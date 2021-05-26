@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DashboardHeader v-if="getpageinfo != 'Front'" />
+    <DashboardHeader v-if="$route.meta.title != 'Front' && $route.meta.title != 'Login' && $route.meta.title != 'Registration' " />
     <router-view></router-view>
     <!-- <DashboardFooter /> -->
   </div>
@@ -20,13 +20,6 @@ export default {
       msg: 'Welcome to Your Vue.js App',
     }
   },
-
-  computed:{
-    getpageinfo(){
-      return this.$store.getters.getsitetitle;
-    },
-  },
-
 
 }
 </script>

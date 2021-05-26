@@ -59,17 +59,15 @@ export default {
     },
 
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
         getclientpagerequest(){
           return this.$store.getters.getproductpagerequest;
         },
-        
-        // getproductpagedata(){
-        //   return this.$store.getters.getproductdata;
-        // },
-
         getpagedata(){
             let data =  this.$store.getters.getsingleclientdata(this.client_id);
             this.imgsrc = this.$imgpath+'/15/clients/'+data.client_logo;
@@ -92,7 +90,7 @@ export default {
 
         editclientdata(){
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('client_id', this.getpagedata.client_id );
             fd.append('client_name', this.$refs.client_name.value);
             fd.append('isupdate',true);
@@ -109,7 +107,7 @@ export default {
                 // console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setproductdata',{id:15});
+                this.$store.dispatch('setproductdata',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

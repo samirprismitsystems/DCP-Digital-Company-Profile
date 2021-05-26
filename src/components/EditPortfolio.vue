@@ -63,6 +63,9 @@ export default {
     },
 
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -92,7 +95,7 @@ export default {
 
         editportfoliodata(){
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('portfolio_id', this.getpagedata.portfolio_id );
             fd.append('portfolio_name', this.$refs.portfolio_name.value);
             fd.append('portfolio_desc', this.$refs.portfolio_desc.value);
@@ -108,7 +111,7 @@ export default {
             axios.post('portfolio/createportfolio',fd).then((result) => {
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setportfolioData',{id:15});
+                this.$store.dispatch('setportfolioData',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

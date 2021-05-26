@@ -41,7 +41,6 @@
             <div v-else>
                 <router-view></router-view>
             </div>
-
           
           </div>
     </div>
@@ -58,6 +57,9 @@ export default {
         }
     },
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -78,22 +80,15 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setproductdata',{id:15});
+            this.$store.dispatch('setproductdata',{id: this.getuserid });
         }
-        // axios.get('company/getcompany?user_id=1').then((result) => {
-        //     console.log(result.data);
-        //     this.company = result.data.company;
-        // }).catch((err) => {
-        // });
     },
 
     methods:{
         deleteproduct(pid){
             this.$confirm("Are you sure you want to delete?").then(() => {
-                // let fd = new FormData();
-                // fd.append('product_id',);
                 axios.get('product/deleteproduct/'+pid).then((res)=>{
-                    this.$store.dispatch('setproductdata',{id:15});
+                    this.$store.dispatch('setproductdata',{id: this.getuserid });
                 }).catch(()=>{});
             }).catch(()=>{
             });

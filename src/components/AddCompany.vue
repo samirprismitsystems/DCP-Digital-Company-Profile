@@ -131,18 +131,20 @@ export default {
         });
     },
 
-    methods:{
+    computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
+    },
 
+    methods:{
         changepic(event){
             this.companydata.logo = event.target.files[0];
-            // this.profile = URL.createObjectURL(this.avatar_file);
             console.log(event.target.files[0]);
         },
-
         addcompanydata(){
-            // console.log(this.companydata);
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('company_name',this.companydata.cname);
             fd.append('company_logo',this.companydata.logo);
             fd.append('company_desc',this.companydata.cdesc);
@@ -155,11 +157,8 @@ export default {
             fd.append('company_email',this.companydata.cemail);
             fd.append('company_contact',this.companydata.cnumber);
             fd.append('working_hours',this.companydata.cwhours);
-
-            // console.log(this.companydata.sociallinks);
-            
+ 
             axios.post('company/createcompany',fd).then((response)=>{
-                // console.log(response.data);
             });
         }
     }

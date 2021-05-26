@@ -52,8 +52,26 @@ class Inquiry extends REST_Controller {
 	}
 
 
-	public function getinquiry_get($company_id){
+	public function updateinquirystatus_post(){
+		$data = $this->input->post();
+		if($this->Inquiry_Model->changestatus($data['inquiry_id'],$data['status'])){
+			$output['error'] = false;
+		    $output['message'] = "Inquiry Updated successfully";
+		    $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+            $output['message'] = "Inquiry Updation failed";
+            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+
+	public function getinquiry_get($user_id){
 		
+		$company_data = $this->Company_Model->getcompany($user_id);
+ 		$company_id = $company_data[0]['company_id'];
+
 		if($inquiry = $this->Inquiry_Model->getinquiry($company_id)){
 			$output['error'] = false;
 			$output['inquiry'] = $inquiry;

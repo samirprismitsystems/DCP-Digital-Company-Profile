@@ -128,6 +128,9 @@ export default {
     },
 
     computed:{
+        getuserid(){
+            return this.$store.getters.getuserid;
+        },
         getpagerequest(){
           return this.$store.getters.getcompanypagerequest;
         },
@@ -176,7 +179,7 @@ export default {
 
     created(){
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id:1});
+            this.$store.dispatch('setcompanydata',{id: this.getuserid});
         }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
        

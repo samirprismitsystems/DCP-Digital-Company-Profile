@@ -9,6 +9,7 @@ import client from './modules/client'
 import portfolio from './modules/portfolio'
 import testimonial from './modules/testimonial'
 import inquiry from './modules/inquiry'
+import user from './modules/user'
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
         client,
         portfolio,
         testimonial,
-        inquiry
+        inquiry,
+        user
     }
 });

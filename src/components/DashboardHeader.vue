@@ -38,11 +38,18 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/dashboard/inquiry">Inquiry</router-link>
                 </li>
-
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/dashboard/login">Login</router-link>
+               
+                <li class="nav-item dropdown" v-if="getuseremail != null">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hi, {{getname}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <router-link class="dropdown-item" to="/dashboard/profile">Profile</router-link>
+                        <a class="dropdown-item" @click="logout()">Logout</a>
+                        <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                    </div>
                 </li>
-
+                
             </ul>
         </div>
         </nav>
@@ -51,6 +58,38 @@
 
 <script>
 export default {
-    name:'DashboardHeader'
+    name:'DashboardHeader',
+    computed:{
+        getuseremail(){
+            return this.$store.getters.getuseremail;
+        },
+        getname(){
+            return this.$store.getters.getfirstname;
+        },
+        getuserid(){
+            return this.$store.getters.getuserid;
+        }
+    },
+
+    created(){
+        if(this.getuseremail == null){
+            this.$router.push('/dashboard/login');
+        }
+    },
+
+    methods:{
+        logout(){
+            localStorage.removeItem('useremail');
+            localStorage.removeItem('userid');
+            localStorage.removeItem('companyid');
+            
+            this.$store.dispatch('setuseremail',{emailid:''});
+            this.$store.dispatch('setuserid',{userid:''});
+            this.$store.dispatch('setcompanyid',{companyid:''});
+            
+            this.$router.push('/dashboard/login');
+
+        }
+    }
 }
 </script>

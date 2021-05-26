@@ -56,6 +56,9 @@ export default {
         }
     },
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -76,7 +79,7 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setportfolioData',{id:15});
+            this.$store.dispatch('setportfolioData',{id: this.getuserid });
         }
     },
 
@@ -86,7 +89,7 @@ export default {
                 // let fd = new FormData();
                 // fd.append('product_id',);
                 axios.get('portfolio/deleteportfolio/'+pid).then((res)=>{
-                    this.$store.dispatch('setportfolioData',{id:15});
+                    this.$store.dispatch('setportfolioData',{id: this.getuserid });
                 }).catch(()=>{});
             }).catch(()=>{
             });

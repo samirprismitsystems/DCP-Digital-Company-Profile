@@ -58,12 +58,6 @@ export default {
             showalert:false,
             alertmsg:'',
             pimage:'',
-            // productdata:{
-            //     pimage:'',
-            //     pname:'',
-            //     pdesc:'',
-            //     pprice:''
-            // }
         }
     },
 
@@ -71,21 +65,18 @@ export default {
         if(this.getproductpagerequest == 0){
             this.$store.dispatch('setproductdata',{id:15});
         }
-        // this.$store.dispatch('setcompanydata',{id:1});
-        // this.company_id = this.getcompanypagedata.company[0].company_id;
     },
 
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
         getproductpagerequest(){
           return this.$store.getters.getproductpagerequest;
         },
-        // getproductpagedata(){
-        //   return this.$store.getters.getproductdata;
-        // },
-
         getpagedata(){
             let data =  this.$store.getters.getsingleproductdata(this.product_id);
             this.imgsrc = this.$imgpath+'/15/products/'+data.product_image;
@@ -108,7 +99,7 @@ export default {
 
         editproductdata(){
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('product_id', this.getpagedata.product_id );
             fd.append('product_name', this.$refs.product_name.value);
             fd.append('product_desc',this.$refs.product_desc.value);
@@ -127,7 +118,7 @@ export default {
                 console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setproductdata',{id:15});
+                this.$store.dispatch('setproductdata',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

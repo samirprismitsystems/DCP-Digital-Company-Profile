@@ -4,7 +4,11 @@ import VueRouter from 'vue-router'
 import Front from './components/Front'
 
 import Home from './components/Home'
+
 import Login from './components/Login'
+import Registration from './components/Registration'
+
+import Profile from './components/Profile'
 
 import Company from './components/Company'
 import AddCompany from './components/AddCompany'
@@ -40,6 +44,9 @@ const router = new VueRouter({
     routes:
     [
         {path:'/dashboard/login',component:Login, meta: {title:'Login'} },
+        {path:'/dashboard/registration',component:Registration, meta: {title:'Registration'} },
+        {path:'/dashboard/profile',component:Profile, meta: {title:'Profile'} },
+
         {path:'/dashboard',component:Home, meta: {title:'Home'} },
         {path:'/dashboard/company',component:Company,
         children:[

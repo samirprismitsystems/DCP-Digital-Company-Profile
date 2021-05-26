@@ -56,12 +56,10 @@ export default {
         }
     },
 
-    created(){
-        // this.$store.dispatch('setcompanydata',{id:1});
-        // this.company_id = this.getcompanypagedata.company[0].company_id;
-    },
-
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -72,12 +70,6 @@ export default {
           return this.$store.getters.getcompanydata;
         },
     },
-
-    // watch:{
-    //     getcompanypagedata(){
-    //         this.company_id = this.getcompanypagedata.company[0].company_id;
-    //     }
-    // },
 
     methods:{
         
@@ -93,14 +85,14 @@ export default {
             fd.append('product_desc',this.productdata.pdesc);
             fd.append('product_price',this.productdata.pprice);
             fd.append('product_image',this.productdata.pimage);
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('isupdate',false);
             // console.log(this.productdata);
             axios.post('product/createproduct',fd).then((result) => {
                 console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setproductdata',{id:15});
+                this.$store.dispatch('setproductdata',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

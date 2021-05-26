@@ -11,6 +11,12 @@ class Testimonial_Model extends CI_Model{
         return $this->db->insert('tbl_testimonial',$data);
     }
 
+    public function changestatus($testimonial_id,$status){
+        $this->db->set('status',$status);
+        $this->db->where('testimonial_id',$testimonial_id);
+        return $this->db->update('tbl_testimonial');
+    }
+
     public function updatetestimonial($data,$testimonial_id){
         $this->db->where('testimonial_id',$testimonial_id);
         return $this->db->update('tbl_testimonial',$data);

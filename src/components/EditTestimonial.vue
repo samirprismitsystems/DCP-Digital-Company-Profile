@@ -38,11 +38,8 @@ import axios from 'axios'
 
 export default {
     name:'EditTestimonial',
-
     components:{
-        
     },
-
     data(){
         return{
             isLoading:false,
@@ -58,6 +55,9 @@ export default {
     },
 
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -69,19 +69,19 @@ export default {
         }
     },
 
-    created(){
-        this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
-        if(this.getpagerequest == 0){
-            this.$store.dispatch('settestimonialData',{id:15} );
-        }
-    },
+    // created(){
+    //     this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
+    //     if(this.getpagerequest == 0){
+    //         this.$store.dispatch('settestimonialData',{id:this.getuserid} );
+    //     }
+    // },
 
     methods:{
 
         edittestimonial(){
             
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('testimonial_id', this.getpagedata.testimonial_id );
             fd.append('client_name', this.$refs.client_name.value );
             fd.append('email_address', this.$refs.email_address.value);
@@ -93,7 +93,7 @@ export default {
                 console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('settestimonialData',{id:15});
+                this.$store.dispatch('settestimonialData',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

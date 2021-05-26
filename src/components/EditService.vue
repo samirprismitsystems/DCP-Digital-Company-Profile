@@ -62,15 +62,10 @@ export default {
         }
     },
 
-    created(){
-        // if(this.getproductpagerequest == 0){
-        //     this.$store.dispatch('setproductdata',{id:15});
-        // }
-        // this.$store.dispatch('setcompanydata',{id:1});
-        // this.company_id = this.getcompanypagedata.company[0].company_id;
-    },
-
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -98,7 +93,7 @@ export default {
 
         editservicedata(){
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('service_id', this.getpagedata.service_id );
             fd.append('service_name', this.$refs.service_name.value);
             fd.append('service_desc',this.$refs.service_desc.value);
@@ -116,7 +111,7 @@ export default {
                 console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setservicedata',{id:15});
+                this.$store.dispatch('setservicedata',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

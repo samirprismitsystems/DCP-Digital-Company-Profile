@@ -69,8 +69,11 @@ class Client extends REST_Controller {
         }
 	}
 
-	public function getclients_get($company_id = NULL){
-		// $company_id = $this->input->get();
+	public function getclients_get($user_id = NULL){
+		
+		$company_data = $this->Company_Model->getcompany($user_id);
+ 		$company_id = $company_data[0]['company_id'];
+
 		if($client = $this->Client_Model->getclient($company_id)){
 			$output['error'] = false;
 			$output['client'] = $client;
@@ -79,14 +82,14 @@ class Client extends REST_Controller {
 		}
 		else{
 			$output['error'] = true;
-	        $output['message'] = "client Data get failed";
-	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+	        $output['client'] = [];
+			$output['message'] = "Empty Client Data.";
+			$this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 
 
 	public function deleteclient_get($client_id){
-		// $client_id = $this->input->get('client_id');
 		if($this->Client_Model->deleteclient($client_id)){
 			$output['error'] = false;
 		    $output['message'] = "client deleted successfully";

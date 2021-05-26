@@ -48,13 +48,11 @@ export default {
             }
         }
     },
-
-    created(){
-        // this.$store.dispatch('setcompanydata',{id:1});
-        // this.company_id = this.getcompanypagedata.company[0].company_id;
-    },
-
+    
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -74,13 +72,13 @@ export default {
             fd.append('portfolio_name',this.portfoliodata.pname);
             fd.append('portfolio_desc',this.portfoliodata.pdesc);
             fd.append('portfolio_image',this.portfoliodata.pimage);
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('isupdate',false);
 
             axios.post('portfolio/createportfolio',fd).then((result) => {
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setportfolioData',{id:15});
+                this.$store.dispatch('setportfolioData',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

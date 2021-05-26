@@ -16,7 +16,7 @@ Vue.prototype.$imgpath = window.location.origin+'/control/upload/';
 
 Vue.prototype.$linkpath = window.location.origin+'/src/assets/';
 
-let sitemainpath = '/digitalcompanyprofile/';
+let sitemainpath = '/digital-company-profile/';
 
 axios.defaults.baseURL = "http://localhost"+sitemainpath+"control/api/";
 

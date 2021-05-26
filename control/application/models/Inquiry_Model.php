@@ -11,6 +11,12 @@ class Inquiry_Model extends CI_Model{
         return $this->db->insert('tbl_inquiry',$data);
     }
 
+    public function changestatus($inquiry_id,$status){
+        $this->db->set('status',$status);
+        $this->db->where('inquiry_id',$inquiry_id);
+        return $this->db->update('tbl_inquiry');
+    }
+
     public function updateinquiry($data,$inquiry_id){
         $this->db->where('inquiry_id',$inquiry_id);
         return $this->db->update('tbl_inquiry',$data);

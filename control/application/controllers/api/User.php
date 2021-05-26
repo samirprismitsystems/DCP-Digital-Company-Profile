@@ -9,42 +9,40 @@ class User extends REST_Controller {
        $this->load->database();
     }
 
-	public function createclient_post(){
+	public function registeruser_post(){
 		$data = $this->input->post();
 
- 		$user_id = $this->input->post('user_id');
- 		$company_data = $this->Company_Model->getcompany($user_id);
-
- 		$companyid = $company_data[0]['company_id'];
-
- 		if(!empty($_FILES['client_logo']['name'])){
-		    $targetpath='./upload/'.$companyid.'/clients/';
+ 		if(!empty($_FILES['profile_photo']['name'])){
+		    $targetpath='./upload/users/';
 		    if (!is_dir($targetpath)) {
 		        mkdir($targetpath,0777,TRUE);
 		    }                  
 		    $config['upload_path']   = $targetpath;
 		    $config['allowed_types'] = "*";
 		    $this->load->library('upload',$config);
-			$path = pathinfo($_FILES["client_logo"]["name"]);
-			$_FILES["client_logo"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];               
-			if ($this->upload->do_upload('client_logo')) {
+			$path = pathinfo($_FILES["profile_photo"]["name"]);
+			$_FILES["profile_photo"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];               
+			if ($this->upload->do_upload('profile_photo')) {
 			   	$uploadphoto = $this->upload->data('file_name');
 			}else{
 			    echo $this->upload->display_errors();
 			}
 		}
 		else{
-			$uploadphoto = $data['client_logo'];
+			$uploadphoto = $data['profile_photo'];
 		}
 
-		$client_field = array(
-			'client_name' => $data['client_name'],
-            'client_logo' => $uploadphoto,
-        	'company_id' => $companyid,
+		$user_field = array(
+			'first_name' => $data['first_name'],
+			'last_name' => $data['last_name'],
+			'email_id' => $data['email_id'],
+			'password' => $data['password'],
+			'contact_no' => $data['contact_no'],
+            'profile_photo' => $uploadphoto,
         );
 
         if($data['isupdate'] == 'true'){
-			if($this->Client_Model->updateclient($client_field,$data['client_id'])){
+			if($this->User_Model->updateclient($user_field,$data['user_id'])){
 				$output['error'] = false;
 			    $output['message'] = "client Data updated";
 			    $this->set_response($output, REST_Controller::HTTP_OK);
@@ -56,14 +54,15 @@ class User extends REST_Controller {
 			}        	
         }
         else{
-        	if($this->Client_Model->createclient($client_field)){
+        	if($data =  $this->User_Model->createuser($user_field)){
 				$output['error'] = false;
-			    $output['message'] = "client Data Inserted";
+				$output['userdata'] = $data;
+			    $output['message'] = "User Data Inserted";
 			    $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			else{
 				$output['error'] = true;
-	            $output['message'] = "client Data Insertion failed";
+	            $output['message'] = "User Data Insertion failed";
 	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
 			}
         }
@@ -85,20 +84,18 @@ class User extends REST_Controller {
 		}
 	}
 
-
-	public function deleteclient_get($client_id){
-		// $client_id = $this->input->get('client_id');
-		if($this->Client_Model->deleteclient($client_id)){
+	public function getuser_get($user_id){
+		if($user = $this->User_Model->getuserdata($user_id)){
 			$output['error'] = false;
-		    $output['message'] = "client deleted successfully";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+			$output['userdata'] = $user;
+			$output['message'] = "User Data Fetched Successfully";
+			$this->set_response($output, REST_Controller::HTTP_OK);
 		}
 		else{
 			$output['error'] = true;
-            $output['message'] = "client deleted failed";
-            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+	        $output['message'] = "User Data Fetched Failed";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
-
 	
 }

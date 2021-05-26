@@ -50,12 +50,11 @@ class Testimonial extends REST_Controller {
 			}
         }
 	}
-
-
-
 	
-	public function gettestimonial_get($company_id){
-		
+	public function gettestimonial_get($user_id){
+		$company_data = $this->Company_Model->getcompany($user_id);
+ 		$company_id = $company_data[0]['company_id'];
+ 		
 		if($testimonial = $this->Testimonial_Model->gettestimonial($company_id)){
 			$output['error'] = false;
 			$output['testimonial'] = $testimonial;
@@ -68,6 +67,20 @@ class Testimonial extends REST_Controller {
 		    $output['message'] = "Empty Testimonial Data";
 		    $this->set_response($output, REST_Controller::HTTP_OK);
 		}
+	}
+
+	public function updatetestimonialstatus_post(){
+		$data = $this->input->post();
+		if($this->Testimonial_Model->changestatus($data['testimonial_id'],$data['status'])){
+			$output['error'] = false;
+		    $output['message'] = "Testimonial Updated successfully";
+		    $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+            $output['message'] = "Testimonial Updation failed";
+            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}	
 	}
 
 	public function deletetestimonial_get($testimonial_id){

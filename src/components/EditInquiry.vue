@@ -55,6 +55,9 @@ export default {
     },
 
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -78,7 +81,7 @@ export default {
         editinquiry(){
             
             let fd = new FormData();
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             fd.append('inquiry_id', this.getpagedata.inquiry_id );
             fd.append('client_name', this.$refs.client_name.value );
             fd.append('email_address', this.$refs.email_address.value);
@@ -90,7 +93,7 @@ export default {
                 console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setinquiryData',{id:15});
+                this.$store.dispatch('setinquiryData',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

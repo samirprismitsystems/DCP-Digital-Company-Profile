@@ -56,12 +56,10 @@ export default {
         }
     },
 
-    created(){
-        // this.$store.dispatch('setcompanydata',{id:1});
-        // this.company_id = this.getcompanypagedata.company[0].company_id;
-    },
-
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -72,12 +70,6 @@ export default {
           return this.$store.getters.getcompanydata;
         },
     },
-
-    // watch:{
-    //     getcompanypagedata(){
-    //         this.company_id = this.getcompanypagedata.company[0].company_id;
-    //     }
-    // },
 
     methods:{
         
@@ -94,13 +86,13 @@ export default {
             fd.append('service_price',this.servicedata.sprice);
             fd.append('service_image',this.servicedata.simage);
             fd.append('isupdate',false);
-            fd.append('user_id',1);
+            fd.append('user_id',this.getuserid);
             
             axios.post('service/createservice',fd).then((result) => {
                 console.log(result.data);
                 this.alertmsg = result.data.message;
                 this.showalert = true;
-                this.$store.dispatch('setservicedata',{id:15});
+                this.$store.dispatch('setservicedata',{id:this.getuserid});
                 setTimeout(() => {
                     this.clear();
                 }, 3000);

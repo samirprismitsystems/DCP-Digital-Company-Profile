@@ -57,6 +57,9 @@ export default {
         }
     },
     computed:{
+        getuserid(){
+          return this.$store.getters.getuserid;
+        },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },
@@ -77,7 +80,7 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setservicedata',{id:15});
+            this.$store.dispatch('setservicedata',{id: this.getuserid });
         }
     },
 
@@ -85,7 +88,7 @@ export default {
         deleteservice(pid){
             this.$confirm("Are you sure you want to delete?").then(() => {
                 axios.get('service/deleteservice/'+pid).then((res)=>{
-                    this.$store.dispatch('setservicedata',{id:15});
+                    this.$store.dispatch('setservicedata',{id: this.getuserid });
                 }).catch(()=>{});
             }).catch(()=>{
             });

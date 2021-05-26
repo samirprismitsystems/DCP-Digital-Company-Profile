@@ -70,8 +70,10 @@ class Portfolio extends REST_Controller {
         }
 	}
 
-	public function getportfolio_get($company_id = NULL){
-		// $company_id = $this->input->get();
+	public function getportfolio_get($user_id = NULL){
+		$company_data = $this->Company_Model->getcompany($user_id);
+ 		$company_id = $company_data[0]['company_id'];
+
 		if($client = $this->Portfolio_Model->getportfolio($company_id)){
 			$output['error'] = false;
 			$output['portfolio'] = $client;
