@@ -28,12 +28,12 @@ export default {
   created(){
     this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
     // if(getcompanypagerequest == 0){
-      this.$store.dispatch('setcompanydata',{id: this.getuserid});
-      this.$store.dispatch('setportfolioData',{id: this.getuserid });
-      this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-      this.$store.dispatch('setproductdata',{id: this.getuserid });
-      this.$store.dispatch('setservicedata',{id: this.getuserid });
-      this.$store.dispatch('settestimonialData',{id: this.getuserid } );
+      // this.$store.dispatch('setcompanydata',{id: this.getuserid});
+      // this.$store.dispatch('setportfolioData',{id: this.getuserid });
+      // this.$store.dispatch('setinquiryData',{id: this.getuserid } );
+      // this.$store.dispatch('setproductdata',{id: this.getuserid });
+      // this.$store.dispatch('setservicedata',{id: this.getuserid });
+      // this.$store.dispatch('settestimonialData',{id: this.getuserid } );
     // }
   
   },

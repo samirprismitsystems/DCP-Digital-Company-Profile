@@ -19,7 +19,7 @@
                     <td> {{inquiry.client_name}} </td>
                     <td> {{inquiry.email_address}} </td>
                     <td> {{inquiry.phone_number}} </td>
-                    <td> {{inquiry.message}} </td>
+                    <td><span class="spnTooltip"><strong>{{inquiry.message}}</strong></span>{{inquiry.message.substr(0,30)}}... </td>
                     <td>
                         <label class="switch">
                             <input type="checkbox" :value="inquiry.status" :checked="checkchecked(inquiry.status)" @change="changestatus(inquiry.inquiry_id,inquiry.status)">
@@ -125,7 +125,43 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+
+a.tooltip {outline:none; }
+a.tooltip strong {line-height:30px;}
+a.tooltip:hover {text-decoration:none;} 
+a.tooltip span {
+    z-index:10;display:none; padding:20px 20px;
+    margin-top:-30px; margin-left:28px;
+    width:400px; line-height:16px;
+}
+a.tooltip:hover span{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA; background:#fffAF0;}
+.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+    
+/*CSS3 extras*/
+a.tooltip span
+{
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
+}
+
+
+tr .spnTooltip {
+    z-index:10;display:none; padding:20px 20px;
+    margin-top:-20px; margin-left:0px;
+    width:650px; line-height:20px;
+}
+tr:hover .spnTooltip{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA; background:#fffAF0;}
+.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+
+
+
+
+
 .switch {
   position: relative;
   display: inline-block;

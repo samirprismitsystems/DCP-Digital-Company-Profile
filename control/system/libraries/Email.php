@@ -69,42 +69,42 @@ class CI_Email {
 	 *
 	 * @var	string	'mail', 'sendmail' or 'smtp'
 	 */
-	public $protocol	= 'mail';		// mail/sendmail/smtp
+	public $protocol	= 'smtp';		// mail/sendmail/smtp
 
 	/**
 	 * STMP Server host
 	 *
 	 * @var	string
 	 */
-	public $smtp_host	= '';
+	public $smtp_host	= 'smtp.sendgrid.net';
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var	string
 	 */
-	public $smtp_user	= '';
+	public $smtp_user	= 'apikey';
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var	string
 	 */
-	public $smtp_pass	= '';
+	public $smtp_pass	= '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';
 
 	/**
 	 * SMTP Server port
 	 *
 	 * @var	int
 	 */
-	public $smtp_port	= 25;
+	public $smtp_port	= 587;
 
 	/**
 	 * SMTP connection timeout in seconds
 	 *
 	 * @var	int
 	 */
-	public $smtp_timeout	= 5;
+	public $smtp_timeout	= 10;
 
 	/**
 	 * SMTP persistent connection

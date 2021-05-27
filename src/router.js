@@ -7,6 +7,8 @@ import Home from './components/Home'
 
 import Login from './components/Login'
 import Registration from './components/Registration'
+import ForgetPassword from './components/ForgetPassword'
+import ChangePassword from './components/ChangePassword'
 
 import Profile from './components/Profile'
 
@@ -37,6 +39,8 @@ import EditTestimonial from './components/EditTestimonial'
 import Inquiry from './components/Inquiry'
 import EditInquiry from './components/EditInquiry'
 
+import Verify from './components/Verify'
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -45,7 +49,11 @@ const router = new VueRouter({
     [
         {path:'/dashboard/login',component:Login, meta: {title:'Login'} },
         {path:'/dashboard/registration',component:Registration, meta: {title:'Registration'} },
+        {path:'/dashboard/forgetpassword',component:ForgetPassword, meta: {title:'Forget Password'} },
+        {path:'/dashboard/changepassword',component:ChangePassword, meta: {title:'Change Password'} },
         {path:'/dashboard/profile',component:Profile, meta: {title:'Profile'} },
+
+        {path:'/dashboard/verify/:emailid/:userpass',component:Verify, meta: {title:'Verify'} },
 
         {path:'/dashboard',component:Home, meta: {title:'Home'} },
         {path:'/dashboard/company',component:Company,

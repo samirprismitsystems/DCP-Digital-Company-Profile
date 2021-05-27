@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DashboardHeader v-if="$route.meta.title != 'Front' && $route.meta.title != 'Login' && $route.meta.title != 'Registration' " />
+    <DashboardHeader v-if="$route.meta.title != 'Front' && $route.meta.title != 'Login' && $route.meta.title != 'Registration' && $route.meta.title != 'Forget Password' && $route.meta.title != 'Verify'" />
     <router-view></router-view>
     <!-- <DashboardFooter /> -->
   </div>

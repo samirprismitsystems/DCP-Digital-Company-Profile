@@ -20,10 +20,16 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
     
-    <router-link class="mt-4 mb-4 float-left" :to="'/dashboard/registration'">Don't have Account? Register Your self.</router-link>
+    <router-link class="mt-4 mb-4 float-left" :to="'/dashboard/forgetpassword'">Forget Password?</router-link>
+
+    <router-link class="mt-4 mb-4 float-right" :to="'/dashboard/registration'">Don't have Account? Register Yourself.</router-link>
 
     </div>
+
   </div>
+
+    <div class="alert alert-danger" v-if="msgshow"><p>{{msg}}</p></div>
+    
 </div>
 
 </template>
@@ -34,6 +40,8 @@ export default {
     name:'Login',
     data(){
         return{
+            msg:'',
+            msgshow:false,
         }
     },
 
@@ -55,21 +63,28 @@ export default {
             fd.append('email',this.$refs.email.value);
             fd.append('password',this.$refs.password.value);
             axios.post('user/loginuser',fd).then((result) => {
-                console.log(result.data);
-                let userdata = result.data.userdata;
+                console.log(result);
 
-                localStorage.setItem('useremail',userdata.email_id);
-                localStorage.setItem('userid',userdata.user_id);
-                localStorage.setItem('first_name',userdata.first_name);
-                // localStorage.setItem('companyid',userdata.company_id);
+                if(result.data.error == true){
+                    this.msg = result.data.message;
+                    this.msgshow = true;
+                }
+                else{
+                    let userdata = result.data.userdata;
+                    localStorage.setItem('useremail',userdata.email_id);
+                    localStorage.setItem('userid',userdata.user_id);
+                    localStorage.setItem('first_name',userdata.first_name);
+                    // localStorage.setItem('companyid',userdata.company_id);
 
-                this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
-                this.$store.dispatch('setuserid',{userid:userdata.user_id});
-                this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
-                // this.$store.dispatch('setcompanyid',{companyid:userdata.company_id});
+                    this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
+                    this.$store.dispatch('setuserid',{userid:userdata.user_id});
+                    this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
+                    // this.$store.dispatch('setcompanyid',{companyid:userdata.company_id});
 
-                this.$router.push('/dashboard/');
+                    this.$router.push('/dashboard/');
 
+                }
+                
             });
         }
     }

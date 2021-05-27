@@ -21,7 +21,6 @@
 
             <div v-show="showalert" class="alert alert-success">{{alertmsg}}</div>
 
-
         </div>
     </div>
 </template>
@@ -92,3 +91,6 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+</style>

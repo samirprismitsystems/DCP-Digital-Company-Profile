@@ -34,9 +34,15 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" ref="password" name="password" id="exampleInputPassword1" placeholder="Password">
+            <label>Password</label>
+            <input type="password" class="form-control" ref="password"  v-on:keyup="checkpassword()" name="password" placeholder="Password">
         </div>
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" ref="cnfpassword"  v-on:keyup="checkpassword()" name="cnfpassword" placeholder="Confirm Password">
+        </div>
+        <p class="text-danger" v-if="showpassmsg">* Password Not Matched</p>
 
         <div class="form-group">
             <label>Contact Number</label>
@@ -46,6 +52,8 @@
 
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
+
+    <div class="alert alert-success mt-2" v-if="showmsg">{{msg}}</div>
     
     <router-link class="mt-4 mb-4 float-left" :to="'/dashboard/login'">Already have an Account? Please Login.</router-link>
 
@@ -63,6 +71,9 @@ export default {
         return{
             profilepic:'',
             imgsrc:this.$imgpath+'profile_pic.png',
+            showpassmsg:false,
+            msg:'',
+            showmsg:false
         }
     },
 
@@ -79,6 +90,23 @@ export default {
     },
 
     methods:{
+
+        checkpassword(){
+            let pass = this.$refs.password.value;
+            let cnfpass = this.$refs.cnfpassword.value;
+            if(pass != ''  && cnfpass != ''){
+                if( pass != cnfpass ){
+                    this.showpassmsg = true;
+                }
+                else{
+                    this.showpassmsg = false;
+                }
+            }
+            else{
+                this.showpassmsg = false;
+            }
+
+        },
 
         openbox(){
             document.getElementById('imgchange').click();
@@ -102,22 +130,31 @@ export default {
             fd.append('isupdate',false);
 
             axios.post('user/registeruser',fd).then((result) => {
+
+                this.msg = result.data.message;
+                this.showmsg = true;
+
+                setTimeout(() => {
+                    this.msg = '';
+                    this.showmsg = false;
+                }, 5000);
+
                 // console.log(result.data);
                 // let userdata = result.data.userdata;
 
-                let userdata = result.data.userdata;
+                // let userdata = result.data.userdata;
 
-                localStorage.setItem('useremail',userdata.email_id);
-                localStorage.setItem('userid',userdata.user_id);
-                localStorage.setItem('first_name',userdata.first_name);
+                // localStorage.setItem('useremail',userdata.email_id);
+                // localStorage.setItem('userid',userdata.user_id);
+                // localStorage.setItem('first_name',userdata.first_name);
                 // localStorage.setItem('companyid',userdata.company_id);
 
-                this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
-                this.$store.dispatch('setuserid',{userid:userdata.user_id});
-                this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
+                // this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
+                // this.$store.dispatch('setuserid',{userid:userdata.user_id});
+                // this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
                 // this.$store.dispatch('setcompanyid',{companyid:userdata.company_id});
 
-                this.$router.push('/dashboard/');
+                // this.$router.push('/dashboard/');
 
             });
         }

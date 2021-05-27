@@ -32,37 +32,42 @@ class User extends REST_Controller {
 			$uploadphoto = $data['profile_photo'];
 		}
 
-		$user_field = array(
-			'first_name' => $data['first_name'],
-			'last_name' => $data['last_name'],
-			'email_id' => $data['email_id'],
-			'password' => $data['password'],
-			'contact_no' => $data['contact_no'],
-            'profile_photo' => $uploadphoto,
-        );
-
         if($data['isupdate'] == 'true'){
-			if($this->User_Model->updateclient($user_field,$data['user_id'])){
+        	$user_field = array(
+				'first_name' => $data['first_name'],
+				'last_name' => $data['last_name'],
+				'email_id' => $data['email_id'],
+				'contact_no' => $data['contact_no'],
+	            'profile_photo' => $uploadphoto,
+        	);
+			if($this->User_Model->updateuser($user_field,$data['user_id'])){
 				$output['error'] = false;
-			    $output['message'] = "client Data updated";
+			    $output['message'] = "User Data updated";
 			    $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			else{
 				$output['error'] = true;
-	            $output['message'] = "client Data updated failed";
+	            $output['message'] = "User Data updated failed";
 	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
 			}        	
         }
         else{
+        	$user_field = array(
+				'first_name' => $data['first_name'],
+				'last_name' => $data['last_name'],
+				'email_id' => $data['email_id'],
+				'password' => md5($data['password']),
+				'contact_no' => $data['contact_no'],
+	            'profile_photo' => $uploadphoto,
+        	);
         	if($data =  $this->User_Model->createuser($user_field)){
 				$output['error'] = false;
-				$output['userdata'] = $data;
-			    $output['message'] = "User Data Inserted";
+			    $output['message'] = "Email Varification Link Sent to Your Email";
 			    $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			else{
 				$output['error'] = true;
-	            $output['message'] = "User Data Insertion failed";
+	            $output['message'] = "User Registration failed";
 	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
 			}
         }
@@ -72,10 +77,18 @@ class User extends REST_Controller {
 		$data = $this->input->post();
 
 		if($user = $this->User_Model->getuser($data)){
-			$output['error'] = false;
-			$output['userdata'] = $user;
-			$output['message'] = "Login Successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+			if($user['status'] == 1){
+				$output['error'] = false;
+				$output['userdata'] = $user;
+				$output['message'] = "Login Successfully";
+				$this->set_response($output, REST_Controller::HTTP_OK);	
+			}
+			else{
+				$output['error'] = true;
+				$output['message'] = "Email Address Not Varified Please Varify And Try Again.";
+				$this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			
 		}
 		else{
 			$output['error'] = true;
@@ -97,5 +110,79 @@ class User extends REST_Controller {
 	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
-	
+
+	public function generateRandomString($length = 8) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
+
+	public function forgetpassword_post(){
+		$user_email = $this->input->post('email');
+		if($user = $this->User_Model->getuserbyemail($user_email)){
+
+			$randpass = $this->generateRandomString();
+
+			if($this->User_Model->sendemail($user_email,$randpass)){
+				$output['error'] = false;
+				$output['message'] = "Password sent to your registered Email";
+				$this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = false;
+				$output['message'] = "Email Sent Failed";
+				$this->set_response($output, REST_Controller::HTTP_OK);	
+			}
+		}
+		else{
+			$output['error'] = true;
+	        $output['message'] = "Invalid EmailId";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+	public function changepassword_post(){
+		$data = $this->input->post();
+		if($user = $this->User_Model->getuserbyemail($data['email_id'])){
+			if($user = $this->User_Model->checkpass(md5($data['cpass']),$data['email_id'])){
+
+				if($this->User_Model->changepass(md5($data['npass']),$data['email_id'])){
+					$output['error'] = false;
+					$output['message'] = "Password Changed Successfully";
+					$this->set_response($output, REST_Controller::HTTP_OK);
+				}
+			}
+			else{
+				$output['error'] = false;
+				$output['message'] = "Old Password Not Matched";
+				$this->set_response($output, REST_Controller::HTTP_OK);	
+			}
+		}
+		else{
+			$output['error'] = true;
+	        $output['message'] = "Invalid EmailId";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+
+	public function verifyuser_post(){
+		$data = $this->input->post();
+			if($data =  $this->User_Model->verifyuser($data)){
+				$output['error'] = false;
+			    $output['message'] = "User Verified Successfully Login To Continue.";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+	            $output['message'] = "User Varification Failed";
+	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}
+
+
 }

@@ -16,10 +16,10 @@ $(document).ready(function(){
 	// 	let divs = '';
 	// 	// if ($("#socialnames").select2('data').length){
 	// 	  $i = 0;
-	// 	  $.each($("#socialnames").val(), function(key, item){
-	// 	  	divs += "<div class= form-group><label>"+item+"<span class=text-danger> *</span></label><input class=form-control type=text v-model=companydata.sociallinks["+[$i]+"]/></div>";
-	// 	  	$i++;
-	// 	  });
+		  // $.each($("#socialnames").val(), function(key, item){
+		  // 	divs += "<div class= form-group><label>"+item+"<span class=text-danger> *</span></label><input class=form-control type=text v-model=companydata.sociallinks["+[$i]+"]/></div>";
+		  // 	$i++;
+		  // });
 	// 	  $('#wraper').html(divs);
 	// 	// }
 	// });
