@@ -1,18 +1,26 @@
 <template>
   <div id="app">
-    <DashboardHeader v-if="$route.meta.title != 'Front' && $route.meta.title != 'Login' && $route.meta.title != 'Registration' && $route.meta.title != 'Forget Password' && $route.meta.title != 'Verify'" />
+    <DashboardHeader v-if="$route.meta.isfront != true && $route.meta.islanding != true" />
+    <!-- <SecHeader  v-if="$route.meta.isdash == false && $route.meta.isfront != true && $route.meta.islanding != true" /> -->
+    
     <router-view></router-view>
+    
     <!-- <DashboardFooter /> -->
+    <SecFooter v-if="$route.meta.isfront != true && $route.meta.islanding != true"/>
   </div>
 </template>
 
 <script>
 import DashboardHeader from './components/DashboardHeader'
+import SecHeader from './components/SecHeader'
+import SecFooter from './components/SecFooter'
 // import DashboardFooter from './components/DashboardFooter'
 export default {
   name: 'app',
   components:{
     DashboardHeader,
+    SecHeader,
+    SecFooter
     // DashboardFooter
   },
   data () {
@@ -25,13 +33,13 @@ export default {
 </script>
 
 <style>
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 60px; */
+  margin-top: 60px;
 }
 
 h1, h2 {
@@ -50,5 +58,5 @@ li {
 
 a {
   color: #42b983;
-}
+} */
 </style>

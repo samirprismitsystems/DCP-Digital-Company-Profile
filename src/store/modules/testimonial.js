@@ -14,6 +14,9 @@ const getters = {
 };
 
 const actions = {
+    async settestimonialrequest({commit},req){
+        commit('SETTESTIMONIALREQUEST',req.status);
+    },
     async settestimonialData({commit},company){
         testimonialApi.gettestimonialData(company.id,result => {
             commit('SETTESTIMONIALDATA',result.data.testimonial);

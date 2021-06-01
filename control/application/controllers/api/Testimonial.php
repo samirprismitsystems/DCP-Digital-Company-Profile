@@ -13,9 +13,15 @@ class Testimonial extends REST_Controller {
 	public function createtestimonial_post(){
 		$data = $this->input->post();
 
- 		$user_id = $this->input->post('user_id');
- 		$company_data = $this->Company_Model->getcompany($user_id);
- 		$companyid = $company_data[0]['company_id'];
+		if($this->input->post('user_id') != 0){
+			$user_id = $this->input->post('user_id');
+			$company_data = $this->Company_Model->getcompany($user_id);
+ 			$companyid = $company_data[0]['company_id'];
+		}
+		else{
+			$companyid = $this->input->post('company_id');
+		}
+
 
 		$testimonial_field = array(
 			'client_name' => $data['client_name'],
@@ -40,7 +46,7 @@ class Testimonial extends REST_Controller {
         else{
         	if($this->Testimonial_Model->createtestimonial($testimonial_field)){
 				$output['error'] = false;
-			    $output['message'] = "Testimonial Data Inserted";
+			    $output['message'] = "Testimonial Data Submitted";
 			    $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			else{

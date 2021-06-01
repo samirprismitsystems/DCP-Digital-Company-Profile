@@ -1,158 +1,64 @@
-$(document).ready(function(){
+// JavaScript Document
 
-	// $('.workareacity').select2();
-	// $("#socialnames").select2();
-
-	// $('#socialnames').change(function(){
-	// 	let val = $('#socialnames option:selected').text();
-	// 	alert(val);
-	// 	$('#wraper').html(val);	
-	// });
-
-	// $('#socialnames').change(function(){
-	// 	// alert($('#socialnames').val());
-	// 	// var selected = [];
-	// 	// selected = $('#socialnames').val();
-	// 	let divs = '';
-	// 	// if ($("#socialnames").select2('data').length){
-	// 	  $i = 0;
-		  // $.each($("#socialnames").val(), function(key, item){
-		  // 	divs += "<div class= form-group><label>"+item+"<span class=text-danger> *</span></label><input class=form-control type=text v-model=companydata.sociallinks["+[$i]+"]/></div>";
-		  // 	$i++;
-		  // });
-	// 	  $('#wraper').html(divs);
-	// 	// }
-	// });
+$(document).ready(function () {
 
 
-
-	function displayResult() {
-    var x = document.getElementById("socialnames");
-    if(x != null){
-      var txt=[];
-      var i;
-      for (i = 0; i < x.length; i++) {
-          txt[i] =  x.options[i].value;
-      }
-      return txt;
-    }
-  }
-
-
-  function arrdiff(a1, a2) {
-    var a = [], diff = [];
-    for (var i = 0; i < a1.length; i++) {
-        a[a1[i]] = true;
-    }
-    for (var i = 0; i < a2.length; i++) {
-        if (a[a2[i]]) {
-            delete a[a2[i]];
-        } else {
-            a[a2[i]] = true;
-        }
-    }
-    for (var k in a) {
-        diff.push(k);
-    }
-    return diff;
-  }
-
-
-  // var datahide = displayResult();
-  //     for(var i=0;i<datahide.length;i++){
-  //         var a3 = "#".concat(datahide[i]);
-  //           $("#wraper").find(a3).hide();
-  //     }
-
-  // Social box hide
-    var data = displayResult();
-      if(data != null){
+  var $ = jQuery
   
-      data = data.toString();
-      var splitarraydata = data.split(',');
-      var valuedata = $('#socialnames').val();
+  /*4. responsivev menu*/
+  jQuery("[data-trigger]").on("click", function () {
+    var trigger_id = jQuery(this).attr('data-trigger');
+    jQuery(trigger_id).toggleClass("show");
+    jQuery('body').toggleClass("offcanvas-active");
+  });
 
-      valuedata = valuedata.toString();
-      
-      var splitdata = valuedata.split(',');
-      if(valuedata==""){
-        splitdata="";
-      }
+  // close button 
+  jQuery(".btn-close").click(function (e) {
+   jQuery(".navbar-collapse").removeClass("show");
+    jQuery("body").removeClass("offcanvas-active");
+  });
 
-      var datahide = displayResult();
-      for(var i=0;i<datahide.length;i++){
-          var a3 = "#".concat(datahide[i]);
-            $("#wraper").find(a3).hide();
-      }
+  jQuery("nav.navbar .nav-link").click(function (e) {
+    jQuery(".navbar-collapse").removeClass("show");
+    jQuery("body").removeClass("offcanvas-active");
+  });
+	
 
-      for(var i=0;i<splitarraydata.length;i++){
-          var divval = splitdata[i];
-            if(typeof(divval) == "undefined"){
-              divval = 0;
-            }
-            if($.inArray(divval,splitarraydata)>-1){
-              //alert(divval);
-              var a1="#".concat(divval);
-              $("#wraper").find(a1).show();
-            } 
-        }
-      }
-
-
-
-
-    $('#socialnames').change(function(){
-      
-      var data = displayResult();
-      data = data.toString();
-      var splitarraydata = data.split(',');
-      
-      var valuedata = $('#socialnames').val();
-
-      valuedata = valuedata.toString();
-      var splitdata = valuedata.split(',');
-      if(valuedata==""){
-        splitdata="";
-      }
-
-      // social cost hour hide
-      var datahide = displayResult();
-      for(var i=0;i<datahide.length;i++){
-          var a3 = "#".concat(datahide[i]);
-            $("#wraper").find(a3).hide();
-      }
-
-      for(var i=0;i<splitarraydata.length;i++){
-          var divval = splitdata[i];
-        
-            if(typeof(divval) == "undefined"){
-              divval = 0;
-            }
-            if($.inArray(divval,splitarraydata)>-1){
-              //alert(divval);
-              var a1="#".concat(divval);
-              $("#wraper").find(a1).show();
-            } 
-        }
-
-        var ardiff = arrdiff(splitdata,splitarraydata);
-        
-        for(var j=0;j<ardiff.length;j++){
-          value = "#".concat(ardiff[j]);
-          var valset ="#wraper > div#".concat(ardiff[j]+" > input:text");
-          $(valset).val('');
-        }
-        
-        });
-
-
-  // console.log(displayResult());
-
-
-
-
-
-
-
-
+/*.tabs-nav*/
+$('.tabs-nav a').on('click', function (event) {
+    event.preventDefault();
+    
+    $('.tab-active').removeClass('tab-active');
+    $(this).parent().addClass('tab-active');
+    $('.tabs-stage > .expand_tabs').hide();
+    $($(this).attr('href')).show();
 });
+    $('.btnNext').click(function(){
+    $('.tabs-nav > .tab-active').next('li').find('a').trigger('click');
+  });
+
+    $('.btnBack').click(function(){
+      $("body").scrollTop(0);
+    $('.tabs-nav > .tab-active').prev('li').find('a').trigger('click');
+    
+  });
+
+
+// $('.tabs-nav a:first').trigger('click'); // Default
+	
+  });
+
+
+/*.upload img*/
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#get_img').show()
+                        .attr('src', e.target.result);
+                    $(".upload_img ~ .placeholder_tex").hide();  
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }

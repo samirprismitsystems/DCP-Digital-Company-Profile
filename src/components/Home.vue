@@ -1,16 +1,47 @@
 <template>
-    <div>
-        <h3 class="mt-5">Home Page</h3>
-        Hi, {{getuser}}    </div>
+
+    <section class="main">
+	<div class="container-fluid ">
+		<div class="row no-wrap">
+
+      	<DashData />
+
+		<div class=" right_sidebar_content">
+			<div class="tabs-stage">
+			    
+        <!-- <Compay /> -->
+        <!-- <SocialLinks /> -->
+      <!-- <router-view></router-view> -->
+
+		</div>
+	</div>
+</div>
+	</div> 
+</section>
+
+<!-- content --> 
+
+
+
 </template>
 
 <script>
+import DashData from './DashData'
+// import Front from './Front'
+import Compay from './Company'
+import SocialLinks from './SocialLinks'
 
 export default {
     name:'Home',
     data () {
     return {
     }
+  },
+
+  components:{
+    DashData,
+    Compay,
+	SocialLinks
   },
 
   computed:{

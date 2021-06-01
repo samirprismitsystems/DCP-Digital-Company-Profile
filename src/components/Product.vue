@@ -1,64 +1,84 @@
 <template>
-    <div class="row mt-5">
-        
-        <div class="col-lg-4 col-md-4 col-sm-4 col-12 mt-5">
-            <ul class="menulist">
-              <li><router-link :to="'/dashboard/product'">Product list<i class="fa fa-list fa-lg ml-4"></i></router-link></li>
-              <li><router-link :to="'/dashboard/product/addproduct'">Add Product<i class="fa fa-plus fa-lg ml-4"></i></router-link></li>
-            </ul>
-          </div>
+
+    <section class="main">
+	<div class="container-fluid ">
+		<div class="row no-wrap">
+
+      	<DashData />
+
+		<div class=" right_sidebar_content" v-if="getpagerequest == 1">
+			<div class="tabs-stage">
 
 
-          <div class="col-md-8 col-sm-8 col-lg-8 col-8 mt-5">
-            <div v-if="getpageinfo === 'Product'">
-            
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Product Image</th>
-                    <th>Product Name</th>
-                    <th>Product Description</th>
-                    <th>Product Price</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody v-if="getpagerequest == 1">              
-                <tr v-for="(product,index) in getpagedata" :key="index">
-                    <td> <img :src="imgpath+'15/products/'+product.product_image" height="100" width="100"></td>
-                    <td>{{product.product_name}}</td>
-                    <td>{{product.product_desc}}</td>
-                    <td>{{product.product_price}}</td>
-                    <td>
-                        <router-link :to="'/dashboard/product/editproduct/'+product.product_id"><i class="fa fa-edit fa-lg"></i></router-link>
-                        <a class="ml-2" @click="deleteproduct(product.product_id)"><i class="fa fa-trash fa-lg"></i></a>
-                    </td>
+            <div id="tab-3" class="expand_tabs">
+			    	<button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+			      	<div class="tab_title">
+				        <div class="h2">Add company products</div>
+				        <div class="h4">Upload products which people can order online</div>
+			    	</div>
+			    	<form id="" @submit.prevent="saveproduct()" class="product_form company_items form_shadow">
+			    		<div class="row">
+			    		
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 item_col " v-for="(product,index) in getpagedata" :key="index">
+			    			<div class="item_no">
+			    				<h5>Product No <span class="count"> {{index+1}} </span></h5> <a @click="deleteproduct(product.product_id)" type="button" class="dismiss-btn fas fa-trash-alt"></a>
+			    			</div>
+			    			<div class="item_div">
+			    				<div class="item_img">
+			    					<img :src="imgsrc[index]" alt="" title="" class="img-fit">
+			    				</div>
+			    				<div>
+			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
+			    					<input type="file" @change="changepic(index,$event)" class="choose">
+			    					Upload product image
+			    					</div>
+			    					<input type="text" name="product-name" v-model="oldproduct[index].product_name" class="item-input" placeholder="Enter Product Name">
+			    					<input type="number" name="product-price" v-model="oldproduct[index].product_price" class="item-input" placeholder="Enter Product MRP">
+			    					<textarea  class="item-input" maxlength="200" v-model="oldproduct[index].product_desc" placeholder="Enter Product Description"></textarea>
+			    				</div>	
+			    			</div>
+			    		</div>
+			    		
+			    		</div>
+			    		<button type="button" class=" site_btn add-more-btn">Add More</button>
 
-                </tr>
-                </tbody>
-            </table>
+						<div class="form_btn_field">
+							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="button" class=" btnNext form_btn btn_100  ">Next</button>
+						</div>
+			    	</form>
+				</div>
+
             </div>
-
-            <div v-else>
-                <router-view></router-view>
-            </div>
-          
-          </div>
+        </div>
+        </div>
     </div>
+    </section>
+
 </template>
 
 <script>
 import axios from 'axios'
+import DashData from './DashData'
 export default {
     name:'Product',
     data(){
         return{
-            product:[],
-            imgpath:this.$imgpath
+            oldproduct:[],
+            imgsrc:[],
+            imgpath:this.$imgpath,
+            ischangepic:false,
         }
+    },
+    components:{
+        DashData
     },
     computed:{
         getuserid(){
           return this.$store.getters.getuserid;
+        },
+        getcompanyid(){
+          return this.$store.getters.getcompanyid;
         },
         getpageinfo(){
           return this.$store.getters.getsitetitle;
@@ -67,7 +87,15 @@ export default {
           return this.$store.getters.getproductpagerequest;
         },
         getpagedata(){
-          return this.$store.getters.getproductdata;
+            let data =  this.$store.getters.getproductdata;
+            let i = 0;
+            data.forEach( element => {
+                this.oldproduct.push(element);
+                this.imgsrc[i] = this.$imgpath+this.getcompanyid+'/products/'+ element.product_image;
+                i++;
+            });
+            // console.log(this.oldproduct);
+            return data;
         },
     },
 
@@ -80,11 +108,32 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
+            this.$store.dispatch('setcompanydata',{id: this.getuserid});
             this.$store.dispatch('setproductdata',{id: this.getuserid });
+            this.$store.dispatch('setsocialdata',{id: this.getuserid});
+            this.$store.dispatch('setcitiesdata');
+            this.$store.dispatch('setservicedata',{id: this.getuserid });
+            this.$store.dispatch('setClientData',{id: this.getuserid } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserid });
+            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
         }
     },
 
     methods:{
+
+        changepic(index,event){
+            // this.oldproduct[index].product_image = event.target.files[0];
+            let src  = event.target.files[0];
+            this.imgsrc[index] = URL.createObjectURL(src);
+            this.ischangepic = true;
+        },
+
+        saveproduct(){
+            console.log(this.oldproduct);
+        },
+
         deleteproduct(pid){
             this.$confirm("Are you sure you want to delete?").then(() => {
                 axios.get('product/deleteproduct/'+pid).then((res)=>{

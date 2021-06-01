@@ -14,6 +14,9 @@ const getters = {
 };
 
 const actions = {
+    async setproductrequest({commit},req){
+        commit('SETPRODUCTREQUEST',req.status);
+    },
     async setproductdata({commit},company){
         productApi.getProductData(company.id,result => {
             commit('SETPRODUCTDATA',result.data.product);

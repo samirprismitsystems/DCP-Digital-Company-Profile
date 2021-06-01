@@ -14,6 +14,9 @@ const getters = {
 };
 
 const actions = {
+    async setclientrequest({commit},req){
+        commit('SETCLIENTREQUEST',req.status);
+    },
     async setClientData({commit},company){
         clientApi.getclientData(company.id,result => {
             commit('SETCLIENTDATA',result.data.client);

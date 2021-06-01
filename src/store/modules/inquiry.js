@@ -14,6 +14,9 @@ const getters = {
 };
 
 const actions = {
+    async setinquiryrequest({commit},req){
+        commit('SETINQUIRYREQUEST',req.status);
+    },
     async setinquiryData({commit},company){
         inquiryApi.getinquiryData(company.id,result => {
             commit('SETINQUIRYDATA',result.data.inquiry);

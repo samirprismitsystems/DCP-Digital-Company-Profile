@@ -19,6 +19,7 @@
     "vue-multiselect": "^2.1.6",
     "vue-router": "^3.5.1",
     "vue-simple-alert": "^1.1.1",
+    "vue-star-rating": "^1.7.0",
     "vuex": "^3.6.2"
   },
   "browserslist": [

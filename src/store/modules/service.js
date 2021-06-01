@@ -14,6 +14,9 @@ const getters = {
 };
 
 const actions = {
+    async setservicerequest({commit},req){
+        commit('SETSERVICEREQUEST',req.status);
+    },
     async setservicedata({commit},company){
         serviceApi.getServiceData(company.id,result => {
             commit('SETSERVICEDATA',result.data.service);

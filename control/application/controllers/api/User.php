@@ -85,7 +85,7 @@ class User extends REST_Controller {
 			}
 			else{
 				$output['error'] = true;
-				$output['message'] = "Email Address Not Varified Please Varify And Try Again.";
+				$output['message'] = "Email Address Not Verified Please Varify And Try Again.";
 				$this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			
@@ -125,11 +125,11 @@ class User extends REST_Controller {
 		$user_email = $this->input->post('email');
 		if($user = $this->User_Model->getuserbyemail($user_email)){
 
-			$randpass = $this->generateRandomString();
+			// $randpass = $this->generateRandomString();
 
-			if($this->User_Model->sendemail($user_email,$randpass)){
+			if($this->User_Model->sendemail($user_email)){
 				$output['error'] = false;
-				$output['message'] = "Password sent to your registered Email";
+				$output['message'] = "Reset Password Link Sent to your registered Email";
 				$this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			else{
@@ -181,6 +181,21 @@ class User extends REST_Controller {
 				$output['error'] = true;
 	            $output['message'] = "User Varification Failed";
 	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}
+
+
+		public function resetpass_post(){
+			$data = $this->input->post();
+			if($user =  $this->User_Model->changepassword($data)){
+				$output['error'] = false;
+			    $output['message'] = "Password Changed Successfully Login To Continue.";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+	            $output['message'] = "Password Changed Failed";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 		}
 

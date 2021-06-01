@@ -1,6 +1,6 @@
 <template>
     <div class="center">
-        <p>{{verify}}</p> 
+        <p>{{verify}}</p>
         <router-link v-if="verified" :to="'/dashboard/login'">Click Here to Login</router-link>
     </div>
 </template>
@@ -12,7 +12,7 @@ export default {
     data(){
         return{
             emailid : this.$route.params.emailid,
-            userpass : this.$route.params.userpass,
+            // userpass : this.$route.params.userpass,
             verify:'',
             verified:false
         }
@@ -21,7 +21,7 @@ export default {
     created(){
         let fd = new FormData();
         fd.append('email_id',this.$route.params.emailid );
-        fd.append('password',this.$route.params.userpass );
+        // fd.append('password',this.$route.params.userpass );
 
         axios.post('user/verifyuser',fd).then((result) => {
             this.verify = result.data.message;

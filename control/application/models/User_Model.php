@@ -3,6 +3,22 @@
 class User_Model extends CI_Model{
     
 
+    public function tokendata(){
+        $tokdata['ciphering'] = $ciphering = "AES-128-CTR";
+        $tokdata['ivlength'] = $iv_length = openssl_cipher_iv_length($ciphering);
+        $tokdata['options'] = $options = 0;
+        $tokdata['iv'] = $iv = '1234567891011121';
+        $tokdata['key'] = $key = "digitalcompanyprofile";
+        return $tokdata;
+    }
+
+    public function encemail($email)
+    {
+        $tokdata = $this->tokendata();
+        $emailaddress = openssl_encrypt($email, $tokdata['ciphering'],$tokdata['key'], $tokdata['options'], $tokdata['iv']);
+        return $emailaddress;
+    }
+
     public function createuser($data){
         $this->db->insert('tbl_users',$data);
         $insert_id = $this->db->insert_id();
@@ -10,8 +26,20 @@ class User_Model extends CI_Model{
         $this->load->library('email');
         $this->email->from('16mscit072@gmail.com', 'Digital Company Profile');
         $this->email->to($data['email_id']);
+
+        $encemail = $this->encemail($data['email_id']);
         
-        $verifymsg = 'http://localhost:8080/dashboard/verify/'.$data['email_id'].'/'.$data['password'];
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+             $url = "https://";   
+        else  
+             $url = "http://";
+
+        $url.= $_SERVER['HTTP_HOST'];   
+        
+        //This is for production
+        // $verifymsg = $url.'/dashboard/verify/'.md5($data['email_id']);
+
+        $verifymsg = 'http://localhost:8080/dashboard/verify/'.$encemail;       
 
         $this->email->subject('Successful Registration On Digital Company Profile');
         $this->email->message('Click Below Link to verify Email ' . $verifymsg);
@@ -56,19 +84,27 @@ class User_Model extends CI_Model{
         return $this->db->delete('tbl_client');
     }    
 
+    public function sendemail($email){
+        $encemail = $this->encemail($email);
 
-    public function sendemail($email,$pass){
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+             $url = "https://";   
+        else  
+             $url = "http://";
 
-        $this->db->set('password',md5($pass));
-        $this->db->where('email_id',$email);
-        return $this->db->update('tbl_users');
+        $url.= $_SERVER['HTTP_HOST'];   
+        
+        //This is for production
+        // $verifymsg = $url.'/dashboard/verify/'.md5($data['email_id']);
+
+        $linkmsg = 'http://localhost:8080/dashboard/resetpassword/'.$encemail;
 
         $this->load->library('email');
         $this->email->from('16mscit072@gmail.com', 'Digital Company Profile');
         $this->email->to($email);
          
         $this->email->subject('Forget Password');
-        $this->email->message('This Is Your New Password ' . $pass);
+        $this->email->message('Click Below Link To Reset Password ' . $linkmsg);
         $data =  $this->email->send();
         // echo $this->email->print_debugger();
         return $data;
@@ -88,13 +124,32 @@ class User_Model extends CI_Model{
     }
 
     public function verifyuser($data){
-        $this->db->where('email_id',$data['email_id']);
-        $this->db->where('password',$data['password']);
-        $user = $this->db->get('tbl_users')->row_array();
-        
-        $this->db->set('status',1);
-        $this->db->where('user_id',$user['user_id']);
-        return $this->db->update('tbl_users');
+        $user = $this->usercheck($data);
+        if(!empty($user)){
+            $this->db->set('status',1);
+            $this->db->where('user_id',$user['user_id']);
+            return $this->db->update('tbl_users');
+        }
+    }
+
+    public function usercheck($data){
+        $tokdata = $this->tokendata();
+        $emailaddress = openssl_decrypt($data['email_id'], $tokdata['ciphering'],$tokdata['key'], $tokdata['options'], $tokdata['iv']);
+        $this->db->where('email_id',$emailaddress);
+        return $user = $this->db->get('tbl_users')->row_array();
+    }
+
+
+    public function changepassword($data){
+        $user = $this->usercheck($data);
+        if(!empty($user)){
+            $this->db->set('password',md5($data['password']));
+            $this->db->where('user_id',$user['user_id']);
+            return $this->db->update('tbl_users');
+        }
+        else{
+            return false;
+        }
     }
 
     

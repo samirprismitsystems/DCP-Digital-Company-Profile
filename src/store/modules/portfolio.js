@@ -14,6 +14,9 @@ const getters = {
 };
 
 const actions = {
+    async setportfoliorequest({commit},req){
+        commit('SETPORTFOLIOREQUEST',req.status);
+    },
     async setportfolioData({commit},company){
         portfolioApi.setportfolioData(company.id,result => {
             commit('SETPORTFOLIODATA',result.data.portfolio);

@@ -1,110 +1,131 @@
-<template>
-    <div class="row justify-content-center mt-5">
+<template> 
 
-        <div class="col-lg-6" v-if="getpagerequest == 1">
+<section class="main">
+	<div class="container-fluid ">
+		<div class="row no-wrap">
 
-            
-        <form @submit.prevent="addcompanydata()" enctype="multipart/form-data" class="text-justify col-lg-10">
-            
-            <div class="form-group">
-                <label>Company Logo</label>
-                <img class="ml-3" @click="openbox" :src="imgsrc" height="100" width="100">
-                <input id="imgchange" v-show="false" type="file" @change="changepic($event)">
-            </div>
-            
-            <div class="form-group">
-                <label>Company Name</label>
-                <input type="text" name="cname" ref="cname" v-model="getpagedata.company[0].company_name" class="form-control" placeholder="Enter Company name">
-            </div>
+      	<DashData />
 
-            <div class="form-group">
-                <label>Company Description</label>
-                <textarea class="form-control" ref="cdesc" v-model="getpagedata.company[0].company_desc" name="cdesc" rows="4" cols="100" placeholder="Enter Company Description"></textarea>
-            </div>
+		<div class=" right_sidebar_content" v-if="getpagerequest == 1">
+			<div class="tabs-stage">
+ 
+            <div class="expand_tabs text-justify">
+			    	<div class="tab_title">
+				        <div class="h2"> Make Your Business Profile</div>
+				        <div class="h4">Please fill up the detail to create your profile</div>
+			    	</div>
+			    	<form id="" @submit.prevent="addcompanydata()" class="digital_profile_form form_shadow">
+			    		<div class="row">
+			    			<div class="col-xl-9  col-lg-8 col-md-7  col-sm-12 form-col">
+				    			<div class="form_field">
+									<label class="" >Full Name / Business Name / Company Name*</label>
+									<input name="cname" ref="cname" class="" :value="getpagedata.company[0].company_name" type="text" placeholder="Enter Your Full Name / Business Name /Company Name" >
+								</div>
+								<div class="form_field">
+									<label class="" >Business Type / Description*</label>
+									<input name="bsegment" ref="bsegment" class="" :value="getpagedata.company[0].business_segment" type="text" placeholder="Business Type / Description" >
+								</div>
+								<div class="row ">
+									<div class="col-sm-6 col-12">
+									<div class=" form_field">
+										<label class="" >Phone No. (WhatsApp No)</label>
+										<input name="cnumber" ref="cnumber" class="" :value="getpagedata.company[0].company_contact" type="text" placeholder="Enter Your WhatsApp No" >
+									</div>
+									</div>
+									<div class="col-sm-6 col-12">
+									<div class=" form_field">
+										<label class="" >Alternet Phone No. (Optional)</label>
+										<input name="canumber" ref="canumber" class="" :value="getpagedata.company[0].company_alternate_contact" type="text" placeholder="Enter Your Alternet Phone No" >
+									</div>
+									</div>
+									
+								</div>
+								<div class="form_field">
+									<label class="" >Email Id*</label>
+									<input name="cemail" ref="cemail" class="" :value="getpagedata.company[0].company_email" type="email" placeholder="Enter Your Emial" >
+								</div>
+			    			</div>
+			    			
+			    			<div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-10 logo-col private_img_col">
+			    				<div class="upload_private_img_box logo_img_box">
+			    					<div v-if="imgsrc == ''" class="upload_here">
+			    						<img id="get_img" class="upload_img" src="" alt="image" style="display: none;" />
+			    						<div class="placeholder_tex">
+			    							<h3>Please Upload Here Your Company</h3>
+			    							<h2>LOGO</h2>
+			    						</div>
+			    					</div>
 
-            <div class="form-group">
-                <label>Company Social Links</label>
-                <select id="socialnames" class="form-control" v-model="companydata.socialnames" multiple>
-                    <option v-for="(smedia,index) in social" :key="index" v-bind:value="smedia.socialmedia_id">{{smedia.socialmedia_name}}</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <div id="wraper">
-                <div :id="smedia.socialmedia_id" v-for="(smedia,index) in social" :key="index">
-                    <span class="col-4">{{smedia.socialmedia_name}}</span><input v-model="companydata.sociallinks[index]" type="text" class="col-8 form-control" name="socialmedia[]"><br>
-                </div>
-                </div>
-            </div>
+                                    <div v-else class="upload_here">
+			    						<img id="get_img" class="upload_img" :src="imgsrc" alt="image" />
+			    					</div>
 
+			    					<p class="red" >Image Required* 250KB max size</p>
+			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
+			    						<input type='file' @change="changepic" class="choose" />
+			    					Upload logo file
+			    					</div>
+			    				</div>
+							</div>
 
-            <div class="form-group">
-                <label>Working Area</label><br>
-                <input type="checkbox" v-model="allindia"> All States
-                <select :disabled="allindia" name="cities[]" class="workareacity form-control" v-model="companydata.cities" multiple>
-                    <option v-for="(city,index) in cities" :key="index" :value="city.id">{{city.name}}</option>
-                </select>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Established In</label>
-                        <input type="date" ref="esdate" v-model="getpagedata.company[0].established_in" name="esdate" class="form-control">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Business Segment</label>
-                        <input type="text" ref="bsegment" v-model="getpagedata.company[0].business_segment" name="bsegment" class="form-control" placeholder="Enter Company Segment">
-                    </div>
-                </div>
-            </div>
+			    		</div>
+			    		<div class=" form_field">
+							<label class="" >Address</label>
+							<input name="Address" ref="address" class="" :value="getpagedata.company[0].address" type="text" placeholder="Enter Your Full Address" >
+						</div>
+						<div class=" form_field">
+							<label class="" >Company Est Date</label>
+							<input name="esdate" ref="esdate" class="" :value="getpagedata.company[0].established_in" type="text" placeholder="When your comp. was started?" >
+						</div>
+						<div class=" form_field">
+							<label class="" >Working Hours</label>
+							<div class="select_working_hours m-0">
+								<div class="days_select"><span>Day</span> 
+                                    <select  placeholder="select working days" v-model="workingdays">
+										<option value="all" selected="">All</option>
+										<option value="mtf">Mon to Fri</option>
+										<option value="mts">Mon to Sat</option>
+									</select>
+								</div>
+								<div class="time_select"><input type="time" ref="fromtime" :value="getpagedata.company[0].working_hours_from"  placeholder=""></div>
+								<span>TO</span>
+								<div class="time_select"><input type="time" ref="totime" :value="getpagedata.company[0].working_hours_to" placeholder=""></div>
+							</div>
+						</div>
+						<div class="form_field">
+							<label class="" >About Company</label>
+							<textarea name="cdesc"  rows="8" ref="cdesc" :value="getpagedata.company[0].company_desc" placeholder="Add Business / Company Description"> </textarea> 
+						</div>
+						<div class="form_btn_field">
+							<button type="submit" class="form_btn btn_200  ">Save Changes</button>
+							<router-link :to="'/dashboard/sociallinks'" tag="button" :disabled="!isnext" type="button" class="btnNext  form_btn btn_100  ">Next</router-link>
+						</div>
+			    	</form>
 
-            <div class="form-group">
-                <label>Address</label>
-                <textarea class="form-control" ref="address" v-model="getpagedata.company[0].address" name="address" rows="3" cols="100" placeholder="Enter Company Address"></textarea>
-            </div>
+                    <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" name="cemail" ref="cemail" v-model="getpagedata.company[0].company_email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            
-            <div class="form-group">
-                <label>Contact No</label>
-                <input type="number" name="cnumber" ref="cnumber" v-model="getpagedata.company[0].company_contact" class="form-control" placeholder="Enter Contact No">
-            </div>
-            
-            <div class="form-group">
-                <label>Working Hours</label>
-                <input type="number" name="cwhours" ref="cwhours" v-model="getpagedata.company[0].working_hours" class="form-control" placeholder="Enter Working Hours">
-            </div>
-            
-            <!-- <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div> -->
-            
-            <button type="submit" class="btn btn-primary mb-4">Submit</button>
-        </form>
+		</div>
+        
+        		</div>
+	</div>
+</div>
+	</div> 
+</section>
 
-            <div v-show="showalert" class="alert alert-success">{{alertmsg}}</div>
-
-        </div>
-    </div>
 </template>
 
 <script>
 import axios from 'axios'
+import DashData from './DashData'
 export default {
     name:'AddCompany',
     components:{
-       
+       DashData
     },
     data(){
         return{
+            workingdays:'',
+            isnext:false,
             path:'',
             cities:[],
             allindia:false,
@@ -134,64 +155,82 @@ export default {
         getpagerequest(){
           return this.$store.getters.getcompanypagerequest;
         },
+
+        // getsocialdata(){
+        //   return this.$store.getters.getsocialdata;
+        // },
+
+        // getcitiesdata(){
+        //   return this.$store.getters.getcitydata;
+        // },
+
         getpagedata(){
             let data =  this.$store.getters.getcompanydata;
-            if(data.company[0] != null){
+            
+            if(data.length != 0){
+                if(data.company[0] != null){
+
                 this.isupdate = true;
                 this.company_id = data.company[0].company_id;
                 this.logo = data.company[0].company_logo;
                 // console.log(data.company[0].company_logo);
                 this.path = this.$imgpath+data.company[0].company_id+'/logo/'+data.company[0].company_logo;
                 this.imgsrc = this.path;
+                this.workingdays = data.company[0].working_hours_day;
+                this.isnext = true;
 
-                if(data.companycities.length == 1 ){
-                   if(data.companycities[0]['all_india'] == 1){
-                        this.allindia = true;   
-                   }
+                // if(data.companycities.length == 1 ){
+                //    if(data.companycities[0]['all_india'] == 1){
+                //         this.allindia = true; 
+                //    }
+                // }
+                // else{
+                //     let i=0;
+                //     data.companycities.forEach(element => {
+                //         this.companydata.cities[i] = element['id'];
+                //         i++;
+                //     });
+                // }
+
+                // let j=0;
+                // data.social.forEach(element => {
+                //     this.companydata.socialnames[j] = element['social_id'];
+                //     this.companydata.sociallinks[j] = element['company_social_link'];
+                //     j++;
+                // });
+
+                // let custom = document.createElement('script')
+                // custom.setAttribute('src', this.$linkpath+'js/custom.js')
+                // document.head.appendChild(custom);
+
                 }
                 else{
-                    let i=0;
-                    data.companycities.forEach(element => {
-                        this.companydata.cities[i] = element['id'];
-                        i++;
-                    });
-                }
-
-                let j=0;
-                data.social.forEach(element => {
-                    this.companydata.socialnames[j] = element['social_id'];
-                    this.companydata.sociallinks[j] = element['company_social_link'];
-                    j++;
-                });
-                let custom = document.createElement('script')
-                custom.setAttribute('src', this.$linkpath+'js/custom.js')
-                document.head.appendChild(custom);
-            }
-            else{
-                if(data.newuser == 1){
-                    data.company[0] = {
-                    };
+                    if(data.newuser == 1){
+                        data.company[0] = {
+                        };
+                    }
                 }
             }
             return data;
         },
+
     },
 
     created(){
+        this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
             this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserid});
+            this.$store.dispatch('setcitiesdata');
+            this.$store.dispatch('setproductdata',{id: this.getuserid });
+            this.$store.dispatch('setservicedata',{id: this.getuserid });
+            this.$store.dispatch('setClientData',{id: this.getuserid } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserid });
+            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
         }
-        this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
-       
-        axios.get('company/fetchcities').then((response)=>{
-            this.cities = response.data.cities;
-            // console.log(response.data.cities);
-        });
-
-        axios.get('company/fetchsocial').then((response)=>{
-            this.social = response.data.social;
-            // console.log(response.data.cities);
-        });
+        
     },
 
     methods:{
@@ -208,22 +247,27 @@ export default {
 
         addcompanydata(){
             // console.log(this.companydata);
-            let fd = new FormData();
             
-            fd.append('user_id',1);
-            fd.append('allindia',this.allindia);
+            // console.log(this.$refs.cname.value);
+
+            let fd = new FormData();
+            fd.append('user_id',this.getuserid);
+            // fd.append('allindia',this.allindia);
             fd.append('company_id',0);
             fd.append('company_name',this.$refs.cname.value);
             fd.append('company_desc',this.$refs.cdesc.value);
-            fd.append('socialnames',this.companydata.socialnames);
-            fd.append('sociallinks',this.companydata.sociallinks);
-            fd.append('cities',this.companydata.cities);
+            // fd.append('socialnames',this.companydata.socialnames);
+            // fd.append('sociallinks',this.companydata.sociallinks);
+            // fd.append('cities',this.companydata.cities);
             fd.append('established_in',this.$refs.esdate.value);
             fd.append('business_segment',this.$refs.bsegment.value);
             fd.append('address',this.$refs.address.value);
             fd.append('company_email',this.$refs.cemail.value);
             fd.append('company_contact',this.$refs.cnumber.value);
-            fd.append('working_hours',this.$refs.cwhours.value);
+            fd.append('company_alternate_contact',this.$refs.canumber.value);
+            fd.append('working_hours_day',this.workingdays);
+            fd.append('working_hours_from',this.$refs.fromtime.value);
+            fd.append('working_hours_to',this.$refs.totime.value);
             fd.append('isupdate',false);
 
             if(this.ischangepic == true){
@@ -241,6 +285,7 @@ export default {
                     // console.log(response.data);
                     this.alertmsg = response.data.message;
                     this.showalert =  !this.showalert;
+                    this.$store.dispatch('setcompanydata',{id: this.getuserid});
                     setTimeout(() => {
                         this.clear();
                     }, 3000);

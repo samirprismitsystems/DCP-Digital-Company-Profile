@@ -11,7 +11,7 @@ const state = {
 const getters = {
     getuseremail : (state) => state.useremail,
     getfirstname : (state) => state.firstname,
-    getcompanyid : (state) => state.company_id,
+    // getcompanyid : (state) => state.company_id,
     getuserid : (state) => state.userid,
     getuserdata : (state) => state.userdata,
 };
@@ -29,9 +29,9 @@ const actions = {
         commit('setfirstname',user.first_name);
     },
     
-    setcompanyid({commit},user){
-        commit('setcompanyid',user.companyid);
-    },
+    // setcompanyid({commit},user){
+    //     commit('setcompanyid',user.company_id);
+    // },
 
     setuserdata({commit},user){
         userApi.getuserData(user.userid,result => {
@@ -45,7 +45,7 @@ const mutations = {
     setuseremail:(state,payload) =>(state.useremail = payload),
     setuserid:(state,payload) =>(state.userid = payload),
     setfirstname:(state,payload) =>(state.firstname = payload),
-    setcompanyid:(state,payload) =>(state.company_id = payload),
+    // setcompanyid:(state,payload) =>(state.company_id = payload),
     setuserdata:(state,payload) =>(state.userdata = payload)
 };
 

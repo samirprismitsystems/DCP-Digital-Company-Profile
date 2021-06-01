@@ -1,37 +1,57 @@
 <template>
 
-<div class="container mt-5">
-   <div class="row justify-content-center">
-    <div class="col-lg-6">
-    
-    <h3 class="mb-2 mt-2">Digital Company Profile</h3>
+    <div class="container-fluid  full_section login_page">
+		<div class="row ">
+			
+			<div class="col-xl-6 col-lg-12 p-0 full-height left_col">
 
-   <form class="text-justify mt-4" @submit.prevent="userlogin()">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" ref="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
+				<!-- <img src="assets/img/login_img.png" width="962" height="881" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit"> -->
 
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" ref="password" name="password" id="exampleInputPassword1" placeholder="Password">
-        </div>
+			<picture class="d-block  h-100">
+			  <source srcset="/src/assets/img/login_img_400.png" media="(max-width:767px)" type="image/png">
+			  <source srcset="/src/assets/img/login_img_800.png" media="(max-width:1024px)" type="image/png">
+			  <source srcset="/src/assets/img/login_img_1200.png" media="(min-width:1025px)" type="image/png">
+			  <img data-src="/src/assets/img/login_img.png" loading="lazy"  width="962" height="881" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit lazyload ">
+		  </picture>
+				<span class="hello_world">hello world</span>
+			</div>
+			
+			<div class="col-xl-6 col-lg-12 full-height right_col p-0">
 
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    
-    <router-link class="mt-4 mb-4 float-left" :to="'/dashboard/forgetpassword'">Forget Password?</router-link>
+				<div class="form-center_main login_form text-justify">
+					<h1 class="site_title">
+						<span>Welcome to</span><br> Digital Company Profile
+					</h1>
+					<div class="form-heading">
+						<div class="h2">Please Login to Continue</div>
+					</div>
 
-    <router-link class="mt-4 mb-4 float-right" :to="'/dashboard/registration'">Don't have Account? Register Yourself.</router-link>
+					<form @submit.prevent="userlogin()">
+						<div class="form_field">
+							<label class="" for="user_id">User ID</label>
+							<input id="user_id" ref="email" name="email" class="" value="" type="Email" placeholder="Enter Email Id or Mobile Number" required="">
+						</div>
+						<div class="form_field">
+							<label class="" for="password">Password</label>
+							<input id="password" ref="password" name="password" class="" value="" type="password" placeholder="Enter 6 Digit Password" required="">
+						</div>
+						<div class="site_link_field">
+						<router-link :to="'/dashboard/forgetpassword'" class="forget_pass_link site_link">Forgot Password?</router-link>
+						</div>
+						<button type="submit" class="form_btn btn_100 btn-center ">Login</button>
+					</form>
 
-    </div>
+					<router-link :to="'/dashboard/registration'" class="form_link  ">New User? Create An Account <i class="fas fa-angle-double-right"></i></router-link>
 
-  </div>
+                    <div class="alert alert-danger mt-5" v-if="msgshow"><p>{{msg}}</p></div>
 
-    <div class="alert alert-danger" v-if="msgshow"><p>{{msg}}</p></div>
-    
-</div>
+				</div>
 
+			</div>
+		</div>
+
+</div> 
+  
 </template>
 
 <script>
@@ -63,7 +83,7 @@ export default {
             fd.append('email',this.$refs.email.value);
             fd.append('password',this.$refs.password.value);
             axios.post('user/loginuser',fd).then((result) => {
-                console.log(result);
+                // console.log(result);
 
                 if(result.data.error == true){
                     this.msg = result.data.message;
@@ -81,7 +101,7 @@ export default {
                     this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
                     // this.$store.dispatch('setcompanyid',{companyid:userdata.company_id});
 
-                    this.$router.push('/dashboard/');
+                    this.$router.push('/dashboard/company');
 
                 }
                 
