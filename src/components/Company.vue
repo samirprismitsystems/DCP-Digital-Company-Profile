@@ -19,30 +19,30 @@
 			    			<div class="col-xl-9  col-lg-8 col-md-7  col-sm-12 form-col">
 				    			<div class="form_field">
 									<label class="" >Full Name / Business Name / Company Name*</label>
-									<input name="cname" ref="cname" class="" :value="getpagedata.company[0].company_name" type="text" placeholder="Enter Your Full Name / Business Name /Company Name" >
+									<input name="cname" ref="cname" class="" v-model="getpagedata.company[0].company_name" type="text" placeholder="Enter Your Full Name / Business Name /Company Name" >
 								</div>
 								<div class="form_field">
 									<label class="" >Business Type / Description*</label>
-									<input name="bsegment" ref="bsegment" class="" :value="getpagedata.company[0].business_segment" type="text" placeholder="Business Type / Description" >
+									<input name="bsegment" ref="bsegment" class="" v-model="getpagedata.company[0].business_segment" type="text" placeholder="Business Type / Description" >
 								</div>
 								<div class="row ">
 									<div class="col-sm-6 col-12">
 									<div class=" form_field">
 										<label class="" >Phone No. (WhatsApp No)</label>
-										<input name="cnumber" ref="cnumber" class="" :value="getpagedata.company[0].company_contact" type="text" placeholder="Enter Your WhatsApp No" >
+										<input name="cnumber" ref="cnumber" class="" v-model="getpagedata.company[0].company_contact" type="text" placeholder="Enter Your WhatsApp No" >
 									</div>
 									</div>
 									<div class="col-sm-6 col-12">
 									<div class=" form_field">
 										<label class="" >Alternet Phone No. (Optional)</label>
-										<input name="canumber" ref="canumber" class="" :value="getpagedata.company[0].company_alternate_contact" type="text" placeholder="Enter Your Alternet Phone No" >
+										<input name="canumber" ref="canumber" class="" v-model="getpagedata.company[0].company_alternate_contact" type="text" placeholder="Enter Your Alternet Phone No" >
 									</div>
 									</div>
 									
 								</div>
 								<div class="form_field">
 									<label class="" >Email Id*</label>
-									<input name="cemail" ref="cemail" class="" :value="getpagedata.company[0].company_email" type="email" placeholder="Enter Your Emial" >
+									<input name="cemail" ref="cemail" class="" v-model="getpagedata.company[0].company_email" type="email" placeholder="Enter Your Emial" >
 								</div>
 			    			</div>
 			    			
@@ -71,11 +71,11 @@
 			    		</div>
 			    		<div class=" form_field">
 							<label class="" >Address</label>
-							<input name="Address" ref="address" class="" :value="getpagedata.company[0].address" type="text" placeholder="Enter Your Full Address" >
+							<input name="Address" ref="address" class="" v-model="getpagedata.company[0].address" type="text" placeholder="Enter Your Full Address" >
 						</div>
 						<div class=" form_field">
 							<label class="" >Company Est Date</label>
-							<input name="esdate" ref="esdate" class="" :value="getpagedata.company[0].established_in" type="text" placeholder="When your comp. was started?" >
+							<input name="esdate" ref="esdate" class="" v-model="getpagedata.company[0].established_in" type="text" placeholder="When your comp. was started?" >
 						</div>
 						<div class=" form_field">
 							<label class="" >Working Hours</label>
@@ -87,18 +87,18 @@
 										<option value="mts">Mon to Sat</option>
 									</select>
 								</div>
-								<div class="time_select"><input type="time" ref="fromtime" :value="getpagedata.company[0].working_hours_from"  placeholder=""></div>
+								<div class="time_select"><input type="time" ref="fromtime" v-model="getpagedata.company[0].working_hours_from"  placeholder=""></div>
 								<span>TO</span>
-								<div class="time_select"><input type="time" ref="totime" :value="getpagedata.company[0].working_hours_to" placeholder=""></div>
+								<div class="time_select"><input type="time" ref="totime" v-model="getpagedata.company[0].working_hours_to" placeholder=""></div>
 							</div>
 						</div>
 						<div class="form_field">
 							<label class="" >About Company</label>
-							<textarea name="cdesc"  rows="8" ref="cdesc" :value="getpagedata.company[0].company_desc" placeholder="Add Business / Company Description"> </textarea> 
+							<textarea name="cdesc"  rows="8" ref="cdesc" v-model="getpagedata.company[0].company_desc" placeholder="Add Business / Company Description"> </textarea> 
 						</div>
 						<div class="form_btn_field">
 							<button type="submit" class="form_btn btn_200  ">Save Changes</button>
-							<router-link :to="'/dashboard/sociallinks'" tag="button" :disabled="!isnext" type="button" class="btnNext  form_btn btn_100  ">Next</router-link>
+							<router-link :to="'/dashboard/sociallinks'" tag="button" :disabled="isnext" type="button" class="btnNext  form_btn btn_100  ">Next</router-link>
 						</div>
 			    	</form>
 
@@ -125,7 +125,7 @@ export default {
     data(){
         return{
             workingdays:'',
-            isnext:false,
+            isnext:true,
             path:'',
             cities:[],
             allindia:false,
@@ -156,6 +156,10 @@ export default {
           return this.$store.getters.getcompanypagerequest;
         },
 
+        getcompanyid(){
+          return this.$store.getters.getcompanyid;
+        },
+
         // getsocialdata(){
         //   return this.$store.getters.getsocialdata;
         // },
@@ -166,10 +170,9 @@ export default {
 
         getpagedata(){
             let data =  this.$store.getters.getcompanydata;
-            
             if(data.length != 0){
-                if(data.company[0] != null){
-
+                if(data.company[0] != null && this.getcompanyid != ''){
+                    console.log('incompany');
                 this.isupdate = true;
                 this.company_id = data.company[0].company_id;
                 this.logo = data.company[0].company_logo;
@@ -177,31 +180,7 @@ export default {
                 this.path = this.$imgpath+data.company[0].company_id+'/logo/'+data.company[0].company_logo;
                 this.imgsrc = this.path;
                 this.workingdays = data.company[0].working_hours_day;
-                this.isnext = true;
-
-                // if(data.companycities.length == 1 ){
-                //    if(data.companycities[0]['all_india'] == 1){
-                //         this.allindia = true; 
-                //    }
-                // }
-                // else{
-                //     let i=0;
-                //     data.companycities.forEach(element => {
-                //         this.companydata.cities[i] = element['id'];
-                //         i++;
-                //     });
-                // }
-
-                // let j=0;
-                // data.social.forEach(element => {
-                //     this.companydata.socialnames[j] = element['social_id'];
-                //     this.companydata.sociallinks[j] = element['company_social_link'];
-                //     j++;
-                // });
-
-                // let custom = document.createElement('script')
-                // custom.setAttribute('src', this.$linkpath+'js/custom.js')
-                // document.head.appendChild(custom);
+                this.isnext = false;
 
                 }
                 else{
@@ -220,6 +199,7 @@ export default {
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
             this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setsocialdata',{id: this.getuserid});
             this.$store.dispatch('setcitiesdata');
             this.$store.dispatch('setproductdata',{id: this.getuserid });
@@ -230,7 +210,6 @@ export default {
             this.$store.dispatch('setinquiryData',{id: this.getuserid } );
             this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
         }
-        
     },
 
     methods:{
@@ -246,19 +225,12 @@ export default {
         },
 
         addcompanydata(){
-            // console.log(this.companydata);
             
-            // console.log(this.$refs.cname.value);
-
             let fd = new FormData();
             fd.append('user_id',this.getuserid);
-            // fd.append('allindia',this.allindia);
-            fd.append('company_id',0);
+            // fd.append('company_id',0);
             fd.append('company_name',this.$refs.cname.value);
             fd.append('company_desc',this.$refs.cdesc.value);
-            // fd.append('socialnames',this.companydata.socialnames);
-            // fd.append('sociallinks',this.companydata.sociallinks);
-            // fd.append('cities',this.companydata.cities);
             fd.append('established_in',this.$refs.esdate.value);
             fd.append('business_segment',this.$refs.bsegment.value);
             fd.append('address',this.$refs.address.value);
@@ -285,11 +257,27 @@ export default {
                     // console.log(response.data);
                     this.alertmsg = response.data.message;
                     this.showalert =  !this.showalert;
-                    this.$store.dispatch('setcompanydata',{id: this.getuserid});
+                    if(this.isupdate == false){
+                        this.$store.dispatch('setcompanydata',{id: this.getuserid});
+                        this.$store.dispatch('setallsocialdata');
+                        this.$store.dispatch('setsocialdata',{id: this.getuserid});
+                        this.$store.dispatch('setcitiesdata');
+                        this.$store.dispatch('setproductdata',{id: this.getuserid });
+                        this.$store.dispatch('setservicedata',{id: this.getuserid });
+                        this.$store.dispatch('setClientData',{id: this.getuserid } );
+                        this.$store.dispatch('setportfolioData',{id: this.getuserid });
+                        this.$store.dispatch('settestimonialData',{id: this.getuserid } );
+                        this.$store.dispatch('setinquiryData',{id: this.getuserid } );
+                        this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+                    }
+                    else{
+                        this.$store.dispatch('setcompanydata',{id: this.getuserid});
+                    }
+                    
                     setTimeout(() => {
                         this.clear();
                     }, 3000);
-                });
+            });
 
         },
 

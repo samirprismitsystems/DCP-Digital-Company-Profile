@@ -79,7 +79,7 @@
                      <div class="alert alert-success mt-2" v-if="showmsg">{{msg}}</div>
 
 					<div class="form_link_group">
-						<router-link :to="'/dashboard/login'" class="form_link  go_back mb-4"> <i class="fas fa-angle-double-left"></i>Go Back to Login</router-link>
+						<router-link :to="'/login'" class="form_link  go_back mb-4"> <i class="fas fa-angle-double-left"></i>Go Back to Login</router-link>
 					</div>
 
 				</div> 
@@ -147,7 +147,6 @@ export default {
         },
 
         userregister(){
-
             let fd = new FormData();
             fd.append('first_name',this.$refs.first_name.value);
             fd.append('last_name',this.$refs.last_name.value);

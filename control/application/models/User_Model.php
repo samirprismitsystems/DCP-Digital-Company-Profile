@@ -2,7 +2,6 @@
 
 class User_Model extends CI_Model{
     
-
     public function tokendata(){
         $tokdata['ciphering'] = $ciphering = "AES-128-CTR";
         $tokdata['ivlength'] = $iv_length = openssl_cipher_iv_length($ciphering);
@@ -48,6 +47,13 @@ class User_Model extends CI_Model{
         // $this->db->where('user_id',$insert_id);
         // return $this->db->get('tbl_users')->row_array();
     }
+
+    public function registeruser($data){
+        $this->db->insert('tbl_users',$data);
+        return $insert_id = $this->db->insert_id();
+    }
+
+
 
     public function getuserdata($user_id){
         $this->db->where('user_id',$user_id);
@@ -150,6 +156,12 @@ class User_Model extends CI_Model{
         else{
             return false;
         }
+    }
+
+
+    public function getusercompany($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_company')->row_array();
     }
 
     

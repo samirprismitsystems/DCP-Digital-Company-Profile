@@ -29,8 +29,8 @@
 						<button type="submit" class="form_btn btn_100 btn-center ">Send Password</button>
 					</form>
 					<div class="form_link_group">
-						<router-link :to="'/dashboard/login'" class="form_link  go_back"> <i class="fas fa-angle-double-left"></i>Go Back to Login</router-link>
-						<router-link :to="'/dashboard/registration'" class="form_link ">New User? Create An Account <i class="fas fa-angle-double-right"></i></router-link>
+						<router-link :to="'/login'" class="form_link  go_back"> <i class="fas fa-angle-double-left"></i>Go Back to Login</router-link>
+						<router-link :to="'/registration'" class="form_link ">New User? Create An Account <i class="fas fa-angle-double-right"></i></router-link>
 					</div>
 				</div> 
 

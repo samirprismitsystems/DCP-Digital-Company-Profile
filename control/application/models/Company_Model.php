@@ -2,8 +2,10 @@
 
 class Company_Model extends CI_Model{
     
-    public function getcompany($userid){
-        $this->db->where('user_id',$userid);
+    public function getcompany($userid = NULL){
+        if($userid != NULL){
+            $this->db->where('user_id',$userid);
+        }
         $company = $this->db->get('tbl_company')->result_array();
         return $company;
     }
@@ -39,21 +41,25 @@ class Company_Model extends CI_Model{
     }
 
 
-    public function getsociallist($company_id){
-
-        $this->db->where('company_id',$company_id);
-        if($this->db->get('tbl_company_sociallinks')->result_array()){
-            $this->db->select('tbl_company_sociallinks.*,tbl_socialmedia.socialmedia_name,tbl_socialmedia.socialmedia_logo');
-            $this->db->from('tbl_socialmedia');
-            $this->db->join('tbl_company_sociallinks','tbl_socialmedia.socialmedia_id = tbl_company_sociallinks.social_id');
-            $this->db->where('tbl_company_sociallinks.company_id',$company_id);
-            $data = $this->db->get()->result_array();
-            return $data;
-        }
-        else{
-            // $this->db->select('socialmedia_id,socialmedia_name,socialmedia_logo');
+    public function getsociallist($company_id = NULL){
+        if($company_id == NULL){
             $social = $this->db->get('tbl_socialmedia')->result_array();
             return $social;
+        }
+        else{
+            $this->db->where('company_id',$company_id);
+            if($socialdata = $this->db->get('tbl_company_sociallinks')->result_array()){
+                $this->db->select('tbl_company_sociallinks.*,tbl_socialmedia.socialmedia_name,tbl_socialmedia.socialmedia_logo');
+                $this->db->from('tbl_socialmedia');
+                $this->db->join('tbl_company_sociallinks','tbl_socialmedia.socialmedia_id = tbl_company_sociallinks.social_id');
+                $this->db->where('tbl_company_sociallinks.company_id',$company_id);
+                $data = $this->db->get()->result_array();
+                return $data;
+            }
+            else{
+                $social = $this->db->get('tbl_socialmedia')->result_array();
+                return $social;
+            }    
         }
     }
 
@@ -146,6 +152,56 @@ class Company_Model extends CI_Model{
         return $this->db->update('tbl_payment_options');
     }
     
+
+    public function createsocial($data){
+        return $this->db->insert_batch('tbl_socialmedia',$data);
+    }
+
+    public function updatesocial($socialdata){
+        $update = 0;
+        foreach ($socialdata as $value) {
+            $this->db->set('socialmedia_name',$value['socialmedia_name']);
+            $this->db->set('socialmedia_logo',$value['socialmedia_logo']);
+            $this->db->where('socialmedia_id',$value['socialmedia_id']);
+            if($this->db->update('tbl_socialmedia')){
+                $update = 0;
+            }
+            else{
+                $update = 1;
+            }
+        }
+
+        if($update == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    public function deletesocialdata($social_id){
+        $this->db->where('socialmedia_id',$social_id);
+        return $this->db->delete('tbl_socialmedia');
+    }
+
+
+    public function changestatus($company_id,$status){
+        $this->db->set('status',$status);
+        $this->db->where('company_id',$company_id);
+        if($this->db->update('tbl_company')){
+            $this->db->where('company_id',$company_id);
+            $data =  $this->db->get('tbl_company')->row_array();
+            $this->db->set('status',$status);
+            $this->db->where('user_id',$data['user_id']);
+            return $this->db->update('tbl_users');
+        }
+        else{
+            return false;
+        }
+        
+    }
+
     
 }
 

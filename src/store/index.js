@@ -10,6 +10,8 @@ import portfolio from './modules/portfolio'
 import testimonial from './modules/testimonial'
 import inquiry from './modules/inquiry'
 import user from './modules/user'
+import setting from './modules/setting'
+import pages from './modules/pages'
 
 Vue.use(Vuex);
 
@@ -23,6 +25,8 @@ export default new Vuex.Store({
         portfolio,
         testimonial,
         inquiry,
-        user
+        user,
+        setting,
+        pages,
     }
 });

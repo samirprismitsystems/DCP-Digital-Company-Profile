@@ -11,12 +11,22 @@ import store from './store/index'
 import VueSimpleAlert from "vue-simple-alert";
 Vue.use(VueSimpleAlert);
 
-
-Vue.prototype.$imgpath = window.location.origin+'/control/upload/';
-
-Vue.prototype.$linkpath = window.location.origin+'/src/assets/';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
 
 let sitemainpath = '/digital-company-profile/';
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+// set default config
+Vue.$cookies.config(60*10,sitemainpath)
+
+
+Vue.prototype.$imgpath = window.location.origin+'/control/upload/';
+Vue.prototype.$linkpath = window.location.origin+'/src/assets/';
+
+
 
 axios.defaults.baseURL = "http://localhost"+sitemainpath+"control/api/";
 

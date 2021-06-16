@@ -6,7 +6,7 @@
 
       	<DashData />
 
-		<div v-if="getpagerequest == 1" class=" right_sidebar_content">
+		<div v-if="getpagerequest == 1 && getcompanyid != ''" class=" right_sidebar_content">
 
 			<div class="tabs-stage">
                 <div id="tab-6" class="expand_tabs">
@@ -104,8 +104,6 @@
 
 			    	</form>
 
-                <div class="alert alert-success" v-if="showmsg"> <h3 class="text-justify"> {{msg}} </h3> </div>
-
 			    </div>
 
 
@@ -113,7 +111,8 @@
             </div>
         </div>
         
-    </div></section>
+    </div>
+	</section>
     
 </template>
 
@@ -129,8 +128,6 @@ export default {
         return{
             acctype:'saving',
             isupdate:false,
-            msg:'',
-            showmsg:false,
 			imgsrc:require('../assets/img/qr-code.png'),
 			ischangepic:false,
 			qrcode:null,
@@ -156,7 +153,7 @@ export default {
         getpagedata(){
             let data =  this.$store.getters.getpaymentoptionsdata;
             // console.log(data);
-            if(data.length != 0){
+            if(data.length != 0 && this.getcompanyid != ''){
                 if(data != null){
                     this.acctype = data.account_type;
                     this.isupdate = true;
@@ -172,9 +169,13 @@ export default {
     },
 
     created(){
+		if(this.getcompanyid == ''){
+            this.$router.push('/dashboard/company');
+        }
 		this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
             this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setsocialdata',{id: this.getuserid});
             this.$store.dispatch('setcitiesdata');
             this.$store.dispatch('setproductdata',{id: this.getuserid });
@@ -183,8 +184,8 @@ export default {
             this.$store.dispatch('setportfolioData',{id: this.getuserid });
             this.$store.dispatch('settestimonialData',{id: this.getuserid } );
             this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-			this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
-		}
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+        }
     },
 
     methods:{
@@ -223,14 +224,8 @@ export default {
             }
 
             axios.post('company/savepaymentoptions',fd).then((result) => {
-                console.log(result.data);
-                this.msg = result.data.message;
-                this.showmsg = true;
                 this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
-                setTimeout(() => {
-                    this.msg = '';
-                    this.showmsg = false;
-                }, 3000);
+                this.$swal.fire('Data Updated', result.data.message, 'success');
             });
             
         }

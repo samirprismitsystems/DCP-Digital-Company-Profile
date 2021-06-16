@@ -14,43 +14,75 @@ class Service extends REST_Controller {
 
  		$user_id = $this->input->post('user_id');
  		$company_data = $this->Company_Model->getcompany($user_id);
-
- 		// $companyname = $company_data[0]['company_name'];
  		$companyid = $company_data[0]['company_id'];
 
- 		if(!empty($_FILES['service_image']['name'])){
+ 		$service_field = array();
+ 		
+ 		$i = 0;
+	 	foreach (json_decode($data['service_data']) as $value) {
+		 	if($data['isupdate'] == 'true'){
+		 		$service_field[$i]['service_id'] = $value->service_id;
+		 		$service_field[$i]['service_image'] = $value->service_image;
+		 	}
+		 	$service_field[$i]['service_name'] = $value->service_name;
+		 	$service_field[$i]['service_desc'] = $value->service_desc;
+		 	$service_field[$i]['service_price'] = $value->service_price;
+		 	$service_field[$i]['company_id'] = $companyid;
+	 		$i++;
+	 	}
 
-		    $targetpath='./upload/'.$companyid.'/service/';
-		    if (!is_dir($targetpath)) {
-		        mkdir($targetpath,0777,TRUE);
-		    }
-		                   
-		    $config['upload_path']   = $targetpath;
-		    $config['allowed_types'] = "*";
-		    $this->load->library('upload',$config);
-			$path = pathinfo($_FILES["service_image"]["name"]);
-			$_FILES["service_image"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
-			               
-			if ($this->upload->do_upload('service_image')) {
-			   	$uploadphoto = $this->upload->data('file_name');
-			}else{
-			    echo $this->upload->display_errors();
+	 	    $sourcepath = './upload/'.$companyid.'/serviceoroginal/';
+            $targetpath = './upload/'.$companyid.'/service/';
+
+	 	for ($i=0; $i < $data['imgcount'] ; $i++) {
+ 			$name = 'oldimages'.$i;
+ 			if(!empty($_FILES[$name]['name'])){
+            
+            // $targetpath = './upload/'.$companyid.'/service/';
+
+			if (!is_dir($sourcepath)) {
+				mkdir($sourcepath,0777,TRUE);
 			}
-		}
-		else{
-			$uploadphoto = $data['service_image'];
-		}
+			if (!is_dir($targetpath)) {
+				mkdir($targetpath,0777,TRUE);
+			}
+			         
+				$config['upload_path']   = $sourcepath;
+				$config['allowed_types'] = "*";
+				$this->load->library('upload',$config);
+				$this->load->library('image_lib');
 
-		$service_field = array(
-			'service_name' => $data['service_name'],
-            'service_desc' => $data['service_desc'],
-            'service_price' => $data['service_price'],
-            'service_image'=> $uploadphoto,
-            'company_id' => $companyid
-        );
+		        $path = pathinfo($_FILES[$name]["name"]);
+				$_FILES[$name]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
+		        if ($this->upload->do_upload($name)) {
+		        	$uploadData = $this->upload->data();
+		           	$service_field[$i]['service_image'] = $uploadData['file_name'];
+		        }
 
+		        $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
+                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+
+		        $config_manip = array(
+                      'image_library' => 'gd2',
+                      'source_image' => $source_path,
+                      'new_image' => $target_path,
+                      'maintain_ratio' => false,
+                      'create_thumb' => false,
+                      'quality' =>'60%',
+                      'width' => 300,
+                      'height' => 300
+                    );
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+
+ 			}
+ 			else{
+ 			}
+ 		}
+		
         if($data['isupdate'] == 'true'){
-        	if($this->Service_Model->updateservice($service_field,$data['service_id'])){
+        	if($this->Service_Model->updateservice($service_field)){
 			$output['error'] = false;
 		    $output['message'] = "Service Updated";
 		    $this->set_response($output, REST_Controller::HTTP_OK);

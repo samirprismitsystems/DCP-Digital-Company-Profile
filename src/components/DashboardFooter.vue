@@ -1,44 +1,48 @@
 <template>
-    <div class="mt-5 pt-5 pb-5 footer">
-    <div class="container">
-    <div class="row">
-        <div class="col-lg-5 col-xs-12 about-company">
-        <h2>Heading</h2>
-        <p class="pr-5 text-white-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis </p>
-        <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="fa fa-linkedin-square"></i></a></p>
-        </div>
-        <div class="col-lg-3 col-xs-12 links">
-        <h4 class="mt-lg-0 mt-sm-3">Links</h4>
-            <ul class="m-0 p-0">
-            <li>- <a href="#">Lorem ipsum</a></li>
-            <li>- <a href="#">Nam mauris velit</a></li>
-            <li>- <a href="#">Etiam vitae mauris</a></li>
-            <li>- <a href="#">Fusce scelerisque</a></li>
-            <li>- <a href="#">Sed faucibus</a></li>
-            <li>- <a href="#">Mauris efficitur nulla</a></li>
-            </ul>
-        </div>
-        <div class="col-lg-4 col-xs-12 location">
-        <h4 class="mt-lg-0 mt-sm-4">Location</h4>
-        <p>22, Lorem ipsum dolor, consectetur adipiscing</p>
-        <p class="mb-0"><i class="fa fa-phone mr-3"></i>(541) 754-3010</p>
-        <p><i class="fa fa-envelope-o mr-3"></i>info@hsdf.com</p>
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col copyright">
-        <p class=""><small class="text-white-50">© 2019. All Rights Reserved.</small></p>
-        </div>
-    </div>
-    </div>
-</div>
+    <footer>
+            <div class="container custom_container" v-if="getpagereq == 1">
+                <div class="row align-items-center">
+                    <div class="col-6  ">
+                        <ul class="social_media_nav">
+                            <li class="social_media_item" v-if="getpagedata[3].setting_name == 'facebookurl'"><a :href="getpagedata[3].setting_value" target="_blank" class="social_media_link fab fa-facebook-f"></a></li>
+                            <li class="social_media_item" v-if="getpagedata[4].setting_name == 'instaurl'"><a :href="getpagedata[4].setting_value" target="_blank" class="social_media_link fab fa-instagram"></a></li>
+                            <li class="social_media_item" v-if="getpagedata[5].setting_name == 'linkedurl'"><a :href="getpagedata[5].setting_value" target="_blank" class="social_media_link fab fa-linkedin-in"></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="footer_nav">
+                            <li class="footer_nav_item"><a href="#!" class="footer_nav_link ">Terms of services</a></li>
+                            <li class="footer_nav_item"><a href="#!" class="footer_nav_link ">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
+        </footer>
 </template>
-
-
 
 <script>
 export default {
-    name:'DashboardFooter'
+    name:'DashboardFooter',
+    computed:{
+        getpagereq(){
+            return this.$store.getters.getsettingrequest;
+        },
+        getpagedata(){
+            return this.$store.getters.getsettingdata;
+        },
+        getpagesdata(){
+            let data = this.$store.getters.getpagesdata;
+            return data;
+        },
+        getpagesrequest(){
+            return this.$store.getters.getpagesrequest;
+        },
+    },
+
+    created(){
+        this.$store.dispatch('setsettingdata');
+        this.$store.dispatch('setpagesdata');
+    }
 }
 </script>

@@ -11,6 +11,10 @@ const getters = {
     getsingletestimonialdata:(state) => (testimonialid) => {
         return state.testimonial.find( testimonialdata => testimonialdata.testimonial_id === testimonialid )
     },
+
+    gettestimonialpage:(state) => (page) => {
+        return state.testimonial.slice( ((2*page) - 2) ,page*2)
+    },
 };
 
 const actions = {

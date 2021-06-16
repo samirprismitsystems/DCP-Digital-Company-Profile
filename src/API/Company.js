@@ -31,4 +31,16 @@ export default{
         });
     },
 
+    getallcompanydata(cb){
+        axios.get('company/fetchallcompany').then((response)=>{
+            cb(response);
+        });
+    },
+
+    getallsocialdata(cb){
+        axios.get('company/fetchallsocial').then((response)=>{
+            cb(response);
+        });
+    },
+
 }

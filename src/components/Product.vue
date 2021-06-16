@@ -6,7 +6,7 @@
 
       	<DashData />
 
-		<div class=" right_sidebar_content" v-if="getpagerequest == 1">
+		<div class=" right_sidebar_content" v-if="getpagerequest == 1 && getcompanyid != ''">
 			<div class="tabs-stage">
 
 
@@ -16,20 +16,23 @@
 				        <div class="h2">Add company products</div>
 				        <div class="h4">Upload products which people can order online</div>
 			    	</div>
-			    	<form id="" @submit.prevent="saveproduct()" class="product_form company_items form_shadow">
-			    		<div class="row">
+
+                    <!-- <h1 class="text-center" v-if="getpagedata == ''">No Services Found</h1> -->
+
+			    	<form id="" @submit.prevent="saveproduct()"  class="product_form company_items form_shadow">
+			    		<div class="row" id="divdata">
 			    		
                         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 item_col " v-for="(product,index) in getpagedata" :key="index">
 			    			<div class="item_no">
-			    				<h5>Product No <span class="count"> {{index+1}} </span></h5> <a @click="deleteproduct(product.product_id)" type="button" class="dismiss-btn fas fa-trash-alt"></a>
+			    				<h5>Product #<span class="count"> {{index+1}} </span></h5> <a @click="deleteproduct(product.product_id)" type="button" class="dismiss-btn fas fa-trash-alt"></a>
 			    			</div>
 			    			<div class="item_div">
 			    				<div class="item_img">
-			    					<img :src="imgsrc[index]" alt="" title="" class="img-fit">
+			    					<img :src="imgsrcprod[index]" alt="" title="" class="img-fit">
 			    				</div>
 			    				<div>
 			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
-			    					<input type="file" @change="changepic(index,$event)" class="choose">
+			    					<input type="file" name="product_image" @change="changepic(index,$event)" class="choose">
 			    					Upload product image
 			    					</div>
 			    					<input type="text" name="product-name" v-model="oldproduct[index].product_name" class="item-input" placeholder="Enter Product Name">
@@ -38,9 +41,31 @@
 			    				</div>	
 			    			</div>
 			    		</div>
+
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 item_col " v-for="(nproduct,nindex) in newproduct" :key="nindex+'new'">
+			    			<div class="item_no">
+			    				<h5>Add New Product <span class="count"> {{nindex+1}} </span></h5> <a @click="deletbox(nindex)" type="button" class="dismiss-btn fas fa-trash-alt"></a>
+			    			</div>
+			    			<div class="item_div">
+			    				<div class="item_img">
+			    					<img :src="newimgsrc[nindex]" alt="" title="" class="img-fit">
+			    				</div>
+			    				<div>
+			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
+			    					<!-- @change="changepic(index,$event)" -->
+                                    <input type="file" @change="changenewpic(nindex,$event)"  class="choose">
+			    					Upload product image
+			    					</div>
+                                    
+			    					<input type="text" name="product-name" v-model="nproduct.product_name" class="item-input" placeholder="Enter Product Name">
+			    					<input type="number" name="product-price" v-model="nproduct.product_price" class="item-input" placeholder="Enter Product MRP">
+			    					<textarea  class="item-input" maxlength="200" v-model="nproduct.product_desc" placeholder="Enter Product Description"></textarea>
+			    				</div>	
+			    			</div>
+			    		</div>
 			    		
 			    		</div>
-			    		<button type="button" class=" site_btn add-more-btn">Add More</button>
+			    		<a @click="adddiv" type="button" class=" site_btn add-more-btn">Add More</a>
 
 						<div class="form_btn_field">
 							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
@@ -48,6 +73,8 @@
 						</div>
 			    	</form>
 				</div>
+
+                <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
             </div>
         </div>
@@ -65,9 +92,17 @@ export default {
     data(){
         return{
             oldproduct:[],
-            imgsrc:[],
+            newproduct:[],
+            oldimages:[],
+            newimages:[],
+            imgsrcprod:[],
+            newimgsrc:[],
             imgpath:this.$imgpath,
             ischangepic:false,
+            alertmsg:'',
+            showalert:false,
+            newdataindex:0,
+            isimgchange:false
         }
     },
     components:{
@@ -88,12 +123,24 @@ export default {
         },
         getpagedata(){
             let data =  this.$store.getters.getproductdata;
+            this.oldproduct = [];
+            if(data.length != 0 && this.getcompanyid != ''){
             let i = 0;
             data.forEach( element => {
                 this.oldproduct.push(element);
-                this.imgsrc[i] = this.$imgpath+this.getcompanyid+'/products/'+ element.product_image;
+                if(this.isimgchange == true){
+                    let blb = this.imgsrcprod[i].substr(0,4);
+                    if(blb != 'blob'){
+                        this.imgsrcprod[i] = this.$imgpath+this.getcompanyid+'/product/'+element.product_image;
+                    }
+                }
+                else{
+                    this.imgsrcprod[i] = this.$imgpath+this.getcompanyid+'/product/'+element.product_image;
+                }
                 i++;
             });
+                this.oldproduct = [ ...new Set(this.oldproduct) ];
+            }
             // console.log(this.oldproduct);
             return data;
         },
@@ -106,12 +153,16 @@ export default {
     },
 
     created(){
+        if(this.getcompanyid == ''){
+            this.$router.push('/dashboard/company');
+        }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
-        if(this.getpagerequest == 0){
+       if(this.getpagerequest == 0){
             this.$store.dispatch('setcompanydata',{id: this.getuserid});
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
+            this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setsocialdata',{id: this.getuserid});
             this.$store.dispatch('setcitiesdata');
+            this.$store.dispatch('setproductdata',{id: this.getuserid });
             this.$store.dispatch('setservicedata',{id: this.getuserid });
             this.$store.dispatch('setClientData',{id: this.getuserid } );
             this.$store.dispatch('setportfolioData',{id: this.getuserid });
@@ -122,16 +173,93 @@ export default {
     },
 
     methods:{
-
         changepic(index,event){
-            // this.oldproduct[index].product_image = event.target.files[0];
-            let src  = event.target.files[0];
-            this.imgsrc[index] = URL.createObjectURL(src);
-            this.ischangepic = true;
+            this.isimgchange = true;
+            this.oldimages[index] = event.target.files[0];
+            this.imgsrcprod[index] = URL.createObjectURL(event.target.files[0]);
+            // console.log(this.imgsrc[index]);
+            // this.oldproduct[index].product_image = URL.createObjectURL(event.target.files[0]);
+            this.imgsrcprod = [ ...new Set(this.imgsrcprod) ];
+            this.oldproduct = [ ...new Set(this.oldproduct) ];
         },
 
-        saveproduct(){
-            console.log(this.oldproduct);
+        changenewpic(index,event){
+            this.newimages[index] = event.target.files[0];
+            this.newimgsrc[index] = URL.createObjectURL(event.target.files[0]);
+            this.newproduct[index].product_image = URL.createObjectURL(event.target.files[0]);
+            this.newproduct = [ ...new Set(this.newproduct) ];
+        },
+
+        deletbox(index){
+            this.newproduct.splice(index, 1);
+            this.newimgsrc[index] = '';
+        },
+
+
+        adddiv(){
+            this.newproduct.push({
+                company_id:this.getcompanyid,
+                product_image:null,
+                product_name:'',
+                product_desc:'',
+                product_price:'',
+            });
+        },
+
+        async saveproduct(){
+            this.oldproduct = [ ...new Set(this.oldproduct) ];
+            // console.log(this.oldproduct);
+            // console.log(this.oldimages);
+            let fd = new FormData();
+            fd.append('user_id',this.getuserid);
+            fd.append('isupdate',true);
+            for (let index = 0; index < this.oldimages.length; index++) {
+                fd.append('oldimages'+index,this.oldimages[index]);
+            }
+            fd.append('imgcount', this.oldimages.length );
+            fd.append('product_data',JSON.stringify(this.oldproduct));
+            
+            await axios.post('product/createproduct',fd).then((result) => {
+                // if(this.newproduct != null && this.newproduct != ''){
+                // this.alertmsg = result.data.message;
+                //     this.showalert = true;
+                //     this.$store.dispatch('setproductdata',{id:this.getuserid});
+                //     // this.newproduct = [];
+                //     setTimeout(() => {
+                //         this.alertmsg = '';
+                //         this.showalert = false;
+                //     }, 3000);
+                // }
+
+                this.$swal.fire('Data Updated', result.data.message, 'success');
+
+            });
+
+            if(this.newproduct != null && this.newproduct != ''){
+                this.newproduct = [ ...new Set(this.newproduct) ];
+                let fd1 = new FormData();
+                fd1.append('user_id',this.getuserid);
+                fd1.append('isupdate',false);
+                for (let index = 0; index < this.newimages.length; index++) {
+                    fd1.append('oldimages'+index,this.newimages[index]);
+                }
+                fd1.append('imgcount', this.newimages.length );
+                fd1.append('product_data',JSON.stringify(this.newproduct));
+                // console.log(this.newproduct);
+
+                await axios.post('product/createproduct',fd1).then((result) => {
+                    this.alertmsg = result.data.message;
+                    this.showalert = true;
+
+                    this.$store.dispatch('setproductdata',{id:this.getuserid});
+                    this.newproduct = [];
+                    this.newimages = [];
+                    setTimeout(() => {
+                        this.alertmsg = '';
+                        this.showalert = false;    
+                    }, 3000);
+                });
+            }
         },
 
         deleteproduct(pid){
@@ -146,19 +274,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-.menulist li{
-    font-size: 16px;
-    color: #9d278f;
-    font-weight: 500;
-    line-height: 1.2;
-    transition: all 0.5s;
-    display: list-item;
-    padding: 20px 20px 20px 20px;
-    margin-top: 2px;
-    border-left : 5px black solid;
-    background-color: #ddffff;
-    padding-left: 10px;
-}
-</style>

@@ -20,6 +20,7 @@ const actions = {
     async setproductdata({commit},company){
         productApi.getProductData(company.id,result => {
             commit('SETPRODUCTDATA',result.data.product);
+            // console.log(result.data.product);
             commit('SETPRODUCTREQUEST',1);
         });
     }

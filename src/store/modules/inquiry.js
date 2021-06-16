@@ -11,6 +11,9 @@ const getters = {
     getsingleinquirydata:(state) => (inquiryid) => {
         return state.inquiry.find( inquirydata => inquirydata.inquiry_id === inquiryid )
     },
+    getinquirypage:(state) => (page) => {
+        return state.inquiry.slice( ((2*page) - 2) ,page*2)
+    },
 };
 
 const actions = {

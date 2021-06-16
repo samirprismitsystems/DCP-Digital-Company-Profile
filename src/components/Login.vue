@@ -36,12 +36,12 @@
 							<input id="password" ref="password" name="password" class="" value="" type="password" placeholder="Enter 6 Digit Password" required="">
 						</div>
 						<div class="site_link_field">
-						<router-link :to="'/dashboard/forgetpassword'" class="forget_pass_link site_link">Forgot Password?</router-link>
+						<router-link :to="'/forgetpassword'" class="forget_pass_link site_link">Forgot Password?</router-link>
 						</div>
 						<button type="submit" class="form_btn btn_100 btn-center ">Login</button>
 					</form>
 
-					<router-link :to="'/dashboard/registration'" class="form_link  ">New User? Create An Account <i class="fas fa-angle-double-right"></i></router-link>
+					<router-link :to="'/registration'" class="form_link">New User? Create An Account <i class="fas fa-angle-double-right"></i></router-link>
 
                     <div class="alert alert-danger mt-5" v-if="msgshow"><p>{{msg}}</p></div>
 
@@ -67,18 +67,28 @@ export default {
 
     created(){
         if(localStorage.getItem('useremail') != null){
-            this.$router.push('/dashboard/');
+            if(this.getusertype == 1){
+                this.$router.push('/admindashboard/');
+            }
+            else{
+                this.$router.push('/dashboard/company');
+            }
+            
         }
     },
 
     computed:{
         getuser(){
             return this.$store.getters.getuseremail;
-        }
+        },
+        getusertype(){
+            return this.$store.getters.getusertype;
+        },
     },
 
     methods:{
         userlogin(){
+
             let fd = new FormData();
             fd.append('email',this.$refs.email.value);
             fd.append('password',this.$refs.password.value);
@@ -91,17 +101,29 @@ export default {
                 }
                 else{
                     let userdata = result.data.userdata;
-                    localStorage.setItem('useremail',userdata.email_id);
-                    localStorage.setItem('userid',userdata.user_id);
+                    
                     localStorage.setItem('first_name',userdata.first_name);
-                    // localStorage.setItem('companyid',userdata.company_id);
-
-                    this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
-                    this.$store.dispatch('setuserid',{userid:userdata.user_id});
+                    localStorage.setItem('usertype',userdata.type);
+                    
+                    this.$store.dispatch('setusertype',{user_type:userdata.type});
                     this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
-                    // this.$store.dispatch('setcompanyid',{companyid:userdata.company_id});
 
-                    this.$router.push('/dashboard/company');
+                    localStorage.setItem('useremail',userdata.email_id);
+                    this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
+
+
+                    if(userdata.type == 1){
+                        localStorage.setItem('admin_id',userdata.user_id);
+                        this.$store.dispatch('setadminid',{admin_id:userdata.user_id});
+                        this.$router.push('/admindashboard/');
+                    }
+                    else{
+                        
+                        localStorage.setItem('userid',userdata.user_id);
+                        this.$store.dispatch('setuserid',{userid:userdata.user_id});
+
+                        this.$router.push('/dashboard/company');
+                    }
 
                 }
                 

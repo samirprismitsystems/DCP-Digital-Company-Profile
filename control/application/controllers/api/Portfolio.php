@@ -14,38 +14,75 @@ class Portfolio extends REST_Controller {
 
  		$user_id = $this->input->post('user_id');
  		$company_data = $this->Company_Model->getcompany($user_id);
-
  		$companyid = $company_data[0]['company_id'];
 
- 		if(!empty($_FILES['portfolio_image']['name'])){
-		    $targetpath='./upload/'.$companyid.'/portfolio/';
-		    if (!is_dir($targetpath)) {
-		        mkdir($targetpath,0777,TRUE);
-		    }                  
-		    $config['upload_path']   = $targetpath;
-		    $config['allowed_types'] = "*";
-		    $this->load->library('upload',$config);
-			$path = pathinfo($_FILES["portfolio_image"]["name"]);
-			$_FILES["portfolio_image"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];               
-			if ($this->upload->do_upload('portfolio_image')) {
-			   	$uploadphoto = $this->upload->data('file_name');
-			}else{
-			    echo $this->upload->display_errors();
-			}
-		}
-		else{
-			$uploadphoto = $data['portfolio_image'];
-		}
+ 		$portfolio_field = array();
+ 		
+ 		$i = 0;
+	 	foreach (json_decode($data['portfolio_data']) as $value) {
+		 	if($data['isupdate'] == 'true'){
+		 		$portfolio_field[$i]['portfolio_id'] = $value->portfolio_id;
+		 		$portfolio_field[$i]['portfolio_image'] = $value->portfolio_image;
+		 	}
+		 	$portfolio_field[$i]['portfolio_name'] = $value->portfolio_name;
+		 	$portfolio_field[$i]['portfolio_desc'] = $value->portfolio_desc;
+		 	$portfolio_field[$i]['company_id'] = $companyid;
+	 		$i++;
+	 	}
 
-		$portfolio_field = array(
-			'portfolio_name' => $data['portfolio_name'],
-            'portfolio_desc' => $data['portfolio_desc'],
-            'portfolio_image' => $uploadphoto,
-        	'company_id' => $companyid,
-        );
+	 	$sourcepath = './upload/'.$companyid.'/portfoliooginal/';
+        $targetpath = './upload/'.$companyid.'/portfolio/';
+
+	 	for ($i=0; $i < $data['imgcount'] ; $i++) {
+ 			$name = 'oldimages'.$i;
+ 			if(!empty($_FILES[$name]['name'])){
+            
+			if (!is_dir($sourcepath)) {
+				mkdir($sourcepath,0777,TRUE);
+			}
+
+			if (!is_dir($targetpath)) {
+				mkdir($targetpath,0777,TRUE);
+			}    
+			     
+				$config['upload_path']   = $sourcepath;
+				$config['allowed_types'] = "*";
+
+				$this->load->library('upload',$config);
+				$this->load->library('image_lib');
+
+	        $path = pathinfo($_FILES[$name]["name"]);
+			$_FILES[$name]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
+	            if ($this->upload->do_upload($name)) {
+	            	$uploadData = $this->upload->data();
+	                $portfolio_field[$i]['portfolio_image'] = $uploadData['file_name'];
+	            }
+
+	            $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
+                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+
+		        $config_manip = array(
+                      'image_library' => 'gd2',
+                      'source_image' => $source_path,
+                      'new_image' => $target_path,
+                      'maintain_ratio' => false,
+                      'create_thumb' => false,
+                      'quality' =>'60%',
+                      'width' => 300,
+                      'height' => 300
+                    );
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+
+ 			}
+ 			else{
+ 			}
+ 		}
+
 
         if($data['isupdate'] == 'true'){
-			if($this->Portfolio_Model->updateportfolio($portfolio_field,$data['portfolio_id'])){
+			if($this->Portfolio_Model->updateportfolio($portfolio_field)){
 				$output['error'] = false;
 			    $output['message'] = "portfolio Data updated";
 			    $this->set_response($output, REST_Controller::HTTP_OK);

@@ -8,7 +8,11 @@ const state = {
     social:[],
     companyfront:[],
     paymentdata:0,
-    paymentoptionsdata:[]
+    paymentoptionsdata:[],
+    allcompany:[],
+    allcompanyreq:0,
+    allsocialreq:0,
+    allsocialdata:[]
 };
 
 const getters = {
@@ -20,6 +24,13 @@ const getters = {
     getcompanyfront:(state) => state.companyfront,
     getpaymentpage:(state) => state.paymentdata,
     getpaymentoptionsdata:(state) => state.paymentoptionsdata,
+    getallcompanydata:(state) => state.allcompany,
+    getallcompanyreq:(state) => state.allcompanyreq,
+    getallsocialreq:(state) => state.allsocialreq,
+    getallsocialdata:(state) => state.allsocialdata,
+    getcompanylist:(state) => (page) => {
+        return state.allcompany.slice( ((2*page) - 2) ,page*2)
+    },
     };
 
 const actions = {
@@ -30,9 +41,13 @@ const actions = {
         CompanyApi.getCompanyData(user.id,result => {
             commit('SETCOMPANYDATA',result.data);
             commit('SETCOMPANYREQUEST',1);
-            commit('SETCOMPANYID',result.data.company[0].company_id);
+            // console.log(result.data.company[0]);
+            if(result.data.company[0] != null && result.data.company[0] != ''){
+                commit('SETCOMPANYID',result.data.company[0].company_id);
+            }
         });
     },
+    
     async setsocialdata({commit},user){
         CompanyApi.getsocialdata(user.id,result => {
             commit('SETSOCIAL',result.data.social);
@@ -58,6 +73,23 @@ const actions = {
         });
     },
 
+
+    async setallcompanydata({commit}){
+        CompanyApi.getallcompanydata(result => {
+            commit('AllCOMPANYDATA',result.data.company);
+            commit('SETALLCOMPANYREQUEST',1);
+        });
+    },
+
+
+    async setallsocialdata({commit}){
+        CompanyApi.getallsocialdata(result => {
+            commit('SETALLSOCIAL',result.data.social);
+            commit('SETALLSOCIALREQUEST',1);
+        });
+    },
+
+
 };
 
 const mutations = {
@@ -69,6 +101,10 @@ const mutations = {
     SETCOMPANYFRONT:(state,payload)=> (state.companyfront = payload),
     SETPAYMENTREQUEST:(state,payload)=> (state.paymentdata = payload),
     SETPAYMENTDATA:(state,payload)=> (state.paymentoptionsdata = payload),
+    AllCOMPANYDATA:(state,payload)=> (state.allcompany = payload),
+    SETALLCOMPANYREQUEST:(state,payload)=> (state.allcompanyreq = payload),
+    SETALLSOCIAL:(state,payload)=> (state.allsocialdata = payload),
+    SETALLSOCIALREQUEST:(state,payload)=> (state.allsocialreq = payload),
 };
 
 export default {

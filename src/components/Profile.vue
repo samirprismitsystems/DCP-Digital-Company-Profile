@@ -1,58 +1,84 @@
 <template>
 
-<div class="container mt-5">
-   <div class="row justify-content-center">
-    <div class="col-lg-6">
+    <section class="main">
+	<div class="container-fluid ">
+		<div class="row no-wrap">
 
-   <form class="text-justify" @submit.prevent="saveprofile()">
-        
-        <div class="form-group">
-            <label>Profile Pic</label>
-            <img class="ml-3" @click="openbox" :src="imgsrc" height="100" width="100">
-            <input id="imgchange" v-show="false" type="file" @change="changepic($event)">
-        </div>
+            
+        <AdminDash  v-if="getusertype == 1" />
+      	<DashData v-if="getusertype == 2" />
 
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" v-model="getdata.first_name"  ref="first_name" name="firstname" placeholder="First Name">
-        </div>
-            </div>
+		<div class=" right_sidebar_content" v-if="getpagerequest == 1">
+			<div class="tabs-stage">
+                
+                <div class="tab_title">
+				        <div class="h2">Profile</div>
+				        <div class="h4">Change Profile Details</div>
+			    	</div>
+                
+                <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
 
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" v-model="getdata.last_name" ref="last_name" name="lastname" placeholder="Last Name">
+                <form class="text-justify" @submit.prevent="saveprofile()">
+                        
+                        <!-- <div class="form-group">
+                            <label>Profile Pic</label>
+                            <img class="ml-3" @click="openbox" :src="imgsrc" height="100" width="100">
+                            <input id="imgchange" v-show="false" type="file" @change="changepic($event)">
+                        </div> -->
+                        
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form_field">
+                                    <label>First Name</label>
+                                    <input id="name" v-model="getdata.first_name"  ref="first_name" name="firstname" class="" value="" type="text" placeholder="Enter Your First Name" required="">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form_field">
+                                    <label>Last Name</label>
+                                    <input id="name" v-model="getdata.last_name" ref="last_name" name="lastname" class="" value="" type="text" placeholder="Enter Your Last Name" required="">
+                                </div>
+                            </div>
+                        </div>
+
+						<div class="form_field">
+							<label class="" for="email">Email</label>
+							<input id="email" v-model="getdata.email_id" ref="email_id" name="email" class="" value="" type="email" placeholder="Enter Your Email" required="">
+						</div>
+						<div class="form_field">
+							<label class="" for="mobile">Mobile No.*</label>
+							<input id="mobile" v-model="getdata.contact_no" ref="contact_no" name="phone" class="" value="" type="text" placeholder="Enter Email id or Mobile Number" required="">
+						</div>
+						
+						<button type="submit" class="form_btn btn_100 btn-center ">Save</button>
+                        
+                    </form>
+
+                    <router-link :to="'/dashboard/changepassword'" class="form_link">Change Password <i class="fas fa-angle-double-right"></i></router-link>
+
+                    <div class="alert alert-success mt-4" v-if="alertshow">{{alertmsg}}</div>
+
+                    </div>
                 </div>
+                </div>
+
             </div>
         </div>
-        
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" v-model="getdata.email_id" ref="email_id" name="email" placeholder="Email Address">
         </div>
-
-        <div class="form-group">
-            <label>Contact Number</label>
-            <input type="text" class="form-control" v-model="getdata.contact_no" ref="contact_no" name="phone" placeholder="Contact Number">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-
-    <router-link :to="'/dashboard/changepassword'" class="btn btn-success mt-3 float-left">Change Password</router-link>
-
-    <div class="alert alert-success mt-4" v-if="alertshow">{{alertmsg}}</div>
-
     </div>
-  </div>
-</div>
+    </section>
+
 
 </template>
 
 <script>
 import axios from 'axios'
+import DashData from './DashData.vue'
+import AdminDash from './AdminDash.vue'
 export default {
     name:'Profile',
     data(){
@@ -62,12 +88,25 @@ export default {
             imgsrc:this.$imgpath+'profile_pic.png',
             alertmsg:'',
             alertshow:false,
+            usertype:0
         }
+    },
+
+    components:{
+        DashData,
+        AdminDash
     },
 
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
-        this.$store.dispatch('setuserdata',{userid: this.getuserid });
+        // this.usertype = localStorage.getItem('usertype');
+        if(this.getusertype == 1){
+            this.$store.dispatch('setuserdata',{userid: this.getadminid });
+        }
+        else{
+            this.$store.dispatch('setuserdata',{userid: this.getuserid });
+        }
+        
     },
 
     computed:{
@@ -75,13 +114,25 @@ export default {
         getuserid(){
           return this.$store.getters.getuserid;
         },
+
+        getpagerequest(){
+            return this.$store.getters.getuserreq;
+        },
+
         getdata(){
             let data =  this.$store.getters.getuserdata;
             if(data.profile_photo != '' && data.profile_photo != null){
                 this.imgsrc = this.$imgpath+'users/'+data.profile_photo;
             }
             return data;
-        }
+        },
+
+        getusertype(){
+            return this.$store.getters.getusertype;
+        },
+        getadminid(){
+            return this.$store.getters.getadminid;
+        },
     },
 
     methods:{

@@ -32,13 +32,24 @@ class Company extends REST_Controller {
 		}
 	}
 
+	public function fetchallcompany_get(){
+		if($company = $this->Company_Model->getcompany()){
+			$output['error'] = false;
+            $output['company'] = $company;
+            $output['message'] = "Company fetched successfully";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = false;
+            $output['company'] = [];
+            $output['message'] = "Empty Company Data";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}
 
 	public function createcompany_post(){
 		$data = $this->input->post();
- 		// $cities = explode(",", $data['cities']);
- 		// $sociallinks = explode(",", $data['sociallinks']);
- 		// $socialids = explode(",", $data['socialnames']);
- 		// $allindia = $data['allindia'];
+
  		$uploadphoto = 'demo';
 
  		if($data['isupdate'] == 'true'){
@@ -71,22 +82,54 @@ class Company extends REST_Controller {
 			$companyid = $cid;
 		}
 
+
 		if(!empty($_FILES['company_logo']['name'])){
-		    $targetpath='./upload/'.$companyid.'/logo/';
-		    if (!is_dir($targetpath)) {
-		        mkdir($targetpath,0777,TRUE);
-		    }              
-		    $config['upload_path']   = $targetpath;
+		    
+		    $sourcepath = './upload/'.$companyid.'/logooginal/';
+        	$targetpath = './upload/'.$companyid.'/logo/';
+
+		    if (!is_dir($sourcepath)) {
+				mkdir($sourcepath,0777,TRUE);
+			}
+
+			if (!is_dir($targetpath)) {
+				mkdir($targetpath,0777,TRUE);
+			} 
+
+		    $config['upload_path']   = $sourcepath;
 		    $config['allowed_types'] = "*";
+
 		    $this->load->library('upload',$config);
+			$this->load->library('image_lib');
+
 			$path = pathinfo($_FILES["company_logo"]["name"]);
 			$_FILES["company_logo"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
 			               
 			if ($this->upload->do_upload('company_logo')) {
-			   	$uploadphoto = $this->upload->data('file_name');
+				$uploadData = $this->upload->data();
+			   	$uploadphoto = $uploadData['file_name'];
 			}else{
 			    echo $this->upload->display_errors();
 			}
+
+
+			$source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
+                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+
+		        $config_manip = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $source_path,
+                    'new_image' => $target_path,
+                    'maintain_ratio' => false,
+                    'create_thumb' => false,
+                    'quality' =>'60%',
+                    'width' => 300,
+                    'height' => 300
+                );
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+
 		}
 		else{
 			$uploadphoto = $data['logo'];
@@ -104,54 +147,6 @@ class Company extends REST_Controller {
 			    $this->set_response($output, REST_Controller::HTTP_OK);	
 			}
 		}
-
-		// if($allindia == 'true'){
-		// 	$workarea[0]['company_id'] = $companyid;
-		// 	$workarea[0]['city_id'] = 7352;
-		// 	$workarea[0]['all_india'] = 1;
-		// }
-		// else{
-		// 	$workarea = array();
-		// 	$i = 0;
-		// 	foreach ($cities as $value) {
-		// 		$workarea[$i]['company_id'] = $companyid;
-		// 		$workarea[$i]['city_id'] = $value;
-		// 		$i++;
-		// 	}
-		// }
-
-		// if($this->Company_Model->addworkingarea($workarea)){
-		// 	$social = array();
-		// 	$i=0;
-		// 	foreach ($socialids as $value) {
-		// 		$social[$i]['company_id'] = $companyid;
-		// 		$social[$i]['social_id'] = $value;
-		// 		$social[$i]['company_social_link'] = $sociallinks[$i];
-		// 		$i++;
-		// 	}
-		// 	if($this->Company_Model->addsociallinks($social)){
-		// 		if($data['isupdate'] == 'true'){
-		// 			$output['error'] = false;
-		// 	        $output['message'] = "Company Data Updated";
-		// 	        $this->set_response($output, REST_Controller::HTTP_OK);
-		// 		}
-		// 		else{
-		// 			$output['error'] = false;
-		// 	        $output['message'] = "Company Data Added";
-		// 	        $this->set_response($output, REST_Controller::HTTP_OK);	
-		// 		}
-		// 	}
-		// 	else{
-		// 		$output['error'] = true;
-	 //            $output['message'] = "Error in social data";
-	 //            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
-		// 	}
-		// }
-		// else{
-		// 	$output['error'] = true;
-  //           $output['message'] = "Error in Working Area";
-  //           $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
-		// }
 	}
 
 	public function fetchcities_get(){
@@ -183,6 +178,21 @@ class Company extends REST_Controller {
 			$output['error'] = true;
             $output['message'] = "social data fetched failed";
             $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+	public function fetchallsocial_get(){
+		if($social = $this->Company_Model->getsociallist()){
+			$output['error'] = false;
+            $output['social'] = $social;
+            $output['message'] = "social data fetched successfully";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = false;
+            $output['social'] = [];
+            $output['message'] = "Empty Social Data";
+            $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 
@@ -276,7 +286,7 @@ class Company extends REST_Controller {
 
 		if($company = $this->Company_Model->getcompanybyslug($companyslug)){
 			$cities = $this->Company_Model->getcompanycities($company['company_id']);
-			// $social = $this->Company_Model->getcompanysocial($company['company_id']);
+			$social = $this->Company_Model->getcompanysocial($company['company_id']);
 			$client = $this->Client_Model->getclient($company['company_id']);
 			$inquiry = $this->Inquiry_Model->getinquiry($company['company_id']);
 			$portfolio = $this->Portfolio_Model->getportfolio($company['company_id']);
@@ -335,7 +345,6 @@ class Company extends REST_Controller {
 
 
 	public function savesocial_post(){
-		
 		$data = $this->input->post();
 
 		$user_id = $this->input->post('user_id');
@@ -343,17 +352,21 @@ class Company extends REST_Controller {
  		$companyid = $company_data[0]['company_id'];
 
  		$social_fields = array();
+ 		$i = 0;
+	 	foreach (json_decode($data['socialdata']) as $value) {
+	 		if($data['isupdate'] == 'true'){
+	 			$social_fields[$i]['company_social_id'] = $value->company_social_id;
+	 			$social_fields[$i]['social_id'] = $value->social_id;
+	 		}
+	 		else{
+	 			$social_fields[$i]['social_id'] = $value->socialmedia_id;
+	 		}
+	 		$social_fields[$i]['link'] = $value->link;
+	 		$social_fields[$i]['company_id'] = $companyid;
+	 		$i++;
+	 	}
 
  		if($data['isupdate'] == 'true'){
- 			$i = 0;
-	 		foreach (json_decode($data['socialdata']) as $value) {
-	 			// $social_fields[$i]['social_id'] = $value->socialmedia_id;
-	 			// $social_fields[$i]['socialmedia_name'] = $value->socialmedia_name;
-	 			$social_fields[$i]['company_social_id'] = $value->company_social_id;
-	 			$social_fields[$i]['link'] = $value->link;
-	 			// $social_fields[$i]['company_id'] = $companyid;
-	 			$i++;
-	 		}
  			if($this->Company_Model->updatesocialdata($social_fields)){
 				$output['error'] = false;
 		        $output['message'] = "Social Data Updated";
@@ -366,14 +379,6 @@ class Company extends REST_Controller {
 			}	
  		}
  		else{
- 			$i = 0;
-	 		foreach (json_decode($data['socialdata']) as $value) {
-	 			$social_fields[$i]['social_id'] = $value->socialmedia_id;
-	 			// $social_fields[$i]['socialmedia_name'] = $value->socialmedia_name;
-	 			$social_fields[$i]['link'] = $value->link;
-	 			$social_fields[$i]['company_id'] = $companyid;
-	 			$i++;
-	 		}
  			if($this->Company_Model->savesocialdata($social_fields)){
 				$output['error'] = false;
 		        $output['message'] = "Social Data Saved Successfull";
@@ -417,30 +422,7 @@ class Company extends REST_Controller {
 		else{
 			$this->Company_Model->savepaymentoptionsdata($paymentoption_field);
 		}
-		// 		$output['error'] = false;
-	 //            $output['message'] = "Payment Data Updated successfully";
-	 //            $this->set_response($output, REST_Controller::HTTP_OK);
-		// 	}
-		// 	else{
-		// 		$output['error'] = true;
-	 //            $output['message'] = "Error in Payment Details updation";
-	 //            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
-		// 	}
-		// }
-		// else{
-		// 	if(){
-		// 		$output['error'] = false;
-	 //            $output['message'] = "Payment Data Saved successfully";
-	 //            $this->set_response($output, REST_Controller::HTTP_OK);
-		// 	}
-		// 	else{
-		// 		$output['error'] = true;
-	 //            $output['message'] = "Error in Payment Details Saved";
-	 //            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
-		// 	}
-		// }
-
-
+	
 		if(!empty($_FILES['qrcode']['name'])){
 		    $targetpath='./upload/'.$companyid.'/qrcode/';
 		    if (!is_dir($targetpath)) {
@@ -466,24 +448,88 @@ class Company extends REST_Controller {
 		if($this->Company_Model->updateqrcode($companyid,$uploadphoto)){
 			if($data['isupdate'] == 'true'){
 				$output['error'] = false;
-			    $output['message'] = "Company Data Updated";
+			    $output['message'] = "Payment Data Saved.";
 			    $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 			else{
 				$output['error'] = false;
-			    $output['message'] = "Company Data Added";
+			    $output['message'] = "Payment Data Saved Failed";
 			    $this->set_response($output, REST_Controller::HTTP_OK);	
 			}
 		}
-
-
-
-
-
-
-
-
 	}
+
+
+	public function createsocial_post(){
+		$data = $this->input->post();
+		$social_field = array();
+ 		$i = 0;
+	 	foreach (json_decode($data['social_data']) as $value) {
+		 	if($data['isupdate'] == 'true'){
+		 		$social_field[$i]['socialmedia_id'] = $value->socialmedia_id;
+		 	}
+		 	$social_field[$i]['socialmedia_name'] = $value->socialmedia_name;
+		 	$social_field[$i]['socialmedia_logo'] = $value->socialmedia_logo;
+	 		$i++;
+	 	}
+
+	 	if($data['isupdate'] == 'true'){
+			if($this->Company_Model->updatesocial($social_field)){
+				$output['error'] = false;
+			    $output['message'] = "Social Data updated";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+	            $output['message'] = "Social Data updated failed";
+	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+			}        	
+        }
+        else{
+        	if($this->Company_Model->createsocial($social_field)){
+				$output['error'] = false;
+			    $output['message'] = "Social Data Inserted";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+	            $output['message'] = "Social Data Insertion failed";
+	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+			}
+        }
+	}
+
+
+
+	public function deletesocial_get($social_id){
+		if($this->Company_Model->deletesocialdata($social_id)){
+			$output['error'] = false;
+			$output['message'] = "Social Data Deleted";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+	        $output['message'] = "Social Data Deletion failed";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+
+	public function updatecompanystatus_post(){
+		$data = $this->input->post();
+		if($this->Company_Model->changestatus($data['company_id'],$data['status'])){
+			$output['error'] = false;
+		    $output['message'] = "Company Updated successfully";
+		    $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+            $output['message'] = "Company Updation failed";
+            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+
 
 
 }

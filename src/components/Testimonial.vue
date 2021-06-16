@@ -1,11 +1,23 @@
 <template>
-    <div class="row mt-5 justify-content-center">
-    
-        
+    <section class="main">
+	<div class="container-fluid ">
+		<div class="row no-wrap">
 
-          <div class="col-md-8 col-sm-8 col-lg-8 col-8 mt-5">
+      	<DashData />
+
+		<div class=" right_sidebar_content" v-if="getpagerequest == 1 && getcompanyid != ''">
+			<div class="tabs-stage">
+
+        <button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+			      	<div class="tab_title">
+				        <div class="h2">Testimonials</div>
+				        <div class="h4">Testimonials Data</div>
+			    	</div>
+    
+    <div class="row mt-5 justify-content-center">
+      <div class="col-md-10 col-sm-12 col-lg-10 col-12 mt-5 table-responsive">
               
-            <table class="table table-hover" v-if="getpageinfo == 'Testimonial'">
+            <table class="table table-hover tablecontent">
                 <thead>
                 <tr>
                     <th>Client Name</th>
@@ -15,9 +27,9 @@
                     <th>Status</th>
                 </tr>
                 </thead>
-                <tbody v-if="getpagerequest == 1">
+                <tbody>
 
-                <tr v-for="(testimonial,index) in getpagedata" :key="index">
+                <tr v-for="(testimonial,index) in gettestimonialdata" :key="index">
                     <td> {{testimonial.client_name}} </td>
                     <td> {{testimonial.email_address}} </td>
                     <td><span class="spnTooltip"><strong>{{testimonial.comment}}</strong></span>{{testimonial.comment.substr(0,30)}}... </td>
@@ -32,19 +44,41 @@
                     </td>
                 </tr>
 
+                <tr v-if="gettestimonialdata == ''">
+                  <td colspan="5" class="text-center">No Record Found</td>
+                </tr>
+
                 </tbody>
             </table>
 
-            <div v-else>
-                <router-view></router-view>
-            </div>
-            
-          
+
+            <nav aria-label="Page navigation example" v-if="gettestimonialdata != ''">
+              <ul class="pagination pagination-lg justify-content-center">
+                
+                <li class="page-item navcontent" v-if="pagenumber != 1">
+                  <a class="page-link" @click="changepage(pagenumber-1)">Previous</a>
+                </li>
+
+                <li v-for="(page,index) in totalpages" :key="index" :class="checknavclass(page,pagenumber)"><a class="page-link" @click="changepage(page)"> {{page}} </a></li>
+                
+                <li class="page-item navcontent"  v-if="pagenumber != totalpages">
+                  <a class="page-link" @click="changepage(pagenumber+1)">Next</a>
+                </li>
+              </ul>
+            </nav>
+
           </div>
     </div>
+    
+      </div>
+    </div>
+    </div>
+  </div>
+    </section>
 </template>
 
 <script>
+import DashData from './DashData'
 import axios from 'axios'
 export default {
     name:'Testimonial',
@@ -52,12 +86,23 @@ export default {
         return{
             imgpath:this.$imgpath,
             status:0,
+            totaldata:0,
+            perpage:2,
+            totalpages:0,
+            pagenumber:1
         }
+    },
+    components:{
+        DashData
     },
     
     computed:{
+      
       getuserid(){
         return this.$store.getters.getuserid;
+      },
+      getcompanyid(){
+        return this.$store.getters.getcompanyid;
       },
       getpageinfo(){
         return this.$store.getters.getsitetitle;
@@ -66,14 +111,38 @@ export default {
         return this.$store.getters.gettestimonialpagerequest;
       },
       getpagedata(){
-        return this.$store.getters.gettestimonialdata;
+        let data = this.$store.getters.gettestimonialdata;
+        if(data.length != 0 && this.getcompanyid != ''){
+          this.totaldata = data.length;
+          this.totalpages = Math.ceil(data.length / this.perpage);
+          // console.log(this.totalpages);
+        }
+        return data;
       },
+
+      gettestimonialdata(){
+        let data = this.getpagedata;
+        return this.$store.getters.gettestimonialpage(this.pagenumber);
+      }
     },
 
     created(){
+        if(this.getcompanyid == ''){
+          this.$router.push('/dashboard/company');
+        }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-          this.$store.dispatch('settestimonialData',{id: this.getuserid } );
+            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setallsocialdata');
+            this.$store.dispatch('setsocialdata',{id: this.getuserid});
+            this.$store.dispatch('setcitiesdata');
+            this.$store.dispatch('setproductdata',{id: this.getuserid });
+            this.$store.dispatch('setservicedata',{id: this.getuserid });
+            this.$store.dispatch('setClientData',{id: this.getuserid } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserid });
+            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
         }
     },
 
@@ -85,6 +154,19 @@ export default {
 
 
     methods:{
+
+      checknavclass(index,page){
+        if(index == page){
+          return 'page-item navcontent active';
+        }
+        else{
+          return 'page-item navcontent';
+        }
+      },
+
+      changepage(page){
+        this.pagenumber = page;
+      },
 
         checkchecked(status){
             if(status == 1){
@@ -128,12 +210,21 @@ export default {
 
 <style scoped>
 
+.tablecontent{
+  font-size: 14px;
+}
+
+.navcontent{
+  font-size: 20px;
+  /* margin: 10px 10px 10px 10px; */
+}
+
 a.tooltip {outline:none; }
 a.tooltip strong {line-height:30px;}
 a.tooltip:hover {text-decoration:none;} 
 a.tooltip span {
     z-index:10;display:none; padding:20px 20px;
-    margin-top:-30px; margin-left:28px;
+    margin-top:40px; margin-left:0px;
     width:400px; line-height:16px;
 }
 a.tooltip:hover span{
@@ -151,13 +242,19 @@ a.tooltip span
 
 tr .spnTooltip {
     z-index:10;display:none; padding:20px 20px;
-    margin-top:-20px; margin-left:28px;
-    width:770px; line-height:20px;
+    margin-top:40px; margin-left:0px;
+    width:570px; line-height:20px;
 }
 tr:hover .spnTooltip{
     display:inline; position:absolute; color:#111;
     border:1px solid #DCA; background:#fffAF0;}
 .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+
+
+
+
+
+
 
 
 .switch {

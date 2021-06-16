@@ -73,6 +73,33 @@ class User extends REST_Controller {
         }
 	}
 
+
+	public function registeruseradmin_post(){
+		$data = $this->input->post();
+
+		$user_field = array(
+			'first_name' => $data['first_name'],
+			'last_name' => $data['last_name'],
+			'email_id' => $data['email_id'],
+			'password' => md5($data['password']),
+			'contact_no' => $data['contact_no'],
+			'status' => $data['status'],
+        );
+
+        if($userid = $this->User_Model->registeruser($user_field)){
+			$output['error'] = false;
+			$output['userid'] = $userid;
+			$output['message'] = "User Data Added";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+	        $output['message'] = "User Data Added Failed";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		} 
+
+	}
+
 	public function loginuser_post(){
 		$data = $this->input->post();
 
@@ -92,8 +119,8 @@ class User extends REST_Controller {
 		}
 		else{
 			$output['error'] = true;
-	        $output['message'] = "Login Failed";
-	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+	        $output['message'] = "Invalid Email Address Or Password";
+	        $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 
@@ -196,6 +223,23 @@ class User extends REST_Controller {
 				$output['error'] = true;
 	            $output['message'] = "Password Changed Failed";
 	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+		}
+
+
+		public function getcompanyuser_get($company_id){
+
+			if($data = $this->User_Model->getusercompany($company_id)){
+				$output['error'] = false;
+				$output['companydata'] = $data;
+				$output['message'] = "Data Fetched Successfully";
+				$this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+				$output['companydata'] = [];
+		        $output['message'] = "Empty Data";
+		        $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 		}
 

@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <!--icon-->
       <link rel="icon" href="#" />
   <!--	  fonts-->
@@ -37,26 +36,26 @@
       <link href="/src/assets/css/style.css" rel="stylesheet" defer>
       <link href="/src/assets/css/responsive.css" rel="stylesheet" defer>
 
-        
-        
 
         <nav class="navbar navbar-expand-lg " id="">
             <div class="container custom_container">
-                <a class="navbar-brand " href="index.html"><h1>DCP</h1></a>
+                <a class="navbar-brand" href="index.html"><h1>DCP</h1></a>
                 <button class="navbar-toggler" type="button" data-trigger="#main_nav"><i class="fas fa-bars"></i></button>
                 <div class="navbar-collapse" id="main_nav">
+                
                 <div class="offcanvas-header mt-3">
                     <button class="btn  btn-close float-right"><i class="fas fa-times"></i></button>
                 </div>
+                
                 <ul class="navbar-nav ml-auto " id="">
-                    <li class="nav-item active"> <a class="nav-link " href="index.html">Home</a> </li>
+                    <li class="nav-item active" v-if="getuseremail != '' && getuseremail != null"> <router-link class="nav-link " :to="'/dashboard/profile'">Hi, {{getname}}</router-link> </li>
+                    <li class="nav-item active" v-else> <router-link class="nav-link " target="_blank" :to="'/'">Home</router-link> </li>
                 </ul>
                 </div>
                 
-                <ul> 
-                    <li class="nav-item aplycolor" v-if="getuseremail == null"> <router-link to="/dashboard/login"  class="login_btn btn_100">login {{getuseremail}}</router-link>  </li>
-                    <!-- <li class="nav-item " v-if="getuseremail != null"> <a href="login.html" target="_blank" class="login_btn btn_100">Profile</a> </li> -->
-                    <li class="nav-item aplycolor" v-else> <a @click="logout()" class="login_btn btn_100">Logout</a> </li>
+                <ul>
+                    <li v-if=" getuseremail == '' || getuseremail == null " class="nav-item aplycolor"> <router-link to="/login"  class="login_btn btn_100">login</router-link>  </li>
+                    <li v-else class="nav-item aplycolor" > <a @click="logout()" class="login_btn btn_100">Logout</a> </li>
                 </ul>
             </div>
         </nav>
@@ -76,23 +75,29 @@ export default {
         },
         getuserid(){
             return this.$store.getters.getuserid;
-        }
+        },
     },
 
     created(){
-        if(this.getuseremail == null){
-            this.$router.push('/dashboard/login');
-        }
+
+        let custom = document.createElement('script')
+        custom.setAttribute('src', '/src/assets/js/custom.js')
+        document.head.appendChild(custom);
+        
     },
 
     methods:{
         logout(){
             localStorage.removeItem('useremail');
+            // localStorage.removeItem('companyid');
+            localStorage.removeItem('usertype');
             localStorage.removeItem('userid');
-            localStorage.removeItem('companyid');
-            
+            localStorage.removeItem('first_name');
+            localStorage.removeItem('admin_id');
+
             this.$store.dispatch('setuseremail',{emailid:''});
             this.$store.dispatch('setuserid',{userid:''});
+            this.$store.dispatch('setadminid',{admin_id:''});
             // this.$store.dispatch('setcompanyid',{companyid:''});
             this.$store.dispatch('setclientrequest',{status:0});
             this.$store.dispatch('setcompanyrequest',{status:0});
@@ -102,7 +107,7 @@ export default {
             this.$store.dispatch('setservicerequest',{status:0});
             this.$store.dispatch('settestimonialrequest',{status:0});
 
-            this.$router.push('/dashboard/login');
+            this.$router.push('/login');
 
         }
     }
