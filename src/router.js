@@ -34,6 +34,9 @@ import AddPages from './components/AddPages'
 import EditPages from './components/EditPages'
 import AddAdminCompany from './components/AddAdminCompany'
 import CustomPage from './components/CustomPage'
+import UserReview from './components/UserReview'
+import UserReviewAdd from './components/UserReviewAdd'
+import UserReviewEdit from './components/UserReviewEdit'
 
 
 Vue.use(VueRouter);
@@ -42,7 +45,6 @@ const router = new VueRouter({
     mode:'history',
     routes:
     [
-
         {path:'/login',component:Login, meta: {title:'Login' , isdash:false} },
         {path:'/registration',component:Registration, meta: {title:'Registration' , isdash:false} },
         {path:'/forgetpassword',component:ForgetPassword, meta: {title:'Forget Password' , isdash:false} },
@@ -71,8 +73,11 @@ const router = new VueRouter({
         {path:'/admindashboard/addpages',component:AddPages, meta: {title:'Add Pages', isadmindash:true} },
         {path:'/admindashboard/editpage/:pageslug',component:EditPages, meta: {title:'Edit Pages', isadmindash:true} },
         {path:'/admindashboard/addcompany',component:AddAdminCompany, meta: {title:'Add Company', isadmindash:true} },
+        {path:'/admindashboard/userreview',component:UserReview, meta: {title:'User Review', isadmindash:true} },
+        {path:'/admindashboard/adduserreview',component:UserReviewAdd, meta: {title:'Add User Review', isadmindash:true} },
+        {path:'/admindashboard/edituserreview/:rid',component:UserReviewEdit, meta: {title:'Edit User Review', isadmindash:true} },
 
-        {path:'/:pageslug',component:CustomPage, meta: {title:'Page' } },
+        {path:'/:pageslug',component:CustomPage, meta: {title:'Page', ispage:true } },
         {path:'/:companyslug', name:'frontpage',  component:Front ,meta: {title:'Front' , isdash:false , isfront:true } },
         {path:'/',component:LandingPage, meta: {title:'Digital Company Profile' , isdash:false , islanding : true} },
         

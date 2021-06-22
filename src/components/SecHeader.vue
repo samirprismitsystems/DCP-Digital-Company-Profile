@@ -48,13 +48,13 @@
                     <button class="btn  btn-close float-right"><i class="fas fa-times"></i></button>
                 </div>
                 <ul class="navbar-nav ml-auto " id="">
-                    <li class="nav-item active"> <a class="nav-link " href="index.html">Home</a> </li>
+                    <li class="nav-item active"> <router-link class="nav-link " to="/">Home</router-link> </li>
                     
                 </ul>
                 </div>
                 <ul> 
                     <!-- target="_blank" -->
-                    <li class="nav-item "> <router-link to="/dashboard/login"  class="login_btn btn_100">login</router-link> </li>
+                    <li class="nav-item "> <router-link to="/login"  class="login_btn btn_100">login</router-link> </li>
                 </ul>
             </div>
         </nav>

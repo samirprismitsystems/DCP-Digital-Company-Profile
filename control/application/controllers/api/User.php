@@ -125,6 +125,7 @@ class User extends REST_Controller {
 	}
 
 	public function getuser_get($user_id){
+		$user_id = $this->User_Model->getuserid($user_id);
 		if($user = $this->User_Model->getuserdata($user_id)){
 			$output['error'] = false;
 			$output['userdata'] = $user;
@@ -242,6 +243,89 @@ class User extends REST_Controller {
 		        $this->set_response($output, REST_Controller::HTTP_OK);
 			}
 		}
+
+
+	public function getuserreview_get($status){
+		if($userreview = $this->User_Model->getuserreview($status)){
+			$output['error'] = false;
+			$output['review'] = $userreview;
+			$output['message'] = "Review Data Get Successfull";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+			$output['review'] = [];
+	        $output['message'] = "Empty Review Data";
+	        $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}
+
+
+	public function updatereviewstatus_post(){
+		$data = $this->input->post();
+		if($this->User_Model->updatereview($data['review_id'],$data['status'])){
+			$output['error'] = false;
+			$output['message'] = "Review Data Updated";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+			$output['message'] = "Review Data Updation Failed";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+
+	public function addreview_post(){
+		$data = $this->input->post();
+		if($this->User_Model->addreview($data)){
+			$output['error'] = false;
+			$output['message'] = "Review Saved";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+			$output['message'] = "Review Saved Failed";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+
+	public function getadmindashdata_get(){
+		
+		$companydata = $this->Company_Model->gettopcompany();
+		$orders = $this->Company_Model->gettotalorders();
+		$users = $this->Company_Model->gettotalusers();
+
+			$output['error'] = false;
+			$output['company'] = $companydata;
+			$output['orders'] = $orders;
+			$output['users'] = $users;
+			$this->set_response($output, REST_Controller::HTTP_OK);
+	}
+
+
+	public function getcompanydashdata_get($user_id){
+		
+		$user_id = $this->User_Model->getuserid($user_id);   	
+		$company = $this->Company_Model->getcompany($user_id);
+
+		$product = $this->Company_Model->gettotalproduct($company[0]['company_id']);
+		$service = $this->Company_Model->gettotalservice($company[0]['company_id']);
+		$clients = $this->Company_Model->gettotalclients($company[0]['company_id']);
+		$portfolio = $this->Company_Model->gettotalportfolio($company[0]['company_id']);
+		$testimonials = $this->Company_Model->gettotaltestimonials($company[0]['company_id']);
+		$inquiry = $this->Company_Model->gettotalinquiry($company[0]['company_id']);
+
+			$output['error'] = false;
+			$output['product'] = $product;
+			$output['service'] = $service;
+			$output['clients'] = $clients;
+			$output['portfolio'] = $portfolio;
+			$output['testimonials'] = $testimonials;
+			$output['inquiry'] = $inquiry;
+			$this->set_response($output, REST_Controller::HTTP_OK);
+	}
 
 
 }

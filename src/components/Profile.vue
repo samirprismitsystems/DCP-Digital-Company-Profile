@@ -99,17 +99,25 @@ export default {
 
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
-        // this.usertype = localStorage.getItem('usertype');
+        
         if(this.getusertype == 1){
-            this.$store.dispatch('setuserdata',{userid: this.getadminid });
+            this.$store.dispatch('setuserdata',{userid: this.getuseremail });
         }
         else{
-            this.$store.dispatch('setuserdata',{userid: this.getuserid });
+            this.$store.dispatch('setuserdata',{userid: this.getuserdataemail });
         }
         
     },
 
     computed:{
+
+        getuseremail(){
+            return this.$store.getters.getuseremail;
+        },
+
+        getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
         
         getuserid(){
           return this.$store.getters.getuserid;

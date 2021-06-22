@@ -8,8 +8,7 @@
 
 		<div class=" right_sidebar_content" v-if="getpagerequest == 1 && getcompanyid != ''">
 			<div class="tabs-stage">
-
-        <button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+      <router-link to="/dashboard/testimonial" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      	<div class="tab_title">
 				        <div class="h2">Inquiry Details</div>
 				        <div class="h4">Inquiry From Users</div>
@@ -72,6 +71,11 @@
           </div>
     </div>
       </div>
+
+       <div class="form_btn_field float-right mt-5">
+						<router-link to="/dashboard/paymentoptions"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
+					</div>
+
     </div>
     </div>
   </div>
@@ -98,6 +102,9 @@ export default {
     },
     
     computed:{
+      getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
         getuserid(){
           return this.$store.getters.getuserid;
         },
@@ -133,17 +140,16 @@ export default {
         }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
             this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
         }
     },
 
@@ -192,7 +198,7 @@ export default {
         console.log(status);
 
         axios.post('inquiry/updateinquirystatus',fd).then((result) => {
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
         });
         
         },
@@ -312,4 +318,10 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
+    .btncol{
+        color: white;
+    }
+
 </style>

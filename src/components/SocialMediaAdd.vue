@@ -10,7 +10,7 @@
 
                 <div class="expand_tabs">
 
-                 <button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+                <router-link to="/admindashboard/companylist" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      	<div class="tab_title">
 				        <div class="h2">Add Social Media Data</div>
 				        <div class="h4">Upload Social Media For Company</div>
@@ -53,12 +53,10 @@
 
 						<div class="form_btn_field">
 							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
-							<button type="button" class=" btnNext form_btn btn_100  ">Next</button>
+							<router-link to="/admindashboard/pages"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
 						</div>
 			    	</form>
                 </div>
-
-                <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
             </div>
         </div>
@@ -77,8 +75,6 @@ export default {
             oldsocial:[],
             newsocial:[],
             imgpath:this.$imgpath,
-            alertmsg:'',
-            showalert:false,
         }
     },
     components:{
@@ -90,6 +86,7 @@ export default {
             this.$store.dispatch('setpagesdata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
+            this.$store.dispatch('setuserreviewdata',{data:'all'});
         }
     },
 
@@ -122,14 +119,12 @@ export default {
             this.newsocial.splice(index, 1);
         },
 
-
         adddiv(){
             this.newsocial.push({
                 socialmedia_logo:'',
                 socialmedia_name:'',
             });
         },
-
 
         deletesocial(sid){
             this.$confirm("Are you sure you want to delete?").then(() => {
@@ -143,13 +138,16 @@ export default {
 
         async savesocial(){
             this.oldsocial = [ ...new Set(this.oldsocial) ];
+            
             let fd = new FormData();
             fd.append('user_id',this.getuserid);
             fd.append('isupdate',true);
             fd.append('social_data',JSON.stringify(this.oldsocial));
             
-            await axios.post('company/createsocial',fd).then((result) => {
-            });
+            if(this.oldsocial != null && this.oldsocial != ''){
+                await axios.post('company/createsocial',fd).then((result) => {
+                });
+            }
 
             if(this.newsocial != null && this.newsocial != ''){
                 this.newsocial = [ ...new Set(this.newsocial) ];
@@ -159,24 +157,23 @@ export default {
                 fd1.append('social_data',JSON.stringify(this.newsocial));
                 
                 await axios.post('company/createsocial',fd1).then((result) => {
-                    this.alertmsg = result.data.message;
-                    this.showalert = true;
                     this.$store.dispatch('setallsocialdata');
                     this.newsocial = [];
                     this.newimages = [];
-                    setTimeout(() => {
-                        this.alertmsg = '';
-                        this.showalert = false;    
-                    }, 3000);
+                    this.$swal.fire('Data Saved', result.data.message, 'success');
                 });
             }
+            else{
+                this.$swal.fire('Data Updated', 'Social Data Updated' , 'success');
+            }
         }
-
     }
-
-
-
-
     
 }
 </script>
+
+<style scoped>
+    .btncol{
+        color: white;
+    }
+</style>

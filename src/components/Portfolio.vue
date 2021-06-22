@@ -9,7 +9,7 @@
 			<div class="tabs-stage">
 
             <div id="tab-3" class="expand_tabs">
-			    	<button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+			    	<router-link to="/dashboard/client" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      	<div class="tab_title">
 				        <div class="h2">Add company portfolios</div>
 				        <div class="h4">Upload up to 10 Images</div>
@@ -62,12 +62,11 @@
 
 						<div class="form_btn_field">
 							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
-							<button type="button" class=" btnNext form_btn btn_100  ">Next</button>
+							<router-link to="/dashboard/testimonial"  class=" btnNext form_btn btn_100 btncol">Next</router-link>
 						</div>
+
 			    	</form>
 				</div>
-
-                <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
             </div>
         </div>
@@ -91,8 +90,6 @@ export default {
             imgsrcport:[],
             newimgsrc:[],
             imgpath:this.$imgpath,
-            alertmsg:'',
-            showalert:false,
             isimgchange :false
         }
     },
@@ -100,6 +97,9 @@ export default {
         DashData
     },
     computed:{
+        getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
         getuserid(){
           return this.$store.getters.getuserid;
         },
@@ -148,17 +148,16 @@ export default {
         }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
             this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
         }
     },
 
@@ -196,7 +195,7 @@ export default {
         deleteportfolio(pid){
             this.$confirm("Are you sure you want to delete?").then(() => {
                 axios.get('portfolio/deleteportfolio/'+pid).then((res)=>{
-                    this.$store.dispatch('setportfolioData',{id: this.getuserid });
+                    this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
                 }).catch(()=>{});
             }).catch(()=>{
             });
@@ -205,29 +204,23 @@ export default {
         async saveportfolio(){
             this.oldportfolio = [ ...new Set(this.oldportfolio) ];
             let fd = new FormData();
-            fd.append('user_id',this.getuserid);
+            fd.append('user_id',this.getuserdataemail);
             fd.append('isupdate',true);
             for (let index = 0; index < this.oldimages.length; index++) {
                 fd.append('oldimages'+index,this.oldimages[index]);
             }
             fd.append('imgcount', this.oldimages.length );
             fd.append('portfolio_data',JSON.stringify(this.oldportfolio));
-            
-            await axios.post('portfolio/createportfolio',fd).then((result) => {
-                // this.alertmsg = result.data.message;
-                // this.showalert = true;
-                // this.$store.dispatch('setportfoliodata',{id:this.getuserid});
-                //     setTimeout(() => {
-                //         this.alertmsg = '';
-                //         this.showalert = false;
-                //     }, 3000);
-                this.$swal.fire('Data Updated', result.data.message, 'success');
-            });
+
+            if(this.oldportfolio != null && this.oldportfolio != ''){
+                await axios.post('portfolio/createportfolio',fd).then((result) => {
+                });
+            }
 
             if(this.newportfolio != null && this.newportfolio != ''){
                 this.newportfolio = [ ...new Set(this.newportfolio) ];
                 let fd1 = new FormData();
-                fd1.append('user_id',this.getuserid);
+                fd1.append('user_id',this.getuserdataemail);
                 fd1.append('isupdate',false);
                 for (let index = 0; index < this.newimages.length; index++) {
                     fd1.append('oldimages'+index,this.newimages[index]);
@@ -236,17 +229,18 @@ export default {
                 fd1.append('portfolio_data',JSON.stringify(this.newportfolio));
             
                 await axios.post('portfolio/createportfolio',fd1).then((result) => {
-                    this.alertmsg = result.data.message;
-                    this.showalert = true;
-                    this.$store.dispatch('setportfolioData',{id:this.getuserid});
+                    this.$store.dispatch('setportfolioData',{id:this.getuserdataemail});
                     this.newportfolio = [];
                     this.newimages = [];
-                    setTimeout(() => {
-                        this.alertmsg = '';
-                        this.showalert = false;
-                    }, 3000);
+                    this.newimgsrc = [];
+                    this.$swal.fire('Portfolio Data', result.data.message , 'success');
                 });
             }
+            else{
+                this.$swal.fire('Portfolio Data', 'Portfolio Data Updated' , 'success');
+				this.$store.dispatch('setportfolioData',{id:this.getuserdataemail});
+            }
+
         },
 
     },
@@ -268,4 +262,9 @@ export default {
     background-color: #ddffff;
     padding-left: 10px;
 }
+
+.btncol{
+        color: white;
+    }
+
 </style>

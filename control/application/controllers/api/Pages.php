@@ -33,6 +33,7 @@ class Pages extends REST_Controller {
 			if (!is_dir($targetpath)) {
 				mkdir($targetpath,0777,TRUE);
 			}
+			
 			$config['upload_path']   = $sourcepath;
 			$config['allowed_types'] = "*";
 			$this->load->library('upload');
@@ -42,11 +43,14 @@ class Pages extends REST_Controller {
 			// Home Image
 			if(!empty($_FILES['homeimg']['name'])){
 				$path = pathinfo($_FILES["homeimg"]["name"]);
+
 				$_FILES["homeimg"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
 	            if ($this->upload->do_upload("homeimg")) {
 	            	$uploadData = $this->upload->data();
 	                $homeuploadfile = $uploadData['file_name'];
 	            }
+
+
 	         //    $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
           //       $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
 		        // $config_manip = array(
@@ -63,6 +67,9 @@ class Pages extends REST_Controller {
           //       $this->image_lib->clear();
           //       $this->image_lib->initialize($config_manip);
           //       $this->image_lib->resize();
+
+
+
 			}
 			else{
 				$homeuploadfile = $data['homeimgpic'];
@@ -236,47 +243,62 @@ class Pages extends REST_Controller {
 
  		if(!empty($_FILES['meta_image']['name'])){
             
-            $sourcepathmeta = './upload/metaimgoriginal/';
-        	$targetpathmeta = './upload/metaimg/';
+            $path = pathinfo($_FILES["meta_image"]["name"]);
 
-				if (!is_dir($sourcepathmeta)) {
-					mkdir($sourcepathmeta,0777,TRUE);
-				}
+        	$targetpathmeta = './upload/metaimg/';
 
 				if (!is_dir($targetpathmeta)) {
 					mkdir($targetpathmeta,0777,TRUE);
 				}
 
-				$configmeta['upload_path']   = $sourcepathmeta;
+				$configmeta['upload_path']   = $targetpathmeta;
 				$configmeta['allowed_types'] = "*";
 				$this->load->library('upload');
 				$this->upload->initialize($configmeta);
 				$this->load->library('image_lib');
+	        
+			$_FILES["meta_image"]["name"] = $path['filename'].'_'.time().'.webp';
+			$fileext = $path['extension'];
 
-	        $path = pathinfo($_FILES["meta_image"]["name"]);
-			$_FILES["meta_image"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
 	            if ($this->upload->do_upload("meta_image")) {
 	            	$uploadData = $this->upload->data();
 	                $uploadfile = $uploadData['file_name'];
 	            }
 
-	         //    $source_path_meta = $sourcepathmeta.$uploadData['raw_name'].$uploadData['file_ext'];
-          //       $target_path_meta = $targetpathmeta.$uploadData['raw_name'].$uploadData['file_ext'];
+	            
+	        if($path['extension'] != 'webp'){
+					if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')  
+			        	$url = "https://";   
+				    else  
+				        $url = "http://";   
+				    if($_SERVER['HTTP_HOST'] == 'localhost'){
+				    	$url.= $_SERVER['HTTP_HOST'].':8080';
+				    }
+				    else{
+				    	$url.= $_SERVER['HTTP_HOST'];
+				    }
 
-		        // $config_manip = array(
-          //           'image_library' => 'gd2',
-          //           'source_image' => $source_path_meta,
-          //           'new_image' => $target_path_meta,
-          //           'maintain_ratio' => false,
-          //           'create_thumb' => false,
-          //           'quality' =>'60%',
-          //           'width' => 300,
-          //           'height' => 300
-          //       );
-          //       $this->image_lib->clear();
-          //       $this->image_lib->initialize($config_manip);
-          //       $this->image_lib->resize();
- 			}
+		         	$target_path = $url.'/control/upload/metaimg/'.$uploadData['raw_name'].$uploadData['file_ext'];
+		         	
+		         	switch ($fileext) {
+			            case 'jpeg':
+			            case 'jpg':
+			                $im = imagecreatefromjpeg($target_path);
+			                break;
+
+			            case 'png':
+			                $im = imagecreatefrompng($target_path);
+			                break;
+
+			            case 'gif':
+			                $im = imagecreatefromgif($target_path);
+			                break;
+			            default:
+			                return false;
+			        }
+					imagewebp($im, './upload/metaimg/'.$uploadData['raw_name'].'.webp' , 60);
+	        }
+	    }
  			else{
  				$uploadfile = $data['meta_image_name'];
  			}
@@ -322,7 +344,6 @@ class Pages extends REST_Controller {
 
 
 	public function getpages_get(){
-		
 		if($allpages = $this->Page_Model->getpagesdata()){
 			$pagedata = array();
 			$i = 0;

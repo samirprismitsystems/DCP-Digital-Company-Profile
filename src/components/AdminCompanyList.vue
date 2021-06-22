@@ -74,6 +74,12 @@
 
                 </div>
             </div>
+
+            <div class="form_btn_field float-right mt-5">
+				<router-link to="/admindashboard/socailmediaadd"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
+			</div>
+
+
         </div>
         </div>
     </div>
@@ -105,6 +111,7 @@ export default {
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setpagesdata');
+            this.$store.dispatch('setuserreviewdata',{data:'all'});
         }
     },
     
@@ -171,15 +178,15 @@ export default {
         editcompany(cid){
             axios.get('user/getcompanyuser/'+cid).then((result)=>{
                 let userdata = result.data.companydata;
-                
+
+                // console.log(userdata);
+
                 localStorage.setItem('userid',userdata.user_id);
                 this.$store.dispatch('setuserid',{userid:userdata.user_id});
 
-                // console.log(result.data);
+                localStorage.setItem('userdataemail',userdata.email_id);
+                this.$store.dispatch('setuserdataemail',{userdataemail:userdata.email_id});
             });
-
-            // localStorage.setItem('useremail',userdata.email_id);
-            // this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
 
             window.open("http://localhost:8080/dashboard/company", "_blank");
         },

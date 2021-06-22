@@ -7,7 +7,8 @@
       	<DashData />
 
 		<div class=" right_sidebar_content" v-if="getpagerequest == 1">
-			<div class="tabs-stage">
+			
+            <div class="tabs-stage">
  
             <div class="expand_tabs text-justify">
 			    	<div class="tab_title">
@@ -75,7 +76,7 @@
 						</div>
 						<div class=" form_field">
 							<label class="" >Company Est Date</label>
-							<input name="esdate" ref="esdate" class="" v-model="getpagedata.company[0].established_in" type="text" placeholder="When your comp. was started?" >
+							<input name="esdate" ref="esdate" class="" v-model="getpagedata.company[0].established_in" type="date" placeholder="When your comp. was started?" >
 						</div>
 						<div class=" form_field">
 							<label class="" >Working Hours</label>
@@ -102,7 +103,6 @@
 						</div>
 			    	</form>
 
-                    <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
 		</div>
         
@@ -130,8 +130,6 @@ export default {
             cities:[],
             allindia:false,
             social:[],
-            showalert:false,
-            alertmsg:'',
             ischangepic:false,
             imgsrc:require('../assets/img/logo.jpg'),
             isupdate:false,
@@ -149,9 +147,15 @@ export default {
     },
 
     computed:{
+
+        getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
+
         getuserid(){
             return this.$store.getters.getuserid;
         },
+
         getpagerequest(){
           return this.$store.getters.getcompanypagerequest;
         },
@@ -172,7 +176,7 @@ export default {
             let data =  this.$store.getters.getcompanydata;
             if(data.length != 0){
                 if(data.company[0] != null && this.getcompanyid != ''){
-                    console.log('incompany');
+
                 this.isupdate = true;
                 this.company_id = data.company[0].company_id;
                 this.logo = data.company[0].company_logo;
@@ -198,17 +202,17 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
             this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            // this.$store.dispatch('setcitiesdata');
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
         }
     },
 
@@ -227,7 +231,7 @@ export default {
         addcompanydata(){
             
             let fd = new FormData();
-            fd.append('user_id',this.getuserid);
+            fd.append('user_id',this.getuserdataemail);
             // fd.append('company_id',0);
             fd.append('company_name',this.$refs.cname.value);
             fd.append('company_desc',this.$refs.cdesc.value);
@@ -258,35 +262,16 @@ export default {
                     this.alertmsg = response.data.message;
                     this.showalert =  !this.showalert;
                     if(this.isupdate == false){
-                        this.$store.dispatch('setcompanydata',{id: this.getuserid});
+                        this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
                         this.$store.dispatch('setallsocialdata');
-                        this.$store.dispatch('setsocialdata',{id: this.getuserid});
-                        this.$store.dispatch('setcitiesdata');
-                        this.$store.dispatch('setproductdata',{id: this.getuserid });
-                        this.$store.dispatch('setservicedata',{id: this.getuserid });
-                        this.$store.dispatch('setClientData',{id: this.getuserid } );
-                        this.$store.dispatch('setportfolioData',{id: this.getuserid });
-                        this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-                        this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-                        this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
                     }
                     else{
-                        this.$store.dispatch('setcompanydata',{id: this.getuserid});
+                        this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
                     }
-                    
-                    setTimeout(() => {
-                        this.clear();
-                    }, 3000);
+                   this.$swal.fire('Company Data', response.data.message , 'success');
             });
 
         },
-
-        clear(){
-            this.showalert = false;
-            this.alertmsg = '';
-        },
-
-        
 
     }
 

@@ -6,7 +6,10 @@ const state = {
     companyid:0,
     cities:[],
     social:[],
+    
     companyfront:[],
+    companyfrontreq:0,
+
     paymentdata:0,
     paymentoptionsdata:[],
     allcompany:[],
@@ -21,7 +24,10 @@ const getters = {
     getcompanyid : (state) => state.companyid,
     getsocialdata:(state) => state.social,
     getcitydata:(state) => state.cities,
+
     getcompanyfront:(state) => state.companyfront,
+    getcompanyfrontreq:(state) => state.companyfrontreq,
+
     getpaymentpage:(state) => state.paymentdata,
     getpaymentoptionsdata:(state) => state.paymentoptionsdata,
     getallcompanydata:(state) => state.allcompany,
@@ -63,6 +69,7 @@ const actions = {
     async setcompanyfront({commit},slug){
         CompanyApi.getcompanyfront(slug.slug,result => {
             commit('SETCOMPANYFRONT',result.data);
+            commit('SETCOMPANYFRONTREQUEST',1);
         });
     },
 
@@ -99,6 +106,7 @@ const mutations = {
     SETCITIES:(state,payload)=> (state.cities = payload),
     SETSOCIAL:(state,payload)=> (state.social = payload),
     SETCOMPANYFRONT:(state,payload)=> (state.companyfront = payload),
+    SETCOMPANYFRONTREQUEST:(state,payload)=> (state.companyfrontreq = payload),
     SETPAYMENTREQUEST:(state,payload)=> (state.paymentdata = payload),
     SETPAYMENTDATA:(state,payload)=> (state.paymentoptionsdata = payload),
     AllCOMPANYDATA:(state,payload)=> (state.allcompany = payload),

@@ -84,7 +84,7 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getusertype == 1){
-            this.$store.dispatch('setuserdata',{userid: this.getadminid });
+            this.$store.dispatch('setuserdata',{userid: this.getuseremail });
         }
         else{
             this.$store.dispatch('setuserdata',{userid: this.getuserid });
@@ -92,6 +92,10 @@ export default {
     },
 
     computed:{
+        getuseremail(){
+            return this.$store.getters.getuseremail;
+        },
+
         getpageinfo(){
           return this.$store.getters.getsitetitle;
         },

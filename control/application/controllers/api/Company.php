@@ -9,8 +9,13 @@ class Company extends REST_Controller {
     }
 
     public function getcompany_get($user_id){
+
 		// $user_id = $this->input->get('user_id');
+
+		$user_id = $this->User_Model->getuserid($user_id);   	
+
 		if($company = $this->Company_Model->getcompany($user_id)){
+			
 			$cities = $this->Company_Model->getcompanycities($company[0]['company_id']);
 			$social = $this->Company_Model->getcompanysocial($company[0]['company_id']);
 
@@ -54,12 +59,12 @@ class Company extends REST_Controller {
 
  		if($data['isupdate'] == 'true'){
  			$companyid = $data['company_id'];
- 			// $this->Company_Model->deleteworkingarea($companyid);
- 			// $this->Company_Model->deletesocial($companyid);
  		}
 
+ 		$user_id = $this->User_Model->getuserid($data['user_id']);
+
 		$company_field = array(
-			'user_id'		=> $data['user_id'],
+			'user_id'		=> $user_id,
             'company_name' => $data['company_name'],
             'company_logo' => $uploadphoto,
             'company_desc' => $data['company_desc'],
@@ -85,26 +90,27 @@ class Company extends REST_Controller {
 
 		if(!empty($_FILES['company_logo']['name'])){
 		    
-		    $sourcepath = './upload/'.$companyid.'/logooginal/';
+		    // $sourcepath = './upload/'.$companyid.'/logooginal/';
         	$targetpath = './upload/'.$companyid.'/logo/';
-
-		    if (!is_dir($sourcepath)) {
-				mkdir($sourcepath,0777,TRUE);
-			}
+		 //    if (!is_dir($sourcepath)) {
+			// 	mkdir($sourcepath,0777,TRUE);
+			// }
 
 			if (!is_dir($targetpath)) {
 				mkdir($targetpath,0777,TRUE);
-			} 
+			}
 
-		    $config['upload_path']   = $sourcepath;
+		    $config['upload_path']   = $targetpath;
 		    $config['allowed_types'] = "*";
 
 		    $this->load->library('upload',$config);
 			$this->load->library('image_lib');
 
 			$path = pathinfo($_FILES["company_logo"]["name"]);
-			$_FILES["company_logo"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
-			               
+			$filename = $path['filename'].'_'.time();
+			$_FILES["company_logo"]["name"] = $filename.'.webp';
+			$fileext = $path['extension'];
+			
 			if ($this->upload->do_upload('company_logo')) {
 				$uploadData = $this->upload->data();
 			   	$uploadphoto = $uploadData['file_name'];
@@ -112,23 +118,38 @@ class Company extends REST_Controller {
 			    echo $this->upload->display_errors();
 			}
 
+			if($fileext != 'webp'){
+				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')  
+		        	$url = "https://";   
+			    else  
+			        $url = "http://";   
+			    if($_SERVER['HTTP_HOST'] == 'localhost'){
+			    	$url.= $_SERVER['HTTP_HOST'].':8080';
+			    }
+			    else{
+			    	$url.= $_SERVER['HTTP_HOST'];
+			    }
 
-			$source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
-                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+	         	$target_path = $url.'/control/upload/'.$companyid.'/logo/'.$uploadData['raw_name'].$uploadData['file_ext'];
+	         	
+	         	switch ($fileext) {
+		            case 'jpeg':
+		            case 'jpg':
+		                $im = imagecreatefromjpeg($target_path);
+		                break;
 
-		        $config_manip = array(
-                    'image_library' => 'gd2',
-                    'source_image' => $source_path,
-                    'new_image' => $target_path,
-                    'maintain_ratio' => false,
-                    'create_thumb' => false,
-                    'quality' =>'60%',
-                    'width' => 300,
-                    'height' => 300
-                );
-                $this->image_lib->clear();
-                $this->image_lib->initialize($config_manip);
-                $this->image_lib->resize();
+		            case 'png':
+		                $im = imagecreatefrompng($target_path);
+		                break;
+
+		            case 'gif':
+		                $im = imagecreatefromgif($target_path);
+		                break;
+		            default:
+		                return false;
+		        }
+				imagewebp($im, './upload/'.$companyid.'/logo/'.$uploadData['raw_name'].'.webp' , 60);
+			}
 
 		}
 		else{
@@ -165,6 +186,9 @@ class Company extends REST_Controller {
 
 
 	public function fetchsocial_get($user_id = NULL){
+
+		$user_id = $this->User_Model->getuserid($user_id);
+
 		$company_data = $this->Company_Model->getcompany($user_id);
  		$company_id = $company_data[0]['company_id'];
 
@@ -283,16 +307,16 @@ class Company extends REST_Controller {
 	}
 
 	public function fetchcompanyfront_get($companyslug){
-
 		if($company = $this->Company_Model->getcompanybyslug($companyslug)){
 			$cities = $this->Company_Model->getcompanycities($company['company_id']);
-			$social = $this->Company_Model->getcompanysocial($company['company_id']);
+			$social = $this->Company_Model->getfrontcompanysocial($company['company_id']);
 			$client = $this->Client_Model->getclient($company['company_id']);
 			$inquiry = $this->Inquiry_Model->getinquiry($company['company_id']);
 			$portfolio = $this->Portfolio_Model->getportfolio($company['company_id']);
 			$product = $this->Product_Model->getproduct($company['company_id']);
 			$service = $this->Service_Model->getservice($company['company_id']);
 			$testimonial = $this->Testimonial_Model->gettestimonial($company['company_id']);
+			$paymentinfo = $this->Company_Model->getpaymentdata($company['company_id']);
 
 
 			$output['error'] = false;
@@ -302,8 +326,10 @@ class Company extends REST_Controller {
             $output['client'] = $client;
             $output['product'] = $product;
             $output['service'] = $service;
+            $output['portfolio'] = $portfolio;
             $output['inquiry'] = $inquiry;
             $output['testimonial'] = $testimonial;
+            $output['paymentinfo'] = $paymentinfo;
             $output['message'] = "Company fetched successfully";
             $this->set_response($output, REST_Controller::HTTP_OK);
 		}
@@ -315,8 +341,10 @@ class Company extends REST_Controller {
             $output['client'] = [];
             $output['product'] = [];
             $output['service'] = [];
+            $output['portfolio'] = [];
             $output['inquiry'] = [];
             $output['testimonial'] = [];
+            $output['paymentinfo'] = [];
             $output['newuser'] = 1;
             $output['message'] = "Empty Data";
             $this->set_response($output, REST_Controller::HTTP_OK);
@@ -325,7 +353,7 @@ class Company extends REST_Controller {
 
 
 	public function fetchpaymentoptions_get($user_id){
-		
+		$user_id = $this->User_Model->getuserid($user_id);
 		$company_data = $this->Company_Model->getcompany($user_id);
  		$company_id = $company_data[0]['company_id'];
 
@@ -347,7 +375,8 @@ class Company extends REST_Controller {
 	public function savesocial_post(){
 		$data = $this->input->post();
 
-		$user_id = $this->input->post('user_id');
+		$user_id = $this->User_Model->getuserid($data['user_id']);
+
  		$company_data = $this->Company_Model->getcompany($user_id);
  		$companyid = $company_data[0]['company_id'];
 
@@ -395,68 +424,99 @@ class Company extends REST_Controller {
 
 
 	public function savepaymentoptions_post(){
-		
 		$data = $this->input->post();
 
-		$user_id = $this->input->post('user_id');
- 		$company_data = $this->Company_Model->getcompany($user_id);
- 		$companyid = $company_data[0]['company_id'];
+		if($user_id = $this->User_Model->getuserid($data['user_id'])){
+			$company_data = $this->Company_Model->getcompany($user_id);
+	 		$companyid = $company_data[0]['company_id'];
 
- 		$paymentoption_field = array(
-			'paytm_number'		=> $data['paytm_number'],
-            'googlepay_number' => $data['googlepay_number'],
-            'phonepay_number' => $data['phonepay_number'],
-            'razorpay_key_id' => $data['razorpay_key_id'],
-            'razorpay_key_secret'=> $data['razorpay_key_secret'],
-            'bank_name' => $data['bank_name'],
-            'account_holder_name' => $data['account_holder_name'],
-            'bank_account_number' => $data['bank_account_number'],
-            'bank_ifsc_code' => $data['bank_ifsc_code'],
-            'account_type' => $data['account_type'],
-            'company_id' => $companyid,
-        );
+	 		$sourcepath = './upload/qrcodeoriginal/';
+	        $targetpath = './upload/qrcode/';
 
-		if($data['isupdate'] == 'true'){
-			$this->Company_Model->updatepaymentoptionsdata($paymentoption_field,$companyid);
-		}
-		else{
-			$this->Company_Model->savepaymentoptionsdata($paymentoption_field);
-		}
-	
-		if(!empty($_FILES['qrcode']['name'])){
-		    $targetpath='./upload/'.$companyid.'/qrcode/';
-		    if (!is_dir($targetpath)) {
-		        mkdir($targetpath,0777,TRUE);
-		    }              
-		    $config['upload_path']   = $targetpath;
-		    $config['allowed_types'] = "*";
-		    $this->load->library('upload',$config);
-			$path = pathinfo($_FILES["qrcode"]["name"]);
-			$_FILES["qrcode"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
-			               
-			if ($this->upload->do_upload('qrcode')) {
-			   	$uploadphoto = $this->upload->data('file_name');
-			}else{
-			    echo $this->upload->display_errors();
-			}
-		}
-		else{
-			$uploadphoto = $data['logo'];
-		}
+	 		if(!empty($_FILES['qrcode']['name'])){
+			    $targetpath='./upload/'.$companyid.'/qrcode/';
+			    if (!is_dir($targetpath)) {
+			        mkdir($targetpath,0777,TRUE);
+			    }            
+			    $config['upload_path']   = $targetpath;
+			    $config['allowed_types'] = "*";
+			    $this->load->library('upload',$config);
+				$path = pathinfo($_FILES["qrcode"]["name"]);
 
+				$filename = $path['filename'].'_'.time();
+				$_FILES["qrcode"]["name"] = $filename.'.webp';
+				               
+				if ($this->upload->do_upload('qrcode')) {
+					$uploadData = $this->upload->data();
+		            $uploadphoto = $uploadData['file_name'];
+				}
 
-		if($this->Company_Model->updateqrcode($companyid,$uploadphoto)){
-			if($data['isupdate'] == 'true'){
-				$output['error'] = false;
-			    $output['message'] = "Payment Data Saved.";
-			    $this->set_response($output, REST_Controller::HTTP_OK);
+				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+			        $url = "https://";   
+			    else  
+			        $url = "http://";   
+			    if($_SERVER['HTTP_HOST'] == 'localhost'){
+			    	$url.= $_SERVER['HTTP_HOST'].':8080';
+			    }
+			    else{
+			    	$url.= $_SERVER['HTTP_HOST'];
+			    }
+
+	         	$target_path = $url.'/control/upload/'.$companyid.'/qrcode/'.$uploadData['raw_name'].$uploadData['file_ext'];
+	         	$im = imagecreatefrompng($target_path);
+				imagewebp($im, './upload/'.$companyid.'/qrcode/'.$filename.'.webp' , 80);
 			}
 			else{
-				$output['error'] = false;
-			    $output['message'] = "Payment Data Saved Failed";
-			    $this->set_response($output, REST_Controller::HTTP_OK);	
+				$uploadphoto = $data['logo'];
+			}
+
+	 		$paymentoption_field = array(
+				'paytm_number'			=> $data['paytm_number'],
+	            'googlepay_number' 		=> $data['googlepay_number'],
+	            'phonepay_number' 		=> $data['phonepay_number'],
+	            'razorpay_key_id' 		=> $data['razorpay_key_id'],
+	            'razorpay_key_secret'	=> $data['razorpay_key_secret'],
+	            'bank_name' 			=> $data['bank_name'],
+	            'account_holder_name' 	=> $data['account_holder_name'],
+	            'bank_account_number' 	=> $data['bank_account_number'],
+	            'bank_ifsc_code' 		=> $data['bank_ifsc_code'],
+	            'account_type' 			=> $data['account_type'],
+	            'qrcode' 				=> $uploadphoto,
+	            'company_id' 			=> $companyid,
+	        );
+
+			if($data['isupdate'] == 'true'){
+				if($this->Company_Model->updatepaymentoptionsdata($paymentoption_field,$companyid)){
+					$output['error'] = false;
+					$output['message'] = "Payment Data Saved.";
+					$this->set_response($output, REST_Controller::HTTP_OK);
+				}
+				else{
+					$output['error'] = false;
+				    $output['message'] = "Payment Data Saved Failed";
+				    $this->set_response($output, REST_Controller::HTTP_OK);
+				}
+			}
+			else{
+				if($this->Company_Model->savepaymentoptionsdata($paymentoption_field)){
+					$output['error'] = false;
+					$output['message'] = "Payment Data Saved.";
+					$this->set_response($output, REST_Controller::HTTP_OK);
+				}
+				else{
+					$output['error'] = false;
+				    $output['message'] = "Payment Data Saved Failed";
+				    $this->set_response($output, REST_Controller::HTTP_OK);
+				}
 			}
 		}
+		else{
+			$output['error'] = true;
+			$output['message'] = "User Email Not Matched";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+
+ 		
 	}
 
 

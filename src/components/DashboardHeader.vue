@@ -27,7 +27,7 @@
       <link rel="preload"  href="/src/assets/webfonts/fa-brands-400.woff" as="font" type="font/woff" crossorigin="anonymous">
       <link rel="preload"  href="/src/assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
       <link rel="preload"  href="/src/assets/webfonts/fa-solid-900.woff" as="font" type="font/woff" crossorigin="anonymous">
-      <link rel="preload"  href="/src/assets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous"> 
+      <link rel="preload"  href="/src/assets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <!--	  theme-->
       <link href="/src/assets/theme/media-query.css" rel="stylesheet" defer>
       <link href="/src/assets/theme/navbar.css" rel="stylesheet" defer>
@@ -39,7 +39,11 @@
 
         <nav class="navbar navbar-expand-lg " id="">
             <div class="container custom_container">
-                <a class="navbar-brand" href="index.html"><h1>DCP</h1></a>
+
+                <router-link v-if="getusertype == 1" to="/admindashboard" class="navbar-brand"><h1>DCP</h1></router-link>
+                <router-link v-if="getusertype == 2" to="/dashboard" class="navbar-brand"><h1>DCP</h1></router-link>
+                <router-link v-if="getusertype == null && getusertype == ''" to="/" class="navbar-brand" ><h1>DCP</h1></router-link>
+
                 <button class="navbar-toggler" type="button" data-trigger="#main_nav"><i class="fas fa-bars"></i></button>
                 <div class="navbar-collapse" id="main_nav">
                 
@@ -52,11 +56,11 @@
                     <li class="nav-item active" v-else> <router-link class="nav-link " target="_blank" :to="'/'">Home</router-link> </li>
                 </ul>
                 </div>
-                
                 <ul>
                     <li v-if=" getuseremail == '' || getuseremail == null " class="nav-item aplycolor"> <router-link to="/login"  class="login_btn btn_100">login</router-link>  </li>
                     <li v-else class="nav-item aplycolor" > <a @click="logout()" class="login_btn btn_100">Logout</a> </li>
                 </ul>
+
             </div>
         </nav>
 
@@ -67,6 +71,14 @@
 export default {
     name:'DashboardHeader',
     computed:{
+
+        getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
+
+        getpagerequest(){
+          return this.$store.getters.getcompanypagerequest;
+        },
         getuseremail(){
             return this.$store.getters.getuseremail;
         },
@@ -75,6 +87,9 @@ export default {
         },
         getuserid(){
             return this.$store.getters.getuserid;
+        },
+        getusertype(){
+            return this.$store.getters.getusertype;
         },
     },
 
@@ -94,11 +109,17 @@ export default {
             localStorage.removeItem('userid');
             localStorage.removeItem('first_name');
             localStorage.removeItem('admin_id');
+            localStorage.removeItem('userdataemail');
 
+            this.$store.dispatch('setuserdataemail',{userdataemail:''});
+            
             this.$store.dispatch('setuseremail',{emailid:''});
             this.$store.dispatch('setuserid',{userid:''});
             this.$store.dispatch('setadminid',{admin_id:''});
             // this.$store.dispatch('setcompanyid',{companyid:''});
+            this.$store.dispatch('setcompanydashreq',{status:0});
+            this.$store.dispatch('setadmindashreq',{status:0});
+            this.$store.dispatch('setuserpagereq',{status:0});
             this.$store.dispatch('setclientrequest',{status:0});
             this.$store.dispatch('setcompanyrequest',{status:0});
             this.$store.dispatch('setinquiryrequest',{status:0});

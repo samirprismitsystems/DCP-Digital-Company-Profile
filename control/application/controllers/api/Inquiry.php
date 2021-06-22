@@ -12,16 +12,9 @@ class Inquiry extends REST_Controller {
 
 	public function createinquiry_post(){
 		$data = $this->input->post();
-
- 		if($this->input->post('user_id') != 0){
-			$user_id = $this->input->post('user_id');
-			$company_data = $this->Company_Model->getcompany($user_id);
- 			$companyid = $company_data[0]['company_id'];
-		}
-		else{
-			$companyid = $this->input->post('company_id');
-		}
-
+		
+		$companyid = $this->input->post('company_id');
+		
 		$inquiry_field = array(
 			'client_name' => $data['client_name'],
             'email_address' => $data['email_address'],
@@ -73,7 +66,7 @@ class Inquiry extends REST_Controller {
 
 
 	public function getinquiry_get($user_id){
-		
+		$user_id = $this->User_Model->getuserid($user_id);
 		$company_data = $this->Company_Model->getcompany($user_id);
  		$company_id = $company_data[0]['company_id'];
 

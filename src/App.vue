@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <DashboardHeader v-if="$route.meta.isfront != true && $route.meta.islanding != true" />
+    <DashboardHeader v-if="$route.meta.isfront != true && $route.meta.islanding != true && $route.meta.ispage != true" />
     <!-- <AdminDashBoard v-if="$route.meta.isadmindash == true"/> -->
-    <!-- <SecHeader  v-if="$route.meta.isfront != true && $route.meta.islanding != true" /> -->
+    <SecHeader  v-if="$route.meta.ispage == true" />
     
     <router-view></router-view>
     

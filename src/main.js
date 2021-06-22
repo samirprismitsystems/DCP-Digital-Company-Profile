@@ -15,6 +15,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
+import Select2 from 'v-select2-component';
+Vue.component('Select2', Select2);
+
 let sitemainpath = '/digital-company-profile/';
 
 import VueCookies from 'vue-cookies'

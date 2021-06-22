@@ -61,7 +61,6 @@
 
                 <button type="submit" class="form_btn btn_100">Save</button>
             </form>
-            <div v-if="showmsg" class="alert alert-info">{{msg}}</div>
             
     </div>
 
@@ -75,8 +74,6 @@ export default {
     name:'Template1',
      data(){
         return{
-            msg:'',
-            showmsg:false,
             pagecontent:[],
             isupdate:false,
             content:'',
@@ -158,15 +155,9 @@ export default {
             fd.append('page_title',this.$refs.pagetitle.value);
             fd.append('page_content',this.$refs.content.value);
 
-            // fd.append('page_content', JSON.stringify(pagecontent) );
-            
             axios.post('pages/createpage',fd).then((result) => {
-                this.showmsg = true;
-                this.msg = result.data.message;
-
+                this.$swal.fire('Data Saved', result.data.message , 'success');    
                 setTimeout(() => {
-                    this.showmsg = false;
-                    this.message = '';
                     this.$router.push('/admindashboard/pages');
                 }, 1000);
             });

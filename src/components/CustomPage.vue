@@ -54,7 +54,7 @@ export default {
                     this.$router.push('/');
                 }
                 this.templatename = result.data.page.template_name;
-                this.pagedata = result.data.page_content;
+                this.pagedata = result.data;
                 this.isdata = 1;
             }
         });

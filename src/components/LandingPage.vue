@@ -291,36 +291,14 @@
       </div>
       <div class="col-md-7 col-sm-12 slider-col">
         <div class="testimonial-slider owl-carousel owl-theme">
-          <div class="item">
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
+          
+          <div class="item" v-for="(review,index) in getreviewdata" :key="index">
+            <p class="comment-text" v-html="review.user_message"></p>
             <div class="comment-by"><i class="fas fa-user-circle " style="font-size: 3.6rem;"></i>
-              <h4>Lorem ipsum</h4>
+              <h4 v-html="review.user_name"></h4>
             </div>
           </div>
-          <div class="item">
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-            <div class="comment-by"><i class="fas fa-user-circle " style="font-size: 3.6rem;"></i>
-              <h4>Lorem ipsum</h4>
-            </div>
-          </div>
-          <div class="item">
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-            <div class="comment-by"><i class="fas fa-user-circle " style="font-size: 3.6rem;"></i>
-              <h4>Lorem ipsum</h4>
-            </div>
-          </div>
-          <div class="item">
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-            <div class="comment-by"><i class="fas fa-user-circle " style="font-size: 3.6rem;"></i>
-              <h4>Lorem ipsum</h4>
-            </div>
-          </div>
-          <div class="item">
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-            <div class="comment-by"><i class="fas fa-user-circle " style="font-size: 3.6rem;"></i>
-              <h4>Lorem ipsum</h4>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -439,12 +417,17 @@ export default {
         return this.$store.getters.getpagesrequest;
       },
       getsettingdata(){
-            let data =  this.$store.getters.getsettingdata;
-            return data;
-        },
-        getsettingrequest(){
-            return this.$store.getters.getsettingrequest;
-        },
+        let data =  this.$store.getters.getsettingdata;
+        return data;
+      },
+      getsettingrequest(){
+        return this.$store.getters.getsettingrequest;
+      },
+
+      getreviewdata(){
+        return this.$store.getters.getuserreviewdata;
+      },
+
     },
 
 
@@ -476,6 +459,7 @@ export default {
 
         this.$store.dispatch('setsettingdata');
         this.$store.dispatch('setpagesdata');
+        this.$store.dispatch('setuserreviewdata',{data:'active'});
 
         axios.get('pages/getsinglepage/landing-page').then((result)=>{
           // console.log(result.data);

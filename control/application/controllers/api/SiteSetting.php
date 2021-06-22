@@ -56,46 +56,60 @@ class SiteSetting extends REST_Controller {
 		$data = $this->input->post();
  		
  		if( !empty($_FILES['site_logo']['name'])) {
- 			$sourcepath = './upload/originalsetting/';
-        	$targetpath = './upload/setting/';
-
- 			if (!is_dir($sourcepath)) {
-				mkdir($sourcepath,0777,TRUE);
-			}
+ 			$targetpath = './upload/setting/';
 
 			if (!is_dir($targetpath)) {
 				mkdir($targetpath,0777,TRUE);
 			}
 
-			$config['upload_path']   = $sourcepath;
+			$config['upload_path']   = $targetpath;
 			$config['allowed_types'] = "*";
 			$this->load->library('upload',$config);
 			$this->load->library('image_lib');
 
 
 			$path = pathinfo($_FILES["site_logo"]["name"]);
-			$_FILES["site_logo"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
-	            if ($this->upload->do_upload("site_logo")) {
-	            	$uploadData = $this->upload->data();
-	                $sitelogo = $uploadData['file_name'];
-	            }
+			$_FILES["site_logo"]["name"] = $path['filename'].'_'.time().'.webp';
+			$fileext = $path['extension'];
+	        
+	        if ($this->upload->do_upload("site_logo")) {
+	           	$uploadData = $this->upload->data();
+	            $sitelogo = $uploadData['file_name'];
+	        }
 
-	            $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
-                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+	        if($path['extension'] != 'webp'){
+					if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')  
+			        	$url = "https://";
+				    else  
+				        $url = "http://";   
+				    if($_SERVER['HTTP_HOST'] == 'localhost'){
+				    	$url.= $_SERVER['HTTP_HOST'].':8080';
+				    }
+				    else{
+				    	$url.= $_SERVER['HTTP_HOST'];
+				    }
 
-		        $config_manip = array(
-                    'image_library' => 'gd2',
-                    'source_image' => $source_path,
-                    'new_image' => $target_path,
-                    'maintain_ratio' => false,
-                    'create_thumb' => false,
-                    'quality' =>'60%',
-                    'width' => 300,
-                    'height' => 300
-                );
-                $this->image_lib->clear();
-                $this->image_lib->initialize($config_manip);
-                $this->image_lib->resize();
+		         	$target_path = $url.'/control/upload/setting/'.$uploadData['raw_name'].$uploadData['file_ext'];
+		         	
+		         	switch ($fileext) {
+			            case 'jpeg':
+			            case 'jpg':
+			                $im = imagecreatefromjpeg($target_path);
+			                break;
+
+			            case 'png':
+			                $im = imagecreatefrompng($target_path);
+			                break;
+
+			            case 'gif':
+			                $im = imagecreatefromgif($target_path);
+			                break;
+			            default:
+			                return false;
+			        }
+					imagewebp($im, './upload/setting/'.$uploadData['raw_name'].'.webp' , 60);
+	        }
+
 
  			}
  			else{

@@ -10,6 +10,7 @@
 
 			<div class="tabs-stage">
                 <div id="tab-6" class="expand_tabs">
+					<router-link to="/dashboard/enquiry" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			    	<div class="tab_title">
 				        <div class="h2">Payment Options</div>
 				        <div class="h4">Please fill up the detail to create your profile</div>
@@ -21,15 +22,16 @@
 									<label class="" >PayTm Number (Optional)</label>
 									<input v-model="getpagedata.paytm_number" name="paytm" ref="paytm" class="" value="" type="text" placeholder="Paytm Number" >
 								</div>
+								
 								<div class="form_field">
-									<label class=" " >Google Pay (Optional)</label>
+									<label class=" " >Google Pay Number / UPI ID (Optional)</label>
 									<input v-model="getpagedata.googlepay_number" name="google-pay" ref="gpay" class="" value="" type="text" placeholder="Google Pay Number / UPI ID" >
 								</div>
+								
 								<div class=" form_field">
-									<label class="" >PhonePe (Optional)</label>
+									<label class="" >PhonePe Number / UPI ID (Optional)</label>
 									<input v-model="getpagedata.phonepay_number" name="PhonePe" ref="phonepay" class="" value="" type="text" placeholder="PhonePe Number / UPI ID" >
 								</div>
-								
 								
 			    			</div>
 			    			<!-- col-md-9 form-col-->
@@ -99,7 +101,7 @@
 						
 						<div class="form_btn_field">
 							<button type="submit" class="form_btn btn_200  ">Save Changes</button>
-							<button type="submit" class=" form_btn btn_100  ">Done</button>
+							<router-link to="/dashboard/enquiry"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
 						</div>
 
 			    	</form>
@@ -136,6 +138,9 @@ export default {
     },
 
     computed:{
+		getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
         getuserid(){
           return this.$store.getters.getuserid;
         },
@@ -174,17 +179,16 @@ export default {
         }
 		this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
             this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
         }
     },
 
@@ -208,7 +212,7 @@ export default {
             fd.append('bank_account_number',this.$refs.accno.value);
             fd.append('bank_ifsc_code',this.$refs.ifsc.value);
             fd.append('account_type',this.acctype);
-            fd.append('user_id',this.getuserid);
+            fd.append('user_id',this.getuserdataemail);
 
 			if(this.ischangepic == true){
                fd.append('qrcode',this.qrcode);
@@ -224,11 +228,18 @@ export default {
             }
 
             axios.post('company/savepaymentoptions',fd).then((result) => {
-                this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
-                this.$swal.fire('Data Updated', result.data.message, 'success');
+                this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
+                this.$swal.fire('Data Saved', result.data.message, 'success');
             });
             
         }
     }
 }
 </script>
+
+<style scoped>
+.btncol{
+        color: white;
+    }
+
+</style>

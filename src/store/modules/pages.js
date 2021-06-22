@@ -19,7 +19,6 @@ const actions = {
     },
     async setpagesdata({commit}){
         pagesApi.getpagesData(result => {
-            console.log(result);
             commit('SETPAGES',result.data.pages);
             commit('SETPAGESREQUEST',1);
         });

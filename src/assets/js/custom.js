@@ -3,6 +3,22 @@
 $(document).ready(function () {
 
 var $ = jQuery
+
+    
+    // Counter
+    $('.counter-value').each(function(){
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        },{
+            duration: 3500,
+            easing: 'swing',
+            step: function (now){
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
+
+
   
   /*4. responsivev menu*/
   jQuery("[data-trigger]").on("click", function () {
@@ -44,12 +60,6 @@ var $ = jQuery
 
 
 // $('.tabs-nav a:first').trigger('click'); // Default
-	
-
-
-
-
-
 
 
   });
@@ -68,3 +78,5 @@ var $ = jQuery
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+

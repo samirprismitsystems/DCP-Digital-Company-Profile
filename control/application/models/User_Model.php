@@ -70,14 +70,6 @@ class User_Model extends CI_Model{
         $this->db->where('tbl_users.email_id',$data['email']);
         $this->db->where('tbl_users.password',md5($data['password']));
         return $this->db->get('tbl_users')->row_array();
-
-
-        // $this->db->select('tbl_users.user_id,tbl_users.email_id,tbl_users.first_name,tbl_users.last_name,tbl_users.profile_photo,tbl_company.*');
-        // $this->db->from('tbl_company');
-        // $this->db->join('tbl_users','tbl_company.user_id = tbl_users.user_id');
-        // $this->db->where('tbl_users.email_id',$data['email']);
-        // $this->db->where('tbl_users.password',$data['password']);
-        // return $this->db->get()->row_array();
     }
 
     public function updateuser($data,$user_id){
@@ -160,9 +152,46 @@ class User_Model extends CI_Model{
 
 
     public function getusercompany($company_id){
-        $this->db->where('company_id',$company_id);
-        return $this->db->get('tbl_company')->row_array();
+        $this->db->select('tbl_users.email_id,tbl_users.user_id,tbl_company.*');
+        $this->db->from('tbl_company');
+        $this->db->join('tbl_users','tbl_company.user_id = tbl_users.user_id');
+        $this->db->where('tbl_company.company_id',$company_id);
+        return $this->db->get()->row_array();
     }
+
+    public function getuserreview($status){
+        if($status == 'active'){
+            $this->db->where('status',1);
+        }
+       return $this->db->get('tbl_userreview')->result_array();
+    }
+
+
+    public function updatereview($review_id,$status){
+        $this->db->set('status',$status);
+        $this->db->where('review_id',$review_id);
+        return $this->db->update('tbl_userreview');
+    }
+
+    public function addreview($data){
+        if($data['isupdate'] == 'true'){
+            $this->db->set('user_name',$data['user_name']);
+            $this->db->set('user_message',$data['user_message']);
+            $this->db->where('review_id',$data['review_id']);
+            return $this->db->update('tbl_userreview');
+        }
+        else{
+            return $this->db->insert('tbl_userreview',$data);
+        }
+    }
+
+    
+
+    public function getuserid($user_email){
+        $this->db->where('email_id',$user_email);
+        return $this->db->get('tbl_users')->row()->user_id;
+    }
+
 
     
 }

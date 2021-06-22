@@ -11,8 +11,7 @@
                     </div>
                     <div class="col-6">
                         <ul class="footer_nav">
-                            <li class="footer_nav_item"><a href="#!" class="footer_nav_link ">Terms of services</a></li>
-                            <li class="footer_nav_item"><a href="#!" class="footer_nav_link ">Privacy Policy</a></li>
+                            <li v-for="(page,index) in footerpages" :key="index" class="footer_nav_item"><a :href="'/'+page.page_slug" target="_blank" class="footer_nav_link "> {{page.page_name}} </a></li>
                         </ul>
                     </div>
                 </div>
@@ -22,27 +21,33 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name:'DashboardFooter',
+    data(){
+        return{
+            footerpages:[]
+        }
+    },
     computed:{
         getpagereq(){
             return this.$store.getters.getsettingrequest;
         },
         getpagedata(){
-            return this.$store.getters.getsettingdata;
-        },
-        getpagesdata(){
-            let data = this.$store.getters.getpagesdata;
-            return data;
-        },
-        getpagesrequest(){
-            return this.$store.getters.getpagesrequest;
+            let pagedata = this.$store.getters.getsettingdata;
+            let pages = JSON.parse(pagedata[9].setting_value);
+            
+            let pagelist = new FormData();
+            pagelist.append('pages[]',pages);
+            axios.post('pages/getsomepagedata',pagelist).then((result) => {
+                this.footerpages = result.data.pages;
+            });
+            return pagedata;
         },
     },
 
     created(){
         this.$store.dispatch('setsettingdata');
-        this.$store.dispatch('setpagesdata');
     }
 }
 </script>

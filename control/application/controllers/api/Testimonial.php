@@ -58,6 +58,7 @@ class Testimonial extends REST_Controller {
 	}
 	
 	public function gettestimonial_get($user_id){
+		$user_id = $this->User_Model->getuserid($user_id);
 		$company_data = $this->Company_Model->getcompany($user_id);
  		$company_id = $company_data[0]['company_id'];
  		

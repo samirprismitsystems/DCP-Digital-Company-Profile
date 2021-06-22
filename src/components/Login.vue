@@ -71,7 +71,7 @@ export default {
                 this.$router.push('/admindashboard/');
             }
             else{
-                this.$router.push('/dashboard/company');
+                this.$router.push('/dashboard/');
             }
             
         }
@@ -111,7 +111,6 @@ export default {
                     localStorage.setItem('useremail',userdata.email_id);
                     this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
 
-
                     if(userdata.type == 1){
                         localStorage.setItem('admin_id',userdata.user_id);
                         this.$store.dispatch('setadminid',{admin_id:userdata.user_id});
@@ -119,10 +118,13 @@ export default {
                     }
                     else{
                         
+                    localStorage.setItem('userdataemail',userdata.email_id);
+                    this.$store.dispatch('setuserdataemail',{userdataemail:userdata.email_id});
+
                         localStorage.setItem('userid',userdata.user_id);
                         this.$store.dispatch('setuserid',{userid:userdata.user_id});
 
-                        this.$router.push('/dashboard/company');
+                        this.$router.push('/dashboard/');
                     }
 
                 }

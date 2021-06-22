@@ -8,7 +8,8 @@
 		<div class=" right_sidebar_content" v-if="getpagerequest == 1">
 			<div class="tabs-stage">
                 <div class="expand_tabs">
-
+                
+                <router-link to="/admindashboard/pages" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			    <div class="tab_title">
 				    <div class="h2">Website Setting</div>
 				    <div class="h4">Change Website Settings</div>
@@ -79,6 +80,17 @@
                                         </select>
                                     </div>
 
+                                    <div class="form_field">
+                                        <label class="" for="">Select Footer Pages</label>
+                                        <Select2 v-model="getdata" :options="options" :settings="{ allowClear: true, placeholder: 'Select Footer Pages', multiple:true}" />
+                                        <!-- <select v-model="getdata" multiple class="js-example-basic-single" name="state">
+                                            <option value="AL">Alabama</option>
+                                            <option value="WY">Wyoming</option>
+                                            </select> -->
+                                        <h4>Value: {{ getdata }}</h4>
+                                    </div>
+
+
                                     <div class=" form_field">
                                         <label class="label_icon"><i class="fab fa-facebook-f"></i>Facebook</label>
                                         <input name="facebookurl" v-if="getpagedata[3].setting_name == 'facebookurl'" :value="getpagedata[3].setting_value" ref="facebookurl" class="" type="text" placeholder="Add Facebook URL" >
@@ -98,9 +110,6 @@
 
                                     <button type="submit" class="form_btn btn_100">Save</button>
                                 </form>
-
-                                <div v-if="showmsg" class="aalert alert-info">{{msg}}</div>
-
                             </div>
 
                             <div class="tab-pane" id="gcode" role="tabpanel">
@@ -117,12 +126,8 @@
                                         <label class="" for="user_id">After Body Tag</label>
                                         <textarea rows="5" v-if="getpagedata[7].setting_name == 'after_body_ganalytics'" :value="getpagedata[7].setting_value" id="afterbody" ref="afterbody" name="afterbody" class="" placeholder="After Body Tag Analytics Code" required=""></textarea>
                                     </div>
-
                                     <button type="submit" class="form_btn btn_100">Save</button>
                                 </form>
-
-                                <div v-if="showmsg" class="alert alert-info">{{msg}}</div>
-
 
                             </div>
 
@@ -142,18 +147,22 @@
 <script>
 import axios from 'axios'
 import AdminDash from './AdminDash'
+// import vSelect from "vue-select";
+// import "vue-select/dist/vue-select.css";
+
 export default {
     name:'Setting',
     components:{
-        AdminDash
+        AdminDash,
+        // vSelect
     },
     data(){
         return{
+            getdata:[],
+            options:[],
             sitelogo:null,
             imgsrc:'',
             ischangepic:false,
-            msg:'',
-            showmsg:false,
             pagelist:[]
         }
     },
@@ -161,7 +170,15 @@ export default {
     computed:{
 
         getpagesdata(){
-            let data =  this.$store.getters.getpagesdata; 
+            let data =  this.$store.getters.getpagesdata;
+            data.forEach(element => {
+                let obj = {
+                    id:element.page_id,
+                    text:element.page_name
+                };
+                this.options.push(obj);
+            });
+            
             return data;
         },
         getpagesrequest(){
@@ -190,10 +207,13 @@ export default {
             this.$store.dispatch('setpagesdata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
+            this.$store.dispatch('setuserreviewdata',{data:'all'});
+            // this.getpagesdata;
         }
     },
 
     methods:{
+
     savesitesetting(){
 
         // console.log(this.pagelist);
@@ -215,14 +235,8 @@ export default {
         fd.append('linkedurl',this.$refs.linkedurl.value);
 
         axios.post('sitesetting/savesetting',fd).then((result) => {
-            // console.log('Saved');
-            this.msg = result.data.message;
-            this.showmsg = true;
             this.$store.dispatch('setsettingdata');
-            setTimeout(() => {
-                this.msg = '';
-                this.showmsg = false;
-            }, 3000);
+            this.$swal.fire('Data Saved', result.data.message, 'success');
         });
     },
 
@@ -232,14 +246,8 @@ export default {
         fd.append('after_body',this.$refs.afterbody.value);
         
         axios.post('sitesetting/savegoogleanalytics',fd).then((result) => {
-            // console.log('Saved');
-            this.msg = result.data.message;
-            this.showmsg = true;
             this.$store.dispatch('setsettingdata');
-            setTimeout(() => {
-                this.msg = '';
-                this.showmsg = false;
-            }, 3000);
+            this.$swal.fire('Google Analytics Data Saved', result.data.message, 'success');
         });
     },
 
@@ -260,4 +268,9 @@ export default {
     .tabstyle{
         font-size: 15px;
     }
+    .btncol{
+        color: white;
+    }
+
+
 </style>

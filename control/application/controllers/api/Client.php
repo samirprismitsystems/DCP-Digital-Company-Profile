@@ -12,7 +12,8 @@ class Client extends REST_Controller {
 	public function createclient_post(){
 		$data = $this->input->post();
 
- 		$user_id = $this->input->post('user_id');
+ 		$user_id = $this->User_Model->getuserid($data['user_id']);
+ 		
  		$company_data = $this->Company_Model->getcompany($user_id);
  		$companyid = $company_data[0]['company_id'];
 
@@ -44,35 +45,41 @@ class Client extends REST_Controller {
 				mkdir($targetpath,0777,TRUE);
 			}
 
-				$config['upload_path']   = $sourcepath;
+				$path = pathinfo($_FILES[$name]["name"]);
+				if($path['extension'] == 'webp'){
+					$config['upload_path']   = $targetpath;
+				}
+				else{
+					$config['upload_path']   = $sourcepath;
+				}
 				$config['allowed_types'] = "*";
-				$this->load->library('upload',$config);
+				$this->load->library('upload');
+				$this->upload->initialize($config);
 				$this->load->library('image_lib');
 
-	        $path = pathinfo($_FILES[$name]["name"]);
 			$_FILES[$name]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
 	            if ($this->upload->do_upload($name)) {
 	            	$uploadData = $this->upload->data();
 	                $client_field[$i]['client_logo'] = $uploadData['file_name'];
 	            }
 
-	            $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
-                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
-
-		        $config_manip = array(
-                      'image_library' => 'gd2',
-                      'source_image' => $source_path,
-                      'new_image' => $target_path,
-                      'maintain_ratio' => false,
-                      'create_thumb' => false,
-                      'quality' =>'60%',
-                      'width' => 300,
-                      'height' => 300
-                    );
-                $this->image_lib->clear();
-                $this->image_lib->initialize($config_manip);
-                $this->image_lib->resize();
-
+	            if($path['extension'] != 'webp'){
+		            $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
+	                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+			        $config_manip = array(
+	                      'image_library' => 'gd2',
+	                      'source_image' => $source_path,
+	                      'new_image' => $target_path,
+	                      'maintain_ratio' => false,
+	                      'create_thumb' => false,
+	                      'quality' =>'60%',
+	                      'width' => 300,
+	                      'height' => 300
+	                    );
+	                $this->image_lib->clear();
+	                $this->image_lib->initialize($config_manip);
+	                $this->image_lib->resize();
+	            }
 
  			}
  			else{
@@ -107,7 +114,7 @@ class Client extends REST_Controller {
 	}
 
 	public function getclients_get($user_id = NULL){
-		
+		$user_id = $this->User_Model->getuserid($user_id);
 		$company_data = $this->Company_Model->getcompany($user_id);
  		$company_id = $company_data[0]['company_id'];
 

@@ -7,8 +7,8 @@
 
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
-                        <h2 class="text-center mt-5">{{data.page_title}}</h2>
-                        <p class="text-center" v-html="data.page_content"></p>
+                        <h2 class="text-center mt-5">{{data.page_content.page_title}}</h2>
+                        <p class="text-center" v-html="data.page_content.page_content"></p>
                     </div>
                 </div>
 
@@ -22,23 +22,26 @@
 </template>
 
 <script>
+// import $ from 'jQuery'
 export default {
     name:'Template1Design',
     data(){
         return{
             pagedata:[],
-            content:[]
+            content:[],
+            imgpath:this.$imgpath,
         }
     },
 
     created(){
         
         this.pagedata = this.data;
+        console.log(this.pagedata);
         // this.content = JSON.parse(this.data.page_content);
-
-        document.getElementsByTagName("META")['title'].content = this.pagedata.meta_title;
-        document.getElementsByTagName("META")['keywords'].content = this.pagedata.meta_keywords;
-        document.getElementsByTagName("META")['description'].content = this.pagedata.meta_description;
+        document.getElementsByTagName("META")['title'].content = this.pagedata.page.meta_title;
+        document.getElementsByTagName("META")['keywords'].content = this.pagedata.page.meta_keywords;
+        document.getElementsByTagName("META")['description'].content = this.pagedata.page.meta_description;
+        document.querySelector("meta[property='og:image']").content = this.imgpath+'metaimg/'+this.pagedata.page.meta_image;
     },
 
     props:{

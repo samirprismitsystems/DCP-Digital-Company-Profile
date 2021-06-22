@@ -9,6 +9,7 @@
 			<div class="tabs-stage">
                 <div class="expand_tabs">
 
+                <router-link to="/admindashboard/socailmediaadd" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			    <div class="tab_title">
 				    <div class="h2">Pages</div>
 				    <div class="h4">Add or Update pages</div>
@@ -51,6 +52,13 @@
                 </div>
                 </div>
             </div>
+
+
+             <div class="form_btn_field float-right mt-5">
+				<router-link to="/admindashboard/userreview"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
+			</div>
+
+
         </div>
         </div>
     </div>
@@ -95,6 +103,7 @@ export default {
             this.$store.dispatch('setpagesdata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
+            this.$store.dispatch('setuserreviewdata',{data:'all'});
         }
     },
 

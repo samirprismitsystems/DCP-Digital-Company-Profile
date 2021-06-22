@@ -11,7 +11,7 @@
 
 
             <div id="tab-3" class="expand_tabs">
-			    	<button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+			    	<router-link to="/dashboard/sociallinks" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      	<div class="tab_title">
 				        <div class="h2">Add company products</div>
 				        <div class="h4">Upload products which people can order online</div>
@@ -69,12 +69,10 @@
 
 						<div class="form_btn_field">
 							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
-							<button type="button" class=" btnNext form_btn btn_100  ">Next</button>
+							<router-link to="/dashboard/service"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
 			    	</form>
 				</div>
-
-                <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
             </div>
         </div>
@@ -99,8 +97,6 @@ export default {
             newimgsrc:[],
             imgpath:this.$imgpath,
             ischangepic:false,
-            alertmsg:'',
-            showalert:false,
             newdataindex:0,
             isimgchange:false
         }
@@ -109,6 +105,9 @@ export default {
         DashData
     },
     computed:{
+        getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
         getuserid(){
           return this.$store.getters.getuserid;
         },
@@ -158,17 +157,16 @@ export default {
         }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
        if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
             this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
         }
     },
 
@@ -192,7 +190,7 @@ export default {
 
         deletbox(index){
             this.newproduct.splice(index, 1);
-            this.newimgsrc[index] = '';
+            this.newimgsrc[index] = null;
         },
 
 
@@ -208,10 +206,9 @@ export default {
 
         async saveproduct(){
             this.oldproduct = [ ...new Set(this.oldproduct) ];
-            // console.log(this.oldproduct);
-            // console.log(this.oldimages);
+            
             let fd = new FormData();
-            fd.append('user_id',this.getuserid);
+            fd.append('user_id',this.getuserdataemail);
             fd.append('isupdate',true);
             for (let index = 0; index < this.oldimages.length; index++) {
                 fd.append('oldimages'+index,this.oldimages[index]);
@@ -219,53 +216,40 @@ export default {
             fd.append('imgcount', this.oldimages.length );
             fd.append('product_data',JSON.stringify(this.oldproduct));
             
-            await axios.post('product/createproduct',fd).then((result) => {
-                // if(this.newproduct != null && this.newproduct != ''){
-                // this.alertmsg = result.data.message;
-                //     this.showalert = true;
-                //     this.$store.dispatch('setproductdata',{id:this.getuserid});
-                //     // this.newproduct = [];
-                //     setTimeout(() => {
-                //         this.alertmsg = '';
-                //         this.showalert = false;
-                //     }, 3000);
-                // }
-
-                this.$swal.fire('Data Updated', result.data.message, 'success');
-
-            });
+            if(this.oldproduct != null && this.oldproduct != ''){
+                await axios.post('product/createproduct',fd).then((result) => {
+                });
+            }
 
             if(this.newproduct != null && this.newproduct != ''){
                 this.newproduct = [ ...new Set(this.newproduct) ];
                 let fd1 = new FormData();
-                fd1.append('user_id',this.getuserid);
+                fd1.append('user_id',this.getuserdataemail);
                 fd1.append('isupdate',false);
                 for (let index = 0; index < this.newimages.length; index++) {
                     fd1.append('oldimages'+index,this.newimages[index]);
                 }
                 fd1.append('imgcount', this.newimages.length );
                 fd1.append('product_data',JSON.stringify(this.newproduct));
-                // console.log(this.newproduct);
-
+                
                 await axios.post('product/createproduct',fd1).then((result) => {
-                    this.alertmsg = result.data.message;
-                    this.showalert = true;
-
                     this.$store.dispatch('setproductdata',{id:this.getuserid});
                     this.newproduct = [];
                     this.newimages = [];
-                    setTimeout(() => {
-                        this.alertmsg = '';
-                        this.showalert = false;    
-                    }, 3000);
+                    this.newimgsrc = [];
+                    this.$swal.fire('Product Data', result.data.message , 'success');
                 });
             }
+            else{
+				this.$swal.fire('Product Data', 'Product Data Updated' , 'success');
+				this.$store.dispatch('setproductdata',{id: this.getuserdataemail});
+			}
         },
 
         deleteproduct(pid){
             this.$confirm("Are you sure you want to delete?").then(() => {
                 axios.get('product/deleteproduct/'+pid).then((res)=>{
-                    this.$store.dispatch('setproductdata',{id: this.getuserid });
+                    this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
                 }).catch(()=>{});
             }).catch(()=>{
             });
@@ -274,3 +258,11 @@ export default {
 
 }
 </script>
+
+
+
+<style scoped>
+    .btncol{
+        color: white;
+    }
+</style>

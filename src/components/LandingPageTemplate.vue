@@ -52,19 +52,19 @@
 
                 <h3 class="mt-3 mb-3">Home Section</h3>
                 <div class="form_field">
-                    <label>Home Title</label>
+                    <label>Title</label>
                     <input v-if="data != null" v-model="data.page_content.hometitle"  id="htitle"  name="htitle" ref="htitle" class="" value="" type="text" placeholder="Enter Home Title" required="">
                     <input v-else id="htitle"  name="htitle" ref="htitle" class="" value="" type="text" placeholder="Enter Home Title" required="">
                 </div>
 
                 <div class="form_field">
-                    <label>Home Sub Title</label>
+                    <label>Sub Title</label>
                     <input v-if="data != null" v-model="data.page_content.homesubtitle"  id="homesubtitle"  name="homesubtitle" ref="homesubtitle" class="" value="" type="text" placeholder="Enter Home Sub Title" required="">
                     <input v-else id="homesubtitle"  name="homesubtitle" ref="homesubtitle" class="" value="" type="text" placeholder="Enter Home Sub Title" required="">
                 </div>
 
                 <div class="form_field">
-                    <label>Home Description</label>
+                    <label>Description</label>
                     <textarea v-if="data != null" v-model="data.page_content.homedesc" id="hdesc" rows="4" name="hdesc" ref="hdesc" class="" value="" placeholder="Enter Home Description" required=""></textarea>
                     <textarea v-else id="hdesc" rows="4" name="hdesc" ref="hdesc" class="" value="" placeholder="Enter Home Description" required=""></textarea>
                 </div>
@@ -109,14 +109,14 @@
                 <div class="row" v-for="(step,index) in steps" :key="index">
                     <div class="col-lg-3">
                         <div class="form_field">
-                            <label>Steps Title</label>
+                            <label>Title</label>
                             <input v-model="step.stepstitle"  name="stepstitle[]" class="" value="" type="text" placeholder="Enter Steps Title" required="">
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form_field">
-                            <label>Steps Description</label>
+                            <label>Description</label>
                             <textarea v-model="step.stepsdesc" rows="3" name="stepsdesc[]" class="" value="" placeholder="Enter Steps Description" required=""></textarea>
                         </div>
                     </div>
@@ -133,7 +133,6 @@
             <div id="cardsection">
                 <h3 class="mt-3 mb-3">Card Section</h3>
                 <h4 class="mt-3 mb-3">Card 1</h4>
-                
                 <div class="form_field">
                     <label>Title</label>
                     <input v-if="data != null" v-model="data.page_content.cardtitle1" id="ctitle1"  name="ctitle1" ref="ctitle1" class="" value="" type="text" placeholder="Enter Card Title1" required="">
@@ -206,19 +205,19 @@
                 <h3 class="mt-3 mb-3">Feature Section</h3>
                 
                 <div class="form_field">
-                    <label>Feature Title</label>
+                    <label>Title</label>
                     <input v-if="data != null" v-model="data.page_content.featuretitle" id="featuretitle"  name="featuretitle" ref="featuretitle" class="" value="" type="text" placeholder="Enter Feature Title" required="">
                     <input v-else id="featuretitle"  name="featuretitle" ref="featuretitle" class="" value="" type="text" placeholder="Enter Feature Title" required="">
                 </div>
 
                 <div class="form_field">
-                    <label>Feature Sub Title</label>
+                    <label>Sub Title</label>
                     <input v-if="data != null" v-model="data.page_content.featuresubtitle" id="featuresubtitle"  name="featuresubtitle" ref="featuresubtitle" class="" value="" type="text" placeholder="Enter Feature Title" required="">
                     <input v-else id="featuresubtitle"  name="featuresubtitle" ref="featuresubtitle" class="" value="" type="text" placeholder="Enter Feature Sub Title" required="">
                 </div>
 
                 <div class="form_field">
-                    <label>Feature Description</label>
+                    <label>Description</label>
                     <textarea v-if="data != null" v-model="data.page_content.featuredesc" id="featuredesc" rows="4" name="featuredesc" ref="featuredesc" class="" value="" placeholder="Enter Feature Description" required=""></textarea>
                     <textarea v-else id="featuredesc" rows="4" name="featuredesc" ref="featuredesc" class="" value="" placeholder="Enter Feature Description" required=""></textarea>
                 </div>
@@ -235,17 +234,17 @@
                     <input v-else id="featurebtnlink"  name="featurebtnlink" ref="featurebtnlink" class="" value="" type="text" placeholder="Enter Button Link" required="">
                 </div>
                 
-                <h4 class="mt-3 mb-3">Features Logo And Text</h4>
+                <h4 class="mt-3 mb-3">Logo And Text</h4>
                 <div class="row" v-for="(feature,index) in features" :key="index">
                     <div class="col-lg-4">
                         <div class="form_field">
-                            <label>Feature Text</label>
+                            <label>Text</label>
                             <input v-model="feature.featuretext" name="featuretitle[]" class="" value="" type="text" placeholder="Enter Feature Text" required="">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form_field">
-                            <label>Feature Logo</label>
+                            <label>Logo</label>
                             <input type="text" v-model="feature.featurelogo" name="featurelogo[]" class="" value="" placeholder="Enter Feature Logo" required="">
                         </div>
                     </div>
@@ -264,13 +263,13 @@
                 <h3 class="mt-3 mb-3">FAQ Section</h3>
                 
                 <div class="form_field">
-                    <label>FAQ Title</label>
+                    <label>Title</label>
                     <input v-if="data != null" v-model="data.page_content.faqtitle" id="faqtitle"  name="faqtitle" ref="faqtitle" class="" value="" type="text" placeholder="Enter FAQ Title" required="">
                     <input v-else id="faqtitle"  name="faqtitle" ref="faqtitle" class="" value="" type="text" placeholder="Enter FAQ Title" required="">
                 </div>
 
                 <div class="form_field">
-                    <label>FAQ Description</label>
+                    <label>Description</label>
                     <textarea v-if="data != null" v-model="data.page_content.faqdesc" id="faqdesc" rows="4" name="faqdesc" ref="faqdesc" class="" value="" placeholder="Enter FAQ Description" required=""></textarea>
                     <textarea v-else id="faqdesc" rows="4" name="faqdesc" ref="faqdesc" class="" value="" placeholder="Enter FAQ Description" required=""></textarea>
                 </div>
@@ -296,17 +295,17 @@
                 </div>
 
                 
-                <h4 class="mt-3 mb-3">FAQ Accrodian</h4>
+                <h4 class="mt-3 mb-3">Accrodian</h4>
                 <div class="row" v-for="(faq,index) in faqs" :key="index">
                     <div class="col-lg-4">
                         <div class="form_field">
-                            <label>Accrodian Text</label>
+                            <label>Text</label>
                             <input v-model="faq.title" name="faqtitle[]" class="" value="" type="text" placeholder="Enter Accrodian Title" required="">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form_field">
-                            <label>Accrodian Description</label>
+                            <label>Description</label>
                             <textarea v-model="faq.desc" name="faqdesc[]" class="" value="" placeholder="Enter Accrodian Description" required=""></textarea>
                         </div>
                     </div>
@@ -324,13 +323,13 @@
             <div id="freetrailsection">
                 <h3 class="mt-3 mb-3">Free Trail Section</h3>
                 <div class="form_field">
-                    <label>Free Trail Title</label>
+                    <label>Title</label>
                     <input v-if="data != null" v-model="data.page_content.fttitle" id="fttitle"  name="fttitle" ref="fttitle" class="" value="" type="text" placeholder="Enter Free Trail Title" required="">
                     <input v-else id="fttitle"  name="fttitle" ref="fttitle" class="" value="" type="text" placeholder="Enter Free Trail Title" required="">
                 </div>
 
                 <div class="form_field">
-                    <label>Free Trail Description</label>
+                    <label>Description</label>
                     <textarea v-if="data != null" v-model="data.page_content.ftdesc" id="ftdesc" rows="4" name="ftdesc" ref="ftdesc" class="" value="" placeholder="Enter Free Trail Description" required=""></textarea>
                     <textarea v-else id="ftdesc" rows="4" name="ftdesc" ref="ftdesc" class="" value="" placeholder="Enter Free Trail Description" required=""></textarea>
                 </div>
@@ -373,19 +372,19 @@
             <div id="reviewsection">
                 <h3 class="mt-3 mb-3">Review Section</h3>
                     <div class="form_field">
-                        <label>Review Title</label>
+                        <label>Title</label>
                         <input v-if="data != null" v-model="data.page_content.reviewtitle" id="reviewtitle"  name="reviewtitle" ref="reviewtitle" class="" value="" type="text" placeholder="Enter Review Title" required="">
                         <input v-else id="reviewtitle"  name="reviewtitle" ref="reviewtitle" class="" value="" type="text" placeholder="Enter Review Title" required="">
                     </div>
 
                     <div class="form_field">
-                        <label>Review Sub Title</label>
+                        <label>Sub Title</label>
                         <input v-if="data != null" v-model="data.page_content.reviewsubtitle" id="reviewsubtitle"  name="reviewsubtitle" ref="reviewsubtitle" class="" value="" type="text" placeholder="Enter Review Sub Title" required="">
                         <input v-else id="reviewsubtitle"  name="reviewsubtitle" ref="reviewsubtitle" class="" value="" type="text" placeholder="Enter Review Sub Title" required="">
                     </div>
 
                     <div class="form_field">
-                        <label>Review Description</label>
+                        <label>Description</label>
                         <textarea v-if="data != null" v-model="data.page_content.reviewdesc" id="reviewdesc" rows="4" name="reviewdesc" ref="reviewdesc" class="" value="" placeholder="Enter Review Description" required=""></textarea>
                         <textarea v-else id="reviewdesc" rows="4" name="reviewdesc" ref="reviewdesc" class="" value="" placeholder="Enter Review Description" required=""></textarea>
                     </div>
@@ -396,13 +395,13 @@
             <div id="contactsection">
                 <h3 class="mt-3 mb-3">Contact Section</h3>
                     <div class="form_field">
-                        <label>Contact Title</label>
+                        <label>Title</label>
                         <input v-if="data != null" v-model="data.page_content.contacttitle" id="contacttitle"  name="contacttitle" ref="contacttitle" class="" value="" type="text" placeholder="Enter Contact Title" required="">
                         <input v-else id="contacttitle"  name="contacttitle" ref="contacttitle" class="" value="" type="text" placeholder="Enter Contact Title" required="">
                     </div>
 
                     <div class="form_field">
-                        <label>Contact Description</label>
+                        <label>Description</label>
                         <textarea v-if="data != null" v-model="data.page_content.contactdesc" id="contactdesc" rows="4" name="contactdesc" ref="contactdesc" class="" value="" placeholder="Enter Contact Description" required=""></textarea>
                         <textarea v-else id="contactdesc" rows="4" name="contactdesc" ref="contactdesc" class="" value="" placeholder="Enter Contact Description" required=""></textarea>
                     </div>
@@ -474,12 +473,9 @@
                 <button type="submit" class="form_btn btn_100">Save</button>
         </div>
 
-
     </div>
 
 </form>
-
-    <div class="alert alert-success" v-if="showmsg">{{msg}}</div>
 
 </div>
 </template>
@@ -525,7 +521,7 @@ export default {
 
                 // Meta
                 this.metaimg = data.meta_image;
-                this.metaimgsrc = this.$imgpath + 'metaimgoriginal/' + data.meta_image;
+                this.metaimgsrc = this.$imgpath + 'metaimg/' + data.meta_image;
 
                 this.pagelist = JSON.parse(data.page_content.footerpages);
 
@@ -606,10 +602,6 @@ export default {
                     desc:'',
                 }
             ],
-
-
-            showmsg:false,
-            msg:'',
 
             isupdate:false,
 
@@ -839,14 +831,10 @@ export default {
             fd.append('footerpages',JSON.stringify(this.pagelist));
 
             axios.post('pages/createpage',fd).then((result) => {
-                this.showmsg = true;
-                this.msg = result.data.message;
-
+                this.$swal.fire('Data Updated', result.data.message , 'success');
                 setTimeout(() => {
-                    this.showmsg = false;
-                    this.msg = '';
                     this.$router.push('/admindashboard/pages');
-                }, 3000);
+                }, 1000);
             });
 
         }

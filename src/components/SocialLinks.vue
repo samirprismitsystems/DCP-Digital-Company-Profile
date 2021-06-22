@@ -10,7 +10,7 @@
 			<div class="tabs-stage">
 
 			    <div class="expand_tabs">
-			    	<button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+			    <router-link to="/dashboard/company" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      <div class="tab_title">
 				        <div class="h2">Add social media links</div>
 				        <div class="h4">Please fill up the your social media links</div>
@@ -22,17 +22,15 @@
 							<label class="label_icon"><i :class="social.socialmedia_logo"></i>{{social.socialmedia_name}}</label>
 							<input v-if="index < socialdata.length" name="" class="" v-model="socialdata[index].link"  type="text" :placeholder="'Add '+social.socialmedia_name" >
 							<input v-else name="" class="" v-model="newsocial[index - socialdata.length].link"  type="text" :placeholder="'Add '+social.socialmedia_name" >
-							<!-- {{index - socialdata.length}} -->
 						</div>
 
 						<div class="form_btn_field">
 							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
-							<button type="button" class=" btnNext form_btn btn_100  ">Next</button>
+							<router-link to="/dashboard/product"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
+
 			    	</form>
 			</div>
-
-			<!-- {{isupdate}} -->
 
 			<div class="alert alert-info" v-if="msgshow">{{msg}}</div>
 
@@ -66,14 +64,18 @@ export default {
 	},
 
 	computed:{
-		
+		getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
 
 		getuserid(){
             return this.$store.getters.getuserid;
         },
 		getcompanyid(){
-          return this.$store.getters.getcompanyid;
-        },
+          	let cid = this.$store.getters.getcompanyid;
+			console.log(cid);
+			return cid;
+		},
 
 		getcompanydata(){
 			let data =  this.$store.getters.getcompanydata;
@@ -129,22 +131,21 @@ export default {
 	},
 
 	created(){
-		if(this.getcompanyid == ''){
-            this.$router.push('/dashboard/company');
-        }
 		this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
 		if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
-			this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
+            this.$store.dispatch('setallsocialdata');
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
+		}
+		if(this.getcompanyid == '' ){
+            this.$router.push('/dashboard/company');
         }
 	},
 
@@ -154,39 +155,27 @@ export default {
 			let fd = new FormData();
 			
 			fd.append('socialdata',JSON.stringify(this.socialdata));
-			fd.append('user_id',this.getuserid);
+			fd.append('user_id',this.getuserdataemail);
 			fd.append('isupdate',true);
-			await axios.post('company/savesocial',fd).then((result)=>{
-				// this.msgshow = true;
-				// this.msg = result.data.message;
-				// this.$store.dispatch('setsocialdata',{id: this.getuserid});
-				// setTimeout(() => {
-				// 	this.msgshow = false;
-				// 	this.msg = '';
-				// }, 3000);
-
-				// this.$swal.fire('Data Updated', result.data.message, 'success');
-
-			});
+			if(this.socialdata != null && this.socialdata != ''){
+				await axios.post('company/savesocial',fd).then((result)=>{
+				});
+			}
 
 			if(this.newsocial.length != 0 ){
 				this.newsocial = [ ...new Set(this.newsocial) ];
-				// console.log(this.newsocial);
-
 				let fd1 = new FormData();
-				console.log(this.newsocial);
-				fd1.append('socialdata',JSON.stringify(this.newsocial));
-				fd1.append('user_id',this.getuserid);
-				fd1.append('isupdate',false);
-				await axios.post('company/savesocial',fd1).then((result)=>{
-				this.msgshow = true;
-				this.msg = result.data.message;
-				this.$store.dispatch('setsocialdata',{id: this.getuserid});
-				setTimeout(() => {
-					this.msgshow = false;
-					this.msg = '';
-				}, 3000);
-			});
+					fd1.append('socialdata',JSON.stringify(this.newsocial));
+					fd1.append('user_id',this.getuserdataemail);
+					fd1.append('isupdate',false);
+					await axios.post('company/savesocial',fd1).then((result)=>{
+						this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+						this.$swal.fire('Social Data', result.data.message , 'success');
+					});
+			}
+			else{
+				this.$swal.fire('Social Data', 'Social Data Updated' , 'success');
+				this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
 			}
 
 
@@ -195,3 +184,10 @@ export default {
 
 }
 </script>
+
+
+<style scoped>
+    .btncol{
+        color: white;
+    }
+</style>

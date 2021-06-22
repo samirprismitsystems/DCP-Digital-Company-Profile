@@ -12,6 +12,7 @@ import inquiry from './modules/inquiry'
 import user from './modules/user'
 import setting from './modules/setting'
 import pages from './modules/pages'
+import userreview from './modules/userreview'
 
 Vue.use(Vuex);
 
@@ -28,5 +29,6 @@ export default new Vuex.Store({
         user,
         setting,
         pages,
+        userreview,
     }
 });

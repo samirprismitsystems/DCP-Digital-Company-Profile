@@ -10,7 +10,7 @@
             
             <div class="tabs-stage">
             <div id="tab-3" class="expand_tabs">
-			    	<button type="button" class="btnBack  site_btn btn_000"><i class="fas fa-arrow-left"></i>Back</button>
+			    	<router-link to="/dashboard/product" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      	<div class="tab_title">
 				        <div class="h2">Add company Services</div>
 				        <div class="h4">Upload best services</div>
@@ -68,12 +68,10 @@
 
 						<div class="form_btn_field">
 							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
-							<button type="button" class=" btnNext form_btn btn_100  ">Next</button>
+							<router-link to="/dashboard/client"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
 			    	</form>
 				</div>
-
-                <div class="alert alert-info" v-if="showalert">{{alertmsg}}</div>
 
             </div>
         </div>
@@ -101,13 +99,14 @@ export default {
             imgsrcservice:[],
             newimgsrc:[],
             imgpath:this.$imgpath,
-            alertmsg:'',
-            showalert:false,
             isimgchange :false,
             imgsrcset:'',
         }
     },
     computed:{
+        getuserdataemail(){
+            return this.$store.getters.getuserdataemail;
+        },
         getuserid(){
           return this.$store.getters.getuserid;
         },
@@ -156,17 +155,16 @@ export default {
         }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
-            this.$store.dispatch('setcompanydata',{id: this.getuserid});
+            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
             this.$store.dispatch('setallsocialdata');
-            this.$store.dispatch('setsocialdata',{id: this.getuserid});
-            this.$store.dispatch('setcitiesdata');
-            this.$store.dispatch('setproductdata',{id: this.getuserid });
-            this.$store.dispatch('setservicedata',{id: this.getuserid });
-            this.$store.dispatch('setClientData',{id: this.getuserid } );
-            this.$store.dispatch('setportfolioData',{id: this.getuserid });
-            this.$store.dispatch('settestimonialData',{id: this.getuserid } );
-            this.$store.dispatch('setinquiryData',{id: this.getuserid } );
-            this.$store.dispatch('setpaymentoptions',{id:this.getuserid});
+            this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+            this.$store.dispatch('setproductdata',{id: this.getuserdataemail });
+            this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
+            this.$store.dispatch('setClientData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setportfolioData',{id: this.getuserdataemail });
+            this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
+            this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
         }
     },
 
@@ -204,7 +202,7 @@ export default {
         deleteservice(pid){
             this.$confirm("Are you sure you want to delete?").then(() => {
                 axios.get('service/deleteservice/'+pid).then((res)=>{
-                    this.$store.dispatch('setservicedata',{id: this.getuserid });
+                    this.$store.dispatch('setservicedata',{id: this.getuserdataemail });
                 }).catch(()=>{});
             }).catch(()=>{
             });
@@ -213,7 +211,7 @@ export default {
         async saveservice(){
             this.oldservice = [ ...new Set(this.oldservice) ];
             let fd = new FormData();
-            fd.append('user_id',this.getuserid);
+            fd.append('user_id',this.getuserdataemail);
             fd.append('isupdate',true);
             for (let index = 0; index < this.oldimages.length; index++) {
                 fd.append('oldimages'+index,this.oldimages[index]);
@@ -221,23 +219,15 @@ export default {
             fd.append('imgcount', this.oldimages.length );
             fd.append('service_data',JSON.stringify(this.oldservice));
             
-            await axios.post('service/createservice',fd).then((result) => {
-                // this.alertmsg = result.data.message;
-                // this.showalert = true;
-                // this.$store.dispatch('setservicedata',{id:this.getuserid});
-                //     setTimeout(() => {
-                //         this.alertmsg = '';
-                //         this.showalert = false;
-                //     }, 3000);
-
-                this.$swal.fire('Data Updated', result.data.message, 'success');
-
-            });
+            if(this.oldservice != null && this.oldservice != ''){
+                await axios.post('service/createservice',fd).then((result) => {
+                });
+            }
 
             if(this.newservice != null && this.newservice != ''){
                 this.newservice = [ ...new Set(this.newservice) ];
                 let fd1 = new FormData();
-                fd1.append('user_id',this.getuserid);
+                fd1.append('user_id',this.getuserdataemail);
                 fd1.append('isupdate',false);
                 for (let index = 0; index < this.newimages.length; index++) {
                     fd1.append('oldimages'+index,this.newimages[index]);
@@ -246,16 +236,17 @@ export default {
                 fd1.append('service_data',JSON.stringify(this.newservice));
             
                 await axios.post('service/createservice',fd1).then((result) => {
-                    this.alertmsg = result.data.message;
-                    this.showalert = true;
-                    this.$store.dispatch('setservicedata',{id:this.getuserid});
+                   
+                    this.$store.dispatch('setservicedata',{id:this.getuserdataemail});
                     this.newservice = [];
                     this.newimages = [];
-                    setTimeout(() => {
-                        this.alertmsg = '';
-                        this.showalert = false;   
-                    }, 3000);
+                    this.newimgsrc = [];
+                    this.$swal.fire('Service Data', result.data.message , 'success');
                 });
+            }
+            else{
+                this.$swal.fire('Service Data', 'Service Data Updated' , 'success');
+				this.$store.dispatch('setservicedata',{id:this.getuserdataemail});
             }
 
         },
@@ -279,4 +270,9 @@ export default {
     background-color: #ddffff;
     padding-left: 10px;
 }
+
+.btncol{
+    color: white;
+}
+
 </style>

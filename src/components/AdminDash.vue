@@ -14,6 +14,10 @@
 			    	<span>Pages</span></router-link>
 			    </li>
 
+				<li :class="checkadminclass('User Review')"><router-link :to="'/admindashboard/userreview'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/clientreview.png" width="44" height="39" alt="" title="" >
+			    	<span>User Review</span></router-link>
+			    </li>
+
 				<li :class="checkadminclass('Setting')"><router-link :to="'/admindashboard/setting'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/setting.png" width="44" height="39" alt="" title="" >
 			    	<span>Setting</span></router-link>
 			    </li>

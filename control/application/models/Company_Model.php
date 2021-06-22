@@ -34,6 +34,16 @@ class Company_Model extends CI_Model{
     }
 
 
+    public function getfrontcompanysocial($company_id){
+        $this->db->select('tbl_socialmedia.socialmedia_logo,tbl_company_sociallinks.*');
+        $this->db->from('tbl_company_sociallinks');
+        $this->db->join('tbl_socialmedia','tbl_company_sociallinks.social_id = tbl_socialmedia.socialmedia_id');
+        $this->db->where('tbl_company_sociallinks.company_id',$company_id);
+        $companysocial = $this->db->get()->result_array();
+        return $companysocial;
+    }
+
+
     public function getcitylist(){
         $this->db->select('id,name');
         $cities = $this->db->get('tbl_cities')->result_array();
@@ -201,6 +211,52 @@ class Company_Model extends CI_Model{
         }
         
     }
+
+
+    // Admin Dashboard
+    public function gettopcompany(){
+        $this->db->limit(5,0);
+        return $this->db->get('tbl_company')->result_array();
+    }
+
+    public function gettotalorders(){
+        return $this->db->get('tbl_inquiry')->num_rows();   
+    }
+
+    public function gettotalusers(){
+        return $this->db->get('tbl_users')->num_rows();   
+    }
+
+
+
+    // Company Dashboard
+    public function gettotalproduct($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_product')->num_rows();   
+    }
+
+    public function gettotalservice($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_service')->num_rows();   
+    }
+    public function gettotalclients($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_client')->num_rows();   
+    }
+
+    public function gettotalportfolio($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_portfolio')->num_rows();   
+    }
+    public function gettotaltestimonials($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_testimonial')->num_rows();   
+    }
+
+    public function gettotalinquiry($company_id){
+        $this->db->where('company_id',$company_id);
+        return $this->db->get('tbl_inquiry')->num_rows();   
+    }    
 
     
 }
