@@ -470,7 +470,7 @@
                     <textarea v-if="data != null" v-model="getsinglepagedata.meta_keywords" rows="5"  id="metakey" ref="metakey" name="metakey" class="" placeholder="Enter Meta Keywords" required=""></textarea>
                     <textarea v-else rows="5"  id="metakey" ref="metakey" name="metakey" class="" placeholder="Enter Meta Keywords" required=""></textarea>
                 </div>
-                <button type="submit" class="form_btn btn_100">Save</button>
+                <button type="submit" class="form_btn btn_100">Save <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
         </div>
 
     </div>
@@ -613,6 +613,8 @@ export default {
             ischangeseopic:false,
             
             pagelist:[],
+
+            isloading:false,
             
         }
     },
@@ -688,6 +690,7 @@ export default {
 
 
         savelandingdata(){
+            this.isloading  = true;
             let fd = new FormData();
 
             let slug = $('#mainpagetitle').val().replace(/[^a-zA-Z ]/g, "");
@@ -832,9 +835,10 @@ export default {
 
             axios.post('pages/createpage',fd).then((result) => {
                 this.$swal.fire('Data Updated', result.data.message , 'success');
+                this.isloading  = false;
                 setTimeout(() => {
                     this.$router.push('/admindashboard/pages');
-                }, 1000);
+                }, 500);
             });
 
         }

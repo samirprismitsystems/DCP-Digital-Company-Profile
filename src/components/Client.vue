@@ -61,7 +61,7 @@
 			    		<a @click="adddiv" type="button" class=" site_btn add-more-btn">Add More</a>
 
 						<div class="form_btn_field">
-							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class=" form_btn btn_200  ">Save Changes  <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
 							<router-link to="/dashboard/portfolio"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
 			    	</form>
@@ -91,7 +91,8 @@ export default {
             imgpath:this.$imgpath,
             ischangepic:false,
             newdataindex:0,
-            isimgchange:false
+            isimgchange:false,
+            isloading:false,
         }
     },
 
@@ -205,7 +206,7 @@ export default {
         },
 
         async saveclient(){
-
+            this.isloading  = true;
             this.oldclient = [ ...new Set(this.oldclient) ];
             let fd = new FormData();
             fd.append('user_id',this.getuserdataemail);
@@ -239,11 +240,13 @@ export default {
                     this.newimages = [];
                     this.newimgsrc = [];
                     this.$swal.fire('Client Data', result.data.message , 'success');
+                    this.isloading  = false;
                 });
             }
             else{
                 this.$swal.fire('Client Data', 'Client Data Updated' , 'success');
 				this.$store.dispatch('setClientData',{id:this.getuserdataemail});
+                this.isloading  = false;
             }
 
         }

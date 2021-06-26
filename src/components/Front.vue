@@ -323,7 +323,7 @@
           <div id="map" style="width: 100%; height: 25rem">
             <!-- <iframe :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyBZwDt7DaRbnnOX-Glzg7FJvZ9yCbVHkBQ&q='+getfrontdata.company.address" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
 
-          <l-map :zoom="20" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
+          <l-map :zoom="16" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
             <l-marker :lat-lng="getmarker(osmdata.lat,osmdata.lon)">
               <l-popup :content="osmdata.displayname"></l-popup>

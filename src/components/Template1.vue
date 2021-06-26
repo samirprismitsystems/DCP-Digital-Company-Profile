@@ -59,7 +59,7 @@
                     <textarea rows="5" v-else id="metakey" ref="metakey" name="metakey" class="" placeholder="Enter Meta Keywords" required=""></textarea>
                 </div>
 
-                <button type="submit" class="form_btn btn_100">Save</button>
+                <button type="submit" class="form_btn btn_100">Save <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
             </form>
             
     </div>
@@ -80,7 +80,8 @@ export default {
             metaimg:null,
             imgsrc:'',
             ischangepic:false,
-            isdata:0
+            isdata:0,
+            isloading:false,
         }
     },
 
@@ -124,6 +125,8 @@ export default {
 
 
         savepage(){
+            this.isloading  = true;
+
             let fd = new FormData();
             
             let slug = $('#mainpagetitle').val().replace(/[^a-zA-Z ]/g, "");
@@ -157,9 +160,10 @@ export default {
 
             axios.post('pages/createpage',fd).then((result) => {
                 this.$swal.fire('Data Saved', result.data.message , 'success');    
+                this.isloading  = false;
                 setTimeout(() => {
                     this.$router.push('/admindashboard/pages');
-                }, 1000);
+                }, 500);
             });
 
 

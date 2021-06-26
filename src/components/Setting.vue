@@ -103,7 +103,7 @@
 
                                     
 
-                                    <button type="submit" class="form_btn btn_100">Save</button>
+                                    <button type="submit" class="form_btn btn_100">Save <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
                                 </form>
                             </div>
 
@@ -121,7 +121,7 @@
                                         <label class="" for="user_id">After Body Tag</label>
                                         <textarea rows="5" v-if="getpagedata[7].setting_name == 'after_body_ganalytics'" :value="getpagedata[7].setting_value" id="afterbody" ref="afterbody" name="afterbody" class="" placeholder="After Body Tag Analytics Code" required=""></textarea>
                                     </div>
-                                    <button type="submit" class="form_btn btn_100">Save</button>
+                                    <button type="submit" class="form_btn btn_100">Save <i v-if="isloadingga" class="fas fa-spinner fa-pulse"></i></button>
                                 </form>
 
                             </div>
@@ -158,12 +158,13 @@ export default {
             sitelogo:null,
             imgsrc:'',
             ischangepic:false,
-            pagelist:[]
+            pagelist:[],
+            isloading:false,
+            isloadingga:false,
         }
     },
 
     computed:{
-
         getpagesdata(){
             let data =  this.$store.getters.getpagesdata;
             data.forEach(element => {
@@ -212,7 +213,7 @@ export default {
     methods:{
 
     savesitesetting(){
-
+        this.isloading = true;
         // console.log(this.pagelist);
 
         let fd = new FormData();
@@ -234,10 +235,12 @@ export default {
         axios.post('sitesetting/savesetting',fd).then((result) => {
             this.$store.dispatch('setsettingdata');
             this.$swal.fire('Data Saved', result.data.message, 'success');
+            this.isloading = false;
         });
     },
 
     savegoogleanalytics(){
+        this.isloading = true;
         let fd = new FormData();
         fd.append('before_body',this.$refs.beforebody.value);
         fd.append('after_body',this.$refs.afterbody.value);
@@ -245,6 +248,7 @@ export default {
         axios.post('sitesetting/savegoogleanalytics',fd).then((result) => {
             this.$store.dispatch('setsettingdata');
             this.$swal.fire('Google Analytics Data Saved', result.data.message, 'success');
+            this.isloading = false;
         });
     },
 

@@ -62,7 +62,7 @@
 			    		<a @click="adddiv" type="button" class=" site_btn add-more-btn">Add More</a>
 
 						<div class="form_btn_field">
-							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class=" form_btn btn_200  "> Save Changes <i v-if="isloading" class="fas fa-spinner fa-pulse"></i> </button>
 							<router-link to="/admindashboard/pages"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
 						</div>
 			    	</form>
@@ -85,6 +85,7 @@ export default {
             oldsocial:[],
             newsocial:[],
             imgpath:this.$imgpath,
+            isloading:false,
         }
     },
     components:{
@@ -159,6 +160,7 @@ export default {
 
 
         async savesocial(){
+            this.isloading  = true;
             this.oldsocial = [ ...new Set(this.oldsocial) ];
             
             let fd = new FormData();
@@ -181,10 +183,12 @@ export default {
                     this.newsocial = [];
                     this.newimages = [];
                     this.$swal.fire('Data Saved', result.data.message, 'success');
+                    this.isloading  = false;
                 });
             }
             else{
                 this.$swal.fire('Data Updated', 'Social Data Updated' , 'success');
+                this.isloading  = false;
             }
         }
     }

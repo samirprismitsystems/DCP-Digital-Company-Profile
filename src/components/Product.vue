@@ -68,7 +68,7 @@
 			    		<a @click="adddiv" type="button" class=" site_btn add-more-btn">Add More</a>
 
 						<div class="form_btn_field">
-							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class=" form_btn btn_200  ">Save Changes <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
 							<router-link to="/dashboard/service"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
 			    	</form>
@@ -98,7 +98,8 @@ export default {
             imgpath:this.$imgpath,
             ischangepic:false,
             newdataindex:0,
-            isimgchange:false
+            isimgchange:false,
+            isloading:false,
         }
     },
     components:{
@@ -205,6 +206,8 @@ export default {
         },
 
         async saveproduct(){
+            this.isloading  = true;
+
             this.oldproduct = [ ...new Set(this.oldproduct) ];
             
             let fd = new FormData();
@@ -238,11 +241,13 @@ export default {
                     this.newimages = [];
                     this.newimgsrc = [];
                     this.$swal.fire('Product Data', result.data.message , 'success');
+                    this.isloading  = false;
                 });
             }
             else{
 				this.$swal.fire('Product Data', 'Product Data Updated' , 'success');
 				this.$store.dispatch('setproductdata',{id: this.getuserdataemail});
+                this.isloading  = false;
 			}
         },
 

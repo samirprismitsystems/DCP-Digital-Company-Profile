@@ -25,16 +25,15 @@
 						</div>
 
 						<div class="form_btn_field">
-							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class=" form_btn btn_200  ">Save Changes  <i v-if="isloading" class="fas fa-spinner fa-pulse"></i> </button>
 							<router-link to="/dashboard/product"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
 
 			    	</form>
 			</div>
 
-			<div class="alert alert-info" v-if="msgshow">{{msg}}</div>
-
-				</div>
+		
+		</div>
 
 
         </div>
@@ -57,9 +56,8 @@ export default {
 		return{
 			socialdata:[],
 			newsocial:[],
-			msg:'',
-			msgshow:false,
-			isupdate:false
+			isupdate:false,
+			isloading:false,
 		}
 	},
 
@@ -152,7 +150,8 @@ export default {
 
 	methods:{
 		async savesocialdata(){
-			
+			this.isloading  = true;
+
 			let fd = new FormData();
 			
 			fd.append('socialdata',JSON.stringify(this.socialdata));
@@ -174,11 +173,13 @@ export default {
 					await axios.post('company/savesocial',fd1).then((result)=>{
 						this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
 						this.$swal.fire('Social Data', result.data.message , 'success');
+						this.isloading  = false;
 					});
 			}
 			else{
 				this.$swal.fire('Social Data', 'Social Data Updated' , 'success');
 				this.$store.dispatch('setsocialdata',{id: this.getuserdataemail});
+				this.isloading  = false;
 			}
 
 

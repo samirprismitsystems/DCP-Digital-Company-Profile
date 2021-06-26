@@ -46,7 +46,31 @@
 									<input name="cemail" ref="cemail" class="" v-model="getpagedata.company[0].company_email" type="email" placeholder="Enter Your Emial" required>
 								</div>
 			    			</div>
-			    			
+
+                            <!-- LOGO  -->
+                            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-5 col-10 logo-col private_img_col">
+			    				<div class="upload_private_img_box logo_img_box">
+			    					<div v-if="imgsrc == ''" class="upload_here">
+			    						<img id="get_img" class="upload_img" src="" alt="image" style="display: none;" />
+			    						<div class="placeholder_tex">
+			    							<h3>Please Upload Here Your Company</h3>
+			    							<h2>LOGO</h2>
+			    						</div>
+			    					</div>
+
+                                    <div v-else class="upload_here">
+			    						<img id="get_img" class="upload_img" :src="imgsrc" alt="image" />
+			    					</div>
+
+			    					<p class="red" >Image Required* 250KB max size</p>
+			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
+			    						<input type='file' @change="changepic" class="choose" />
+			    					Upload logo file
+			    					</div>
+			    				</div>
+							</div>
+
+                            <!-- BANNER -->
 			    			<div class="col-xl-3 col-lg-3 col-md-5 col-sm-5 col-10 logo-col private_img_col">
 			    				<div class="upload_private_img_box logo_img_box">
 			    					<div v-if="imgbannersrc == ''" class="upload_here">
@@ -69,27 +93,7 @@
 			    				</div>
 							</div>
 
-                            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-5 col-10 logo-col private_img_col">
-			    				<div class="upload_private_img_box logo_img_box">
-			    					<div v-if="imgsrc == ''" class="upload_here">
-			    						<img id="get_img" class="upload_img" src="" alt="image" style="display: none;" />
-			    						<div class="placeholder_tex">
-			    							<h3>Please Upload Here Your Company</h3>
-			    							<h2>LOGO</h2>
-			    						</div>
-			    					</div>
-
-                                    <div v-else class="upload_here">
-			    						<img id="get_img" class="upload_img" :src="imgsrc" alt="image" />
-			    					</div>
-
-			    					<p class="red" >Image Required* 250KB max size</p>
-			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
-			    						<input type='file' @change="changepic" class="choose" />
-			    					Upload logo file
-			    					</div>
-			    				</div>
-							</div>
+                            
 
 			    		</div>
                         
@@ -141,7 +145,7 @@
                         </div>
 
 						<div class="form_btn_field">
-							<button type="submit" class="form_btn btn_200">Save Changes</button>
+							<button type="submit" class="form_btn btn_200"> Save Changes  <i v-if="isloading" class="fas fa-spinner fa-pulse"></i> </button>
 							<router-link :to="'/dashboard/sociallinks'" tag="button" :disabled="isnext" type="button" class="btnNext  form_btn btn_100  ">Next</router-link>
 						</div>
 			    	</form>
@@ -174,6 +178,7 @@ export default {
     },
     data(){
         return{
+            isloading:false,
             workingdays:'',
             isnext:true,
             path:'',
@@ -340,6 +345,8 @@ export default {
 
         addcompanydata(){
             
+            this.isloading  = true;
+
             let fd = new FormData();
             let slug = this.$refs.cname.value.replace(/[^a-zA-Z ]/g, "");
             let company_slug = slug.replace(" ","-").replace(/\s+/g, '').toLowerCase(); 
@@ -386,9 +393,11 @@ export default {
                     if(this.isupdate == false){
                         this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
                         this.$store.dispatch('setallsocialdata');
+                        this.isloading  = false;
                     }
                     else{
                         this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
+                        this.isloading  = false;
                     }
                    this.$swal.fire('Company Data', response.data.message , 'success');
             });

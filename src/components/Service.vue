@@ -67,7 +67,7 @@
 			    		<a @click="adddiv" type="button" class=" site_btn add-more-btn">Add More</a>
 
 						<div class="form_btn_field">
-							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class=" form_btn btn_200  ">Save Changes <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
 							<router-link to="/dashboard/client"  class=" btnNext form_btn btn_100 btncol ">Next</router-link>
 						</div>
 			    	</form>
@@ -101,6 +101,7 @@ export default {
             imgpath:this.$imgpath,
             isimgchange :false,
             imgsrcset:'',
+            isloading:false,
         }
     },
     computed:{
@@ -209,6 +210,7 @@ export default {
         },
 
         async saveservice(){
+            this.isloading  = true;
             this.oldservice = [ ...new Set(this.oldservice) ];
             let fd = new FormData();
             fd.append('user_id',this.getuserdataemail);
@@ -242,11 +244,13 @@ export default {
                     this.newimages = [];
                     this.newimgsrc = [];
                     this.$swal.fire('Service Data', result.data.message , 'success');
+                    this.isloading  = false;
                 });
             }
             else{
                 this.$swal.fire('Service Data', 'Service Data Updated' , 'success');
 				this.$store.dispatch('setservicedata',{id:this.getuserdataemail});
+                this.isloading  = false;
             }
 
         },

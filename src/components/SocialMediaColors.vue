@@ -23,7 +23,7 @@
                                 <input id="socialcolor" ref="socialcolor" name="socialcolor" class="" value="" type="text" placeholder="Enter Social Media Color Class" required="">
                             </div>
                         </div>
-                        <button type="submit" class="form_btn btn_100 btn-left ">Save</button>
+                        <button type="submit" class="form_btn btn_100 btn-left ">Save <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
                     </form>
 
                     <div class="mt-5">
@@ -44,7 +44,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a class="btncol form_btn btn_100" @click="updatesocialcolors">Update</a>
+                            <a class="btncol form_btn btn_100" @click="updatesocialcolors">Update <i v-if="isloadingupdate" class="fas fa-spinner fa-pulse"></i></a>
                     </div>
 
                 </div>
@@ -64,6 +64,8 @@ export default {
     data(){
         return{
             socialdata:[],
+            isloading:false,
+            isloadingupdate:false
         }
     },
     components:{
@@ -114,6 +116,7 @@ export default {
         },
 
         async createsocialcolor(){
+            this.isloading  = true;
             let fd = new FormData();
             fd.append('socialmedia_color_name',this.$refs.socialcolor.value);
 
@@ -121,10 +124,12 @@ export default {
                 this.$store.dispatch('setsocialcolordata');
                 this.$swal.fire('Data Saved', result.data.message, 'success');
                 this.$refs.socialcolor.value = '';
+                this.isloading  = false;
             });
         },
 
         async updatesocialcolors(){
+            this.isloadingupdate  = true;
             this.socialdata = [ ...new Set(this.socialdata) ];
             let fd = new FormData();
             
@@ -133,6 +138,7 @@ export default {
             await axios.post('company/updatesocialmediacolor',fd).then((result) => {
                 this.$store.dispatch('setsocialcolordata');
                 this.$swal.fire('Data Saved', result.data.message, 'success');
+                this.isloadingupdate  = false;
             });
         },
 

@@ -28,7 +28,7 @@
                             <textarea id="userreview" rows="4" name="userreview" ref="userreview" class="" value="" placeholder="Enter User Review" required=""></textarea>
                         </div>
                     	
-						<button type="submit" class="form_btn btn_100 btn-left ">Save</button>
+						<button type="submit" class="form_btn btn_100 btn-left ">Save <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
 					</form>
 
                     
@@ -53,9 +53,14 @@ export default {
     components:{
         AdminDash
     },
-
+    data(){
+        return{
+            isloading:false,
+        }
+    },
     methods:{
         reviewadd(){
+            this.isloading  = true;
             let fd = new FormData();
             fd.append('user_name',this.$refs.username.value);
             fd.append('user_message',this.$refs.userreview.value);
@@ -64,7 +69,9 @@ export default {
             axios.post('user/addreview',fd).then((result)=>{
                 this.$store.dispatch('setuserreviewdata');
                 this.$swal.fire('Data Saved', result.data.message , 'success');
+                this.isloading  = false;
                 this.$router.push("/admindashboard/userreview");
+                
             });
 
         }

@@ -61,7 +61,7 @@
 			    		<a @click="adddiv" type="button" class=" site_btn add-more-btn">Add More</a>
 
 						<div class="form_btn_field">
-							<button type="submit" class=" form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class=" form_btn btn_200  ">Save Changes <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
 							<router-link to="/dashboard/testimonial"  class=" btnNext form_btn btn_100 btncol">Next</router-link>
 						</div>
 
@@ -90,7 +90,8 @@ export default {
             imgsrcport:[],
             newimgsrc:[],
             imgpath:this.$imgpath,
-            isimgchange :false
+            isimgchange :false,
+            isloading:false,
         }
     },
     components:{
@@ -202,6 +203,7 @@ export default {
         },
 
         async saveportfolio(){
+            this.isloading  = true;
             this.oldportfolio = [ ...new Set(this.oldportfolio) ];
             let fd = new FormData();
             fd.append('user_id',this.getuserdataemail);
@@ -234,11 +236,13 @@ export default {
                     this.newimages = [];
                     this.newimgsrc = [];
                     this.$swal.fire('Portfolio Data', result.data.message , 'success');
+                    this.isloading  = false;
                 });
             }
             else{
                 this.$swal.fire('Portfolio Data', 'Portfolio Data Updated' , 'success');
 				this.$store.dispatch('setportfolioData',{id:this.getuserdataemail});
+                this.isloading  = false;
             }
 
         },

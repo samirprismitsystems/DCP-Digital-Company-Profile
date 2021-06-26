@@ -100,7 +100,7 @@
 						</div>
 						
 						<div class="form_btn_field">
-							<button type="submit" class="form_btn btn_200  ">Save Changes</button>
+							<button type="submit" class="form_btn btn_200  ">Save Changes <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
 							<router-link to="/dashboard/enquiry"  class=" btnNext form_btn btn_100 mt-5 btncol">Next</router-link>
 						</div>
 
@@ -134,6 +134,7 @@ export default {
 			ischangepic:false,
 			qrcode:null,
 			logo:'',
+			isloading:false,
         }
     },
 
@@ -201,6 +202,8 @@ export default {
         },
 
         savepaymentoptions(){
+			this.isloading  = true;
+
             let fd = new FormData();
             fd.append('paytm_number',this.$refs.paytm.value);
             fd.append('googlepay_number',this.$refs.gpay.value);
@@ -230,6 +233,7 @@ export default {
             axios.post('company/savepaymentoptions',fd).then((result) => {
                 this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
                 this.$swal.fire('Data Saved', result.data.message, 'success');
+				this.isloading  = false;
             });
             
         }
