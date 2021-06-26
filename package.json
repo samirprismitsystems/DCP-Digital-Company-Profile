@@ -12,10 +12,12 @@
   "dependencies": {
     "axios": "^0.21.1",
     "jquery": "^3.6.0",
+    "leaflet": "^1.7.1",
     "moment": "^2.29.1",
     "regenerator-runtime": "^0.13.7",
     "select2": "^4.1.0-rc.0",
     "v-select2-component": "^0.4.7",
+    "vcards-js": "^2.10.0",
     "vue": "^2.5.11",
     "vue-cookies": "^1.7.4",
     "vue-loading-overlay": "^4.0.2",
@@ -25,7 +27,9 @@
     "vue-simple-alert": "^1.1.1",
     "vue-star-rating": "^1.7.0",
     "vue-sweetalert2": "^4.3.1",
+    "vue-vcard": "^1.0.2",
     "vue2-editor": "^2.10.2",
+    "vue2-leaflet": "^2.7.0",
     "vuex": "^3.6.2"
   },
   "browserslist": [

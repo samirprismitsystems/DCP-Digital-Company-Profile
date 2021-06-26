@@ -47,7 +47,9 @@ export default {
     },
 
     created(){
-        this.$store.dispatch('setsettingdata');
+        // if(getpagereq == 0){
+            // this.$store.dispatch('setsettingdata');
+        // }
     }
 }
 </script>

@@ -25,13 +25,22 @@ Vue.use(VueCookies)
 // set default config
 Vue.$cookies.config(60*10,sitemainpath)
 
+import { Icon } from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.imagePath = '.';
+Icon.Default.mergeOptions({
+  iconRetinaUrl: '/src/frontassets/img/marker-icon-2x.png',
+  iconUrl: '/src/frontassets/img/marker-icon.png',
+  shadowUrl: '/src/frontassets/img/marker-shadow.png'
+});
 
 Vue.prototype.$imgpath = window.location.origin+'/control/upload/';
 Vue.prototype.$linkpath = window.location.origin+'/src/assets/';
 
 
 
-axios.defaults.baseURL = "http://localhost"+sitemainpath+"control/api/";
+axios.defaults.baseURL = window.location.protocol+"//"+window.location.hostname+sitemainpath+"control/api/";
 
 new Vue({
   el: '#app',

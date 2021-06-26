@@ -5,16 +5,20 @@
 
       	<AdminDash />
 
-		<div class=" right_sidebar_content"  v-if="getpagereq == 1">
+		<div class=" right_sidebar_content"  v-if="getpagereq == 1 && getsocialcolorreq == 1">
 			<div class="tabs-stage">
 
                 <div class="expand_tabs">
 
                 <router-link to="/admindashboard/companylist" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
-			      	<div class="tab_title">
+
+                    <div class="tab_title">
 				        <div class="h2">Add Social Media Data</div>
 				        <div class="h4">Upload Social Media For Company</div>
 			    	</div>
+
+                    <router-link to="/admindashboard/addsocialcolors" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-plus"></i>Add Social Media Color Class</router-link>
+
 			    	<form id="" @submit.prevent="savesocial()"  class="social_form company_items form_shadow">
 			    		<div class="row" id="divdata">
 			    		
@@ -26,10 +30,13 @@
 			    				<div class="text-center">
 			    					<i :class="oldsocial[index].socialmedia_logo+' fab-lg'"></i>
 			    				</div>
-			    				<div>
+			    				<div class="">
 			    					<input type="text" name="social-name" v-model="oldsocial[index].socialmedia_name" class="item-input" placeholder="Enter social Name">
 			    					<input type="text" name="social-icon" v-model="oldsocial[index].socialmedia_logo" class="item-input" placeholder="Enter social Logo Class">
-			    				</div>	
+                                    <select class="mt-3" name="social-icon-color" v-model="oldsocial[index].socialmedia_color">
+                                        <option v-for="(socialcolor,index) in getsocialcolordata" :key="index" :value="socialcolor.socialmedia_color_id">{{socialcolor.socialmedia_color_name}}</option>
+                                    </select>
+                                </div>	
 			    			</div>
 			    		</div>
 
@@ -44,7 +51,10 @@
 			    				<div>
 			    					<input type="text" name="social-name" v-model="nsocial.socialmedia_name" class="item-input" placeholder="Enter social Name">
 			    					<input type="text" name="social-icon" v-model="nsocial.socialmedia_logo" class="item-input" placeholder="Enter social Logo Class">
-			    				</div>	
+                                    <select class="mt-3" name="social-icon-color" v-model="nsocial.socialmedia_color">
+                                        <option v-for="(socialcolor,index) in getsocialcolordata" :key="index" :value="socialcolor.socialmedia_color_id">{{socialcolor.socialmedia_color_name}}</option>
+                                    </select>
+                                </div>	
 			    			</div>
 			    		</div>
 			    		
@@ -84,6 +94,7 @@ export default {
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getcompanypagereq == 0){
             this.$store.dispatch('setpagesdata');
+            this.$store.dispatch('setsocialcolordata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setuserreviewdata',{data:'all'});
@@ -91,6 +102,15 @@ export default {
     },
 
     computed:{
+
+        getsocialcolordata(){
+            let data =  this.$store.getters.getsocialcolors;
+            return data;
+        },
+        
+        getsocialcolorreq(){
+            return this.$store.getters.getsocialcolorsreq;
+        },
         
         getcompanypagereq(){
             return this.$store.getters.getallcompanyreq;
@@ -109,6 +129,7 @@ export default {
             });
                 this.oldsocial = [ ...new Set(this.oldsocial) ];
             }
+            // console.log(this.oldsocial);
             return data;
         }
     },
@@ -123,6 +144,7 @@ export default {
             this.newsocial.push({
                 socialmedia_logo:'',
                 socialmedia_name:'',
+                socialmedia_color:'',
             });
         },
 
@@ -140,7 +162,6 @@ export default {
             this.oldsocial = [ ...new Set(this.oldsocial) ];
             
             let fd = new FormData();
-            fd.append('user_id',this.getuserid);
             fd.append('isupdate',true);
             fd.append('social_data',JSON.stringify(this.oldsocial));
             
@@ -152,7 +173,6 @@ export default {
             if(this.newsocial != null && this.newsocial != ''){
                 this.newsocial = [ ...new Set(this.newsocial) ];
                 let fd1 = new FormData();
-                fd1.append('user_id',this.getuserid);
                 fd1.append('isupdate',false);
                 fd1.append('social_data',JSON.stringify(this.newsocial));
                 

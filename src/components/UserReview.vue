@@ -129,6 +129,7 @@ export default {
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
             this.$store.dispatch('setuserreviewdata',{data:'all'});
+            this.$store.dispatch('setsocialcolordata');
             this.$store.dispatch('setpagesdata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');

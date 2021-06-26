@@ -47,7 +47,8 @@ export default {
         axios.get('pages/getsinglepage/'+this.slug).then((result)=>{
             // console.log(result);
             if(result.data.page == ''){
-                this.$router.push({name:'frontpage', params: {companyslug:this.$route.params.pageslug} });
+                // this.$router.push({name:'frontpage', params: {companyslug:this.$route.params.pageslug} });
+                this.$router.push('/');
             }
             else{
                 if(result.data.page.template_name == 'landingpage_template'){

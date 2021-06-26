@@ -35,9 +35,10 @@ class Company_Model extends CI_Model{
 
 
     public function getfrontcompanysocial($company_id){
-        $this->db->select('tbl_socialmedia.socialmedia_logo,tbl_company_sociallinks.*');
+        $this->db->select('tbl_socialmedia.socialmedia_logo,tbl_socialmedia_color.socialmedia_color_name as socialmedia_color,tbl_company_sociallinks.*');
         $this->db->from('tbl_company_sociallinks');
         $this->db->join('tbl_socialmedia','tbl_company_sociallinks.social_id = tbl_socialmedia.socialmedia_id');
+        $this->db->join('tbl_socialmedia_color','tbl_socialmedia.socialmedia_color = tbl_socialmedia_color.socialmedia_color_id');
         $this->db->where('tbl_company_sociallinks.company_id',$company_id);
         $companysocial = $this->db->get()->result_array();
         return $companysocial;
@@ -59,7 +60,7 @@ class Company_Model extends CI_Model{
         else{
             $this->db->where('company_id',$company_id);
             if($socialdata = $this->db->get('tbl_company_sociallinks')->result_array()){
-                $this->db->select('tbl_company_sociallinks.*,tbl_socialmedia.socialmedia_name,tbl_socialmedia.socialmedia_logo');
+                $this->db->select('tbl_company_sociallinks.*,tbl_socialmedia.socialmedia_name,tbl_socialmedia.socialmedia_logo,tbl_socialmedia.socialmedia_color');
                 $this->db->from('tbl_socialmedia');
                 $this->db->join('tbl_company_sociallinks','tbl_socialmedia.socialmedia_id = tbl_company_sociallinks.social_id');
                 $this->db->where('tbl_company_sociallinks.company_id',$company_id);
@@ -67,8 +68,9 @@ class Company_Model extends CI_Model{
                 return $data;
             }
             else{
-                $social = $this->db->get('tbl_socialmedia')->result_array();
-                return $social;
+                // $social = $this->db->get('tbl_socialmedia')->result_array();
+                // return $social;
+                return false;
             }    
         }
     }
@@ -105,8 +107,9 @@ class Company_Model extends CI_Model{
         return $insert_id;
     }
 
-    public function updatelogo($company_id,$logo){
+    public function updatelogo($company_id,$logo,$banner){
         $this->db->set('company_logo',$logo);
+        $this->db->set('company_banner',$banner);
         $this->db->where('company_id',$company_id);
         return $this->db->update('tbl_company');
     }
@@ -140,7 +143,7 @@ class Company_Model extends CI_Model{
 
 
     public function getcompanybyslug($companyslug){
-        $this->db->where('company_name',$companyslug);
+        $this->db->where('company_slug',$companyslug);
         $company = $this->db->get('tbl_company')->row_array();
         return $company;
     }
@@ -167,11 +170,16 @@ class Company_Model extends CI_Model{
         return $this->db->insert_batch('tbl_socialmedia',$data);
     }
 
+    public function createsocialcolor($data){
+        return $this->db->insert('tbl_socialmedia_color',$data);
+    }
+
     public function updatesocial($socialdata){
         $update = 0;
         foreach ($socialdata as $value) {
             $this->db->set('socialmedia_name',$value['socialmedia_name']);
             $this->db->set('socialmedia_logo',$value['socialmedia_logo']);
+            $this->db->set('socialmedia_color',$value['socialmedia_color']);
             $this->db->where('socialmedia_id',$value['socialmedia_id']);
             if($this->db->update('tbl_socialmedia')){
                 $update = 0;
@@ -189,6 +197,35 @@ class Company_Model extends CI_Model{
         }
     }
 
+    public function updatesocialcolor($socialdata){
+        $update = 0;
+        foreach ($socialdata as $value) {
+            $this->db->set('socialmedia_color_name',$value['socialmedia_color_name']);
+            $this->db->where('socialmedia_color_id',$value['socialmedia_color_id']);
+            if($this->db->update('tbl_socialmedia_color')){
+                $update = 0;
+            }
+            else{
+                $update = 1;
+            }
+        }
+
+        if($update == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function getsocialcolors(){
+        return $this->db->get('tbl_socialmedia_color')->result_array();
+    }
+
+    public function deletesocialcolordata($socialcolor_id){
+        $this->db->where('socialmedia_color_id',$socialcolor_id);
+        return $this->db->delete('tbl_socialmedia_color');
+    }
 
     public function deletesocialdata($social_id){
         $this->db->where('socialmedia_id',$social_id);
@@ -230,31 +267,43 @@ class Company_Model extends CI_Model{
 
 
     // Company Dashboard
-    public function gettotalproduct($company_id){
-        $this->db->where('company_id',$company_id);
+    public function gettotalproduct($company_id = NULL){
+        if($company_id != NULL){
+            $this->db->where('company_id',$company_id);
+        }
         return $this->db->get('tbl_product')->num_rows();   
     }
 
-    public function gettotalservice($company_id){
-        $this->db->where('company_id',$company_id);
+    public function gettotalservice($company_id = NULL){
+        if($company_id != NULL){
+            $this->db->where('company_id',$company_id);
+        }
         return $this->db->get('tbl_service')->num_rows();   
     }
-    public function gettotalclients($company_id){
-        $this->db->where('company_id',$company_id);
+    public function gettotalclients($company_id = NULL){
+        if($company_id != NULL){
+            $this->db->where('company_id',$company_id);
+        }
         return $this->db->get('tbl_client')->num_rows();   
     }
 
-    public function gettotalportfolio($company_id){
-        $this->db->where('company_id',$company_id);
+    public function gettotalportfolio($company_id = NULL){
+        if($company_id != NULL){
+            $this->db->where('company_id',$company_id);
+        }
         return $this->db->get('tbl_portfolio')->num_rows();   
     }
-    public function gettotaltestimonials($company_id){
-        $this->db->where('company_id',$company_id);
+    public function gettotaltestimonials($company_id = NULL){
+        if($company_id != NULL){
+            $this->db->where('company_id',$company_id);
+        }
         return $this->db->get('tbl_testimonial')->num_rows();   
     }
 
-    public function gettotalinquiry($company_id){
-        $this->db->where('company_id',$company_id);
+    public function gettotalinquiry($company_id = NULL){
+        if($company_id != NULL){
+            $this->db->where('company_id',$company_id);
+        }
         return $this->db->get('tbl_inquiry')->num_rows();   
     }    
 

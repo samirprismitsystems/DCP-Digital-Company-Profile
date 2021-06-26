@@ -73,7 +73,7 @@ export default {
         },
 		getcompanyid(){
           	let cid = this.$store.getters.getcompanyid;
-			console.log(cid);
+			// console.log(cid);
 			return cid;
 		},
 
@@ -99,7 +99,8 @@ export default {
 
 			let allsocial =  this.$store.getters.getallsocialdata;
 			let data = this.getsocialdata;
-			if(allsocial.length != 0 && data.length != 0){
+			
+			if(allsocial.length != 0){
 				let index = 0;
 				allsocial.forEach( element => {
 				index++;
@@ -157,6 +158,7 @@ export default {
 			fd.append('socialdata',JSON.stringify(this.socialdata));
 			fd.append('user_id',this.getuserdataemail);
 			fd.append('isupdate',true);
+
 			if(this.socialdata != null && this.socialdata != ''){
 				await axios.post('company/savesocial',fd).then((result)=>{
 				});
@@ -164,6 +166,7 @@ export default {
 
 			if(this.newsocial.length != 0 ){
 				this.newsocial = [ ...new Set(this.newsocial) ];
+				console.log(this.newsocial);
 				let fd1 = new FormData();
 					fd1.append('socialdata',JSON.stringify(this.newsocial));
 					fd1.append('user_id',this.getuserdataemail);

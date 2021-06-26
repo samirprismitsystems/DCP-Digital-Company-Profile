@@ -16,7 +16,7 @@
 
                    <div class="container mt-5">
                     <div class="row">
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-3 col-sm-6">
                             <div class="counter">
                                 <div class="counter-icon">
                                     <i class="fa fa-user"></i>
@@ -25,7 +25,7 @@
                                 <h3>Total Users</h3>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-3 col-sm-6">
                             <div class="counter blue">
                                 <div class="counter-icon">
                                     <i class="fa fa-box-open"></i>
@@ -35,8 +35,71 @@
                             </div>
                         </div>
 
+                        <div class="col-md-3 col-sm-6">
+                            <div class="counter gray">
+                                <div class="counter-icon">
+                                    <i class="fa fa-box"></i>
+                                </div>
+                                <span class="counter-value">{{getdashdata.product}}</span>
+                                <h3>Total Product</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="counter pink">
+                                <div class="counter-icon">
+                                    <i class="fa fa-cogs"></i>
+                                </div>
+                                <span class="counter-value">{{getdashdata.service}}</span>
+                                <h3>Total Service</h3>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+                <div class="row mt-5">
+
+                     <div class="col-md-3 col-sm-6">
+                            <div class="counter lpurple">
+                                <div class="counter-icon">
+                                  <i class="fa fa-user-friends"></i>
+                                </div>
+                                <span class="counter-value">{{getdashdata.clients}}</span>
+                                <h3>Total Clients</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="counter dpink">
+                                <div class="counter-icon">
+                                  <i class="fa fa-images"></i>
+                                </div>
+                                <span class="counter-value">{{getdashdata.portfolio}}</span>
+                                <h3>Total Portfolios</h3>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-3 col-sm-6">
+                            <div class="counter purple">
+                                <div class="counter-icon">
+                                  <i class="fa fa-quote-right"></i>
+                                </div>
+                                <span class="counter-value">{{getdashdata.testimonials}}</span>
+                                <h3>Total Testimonials</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="counter green">
+                                <div class="counter-icon">
+                                  <i class="fa fa-question-circle"></i>
+                                </div>
+                                <span class="counter-value">{{getdashdata.inquiry}}</span>
+                                <h3>Total Inquires</h3>
+                            </div>
+                        </div>
+                    </div>
 
                 <div class="container row companytable mt-5 justify-content-center">
                 <h3 class="mt-5 col-md-8">Top 5 Companies</h3>
@@ -97,7 +160,6 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         this.$store.dispatch('setadmindashdata');
-        
     },
 
 
@@ -176,6 +238,69 @@ export default {
     border-bottom-color: #4accdb;
     border-left-color: #4accdb;
 }
+
+
+/* gray */
+.counter.gray{
+    color: #a8a8a8;
+    border-color: #a8a8a8;
+}
+.counter.gray:after{
+    border-bottom-color: #a8a8a8;
+    border-left-color: #a8a8a8;
+}
+
+/* Pink */
+.counter.pink{
+    color: #ff1c86;
+    border-color: #ff1c86;
+}
+.counter.pink:after{
+    border-bottom-color: #ff1c86;
+    border-left-color: #ff1c86;
+}
+
+/* black */
+.counter.purple{
+    color: #c2a9ff;
+    border-color: #c2a9ff;
+}
+.counter.purple:after{
+    border-bottom-color: #c2a9ff;
+    border-left-color: #c2a9ff;
+}
+
+/* Green */
+.counter.green{
+    color: #132c33;
+    border-color: #132c33;
+}
+.counter.green:after{
+    border-bottom-color: #132c33;
+    border-left-color: #132c33;
+}
+
+
+/* light Purple */
+.counter.lpurple{
+    color: #9b82ae;
+    border-color: #9b82ae;
+}
+.counter.lpurple:after{
+    border-bottom-color: #9b82ae;
+    border-left-color: #9b82ae;
+}
+
+/* dark pink */
+.counter.dpink{
+    color: #A52A2A;
+    border-color: #A52A2A;
+}
+.counter.dpink:after{
+    border-bottom-color: #A52A2A;
+    border-left-color: #A52A2A;
+}
+
 
 @media screen and (max-width:990px){
     .counter{ margin-bottom: 40px; }

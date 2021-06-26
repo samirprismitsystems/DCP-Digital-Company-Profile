@@ -43,7 +43,7 @@
 			    					<p class="red" >Image Required* 250KB max size</p>
 			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
 			    						<input type='file' @change="changepic($event)" class="choose" />
-			    					Upload logo file
+			    					Upload Qr Code
 			    					</div>
 			    				</div>
 							</div>	

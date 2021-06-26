@@ -37,7 +37,7 @@ import CustomPage from './components/CustomPage'
 import UserReview from './components/UserReview'
 import UserReviewAdd from './components/UserReviewAdd'
 import UserReviewEdit from './components/UserReviewEdit'
-
+import SocialMediaColors from './components/SocialMediaColors'
 
 Vue.use(VueRouter);
 
@@ -76,9 +76,10 @@ const router = new VueRouter({
         {path:'/admindashboard/userreview',component:UserReview, meta: {title:'User Review', isadmindash:true} },
         {path:'/admindashboard/adduserreview',component:UserReviewAdd, meta: {title:'Add User Review', isadmindash:true} },
         {path:'/admindashboard/edituserreview/:rid',component:UserReviewEdit, meta: {title:'Edit User Review', isadmindash:true} },
+        {path:'/admindashboard/addsocialcolors',component:SocialMediaColors, meta: {title:'Add Social Media Colors', isadmindash:true} },
 
-        {path:'/:pageslug',component:CustomPage, meta: {title:'Page', ispage:true } },
         {path:'/:companyslug', name:'frontpage',  component:Front ,meta: {title:'Front' , isdash:false , isfront:true } },
+        {path:'/:pageslug', name:'custompage' ,component:CustomPage, meta: {title:'Page', ispage:true } },
         {path:'/',component:LandingPage, meta: {title:'Digital Company Profile' , isdash:false , islanding : true} },
         
     ]

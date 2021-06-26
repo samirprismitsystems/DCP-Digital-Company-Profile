@@ -233,7 +233,7 @@ export default {
                 fd1.append('product_data',JSON.stringify(this.newproduct));
                 
                 await axios.post('product/createproduct',fd1).then((result) => {
-                    this.$store.dispatch('setproductdata',{id:this.getuserid});
+                    this.$store.dispatch('setproductdata',{id:this.getuserdataemail});
                     this.newproduct = [];
                     this.newimages = [];
                     this.newimgsrc = [];

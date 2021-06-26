@@ -262,6 +262,10 @@ input:focus, textarea:focus, a:focus, button:focus {
 .social-links .social-link.tumblr-icon {
   background-color: #34465d;
 }
+.social-links .social-link.whats-icon {
+  background-color: #25d366;
+}
+
 .block-title {
   background-color: var(--primary);
   padding: 1rem;

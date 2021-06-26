@@ -15,7 +15,10 @@ const state = {
     allcompany:[],
     allcompanyreq:0,
     allsocialreq:0,
-    allsocialdata:[]
+    allsocialdata:[],
+
+    socialcolorreq:0,
+    socialcolors:[],
 };
 
 const getters = {
@@ -37,6 +40,10 @@ const getters = {
     getcompanylist:(state) => (page) => {
         return state.allcompany.slice( ((2*page) - 2) ,page*2)
     },
+
+    getsocialcolors:(state) => state.socialcolors,
+    getsocialcolorsreq:(state) => state.socialcolorreq,
+
     };
 
 const actions = {
@@ -57,6 +64,13 @@ const actions = {
     async setsocialdata({commit},user){
         CompanyApi.getsocialdata(user.id,result => {
             commit('SETSOCIAL',result.data.social);
+        });
+    },
+
+    async setsocialcolordata({commit}){
+        CompanyApi.getsocialcolordata(result => {
+            commit('SETSOCIALCOLOR',result.data.socialcolor);
+            commit('SETSOCIALCOLORREQ',1);
         });
     },
     
@@ -113,6 +127,8 @@ const mutations = {
     SETALLCOMPANYREQUEST:(state,payload)=> (state.allcompanyreq = payload),
     SETALLSOCIAL:(state,payload)=> (state.allsocialdata = payload),
     SETALLSOCIALREQUEST:(state,payload)=> (state.allsocialreq = payload),
+    SETSOCIALCOLOR:(state,payload)=> (state.socialcolors = payload),
+    SETSOCIALCOLORREQ:(state,payload)=> (state.socialcolorreq = payload),
 };
 
 export default {

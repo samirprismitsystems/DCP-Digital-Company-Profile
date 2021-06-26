@@ -101,6 +101,7 @@ export default {
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getcompanypagereq == 0){
             this.$store.dispatch('setpagesdata');
+            this.$store.dispatch('setsocialcolordata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setuserreviewdata',{data:'all'});

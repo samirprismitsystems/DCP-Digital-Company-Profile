@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   /*1. back_to_top*/
 
-  jQuery('.back_to_top').click(function() {
+  jQuery('.back_to_top').on('click',function() {
     jQuery('html, body').animate({
       scrollTop: 0
     }, 1500);
@@ -52,19 +52,19 @@ $(document).ready(function() {
 
 
   /*3.fixed navbar*/
-  // $('#share').on('click', () => {
-  //   if (navigator.share) {
-  //     navigator.share({
-  //         title: 'Web Share API Draft',
-  //         text: 'Take a look at this spec!',
-  //         url: 'https://wicg.github.io/web-share/#share-method',
-  //       })
-  //       .then(() => console.log('Successful share'))
-  //       .catch((error) => console.log('Error sharing', error));
-  //   } else {
-  //     console.log('Share not supported on this browser, do it the old way.');
-  //   }
-  // });
+  $('#share').on('click', () => {
+    if (navigator.share) {
+      navigator.share({
+          title: 'Web Share API Draft',
+          text: 'Take a look at this spec!',
+          url: 'https://wicg.github.io/web-share/#share-method',
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    } else {
+      console.log('Share not supported on this browser, do it the old way.');
+    }
+  });
 
   /*5.lazyLoad*/
 

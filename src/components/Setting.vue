@@ -73,21 +73,16 @@
                                         <input name="siteemail" v-if="getpagedata[8].setting_name == 'site_email'" :value="getpagedata[8].setting_value" ref="siteemail" class="" type="text" placeholder="Add Site Email Address" >
                                     </div>
 
-                                     <div class="form_field">
+                                     <!-- <div class="form_field">
                                         <label class="" for="">Select Footer Pages</label>
                                         <select name="pagelist" v-model="pagelist" id="pagelist" multiple>
                                             <option :value="page.page_id" v-for="(page,index) in getpagesdata" :key="index">{{page.page_name}}</option>
                                         </select>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form_field">
                                         <label class="" for="">Select Footer Pages</label>
-                                        <Select2 v-model="getdata" :options="options" :settings="{ allowClear: true, placeholder: 'Select Footer Pages', multiple:true}" />
-                                        <!-- <select v-model="getdata" multiple class="js-example-basic-single" name="state">
-                                            <option value="AL">Alabama</option>
-                                            <option value="WY">Wyoming</option>
-                                            </select> -->
-                                        <h4>Value: {{ getdata }}</h4>
+                                        <Select2 v-model="pagelist" :options="options" :settings="{ allowClear: true, placeholder: 'Select Footer Pages', multiple:true}" />   
                                     </div>
 
 
@@ -188,6 +183,7 @@ export default {
         getpagedata(){
             let data =  this.$store.getters.getsettingdata;
             if(data.length != 0){
+                this.getpagesdata;
                 this.imgsrc = this.$imgpath+'setting/'+ data[0].setting_value;
                 this.pagelist = JSON.parse(data[9].setting_value);
             }
@@ -205,6 +201,7 @@ export default {
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getcompanypagereq == 0){
             this.$store.dispatch('setpagesdata');
+            this.$store.dispatch('setsocialcolordata');
             this.$store.dispatch('setallcompanydata');
             this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setuserreviewdata',{data:'all'});

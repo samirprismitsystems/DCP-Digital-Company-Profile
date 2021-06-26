@@ -463,22 +463,28 @@ export default {
 
         axios.get('pages/getsinglepage/landing-page').then((result)=>{
           // console.log(result.data);
-          // this.data = result.data;
+          this.data = result.data.page;
+          // console.log(this.data);
           this.pagedata = result.data.page_content;
           this.steps = JSON.parse(result.data.page_content.steps);
           this.features = JSON.parse(result.data.page_content.logoandtext);
           this.accordion = JSON.parse(result.data.page_content.accordian);
           this.pages = JSON.parse(result.data.page_content.footerpages);
-          // console.log(this.pages);
           this.isdata = 1;
-
+          
           let pagelist = new FormData();
           pagelist.append('pages[]',this.pages);
           axios.post('pages/getsomepagedata',pagelist).then((result) => {
             this.footerpagesdata = result.data.pages;
           });
 
-        
+          document.getElementsByTagName("META")['title'].content = this.data.meta_title;
+          document.getElementsByTagName("META")['keywords'].content = this.data.meta_keywords;
+          document.getElementsByTagName("META")['description'].content = this.data.meta_description;
+          document.querySelector("meta[property='og:title']").content = this.data.meta_title;
+          document.querySelector("meta[property='og:description']").content = this.data.meta_description;
+          document.querySelector("meta[property='og:image']").content = this.$imgpath + 'metaimg/' + this.data.meta_image;
+
         });
 
     },

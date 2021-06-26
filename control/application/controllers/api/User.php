@@ -296,11 +296,23 @@ class User extends REST_Controller {
 		$companydata = $this->Company_Model->gettopcompany();
 		$orders = $this->Company_Model->gettotalorders();
 		$users = $this->Company_Model->gettotalusers();
+		$product = $this->Company_Model->gettotalproduct();
+		$service = $this->Company_Model->gettotalservice();
+		$clients = $this->Company_Model->gettotalclients();
+		$portfolio = $this->Company_Model->gettotalportfolio();
+		$testimonials = $this->Company_Model->gettotaltestimonials();
+		$inquiry = $this->Company_Model->gettotalinquiry();
 
 			$output['error'] = false;
 			$output['company'] = $companydata;
 			$output['orders'] = $orders;
 			$output['users'] = $users;
+			$output['product'] = $product;
+			$output['service'] = $service;
+			$output['clients'] = $clients;
+			$output['portfolio'] = $portfolio;
+			$output['testimonials'] = $testimonials;
+			$output['inquiry'] = $inquiry;
 			$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 

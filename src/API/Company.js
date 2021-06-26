@@ -19,6 +19,12 @@ export default{
         });
     },
 
+    getsocialcolordata(cb){
+        axios.get('company/fetchsocialcolor').then((response)=>{
+            cb(response);
+        });
+    },
+
     getcompanyfront(slug,cb){
         axios.get('company/fetchcompanyfront/'+slug).then((response)=>{
             cb(response);

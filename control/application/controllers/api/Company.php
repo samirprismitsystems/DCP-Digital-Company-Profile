@@ -55,7 +55,8 @@ class Company extends REST_Controller {
 	public function createcompany_post(){
 		$data = $this->input->post();
 
- 		$uploadphoto = 'demo';
+ 		$uploadphoto = 'logo';
+ 		$uploadbanner = 'banner';
 
  		if($data['isupdate'] == 'true'){
  			$companyid = $data['company_id'];
@@ -66,7 +67,9 @@ class Company extends REST_Controller {
 		$company_field = array(
 			'user_id'		=> $user_id,
             'company_name' => $data['company_name'],
+            'company_slug' => $data['company_slug'],
             'company_logo' => $uploadphoto,
+            'company_banner' => $uploadbanner,
             'company_desc' => $data['company_desc'],
             'established_in'=> $data['established_in'],
             'business_segment' => $data['business_segment'],
@@ -77,6 +80,8 @@ class Company extends REST_Controller {
             'working_hours_day' => $data['working_hours_day'],
             'working_hours_from' => $data['working_hours_from'],
             'working_hours_to' => $data['working_hours_to'],
+            'map_lat' => $data['map_lat'],
+            'map_lng' => $data['map_lng'],
         );
 
 		if($data['isupdate'] == 'true'){
@@ -90,20 +95,16 @@ class Company extends REST_Controller {
 
 		if(!empty($_FILES['company_logo']['name'])){
 		    
-		    // $sourcepath = './upload/'.$companyid.'/logooginal/';
-        	$targetpath = './upload/'.$companyid.'/logo/';
-		 //    if (!is_dir($sourcepath)) {
-			// 	mkdir($sourcepath,0777,TRUE);
-			// }
-
-			if (!is_dir($targetpath)) {
+		    $targetpath = './upload/'.$companyid.'/logo/';
+		 	if (!is_dir($targetpath)) {
 				mkdir($targetpath,0777,TRUE);
 			}
 
 		    $config['upload_path']   = $targetpath;
 		    $config['allowed_types'] = "*";
 
-		    $this->load->library('upload',$config);
+		    $this->load->library('upload');
+			$this->upload->initialize($config);
 			$this->load->library('image_lib');
 
 			$path = pathinfo($_FILES["company_logo"]["name"]);
@@ -156,7 +157,73 @@ class Company extends REST_Controller {
 			$uploadphoto = $data['logo'];
 		}
 
-		if($this->Company_Model->updatelogo($companyid,$uploadphoto)){
+
+		if(!empty($_FILES['company_banner']['name'])){
+		    
+		    $targetpath = './upload/'.$companyid.'/banner/';
+		 	if (!is_dir($targetpath)) {
+				mkdir($targetpath,0777,TRUE);
+			}
+
+		    $config['upload_path']   = $targetpath;
+		    $config['allowed_types'] = "*";
+
+		    $this->load->library('upload');
+		    $this->upload->initialize($config);
+			$this->load->library('image_lib');
+
+			$path = pathinfo($_FILES["company_banner"]["name"]);
+			$filename = $path['filename'].'_'.time();
+			$_FILES["company_banner"]["name"] = $filename.'.webp';
+			$fileext = $path['extension'];
+			
+			if ($this->upload->do_upload('company_banner')) {
+				$uploadData = $this->upload->data();
+			   	$uploadbannerphoto = $uploadData['file_name'];
+			}else{
+			    echo $this->upload->display_errors();
+			}
+
+			if($fileext != 'webp'){
+				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')  
+		        	$url = "https://";   
+			    else  
+			        $url = "http://";   
+			    if($_SERVER['HTTP_HOST'] == 'localhost'){
+			    	$url.= $_SERVER['HTTP_HOST'].':8080';
+			    }
+			    else{
+			    	$url.= $_SERVER['HTTP_HOST'];
+			    }
+
+	         	$target_path = $url.'/control/upload/'.$companyid.'/banner/'.$uploadData['raw_name'].$uploadData['file_ext'];
+	         	
+	         	switch ($fileext) {
+		            case 'jpeg':
+		            case 'jpg':
+		                $im = imagecreatefromjpeg($target_path);
+		                break;
+
+		            case 'png':
+		                $im = imagecreatefrompng($target_path);
+		                break;
+
+		            case 'gif':
+		                $im = imagecreatefromgif($target_path);
+		                break;
+		            default:
+		                return false;
+		        }
+				imagewebp($im, './upload/'.$companyid.'/banner/'.$uploadData['raw_name'].'.webp' , 60);
+			}
+
+		}
+		else{
+			$uploadbannerphoto = $data['banner'];
+		}
+
+
+		if($this->Company_Model->updatelogo($companyid,$uploadphoto,$uploadbannerphoto)){
 			if($data['isupdate'] == 'true'){
 				$output['error'] = false;
 			    $output['message'] = "Company Data Updated";
@@ -200,8 +267,9 @@ class Company extends REST_Controller {
 		}
 		else{
 			$output['error'] = true;
-            $output['message'] = "social data fetched failed";
-            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+			$output['social'] = [];
+            $output['message'] = "empty social data";
+            $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 
@@ -382,6 +450,7 @@ class Company extends REST_Controller {
 
  		$social_fields = array();
  		$i = 0;
+
 	 	foreach (json_decode($data['socialdata']) as $value) {
 	 		if($data['isupdate'] == 'true'){
 	 			$social_fields[$i]['company_social_id'] = $value->company_social_id;
@@ -441,30 +510,48 @@ class Company extends REST_Controller {
 			    $config['upload_path']   = $targetpath;
 			    $config['allowed_types'] = "*";
 			    $this->load->library('upload',$config);
-				$path = pathinfo($_FILES["qrcode"]["name"]);
 
+				$path = pathinfo($_FILES["qrcode"]["name"]);
 				$filename = $path['filename'].'_'.time();
 				$_FILES["qrcode"]["name"] = $filename.'.webp';
+				$fileext = $path['extension'];
 				               
 				if ($this->upload->do_upload('qrcode')) {
 					$uploadData = $this->upload->data();
 		            $uploadphoto = $uploadData['file_name'];
 				}
 
-				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-			        $url = "https://";   
-			    else  
-			        $url = "http://";   
-			    if($_SERVER['HTTP_HOST'] == 'localhost'){
-			    	$url.= $_SERVER['HTTP_HOST'].':8080';
-			    }
-			    else{
-			    	$url.= $_SERVER['HTTP_HOST'];
-			    }
+				if($fileext != 'webp'){
+					if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+				        $url = "https://";   
+				    else  
+				        $url = "http://";   
+				    if($_SERVER['HTTP_HOST'] == 'localhost'){
+				    	$url.= $_SERVER['HTTP_HOST'].':8080';
+				    }
+				    else{
+				    	$url.= $_SERVER['HTTP_HOST'];
+				    }
 
-	         	$target_path = $url.'/control/upload/'.$companyid.'/qrcode/'.$uploadData['raw_name'].$uploadData['file_ext'];
-	         	$im = imagecreatefrompng($target_path);
-				imagewebp($im, './upload/'.$companyid.'/qrcode/'.$filename.'.webp' , 80);
+		         	$target_path = $url.'/control/upload/'.$companyid.'/qrcode/'.$uploadData['raw_name'].$uploadData['file_ext'];
+		         	switch ($fileext) {
+			            case 'jpeg':
+			            case 'jpg':
+			                $im = imagecreatefromjpeg($target_path);
+			                break;
+
+			            case 'png':
+			                $im = imagecreatefrompng($target_path);
+			                break;
+
+			            case 'gif':
+			                $im = imagecreatefromgif($target_path);
+			                break;
+			            default:
+			                return false;
+			        }
+					imagewebp($im, './upload/'.$companyid.'/qrcode/'.$filename.'.webp' , 80);
+				}
 			}
 			else{
 				$uploadphoto = $data['logo'];
@@ -520,9 +607,26 @@ class Company extends REST_Controller {
 	}
 
 
+	public function fetchsocialcolor_get(){
+		if($socialcolor = $this->Company_Model->getsocialcolors()){
+			$output['error'] = false;
+			$output['socialcolor'] = $socialcolor;
+			$output['message'] = "Socialcolor Data Fetched";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = false;
+			$output['socialcolor'] = [];
+			$output['message'] = "Empty Socialcolor Data ";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}
+
+
 	public function createsocial_post(){
 		$data = $this->input->post();
 		$social_field = array();
+
  		$i = 0;
 	 	foreach (json_decode($data['social_data']) as $value) {
 		 	if($data['isupdate'] == 'true'){
@@ -530,6 +634,7 @@ class Company extends REST_Controller {
 		 	}
 		 	$social_field[$i]['socialmedia_name'] = $value->socialmedia_name;
 		 	$social_field[$i]['socialmedia_logo'] = $value->socialmedia_logo;
+		 	$social_field[$i]['socialmedia_color'] = $value->socialmedia_color;
 	 		$i++;
 	 	}
 
@@ -559,6 +664,56 @@ class Company extends REST_Controller {
         }
 	}
 
+	public function createsocialmediacolor_post(){
+		$data = $this->input->post();
+	
+			if($this->Company_Model->createsocialcolor($data)){
+				$output['error'] = false;
+			    $output['message'] = "Socialcolor Data Saved";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+	            $output['message'] = "Socialcolor Data Saved failed";
+	            $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+			}        	
+	}
+
+	public function updatesocialmediacolor_post(){
+		$data = $this->input->post();
+		$social_field = array();
+
+ 		$i = 0;
+	 	foreach (json_decode($data['socialcolor_data']) as $value) {
+		 	$social_field[$i]['socialmedia_color_id'] = $value->socialmedia_color_id;
+		 	$social_field[$i]['socialmedia_color_name'] = $value->socialmedia_color_name;
+	 		$i++;
+	 	}
+
+        if($this->Company_Model->updatesocialcolor($social_field)){
+			$output['error'] = false;
+			$output['message'] = "Social Data Updated";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+	        $output['message'] = "Social Data Updation failed";
+	        $this->set_response($output, REST_Controller::HTTP_NOT_FOUND);
+		}     	
+	}
+
+	public function deletesocialcolor_get($socialcolor_id){
+		if($this->Company_Model->deletesocialcolordata($socialcolor_id)){
+			$output['error'] = false;
+			$output['message'] = "SocialColor Data Deleted";
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+	        $output['message'] = "This class is in used";
+	        $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}
 
 
 	public function deletesocial_get($social_id){

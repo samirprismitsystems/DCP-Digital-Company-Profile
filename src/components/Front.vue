@@ -26,17 +26,19 @@
 
 
 
-<div class="container-fluid p-0 " id="" v-if="getpagerequest == 1">
+<div class="container-fluid p-0 " id="" v-if="getpagerequest == 1 && getfrontdata.company != null && getfrontdata.company != '' ">
   <section id="profile" class="profile-section">
     <div class="container h-100 ">
       <div class="row profile-row">
         <div class=" col-12 text-center">
-            <div class="store-logo"> <img :src="imgpath+getfrontdata.company.company_id+'/logo/'+getfrontdata.company.company_logo" width="62" height="49" alt="logo" title="logo-img"  class="img-responsive" /> </div>
+            <div class="store-logo"> 
+              <img :src="imgpath+getfrontdata.company.company_id+'/logo/'+getfrontdata.company.company_logo" width="62" height="49" alt="logo" title="logo-img"  class="img-responsive" />
+            </div>
           <!-- <div class="store-logo"> <img src="/src/frontassets/img/logo.png" width="62" height="49" alt="logo" title="logo-img"  class="img-responsive" /> </div> -->
         </div>
         <div class="col-12 text-center">
           <h1 class="store-name">{{getfrontdata.company.company_name}}</h1>
-          <h4 class="store-tagline">“ {{getfrontdata.company.business_segment}} ”</h4>
+          <h4 class="store-tagline">“{{getfrontdata.company.business_segment}}”</h4>
         </div>
       </div>
     </div>
@@ -60,39 +62,31 @@
           <p>Mail</p>
         </div>
         <div class="col-3 contact-link">
-          <div @click="sharelink('link')" class="link-icon share-icon"  id="share"> <i class="fas fa-share-square" ></i> </div>
+          <div @click="sharelink()" class="link-icon share-icon" > <i class="fas fa-share-square" ></i> </div>
           <p>Share</p>
         </div>
-        <div class="col-3 contact-link"> <a href="nitin_patel.vcf" class="link-icon save-icon" download > <i class="fas fa-save" ></i> </a>
+        <div class="col-3 contact-link"> <a @click="savevcard()" class="link-icon save-icon" > <i class="fas fa-save" ></i> </a>
           <p>Save</p>
         </div>
       </div>
     </div>
     <div class="container"> 
-      <!--			whatsapp share-->
+      <!--	  	whatsapp share     -->
       <div class="whatsapp-share-form">
         <form action="https://api.whatsapp.com/send" id="wtsp_share" target="_blank">
-          <!--				<label>+91</label>-->
           <input type="text" name="phone" placeholder="WhatsApp Number with Country code	" value="+91">
           <input type="hidden" name="text" :value="companyurl">
           <button type="submit" class="wtsp_share_btn">Share <i class="fab fa-whatsapp"></i> </button>
         </form>
-       
       </div>
       
       <!--			Follow us-->
-      <div class="follow-us-block mt-30">
+      <div class="follow-us-block mt-30" v-if="getfrontdata.social != null && getfrontdata.social != ''">
         <h3 class="text-center titleClr">Follow Us On</h3>
-        <div class="social-links"> 
-          <a v-for="(social,index) in getfrontdata.social" :key="index" href="#!" class="social-link fb-icon">
+        <div class="social-links">
+          <a target="_blank" v-for="(social,index) in getfrontdata.social" :key="index" :href="social.link" :class="social.socialmedia_color">
             <i :class="social.socialmedia_logo"></i>
           </a> 
-          <!-- <a href="#!" class=" social-link twt-icon"><i class="fab fa-twitter"></i></a> 
-          <a href="#!" class=" social-link insta-icon"><i class="fab fa-instagram"></i></a>
-          <a href="#!" class=" social-link in-icon"><i class="fab fa-linkedin-in"></i></a> 
-          <a href="#!" class=" social-link yt-icon"><i class="fab fa-youtube"></i></a> 
-          <a href="#!" class=" social-link tele-icon"><i class="fab fa-telegram-plane" ></i></a> 
-          <a href="#!" class=" social-link tumblr-icon"><i class="fab fa-tumblr" ></i></a>  -->
         </div>
       </div>
       
@@ -104,23 +98,26 @@
         <div class="content-box">
           <p><strong> Since  {{ dateformat(getfrontdata.company.established_in) }} </strong></p>
           <p>{{getfrontdata.company.company_desc}}</p>
+          <p><strong> Working Days - {{ workingdays(getfrontdata.company.working_hours_day) }} </strong></p>
+          <p><strong> From Time - {{ timeformat(getfrontdata.company.working_hours_from) }} </strong></p>
+          <p><strong> To Time - {{ timeformat(getfrontdata.company.working_hours_to) }} </strong></p>
         </div>
       </div>
 
-      <div class="product-block " id="products">
+  <!--			Product -->
+      <div class="product-block " id="products" v-if="getfrontdata.product != null && getfrontdata.product != ''">
         <div class="block-title mt-30 mb-30">
           <h3 class="">Product</h3>
         </div>
         <div class="row">
           <div class="owl-carousel owl-theme product-slider"> 
-          
             <div class="item" v-for="(product,index) in getfrontdata.product" :key="index">
               <div class="content-box product-box">
                 <div class="product-img"> <img :data-src="imgpath+getfrontdata.company.company_id+'/product/'+product.product_image" width="156" height="190" alt="product-img" title="product-img" class="lazyload "> </div>
                 <div class="product-info">
                   <h4 class="product-title">{{product.product_name}}</h4>
                   <p class="product-description"> {{product.product_desc}} </p>
-                  <div class="product-action"> <span class="product-price">Rs. {{new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(product.product_price)}} </span> <a href="#" class="site_btn">Buy Now</a> </div>
+                  <div class="product-action"> <span class="product-price">Rs. {{new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(product.product_price)}} </span> </div>
                 </div>
               </div>
             </div>
@@ -130,29 +127,50 @@
       </div>
       
       <!--			Services-->
-      <div class="services-block " id="services">
+      <div class="services-block " id="services"  v-if="getfrontdata.service != null && getfrontdata.service != ''">
         <div class="block-title mt-30 mb-30">
           <h3 class="">Services</h3>
         </div>
         <div class="row">
-          <div class="owl-carousel owl-theme services-slider"> 
-            
+          <div class="owl-carousel owl-theme services-slider">
             <div class="item" v-for="(service,index) in getfrontdata.service" :key="index">
               <div class="content-box services-box">
                 <div class="services-img"> <img :data-src="imgpath+getfrontdata.company.company_id+'/service/'+service.service_image" width="298" height="199"  alt="services-img" title="services-img" class="lazyload img-fluid"> </div>
                 <div class="services-info">
-                  <h4 class="services-title titleClr"> {{service.service_name}} </h4>
+                  <h4 class="services-title titleClr"> {{service.service_name}}  </h4>
                   <p class="services-description">{{service.service_desc}}</p>
+                  <p> Rs. {{new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(service.service_price)}} </p>
                 </div>
               </div>
             </div>
-            
+          </div>
+        </div>
+      </div>
+
+
+      <!--			Client  -->
+
+      <div class="product-block " id="products"  v-if="getfrontdata.client != null && getfrontdata.client != ''">
+        <div class="block-title mt-30 mb-30">
+          <h3 class="">Clients</h3>
+        </div>
+        <div class="row">
+          <div class="owl-carousel owl-theme product-slider"> 
+            <div class="item" v-for="(client,index) in getfrontdata.client" :key="index">
+              <div class="content-box product-box">
+                <div class="product-img"> <img :data-src="imgpath+getfrontdata.company.company_id+'/client/'+client.client_logo" width="156" height="190" alt="product-img" title="product-img" class="lazyload "> </div>
+                <div class="product-info">
+                  <h4 class="product-title"> {{client.client_name}} </h4>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       
+      
       <!--		Gallery-->
-      <div class="gallery-block " id="gallery">
+      <div class="gallery-block " id="gallery" v-if="getfrontdata.portfolio != null && getfrontdata.portfolio != ''">
         <div class="block-title mt-30 mb-30">
           <h3 class="">Gallery</h3>
         </div>
@@ -166,14 +184,15 @@
           </div>
         </div>
       </div>
-      
+
+  
       <!--		payment-info-->
-      <div class="payment-info-block " id="payment-info">
+      <div class="payment-info-block " id="payment-info" v-if="getfrontdata.paymentinfo != null && getfrontdata.paymentinfo != ''">
         <div class="block-title mt-30 mb-30">
           <h3 class="">Payment Info</h3>
         </div>
         <div class="row"> 
-          <!--					google pay-->
+          <!--	google pay  -->
           <div class="col-12">
             <div class="pay-detail"> <span class="app-name">Google Pay</span>
               <div class="link-icon google-icon"> <img data-src="/src/frontassets/img/google-pay.png" width="35" height="30" alt="Digital Profile" title="Digital Profile" class="lazyload "/> </div>
@@ -209,6 +228,20 @@
               </div>
             </div>
           </div>
+
+          <!-- QR Code -->
+          <div class="col-12" v-if="getfrontdata.paymentinfo.qrcode != null && getfrontdata.paymentinfo.qrcode != ''">
+            <div class="pay-detail"> <span class="app-name">Qr Code</span>
+              <div class="link-icon google-icon"> <img data-src="/src/frontassets/img/qrcode.png" width="35" height="12" alt="Digital Profile" title="Digital Profile" class="lazyload "/> </div>
+              <div class="pay-info">
+                <dl>
+                  <dt>Qr Code .:&nbsp;</dt>
+                  <dd> <img :src="imgpath+getfrontdata.company.company_id+'/qrcode/'+getfrontdata.paymentinfo.qrcode" width="150" height="150" /> </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+
           <!--					bank info-->
           <div class="col-12">
             <div class="content-box bank-info">
@@ -236,19 +269,15 @@
           <h3 class="">Feedback</h3>
         </div>
         <!--				comments-->
-        <div class="comments">
+        <div class="comments" v-if="getfrontdata.testimonial != null">
           
           <div class="comment-item" v-for="(testimonialdata,index) in getfrontdata.testimonial" :key="index">
             <h5 class="user-name primary">{{testimonialdata.client_name}}</h5>
             <div class="ratings">
               <div class="rat-stars">
                 <span v-for="(ratting,index) in parseInt(testimonialdata.ratting)" :key="index" class="rating-star" ><i class="fas fa-star" ></i></span> 
-                <!-- <span class="rating-star" ><i class="fas fa-star" ></i></span>
-                <span class="rating-star" ><i class="fas fa-star" ></i></span>
-                <span class="rating-star" ><i class="fas fa-star" ></i></span>
-                <span class="rating-star" ><i class="fas fa-star" ></i></span> -->
               </div>
-              <span class="comment-date"> {{ datedayformat(testimonialdata.created_on) }} days ago </span> </div>
+              <span class="comment-date"> {{ datedayformat(testimonialdata.created_on) }} </span> </div>
             <p class="comment-text"> {{testimonialdata.comment}} </p>
           </div>
          
@@ -256,9 +285,13 @@
         <div class="content-box feedback-box">
           <h3 class="text-center">Give Your Feedback</h3>
           <form @submit.prevent="addtestimonial" id="feedback-form" class="form">
-            <p style="margin-left:40%" class="star-ratings mb-4">
-            <star-rating :show-rating="false" :glow="10" :star-size="30" v-model="boundRating"></star-rating>
-            </p>
+            <div class="row justify-content-center">
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="star-ratings mb-4">
+                  <star-rating :show-rating="false" :glow="10" :star-size="30" v-model="boundRating"></star-rating>
+                </p>
+              </div>
+            </div>
             <input type="text"  id="name" ref="name" name="name" placeholder="Enter Your Name" required>
             <input type="email" id="email" ref="email" name="email" placeholder="Enter Your Email" required>
             <textarea name="comment" ref="comment" placeholder="Enter Your Feedback" rows="5" required></textarea>
@@ -285,22 +318,33 @@
       </div>
       
       <!--			 Direction-->
-      <div class="direction-block mt-30" id=" direction">
+      <div class="direction-block mt-30" id=" direction" v-if="ismapdata == 1">
         <div class="content-box direction-box p-0">
           <div id="map" style="width: 100%; height: 25rem">
-            <iframe :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyBZwDt7DaRbnnOX-Glzg7FJvZ9yCbVHkBQ&q='+getfrontdata.company.address" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <!-- <iframe :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyBZwDt7DaRbnnOX-Glzg7FJvZ9yCbVHkBQ&q='+getfrontdata.company.address" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
+
+          <l-map :zoom="20" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
+            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+            <l-marker :lat-lng="getmarker(osmdata.lat,osmdata.lon)">
+              <l-popup :content="osmdata.displayname"></l-popup>
+            </l-marker>
+          </l-map>
+
+
            </div>
         </div>
       </div>
+
+
     </div>
   </div>
 </div>
 
 <ul class="bottom-nav fixed-bottom">
-  <a href="#back" class="site-link back_to_top"> <i class="far fa-arrow-alt-circle-up" ></i> <span>Back to top</span> </a>
+  <a class="site-link back_to_top"> <i class="far fa-arrow-alt-circle-up" ></i> <span>Back to top</span> </a>
   <a href="#about-us" class="site-link scroll-to"> <i class="far fa-user-circle" ></i> <span>About-us</span> </a>
-  <a href="#products" class="site-link scroll-to"> <i class="fas fa-shopping-basket" ></i> <span>Products</span> </a>
-  <a href="#gallery" class="site-link scroll-to"> <i class="far fa-images" ></i> <span>Gallery</span> </a>
+  <a v-if="getfrontdata.product != null && getfrontdata.product != ''" href="#products" class="site-link scroll-to"> <i class="fas fa-shopping-basket" ></i> <span>Products</span> </a>
+  <a  v-if="getfrontdata.portfolio != null && getfrontdata.portfolio != ''" href="#gallery" class="site-link scroll-to"> <i class="far fa-images" ></i> <span>Gallery</span> </a>
   <a href="#feedback" class="site-link scroll-to"> <i class="far fa-comment-dots"></i> <span>Feedback</span> </a>
 </ul>
 
@@ -316,7 +360,10 @@
 import axios from 'axios'
 import StarRating from 'vue-star-rating'
 import moment from 'moment'
-// import DashData from './DashData'
+import L from 'leaflet';
+import { LMap, LTileLayer, LMarker,LPopup } from 'vue2-leaflet';
+// import vCardsJS from 'vcards-js'
+
 export default {
     name:'Front',
     data(){
@@ -334,11 +381,25 @@ export default {
             ],
             getdata:[],
             companyurl:window.location.href,
-            imgpath:this.$imgpath
+            imgpath:this.$imgpath,
+            osmdata:{
+              lat:'',
+              lng:'',
+              displayname:''
+            },
+            // Map Data  
+            url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',      
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            marker: null,
+            ismapdata:0,
         }
     },
     components:{
-        StarRating
+        StarRating,
+        LMap,
+        LTileLayer,
+        LMarker,
+        LPopup,
     },
 
     computed:{
@@ -346,7 +407,13 @@ export default {
             let data = this.$store.getters.getcompanyfront;
             if(data.length != 0 ){
                 if(data.company.length == 0 ){
-                    this.$router.push('/');
+                  this.$router.push({name:'custompage', params: {pageslug:this.$route.params.companyslug} });
+                }
+                else{
+                  this.osmdata.lat = data.company.map_lat;
+                  this.osmdata.lon = data.company.map_lng;
+                  this.osmdata.displayname = data.company.address;
+                  this.ismapdata = 1;
                 }
             }
             return data;
@@ -357,15 +424,20 @@ export default {
           if(req == 1){
             let carousel = document.createElement('script')
             carousel.setAttribute('src', '/src/frontassets/theme/owl.carousel.min.js')
-            document.head.appendChild(carousel);
+            document.body.appendChild(carousel);
 
             let custom = document.createElement('script')
             custom.setAttribute('src', '/src/frontassets/js/custom.js')
-            document.head.appendChild(custom);
+            document.body.appendChild(custom);
 
             let lazysizes = document.createElement('script')
             lazysizes.setAttribute('src', '/src/frontassets/theme/lazysizes.min.js')
-            document.head.appendChild(lazysizes);
+            document.body.appendChild(lazysizes);
+
+            let vcard = document.createElement('script')
+            vcard.setAttribute('src', '/src/frontassets/js/vcard.js')
+            document.body.appendChild(vcard);
+
           }
           return req;
         }
@@ -374,38 +446,72 @@ export default {
     created(){
         this.$store.dispatch('changetitle',{ title: localStorage.getItem('sitetitle') });
         this.$store.dispatch('setcompanyfront',{slug: this.companyslug });
+        document.title = this.companyslug;
     },
 
     methods:{
 
+      savevcard(){
+        var companycard = vCard.create(vCard.Version.FOUR)
+        companycard.add(vCard.Entry.NAME, this.getfrontdata.company.company_name+";;;")
+        companycard.add(vCard.Entry.FORMATTEDNAME, this.getfrontdata.company.company_name)
+        companycard.add(vCard.Entry.TITLE, this.getfrontdata.company.business_segment)
+        companycard.add(vCard.Entry.PHONE, this.getfrontdata.company.company_contact, vCard.Type.CELL)
+        companycard.add(vCard.Entry.EMAIL, this.getfrontdata.company.company_email, vCard.Type.WORK)
+        companycard.add(vCard.Entry.EMAIL, this.getfrontdata.company.company_email, vCard.Type.HOME)
+        companycard.add(vCard.Entry.ADDRESS, ";;"+this.getfrontdata.company.address, vCard.Type.HOME)
+        companycard.add(vCard.Entry.URL, window.location.href)
+
+        var link = vCard.export(companycard, this.getfrontdata.company.company_name , true)
+        document.body.appendChild(link)
+      },
+
+      workingdays(days){
+        if(days == 'mtf'){
+          return 'Monday To Friday';
+        }
+        else if(days == 'mts'){
+          return 'Monday To Saturday';
+        }
+        else{
+          return 'All Days';
+        }
+      },
+
+      getmarker(lat,lng){
+        return L.latLng([lat,lng])
+      },
+
       datedayformat(date){
-        var given = moment(date, "YYYY-MM-DD");
-        var current = moment().startOf('day');
-        return moment.duration(current.diff(given)).asDays();
+        var given = moment(date, "YYYYMMDD");
+        // var current = moment().startOf('day');
+        return moment(given, "YYYYMMDD").fromNow();
+        // return moment.duration(current.diff(given)).asDays();
       },
 
       dateformat(date){
        return moment(date).format('YYYY');
       },
 
-      sharelink(link){
-        document.getElementById('share').click(function(){
-          if (navigator.share) {
+      timeformat(time){
+       return moment(time,"HH:mm:ss").format('h:mm A');
+      },
+
+      sharelink(){
+        if (navigator.share) {
             navigator.share({
-                title: 'Web Share API Draft',
-                text: 'Take a look at this spec!',
-                url: 'https://wicg.github.io/web-share/#share-method',
+                title: this.getfrontdata.company.company_name,
+                text: 'Take a look at this Site!',
+                url: window.location.href,
               })
               .then(() => console.log('Successful share'))
               .catch((error) => console.log('Error sharing', error));
           } else {
             console.log('Share not supported on this browser, do it the old way.');
           }
-        });
-      },
+        },
 
         addtestimonial(){
-          
             let fd = new FormData();
             fd.append('client_name',this.$refs.name.value);
             fd.append('email_address',this.$refs.email.value);

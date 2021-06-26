@@ -40,9 +40,9 @@
         <nav class="navbar navbar-expand-lg " id="">
             <div class="container custom_container">
 
-                <router-link v-if="getusertype == 1" to="/admindashboard" class="navbar-brand"><h1>DCP</h1></router-link>
-                <router-link v-if="getusertype == 2" to="/dashboard" class="navbar-brand"><h1>DCP</h1></router-link>
-                <router-link v-if="getusertype == null && getusertype == ''" to="/" class="navbar-brand" ><h1>DCP</h1></router-link>
+                <router-link v-if="getsettingpagereq == 1 && getusertype == 1" to="/admindashboard" class="navbar-brand"><h1> {{getsettingpagedata[1].setting_value}} </h1></router-link>
+                <router-link v-if="getsettingpagereq == 1 && getusertype == 2" to="/dashboard" class="navbar-brand"><h1> {{getsettingpagedata[1].setting_value}} </h1></router-link>
+                <router-link v-if="getsettingpagereq == 1 &&  getusertype == null && getusertype == ''" to="/" class="navbar-brand" ><h1> {{getsettingpagedata[1].setting_value}} </h1></router-link>
 
                 <button class="navbar-toggler" type="button" data-trigger="#main_nav"><i class="fas fa-bars"></i></button>
                 <div class="navbar-collapse" id="main_nav">
@@ -52,6 +52,7 @@
                 </div>
                 
                 <ul class="navbar-nav ml-auto " id="">
+                    <li class="nav-item active mr-3" v-if="getcompanypagedata != null && getcompanypagedata != '' && getcompanyreq == 1 && getuseremail != '' && getuseremail != null" ><router-link target="_blank" class="nav-link " :to="'/'+getcompanypagedata.company[0].company_slug">Visit Site</router-link></li>
                     <li class="nav-item active" v-if="getuseremail != '' && getuseremail != null"> <router-link class="nav-link " :to="'/dashboard/profile'">Hi, {{getname}}</router-link> </li>
                     <li class="nav-item active" v-else> <router-link class="nav-link " target="_blank" :to="'/'">Home</router-link> </li>
                 </ul>
@@ -72,10 +73,11 @@ export default {
     name:'DashboardHeader',
     computed:{
 
+
+
         getuserdataemail(){
             return this.$store.getters.getuserdataemail;
         },
-
         getpagerequest(){
           return this.$store.getters.getcompanypagerequest;
         },
@@ -91,10 +93,30 @@ export default {
         getusertype(){
             return this.$store.getters.getusertype;
         },
+
+        getcompanyreq(){
+          return this.$store.getters.getcompanypagerequest;
+        },
+
+        getcompanypagedata(){
+            return this.$store.getters.getcompanydata;
+        },
+
+
+        getsettingpagereq(){
+            return this.$store.getters.getsettingrequest;
+        },
+        getsettingpagedata(){
+            return  this.$store.getters.getsettingdata;
+        },
+
     },
 
     created(){
-
+        // if(getsettingpagereq == 0){
+        //     this.$store.dispatch('setsettingdata');
+        // }
+        this.$store.dispatch('setsettingdata');
         let custom = document.createElement('script')
         custom.setAttribute('src', '/src/assets/js/custom.js')
         document.head.appendChild(custom);

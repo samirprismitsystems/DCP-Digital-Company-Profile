@@ -14,7 +14,7 @@
 				        <div class="h4">All Company List</div>
 			    	</div>
 
-                    <router-link to="/admindashboard/addcompany" target="_blank" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-plus"></i>Add Company</router-link>
+                <router-link to="/admindashboard/addcompany" target="_blank" type="button" class="btnBack site_btn btn_000 btncol"><i class="fas fa-plus"></i>Add Company</router-link>
 
                    <div class="row mt-5 justify-content-center">
                     <div class="col-md-10 col-sm-12 col-lg-10 col-12 mt-5 table-responsive">
@@ -34,7 +34,7 @@
 
                                 <tr v-for="(company,index) in getcomapnydata" :key="index">
                                     <td> {{company.company_name}} </td>
-                                    <td> {{company.established_in}} </td>
+                                    <td> {{companydate(company.established_in)}} </td>
                                     <td> {{company.company_email}} </td>
                                     <td> {{company.company_contact}} </td>
                                     <td>
@@ -90,6 +90,7 @@
 <script>
 import axios from 'axios'
 import AdminDash from './AdminDash'
+import moment from 'moment'
 export default {
     name:'AdminCompanyList',
     components:{
@@ -109,6 +110,7 @@ export default {
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagereq == 0){
             this.$store.dispatch('setallcompanydata');
+            this.$store.dispatch('setsocialcolordata');
             this.$store.dispatch('setallsocialdata');
             this.$store.dispatch('setpagesdata');
             this.$store.dispatch('setuserreviewdata',{data:'all'});
@@ -134,6 +136,10 @@ export default {
     },
 
     methods:{
+
+        companydate(date){
+            return moment(date).format('Do - MMM - yyyy');
+        },
 
         checkchecked(status){
             if(status == 1){
