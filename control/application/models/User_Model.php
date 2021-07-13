@@ -50,7 +50,9 @@ class User_Model extends CI_Model{
 
     public function registeruser($data){
         $this->db->insert('tbl_users',$data);
-        return $insert_id = $this->db->insert_id();
+        $insert_id = $this->db->insert_id();
+        $this->db->where('user_id',$insert_id);
+        return $this->db->get('tbl_users')->row_array();
     }
 
 

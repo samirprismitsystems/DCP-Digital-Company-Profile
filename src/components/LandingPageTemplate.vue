@@ -412,18 +412,12 @@
             <div id="pagesection">
                 <h3 class="mt-3 mb-3">Page Section</h3>
 
-                    <!-- <div class="form_field">
-                        <label class="" for="">Select Menu Pages</label>
-                        <select name="pagelist" v-model="pagelist" id="pagelist" multiple>
-                            <option :value="page.page_id" v-for="(page,index) in getpagesdata" :key="index">{{page.page_name}}</option>
-                        </select>
-                    </div> -->
-
                     <div class="form_field">
                         <label class="" for="">Select Footer Pages</label>
-                        <select name="pagelist" v-model="pagelist" id="pagelist" multiple>
-                            <option :value="page.page_id" v-for="(page,index) in getpagesdata" :key="index">{{page.page_name}}</option>
-                        </select>
+                        <!-- <select name="pagelist" v-model="pagelist" id="pagelist" multiple>
+                            <option :value="page.id" v-for="(page,index) in pages" :key="index">{{page.text}}</option>
+                        </select> -->
+                        <Select2 v-model="pagelist" :options="pages" :settings="{ allowClear: true, placeholder: 'Select Pages', multiple:true}" />
                     </div>
 
             </div>
@@ -525,6 +519,8 @@ export default {
 
                 this.pagelist = JSON.parse(data.page_content.footerpages);
 
+                this.getpagesdata;
+
             }
             return data;
         },
@@ -533,7 +529,14 @@ export default {
         },
 
         getpagesdata(){
-            let data =  this.$store.getters.getpagesdata; 
+            let data =  this.$store.getters.getpagesdata;
+            data.forEach(element => {
+                let obj = {
+                    id:element.page_id,
+                    text:element.page_name
+                };
+                this.pages.push(obj);
+            });
             return data;
         },
         getpagesrequest(){
@@ -556,6 +559,7 @@ export default {
 
     data(){
         return{
+            pages:[],
             card1:'',
             card2:'',
             content:'',

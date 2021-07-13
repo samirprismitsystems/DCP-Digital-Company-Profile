@@ -56,6 +56,7 @@
 
 <script>
 import axios from 'axios'
+import Crypto from 'crypto-js';
 export default {
     name:'Login',
     data(){
@@ -66,13 +67,18 @@ export default {
     },
 
     created(){
-        if(localStorage.getItem('useremail') != null){
+        if(localStorage.getItem('userdataemail') != null || localStorage.getItem('useremail') != null || localStorage.getItem('usertype') != null){
             if(this.getusertype == 1){
                 this.$router.push('/admindashboard/');
             }
-            else{
+            else if(this.getusertype == 2){
                 this.$router.push('/dashboard/');
             }
+            else{
+
+            }
+        }
+        else{
             
         }
     },
@@ -87,6 +93,7 @@ export default {
     },
 
     methods:{
+        
         userlogin(){
 
             let fd = new FormData();
@@ -102,29 +109,39 @@ export default {
                 else{
                     let userdata = result.data.userdata;
                     
-                    localStorage.setItem('first_name',userdata.first_name);
-                    localStorage.setItem('usertype',userdata.type);
                     
-                    this.$store.dispatch('setusertype',{user_type:userdata.type});
-                    this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
 
-                    localStorage.setItem('useremail',userdata.email_id);
+                    var encusertype = Crypto.AES.encrypt(userdata.type, "DIGITALCOMPANYPROFILE").toString()
+                    localStorage.setItem('usertype',encusertype);
+                    // localStorage.setItem('usertype',userdata.type);
+                    this.$store.dispatch('setusertype',{user_type:userdata.type});
+                    
+                    localStorage.setItem('first_name',userdata.first_name);
+                    this.$store.dispatch('setfirstname',{first_name:userdata.first_name});
+                    
+                    var encemail = Crypto.AES.encrypt(userdata.email_id, "DIGITALCOMPANYPROFILE").toString()
+                    // localStorage.setItem('useremail',userdata.email_id);
+                    localStorage.setItem('useremail',encemail);
                     this.$store.dispatch('setuseremail',{emailid:userdata.email_id});
 
                     if(userdata.type == 1){
-                        localStorage.setItem('admin_id',userdata.user_id);
-                        this.$store.dispatch('setadminid',{admin_id:userdata.user_id});
+                        // var encadminid = Crypto.AES.encrypt(userdata.user_id, "DIGITALCOMPANYPROFILE").toString()
+                        // localStorage.setItem('admin_id',userdata.user_id);
+                        // localStorage.setItem('admin_id',encadminid);
+                        // this.$store.dispatch('setadminid',{admin_id:userdata.user_id});
                         this.$router.push('/admindashboard/');
                     }
                     else{
-                        
-                    localStorage.setItem('userdataemail',userdata.email_id);
+                    
+                    // localStorage.setItem('userdataemail',userdata.email_id);
+                    localStorage.setItem('userdataemail',encemail);
                     this.$store.dispatch('setuserdataemail',{userdataemail:userdata.email_id});
 
-                        localStorage.setItem('userid',userdata.user_id);
-                        this.$store.dispatch('setuserid',{userid:userdata.user_id});
+                    // localStorage.setItem('userid',userdata.user_id);
+                    // this.$store.dispatch('setuserid',{userid:userdata.user_id});
 
-                        this.$router.push('/dashboard/');
+                    this.$router.push('/dashboard/');
+                    
                     }
 
                 }

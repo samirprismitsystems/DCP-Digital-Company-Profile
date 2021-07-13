@@ -16,8 +16,7 @@
                     </div>
                 </div>
             </div>
-
-        </footer>
+    </footer>
 </template>
 
 <script>
@@ -36,6 +35,10 @@ export default {
         getpagedata(){
             let pagedata = this.$store.getters.getsettingdata;
             let pages = JSON.parse(pagedata[9].setting_value);
+
+            document.querySelector("meta[property='og:image']").content = this.$imgpath + 'setting/' + pagedata[0].setting_value;
+            document.querySelector("meta[property='og:url']").content = window.location.protocol +'//'+ window.location.hostname ;
+            document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + 'setting/' + pagedata[0].setting_value;
             
             let pagelist = new FormData();
             pagelist.append('pages[]',pages);

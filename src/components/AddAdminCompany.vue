@@ -54,7 +54,7 @@
 
                         <p class="text-danger" v-if="showpassmsg">* Password Not Matched</p>
 
-						<button type="submit" class="form_btn btn_100 btn-center ">Save Details</button>
+						<button type="submit" class="form_btn btn_100 btn-center ">Save Details <i v-if="isloading" class="fas fa-spinner fa-pulse"></i></button>
                         
 					</form>
                 </div>
@@ -76,11 +76,15 @@ export default {
     data(){
         return{
             showpassmsg:false,
+            isloading:false,
         }
     },
 
     components:{
         AdminDash
+    },
+
+    created(){
     },
 
     methods:{
@@ -103,6 +107,7 @@ export default {
         },
 
         userregister(){
+            this.isloading = true;
             let fd = new FormData();
             fd.append('first_name',this.$refs.first_name.value);
             fd.append('last_name',this.$refs.last_name.value);
@@ -113,9 +118,14 @@ export default {
             fd.append('isupdate',false);
 
             axios.post('user/registeruseradmin',fd).then((result) => {
-                let userid = result.data.userid;
-                localStorage.setItem('userid',userid);
-                this.$store.dispatch('setuserid',{userid:userid});
+                let userdata = result.data.userid;
+
+                // localStorage.setItem('userid',userdata.user_id);
+                // this.$store.dispatch('setuserid',{userid:userdata.user_id});
+
+                localStorage.setItem('userdataemail',userdata.email_id);
+                this.$store.dispatch('setuserdataemail',{userdataemail:userdata.email_id});
+                
                 this.$router.push('/dashboard/company');
             });
         }

@@ -1,6 +1,6 @@
 // JavaScript Document
 
-$(document).ready(function () {
+jQuery(document).ready(function () {
 
 var $ = jQuery
 
@@ -60,8 +60,6 @@ var $ = jQuery
 
 
 // $('.tabs-nav a:first').trigger('click'); // Default
-
-
   });
 
 

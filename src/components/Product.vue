@@ -28,7 +28,7 @@
 			    			</div>
 			    			<div class="item_div">
 			    				<div class="item_img">
-			    					<img :src="imgsrcprod[index]" alt="" title="" class="img-fit">
+			    					<img :src="imgsrcprod[index]" alt="Products" title="" class="img-fit">
 			    				</div>
 			    				<div>
 			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">
@@ -48,7 +48,7 @@
 			    			</div>
 			    			<div class="item_div">
 			    				<div class="item_img">
-			    					<img :src="newimgsrc[nindex]" alt="" title="" class="img-fit">
+			    					<img :src="newimgsrc[nindex]" alt="Products" title="" class="img-fit">
 			    				</div>
 			    				<div>
 			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">

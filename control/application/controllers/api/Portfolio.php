@@ -116,20 +116,27 @@ class Portfolio extends REST_Controller {
 
 	public function getportfolio_get($user_id = NULL){
 		$user_id = $this->User_Model->getuserid($user_id);
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
-
-		if($portfolio = $this->Portfolio_Model->getportfolio($company_id)){
-			$output['error'] = false;
-			$output['portfolio'] = $portfolio;
-			$output['message'] = "Portfolio Data get successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+		
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+	 		$company_id = $company_data[0]['company_id'];
+			if($portfolio = $this->Portfolio_Model->getportfolio($company_id)){
+				$output['error'] = false;
+				$output['portfolio'] = $portfolio;
+				$output['message'] = "Portfolio Data get successfully";
+				$this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+				$output['portfolio'] = [];
+		        $output['message'] = "Empty Portfolio Data";
+		        $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = true;
-			$output['portfolio'] = [];
-	        $output['message'] = "Empty Portfolio Data";
-	        $this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = true;
+				$output['portfolio'] = [];
+		        $output['message'] = "Empty Portfolio Data";
+		        $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 

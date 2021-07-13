@@ -115,20 +115,27 @@ class Client extends REST_Controller {
 
 	public function getclients_get($user_id = NULL){
 		$user_id = $this->User_Model->getuserid($user_id);
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
-
-		if($client = $this->Client_Model->getclient($company_id)){
-			$output['error'] = false;
-			$output['client'] = $client;
-			$output['message'] = "client Data get successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+		
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+	 		$company_id = $company_data[0]['company_id'];
+			if($client = $this->Client_Model->getclient($company_id)){
+				$output['error'] = false;
+				$output['client'] = $client;
+				$output['message'] = "client Data get successfully";
+				$this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+		        $output['client'] = [];
+				$output['message'] = "Empty Client Data.";
+				$this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = true;
-	        $output['client'] = [];
-			$output['message'] = "Empty Client Data.";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = true;
+		        $output['client'] = [];
+				$output['message'] = "Empty Client Data.";
+				$this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 

@@ -38,7 +38,7 @@
 			    			<div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-10 private_img_col">
 			    				<div class="upload_private_img_box upi_qr_img">
 			    					<div class="upload_here">
-			    						<img id="" class="upload_img qr-code-img" :src="imgsrc" alt="image" />
+			    						<img id="" class="upload_img qr-code-img" :src="imgsrc" alt="qr code" />
 			    					</div>
 			    					<p class="red" >Image Required* 250KB max size</p>
 			    					<div class="upload_btn btn_100 site_btn mb-0 w-100">

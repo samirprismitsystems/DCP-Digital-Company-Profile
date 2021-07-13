@@ -2,7 +2,10 @@
 
 class Testimonial_Model extends CI_Model{
         
-    public function gettestimonial($company_id){
+    public function gettestimonial($company_id,$status = NULL){
+        if($status != null){
+            $this->db->where('status',1);
+        }
         $this->db->where('company_id',$company_id);
         return $this->db->get('tbl_testimonial')->result_array();
     }

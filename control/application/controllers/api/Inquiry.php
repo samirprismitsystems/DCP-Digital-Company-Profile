@@ -67,20 +67,28 @@ class Inquiry extends REST_Controller {
 
 	public function getinquiry_get($user_id){
 		$user_id = $this->User_Model->getuserid($user_id);
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
+		
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+	 		$company_id = $company_data[0]['company_id'];
 
-		if($inquiry = $this->Inquiry_Model->getinquiry($company_id)){
-			$output['error'] = false;
-			$output['inquiry'] = $inquiry;
-		    $output['message'] = "inquiry Data get successfully";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+			if($inquiry = $this->Inquiry_Model->getinquiry($company_id)){
+				$output['error'] = false;
+				$output['inquiry'] = $inquiry;
+			    $output['message'] = "inquiry Data get successfully";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = false;
+				$output['inquiry'] = [];
+			    $output['message'] = "Empty inquiry Data";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = false;
-			$output['inquiry'] = [];
-		    $output['message'] = "Empty inquiry Data";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = false;
+				$output['inquiry'] = [];
+			    $output['message'] = "Empty inquiry Data";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 

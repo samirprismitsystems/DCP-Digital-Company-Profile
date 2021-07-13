@@ -14,11 +14,11 @@
 				        <div class="h4">Inquiry From Users</div>
 			    	</div>
 
-    <div class="row mt-5 justify-content-center">
+    <div class="row mt-5 justify-content-center ">
     
           <div class="col-md-10 col-sm-12 col-lg-10 col-12 mt-5 table-responsive">
             
-            <table class="table table-hover tablecontent table-nonfluid">
+            <table class="table table-hover tablecontent table-nonfluid form_shadow">
                 <thead>
                 <tr>
                     <th>Client Name</th>
@@ -136,8 +136,8 @@ export default {
 
     created(){
       if(this.getcompanyid == ''){
-            this.$router.push('/dashboard/company');
-        }
+        this.$router.push('/dashboard/company');
+      }
         this.$store.dispatch('changetitle',{title:localStorage.getItem('sitetitle')});
         if(this.getpagerequest == 0){
             this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});

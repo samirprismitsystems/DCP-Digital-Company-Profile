@@ -47,12 +47,13 @@
                 <button class="navbar-toggler" type="button" data-trigger="#main_nav"><i class="fas fa-bars"></i></button>
                 <div class="navbar-collapse" id="main_nav">
                 
+                    
                 <div class="offcanvas-header mt-3">
                     <button class="btn  btn-close float-right"><i class="fas fa-times"></i></button>
                 </div>
-                
+    
                 <ul class="navbar-nav ml-auto " id="">
-                    <li class="nav-item active mr-3" v-if="getcompanypagedata != null && getcompanypagedata != '' && getcompanyreq == 1 && getuseremail != '' && getuseremail != null" ><router-link target="_blank" class="nav-link " :to="'/'+getcompanypagedata.company[0].company_slug">Visit Site</router-link></li>
+                    <li class="nav-item active mr-3" v-if="getcompanypagedata != null && getcompanypagedata != '' && getcompanyreq == 1 && getuseremail != '' && getuseremail != null && getcompanypagedata.newuser != 1" ><router-link target="_blank" class="nav-link " :to="'/'+getcompanypagedata.company[0].company_slug">Visit Site</router-link></li>
                     <li class="nav-item active" v-if="getuseremail != '' && getuseremail != null"> <router-link class="nav-link " :to="'/dashboard/profile'">Hi, {{getname}}</router-link> </li>
                     <li class="nav-item active" v-else> <router-link class="nav-link " target="_blank" :to="'/'">Home</router-link> </li>
                 </ul>
@@ -61,9 +62,10 @@
                     <li v-if=" getuseremail == '' || getuseremail == null " class="nav-item aplycolor"> <router-link to="/login"  class="login_btn btn_100">login</router-link>  </li>
                     <li v-else class="nav-item aplycolor" > <a @click="logout()" class="login_btn btn_100">Logout</a> </li>
                 </ul>
-
+        
             </div>
         </nav>
+
 
     </div>
 </template>
@@ -71,9 +73,13 @@
 <script>
 export default {
     name:'DashboardHeader',
+    data(){
+        return{
+            // user:this.$session.get('userdataemail')
+        }
+    },
+    
     computed:{
-
-
 
         getuserdataemail(){
             return this.$store.getters.getuserdataemail;
@@ -120,11 +126,12 @@ export default {
         let custom = document.createElement('script')
         custom.setAttribute('src', '/src/assets/js/custom.js')
         document.head.appendChild(custom);
-        
     },
 
     methods:{
+
         logout(){
+            this.$session.destroy();
             localStorage.removeItem('useremail');
             // localStorage.removeItem('companyid');
             localStorage.removeItem('usertype');

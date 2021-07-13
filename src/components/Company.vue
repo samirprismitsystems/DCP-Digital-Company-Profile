@@ -19,17 +19,17 @@
 			    		<div class="row">
 			    			<div class="col-xl-6  col-lg-6 col-md-7  col-sm-12 form-col">
 				    			<div class="form_field">
-									<label class="" >Full Name / Business Name / Company Name*</label>
+									<label class="" >Full Name / Business Name / Company Name *</label>
 									<input name="cname" ref="cname" class="" v-model="getpagedata.company[0].company_name" type="text" placeholder="Enter Your Full Name / Business Name /Company Name" required>
 								</div>
 								<div class="form_field">
-									<label class="" >Business Type / Description*</label>
+									<label class="" >Business Type / Description *</label>
 									<input name="bsegment" ref="bsegment" class="" v-model="getpagedata.company[0].business_segment" type="text" placeholder="Business Type / Description" required>
 								</div>
-								<div class="row ">
+								<div class="row">
 									<div class="col-sm-6 col-12">
 									<div class=" form_field">
-										<label class="" >Phone No. (WhatsApp No)</label>
+										<label class="" >Phone No. (WhatsApp No) *</label>
 										<input name="cnumber" ref="cnumber" class="" v-model="getpagedata.company[0].company_contact" type="text" placeholder="Enter Your WhatsApp No" required>
 									</div>
 									</div>
@@ -42,7 +42,7 @@
 									
 								</div>
 								<div class="form_field">
-									<label class="">Email Id*</label>
+									<label class="">Email Id *</label>
 									<input name="cemail" ref="cemail" class="" v-model="getpagedata.company[0].company_email" type="email" placeholder="Enter Your Emial" required>
 								</div>
 			    			</div>
@@ -51,7 +51,7 @@
                             <div class="col-xl-3 col-lg-3 col-md-5 col-sm-5 col-10 logo-col private_img_col">
 			    				<div class="upload_private_img_box logo_img_box">
 			    					<div v-if="imgsrc == ''" class="upload_here">
-			    						<img id="get_img" class="upload_img" src="" alt="image" style="display: none;" />
+			    						<img id="get_img" class="upload_img" src="" alt="logo image" style="display: none;" />
 			    						<div class="placeholder_tex">
 			    							<h3>Please Upload Here Your Company</h3>
 			    							<h2>LOGO</h2>
@@ -59,7 +59,7 @@
 			    					</div>
 
                                     <div v-else class="upload_here">
-			    						<img id="get_img" class="upload_img" :src="imgsrc" alt="image" />
+			    						<img id="get_img" class="upload_img" :src="imgsrc" alt="logo image" />
 			    					</div>
 
 			    					<p class="red" >Image Required* 250KB max size</p>
@@ -74,7 +74,7 @@
 			    			<div class="col-xl-3 col-lg-3 col-md-5 col-sm-5 col-10 logo-col private_img_col">
 			    				<div class="upload_private_img_box logo_img_box">
 			    					<div v-if="imgbannersrc == ''" class="upload_here">
-			    						<img id="get_img" class="upload_img" src="" alt="image" style="display: none;" />
+			    						<img id="get_img" class="upload_img" src="" alt="banner image" style="display: none;" />
 			    						<div class="placeholder_tex">
 			    							<h3>Please Upload Company Background</h3>
 			    							<h2>BANNER</h2>
@@ -82,7 +82,7 @@
 			    					</div>
 
                                     <div v-else class="upload_here">
-			    						<img id="get_img" class="upload_img" :src="imgbannersrc" alt="image" />
+			    						<img id="get_img" class="upload_img" :src="imgbannersrc" alt="banner image" />
 			    					</div>
 
 			    					<p class="red" >Image Required* 250KB max size</p>
@@ -97,32 +97,77 @@
 
 			    		</div>
                         
-			    		<div class=" form_field">
-							<label class="" >Address</label>
-							<input name="Address" ref="address" class="" v-model="getpagedata.company[0].address" type="text" placeholder="Enter Your Full Address" required>
+			    		<div class="row">
+							<div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                                <div class=" form_field">
+                                    <label class="" >House No, Street, Area *</label>
+                                    <input name="area" ref="area" class="" v-model="getpagedata.company[0].area" type="text" placeholder="Enter House No , Street (Area)" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                                <div class=" form_field">
+                                    <label class="" >Country *</label>
+                                    <select name="country" v-model="country" @input="getstates(country)" disabled required>
+                                        <option v-for="(country,index) in getareadata.data.country" :key="index" :value="country.sortname">{{country.name}}</option>
+                                    </select>
+                                    <!-- <input name="country" ref="country" class="" v-model="getpagedata.company[0].country" type="text" placeholder="Enter Country" required> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
+                                <div class=" form_field">
+                                    <label class="" >State *</label>
+                                    <v-select :options="getstatesdata" v-model="state" @input="getcities(state)" required></v-select>
+                                    <!-- <select name="state" v-model="state" @change="getcities(state)" required>
+                                        <option v-for="(state,index) in stateslist" :key="index" :value="state.name">{{state.name}}</option>
+                                    </select> -->
+                                    <!-- <input name="state" ref="state" class="" v-model="getpagedata.company[0].state" type="text" placeholder="Enter State" required> -->
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
+                                <div class=" form_field">
+                                    <label class="" >City *</label>
+                                    <v-select :options="citylist" v-model="city" required></v-select>
+                                    <!-- <select name="city" v-model="city" id="citylist" required>
+                                        <option v-for="(citydata,index) in citylist" :key="index" :value="citydata.name">{{citydata.name}}</option>
+                                    </select> -->
+                                    <!-- <input name="city" ref="city" class="" v-model="getpagedata.company[0].city" type="text" placeholder="Enter City" required> -->
+                                
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
+                                <div class=" form_field">
+                                    <label class="" >Postal Code *</label>
+                                    <input name="postcode" ref="postcode" class="" v-model="getpagedata.company[0].post_code" type="text" placeholder="Enter Postcode" required>
+                                </div>
+                            </div>
+                            
 						</div>
+                        
 						<div class=" form_field">
 							<label class="" >Company Est Date</label>
-							<input name="esdate" ref="esdate" class="" v-model="getpagedata.company[0].established_in" type="date" placeholder="When your comp. was started?" required >
+							<input name="esdate" ref="esdate" class="" v-model="getpagedata.company[0].established_in" type="date" placeholder="When your comp. was started?" >
 						</div>
 						<div class=" form_field">
 							<label class="" >Working Hours</label>
 							<div class="select_working_hours m-0">
 								<div class="days_select"><span>Day</span> 
-                                    <select  placeholder="select working days" v-model="workingdays" required>
+                                    <select  placeholder="select working days" v-model="workingdays">
 										<option value="all" selected="">All</option>
 										<option value="mtf">Mon to Fri</option>
 										<option value="mts">Mon to Sat</option>
 									</select>
 								</div>
-								<div class="time_select"><input required type="time" ref="fromtime" v-model="getpagedata.company[0].working_hours_from"  placeholder=""></div>
+								<div class="time_select"><input type="time" ref="fromtime" v-model="getpagedata.company[0].working_hours_from"  placeholder=""></div>
 								<span>TO</span>
-								<div class="time_select"><input required type="time" ref="totime" v-model="getpagedata.company[0].working_hours_to" placeholder=""></div>
+								<div class="time_select"><input type="time" ref="totime" v-model="getpagedata.company[0].working_hours_to" placeholder=""></div>
 							</div>
 						</div>
+
 						<div class="form_field">
 							<label class="" >About Company</label>
-							<textarea required name="cdesc"  rows="8" ref="cdesc" v-model="getpagedata.company[0].company_desc" placeholder="Add Business / Company Description"> </textarea> 
+							<textarea name="cdesc"  rows="8" ref="cdesc" v-model="getpagedata.company[0].company_desc" placeholder="Add Business / Company Description"> </textarea> 
 						</div>
                         
                         <div class="form_field">
@@ -136,7 +181,7 @@
 
                         <div class="form_field">
                             <label class="">Map</label>
-                            <l-map :zoom="20" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
+                            <l-map :zoom="17" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
                                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                                 <l-marker @dragend="changemarker($event)" :lat-lng="getmarker(osmdata.lat,osmdata.lon)" :draggable=true>
                                     <l-popup :content="osmdata.displayname"></l-popup>
@@ -162,6 +207,11 @@
 </template>
 
 <script>
+import Vue from "vue";
+import vSelect from "vue-select";
+Vue.component("v-select", vSelect);
+import "vue-select/dist/vue-select.css";
+
 import axios from 'axios'
 import DashData from './DashData'
 import L from 'leaflet';
@@ -187,8 +237,8 @@ export default {
             social:[],
             
             ischangepic:false,
-            imgsrc:require('../assets/img/logo.jpg'),
-
+            // imgsrc:require('../assets/img/logo.jpg'),
+            imgsrc:'',
             ischangebannerpic:false,
             imgbannersrc:'',
 
@@ -215,12 +265,27 @@ export default {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             marker: null,
             ismapdata:0,
-            mapaddress:''
+            mapaddress:'',
+
+            citylist:[],
+            stateslist:[],
+            country:'IN',
+            state:'',
+            city:'',
+            isnewuser:0,
             
         }
     },
 
     computed:{
+
+        getstatesreq(){
+            return this.$store.getters.getstatesreq;
+        },
+
+        getstatesdata(){
+            return this.$store.getters.getstatesdata;
+        },
 
         getuserdataemail(){
             return this.$store.getters.getuserdataemail;
@@ -255,6 +320,16 @@ export default {
                 this.company_id = data.company[0].company_id;
                 this.logo = data.company[0].company_logo;
                 this.banner = data.company[0].company_banner;
+                this.country = data.company[0].country;
+                this.state = data.company[0].state;
+                this.city = data.company[0].city;
+
+                if(this.getstatesreq == 0){
+                    this.getstates(data.company[0].country);
+                    this.getcities(data.company[0].state);
+                }
+                
+
                 // console.log(data.company[0].company_logo);
                 this.path = this.$imgpath+data.company[0].company_id+'/logo/'+data.company[0].company_logo;
                 this.imgsrc = this.path;
@@ -266,13 +341,16 @@ export default {
                 this.workingdays = data.company[0].working_hours_day;
                 this.osmdata.lat = data.company[0].map_lat;
                 this.osmdata.lon = data.company[0].map_lng;
-                this.osmdata.displayname = data.company[0].address;
-
+                this.osmdata.displayname = data.company[0].area +', '+ data.company[0].city +', '+ data.company[0].state +', '+ data.company[0].country +', '+ data.company[0].post_code;
                 this.isnext = false;
 
                 }
                 else{
                     if(data.newuser == 1){
+                        this.isnewuser = 1;
+                        if(this.getstatesreq == 0){
+                            this.getstates(this.country);
+                        }
                         data.company[0] = {
                         };
                     }
@@ -280,6 +358,10 @@ export default {
             }
             return data;
         },
+
+        getareadata(){
+            return this.$store.getters.getareadata;
+        }
 
     },
 
@@ -302,6 +384,27 @@ export default {
 
     methods:{
 
+        getcities(state){
+            axios.get('company/getcitiesdata/'+state).then((result)=>{
+                // console.log(result);
+                result.data.cities.forEach(element => {
+                    this.citylist.push(element.name);
+                });
+            });
+        },
+
+        getstates(country){
+            axios.get('company/getstatesdata/'+country).then((result)=>{
+                // console.log(result);
+                result.data.states.forEach(element => {
+                    this.stateslist.push(element.name);
+                });
+
+                this.$store.dispatch('setstatesdata',{states:this.stateslist});
+
+            });
+        },
+
         changemarker(event){
             this.osmdata.lat = event.target._latlng.lat;
             this.osmdata.lon = event.target._latlng.lng;
@@ -319,8 +422,6 @@ export default {
                     this.osmdata.displayname = response.data[0].display_name;
                 }
             });
-
-
         },
 
         getmarker(lat,lng){
@@ -346,61 +447,93 @@ export default {
         addcompanydata(){
             
             this.isloading  = true;
-
-            let fd = new FormData();
-            let slug = this.$refs.cname.value.replace(/[^a-zA-Z ]/g, "");
-            let company_slug = slug.replace(" ","-").replace(/\s+/g, '').toLowerCase(); 
-
-            fd.append('user_id',this.getuserdataemail);
-            fd.append('company_name',this.$refs.cname.value);
-            fd.append('company_slug',company_slug);
-            fd.append('company_desc',this.$refs.cdesc.value);
-            fd.append('established_in',this.$refs.esdate.value);
-            fd.append('business_segment',this.$refs.bsegment.value);
-            fd.append('address',this.$refs.address.value);
-            fd.append('company_email',this.$refs.cemail.value);
-            fd.append('company_contact',this.$refs.cnumber.value);
-            fd.append('company_alternate_contact',this.$refs.canumber.value);
-            fd.append('working_hours_day',this.workingdays);
-            fd.append('working_hours_from',this.$refs.fromtime.value);
-            fd.append('working_hours_to',this.$refs.totime.value);
-            fd.append('map_lat',this.osmdata.lat);
-            fd.append('map_lng',this.osmdata.lon);
-            fd.append('isupdate',false);
-
-            if(this.ischangepic == true){
-               fd.append('company_logo',this.companydata.logo);
-               this.ischangepic = false;
+            let isimages = 0;
+            let isaddress = 0;
+            
+            if(this.isnewuser == 1 ){
+                if(this.companydata.logo == null && this.companydata.banner == null){
+                    isimages = 1;
+                }
             }
 
-            if(this.ischangebannerpic == true){
-               fd.append('company_banner',this.companydata.banner);
-               this.ischangepic = false;
+            if(this.state == null || this.state == ''  && this.city == null || this.city == ''){
+                isaddress = 1;
             }
 
+        if(isimages == 0){
 
-            if(this.isupdate == true){
-                fd.append('company_id',this.company_id);
-                fd.append('logo',this.logo);
-                fd.append('banner',this.banner);
-                fd.append('isupdate',true);
+            if(isaddress == 0){
+
+                let fd = new FormData();
+                let slug = this.$refs.cname.value.replace(/[^a-zA-Z ]/g, "");
+                let company_slug = slug.replace(" ","-").replace(/\s+/g, '').toLowerCase();
+
+                fd.append('user_id',this.getuserdataemail);
+                fd.append('company_name',this.$refs.cname.value);
+                fd.append('company_slug',company_slug);
+                fd.append('company_desc',this.$refs.cdesc.value);
+                fd.append('established_in',this.$refs.esdate.value);
+                fd.append('business_segment',this.$refs.bsegment.value);
+                // fd.append('address',this.$refs.address.value);
+                fd.append('area',this.$refs.area.value);
+                fd.append('city',this.city);
+                fd.append('state',this.state);
+                fd.append('country',this.country);
+                fd.append('post_code',this.$refs.postcode.value);
+                fd.append('company_email',this.$refs.cemail.value);
+                fd.append('company_contact',this.$refs.cnumber.value);
+                fd.append('company_alternate_contact',this.$refs.canumber.value);
+                fd.append('working_hours_day',this.workingdays);
+                fd.append('working_hours_from',this.$refs.fromtime.value);
+                fd.append('working_hours_to',this.$refs.totime.value);
+                fd.append('map_lat',this.osmdata.lat);
+                fd.append('map_lng',this.osmdata.lon);
+                fd.append('isupdate',false);
+
+                if(this.ischangepic == true){
+                fd.append('company_logo',this.companydata.logo);
+                this.ischangepic = false;
+                }
+
+                if(this.ischangebannerpic == true){
+                fd.append('company_banner',this.companydata.banner);
+                this.ischangepic = false;
+                }
+
+
+                if(this.isupdate == true){
+                    fd.append('company_id',this.company_id);
+                    fd.append('logo',this.logo);
+                    fd.append('banner',this.banner);
+                    fd.append('isupdate',true);
+                }
+
+                axios.post('company/createcompany',fd).then((response)=>{
+                        // console.log(response.data);
+                        this.alertmsg = response.data.message;
+                        this.showalert =  !this.showalert;
+                        if(this.isupdate == false){
+                            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
+                            this.$store.dispatch('setallsocialdata');
+                            this.isloading  = false;
+                        }
+                        else{
+                            this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
+                            this.isloading  = false;
+                        }
+                    this.$swal.fire('Company Data', response.data.message , 'success');
+                });
             }
-
-            axios.post('company/createcompany',fd).then((response)=>{
-                    // console.log(response.data);
-                    this.alertmsg = response.data.message;
-                    this.showalert =  !this.showalert;
-                    if(this.isupdate == false){
-                        this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
-                        this.$store.dispatch('setallsocialdata');
-                        this.isloading  = false;
-                    }
-                    else{
-                        this.$store.dispatch('setcompanydata',{id: this.getuserdataemail});
-                        this.isloading  = false;
-                    }
-                   this.$swal.fire('Company Data', response.data.message , 'success');
-            });
+            else{
+                this.$swal.fire('Please Select Mandatory fields', '* Indicates Mandatory fields' , 'error');
+                this.isloading  = false;
+            }
+        }
+        else{
+            this.$swal.fire('Please Select Logo and Banner Image', '* Indicates Mandatory fields' , 'error');
+            this.isloading  = false;
+        }
+            
 
         },
 

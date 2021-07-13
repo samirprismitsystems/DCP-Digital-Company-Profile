@@ -59,20 +59,28 @@ class Testimonial extends REST_Controller {
 	
 	public function gettestimonial_get($user_id){
 		$user_id = $this->User_Model->getuserid($user_id);
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
- 		
-		if($testimonial = $this->Testimonial_Model->gettestimonial($company_id)){
-			$output['error'] = false;
-			$output['testimonial'] = $testimonial;
-		    $output['message'] = "Testimonial Data get successfully";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+		
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+	 		$company_id = $company_data[0]['company_id'];
+	 		
+			if($testimonial = $this->Testimonial_Model->gettestimonial($company_id)){
+				$output['error'] = false;
+				$output['testimonial'] = $testimonial;
+			    $output['message'] = "Testimonial Data get successfully";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = false;
+				$output['testimonial'] = [];
+			    $output['message'] = "Empty Testimonial Data";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = false;
-			$output['testimonial'] = [];
-		    $output['message'] = "Empty Testimonial Data";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = false;
+				$output['testimonial'] = [];
+			    $output['message'] = "Empty Testimonial Data";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 

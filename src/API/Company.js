@@ -49,4 +49,10 @@ export default{
         });
     },
 
+    getareadata(cb){
+        axios.get('company/fetchallareadata').then((response)=>{
+            cb(response);
+        });
+    }
+
 }

@@ -33,7 +33,7 @@
                             <div class="tab-pane active" id="site" role="tabpanel">
                                 <h2 class="mt-4">Site Setting</h2>
                                 
-                                <form class="mt-5" @submit.prevent="savesitesetting()">
+                                <form class="mt-5 form_shadow" @submit.prevent="savesitesetting()">
                                     
                                     <div class="form_field col-xl-3 col-lg-4 col-md-5 col-sm-5 col-10 logo-col private_img_col">
                                         <div class="upload_private_img_box logo_img_box">
@@ -111,7 +111,7 @@
 
                                 <h2 class="mt-4">Google Analytics Code</h2>
                                 
-                                <form class="mt-5" @submit.prevent="savegoogleanalytics()">
+                                <form class="mt-5 form_shadow" @submit.prevent="savegoogleanalytics()">
                                     <div class="form_field">
                                         <label class="" for="user_id">Before Body Tag</label>
                                         <textarea rows="5" v-if="getpagedata[6].setting_name == 'before_body_ganalytics'" :value="getpagedata[6].setting_value" id="beforebody" ref="beforebody" name="beforebody" class="" placeholder="Before Body Tag Analytics Code" required=""></textarea>

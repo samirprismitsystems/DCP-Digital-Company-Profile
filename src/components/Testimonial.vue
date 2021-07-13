@@ -7,6 +7,7 @@
 
 		<div class=" right_sidebar_content" v-if="getpagerequest == 1 && getcompanyid != ''">
 			<div class="tabs-stage">
+        <div id="tab-3" class="expand_tabs">
 
         <router-link to="/dashboard/portfolio" class="btnBack site_btn btn_000 btncol"><i class="fas fa-arrow-left"></i>Back</router-link>
 			      	<div class="tab_title">
@@ -17,7 +18,7 @@
     <div class="row mt-5 justify-content-center">
       <div class="col-md-10 col-sm-12 col-lg-10 col-12 mt-5 table-responsive">
               
-            <table class="table table-hover tablecontent">
+            <table class="table table-hover tablecontent form_shadow mb-5">
                 <thead>
                 <tr>
                     <th>Client Name</th>
@@ -79,6 +80,8 @@
 			</div>
 
 
+
+    </div>
 
     </div>
 

@@ -118,20 +118,28 @@ class Service extends REST_Controller {
 
 	public function getservice_get($user_id){
 		$user_id = $this->User_Model->getuserid($user_id);
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
+		
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+	 		$company_id = $company_data[0]['company_id'];
 
-		if($service = $this->Service_Model->getservice($company_id)){
-			$output['error'] = false;
-			$output['service'] = $service;
-		    $output['message'] = "Service Data get successfully";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+			if($service = $this->Service_Model->getservice($company_id)){
+				$output['error'] = false;
+				$output['service'] = $service;
+			    $output['message'] = "Service Data get successfully";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = false;
+				$output['service'] = [];
+			    $output['message'] = "Empty Service Data";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = false;
-			$output['service'] = [];
-		    $output['message'] = "Empty Service Data";
-		    $this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = false;
+				$output['service'] = [];
+			    $output['message'] = "Empty Service Data";
+			    $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 

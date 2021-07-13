@@ -1,23 +1,48 @@
 import userApi from '../../API/user'
+import Crypto from 'crypto-js';
+
+let userdataemail = '';
+let useremail = '';
+let usertype = '';
+
+if(localStorage.getItem('useremail') != null && localStorage.getItem('useremail') != '' ){
+    useremail = Crypto.AES.decrypt(localStorage.getItem('useremail').toString(), "DIGITALCOMPANYPROFILE").toString(Crypto.enc.Utf8);
+}
+else{
+    useremail = localStorage.getItem('useremail');
+}
+
+if(localStorage.getItem('usertype') != null && localStorage.getItem('usertype') != '' ){
+    usertype = Crypto.AES.decrypt(localStorage.getItem('usertype').toString(), "DIGITALCOMPANYPROFILE").toString(Crypto.enc.Utf8);
+}
+else{
+    usertype = localStorage.getItem('usertype');
+}
+
+if(localStorage.getItem('userdataemail') != null && localStorage.getItem('userdataemail') != '' ){
+    userdataemail = Crypto.AES.decrypt(localStorage.getItem('userdataemail').toString(), "DIGITALCOMPANYPROFILE").toString(Crypto.enc.Utf8);
+}
+else{
+    userdataemail = localStorage.getItem('userdataemail');
+}
 
 const state = {
-    useremail: localStorage.getItem('useremail'),
+    useremail: useremail,
+    // useremail: localStorage.getItem('useremail'),
     // company_id: localStorage.getItem('companyid'),
     userid: localStorage.getItem('userid'),
     firstname: localStorage.getItem('first_name'),
-    type: localStorage.getItem('usertype'),
+    type: usertype,
+    // type: localStorage.getItem('usertype'),
     adminid: localStorage.getItem('admin_id'),
     userpagereq:0,
     userdata:[],
     admindash:[],
     admindashreq:0,
-
     companydash:[],
     companydashreq:0,
-
-    userdataemail:localStorage.getItem('userdataemail'),
-
-
+    userdataemail: userdataemail,
+    // userdataemail:localStorage.getItem('userdataemail'),
 };
 
 const getters = {
@@ -38,7 +63,6 @@ const getters = {
 
     getcompanydash: (state) => state.companydash,
     getcompanydashreq: (state) => state.companydashreq,
-
 
 };
 

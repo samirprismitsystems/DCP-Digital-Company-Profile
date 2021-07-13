@@ -58,7 +58,7 @@
 <div id="particles-js"></div>
 
     <!--	  -->
-<nav class="navbar navbar-expand-md " id="">
+<nav class="navbar navbar-expand-md " id="" v-if="getpagerequest == 1">
   <div class="container custom_container"> <a class="navbar-brand " href="index.html">
     <h1>DCP</h1>
     </a>
@@ -414,7 +414,33 @@ export default {
         return data;
       },
       getpagerequest(){
-        return this.$store.getters.getpagesrequest;
+        let req =  this.$store.getters.getpagesrequest;
+        if(req == 1){
+            let owl = document.createElement('script')
+            owl.setAttribute('src', '/src/landingassets/theme/owl.carousel.min.js')
+            document.head.appendChild(owl);
+
+            // let owltheme = document.createElement('script')
+            // owltheme.setAttribute('src', '/src/landingassets/theme/owl.theme.default.min.js')
+            // document.head.appendChild(owltheme);
+
+            let particles = document.createElement('script')
+            particles.setAttribute('src', 'http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js')
+            document.head.appendChild(particles);
+
+            let app = document.createElement('script')
+            app.setAttribute('src', '/src/landingassets/app.js')
+            document.head.appendChild(app);
+
+            let custom = document.createElement('script')
+            custom.setAttribute('src', '/src/landingassets/js/custom.js')
+            document.head.appendChild(custom);
+
+            let animation = document.createElement('script')
+            animation.setAttribute('src', '/src/landingassets/theme/animation-on-scroll.js')
+            document.head.appendChild(animation);
+        }
+        return req;  
       },
       getsettingdata(){
         let data =  this.$store.getters.getsettingdata;
@@ -432,30 +458,6 @@ export default {
 
 
     created(){
-
-        let owl = document.createElement('script')
-        owl.setAttribute('src', '/src/landingassets/theme/owl.carousel.min.js')
-        document.head.appendChild(owl);
-
-        // let owltheme = document.createElement('script')
-        // owltheme.setAttribute('src', '/src/landingassets/theme/owl.theme.default.min.js')
-        // document.head.appendChild(owltheme);
-
-        let particles = document.createElement('script')
-        particles.setAttribute('src', 'http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js')
-        document.head.appendChild(particles);
-
-        let app = document.createElement('script')
-        app.setAttribute('src', '/src/landingassets/app.js')
-        document.head.appendChild(app);
-
-        let custom = document.createElement('script')
-        custom.setAttribute('src', '/src/landingassets/js/custom.js')
-        document.head.appendChild(custom);
-
-        let animation = document.createElement('script')
-        animation.setAttribute('src', '/src/landingassets/theme/animation-on-scroll.js')
-        document.head.appendChild(animation);
 
         this.$store.dispatch('setsettingdata');
         this.$store.dispatch('setpagesdata');
@@ -484,6 +486,8 @@ export default {
           document.querySelector("meta[property='og:title']").content = this.data.meta_title;
           document.querySelector("meta[property='og:description']").content = this.data.meta_description;
           document.querySelector("meta[property='og:image']").content = this.$imgpath + 'metaimg/' + this.data.meta_image;
+          document.querySelector("meta[property='og:url']").content = window.location.href;
+          document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + 'metaimg/' + this.data.meta_image;
 
         });
 

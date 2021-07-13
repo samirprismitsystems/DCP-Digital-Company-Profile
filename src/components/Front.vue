@@ -24,6 +24,7 @@
 <!--	  style-->
 <link href="/src/frontassets/css/style.css" rel="stylesheet" >
 
+<script v-html="jsonlddata"  type="application/ld+json"></script>
 
 
 <div class="container-fluid p-0 " id="" v-if="getpagerequest == 1 && getfrontdata.company != null && getfrontdata.company != '' ">
@@ -55,7 +56,7 @@
           <p>Whatsapp</p>
         </div>
 
-        <div class="col-3 contact-link"> <a :href="'https://www.google.com/maps/search/?api=1&query='+getfrontdata.company.address" class="link-icon location-icon" target="_blank" rel="noopener"> <i class="fas fa-map-marker-alt" ></i> </a>
+        <div class="col-3 contact-link"> <a :href="'https://www.google.com/maps/search/?api=1&query='+ getfrontdata.company.area +', '+ getfrontdata.company.city +', '+ getfrontdata.company.state +', '+ getfrontdata.company.country +', '+ getfrontdata.company.post_code" class="link-icon location-icon" target="_blank" rel="noopener"> <i class="fas fa-map-marker-alt" ></i> </a>
           <p>Location</p>
         </div>
         <div class="col-3 contact-link"> <a :href="'mailto:'+getfrontdata.company.company_email" class="link-icon mail-icon" > <i class="fas fa-envelope" ></i> </a>
@@ -96,11 +97,11 @@
           <h3 class="">About</h3>
         </div>
         <div class="content-box">
-          <p><strong> Since  {{ dateformat(getfrontdata.company.established_in) }} </strong></p>
+          <p v-if="getfrontdata.company.established_in != ''"><strong> Since  {{ dateformat(getfrontdata.company.established_in) }} </strong></p>
           <p>{{getfrontdata.company.company_desc}}</p>
-          <p><strong> Working Days - {{ workingdays(getfrontdata.company.working_hours_day) }} </strong></p>
-          <p><strong> From Time - {{ timeformat(getfrontdata.company.working_hours_from) }} </strong></p>
-          <p><strong> To Time - {{ timeformat(getfrontdata.company.working_hours_to) }} </strong></p>
+          <p v-if="getfrontdata.company.working_hours_day != ''"><strong> Working Days - {{ workingdays(getfrontdata.company.working_hours_day) }} </strong></p>
+          <p v-if="getfrontdata.company.working_hours_from != ''"><strong> From Time - {{ timeformat(getfrontdata.company.working_hours_from) }} </strong></p>
+          <p v-if="getfrontdata.company.working_hours_to != ''"><strong> To Time - {{ timeformat(getfrontdata.company.working_hours_to) }} </strong></p>
         </div>
       </div>
 
@@ -193,7 +194,7 @@
         </div>
         <div class="row"> 
           <!--	google pay  -->
-          <div class="col-12">
+          <div class="col-12" v-if="getfrontdata.paymentinfo.googlepay_number != ''">
             <div class="pay-detail"> <span class="app-name">Google Pay</span>
               <div class="link-icon google-icon"> <img data-src="/src/frontassets/img/google-pay.png" width="35" height="30" alt="Digital Profile" title="Digital Profile" class="lazyload "/> </div>
               <div class="pay-info">
@@ -205,7 +206,7 @@
             </div>
           </div>
           <!--					phone-pe-->
-          <div class="col-12">
+          <div class="col-12" v-if="getfrontdata.paymentinfo.phonepay_number != ''">
             <div class="pay-detail"> <span class="app-name">Phone Pe</span>
               <div class="link-icon google-icon"> <img data-src="/src/frontassets/img/phone-pe.png" width="30" height="30" alt="Digital Profile" title="Digital Profile" class="lazyload "/> </div>
               <div class="pay-info">
@@ -217,7 +218,7 @@
             </div>
           </div>
           <!--					Paytm-->
-          <div class="col-12">
+          <div class="col-12" v-if="getfrontdata.paymentinfo.paytm_number != ''">
             <div class="pay-detail"> <span class="app-name">Paytm</span>
               <div class="link-icon google-icon"> <img data-src="/src/frontassets/img/paytm.png" width="35" height="12" alt="Digital Profile" title="Digital Profile" class="lazyload "/> </div>
               <div class="pay-info">
@@ -236,14 +237,15 @@
               <div class="pay-info">
                 <dl>
                   <dt>Qr Code .:&nbsp;</dt>
-                  <dd> <img :src="imgpath+getfrontdata.company.company_id+'/qrcode/'+getfrontdata.paymentinfo.qrcode" width="150" height="150" /> </dd>
+                  <dd> <img :src="imgpath+getfrontdata.company.company_id+'/qrcode/'+getfrontdata.paymentinfo.qrcode" alt="Qr code" width="150" height="150" /> </dd>
                 </dl>
               </div>
             </div>
           </div>
 
-          <!--					bank info-->
-          <div class="col-12">
+          <!-- bank info -->
+          
+          <div class="col-12" v-if="getfrontdata.paymentinfo.account_holder_name != '' && getfrontdata.paymentinfo.bank_name && getfrontdata.paymentinfo.bank_account_number && getfrontdata.paymentinfo.bank_ifsc_code && getfrontdata.paymentinfo.account_type">
             <div class="content-box bank-info">
               <h3>Bank Account Details</h3>
               <dl>
@@ -260,6 +262,8 @@
               </dl>
             </div>
           </div>
+
+
         </div>
       </div>
       
@@ -323,13 +327,12 @@
           <div id="map" style="width: 100%; height: 25rem">
             <!-- <iframe :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyBZwDt7DaRbnnOX-Glzg7FJvZ9yCbVHkBQ&q='+getfrontdata.company.address" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
 
-          <l-map :zoom="16" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
+          <l-map :zoom="17" :center="[osmdata.lat,osmdata.lon ]" style="height: 400px; width:100%">
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
             <l-marker :lat-lng="getmarker(osmdata.lat,osmdata.lon)">
               <l-popup :content="osmdata.displayname"></l-popup>
             </l-marker>
           </l-map>
-
 
            </div>
         </div>
@@ -379,6 +382,7 @@ export default {
                 {id:2,text:'two'},
                 {id:3,text:'three'},
             ],
+            daysofweek:[],
             getdata:[],
             companyurl:window.location.href,
             imgpath:this.$imgpath,
@@ -392,6 +396,36 @@ export default {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             marker: null,
             ismapdata:0,
+
+            jsonlddata:{
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "",
+              image: "",
+              "@id": "",
+              url: "",
+              telephone: "",
+              priceRange: "",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "",
+                addressLocality: "",
+                postalCode: "",
+                addressCountry: ""
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: '',
+                longitude: ''
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [],
+                opens: "",
+                closes: ""
+              },
+              sameAs: [] 
+            },
         }
     },
     components:{
@@ -412,8 +446,55 @@ export default {
                 else{
                   this.osmdata.lat = data.company.map_lat;
                   this.osmdata.lon = data.company.map_lng;
-                  this.osmdata.displayname = data.company.address;
+                  this.osmdata.displayname = data.company.area +', '+ data.company.city +', '+ data.company.state +', '+ data.company.country +', '+ data.company.post_code;
                   this.ismapdata = 1;
+
+                  if(data.company.working_hours_day == 'mtf'){
+                    this.daysofweek = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+                  }
+                  else if(data.company.working_hours_day == 'mts'){
+                    this.daysofweek = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+                  }
+                  else{
+                    this.daysofweek = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+                  }
+
+                  let schema = document.createElement('script')
+                  schema.setAttribute('type', 'application/ld+json')
+
+                  this.jsonlddata.name = data.company.company_name;
+                  this.jsonlddata.image = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
+                  this.jsonlddata.url = window.location.href;
+                  this.jsonlddata.telephone = data.company.company_contact;
+                  this.jsonlddata.priceRange = "$$";
+                  this.jsonlddata.address.streetAddress = data.company.area;
+                  this.jsonlddata.address.addressLocality = data.company.city;
+                  this.jsonlddata.address.postalCode = data.company.post_code;
+                  this.jsonlddata.address.addressCountry = data.company.country;
+                  this.jsonlddata.geo.latitude =  data.company.map_lat;
+                  this.jsonlddata.geo.longitude = data.company.map_lng;
+                  this.jsonlddata.openingHoursSpecification.dayOfWeek = this.daysofweek;
+                  this.jsonlddata.openingHoursSpecification.opens = data.company.working_hours_from;
+                  this.jsonlddata.openingHoursSpecification.closes = data.company.working_hours_to;
+                  data.social.forEach( social => {
+                    this.jsonlddata.sameAs.push(social.link);
+                  });
+                
+                  document.getElementsByTagName("META")['title'].content = data.company.company_name;
+                  document.getElementsByTagName("META")['keywords'].content = data.company.business_segment;
+                  document.getElementsByTagName("META")['description'].content = data.company.company_desc;
+                  document.querySelector("meta[property='og:title']").content = data.company.company_name;
+                  document.querySelector("meta[property='og:description']").content = data.company.company_desc;
+                  document.querySelector("meta[property='og:image']").content = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
+                  document.querySelector("meta[property='og:url']").content = window.location.href;
+                  
+                  document.getElementsByTagName('meta')["twitter:title"].content = data.company.company_name;
+                  document.getElementsByTagName('meta')["twitter:description"].content = data.company.company_desc;
+                  document.getElementsByTagName('meta')["twitter:site"].content = '';
+                  document.getElementsByTagName('meta')["twitter:creator"].content = '';
+                  document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
+                  document.getElementById("favicon").href = this.$imgpath + data.company.company_id + '/logo/' + data.company.company_logo;
+                  
                 }
             }
             return data;
@@ -504,7 +585,7 @@ export default {
                 text: 'Take a look at this Site!',
                 url: window.location.href,
               })
-              .then(() => console.log('Successful share'))
+              .then(() => {})
               .catch((error) => console.log('Error sharing', error));
           } else {
             console.log('Share not supported on this browser, do it the old way.');

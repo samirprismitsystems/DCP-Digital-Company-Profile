@@ -20,7 +20,7 @@
                 <div class="row mt-5 justify-content-center">
                     <div class="col-md-12 col-sm-12 col-lg-12 col-12 mt-5">
 
-                        <table class="table table-hover tablecontent">
+                        <table class="table table-hover tablecontent form_shadow">
                             <thead>
                             <tr>
                                 <th>Page Name</th>

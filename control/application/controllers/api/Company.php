@@ -52,6 +52,56 @@ class Company extends REST_Controller {
 		}
 	}
 
+	public function fetchallareadata_get(){
+		$data = array();
+		$data['country'] = $this->Company_Model->getcountry();
+		$data['state'] = $this->Company_Model->getstates();
+		$data['city'] = $this->Company_Model->getcities();
+
+		if($data['country'] != null && $data['state'] != null && $data['city'] != null ){
+			$output['error'] = false;
+            $output['data'] = $data;
+            $output['message'] = "Area data fetched successfully";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = false;
+            $output['data'] = [];
+            $output['message'] = "Empty Area Data";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}
+
+	public function getcitiesdata_get($statename){
+		if($cities = $this->Company_Model->getcitiesdata($statename)){
+			$output['error'] = false;
+            $output['cities'] = $cities;
+            $output['message'] = "Cities data fetched successfully";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = false;
+            $output['cities'] = [];
+            $output['message'] = "Empty City Data";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}
+
+	public function getstatesdata_get($countryname){
+		if($states = $this->Company_Model->getstatesdata($countryname)){
+			$output['error'] = false;
+            $output['states'] = $states;
+            $output['message'] = "States data fetched successfully";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = false;
+            $output['states'] = [];
+            $output['message'] = "Empty States Data";
+            $this->set_response($output, REST_Controller::HTTP_OK);
+		}
+	}	
+
 	public function createcompany_post(){
 		$data = $this->input->post();
 
@@ -73,7 +123,13 @@ class Company extends REST_Controller {
             'company_desc' => $data['company_desc'],
             'established_in'=> $data['established_in'],
             'business_segment' => $data['business_segment'],
-            'address' => $data['address'],
+            // 'address' => $data['address'],
+            'area' => $data['area'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'country' => $data['country'],
+            'post_code' => $data['post_code'],
+            
             'company_email' => $data['company_email'],
             'company_contact' => $data['company_contact'],
             'company_alternate_contact' => $data['company_alternate_contact'],
@@ -256,20 +312,26 @@ class Company extends REST_Controller {
 
 		$user_id = $this->User_Model->getuserid($user_id);
 
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
-
-		if($social = $this->Company_Model->getsociallist($company_id)){
-			$output['error'] = false;
-            $output['social'] = $social;
-            $output['message'] = "social data fetched successfully";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+			$company_id = $company_data[0]['company_id'];
+			if($social = $this->Company_Model->getsociallist($company_id)){
+				$output['error'] = false;
+	            $output['social'] = $social;
+	            $output['message'] = "social data fetched successfully";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = true;
+				$output['social'] = [];
+	            $output['message'] = "empty social data";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = true;
-			$output['social'] = [];
-            $output['message'] = "empty social data";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = true;
+				$output['social'] = [];
+	            $output['message'] = "empty social data";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 
@@ -383,7 +445,7 @@ class Company extends REST_Controller {
 			$portfolio = $this->Portfolio_Model->getportfolio($company['company_id']);
 			$product = $this->Product_Model->getproduct($company['company_id']);
 			$service = $this->Service_Model->getservice($company['company_id']);
-			$testimonial = $this->Testimonial_Model->gettestimonial($company['company_id']);
+			$testimonial = $this->Testimonial_Model->gettestimonial($company['company_id'],'active');
 			$paymentinfo = $this->Company_Model->getpaymentdata($company['company_id']);
 
 
@@ -422,20 +484,28 @@ class Company extends REST_Controller {
 
 	public function fetchpaymentoptions_get($user_id){
 		$user_id = $this->User_Model->getuserid($user_id);
-		$company_data = $this->Company_Model->getcompany($user_id);
- 		$company_id = $company_data[0]['company_id'];
+		
+		if($company_data = $this->Company_Model->getcompany($user_id)){
+	 		$company_id = $company_data[0]['company_id'];
 
- 		if($payment_data = $this->Company_Model->getpaymentdata($company_id)){
-			$output['error'] = false;
-            $output['paymentdata'] = $payment_data;
-            $output['message'] = "Payment Data fetched successfully";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+	 		if($payment_data = $this->Company_Model->getpaymentdata($company_id)){
+				$output['error'] = false;
+	            $output['paymentdata'] = $payment_data;
+	            $output['message'] = "Payment Data fetched successfully";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = false;
+	            $output['paymentdata'] = [];
+	            $output['message'] = "Empty Payment Data";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 		else{
-			$output['error'] = false;
-            $output['paymentdata'] = [];
-            $output['message'] = "Empty Payment Data";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+				$output['error'] = false;
+	            $output['paymentdata'] = [];
+	            $output['message'] = "Empty Payment Data";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 	}
 
@@ -554,7 +624,11 @@ class Company extends REST_Controller {
 				}
 			}
 			else{
-				$uploadphoto = $data['logo'];
+				if($data['isupdate'] == 'true'){
+					$uploadphoto = $data['logo'];
+				}else{
+					$uploadphoto = '';
+				}
 			}
 
 	 		$paymentoption_field = array(

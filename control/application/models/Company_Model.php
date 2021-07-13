@@ -305,7 +305,47 @@ class Company_Model extends CI_Model{
             $this->db->where('company_id',$company_id);
         }
         return $this->db->get('tbl_inquiry')->num_rows();   
-    }    
+    }
+
+    public function getcountry(){
+        $this->db->order_by('name');
+        return $this->db->get('tbl_countries')->result_array();   
+    }
+
+    public function getstates(){
+        $this->db->order_by('name');
+        return $this->db->get('tbl_states')->result_array();   
+    }
+
+    public function getcities(){
+        $this->db->order_by('name');
+        return $this->db->get('tbl_cities')->result_array();   
+    }
+
+    public function getcitiesdata($statename){
+        $statename = str_replace("%20"," ",$statename);
+        
+        $this->db->where('name',$statename);
+        $stateid = $this->db->get('tbl_states')->row_array();
+
+        $this->db->where('state_id',$stateid['id']);
+        $this->db->order_by('name');
+        return $this->db->get('tbl_cities')->result_array();   
+    }
+
+
+    public function getstatesdata($countryname){
+        $statename = str_replace("%20"," ",$countryname);
+        
+        $this->db->where('sortname',$countryname);
+        $countryid = $this->db->get('tbl_countries')->row_array();
+
+        $this->db->where('country_id',$countryid['id']);
+        $this->db->order_by('name');
+        return $this->db->get('tbl_states')->result_array();   
+    }
+
+
 
     
 }

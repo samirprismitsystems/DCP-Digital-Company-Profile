@@ -19,7 +19,7 @@
                    <div class="row mt-5 justify-content-center">
                     <div class="col-md-10 col-sm-12 col-lg-10 col-12 mt-5 table-responsive">
                             
-                            <table class="table table-hover tablecontent">
+                            <table class="table table-hover tablecontent form_shadow mb-5">
                                 <thead>
                                 <tr>
                                     <th>Company Name</th>
@@ -91,6 +91,7 @@
 import axios from 'axios'
 import AdminDash from './AdminDash'
 import moment from 'moment'
+import Crypto from 'crypto-js';
 export default {
     name:'AdminCompanyList',
     components:{
@@ -187,11 +188,19 @@ export default {
 
                 // console.log(userdata);
 
-                localStorage.setItem('userid',userdata.user_id);
-                this.$store.dispatch('setuserid',{userid:userdata.user_id});
+                // localStorage.setItem('userid',userdata.user_id);
+                // this.$store.dispatch('setuserid',{userid:userdata.user_id});
+                
+                // this.$session.start()
+                // this.$session.clear()
+                // this.$session.set('userdataemail', userdata.email_id);
+                // sessionStorage.setItem('userdataemail', userdata.email_id);
+                // localStorage.setItem('userdataemail', encemail);
 
-                localStorage.setItem('userdataemail',userdata.email_id);
+                var encemail = Crypto.AES.encrypt(userdata.email_id, "DIGITALCOMPANYPROFILE").toString();
+                localStorage.setItem('userdataemail',encemail);
                 this.$store.dispatch('setuserdataemail',{userdataemail:userdata.email_id});
+            
             });
 
             window.open("http://localhost:8080/dashboard/company", "_blank");

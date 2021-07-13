@@ -86,9 +86,9 @@ class User extends REST_Controller {
 			'status' => $data['status'],
         );
 
-        if($userid = $this->User_Model->registeruser($user_field)){
+        if($userdata = $this->User_Model->registeruser($user_field)){
 			$output['error'] = false;
-			$output['userid'] = $userid;
+			$output['userdata'] = $userdata;
 			$output['message'] = "User Data Added";
 			$this->set_response($output, REST_Controller::HTTP_OK);
 		}
@@ -320,9 +320,8 @@ class User extends REST_Controller {
 	public function getcompanydashdata_get($user_id){
 		
 		$user_id = $this->User_Model->getuserid($user_id);   	
-		$company = $this->Company_Model->getcompany($user_id);
-
-		$product = $this->Company_Model->gettotalproduct($company[0]['company_id']);
+		if( $company = $this->Company_Model->getcompany($user_id)){
+			$product = $this->Company_Model->gettotalproduct($company[0]['company_id']);
 		$service = $this->Company_Model->gettotalservice($company[0]['company_id']);
 		$clients = $this->Company_Model->gettotalclients($company[0]['company_id']);
 		$portfolio = $this->Company_Model->gettotalportfolio($company[0]['company_id']);
@@ -337,6 +336,19 @@ class User extends REST_Controller {
 			$output['testimonials'] = $testimonials;
 			$output['inquiry'] = $inquiry;
 			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+		else{
+			$output['error'] = true;
+			$output['product'] = 0;
+			$output['service'] = 0;
+			$output['clients'] = 0;
+			$output['portfolio'] = 0;
+			$output['testimonials'] = 0;
+			$output['inquiry'] = 0;
+			$this->set_response($output, REST_Controller::HTTP_OK);
+		}
+
+		
 	}
 
 

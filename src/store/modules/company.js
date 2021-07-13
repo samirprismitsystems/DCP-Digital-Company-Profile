@@ -19,6 +19,11 @@ const state = {
 
     socialcolorreq:0,
     socialcolors:[],
+
+    area:[],
+
+    states:[],
+    statereq:0,
 };
 
 const getters = {
@@ -44,6 +49,12 @@ const getters = {
     getsocialcolors:(state) => state.socialcolors,
     getsocialcolorsreq:(state) => state.socialcolorreq,
 
+    getareadata:(state) => state.area,
+
+
+    getstatesdata:(state) => state.states,
+    getstatesreq:(state) => state.statereq,
+
     };
 
 const actions = {
@@ -53,12 +64,18 @@ const actions = {
     async setcompanydata({commit},user){
         CompanyApi.getCompanyData(user.id,result => {
             commit('SETCOMPANYDATA',result.data);
-            commit('SETCOMPANYREQUEST',1);
+            // commit('SETCOMPANYREQUEST',1);
             // console.log(result.data.company[0]);
             if(result.data.company[0] != null && result.data.company[0] != ''){
                 commit('SETCOMPANYID',result.data.company[0].company_id);
             }
         });
+
+        CompanyApi.getareadata(result => {
+            commit('SETAREADATA',result.data);
+            commit('SETCOMPANYREQUEST',1);
+        });
+
     },
     
     async setsocialdata({commit},user){
@@ -111,6 +128,12 @@ const actions = {
     },
 
 
+    async setstatesdata({commit},states){
+        commit('SETSTATESDATA',states.states);
+        commit('SETSTATESREQUEST',1);
+    },
+
+
 };
 
 const mutations = {
@@ -129,6 +152,11 @@ const mutations = {
     SETALLSOCIALREQUEST:(state,payload)=> (state.allsocialreq = payload),
     SETSOCIALCOLOR:(state,payload)=> (state.socialcolors = payload),
     SETSOCIALCOLORREQ:(state,payload)=> (state.socialcolorreq = payload),
+    SETAREADATA:(state,payload)=> (state.area = payload),
+
+    SETSTATESREQUEST:(state,payload)=> (state.statereq = payload),
+    SETSTATESDATA:(state,payload)=> (state.states = payload),
+
 };
 
 export default {

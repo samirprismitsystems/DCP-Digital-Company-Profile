@@ -20,10 +20,23 @@ Vue.component('Select2', Select2);
 
 let sitemainpath = '/digital-company-profile/';
 
+
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 // set default config
 Vue.$cookies.config(60*10,sitemainpath)
+
+
+var options = {
+  persist: true
+}
+import VueSession from 'vue-session'
+Vue.use(VueSession,options)
+
+
+import VueCryptojs from 'vue-cryptojs'
+Vue.use(VueCryptojs)
+
 
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
