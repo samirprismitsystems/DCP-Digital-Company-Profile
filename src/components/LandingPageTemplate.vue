@@ -161,6 +161,10 @@
 
                 <div class="form_field">
                     <label>Description</label>
+                    
+                    <!-- <wysiwyg v-if="data != null" v-model="data.page_content.carddesc1"  name="cdesc1" ref="cdesc1" class="" placeholder="Enter Card Description 1" required="" />
+                    <wysiwyg v-else v-model="card1"  name="cdesc1" ref="cdesc1" class="" placeholder="Enter Card Description 1" required="" /> -->
+
                     <vue-editor v-if="data != null" v-model="data.page_content.carddesc1"  name="cdesc1" ref="cdesc1" class="" placeholder="Enter Card Description 1" required=""></vue-editor>
                     <vue-editor v-else v-model="card1"  name="cdesc1" ref="cdesc1" class="" placeholder="Enter Card Description 1" required=""></vue-editor>
                 </div>
@@ -194,8 +198,13 @@
 
                 <div class="form_field">
                     <label>Description</label>
-                    <vue-editor v-if="data != null" v-model="data.page_content.carddesc2"  name="cdesc2" ref="cdesc2" class="" placeholder="Enter Card Description 2" required=""></vue-editor>
+                    
+                    <!-- <wysiwyg v-if=" data != null" v-model="data.page_content.carddesc2"  name="cdesc2" ref="cdesc2" class="" placeholder="Enter Card Description 2" required="" />
+                    <wysiwyg v-else v-model="card2"  name="cdesc2" ref="cdesc2" class="" placeholder="Enter Card Description 2" required="" /> -->
+                    
+                    <vue-editor v-if=" data != null" v-model="data.page_content.carddesc2"  name="cdesc2" ref="cdesc2" class="" placeholder="Enter Card Description 2" required=""></vue-editor>
                     <vue-editor v-else v-model="card2"  name="cdesc2" ref="cdesc2" class="" placeholder="Enter Card Description 2" required=""></vue-editor>
+
                 </div>
             </div>
         </div>
@@ -476,7 +485,14 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+// import wysiwyg from "vue-wysiwyg";
+// Vue.use(wysiwyg, {});
+// import "vue-wysiwyg/dist/vueWysiwyg.css";
+
 import { VueEditor } from "vue2-editor";
+
+
 export default {
     name:'LandingPageTemplate',
     components:{
@@ -530,6 +546,7 @@ export default {
 
         getpagesdata(){
             let data =  this.$store.getters.getpagesdata;
+            this.pages = [];
             data.forEach(element => {
                 let obj = {
                     id:element.page_id,

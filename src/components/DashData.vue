@@ -12,13 +12,13 @@
 			    </li>
 			    <li :class="checkclass('Service')"><router-link to="/dashboard/service" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/services.png" width="36" height="37" alt="Service" title="" ><span>Services</span></router-link>
 			    </li>
-				<li :class="checkclass('Client')"><router-link to="/dashboard/client" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/clients.png" width="40" height="32" alt="Clients" title="" ><span>Clients</span></router-link>
+				<li :class="checkclass('Client')"><router-link to="/dashboard/client" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/clients.webp" width="40" height="32" alt="Clients" title="" ><span>Clients</span></router-link>
 			    </li>
 			    <li :class="checkclass('Portfolio')"><router-link to="/dashboard/portfolio" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/image_gallery.png" width="40" height="32" alt="Gallery" title="" ><span>Image Gallery</span></router-link>
 			    </li>
 				<li :class="checkclass('Testimonial')"><router-link to="/dashboard/testimonial" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/testimonial.png" width="40" height="40" alt="Testimonials" title="" ><span>Testimonial</span></router-link>
 			    </li>
-				<li :class="checkclass('Enquiry')"><router-link to="/dashboard/enquiry" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/inquiry.png" width="40" height="40" alt="Enquiry" title="" ><span>Inquiry</span></router-link>
+				<li :class="checkclass('Enquiry')"><router-link to="/dashboard/enquiry" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/inquiry.webp" width="40" height="40" alt="Enquiry" title="" ><span>Inquiry</span></router-link>
 			    </li>
 			    <li :class="checkclass('Payment Options')"><router-link to="/dashboard/paymentoptions" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/payment_options.png" width="40" height="40" alt="Payment Option" title="" ><span>Payment Options</span></router-link>
 			    </li>
@@ -28,6 +28,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
+
 export default {
 	name:'DashData',
 	computed:{

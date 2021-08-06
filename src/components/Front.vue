@@ -1,15 +1,8 @@
 <template>
 <div>
 	<!--icon-->
-<link rel="icon" href="#" />
+<!-- <link rel="icon" href="#" /> -->
 <!--	  fonts--> 
-
-<!--	  offline font-->
-<link rel="preload"  href="/src/frontassets/webfonts/fa-brands-400.woff" as="font">
-<link rel="preload"  href="/src/frontassets/webfonts/fa-brands-400.woff" as="font" type="font/woff" crossorigin="anonymous">
-<link rel="preload"  href="/src/frontassets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload"  href="/src/frontassets/webfonts/fa-solid-900.woff" as="font" type="font/woff" crossorigin="anonymous">
-<link rel="preload"  href="/src/frontassets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <!--	  theme-->
 <link href="/src/frontassets/theme/media-query.css" rel="preload" as="style">
@@ -24,8 +17,8 @@
 <!--	  style-->
 <link href="/src/frontassets/css/style.css" rel="stylesheet" >
 
-<script v-html="jsonlddata"  type="application/ld+json"></script>
 
+<script v-html="jsonlddata"  type="application/ld+json"></script>
 
 <div class="container-fluid p-0 " id="" v-if="getpagerequest == 1 && getfrontdata.company != null && getfrontdata.company != '' ">
   <section id="profile" class="profile-section">
@@ -343,7 +336,7 @@
   </div>
 </div>
 
-<ul class="bottom-nav fixed-bottom">
+<ul v-if="getpagerequest == 1" class="bottom-nav fixed-bottom">
   <a class="site-link back_to_top"> <i class="far fa-arrow-alt-circle-up" ></i> <span>Back to top</span> </a>
   <a href="#about-us" class="site-link scroll-to"> <i class="far fa-user-circle" ></i> <span>About-us</span> </a>
   <a v-if="getfrontdata.product != null && getfrontdata.product != ''" href="#products" class="site-link scroll-to"> <i class="fas fa-shopping-basket" ></i> <span>Products</span> </a>
@@ -362,10 +355,10 @@
 <script>
 import axios from 'axios'
 import StarRating from 'vue-star-rating'
-import moment from 'moment'
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker,LPopup } from 'vue2-leaflet';
-// import vCardsJS from 'vcards-js'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 export default {
     name:'Front',
@@ -480,19 +473,20 @@ export default {
                     this.jsonlddata.sameAs.push(social.link);
                   });
                 
-                  document.getElementsByTagName("META")['title'].content = data.company.company_name;
-                  document.getElementsByTagName("META")['keywords'].content = data.company.business_segment;
-                  document.getElementsByTagName("META")['description'].content = data.company.company_desc;
-                  document.querySelector("meta[property='og:title']").content = data.company.company_name;
-                  document.querySelector("meta[property='og:description']").content = data.company.company_desc;
-                  document.querySelector("meta[property='og:image']").content = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
-                  document.querySelector("meta[property='og:url']").content = window.location.href;
+                  // document.getElementsByTagName("META")['title'].content = data.company.company_name;
+                  // document.getElementsByTagName("META")['keywords'].content = data.company.business_segment;
+                  // document.getElementsByTagName("META")['description'].content = data.company.company_desc;
+                  // document.querySelector("meta[property='og:title']").content = data.company.company_name;
+                  // document.querySelector("meta[property='og:description']").content = data.company.company_desc;
+                  // document.querySelector("meta[property='og:image']").content = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
+                  // document.querySelector("meta[property='og:url']").content = window.location.href;
                   
-                  document.getElementsByTagName('meta')["twitter:title"].content = data.company.company_name;
-                  document.getElementsByTagName('meta')["twitter:description"].content = data.company.company_desc;
-                  document.getElementsByTagName('meta')["twitter:site"].content = '';
-                  document.getElementsByTagName('meta')["twitter:creator"].content = '';
-                  document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
+                  // document.getElementsByTagName('meta')["twitter:title"].content = data.company.company_name;
+                  // document.getElementsByTagName('meta')["twitter:description"].content = data.company.company_desc;
+                  // document.getElementsByTagName('meta')["twitter:site"].content = '';
+                  // document.getElementsByTagName('meta')["twitter:creator"].content = '';
+                  // document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + data.company.company_id + '/banner/' + data.company.company_banner;
+                  
                   document.getElementById("favicon").href = this.$imgpath + data.company.company_id + '/logo/' + data.company.company_logo;
                   
                 }
@@ -564,19 +558,24 @@ export default {
       },
 
       datedayformat(date){
-        var given = moment(date, "YYYYMMDD");
-        // var current = moment().startOf('day');
-        return moment(given, "YYYYMMDD").fromNow();
-        // return moment.duration(current.diff(given)).asDays();
+        dayjs.extend(relativeTime);
+        return dayjs(date).fromNow();
       },
 
       dateformat(date){
-       return moment(date).format('YYYY');
+       return dayjs(date).format('YYYY');
       },
 
-      timeformat(time){
-       return moment(time,"HH:mm:ss").format('h:mm A');
-      },
+    timeformat(time) {
+      time = time.toString().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join (''); // return adjusted time or original string
+    },
+
 
       sharelink(){
         if (navigator.share) {

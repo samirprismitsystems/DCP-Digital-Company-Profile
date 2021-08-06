@@ -15,6 +15,10 @@
                     <textarea rows="5" v-else id="content" ref="content" name="content" class="" placeholder="Enter Page Content" required=""></textarea> -->
                     <vue-editor v-if=" data != null" v-model="data.page_content.page_content" ref="content" name="content" class="" placeholder="Enter Page Content" required=""></vue-editor>
                     <vue-editor v-else v-model="content"  ref="content" name="content" class="" placeholder="Enter Page Content" required=""></vue-editor>
+
+                    <!-- <wysiwyg v-if=" data != null" v-model="data.page_content.page_content" ref="content" name="content" class="" placeholder="Enter Page Content" required="" />
+                    <wysiwyg v-else v-model="content"  ref="content" name="content" class="" placeholder="Enter Page Content" required="" /> -->
+                
                 </div>
 
                 <h2 class="mt-5">SEO Section</h2>
@@ -68,6 +72,10 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+// import wysiwyg from "vue-wysiwyg";
+// Vue.use(wysiwyg, {});
+// import "vue-wysiwyg/dist/vueWysiwyg.css";
 import { VueEditor } from "vue2-editor";
 
 export default {
@@ -93,7 +101,6 @@ export default {
         getsinglepagedata(){
             let data =  this.$store.getters.getsinglepagedata(this.$route.params.pageslug);
             if(data != null){
-                // console.log(data);
                 this.imgsrc = this.$imgpath + 'metaimg/' + data.meta_image;
             }
             return data;

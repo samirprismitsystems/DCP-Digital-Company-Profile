@@ -1,13 +1,16 @@
 var path = require('path')
 var webpack = require('webpack')
-require("babel-polyfill");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var PrerenderSpaPlugin = require('prerender-spa-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+var VendorChunkPlugin = require('webpack-vendor-chunk-plugin');
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    filename: 'build.js',
+    publicPath: '/dist/', // was originally 'dist'
   },
   module: {
     rules: [
@@ -66,12 +69,30 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
+
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: false
     }),
+
+    new PrerenderSpaPlugin(
+      path.join(__dirname, './dist'),
+      [ '/' ]
+    ),
+      
+    new UglifyJsPlugin({
+      "uglifyOptions":
+          {
+            compress: {
+              warnings: false
+            },
+            sourceMap: true
+          }
+      }
+    ),
+
+    new VendorChunkPlugin('vendor'),
+
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

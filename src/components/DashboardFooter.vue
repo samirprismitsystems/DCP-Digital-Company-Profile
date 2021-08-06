@@ -30,15 +30,20 @@ export default {
     },
     computed:{
         getpagereq(){
-            return this.$store.getters.getsettingrequest;
+            let req =  this.$store.getters.getsettingrequest;
+            // if(req == 1){
+            //     let bootstrap = document.createElement('script')
+            //     bootstrap.setAttribute('src', '/src/assets/js/bootstrap.min.js')
+            //     document.head.appendChild(bootstrap);
+            // }
+            return req;
         },
         getpagedata(){
             let pagedata = this.$store.getters.getsettingdata;
             let pages = JSON.parse(pagedata[9].setting_value);
-
-            document.querySelector("meta[property='og:image']").content = this.$imgpath + 'setting/' + pagedata[0].setting_value;
-            document.querySelector("meta[property='og:url']").content = window.location.protocol +'//'+ window.location.hostname ;
-            document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + 'setting/' + pagedata[0].setting_value;
+            // document.querySelector("meta[property='og:image']").content = this.$imgpath + 'setting/' + pagedata[0].setting_value;
+            // document.querySelector("meta[property='og:url']").content = window.location.protocol +'//'+ window.location.hostname ;
+            // document.getElementsByTagName('meta')["twitter:image"].content = this.$imgpath + 'setting/' + pagedata[0].setting_value;
             
             let pagelist = new FormData();
             pagelist.append('pages[]',pages);
@@ -50,9 +55,9 @@ export default {
     },
 
     created(){
-        // if(getpagereq == 0){
+        if(this.getpagereq == 0){
             // this.$store.dispatch('setsettingdata');
-        // }
+        }
     }
 }
 </script>

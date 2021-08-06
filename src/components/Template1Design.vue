@@ -38,12 +38,12 @@ export default {
         this.pagedata = this.data;
         // console.log(this.pagedata);
         // this.content = JSON.parse(this.data.page_content);
-        document.getElementsByTagName("META")['title'].content = this.pagedata.page.meta_title;
-        document.getElementsByTagName("META")['keywords'].content = this.pagedata.page.meta_keywords;
-        document.getElementsByTagName("META")['description'].content = this.pagedata.page.meta_description;
-        document.querySelector("meta[property='og:title']").content = this.pagedata.page.meta_title;
-        document.querySelector("meta[property='og:description']").content = this.pagedata.page.meta_description;
-        document.querySelector("meta[property='og:image']").content = this.imgpath+'metaimg/'+this.pagedata.page.meta_image;
+        // document.getElementsByTagName("META")['title'].content = this.pagedata.page.meta_title;
+        // document.getElementsByTagName("META")['keywords'].content = this.pagedata.page.meta_keywords;
+        // document.getElementsByTagName("META")['description'].content = this.pagedata.page.meta_description;
+        // document.querySelector("meta[property='og:title']").content = this.pagedata.page.meta_title;
+        // document.querySelector("meta[property='og:description']").content = this.pagedata.page.meta_description;
+        // document.querySelector("meta[property='og:image']").content = this.imgpath+'metaimg/'+this.pagedata.page.meta_image;
     },
 
     props:{

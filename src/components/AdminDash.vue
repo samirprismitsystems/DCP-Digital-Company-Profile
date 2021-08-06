@@ -14,11 +14,11 @@
 			    	<span>Pages</span></router-link>
 			    </li>
 
-				<li :class="checkadminclass('User Review')"><router-link :to="'/admindashboard/userreview'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/clientreview.png" width="44" height="39" alt="user review" title="" >
+				<li :class="checkadminclass('User Review')"><router-link :to="'/admindashboard/userreview'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/clientreview.webp" width="44" height="39" alt="user review" title="" >
 			    	<span>User Review</span></router-link>
 			    </li>
 
-				<li :class="checkadminclass('Setting')"><router-link :to="'/admindashboard/setting'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/setting.png" width="44" height="39" alt="settings" title="" >
+				<li :class="checkadminclass('Setting')"><router-link :to="'/admindashboard/setting'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/setting.webp" width="44" height="39" alt="settings" title="" >
 			    	<span>Setting</span></router-link>
 			    </li>
 				
@@ -27,6 +27,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
+
 export default {
 	name:'AdminDash',
 	computed:{

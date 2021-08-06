@@ -90,8 +90,9 @@
 <script>
 import axios from 'axios'
 import AdminDash from './AdminDash'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import Crypto from 'crypto-js';
+
 export default {
     name:'AdminCompanyList',
     components:{
@@ -139,7 +140,7 @@ export default {
     methods:{
 
         companydate(date){
-            return moment(date).format('Do - MMM - yyyy');
+            return dayjs(date).format('DD - MMM - YYYY');
         },
 
         checkchecked(status){
@@ -202,8 +203,14 @@ export default {
                 this.$store.dispatch('setuserdataemail',{userdataemail:userdata.email_id});
             
             });
-
-            window.open("http://localhost:8080/dashboard/company", "_blank");
+            if(window.location.hostname == 'localhost'){
+                window.open("http://localhost:8080/"+"dashboard/company", "_blank");
+                                              
+            }
+            else{
+                window.open(window.location.protocol+"//"+window.location.hostname+"/dashboard/company", "_blank");
+            }
+            
         },
 
         deletecompany(cid){

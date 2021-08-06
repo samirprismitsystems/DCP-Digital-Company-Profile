@@ -6,10 +6,10 @@
 				<!-- <img src="assets/img/login_img.png" width="962" height="881" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit"> -->
 
 			<picture class="d-block  h-100">
-			  <source srcset="/src/assets/img/login_img_400.png" media="(max-width:767px)" type="image/png">
-			  <source srcset="/src/assets/img/login_img_800.png" media="(max-width:1024px)" type="image/png">
-			  <source srcset="/src/assets/img/login_img_1200.png" media="(min-width:1025px)" type="image/png">
-			  <img data-src="/src/assets/img/login_img.png" loading="lazy"  width="962" height="881" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit lazyload ">
+			  <source srcset="/src/assets/img/login_img_400.webp" media="(max-width:767px)" type="image/png">
+			  <source srcset="/src/assets/img/login_img_800.webp" media="(max-width:1024px)" type="image/png">
+			  <source srcset="/src/assets/img/login_img_1200.webp" media="(min-width:1025px)" type="image/png">
+			  <img data-src="/src/assets/img/login_img.webp" loading="lazy"  width="962" height="881" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit lazyload ">
 		  </picture>
 				<span class="hello_world">hello world</span>
 			</div>

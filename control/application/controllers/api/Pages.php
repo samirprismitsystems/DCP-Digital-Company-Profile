@@ -51,22 +51,22 @@ class Pages extends REST_Controller {
 	            }
 
 
-	         //    $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
-          //       $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
-		        // $config_manip = array(
-          //           'image_library' => 'gd2',
-          //           'source_image' => $source_path,
-          //           'new_image' => $target_path,
-          //           'maintain_ratio' => false,
-          //           'create_thumb' => false,
-          //           'quality' =>'60%',
-          //          	'allowed_types' => "*",
-          //           // 'width' => 300,
-          //           // 'height' => 300
-          //       );
-          //       $this->image_lib->clear();
-          //       $this->image_lib->initialize($config_manip);
-          //       $this->image_lib->resize();
+	            $source_path = $sourcepath.$uploadData['raw_name'].$uploadData['file_ext'];
+                $target_path = $targetpath.$uploadData['raw_name'].$uploadData['file_ext'];
+		        $config_manip = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $source_path,
+                    'new_image' => $target_path,
+                    'maintain_ratio' => false,
+                    'create_thumb' => false,
+                    'quality' =>'60%',
+                   	'allowed_types' => "*",
+                    // 'width' => 300,
+                    // 'height' => 300
+                );
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
 
 
 
@@ -241,67 +241,116 @@ class Pages extends REST_Controller {
 
  		}
 
+
  		if(!empty($_FILES['meta_image']['name'])){
-            
-            $path = pathinfo($_FILES["meta_image"]["name"]);
 
-        	$targetpathmeta = './upload/metaimg/';
 
-				if (!is_dir($targetpathmeta)) {
-					mkdir($targetpathmeta,0777,TRUE);
-				}
+ 			$sourcepathmeta = './upload/metaimgoriginal/';
+	 		$targetpathmeta = './upload/metaimg/';
 
-				$configmeta['upload_path']   = $targetpathmeta;
-				$configmeta['allowed_types'] = "*";
-				$this->load->library('upload');
-				$this->upload->initialize($configmeta);
-				$this->load->library('image_lib');
-	        
-			$_FILES["meta_image"]["name"] = $path['filename'].'_'.time().'.webp';
-			$fileext = $path['extension'];
+	 		$config['upload_path']   = $sourcepathmeta;
+			$config['allowed_types'] = "*";
+			$this->load->library('upload');
+			$this->upload->initialize($config);
+			$this->load->library('image_lib');
 
+	 		if (!is_dir($sourcepathmeta)) {
+				mkdir($sourcepathmeta,0777,TRUE);
+			}
+			if (!is_dir($targetpathmeta)) {
+				mkdir($targetpathmeta,0777,TRUE);
+			}
+
+				$path = pathinfo($_FILES["meta_image"]["name"]);
+				$_FILES["meta_image"]["name"] = $path['filename'].'_'.time().'.'.$path['extension'];
 	            if ($this->upload->do_upload("meta_image")) {
 	            	$uploadData = $this->upload->data();
 	                $uploadfile = $uploadData['file_name'];
 	            }
+	            $source_path = $sourcepathmeta.$uploadData['raw_name'].$uploadData['file_ext'];
+                $target_path = $targetpathmeta.$uploadData['raw_name'].$uploadData['file_ext'];
+		        $config_manip = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $source_path,
+                    'new_image' => $target_path,
+                    'maintain_ratio' => false,
+                    'create_thumb' => false,
+                    'quality' =>'60%',
+                    'width' => 300,
+                    'height' => 300
+                );
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+			}
+			else{
+				$uploadfile = $data['meta_image_name'];
+			}
+
+
+
+
+ 		// if(!empty($_FILES['meta_image']['name'])){
+            
+   //          $path = pathinfo($_FILES["meta_image"]["name"]);
+
+   //      	$targetpathmeta = './upload/metaimg/';
+
+			// 	if (!is_dir($targetpathmeta)) {
+			// 		mkdir($targetpathmeta,0777,TRUE);
+			// 	}
+
+			// 	$configmeta['upload_path']   = $targetpathmeta;
+			// 	$configmeta['allowed_types'] = "*";
+			// 	$this->load->library('upload');
+			// 	$this->upload->initialize($configmeta);
+			// 	$this->load->library('image_lib');
+	        
+			// $_FILES["meta_image"]["name"] = $path['filename'].'_'.time().'.webp';
+			// $fileext = $path['extension'];
+
+	  //           if ($this->upload->do_upload("meta_image")) {
+	  //           	$uploadData = $this->upload->data();
+	  //               $uploadfile = $uploadData['file_name'];
+	  //           }
 
 	            
-	        if($path['extension'] != 'webp'){
-					if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')  
-			        	$url = "https://";   
-				    else  
-				        $url = "http://";   
-				    if($_SERVER['HTTP_HOST'] == 'localhost'){
-				    	$url.= $_SERVER['HTTP_HOST'].':8080';
-				    }
-				    else{
-				    	$url.= $_SERVER['HTTP_HOST'];
-				    }
+	  //       if($path['extension'] != 'webp'){
+			// 		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')  
+			//         	$url = "https://";   
+			// 	    else  
+			// 	        $url = "http://";   
+			// 	    if($_SERVER['HTTP_HOST'] == 'localhost'){
+			// 	    	$url.= $_SERVER['HTTP_HOST'].':8080';
+			// 	    }
+			// 	    else{
+			// 	    	$url.= $_SERVER['HTTP_HOST'];
+			// 	    }
 
-		         	$target_path = $url.'/control/upload/metaimg/'.$uploadData['raw_name'].$uploadData['file_ext'];
+		 //         	$target_path = $url.'/control/upload/metaimg/'.$uploadData['raw_name'].$uploadData['file_ext'];
 		         	
-		         	switch ($fileext) {
-			            case 'jpeg':
-			            case 'jpg':
-			                $im = imagecreatefromjpeg($target_path);
-			                break;
+		 //         	switch ($fileext) {
+			//             case 'jpeg':
+			//             case 'jpg':
+			//                 $im = imagecreatefromjpeg($target_path);
+			//                 break;
 
-			            case 'png':
-			                $im = imagecreatefrompng($target_path);
-			                break;
+			//             case 'png':
+			//                 $im = imagecreatefrompng($target_path);
+			//                 break;
 
-			            case 'gif':
-			                $im = imagecreatefromgif($target_path);
-			                break;
-			            default:
-			                return false;
-			        }
-					imagewebp($im, './upload/metaimg/'.$uploadData['raw_name'].'.webp' , 60);
-	        }
-	    }
- 			else{
- 				$uploadfile = $data['meta_image_name'];
- 			}
+			//             case 'gif':
+			//                 $im = imagecreatefromgif($target_path);
+			//                 break;
+			//             default:
+			//                 return false;
+			//         }
+			// 		imagewebp($im, './upload/metaimg/'.$uploadData['raw_name'].'.webp' , 60);
+	  //       }
+	  //   }
+ 		// 	else{
+ 		// 		$uploadfile = $data['meta_image_name'];
+ 		// 	}
  		
 		$content = serialize($page_content);
  		$page_field = array(
