@@ -24,6 +24,7 @@
     </noscript> -->
 <!--	  theme-->
 <link href="/src/landingassets/theme/media-query.css" rel="preload" as="style">
+
 <!-- <link href="/src/landingassets/theme/navbar.css" rel="preload" as="style">
 <link href="/src/landingassets/theme/icon.css" rel="preload" as="style"> -->
 <!-- <link href="/src/landingassets/theme/animation-on-scroll.css" rel="preload" as="style"> -->
@@ -44,10 +45,10 @@
 
 
 
-<div id="particles-js" v-if="getpagerequest == 1 && isdata == 1"></div>
+<div id="particles-js"></div>
 
     <!--	  -->
-<nav class="navbar navbar-expand-md " id="" v-if="getpagerequest == 1 && isdata == 1">
+<nav v-if="getpagerequest == 1 && isdata == 1" class="navbar navbar-expand-md " id="">
   <div class="container custom_container"> <router-link :to="'/'" class="navbar-brand ">
     <h1>DCP</h1>
     </router-link>
@@ -67,7 +68,6 @@
     <button class="navbar-toggler" type="button" data-trigger="#main_nav"><i class="fas fa-bars"></i></button>
   </div>
 </nav>
-
 
 <!-- content -->
 <!-- Home -->
@@ -99,7 +99,7 @@
         <source srcset="/src/landingassets/img/mobile_frame_sm.webp" media="(max-width:767px)" type="image/webp" rel="preload">
         <source srcset="/src/landingassets/img/mobile_frame.webp" media="(max-width:1024px)" type="image/webp" rel="preload">
         <source srcset="/src/landingassets/img/mobile_frame.webp" media="(min-width:1025px)" type="image/webp" rel="preload">
-        <img rel="preload" src="/src/landingassets/img/mobile_frame.webp"  width="408" height="772" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit  "> </picture>
+        <img rel="preload" src="/src/landingassets/img/mobile_frame.webp"  width="408" height="772" alt="Digital Company Profile" title="Digital Company Profile" class="img-fit"> </picture>
       <div > </div>
     </div>
     <div class="d-table mx-auto mt-3"> <a :href="pagedata.homebtnlink" target="_blank" class="site_btn btn_100 btncolor"> {{pagedata.homebtntitle}} </a> </div>
@@ -278,18 +278,23 @@
         </div>
         <p v-html="pagedata.reviewdesc"></p>
       </div>
+      
+      
       <div class="col-md-7 col-sm-12 slider-col">
+        
         <div class="testimonial-slider owl-carousel owl-theme">
-          
           <div class="item" v-for="(review,index) in getreviewdata" :key="index">
             <p class="comment-text" v-html="review.user_message"></p>
             <div class="comment-by"><i class="fas fa-user-circle " style="font-size: 3.6rem;"></i>
               <h4 v-html="review.user_name"></h4>
             </div>
-          </div>
-          
-        </div>
+          </div>  
+        </div> 
+      
       </div>
+
+
+
     </div>
   </div>
 </div>
@@ -333,7 +338,7 @@
 <!-- content --> 
 
 <a v-if="getpagerequest == 1 && isdata == 1" href="javascript:void(0)" class="back_to_top"><i class="fas fa-caret-up" style="font-size: 3rem;"></i></a>
-<footer v-if="getpagerequest == 1 && isdata == 1">
+<footer v-if="getpagerequest == 1 && getsettingrequest == 1 && isdata == 1" >
   <section class="first-section">
     <div class="container">
       <div class="row ">
@@ -360,7 +365,7 @@
     <div class="container custom_container">
       <div class="row align-items-center">
         <div class="col-md-6 col-sm-12  left-col">
-          <p>Copyright @2021 <a href="index.html">Digital Company Profile</a>. All rights reserved</p>
+          <p>Copyright @2021 <router-link to="/">Digital Company Profile</router-link>. All rights reserved</p>
         </div>
         <div class="col-md-6 col-sm-12 right-col">
           <p><a href="https://www.prismitsystems.com/">A Prism I. T. Systems Enterprise</a> <img rel="preload" data-src="/src/landingassets/img/prismitsystems_logo.png"  width="57"
@@ -381,12 +386,8 @@ import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload)
 
-import MetaInfo from 'vue-meta-info'
-Vue.use(MetaInfo)
-
 export default {
     name:'LandingPage',
-
     metaInfo () {
       return {
         title: this.pageName,
@@ -429,9 +430,9 @@ export default {
         let req =  this.$store.getters.getpagesrequest;
         if(req == 1){
 
-            let owl = document.createElement('script')
-            owl.setAttribute('src', '/src/landingassets/theme/owl.carousel.min.js')
-            document.head.appendChild(owl);
+            // let owl = document.createElement('script')
+            // owl.setAttribute('src', '/src/landingassets/theme/owl.carousel.min.js')
+            // document.head.appendChild(owl);
 
             // let owltheme = document.createElement('script')
             // owltheme.setAttribute('src', '/src/landingassets/theme/owl.theme.default.min.js')
@@ -441,9 +442,9 @@ export default {
             // app.setAttribute('src', '/src/landingassets/app.js')
             // document.head.appendChild(app);
 
-            // let custom = document.createElement('script')
-            // custom.setAttribute('src', '/src/landingassets/js/custom.js')
-            // document.head.appendChild(custom);
+            let custom = document.createElement('script')
+            custom.setAttribute('src', '/src/landingassets/js/custom.js')
+            document.head.appendChild(custom);
 
             // let animation = document.createElement('script')
             // animation.setAttribute('src', '/src/landingassets/theme/animation-on-scroll.js')
@@ -464,7 +465,7 @@ export default {
 
     },
 
-    //  serverPrefetch () {
+    // async serverPrefetch () {
     //   axios.get('pages/getsinglepage/landing-page').then((result)=>{
     //       // console.log(result.data);
     //       this.data = result.data.page;
@@ -486,13 +487,12 @@ export default {
         }
     },
 
-    created(){
+   async created(){
         this.$store.dispatch('changetitle',{title:'DCP'});
-        // this.$store.dispatch('setsettingdata');
         this.$store.dispatch('setpagesdata');
         this.$store.dispatch('setuserreviewdata',{data:'active'});
        
-        axios.get('pages/getsinglepage/landing-page').then((result)=>{
+       await axios.get('pages/getsinglepage/landing-page').then((result)=>{
           this.data = result.data.page;
           this.pagedata = result.data.page_content;
           this.steps = JSON.parse(result.data.page_content.steps);
@@ -508,7 +508,6 @@ export default {
             this.footerpagesdata = result.data.pages;
           });
         });
-
     },
 
     methods:{

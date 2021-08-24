@@ -9,19 +9,47 @@ class SiteSetting extends REST_Controller {
        $this->load->database();
     }
 
+    public function getfiledata($filename){
+		if (!is_dir('./cache')) {
+			mkdir('./cache',0777,TRUE);
+		}
+		if(file_exists('./cache/'.$filename)){
+			$filedata = json_decode(file_get_contents('./cache/'.$filename));
+			return $filedata;
+		}
+		return false;
+	}
+
+
+	public function createfile($filename,$data){
+		if (!is_dir('./cache')) {
+				mkdir('./cache',0777,TRUE);
+		}
+		$myfile = fopen('./cache/'.$filename, "a");
+		fwrite($myfile, json_encode($data));
+		fclose($myfile);
+		return $filedata = json_decode(file_get_contents('./cache/'.$filename));
+	}
+
     public function getsetting_get(){
-		if($setting = $this->SiteSetting_Model->getsettings()){
-			$output['error'] = false;
-			$output['setting'] = $setting;
-			$output['message'] = "Setting Data get successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+		$output['error'] = false;
+		$output['message'] = "Pages Data get successfully";
+		
+		if($data = $this->getfiledata('sitesetting.json')){
+			$output['setting'] = $data;
 		}
 		else{
-			$output['error'] = true;
-	        $output['setting'] = [];
-			$output['message'] = "Empty Setting Data";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+			if($setting = $this->SiteSetting_Model->getsettings()){	
+				$filedata = $this->createfile('sitesetting.json',$setting);
+				$output['setting'] = $filedata;
+			}
+			else{
+				$output['error'] = true;
+				$output['message'] = "Empty Setting Data";
+		        $output['setting'] = [];
+			}
 		}
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 
 

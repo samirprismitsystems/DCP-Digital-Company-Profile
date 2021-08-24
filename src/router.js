@@ -5,6 +5,8 @@ const LandingPage = () => import(/* webpackChunkName: "landingpage" */ /* webpac
 
 const Front = () => import(/* webpackChunkName: "front" */ /* webpackPrefetch: true */'./components/Front.vue');
 
+// const FrontProfile = () => import(/* webpackChunkName: "front profile" */ /* webpackPrefetch: true */'./components/FrontProfile.vue');
+
 const Login = () => import(/* webpackChunkName: "user" */ /* webpackPrefetch: true */'./components/Login.vue');
 const Registration = () => import(/* webpackChunkName: "user" */ /* webpackPrefetch: true */'./components/Registration.vue');
 const ForgetPassword = () => import(/* webpackChunkName: "user" */ /* webpackPrefetch: true */'./components/ForgetPassword.vue');
@@ -120,7 +122,7 @@ const router = new VueRouter({
         {path:'/admindashboard/edituserreview/:rid',component:UserReviewEdit, meta: {title:'Edit User Review', isadmindash:true} },
         {path:'/admindashboard/addsocialcolors',component:SocialMediaColors, meta: {title:'Add Social Media Colors', isadmindash:true} },
 
-        {path:'/:companyslug', name:'frontpage',  component:Front ,meta: {title:'Front' , isdash:false , isfront:true } },
+        {path:'/:companyslug', name:'frontpage',  component:Front ,meta: {title:'' , isdash:false , isfront:true } },
         {path:'/:pageslug', name:'custompage' ,component:CustomPage, meta: {title:'Page', ispage:true } },
         {path:'/',component:LandingPage, meta: {title:'Digital Company Profile' , isdash:false , islanding : true} },   
     ]

@@ -12,6 +12,8 @@ import store from './store/index'
 let sitemainpath = '/digital-company-profile/';
 // let sitemainpath = '/';
 
+import MetaInfo from 'vue-meta-info'
+Vue.use(MetaInfo)
 
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -32,8 +34,5 @@ new Vue({
   el: '#app',
   router:router,
   store:store,
-  render: h => h(App),
-  // mounted () {
-  //   document.dispatchEvent(new Event('render-event'))
-  // }
+  render: h => h(App)
 })

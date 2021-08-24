@@ -147,6 +147,10 @@ export default {
             let custom = document.createElement('script')
             custom.setAttribute('src', '/src/assets/js/custom.js')
             document.head.appendChild(custom);
+            
+            let bootstrap = document.createElement('script')
+            bootstrap.setAttribute('src', '/src/assets/js/bootstrap.min.js')
+            document.head.appendChild(bootstrap);
         }
     },
 

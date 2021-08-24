@@ -1,16 +1,19 @@
 var path = require('path')
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var PrerenderSpaPlugin = require('prerender-spa-plugin');
+
+// var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// var PrerenderSpaPlugin = require('prerender-spa-plugin');
+// const Renderer = PrerenderSpaPlugin.PuppeteerRenderer;
+
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-var VendorChunkPlugin = require('webpack-vendor-chunk-plugin');
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'build.js',
-    publicPath: '/dist/', // was originally 'dist'
+    publicPath: '/dist/',
+    filename: 'build.js'
   },
   module: {
     rules: [
@@ -70,16 +73,27 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
 
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      inject: false
-    }),
 
-    new PrerenderSpaPlugin(
-      path.join(__dirname, './dist'),
-      [ '/' ]
-    ),
-      
+    // new HtmlWebpackPlugin({
+    //   template: 'index.html',
+    //   filename: path.resolve(__dirname, 'dist/index.html')
+    // }),
+
+
+    // new PrerenderSpaPlugin({
+    //   staticDir: path.join(__dirname, './dist'),
+    //   routes: [ '/' ],
+    //   renderer: new Renderer({
+    //     maxConcurrentRoutes: 1
+    //     })
+    //   }),
+
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    // }),
+
+    new webpack.optimize.ModuleConcatenationPlugin(),
+
     new UglifyJsPlugin({
       "uglifyOptions":
           {
@@ -90,8 +104,6 @@ if (process.env.NODE_ENV === 'production') {
           }
       }
     ),
-
-    new VendorChunkPlugin('vendor'),
 
     new webpack.LoaderOptionsPlugin({
       minimize: true

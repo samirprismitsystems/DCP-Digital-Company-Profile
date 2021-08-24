@@ -246,18 +246,25 @@ class User extends REST_Controller {
 
 
 	public function getuserreview_get($status){
-		if($userreview = $this->User_Model->getuserreview($status)){
+		if($data = $this->file_operation->getfiledata($status.'frontreview.json')){
 			$output['error'] = false;
-			$output['review'] = $userreview;
+			$output['review'] = $data;
 			$output['message'] = "Review Data Get Successfull";
-			$this->set_response($output, REST_Controller::HTTP_OK);
 		}
 		else{
-			$output['error'] = true;
-			$output['review'] = [];
-	        $output['message'] = "Empty Review Data";
-	        $this->set_response($output, REST_Controller::HTTP_OK);
+			if($userreview = $this->User_Model->getuserreview($status)){
+				$filedata = $this->file_operation->createfile($status.'frontreview.json',$userreview);
+				$output['error'] = false;
+				$output['review'] = $filedata;
+				$output['message'] = "Review Data Get Successfull";
+			}
+			else{
+				$output['error'] = true;
+				$output['review'] = [];
+		        $output['message'] = "Empty Review Data";
+			}
 		}
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 
 

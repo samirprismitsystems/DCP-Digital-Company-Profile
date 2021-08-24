@@ -391,67 +391,94 @@ class Pages extends REST_Controller {
 	}
 
 
-
 	public function getpages_get(){
-		if($allpages = $this->Page_Model->getpagesdata()){
-			$pagedata = array();
-			$i = 0;
-			foreach ($allpages as  $value) {
-				$pagedata[$i]['page_content'] = unserialize($value['page_content']);
-				$pagedata[$i]['page_id'] = $value['page_id'];
-				$pagedata[$i]['page_name'] = $value['page_name'];
-				$pagedata[$i]['page_slug'] = $value['page_slug'];
-				$pagedata[$i]['template_name'] = $value['template_name'];
-				$pagedata[$i]['meta_title'] = $value['meta_title'];
-				$pagedata[$i]['meta_keywords'] = $value['meta_keywords'];
-				$pagedata[$i]['meta_description'] = $value['meta_description'];
-				$pagedata[$i]['meta_image'] = $value['meta_image'];
-				$i++;
-			}
-			$output['error'] = false;
-			$output['pages'] = $pagedata;
-			$output['message'] = "Pages Data get successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+		$output['error'] = false;
+		$output['message'] = "Pages Data get successfully";
+		
+        if($data = $this->file_operation->getfiledata('getpages.json')){	
+			$output['pages'] = $data;
 		}
 		else{
-			$output['error'] = true;
-	        $output['pages'] = [];
-			$output['message'] = "Empty Pages Data.";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+			if($allpages = $this->Page_Model->getpagesdata()){
+				$pagedata = array();
+				$i = 0;
+				foreach ($allpages as  $value) {
+					$pagedata[$i]['page_content'] = unserialize($value['page_content']);
+					$pagedata[$i]['page_id'] = $value['page_id'];
+					$pagedata[$i]['page_name'] = $value['page_name'];
+					$pagedata[$i]['page_slug'] = $value['page_slug'];
+					$pagedata[$i]['template_name'] = $value['template_name'];
+					$pagedata[$i]['meta_title'] = $value['meta_title'];
+					$pagedata[$i]['meta_keywords'] = $value['meta_keywords'];
+					$pagedata[$i]['meta_description'] = $value['meta_description'];
+					$pagedata[$i]['meta_image'] = $value['meta_image'];
+					$i++;
+				}
+
+				$filedata = $this->file_operation->createfile('getpages.json',$pagedata);
+				$output['pages'] = $filedata;
+			}
+			else{
+				$output['error'] = true;
+		        $output['pages'] = [];
+				$output['message'] = "Empty Pages Data.";
+			}
 		}
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 
 
 	public function getsomepagedata_post(){
-		$data = $this->input->post();
+		$output['error'] = false;
+		$output['message'] = "Pages Data get successfully";
 
-		if($pagedata = $this->Page_Model->getsomepages($data)){
-			$output['error'] = false;
-			$output['pages'] = $pagedata;
-			$output['message'] = "Pages Data get successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+		if($data = $this->file_operation->getfiledata('getsomepages.json')){
+			$output['pages'] = $data;
 		}
-
-		
+		else{
+			$data = $this->input->post();
+			if($pagedata = $this->Page_Model->getsomepages($data)){
+				$filedata = $this->file_operation->createfile('getsomepages.json',$pagedata);
+				$output['pages'] = $filedata;
+			}
+			else{
+				$output['error'] = true;
+		        $output['pages'] = [];
+				$output['message'] = "Empty Pages Data.";
+			}
+		}
+		$this->set_response($output, REST_Controller::HTTP_OK);		
 	}
 
 	
-
 	public function getsinglepage_get($page_slug){
-		if($page = $this->Page_Model->getsinglepagedata($page_slug)){
-			$output['error'] = false;
-			$output['page'] = $page;
-			$output['page_content'] = unserialize($page['page_content']);
-			$output['message'] = "Pages Data get successfully";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+		$output['error'] = false;
+		$output['message'] = "Pages Data get successfully";
+
+		if($data = $this->file_operation->getfiledata($page_slug.'.json')){
+			$output['page'] = $data->page;
+		    $output['page_content'] = $data->page_content;
 		}
 		else{
-			$output['error'] = true;
-	        $output['page'] = [];
-	        $output['page_content'] = [];
-			$output['message'] = "Empty Pages Data.";
-			$this->set_response($output, REST_Controller::HTTP_OK);
+			if($page = $this->Page_Model->getsinglepagedata($page_slug)){
+				$data = array(
+					'page' => $page,
+					'page_content' => unserialize($page['page_content'])
+				);
+
+				$filedata = $this->file_operation->createfile($page_slug.'.json',$data);
+
+				$output['page'] = $filedata->page;
+		        $output['page_content'] = $filedata->page_content;
+			}
+			else{
+				$output['error'] = true;
+		        $output['page'] = [];
+		        $output['page_content'] = [];
+				$output['message'] = "Empty Pages Data.";
+			}
 		}
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}	
 
 

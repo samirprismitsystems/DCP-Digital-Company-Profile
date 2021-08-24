@@ -186,9 +186,6 @@ export default {
         editcompany(cid){
             axios.get('user/getcompanyuser/'+cid).then((result)=>{
                 let userdata = result.data.companydata;
-
-                // console.log(userdata);
-
                 // localStorage.setItem('userid',userdata.user_id);
                 // this.$store.dispatch('setuserid',{userid:userdata.user_id});
                 

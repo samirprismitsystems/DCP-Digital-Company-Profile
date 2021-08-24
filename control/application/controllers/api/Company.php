@@ -37,19 +37,19 @@ class Company extends REST_Controller {
 		}
 	}
 
+
 	public function fetchallcompany_get(){
 		if($company = $this->Company_Model->getcompany()){
 			$output['error'] = false;
-            $output['company'] = $company;
-            $output['message'] = "Company fetched successfully";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+	        $output['company'] = $company;
+	        $output['message'] = "Company fetched successfully";
 		}
 		else{
 			$output['error'] = false;
-            $output['company'] = [];
-            $output['message'] = "Empty Company Data";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+	        $output['company'] = [];
+	        $output['message'] = "Empty Company Data";
 		}
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 
 	public function fetchallareadata_get(){
@@ -336,18 +336,16 @@ class Company extends REST_Controller {
 	}
 
 	public function fetchallsocial_get(){
+		$output['error'] = false;
 		if($social = $this->Company_Model->getsociallist()){
-			$output['error'] = false;
-            $output['social'] = $social;
-            $output['message'] = "social data fetched successfully";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+			$output['message'] = "social Data get successfully";
+			$output['social'] = $social;
 		}
 		else{
-			$output['error'] = false;
-            $output['social'] = [];
-            $output['message'] = "Empty Social Data";
-            $this->set_response($output, REST_Controller::HTTP_OK);
-		}
+	        $output['message'] = "Empty Social Data";
+	        $output['social'] = [];
+	    }
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 
 	public function updatecompany_post(){
@@ -436,48 +434,80 @@ class Company extends REST_Controller {
 		}
 	}
 
+	
 	public function fetchcompanyfront_get($companyslug){
-		if($company = $this->Company_Model->getcompanybyslug($companyslug)){
-			$cities = $this->Company_Model->getcompanycities($company['company_id']);
-			$social = $this->Company_Model->getfrontcompanysocial($company['company_id']);
-			$client = $this->Client_Model->getclient($company['company_id']);
-			$inquiry = $this->Inquiry_Model->getinquiry($company['company_id']);
-			$portfolio = $this->Portfolio_Model->getportfolio($company['company_id']);
-			$product = $this->Product_Model->getproduct($company['company_id']);
-			$service = $this->Service_Model->getservice($company['company_id']);
-			$testimonial = $this->Testimonial_Model->gettestimonial($company['company_id'],'active');
-			$paymentinfo = $this->Company_Model->getpaymentdata($company['company_id']);
-
-
+		if($data = $this->file_operation->getfiledata($companyslug.'_front.json')){
 			$output['error'] = false;
-            $output['company'] = $company;
-            $output['companycities'] = $cities;
-            $output['social'] = $social;
-            $output['client'] = $client;
-            $output['product'] = $product;
-            $output['service'] = $service;
-            $output['portfolio'] = $portfolio;
-            $output['inquiry'] = $inquiry;
-            $output['testimonial'] = $testimonial;
-            $output['paymentinfo'] = $paymentinfo;
-            $output['message'] = "Company fetched successfully";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+	        $output['company'] = $data->company;
+	        $output['companycities'] = $data->cities;
+	        $output['social'] = $data->social;
+	        $output['client'] = $data->client;
+	        $output['product'] = $data->product;
+	        $output['service'] = $data->service;
+	        $output['portfolio'] = $data->portfolio;
+	        $output['inquiry'] = $data->inquiry;
+	        $output['testimonial'] = $data->testimonial;
+	        $output['paymentinfo'] = $data->paymentinfo;
+	        $output['message'] = "Company fetched successfully";
+	        $this->set_response($output, REST_Controller::HTTP_OK);
 		}
 		else{
-			$output['error'] = false;
-            $output['company'] = [];
-            $output['companycities'] = [];
-            $output['social'] = [];
-            $output['client'] = [];
-            $output['product'] = [];
-            $output['service'] = [];
-            $output['portfolio'] = [];
-            $output['inquiry'] = [];
-            $output['testimonial'] = [];
-            $output['paymentinfo'] = [];
-            $output['newuser'] = 1;
-            $output['message'] = "Empty Data";
-            $this->set_response($output, REST_Controller::HTTP_OK);
+			if($company = $this->Company_Model->getcompanybyslug($companyslug)){
+				$cities = $this->Company_Model->getcompanycities($company['company_id']);
+				$social = $this->Company_Model->getfrontcompanysocial($company['company_id']);
+				$client = $this->Client_Model->getclient($company['company_id']);
+				$inquiry = $this->Inquiry_Model->getinquiry($company['company_id']);
+				$portfolio = $this->Portfolio_Model->getportfolio($company['company_id']);
+				$product = $this->Product_Model->getproduct($company['company_id']);
+				$service = $this->Service_Model->getservice($company['company_id']);
+				$testimonial = $this->Testimonial_Model->gettestimonial($company['company_id'],'active');
+				$paymentinfo = $this->Company_Model->getpaymentdata($company['company_id']);
+
+				$data = array(
+					'company' => $company,
+					'cities' => $cities,
+					'social' => $social,
+					'client' => $client,
+					'inquiry' => $inquiry,
+					'portfolio' => $portfolio,
+					'product' => $product,
+					'service' => $service,
+					'testimonial' => $testimonial,
+					'paymentinfo' => $paymentinfo
+				);
+
+				$filedata = $this->file_operation->createfile($companyslug.'_front.json',$data);
+
+				$output['error'] = false;
+	            $output['company'] = $filedata->company;
+	            $output['companycities'] = $filedata->cities;
+	            $output['social'] = $filedata->social;
+	            $output['client'] = $filedata->client;
+	            $output['product'] = $filedata->product;
+	            $output['service'] = $filedata->service;
+	            $output['portfolio'] = $filedata->portfolio;
+	            $output['inquiry'] = $filedata->inquiry;
+	            $output['testimonial'] = $filedata->testimonial;
+	            $output['paymentinfo'] = $filedata->paymentinfo;
+	            $output['message'] = "Company fetched successfully";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
+			else{
+				$output['error'] = false;
+	            $output['company'] = [];
+	            $output['companycities'] = [];
+	            $output['social'] = [];
+	            $output['client'] = [];
+	            $output['product'] = [];
+	            $output['service'] = [];
+	            $output['portfolio'] = [];
+	            $output['inquiry'] = [];
+	            $output['testimonial'] = [];
+	            $output['paymentinfo'] = [];
+	            $output['newuser'] = 1;
+	            $output['message'] = "Empty Data";
+	            $this->set_response($output, REST_Controller::HTTP_OK);
+			}
 		}
 	}
 
@@ -686,14 +716,13 @@ class Company extends REST_Controller {
 			$output['error'] = false;
 			$output['socialcolor'] = $socialcolor;
 			$output['message'] = "Socialcolor Data Fetched";
-			$this->set_response($output, REST_Controller::HTTP_OK);
 		}
 		else{
 			$output['error'] = false;
 			$output['socialcolor'] = [];
 			$output['message'] = "Empty Socialcolor Data ";
-			$this->set_response($output, REST_Controller::HTTP_OK);
 		}
+		$this->set_response($output, REST_Controller::HTTP_OK);
 	}
 
 
