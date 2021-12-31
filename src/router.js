@@ -35,7 +35,7 @@ const Client = () => import(/* webpackChunkName: "dashboard" */ /* webpackPrefet
 const Portfolio = () => import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */'./components/Portfolio');
 const Testimonial = () => import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */'./components/Testimonial');
 const Inquiry = () => import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */'./components/Inquiry');
-
+const FrontThemes = () => import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */'./components/FrontThemes');
 
 
 // import Home from './components/Home'
@@ -66,7 +66,9 @@ const UserReview = () => import(/* webpackChunkName: "admindash" */ /* webpackPr
 const UserReviewAdd = () => import( /* webpackChunkName: "admindash" */ /* webpackPrefetch: true */'./components/UserReviewAdd');
 const UserReviewEdit = () => import(/* webpackChunkName: "admindash" */ /* webpackPrefetch: true */'./components/UserReviewEdit');
 const SocialMediaColors = () => import(/* webpackChunkName: "admindash" */ /* webpackPrefetch: true */'./components/SocialMediaColors');
+const AddTheme = () => import(/* webpackChunkName: "admindash" */ /* webpackPrefetch: true */'./components/AddTheme');
 
+const ThemeDynamic = () => import(/* webpackChunkName: "admindash" */ /* webpackPrefetch: true */'./components/ThemeDynamic');
 
 // import AdminDashboard from './components/AdminDashboard'
 // import AdminCompanyList from './components/AdminCompanyList'
@@ -108,6 +110,8 @@ const router = new VueRouter({
         {path:'/dashboard/portfolio',component:Portfolio,meta: {title:'Portfolio'} },
         {path:'/dashboard/testimonial',component:Testimonial,meta: {title:'Testimonial'} },
         {path:'/dashboard/enquiry',component:Inquiry,meta: {title:'Enquiry'} },
+        {path:'/dashboard/themes',component:FrontThemes,meta: {title:'Themes'} },
+        
 
         {path:'/admindashboard/',component:AdminDashboard, meta: {title:'Admin Dashboard', isadmindash:true} },
         {path:'/admindashboard/companylist',component:AdminCompanyList, meta: {title:'Company List', isadmindash:true} },
@@ -121,6 +125,9 @@ const router = new VueRouter({
         {path:'/admindashboard/adduserreview',component:UserReviewAdd, meta: {title:'Add User Review', isadmindash:true} },
         {path:'/admindashboard/edituserreview/:rid',component:UserReviewEdit, meta: {title:'Edit User Review', isadmindash:true} },
         {path:'/admindashboard/addsocialcolors',component:SocialMediaColors, meta: {title:'Add Social Media Colors', isadmindash:true} },
+        {path:'/admindashboard/addtheme',component:AddTheme, meta: {title:'Add Theme', isadmindash:true} },
+        
+        {path:'/themedynamic', name:'frontpage',  component:ThemeDynamic ,meta: {title:'' , isdash:false , isfront:true } },
 
         {path:'/:companyslug', name:'frontpage',  component:Front ,meta: {title:'' , isdash:false , isfront:true } },
         {path:'/:pageslug', name:'custompage' ,component:CustomPage, meta: {title:'Page', ispage:true } },

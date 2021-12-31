@@ -377,6 +377,7 @@ export default {
             this.$store.dispatch('settestimonialData',{id: this.getuserdataemail } );
             this.$store.dispatch('setinquiryData',{id: this.getuserdataemail } );
             this.$store.dispatch('setpaymentoptions',{id:this.getuserdataemail});
+            this.$store.dispatch('setthemesData');
         }
     },
 

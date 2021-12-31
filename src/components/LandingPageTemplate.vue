@@ -3,50 +3,42 @@
 
     <ul class="nav nav-tabs tabstyle" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Home</a>
+            <a @click="changepanel('home')" :class="curpage == 'home' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#home" role="tab">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#steps" role="tab">Steps</a>
+            <a @click="changepanel('steps')" :class="curpage == 'steps' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#steps" role="tab">Steps</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#card" role="tab">Card</a>
+            <a @click="changepanel('card')" :class="curpage == 'card' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#card" role="tab">Card</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#feature" role="tab">Feature</a>
+            <a @click="changepanel('feature')" :class="curpage == 'feature' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#feature" role="tab">Feature</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#faq" role="tab">FAQ</a>
+            <a @click="changepanel('faq')" :class="curpage == 'faq' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#faq" role="tab">FAQ</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#freetrail" role="tab">Free Trail</a>
+            <a @click="changepanel('freetrail')" :class="curpage == 'freetrail' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#freetrail" role="tab">Free Trail</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#review" role="tab">Review</a>
+            <a @click="changepanel('review')" :class="curpage == 'review' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#review" role="tab">Review</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#contact" role="tab">Contact</a>
+            <a @click="changepanel('contact')" :class="curpage == 'contact' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#contact" role="tab">Contact</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#pages" role="tab">Pages</a>
+            <a @click="changepanel('pages')" :class="curpage == 'pages' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#pages" role="tab">Pages</a>
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#seo" role="tab">Seo</a>
+            <a @click="changepanel('seo')" :class="curpage == 'seo' ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#seo" role="tab">Seo</a>
         </li>
-
     </ul>
 
     <form @submit.prevent="savelandingdata">
 
     <div class="tab-content">
 
-        <div class="tab-pane active" id="home" role="tabpanel">
+        <div :class="curpage == 'home' ? 'tab-pane active' : 'tab-pane'"  role="tabpanel">
             
             <div id="homesection">
 
@@ -103,7 +95,7 @@
             </div>
         </div>
 
-        <div class="tab-pane" id="steps" role="tabpanel">
+        <div :class="curpage == 'steps' ? 'tab-pane active' : 'tab-pane'"  role="tabpanel">
             <div id="stepssection">
                 <h3 class="mt-3 mb-3">Steps Section</h3>
                 <div class="row" v-for="(step,index) in steps" :key="index">
@@ -129,7 +121,7 @@
             </div>
         </div>
 
-        <div class="tab-pane" id="card" role="tabpanel">
+        <div :class="curpage == 'card' ? 'tab-pane active' : 'tab-pane'"  role="tabpanel">
             <div id="cardsection">
                 <h3 class="mt-3 mb-3">Card Section</h3>
                 <h4 class="mt-3 mb-3">Card 1</h4>
@@ -209,7 +201,7 @@
             </div>
         </div>
 
-        <div class="tab-pane" id="feature" role="tabpanel">
+        <div :class="curpage == 'feature' ? 'tab-pane active' : 'tab-pane'"  role="tabpanel">
             <div id="featuresection">
                 <h3 class="mt-3 mb-3">Feature Section</h3>
                 
@@ -267,7 +259,7 @@
 
         </div>
 
-        <div class="tab-pane" id="faq" role="tabpanel">
+        <div :class="curpage == 'faq' ? 'tab-pane active' : 'tab-pane'" role="tabpanel">
             <div id="faqsection">
                 <h3 class="mt-3 mb-3">FAQ Section</h3>
                 
@@ -328,7 +320,7 @@
 
         </div>        
 
-        <div class="tab-pane" id="freetrail" role="tabpanel">
+        <div :class="curpage == 'freetrail' ? 'tab-pane active' : 'tab-pane'" role="tabpanel">
             <div id="freetrailsection">
                 <h3 class="mt-3 mb-3">Free Trail Section</h3>
                 <div class="form_field">
@@ -377,7 +369,7 @@
             </div>
         </div>
 
-        <div class="tab-pane" id="review" role="tabpanel">
+        <div :class="curpage == 'review' ? 'tab-pane active' : 'tab-pane'" role="tabpanel">
             <div id="reviewsection">
                 <h3 class="mt-3 mb-3">Review Section</h3>
                     <div class="form_field">
@@ -400,7 +392,7 @@
             </div>
         </div>
 
-        <div class="tab-pane" id="contact" role="tabpanel">
+        <div :class="curpage == 'contact' ? 'tab-pane active' : 'tab-pane'" role="tabpanel">
             <div id="contactsection">
                 <h3 class="mt-3 mb-3">Contact Section</h3>
                     <div class="form_field">
@@ -417,22 +409,22 @@
             </div>
         </div>
 
-         <div class="tab-pane" id="pages" role="tabpanel">
+         <div :class="curpage == 'pages' ? 'tab-pane active' : 'tab-pane'" role="tabpanel">
             <div id="pagesection">
                 <h3 class="mt-3 mb-3">Page Section</h3>
 
                     <div class="form_field">
                         <label class="" for="">Select Footer Pages</label>
-                        <!-- <select name="pagelist" v-model="pagelist" id="pagelist" multiple>
+                        <select name="pagelist" v-model="pagelist" id="pagelist" multiple>
                             <option :value="page.id" v-for="(page,index) in pages" :key="index">{{page.text}}</option>
-                        </select> -->
+                        </select>
                         <Select2 v-model="pagelist" :options="pages" :settings="{ allowClear: true, placeholder: 'Select Pages', multiple:true}" />
                     </div>
 
             </div>
         </div>
 
-        <div class="tab-pane" id="seo" role="tabpanel">
+        <div :class="curpage == 'seo' ? 'tab-pane active' : 'tab-pane'" role="tabpanel">
             <h3 class="mt-3 mb-3">SEO Section</h3>
                 <div class="form_field col-xl-3 col-lg-4 col-md-5 col-sm-5 col-10 logo-col private_img_col mt-3">
                     <div class="upload_private_img_box logo_img_box">
@@ -485,11 +477,6 @@
 
 <script>
 import axios from 'axios'
-import Vue from 'vue'
-// import wysiwyg from "vue-wysiwyg";
-// Vue.use(wysiwyg, {});
-// import "vue-wysiwyg/dist/vueWysiwyg.css";
-
 import { VueEditor } from "vue2-editor";
 
 
@@ -564,7 +551,6 @@ export default {
     
     props:{
         data:{
-
         }
     },
 
@@ -576,18 +562,17 @@ export default {
 
     data(){
         return{
+            curpage:'home',
             pages:[],
             card1:'',
             card2:'',
             content:'',
-            
             steps:[
                 {
                     stepstitle:'',
                     stepsdesc:''
                 }
             ],
-
             mobileimage:null,
             mobileimagesrc:'',
 
@@ -608,7 +593,6 @@ export default {
             metaimg:null,
             metaimgsrc:'',
             // ismetachangepic:false,
-
 
             features:[
                 {
@@ -641,6 +625,10 @@ export default {
     },
 
     methods:{
+        changepanel(pagename){
+            this.curpage = pagename;
+        },
+
         addstepsitem(){
             this.steps.push({
                 stepstitle:'',

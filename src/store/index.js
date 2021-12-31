@@ -13,6 +13,7 @@ import user from './modules/user'
 import setting from './modules/setting'
 import pages from './modules/pages'
 import userreview from './modules/userreview'
+import themes from './modules/themes'
 
 Vue.use(Vuex);
 
@@ -30,5 +31,6 @@ export default new Vuex.Store({
         setting,
         pages,
         userreview,
+        themes
     }
 });

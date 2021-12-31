@@ -22,7 +22,8 @@
 			    </li>
 			    <li :class="checkclass('Payment Options')"><router-link to="/dashboard/paymentoptions" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/payment_options.png" width="40" height="40" alt="Payment Option" title="" ><span>Payment Options</span></router-link>
 			    </li>
-				
+				<li :class="checkclass('Themes')"><router-link to="/dashboard/themes" class="tab_anchor" rel="nofollow"><img src="/src/assets/img/theme.png" width="40" height="40" alt="Themes" title="" ><span>Themes</span></router-link>
+			    </li>
 			</ul>
 		</div>
 </template>

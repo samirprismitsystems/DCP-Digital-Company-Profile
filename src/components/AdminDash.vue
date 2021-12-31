@@ -17,6 +17,10 @@
 				<li :class="checkadminclass('User Review')"><router-link :to="'/admindashboard/userreview'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/clientreview.webp" width="44" height="39" alt="user review" title="" >
 			    	<span>User Review</span></router-link>
 			    </li>
+				
+				<li :class="checkadminclass('Add Theme')"><router-link :to="'/admindashboard/addtheme'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/theme.png" width="44" height="39" alt="themes" title="" >
+			    	<span>Add Theme</span></router-link>
+			    </li>
 
 				<li :class="checkadminclass('Setting')"><router-link :to="'/admindashboard/setting'"  class="tab_anchor" rel="nofollow"><img src="/src/assets/img/setting.webp" width="44" height="39" alt="settings" title="" >
 			    	<span>Setting</span></router-link>
