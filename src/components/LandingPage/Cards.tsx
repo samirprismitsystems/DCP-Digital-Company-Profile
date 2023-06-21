@@ -1,0 +1,103 @@
+import MainScrollAnimation from "@/common/MainScrollAnimation";
+import {
+  ILandingPageCardSteps,
+  ILandingPageDetails,
+} from "@/types/commonTypes";
+import { useContext } from "react";
+import { LandingPageContextApi } from "./LandingPage";
+import Steps from "./Steps";
+
+export default function Cards() {
+  const data = useContext(LandingPageContextApi);
+  const pageDetails: ILandingPageDetails = data.pageDetails;
+  const steps: ILandingPageCardSteps[] = JSON.parse(pageDetails.steps);
+
+  return (
+    <div className="container">
+      <section className="mb-16">
+        <div className="container px-5 py-44 mx-auto">
+          <div className="flex flex-wrap sm:flex-nowrap -m-4 -z-10">
+            {steps &&
+              steps.map((item: ILandingPageCardSteps, index: number) => (
+                <Steps
+                  key={index}
+                  index={index + 1}
+                  title={item.stepstitle}
+                  desc={item.stepsdesc}
+                />
+              ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="text-gray-600 body-font">
+        <MainScrollAnimation>
+          <div className="container mx-auto flex px-5 xs:py-0 py-16 md:flex-row flex-col md:items-start items-center">
+            <div className="sm:w-full md:w-1/2 mb-10 md:mb-0">
+              <MainScrollAnimation>
+                <img
+                  className="w-full h-auto max-w-full rounded-2xl border border-white"
+                  alt="hero"
+                  src="/assets/landing/doctor.png"
+                />
+              </MainScrollAnimation>
+            </div>
+            <div className="sm:items-start md:item-center md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center xs:items-start">
+              <MainScrollAnimation>
+                <h1 className="text-white font-600 md:leading-5 lg:leading-[3.5rem] xs:text-left title-font text-[3.0rem] mb-4 font-semibold">
+                  {pageDetails.cardtitle1}
+                </h1>
+                <p className="text-white xs:text-left md:text-left  text-[1.8rem] pb-4">
+                  {pageDetails.carddesc1 || "N/A"}
+                </p>
+                <ul className="theme_list text-[1.8rem] ml-6 mt-4 ">
+                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                </ul>
+              </MainScrollAnimation>
+            </div>
+          </div>
+        </MainScrollAnimation>
+
+        <div className="container mt-20 mx-auto flex px-5  md:flex-row flex-col md:items-start items-center">
+          <div className="md:hidden sm:w-full md:w-1/2 mb-10 md:mb-0">
+            <MainScrollAnimation>
+              <img
+                className="w-full h-auto max-w-full rounded-2xl border border-white"
+                alt="hero"
+                src="/assets/landing/weAreOpen.png"
+              />
+            </MainScrollAnimation>
+          </div>
+          <div className="xs:items-start md:w-1/2 flex flex-col sm:items-start md:item-center text-left ">
+            <MainScrollAnimation>
+              <h1 className="text-white title-font text-[3.0rem] mb-4 font-semibold">
+                {pageDetails.cardtitle2}
+              </h1>
+              <p className="text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4">
+                {pageDetails.carddesc2 || "N/A"}
+              </p>
+              <ul className="theme_list text-[1.8rem] ml-6 mt-4">
+                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
+              </ul>
+            </MainScrollAnimation>
+          </div>
+          <div className="xs:hidden md:block sm:w-full md:w-1/2 mb-10 md:mb-0">
+            <MainScrollAnimation>
+              <img
+                className="w-full h-auto max-w-full rounded-2xl border border-white"
+                alt="hero"
+                src="/assets/landing/weAreOpen.png"
+              />
+            </MainScrollAnimation>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
