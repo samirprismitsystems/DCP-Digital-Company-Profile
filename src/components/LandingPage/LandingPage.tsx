@@ -6,16 +6,15 @@ import {
 } from "@/types/commonTypes";
 import Head from "next/head";
 import { createContext, useEffect, useState } from "react";
-import Cards from "./Cards";
-import Content from "./Content";
-import FAQ from "./FAQ";
-import Features from "./Features";
-import Footer from "./Footer";
-import FreeTrail from "./FreeTrail";
-import GetInTouch from "./GetInTouch";
-import HeroSection from "./HeroSection";
-import Navbar from "./Navbar";
-import Testimonial from "./Testimonial";
+import DigitalFeatures from "./DigitalFeatures/DigitalFeatures";
+import FreeTrail from "./FreeTrail/FreeTrail";
+import GetInTouch from "./GetInTouch/GetInTouch";
+import HeroSection from "./HeroSection/HeroSection";
+import HowItsWork from "./HowItsWork/HowItsWork";
+import LandingFooter from "./LandingFooter/LandingFooter";
+import LandingNavbar from "./LandingNavbar/LandingNavbar";
+import Testimonial from "./Testimonials/Testimonial";
+import WhyUseDigitalCard from "./WhyUseDigitalCard/WhyUseDigitalCard";
 
 export const LandingPageContextApi = createContext<ILandingPageData>(
   {} as ILandingPageData
@@ -45,7 +44,6 @@ export default function LandingPage() {
     loadData();
   }, []);
 
-  
   if (metaData && Object.keys(metaData).length <= 0) return null;
   return (
     <LandingPageContextApi.Provider value={{ metaData, pageDetails }}>
@@ -60,16 +58,15 @@ export default function LandingPage() {
         <title>{metaData.meta_title}</title>
       </Head>
 
-      <Navbar />
+      <LandingNavbar />
       <HeroSection />
-      <Cards />
-      <Features />
-      <FAQ />
+      <HowItsWork />
+      <DigitalFeatures />
+      <WhyUseDigitalCard />
       <FreeTrail />
       <Testimonial />
       <GetInTouch />
-      <Content />
-      <Footer />
+      <LandingFooter />
     </LandingPageContextApi.Provider>
   );
 }

@@ -1,7 +1,7 @@
 import { ILandingPageDetails } from "@/types/commonTypes";
 import Link from "next/link";
 import { useContext } from "react";
-import { LandingPageContextApi } from "./LandingPage";
+import { LandingPageContextApi } from "../LandingPage";
 import MobileScreenSection from "./MobileScreenSection";
 
 export default function HeroSection() {
@@ -12,7 +12,7 @@ export default function HeroSection() {
     <>
       <div
         className="relative xs:h-[991px] sm:h-[917px] lg:h-[1160px] md:h-[1102px] min-h-[100vh] overflow-hidden mt-[1.5rem]"
-        id="hero"
+        id="heroSection"
       >
         <svg
           id="tringle-shape"

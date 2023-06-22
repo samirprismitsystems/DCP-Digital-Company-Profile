@@ -3,11 +3,20 @@
 @tailwind utilities;
 
 .txtdark {
-  @apply text-secondary-dark;
+  @apply text-secondary-greyDark;
 }
 :root {
   --color-400: #d8e3e7;
   --color-100: #126e83;
+}
+
+.sideBarEffect {
+  transition: all !important;
+  transition-duration: 200ms !important;
+  transition-timing-function: ease-in !important;
+}
+.sideBarEffectNoWidth {
+  width: 0px !important;
 }
 
 .btnHoverEffect {
@@ -104,6 +113,7 @@ body {
 html {
   font-size: 62.5%;
   transition: all 0.3s linear;
+  scroll-behavior: smooth;
 }
 
 @media (min-width: 576px) {
@@ -115,12 +125,6 @@ html {
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
   }
 }
 
@@ -142,12 +146,6 @@ html {
   padding-left: 12px;
   margin-right: auto;
   margin-left: auto;
-}
-
-@media (min-width: 1400px) {
-  .container-navbar {
-    max-width: 100%;
-  }
 }
 
 @media (min-width: 1400px) {

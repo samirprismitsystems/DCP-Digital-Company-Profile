@@ -4,10 +4,10 @@ import {
   ILandingPageDetails,
 } from "@/types/commonTypes";
 import { useContext } from "react";
-import { LandingPageContextApi } from "./LandingPage";
+import { LandingPageContextApi } from "../LandingPage";
 import Steps from "./Steps";
 
-export default function Cards() {
+export default function HowItsWork() {
   const data = useContext(LandingPageContextApi);
   const pageDetails: ILandingPageDetails = data.pageDetails;
   const steps: ILandingPageCardSteps[] = JSON.parse(pageDetails.steps);
@@ -15,7 +15,7 @@ export default function Cards() {
   return (
     <div className="container">
       <section className="mb-16">
-        <div className="container px-5 py-44 mx-auto">
+        <div className="container md:px-0 px-5 py-44 mx-auto">
           <div className="flex flex-wrap sm:flex-nowrap -m-4 -z-10">
             {steps &&
               steps.map((item: ILandingPageCardSteps, index: number) => (
@@ -32,7 +32,7 @@ export default function Cards() {
 
       <section className="text-gray-600 body-font">
         <MainScrollAnimation>
-          <div className="container mx-auto flex px-5 xs:py-0 py-16 md:flex-row flex-col md:items-start items-center">
+          <div className="container mx-auto flex md:px-0 px-5 xs:py-0 py-16 md:flex-row flex-col md:items-start items-center">
             <div className="sm:w-full md:w-1/2 mb-10 md:mb-0">
               <MainScrollAnimation>
                 <img
@@ -61,7 +61,7 @@ export default function Cards() {
           </div>
         </MainScrollAnimation>
 
-        <div className="container mt-20 mx-auto flex px-5  md:flex-row flex-col md:items-start items-center">
+        <div className="container mt-20 mx-auto flex md:px-0 px-5  md:flex-row flex-col md:items-start items-center">
           <div className="md:hidden sm:w-full md:w-1/2 mb-10 md:mb-0">
             <MainScrollAnimation>
               <img

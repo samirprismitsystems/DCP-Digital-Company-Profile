@@ -8,7 +8,7 @@ import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { LandingPageContextApi } from "./LandingPage";
+import { LandingPageContextApi } from "../LandingPage";
 
 export default function Testimonial() {
   const [lstReview, setLstReview] = useState<ILandingPageReview[]>();
@@ -56,7 +56,7 @@ export default function Testimonial() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center p-16  justify-center w-full md:w-3/5 mb-10 md:mb-0">
+              <div className="flex items-center xs:p-0 sm:p-16  justify-center w-full md:w-3/5 mb-10 md:mb-0">
                 <Swiper autoplay className="w-full">
                   {lstReview &&
                     lstReview.map((item: ILandingPageReview, index: number) => (
@@ -64,7 +64,7 @@ export default function Testimonial() {
                         key={item.review_id}
                         className="text-2xl xs:p-0"
                       >
-                        <div className="testimonial-slider flex flex-col items-center">
+                        <div className="testimonial-slider flex flex-col item-start">
                           <p className="md:text-left text-center text-black text-[1.8rem] italic mb-6">
                             <FontAwesomeIcon
                               className="bg-transparent text-primary-lightDark text-[6rem] mr-4"

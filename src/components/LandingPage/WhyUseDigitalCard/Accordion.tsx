@@ -1,6 +1,6 @@
 import { useContext } from "react";
+import { LandingPageContextApi } from "../LandingPage";
 import FaqsList from "./FaqsList";
-import { LandingPageContextApi } from "./LandingPage";
 
 const Accordion = () => {
   const data = useContext(LandingPageContextApi);

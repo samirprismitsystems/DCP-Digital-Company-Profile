@@ -5,9 +5,6 @@ const ApiService = {
   async getLandingPageResource() {
     const res = await axios.get(
       "http://localhost/digital-company-profile/control/api/pages/getsinglepage/landing-page",
-      {
-        withCredentials: false,
-      }
     );
 
     if (res) {
@@ -20,9 +17,6 @@ const ApiService = {
   async getReviewData() {
     const res = await axios.get(
       "http://localhost/digital-company-profile/control/api/user/getuserreview/active",
-      {
-        withCredentials: false,
-      }
     );
 
     if (res) {
@@ -36,11 +30,6 @@ const ApiService = {
     const res = await axios.post(
       "http://localhost/digital-company-profile/control/api/pages/sendemail",
       data,
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
     );
   },
 };

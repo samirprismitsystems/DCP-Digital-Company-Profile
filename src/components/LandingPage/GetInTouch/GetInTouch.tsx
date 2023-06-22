@@ -2,7 +2,7 @@ import MainScrollAnimation from "@/common/MainScrollAnimation";
 import ApiService from "@/services/ApiServices";
 import { IUser } from "@/types/commonTypes";
 import { useContext, useState } from "react";
-import { LandingPageContextApi } from "./LandingPage";
+import { LandingPageContextApi } from "../LandingPage";
 
 interface IFormUser {
   fullName: string;
@@ -45,14 +45,19 @@ export default function GetInTouch() {
   };
 
   return (
-    <section className="container lg:w-[60%] mx-auto flex px-5  items-center mt-16 flex-col py-32">
+    <section
+      className="container lg:w-[60%] mx-auto flex md:px-0 px-5  items-center xs:mt-0 flex-col xs:py-0 md:my-16"
+      id="getInTouch"
+    >
       <MainScrollAnimation>
         <div className="mx-auto pb-12">
-          <div className="xs:px-8 pt-16">
+          <div className="xs:px-8 xs:pt-0 md:pt-16">
             <h3 className="text-center text-[3.0rem] font-600 font-bold text-white">
               {data.contacttitle}
             </h3>
-            <p className="text-center pt-6 text-[1.8rem]">{data.contactdesc}</p>
+            <p className="text-center pt-6 text-[1.8rem] md:pb-16">
+              {data.contactdesc}
+            </p>
           </div>
         </div>
         <div className="xs:px-8  w-full">

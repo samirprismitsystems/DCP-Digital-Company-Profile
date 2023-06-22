@@ -2,23 +2,26 @@ import MainScrollAnimation from "@/common/MainScrollAnimation";
 import { ILandingPageDetails } from "@/types/commonTypes";
 import Link from "next/link";
 import { ReactNode, useContext } from "react";
+import { LandingPageContextApi } from "../LandingPage";
 import FeatureCards from "./FeatureCards";
-import { LandingPageContextApi } from "./LandingPage";
 
 interface IFeature {
   featurelogo: string;
   featuretext: ReactNode;
 }
 
-export default function Features() {
+export default function DigitalFeatures() {
   const data = useContext(LandingPageContextApi);
   const pageDetails: ILandingPageDetails = data.pageDetails;
   const lstFeatures: IFeature[] = JSON.parse(pageDetails.logoandtext);
 
   return (
-    <MainScrollAnimation>
-      <section className="container mx-auto text-gray-600 body-font mt-20">
-        <div className=" flex px-5 py-8 md:flex-row flex-col items-start">
+    <section
+      className="container mx-auto text-gray-600 body-font mt-20 xs:py-16 py-32"
+      id="digitalFeatures"
+    >
+      <MainScrollAnimation>
+        <div className=" flex md:px-0 px-5 py-8 md:flex-row flex-col items-start">
           <div className="xs:mb-6 mt-8 md:w-full  flex flex-col xs:items-start md:items-start md:text-left items-center text-center">
             <h2
               style={{ lineHeight: "1.3" }}
@@ -76,7 +79,7 @@ export default function Features() {
             </div>
           </div>
         </div>
-      </section>
-    </MainScrollAnimation>
+      </MainScrollAnimation>
+    </section>
   );
 }

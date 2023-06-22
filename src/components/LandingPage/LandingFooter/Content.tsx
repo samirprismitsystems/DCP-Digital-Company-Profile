@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useContext } from "react";
-import { LandingPageContextApi } from "./LandingPage";
+import { LandingPageContextApi } from "../LandingPage";
 
 export default function Content() {
   const result = useContext(LandingPageContextApi);

@@ -1,17 +1,25 @@
-export const navigationMenuList = [
+export const landingPageNavigationMenuList = [
+  {
+    id: 0,
+    name: "Home",
+    link: "heroSection",
+  },
   {
     id: 1,
-    name: "Home",
-    link: "#",
+    name: "Feature",
+    link: "digitalFeatures",
   },
   {
     id: 2,
-    name: "Feature",
-    link: "#",
-  },
-  {
-    id: 3,
     name: "Contact",
-    link: "#",
+    link: "getInTouch",
+  },
+];
+
+export const loginPageNavigationMenuList = [
+  {
+    id: 0,
+    name: "Home",
+    link: "/",
   },
 ];
