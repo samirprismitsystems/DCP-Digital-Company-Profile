@@ -19,6 +19,9 @@ module.exports = {
           dark: "#1c424d",
           greyDark: "#132c33",
         },
+        info: {
+          main: "#78afcd",
+        },
       },
       screens: {
         xs: "370px",

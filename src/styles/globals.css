@@ -20,7 +20,7 @@
 }
 
 .btnHoverEffect {
-  @apply bg-secondary-main hover:bg-secondary-dark hover:border-cyan-200 hover:border rounded-full;
+  @apply bg-secondary-main transition-all duration-300 ease-linear hover:bg-secondary-greyDark hover:border-cyan-200 hover:border rounded-full;
 }
 p,
 ul li {

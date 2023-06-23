@@ -68,13 +68,19 @@ export interface ILandingPageReview {
 
 export interface IUser {
   email: string;
-  contactemail:string;
-  name:string;
-  message:string;
+  contactemail: string;
+  name: string;
+  message: string;
 }
 
-export interface INavigationMenu{
-  id:number;
-  name:string;
-  link:string;
+export interface INavigationMenu {
+  id: number;
+  name: string;
+  link: string;
+}
+
+export interface ILoginScreenPrivacyPolicy {
+  id: number;
+  name: string;
+  link: string;
 }

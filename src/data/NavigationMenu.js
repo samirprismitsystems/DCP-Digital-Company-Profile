@@ -23,3 +23,21 @@ export const loginPageNavigationMenuList = [
     link: "/",
   },
 ];
+
+export const loginScreenPrivacyPolicyList = [
+  {
+    id: 0,
+    name: "Privacy Policy",
+    link: "/privacy-policy",
+  },
+  {
+    id: 1,
+    name: "Cookie Policy",
+    link: "/Cookie-policy",
+  },
+  {
+    id: 2,
+    name: "Terms",
+    link: "/Terms",
+  },
+];
