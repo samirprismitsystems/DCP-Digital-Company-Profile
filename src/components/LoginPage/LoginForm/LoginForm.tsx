@@ -1,6 +1,4 @@
-import {
-    faAngleDoubleRight
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
@@ -34,27 +32,27 @@ export default function LoginForm() {
             placeholder="Enter 6 Digit Password"
           />
         </div>
+        <div className="py-10">
+          <h1 className="text-primary-lightDark font-bold text-center text-3xl">
+            <Link href={"/forgetpassword"}>Forgot Password?</Link>
+          </h1>
+          <div className="w-full text-center py-20">
+            <Link
+              href="/login"
+              target="_blank"
+              className="border py-4 px-14 text-3xl my-20 btnHoverEffect  text-white text-center"
+            >
+              Login
+            </Link>
+          </div>
+          <div className="text-black text-3xl text-center font-semibold">
+            <Link href={"/registration"} className="hover:text-secondary-main">
+              New User? Create An Account
+              <FontAwesomeIcon size="sm" icon={faAngleDoubleRight} />
+            </Link>
+          </div>
+        </div>
       </form>
-      <div className="py-10">
-        <h1 className="text-primary-lightDark font-bold text-center text-3xl">
-          <Link href={"/"}>Forgot Password?</Link>
-        </h1>
-        <div className="w-full text-center py-20">
-          <Link
-            href="/login"
-            target="_blank"
-            className="border py-4 px-14 text-3xl my-20 btnHoverEffect  text-white text-center"
-          >
-            Login
-          </Link>
-        </div>
-        <div className="text-black text-3xl text-center font-semibold">
-          <Link href={"/registration"} className="hover:text-secondary-main">
-            New User? Create An Account
-            <FontAwesomeIcon size="sm" icon={faAngleDoubleRight} />
-          </Link>
-        </div>
-      </div>
     </div>
   );
 }
