@@ -1,7 +1,7 @@
 import Utils from "@/services/Utils";
 import { INavigationMenu } from "@/types/commonTypes";
 import { useState } from "react";
-import { navigationMenuList } from "../../../data/NavigationMenu";
+import { landingPageNavigationMenuList } from "../../../data/NavigationMenu";
 
 export default function MobileNavbar({
   isOpen,
@@ -40,28 +40,26 @@ export default function MobileNavbar({
             <div className="h-[800px] container py-16 text-white my-32 flex justify-center items-center">
               <div className="w-full md:block md:w-auto" id="navbar-default">
                 <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
-                  {navigationMenuList &&
-                    navigationMenuList.map(
+                  {landingPageNavigationMenuList &&
+                    landingPageNavigationMenuList.map(
                       (item: INavigationMenu, index: number) => (
-                        <li className="">
-                          <a
-                            onClick={(event: any) => {
-                              event.preventDefault();
-                              setSelectedIndex(item.id);
-                              Utils.scrollToView(item.link);
-                              toggle();
-                            }}
-                            href="#"
-                            className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
-                              item.id === selectedIndex
-                                ? "text-primary-lightDark"
-                                : "text-white"
-                            }`}
-                            aria-current="page"
-                          >
-                            {item.name}
-                          </a>
-                        </li>
+                        <a
+                          onClick={(event: any) => {
+                            event.preventDefault();
+                            setSelectedIndex(item.id);
+                            Utils.scrollToView(item.link);
+                            toggle();
+                          }}
+                          href="#"
+                          className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                            item.id === selectedIndex
+                              ? "text-primary-lightDark"
+                              : "text-white"
+                          }`}
+                          aria-current="page"
+                        >
+                          {item.name}
+                        </a>
                       )
                     )}
                 </ul>

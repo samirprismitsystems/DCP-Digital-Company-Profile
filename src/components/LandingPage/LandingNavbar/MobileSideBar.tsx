@@ -4,7 +4,11 @@ export default function MobileSideBar({ toggle }: { toggle: () => void }) {
   return (
     <>
       <div className="flex md:hidden">
-        <Link href="#" className="btnHoverEffect  w-40 text-white  text-center">
+        <Link
+          href="/login"
+          target="_blank"
+          className="btnHoverEffect  w-40 text-white  text-center"
+        >
           <button className="lg:hidden py-4 font-semibold text-center text-3xl rounded text-white">
             Login
           </button>
