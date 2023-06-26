@@ -33,6 +33,7 @@ export default function GetInTouch() {
           message: objUser.message,
         };
         const res = await ApiService.sendEmail(io);
+        console.log(res, "res");
         // cors error occurred the issues from the backend side so this work is pending from here
       } else {
         throw new Error("There is no user information available!");

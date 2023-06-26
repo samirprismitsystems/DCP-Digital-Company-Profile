@@ -84,3 +84,13 @@ export interface ILoginScreenPrivacyPolicy {
   name: string;
   link: string;
 }
+
+export interface IUserRegistration {
+  first_name: string;
+  last_name: string;
+  email_id: string;
+  password: string;
+  contact_no: number;
+  profile_photo: string;
+  isupdate: boolean;
+}

@@ -1,12 +1,24 @@
 import NavigationMenu from "@/common/NavigationMenu";
+import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { loginPageNavigationMenuList } from "@/data/NavigationMenu";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LoginNavbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <nav
       className={`shadow-md bg-white fixed w-full top-0 h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}
     >
+      <MobileNavbar
+        lstNavigations={loginPageNavigationMenuList}
+        toggle={toggle}
+        isOpen={isOpen}
+      />
       <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
         <Link
           href="/"
@@ -20,7 +32,7 @@ export default function LoginNavbar() {
           <button
             data-collapse-toggle="navbar-default"
             type="button"
-            // onClick={toggle}
+            onClick={toggle}
             className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-default"
             aria-expanded="false"
@@ -41,7 +53,8 @@ export default function LoginNavbar() {
           </button>
 
           <Link
-            href="#"
+            href="/login"
+            target="_blank"
             className="btnHoverEffect  w-40 text-white  text-center"
           >
             <button className="lg:hidden py-4 font-semibold text-center text-3xl rounded text-white">

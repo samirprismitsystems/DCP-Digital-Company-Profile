@@ -33,7 +33,11 @@ export default function LandingNavbar() {
           scrollY >= 50 ? "shadow-md" : "shadow-none"
         } bg-primary-main  border-gray-200 fixed w-full top-0 h-[10rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}
       >
-        <MobileNavbar toggle={toggle} isOpen={isOpen} />
+        <MobileNavbar
+          lstNavigations={landingPageNavigationMenuList}
+          toggle={toggle}
+          isOpen={isOpen}
+        />
         <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
           <Link
             href="/"

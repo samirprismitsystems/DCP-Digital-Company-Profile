@@ -31,6 +31,7 @@ module.exports = {
         xl: "1200px",
         xlOne: "1400px",
         xlTwo: "1600px",
+        xlThree: "1700px",
       },
     },
   },

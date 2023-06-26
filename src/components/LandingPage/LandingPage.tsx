@@ -36,7 +36,6 @@ export default function LandingPage() {
       setPageDetails(result.page_content);
     } catch (ex) {
       console.log(ex);
-      console.table(ex);
     }
   };
 

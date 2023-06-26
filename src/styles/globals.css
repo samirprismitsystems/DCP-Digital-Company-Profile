@@ -166,13 +166,14 @@ html {
   }
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1700px) {
   html {
     font-size: 45.5%;
   }
 }
 @media (max-width: 1366px) {
   html {
+    /* font-size: 38.5%; */
     font-size: 38.5%;
   }
 

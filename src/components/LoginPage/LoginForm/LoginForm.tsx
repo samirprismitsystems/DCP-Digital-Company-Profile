@@ -1,4 +1,4 @@
-import ShowFormFieldError from "@/common/ShowFormFieldError";
+import ApiService from "@/services/ApiServices";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,10 +10,19 @@ export default function LoginForm() {
   const objForm = useForm({
     resolver: yupResolver(loginSchema),
   });
-  const formErrors = objForm.formState.errors;
 
-  const onLogin = (data: { userID: string; password: string }) => {
-    console.log("from login", data);
+  const onLogin: any = async (data: { userID: string; password: string }) => {
+    try {
+      const io = {
+        email: data.userID,
+        password: data.password,
+      };
+
+      const res = await ApiService.loginUser(io);
+      console.log(res);
+    } catch (ex) {
+      console.log(ex);
+    }
   };
 
   return (
@@ -32,12 +41,10 @@ export default function LoginForm() {
           <input
             className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
             type="text"
+            required
             placeholder="Enter Email Id or Mobile Number"
             {...objForm.register("userID")}
           />
-          {formErrors.userID && (
-            <ShowFormFieldError error={formErrors.userID.message || ""} />
-          )}
         </div>
         <div className="py-8">
           <label
@@ -47,14 +54,12 @@ export default function LoginForm() {
             Password
           </label>
           <input
+            required
             className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
             type="password"
             placeholder="Enter 6 Digit Password"
             {...objForm.register("password")}
           />
-          {formErrors.password && (
-            <ShowFormFieldError error={formErrors.password.message || ""} />
-          )}
         </div>
         <div className="py-10">
           <h1 className="text-primary-lightDark font-bold text-center text-3xl">
