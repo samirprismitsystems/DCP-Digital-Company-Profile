@@ -18,7 +18,11 @@ export default function LoginForm() {
         password: data.password,
       };
 
-      const res = await ApiService.loginUser(io);
+      let fd = new FormData();
+      fd.append("email", data.userID);
+      fd.append("password", data.password);
+
+      const res = await ApiService.loginUser(fd as any);
       console.log(res);
     } catch (ex) {
       console.log(ex);
