@@ -21,6 +21,7 @@ export default function LoginForm() {
   const onLogin: any = async (data: { userID: string; password: string }) => {
     try {
       setIsLoading(true);
+      
       let userData = new FormData();
       userData.append("email", data.userID);
       userData.append("password", data.password);

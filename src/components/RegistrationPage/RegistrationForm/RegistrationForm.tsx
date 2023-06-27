@@ -31,7 +31,6 @@ export default function RegistrationForm() {
       if (res.error) {
         throw new Error(res.message);
       }
-
       Utils.showSuccessMessage(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
