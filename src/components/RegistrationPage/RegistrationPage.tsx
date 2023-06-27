@@ -54,7 +54,7 @@ export default function RegistrationPage() {
                 <button
                   className="hover:text-secondary-main"
                   onClick={() => {
-                    router.back();
+                    router.push("/login");
                   }}
                 >
                   <FontAwesomeIcon size="sm" icon={faAngleDoubleLeft} />

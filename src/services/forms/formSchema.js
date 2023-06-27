@@ -15,5 +15,7 @@ export const createNewAccountSchema = yup.object({
   email: yup.string().required(),
   mobile: yup.number().required(),
   createPassword: yup.string().required(),
-  confirmPassword: yup.string().required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("createPassword"), null], "Passwords must be match"),
 });

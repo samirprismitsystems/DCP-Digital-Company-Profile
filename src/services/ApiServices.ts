@@ -38,15 +38,13 @@ const ApiService = {
     return res.data;
   },
 
-  async forgotPassword(data: { email: string }) {
+  async forgotPassword(data: any) {
     const res = await axios.post(`${BASE_URI}api/user/forgetpassword`, data);
-
     return res.data;
   },
 
-  async userRegistration(data: IUserRegistration) {
+  async userRegistration(data: any) {
     const res = await axios.post(`${BASE_URI}api/user/registeruser`, data);
-
     return res.data;
   },
 };

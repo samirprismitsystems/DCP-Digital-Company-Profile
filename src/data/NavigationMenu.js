@@ -21,6 +21,7 @@ export const loginPageNavigationMenuList = [
     id: 0,
     name: "Home",
     link: "/",
+    isNavigate: true,
   },
 ];
 

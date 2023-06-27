@@ -1,3 +1,6 @@
+import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForButton";
+import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
 import { forgotPasswordSchema } from "@/services/forms/formSchema";
 import {
   faAngleDoubleLeft,
@@ -10,10 +13,10 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import LoginFooter from "../LoginPage/LoginFooter/LoginFooter";
 import LoginNavbar from "../LoginPage/LoginNavbar/LoginNavbar";
-import ShowFormFieldError from "@/common/ShowFormFieldError";
-import ApiService from "@/services/ApiServices";
+import { useState } from "react";
 
 export default function ForgotPasswordPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const objForm = useForm({
     defaultValues: {
       userID: "",
@@ -22,16 +25,22 @@ export default function ForgotPasswordPage() {
   });
 
   const onSubmit: any = async (data: { userID: string }) => {
-    console.log("from the forgot password", data);
     try {
-      const io = {
-        email: data.userID,
-      };
+      setIsLoading(true);
+      const io = new FormData();
+      io.append("email", data.userID);
 
       const res = await ApiService.forgotPassword(io);
-      console.log(res)
-    } catch (ex) {
-      console.log("from forgotpasswordPage", ex);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        return null;
+      }
+
+      throw new Error("Some error occurred while sending email!");
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -88,7 +97,7 @@ export default function ForgotPasswordPage() {
                       <input
                         required
                         className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
-                        type="text"
+                        type="email"
                         placeholder="Enter Email Id or Mobile Number"
                         {...objForm.register("userID")}
                       />
@@ -96,8 +105,11 @@ export default function ForgotPasswordPage() {
                     <div className="w-full text-center">
                       <button
                         type="submit"
-                        className="border font-semibold py-4 px-14 text-3xl my-20 xs:my-14 btnHoverEffect  text-white text-center"
+                        className={`${
+                          isLoading && "opacity-20"
+                        } border font-semibold py-4 px-14 text-3xl my-20 xs:my-14 btnHoverEffect  text-white text-center`}
                       >
+                        {isLoading && <CircularLoadingEffectForButton />}
                         Send Password
                       </button>
                     </div>
@@ -106,7 +118,7 @@ export default function ForgotPasswordPage() {
                     <button
                       className="hover:text-secondary-main"
                       onClick={() => {
-                        router.back();
+                        router.push("/login");
                       }}
                     >
                       <FontAwesomeIcon size="sm" icon={faAngleDoubleLeft} />

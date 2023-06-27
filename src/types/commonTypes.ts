@@ -77,6 +77,7 @@ export interface INavigationMenu {
   id: number;
   name: string;
   link: string;
+  isNavigate?: boolean;
 }
 
 export interface ILoginScreenPrivacyPolicy {
@@ -93,4 +94,18 @@ export interface IUserRegistration {
   contact_no: number;
   profile_photo: string;
   isupdate: boolean;
+}
+
+export interface ILoginUser {
+  contact_no: string;
+  created_on: string;
+  email_id: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  profile_photo: string;
+  status: string;
+  type: string;
+  updated_on: string;
+  user_id: string;
 }

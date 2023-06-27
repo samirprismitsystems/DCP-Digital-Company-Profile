@@ -1,11 +1,14 @@
+import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForButton";
 import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
 import { createNewAccountSchema } from "@/services/forms/formSchema";
-import { IUserRegistration } from "@/types/commonTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 export default function RegistrationForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const objForm = useForm({
     resolver: yupResolver(createNewAccountSchema),
   });
@@ -14,20 +17,26 @@ export default function RegistrationForm() {
 
   const onRegister = async (data: IFormData) => {
     try {
-      const io: IUserRegistration = {
-        first_name: data.firstName,
-        last_name: data.lastName,
-        email_id: data.email,
-        isupdate: false,
-        password: data.confirmPassword,
-        profile_photo: "",
-        contact_no: data.mobile,
-      };
+      setIsLoading(true);
+      const io: any = new FormData();
+      io.append("first_name", data.firstName);
+      io.append("last_name", data.lastName);
+      io.append("email_id", data.email);
+      io.append("password", data.confirmPassword);
+      io.append("isupdate", "false");
+      io.append("profile_photo", "");
+      io.append("contact_no", data.mobile);
 
       const res = await ApiService.userRegistration(io);
-      console.log(res);
-    } catch (ex) {
-      console.log(ex);
+      if (res.error) {
+        throw new Error(res.message);
+      }
+
+      Utils.showSuccessMessage(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,7 +120,7 @@ export default function RegistrationForm() {
             <input
               required
               className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
-              type="text"
+              type="password"
               placeholder="Enter 6 Digit Password"
               {...objForm.register("createPassword")}
             />
@@ -126,17 +135,25 @@ export default function RegistrationForm() {
             <input
               required
               className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
-              type="text"
+              type="password"
               placeholder="Enter 6 Digit Password"
               {...objForm.register("confirmPassword")}
             />
           </div>
+          {objForm.formState.errors.confirmPassword && (
+            <span className="text-red-600 text-2xl font-normal">
+              {objForm.formState.errors.confirmPassword.message}
+            </span>
+          )}
         </div>
         <div className="w-full text-center">
           <button
             type="submit"
-            className="border py-4 px-14 text-3xl my-8 btnHoverEffect  text-white text-center"
+            className={` ${
+              isLoading && "opacity-20"
+            } border py-4 px-14 text-3xl my-8 btnHoverEffect  text-white text-center`}
           >
+            {isLoading && <CircularLoadingEffectForButton />}
             Sign Up
           </button>
         </div>

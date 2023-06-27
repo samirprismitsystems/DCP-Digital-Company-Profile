@@ -1,31 +1,47 @@
+import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForButton";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../../services/forms/formSchema";
 
 export default function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const objForm = useForm({
     resolver: yupResolver(loginSchema),
   });
 
   const onLogin: any = async (data: { userID: string; password: string }) => {
     try {
-      const io = {
-        email: data.userID,
-        password: data.password,
-      };
+      setIsLoading(true);
+      let userData = new FormData();
+      userData.append("email", data.userID);
+      userData.append("password", data.password);
 
-      let fd = new FormData();
-      fd.append("email", data.userID);
-      fd.append("password", data.password);
+      const res = await ApiService.loginUser(userData as any);
+      if (!res.error) {
+        const userData = res.userdata;
+        const isValid = AuthService.setLoginUserData(userData);
+        if (!isValid) {
+          throw new Error("something went wrong while save user data!");
+        }
+        router.push("/admindashboard");
+        Utils.showSuccessMessage("User Login Successfully");
+        return null;
+      }
 
-      const res = await ApiService.loginUser(fd as any);
-      console.log(res);
-    } catch (ex) {
-      console.log(ex);
+      throw new Error("Something went wrong while login");
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,7 +60,7 @@ export default function LoginForm() {
           </label>
           <input
             className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
-            type="text"
+            type="email"
             required
             placeholder="Enter Email Id or Mobile Number"
             {...objForm.register("userID")}
@@ -72,8 +88,11 @@ export default function LoginForm() {
           <div className="w-full text-center">
             <button
               type="submit"
-              className="border py-4 px-14 text-3xl my-16 btnHoverEffect  text-white text-center"
+              className={`${
+                isLoading && "opacity-20"
+              } border py-4 px-14 text-3xl my-16 btnHoverEffect  text-white text-center`}
             >
+              {isLoading && <CircularLoadingEffectForButton />}
               Login
             </button>
           </div>

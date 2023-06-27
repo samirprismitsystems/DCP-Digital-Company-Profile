@@ -1,19 +1,18 @@
 import Utils from "@/services/Utils";
 import { INavigationMenu } from "@/types/commonTypes";
+import { useRouter } from "next/router";
 import { useState } from "react";
 export default function MobileNavbar({
   isOpen,
   toggle,
-  isNavigate,
   lstNavigations,
 }: {
   isOpen: boolean;
   lstNavigations: any;
-  isNavigate?: boolean;
   toggle: () => void;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-
+  const router = useRouter();
   return (
     <>
       <div
@@ -28,13 +27,13 @@ export default function MobileNavbar({
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="3"
+                strokeWidth="3"
                 stroke="currentColor"
                 className="w-16 h-16 "
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
@@ -46,13 +45,19 @@ export default function MobileNavbar({
                     lstNavigations.map(
                       (item: INavigationMenu, index: number) => (
                         <a
+                        key={index}
                           onClick={(event: any) => {
                             event.preventDefault();
+
+                            if (item.isNavigate) {
+                              router.push(`${item.link}`);
+                            }
+
                             setSelectedIndex(item.id);
                             Utils.scrollToView(item.link);
                             toggle();
                           }}
-                          href="#"
+                          href={"#"}
                           className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
                             item.id === selectedIndex
                               ? "text-primary-lightDark"
