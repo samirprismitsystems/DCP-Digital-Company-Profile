@@ -78,6 +78,7 @@ export interface INavigationMenu {
   name: string;
   link: string;
   isNavigate?: boolean;
+  target?: boolean;
 }
 
 export interface ILoginScreenPrivacyPolicy {

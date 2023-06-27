@@ -42,3 +42,17 @@ export const loginScreenPrivacyPolicyList = [
     link: "/Terms",
   },
 ];
+
+export const lstDashboardNavigationMenu = [
+  {
+    id: 0,
+    name: "Visit Site",
+    link: "/prismitsystems",
+    target: true,
+  },
+  {
+    id: 1,
+    name: "Hi, Zaid",
+    link: "#",
+  },
+];
