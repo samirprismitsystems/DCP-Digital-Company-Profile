@@ -1,11 +1,8 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
-import {
-  ILandingPageCardSteps,
-  ILandingPageDetails,
-} from "@/types/commonTypes";
 import { useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";
 import Steps from "./Steps";
+import { ILandingPageCardSteps, ILandingPageDetails } from "@/types/landingPageType";
 
 export default function HowItsWork() {
   const data = useContext(LandingPageContextApi);

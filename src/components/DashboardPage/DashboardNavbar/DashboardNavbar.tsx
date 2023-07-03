@@ -1,16 +1,17 @@
-import NavigationMenu from "@/common/NavigationMenu";
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import {
   loginPageNavigationMenuList,
   lstDashboardNavigationMenu,
 } from "@/data/NavigationMenu";
+import { useAppDispatch } from "@/services/store/hooks/hooks";
+import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import Link from "next/link";
 import { useState } from "react";
 import DashboardNavigationMenu from "./DashboardNavigationMenu";
 
 export default function DashboardNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const dispatch = useAppDispatch();
   const toggle = () => {
     setIsOpen(!isOpen);
   };
@@ -25,8 +26,16 @@ export default function DashboardNavbar() {
       />
       <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
         <Link
-          href="/"
+          href="/dashboard"
           className="flex items-center p-t-[.3125rem] text-[1.25rem]"
+          onClick={() => {
+            dispatch(
+              setSelectedObj({
+                selectedIndex: 0,
+                selectedTitle: "dashboard",
+              })
+            );
+          }}
         >
           <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
             DCP

@@ -21,7 +21,13 @@ module.exports = {
         },
         info: {
           main: "#78afcd",
+          light: "#f3f3f3",
+          dark: "#f2f2f2",
         },
+        warning: {
+          main: "#f27f21",
+        },
+        companyFormFieldBorderColor: "#d7d7d7",
       },
       screens: {
         xs: "370px",

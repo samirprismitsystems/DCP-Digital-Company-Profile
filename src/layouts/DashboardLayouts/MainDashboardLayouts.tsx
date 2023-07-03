@@ -14,20 +14,22 @@ export default function MainDashboardLayouts({ children }: any) {
   const { selectedIndex, selectedTitle } = useAppSelector(
     (state: RootState) => state.dashboard
   );
-  
+
   const loadData = () => {
     let link = window.location.pathname;
     let modifiedLink = link.replace(/\/dashboard\//, "");
-    lstDashboardPanels.forEach((item) => {
+    for (let item of lstDashboardPanels) {
       if (item.link === modifiedLink) {
-        dispatch(setSelectedObj({
-          selectedIndex: item.id,
-          selectedTitle: item.name,
-        }));
+        dispatch(
+          setSelectedObj({
+            selectedIndex: item.id,
+            selectedTitle: item.link,
+          })
+        );
       }
-    });
+    }
   };
-  
+
   useEffect(() => {
     loadData();
   }, []);
@@ -66,7 +68,7 @@ export default function MainDashboardLayouts({ children }: any) {
                         <img
                           src={item.icon}
                           className="w-16 h-auto mr-6"
-                          alt=""
+                          alt="error.png"
                         />
                         <span>{item.name}</span>
                       </div>

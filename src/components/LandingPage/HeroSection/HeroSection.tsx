@@ -1,4 +1,4 @@
-import { ILandingPageDetails } from "@/types/commonTypes";
+import { ILandingPageDetails } from "@/types/landingPageType";
 import Link from "next/link";
 import { useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";

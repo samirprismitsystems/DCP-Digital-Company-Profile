@@ -1,4 +1,4 @@
-import { IUser, IUserRegistration } from "@/types/commonTypes";
+import { IUser } from "@/types/commonTypes";
 import axios from "axios";
 import { BASE_URI } from "./config";
 
@@ -45,6 +45,25 @@ const ApiService = {
 
   async userRegistration(data: any) {
     const res = await axios.post(`${BASE_URI}api/user/registeruser`, data);
+    return res.data;
+  },
+
+  async getStates() {
+    const res = await axios.get(`${BASE_URI}api/company/getstatesdata/IN`);
+    return res.data;
+  },
+
+  async getCities(stateName: string) {
+    const res = await axios.get(
+      `${BASE_URI}api/company/getcitiesdata/${stateName}`
+    );
+    return res.data;
+  },
+
+  async getMapLocation(mapAddress: string) {
+    const res = await axios.get(
+      `https://nominatim.openstreetmap.org/search?q=${mapAddress}&limit=2&format=json`
+    );
     return res.data;
   },
 };

@@ -34,13 +34,15 @@ export default function DashboardNavigationMenu({
               </button>
             ))}
           <li>
-            <Link
-              href="/login"
-              target="_blank"
+            <button
               className="border py-2 px-9 btnHoverEffect  text-white block  text-center"
+              onClick={() => {
+                Utils.clearStorage();
+                router.push("/login");
+              }}
             >
-              Login
-            </Link>
+              Logout
+            </button>
           </li>
         </ul>
       </div>

@@ -1,9 +1,9 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
-import { ILandingPageDetails } from "@/types/commonTypes";
 import Link from "next/link";
 import { ReactNode, useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";
 import FeatureCards from "./FeatureCards";
+import { ILandingPageDetails } from "@/types/landingPageType";
 
 interface IFeature {
   featurelogo: string;
@@ -72,7 +72,7 @@ export default function DigitalFeatures() {
                       >
                         <FeatureCards logoText={item.featurelogo} />
                       </div>
-                      <h1 className="text-[1.5rem] pt-4">{item.featuretext}</h1>
+                      <h1 className="text-[1.5rem] text-white pt-4 font-normal">{item.featuretext}</h1>
                     </div>
                   );
                 })}

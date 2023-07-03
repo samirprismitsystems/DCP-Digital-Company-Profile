@@ -1,9 +1,4 @@
 import ApiService from "@/services/ApiServices";
-import {
-  ILandingPageData,
-  ILandingPageDetails,
-  IMeta,
-} from "@/types/commonTypes";
 import Head from "next/head";
 import { createContext, useEffect, useState } from "react";
 import DigitalFeatures from "./DigitalFeatures/DigitalFeatures";
@@ -15,6 +10,7 @@ import LandingFooter from "./LandingFooter/LandingFooter";
 import LandingNavbar from "./LandingNavbar/LandingNavbar";
 import Testimonial from "./Testimonials/Testimonial";
 import WhyUseDigitalCard from "./WhyUseDigitalCard/WhyUseDigitalCard";
+import { ILandingPageData, ILandingPageDetails, IMeta } from "@/types/landingPageType";
 
 export const LandingPageContextApi = createContext<ILandingPageData>(
   {} as ILandingPageData

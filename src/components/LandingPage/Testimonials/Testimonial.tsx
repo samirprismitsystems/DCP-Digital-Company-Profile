@@ -1,6 +1,5 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
 import ApiService from "@/services/ApiServices";
-import { ILandingPageReview } from "@/types/commonTypes";
 import { faQuoteLeft, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { LandingPageContextApi } from "../LandingPage";
+import { ILandingPageReview } from "@/types/landingPageType";
 
 export default function Testimonial() {
   const [lstReview, setLstReview] = useState<ILandingPageReview[]>();
