@@ -8,7 +8,7 @@ export default function CompanyImageUploader(props: {
 }) {
   return (
     <>
-      <div className="rightSide text-black text-3xl grid grid-cols-2 gap-8 h-[90%]">
+      <div className="lg:mb-8 xs:mb-0  rightSide text-black text-3xl xl:grid xl:grid-cols-2 xl:gap-8 h-[90%] xs:flex xs:flex-wrap xs:justify-center lg:justify-evenly xl:flex-nowrap">
         <div
           className="upload_private_img_box logo_img_box bg-white rounded-2xl p-6"
           style={{

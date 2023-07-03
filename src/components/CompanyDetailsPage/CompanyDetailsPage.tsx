@@ -97,7 +97,7 @@ export default function CompanyDetailsPage() {
   }, []);
 
   return (
-    <div className="right_sidebar_content p-12 bg-white">
+    <>
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Make Your Business Profile</div>
         <div className="h4 mt-1">
@@ -112,7 +112,7 @@ export default function CompanyDetailsPage() {
           }}
           onSubmit={objForm.handleSubmit(onSave)}
         >
-          <div className="row grid grid-cols-2 gap-8 flex-wrap -mr-3 -ml-3">
+          <div className="row lg:grid lg:grid-cols-1 xl:grid-cols-2 xl:gap-8 lg:gap-8 xs:flex-wrap lg:flex-nowrap -mr-3 -ml-3 xs:flex justify-center">
             <div className="leftSide px-3">
               <CompanyTextField
                 name="fullName"
@@ -157,9 +157,11 @@ export default function CompanyDetailsPage() {
                 objForm.setValue("bannerPath", path);
               }}
             />
+            <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
           </div>
-          <div className="row grid grid-cols-2 flex-wrap -mr-3 -ml-3 gap-8">
-            <div className="leftSide px-3 grid grid-cols-2 gap-8">
+          <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">
+            <div className="leftSide px-3 grid xs:grid-cols-1  sm:grid-cols-2 gap-8">
+              <div className="xs:block sm:hidden lg:mt-8 xs:pt-4"></div>
               <CompanyTextField
                 name="houseNumber"
                 title="House No, Street, Area *"
@@ -180,7 +182,7 @@ export default function CompanyDetailsPage() {
                 </select>
               </div>
             </div>
-            <div className="rightSide grid grid-cols-3 gap-8">
+            <div className="rightSide grid sm:grid-cols-3 md:grid-cols-3 xs:grid-cols-1 gap-8">
               {lstStates && (
                 <CompanyStateAndCitySelector lstStates={lstStates} />
               )}
@@ -236,18 +238,28 @@ export default function CompanyDetailsPage() {
                   transition: "all 0.3s linear",
                 }}
                 type="button"
-                className="py-4 font-medium text-center text-3xl w-2/12 text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
+                className="xs:hidden md:block py-4 font-medium text-center text-3xl w-2/12 md:w-96 text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
                 onClick={getMapLocation}
               >
                 Get Location
               </button>
             </div>
+            <button
+              style={{
+                transition: "all 0.3s linear",
+              }}
+              type="button"
+              className="xs:visible py-4 md:hidden font-medium text-center text-3xl xs:w-full text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
+              onClick={getMapLocation}
+            >
+              Get Location
+            </button>
           </div>
           <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
             <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
               Map
             </label>
-            <div className="w-full h-[400px] relative">
+            <div className="w-full h-[400px] relative z-0">
               <MapInformation
                 displayName={mapLocation?.displayname}
                 lat={mapLocation?.lat}
@@ -263,7 +275,7 @@ export default function CompanyDetailsPage() {
             </div>
           </div>
           <div className="flex justify-end">
-            <div className="form_field pb-16 space-x-8 w-1/4 flex justify-end">
+            <div className="form_field pb-16 space-x-8 xl:w-1/4 xs:w-full md:w-[40%] flex justify-end">
               <button
                 style={{
                   transition: "all 0.3s linear",
@@ -285,6 +297,6 @@ export default function CompanyDetailsPage() {
           </div>
         </form>
       </FormProvider>
-    </div>
+    </>
   );
 }

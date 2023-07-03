@@ -43,8 +43,8 @@ export default function MainDashboardLayouts({ children }: any) {
       <section className="main">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
-            <div className="left_sidebar_nav text-white w-[35rem] p-12 bg-secondary-greyDark">
-              <ul className="sticky top-52 w-full list-none m-0 p-0">
+            <div className="left_sidebar_nav text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark">
+              <ul className="sticky md:top-40 xs:top-44 w-full list-none m-0 p-0">
                 {lstDashboardPanels &&
                   lstDashboardPanels.map((item, index: number) => (
                     <li
@@ -53,7 +53,7 @@ export default function MainDashboardLayouts({ children }: any) {
                         selectedIndex !== item.id
                           ? "bg-secondary-dark"
                           : "bg-secondary-main"
-                      } rounded-xl mb-6 flex items-center p-10 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
+                      } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
                         dispatch(
                           setSelectedObj({
@@ -67,16 +67,18 @@ export default function MainDashboardLayouts({ children }: any) {
                       <div className="flex justify-center items-center">
                         <img
                           src={item.icon}
-                          className="w-16 h-auto mr-6"
+                          className="w-16 h-auto md:mr-6 xs:m-0"
                           alt="error.png"
                         />
-                        <span>{item.name}</span>
+                        <span className="xs:hidden md:block">{item.name}</span>
                       </div>
                     </li>
                   ))}
               </ul>
             </div>
-            {children}
+            <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8">
+              {children}
+            </div>
           </div>
         </div>
       </section>

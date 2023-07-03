@@ -88,10 +88,11 @@ h6,
 .left_sidebar_nav {
   min-height: calc(100vh - 20rem) !important;
 }
-
+/* 
 .right_sidebar_content {
   width: calc(100% - 35rem) !important;
-}
+} */
+
 .main {
   min-height: calc(100vh - 20rem);
 }
