@@ -148,7 +148,11 @@ export default function SocialLinksPage() {
               name="youtubeLink"
             />
           </div>
-          <DashboardCommonButtons />
+          <div className="w-full flex justify-end">
+            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
+              <DashboardCommonButtons />
+            </div>
+          </div>
         </form>
       </FormProvider>
     </>

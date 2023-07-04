@@ -26,8 +26,8 @@ export default function DashboardCommonButtons() {
 
   return (
     <>
-      <div className="flex justify-end">
-        <div className="form_field pb-16 space-x-8 xl:w-1/4 xs:w-full md:w-[40%] flex justify-end">
+      <div className="flex justify-end w-full">
+        <div className="form_field pb-16 space-x-8 xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%] flex justify-end">
           <button
             style={{
               transition: "all 0.3s linear",

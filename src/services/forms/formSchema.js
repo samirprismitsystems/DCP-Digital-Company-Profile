@@ -52,3 +52,14 @@ export const socialLinkFormSchema = yup.object({
   telegramLink: yup.string().required(),
   youtubeLink: yup.string().required(),
 });
+
+export const productFormSchema = yup.object({
+  product_data: yup.array().of(
+    yup.object().shape({
+      product_image: yup.mixed().optional(),
+      product_name: yup.string().required(),
+      product_price: yup.string().required(),
+      product_desc: yup.string().required(),
+    })
+  ),
+});
