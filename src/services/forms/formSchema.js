@@ -41,3 +41,14 @@ export const companyDetailsFormSchema = yup.object({
   logoPath: yup.mixed(),
   bannerPath: yup.mixed(),
 });
+
+export const socialLinkFormSchema = yup.object({
+  facebookLink: yup.string().required(),
+  instagramLink: yup.string().required(),
+  linkedInLink: yup.string().required(),
+  twitterLink: yup.string().required(),
+  whatsAppLink: yup.string().required(),
+  pintrestLink: yup.string().required(),
+  telegramLink: yup.string().required(),
+  youtubeLink: yup.string().required(),
+});

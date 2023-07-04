@@ -88,10 +88,18 @@ h6,
 .left_sidebar_nav {
   min-height: calc(100vh - 20rem) !important;
 }
-/* 
-.right_sidebar_content {
-  width: calc(100% - 35rem) !important;
-} */
+
+.social-link-icons {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.8rem;
+  border-radius: 0.4rem;
+  background-color: #e6e6e6;
+  text-align: center;
+  line-height: 2.6rem;
+  padding: 0.3rem;
+  margin-right: 1rem;
+}
 
 .main {
   min-height: calc(100vh - 20rem);

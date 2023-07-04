@@ -26,10 +26,10 @@ export default function CompanyImageUploader(props: {
               }}
             />
           </div>
-          <p className="text-red-600 my-5  mx-auto text-center">
+          <p className="text-red-600 my-3  mx-auto text-center">
             Image Required* 250KB max size
           </p>
-          <div className="upload_btn relative z-0 border-[1px] border-solid border-secondary-main bg-secondary-main text-white text-3xl transition-all duration-300 ease-linear rounded-2xl min-w-[12rem] py-4 px-10 font-normal text-center capitalize font-['GothamRoundedBook']">
+          <div className="upload_btn relative z-0 border-[1px] border-solid border-secondary-main bg-secondary-main text-white text-2xl transition-all duration-300 ease-linear rounded-2xl min-w-[12rem] py-4 px-10 font-normal text-center capitalize font-['GothamRoundedBook']">
             <input
               type="file"
               name="file"
@@ -68,10 +68,10 @@ export default function CompanyImageUploader(props: {
               }}
             />
           </div>
-          <p className="text-red-600 my-5  mx-auto text-center">
+          <p className="text-red-600 my-3  mx-auto text-center">
             Image Required* 250KB max size
           </p>
-          <div className="upload_btn relative z-0 border-[1px] border-solid border-secondary-main bg-secondary-main text-white text-3xl transition-all duration-300 ease-linear rounded-2xl min-w-[12rem] py-4 px-10 font-normal text-center capitalize font-['GothamRoundedBook']">
+          <div className="upload_btn relative z-0 border-[1px] border-solid border-secondary-main bg-secondary-main text-white text-2xl transition-all duration-300 ease-linear rounded-2xl min-w-[12rem] py-4 px-10 font-normal text-center capitalize font-['GothamRoundedBook']">
             <input
               type="file"
               name="file"

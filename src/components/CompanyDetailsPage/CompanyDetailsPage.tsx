@@ -1,3 +1,4 @@
+import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import CompanyTextField from "@/components/CompanyDetailsPage/FormFields/CompanyTextField";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
@@ -274,27 +275,7 @@ export default function CompanyDetailsPage() {
               />
             </div>
           </div>
-          <div className="flex justify-end">
-            <div className="form_field pb-16 space-x-8 xl:w-1/4 xs:w-full md:w-[40%] flex justify-end">
-              <button
-                style={{
-                  transition: "all 0.3s linear",
-                }}
-                type="submit"
-                className="py-4 font-medium text-center text-3xl w-full hover:text-white text-primary-light bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
-              >
-                Save Changes
-              </button>
-              <button
-                style={{
-                  transition: "all 0.3s linear",
-                }}
-                className="py-4 font-medium text-center text-3xl w-[60%] bg-secondary-main border-[1px] border-secondary-main btnHoverEffect text-white rounded-[5rem]"
-              >
-                Next
-              </button>
-            </div>
-          </div>
+          <DashboardCommonButtons />
         </form>
       </FormProvider>
     </>
