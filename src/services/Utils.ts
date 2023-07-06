@@ -49,6 +49,14 @@ class Utils {
   static clearStorage() {
     localStorage.clear();
   }
+
+  static capitalizeFirstLetter(string: string | null) {
+    if (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    return "";
+  }
 }
 
 export default Utils;

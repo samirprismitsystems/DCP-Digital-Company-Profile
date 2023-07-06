@@ -11,6 +11,14 @@
   --color-100: #126e83;
 }
 
+.imageUploaderInputs {
+  background-color: #f5f5f5 !important;
+}
+
+.imageUploaderInputs::placeholder {
+  color: #78afcd !important;
+}
+
 .counter:before,
 .counter:after {
   content: "";
@@ -25,7 +33,7 @@
   z-index: -1;
 }
 
-.leaflet-popup-content{
+.leaflet-popup-content {
   font-size: 14px;
 }
 .cardShadow {

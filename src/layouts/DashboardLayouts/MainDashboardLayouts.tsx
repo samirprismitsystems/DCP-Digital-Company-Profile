@@ -1,6 +1,7 @@
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
 import DashboardNavbar from "@/components/DashboardPage/DashboardNavbar/DashboardNavbar";
 import { lstDashboardPanels } from "@/data/DashboardSideBar";
+import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
@@ -37,7 +38,10 @@ export default function MainDashboardLayouts({ children }: any) {
   return (
     <>
       <Head>
-        <title>{selectedTitle || "Digital Company Profile"}</title>
+        <title>
+          {Utils.capitalizeFirstLetter(selectedTitle) ||
+            "Digital Company Profile"}
+        </title>
       </Head>
       <DashboardNavbar />
       <section className="main">

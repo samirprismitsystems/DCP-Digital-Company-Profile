@@ -27,6 +27,7 @@ module.exports = {
         warning: {
           main: "#f27f21",
         },
+        inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",
       },
       screens: {

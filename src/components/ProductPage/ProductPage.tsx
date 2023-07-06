@@ -3,16 +3,9 @@ import { socialLinkFormSchema } from "@/services/forms/formSchema";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import ProductPageItem from "./ProductPageItem/ProductPageItem";
+import ProductItem from "./ProductItem/ProductItem";
 
 export default function ProductPage() {
-  const router = useRouter();
-  const objForm = useForm();
-
-  type IFormData = yup.InferType<typeof socialLinkFormSchema>;
-  const onSave: any = async (data: IFormData) => {
-    console.log(data);
-  };
   return (
     <>
       <BackButton />
@@ -27,10 +20,9 @@ export default function ProductPage() {
         style={{
           boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
         }}
-        onSubmit={objForm.handleSubmit(onSave)}
       >
         <div className="row -mr-3 -ml-3">
-          <ProductPageItem />
+          <ProductItem />
         </div>
       </div>
     </>

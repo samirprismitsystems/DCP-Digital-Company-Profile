@@ -63,3 +63,33 @@ export const productFormSchema = yup.object({
     })
   ),
 });
+
+export const serviceFormSchema = yup.object({
+  service_data: yup.array().of(
+    yup.object().shape({
+      service_image: yup.mixed().optional(),
+      service_name: yup.string().required(),
+      service_price: yup.string().required(),
+      service_desc: yup.string().required(),
+    })
+  ),
+});
+
+export const clientFormSchema = yup.object({
+  client_data: yup.array().of(
+    yup.object().shape({
+      client_image: yup.mixed().optional(),
+      client_name: yup.string().required(),
+    })
+  ),
+});
+
+export const portfolioFormSchema = yup.object({
+  portfolio_data: yup.array().of(
+    yup.object().shape({
+      portfolio_image: yup.mixed().optional(),
+      portfolio_name: yup.string().required(),
+      portfolio_desc: yup.string().required(),
+    })
+  ),
+});
