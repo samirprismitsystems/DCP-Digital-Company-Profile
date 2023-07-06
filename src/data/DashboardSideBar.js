@@ -43,9 +43,9 @@ export const lstDashboardPanels = [
   },
   {
     id: 8,
-    name: "Inquiry",
+    name: "Enquiry",
     icon: "/assets/dashboard/inquiry.webp",
-    link: "inquiry",
+    link: "enquiry",
   },
   {
     id: 9,

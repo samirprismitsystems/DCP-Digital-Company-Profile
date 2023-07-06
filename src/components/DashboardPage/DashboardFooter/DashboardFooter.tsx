@@ -12,9 +12,9 @@ export default function DashboardFooter() {
   return (
     <>
       <nav
-        className={`shadow-md bg-secondary-main w-full bottom-0 h-[10rem] z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center`}
+        className={`shadow-md bg-secondary-main w-full bottom-0 xs:h-[12rem] z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center`}
       >
-        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 xs:pt-8 mx-0 xs:flex-col md:flex-row  xs:space-y-5 md:space-y-0">
+        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-0 pt-6 xs:pt-8 mx-0 xs:flex-col md:flex-row  xs:space-y-5 md:space-y-0">
           <div className="flex flex-wrap space-x-10">
             <Link href={"https://www.facebook.com/"} target="_blank">
               <li className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-[4.5rem] w-[4.5rem]">
