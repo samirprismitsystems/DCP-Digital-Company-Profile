@@ -1,6 +1,7 @@
 import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForButton";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
+import { USER_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,7 +34,15 @@ export default function LoginForm() {
         if (!isValid) {
           throw new Error("something went wrong while save user data!");
         }
-        router.push("/admindashboard");
+
+        if (userData.type === USER_TYPE.ADMIN) {
+          router.push("/admindashboard");
+        }
+
+        if (userData.type === USER_TYPE.USER) {
+          router.push("/dashboard");
+        }
+
         Utils.showSuccessMessage("User Login Successfully");
         return null;
       }

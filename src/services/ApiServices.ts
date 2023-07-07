@@ -1,5 +1,6 @@
 import { IUser } from "@/types/commonTypes";
 import axios from "axios";
+import AuthService from "./AuthServices";
 import { BASE_URI } from "./config";
 
 const ApiService = {
@@ -63,6 +64,18 @@ const ApiService = {
   async getMapLocation(mapAddress: string) {
     const res = await axios.get(
       `https://nominatim.openstreetmap.org/search?q=${mapAddress}&limit=2&format=json`
+    );
+    return res.data;
+  },
+
+  async saveSocialLinks(io: any) {
+    const res = await axios.post(`${BASE_URI}api/company/savesocial`, io);
+    return res.data;
+  },
+
+  async getSocialLinksData() {
+    const res = await axios.get(
+      `${BASE_URI}api/company/fetchsocial/${AuthService.getUserEmail()}`
     );
     return res.data;
   },

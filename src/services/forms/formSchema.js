@@ -43,14 +43,19 @@ export const companyDetailsFormSchema = yup.object({
 });
 
 export const socialLinkFormSchema = yup.object({
-  facebookLink: yup.string().required(),
-  instagramLink: yup.string().required(),
-  linkedInLink: yup.string().required(),
-  twitterLink: yup.string().required(),
-  whatsAppLink: yup.string().required(),
-  pintrestLink: yup.string().required(),
-  telegramLink: yup.string().required(),
-  youtubeLink: yup.string().required(),
+  socialData: yup.array().of(
+    yup.object().shape({
+      company_id: yup.string().optional().default(""),
+      company_social_id: yup.string().optional().default(""),
+      created_at: yup.string().optional().default(""),
+      link: yup.string().optional().default(""),
+      social_id: yup.string().optional().default(""),
+      socialmedia_color: yup.string().optional().default(""),
+      socialmedia_logo: yup.string().optional().default(""),
+      socialmedia_name: yup.string().optional().default(""),
+      updated_at: yup.string().optional().default(""),
+    })
+  ),
 });
 
 export const paymentOptionFormSchema = yup.object({

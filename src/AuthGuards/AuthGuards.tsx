@@ -15,6 +15,7 @@ export default function AuthGuard({ children }: { children: any }) {
       }
 
       if (AuthService.getUserType() === USER_TYPE.USER) {
+        console.log(AuthService.getUserType(), USER_TYPE.USER);
         router.push("/dashboard");
         return null;
       }
