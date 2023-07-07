@@ -53,6 +53,20 @@ export const socialLinkFormSchema = yup.object({
   youtubeLink: yup.string().required(),
 });
 
+export const paymentOptionFormSchema = yup.object({
+  bankName: yup.string().optional(),
+  QRCodeImage: yup.mixed().optional(),
+  bankAccountNumber: yup.number().optional(),
+  accountHolderName: yup.string().optional(),
+  payTMNumber: yup.string().optional(),
+  googlePayNumber: yup.string().optional(),
+  phonePeNumber: yup.string().optional(),
+  keyID: yup.string().optional(),
+  keySecret: yup.string().optional(),
+  bankIFSCCode: yup.string().optional(),
+  accountType: yup.string().optional(),
+});
+
 export const productFormSchema = yup.object({
   product_data: yup.array().of(
     yup.object().shape({

@@ -72,7 +72,7 @@ export default function MainDashboardLayouts({ children }: any) {
                         <img
                           src={item.icon}
                           className="w-16 h-auto md:mr-6 xs:m-0"
-                          alt="error.png"
+                          alt="error"
                         />
                         <span className="xs:hidden md:block">{item.name}</span>
                       </div>

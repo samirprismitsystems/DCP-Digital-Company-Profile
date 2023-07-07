@@ -11,6 +11,19 @@
   --color-100: #126e83;
 }
 
+label span[data-v-1dcf67d3] {
+  display: flex;
+  color: black;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+
+label input:checked + span[data-v-1dcf67d3]:before {
+  box-shadow: inset 0 0 0 0.4375em #126e83;
+}
+
 .imageUploaderInputs {
   background-color: #f5f5f5 !important;
 }

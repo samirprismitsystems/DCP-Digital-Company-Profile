@@ -169,17 +169,21 @@ export default function CompanyDetailsPage() {
                 placeHolder="Enter House No, Street (Area)"
                 type="text"
               />
-              <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-16 transition-all duration-300 ease-linear">
-                <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
-                  Country *
+              <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  mb-16 transition-all duration-300 ease-linear">
+                <label
+                  className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none`}
+                >
+                 Country *
                 </label>
                 <select
-                  className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
-                  name="cname"
-                  placeholder="India"
                   disabled
+                  className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
+                  placeholder="Select City"
+                  defaultValue={"India"}
                 >
-                  <option value="India">India</option>
+                  <option value={"India"} selected>
+                    India
+                  </option>
                 </select>
               </div>
             </div>

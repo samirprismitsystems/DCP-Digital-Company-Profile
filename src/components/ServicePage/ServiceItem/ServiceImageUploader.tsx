@@ -16,7 +16,7 @@ export default function ServiceImageUploader({
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
         <img
           src={(imagePath as any) || selectedImagePath}
-          alt="image.png"
+          alt="image"
           className="w-full h-full object-cover object-center align-middle border-none"
         />
       </div>
