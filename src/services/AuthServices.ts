@@ -14,14 +14,22 @@ class AuthService {
     Utils.setItem("userEmail", userEmail.toString());
     Utils.setItem("userName", data.first_name);
     Utils.setItem("siteTitle", "Admin Dashboard");
+    Utils.setItem("isUserLoggedIn", true);
 
     return true;
   }
 
-  static getLoginUserData() {}
+  static isUserLoggedIn() {
+    const res = Utils.getItem("isUserLoggedIn");
+    if (res && typeof res === "boolean") {
+      return res;
+    }
+
+    return false;
+  }
 
   static getUserType() {
-    const userTypeCiphertext = Utils.getItem("userType");
+    const userTypeCiphertext: any = Utils.getItem("userType");
     const userTypePlaintext = AES.decrypt(
       userTypeCiphertext,
       LOGIN_USER_TYPE_KEY

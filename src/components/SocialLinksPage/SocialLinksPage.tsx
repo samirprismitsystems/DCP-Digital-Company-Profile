@@ -25,6 +25,8 @@ export default function SocialLinksPage() {
   const onSave: any = async (data: IFormData) => {
     console.log(data);
   };
+
+  
   return (
     <>
       <BackButton />

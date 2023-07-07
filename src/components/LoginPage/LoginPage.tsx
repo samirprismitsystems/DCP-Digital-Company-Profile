@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import LoginFooter from "./LoginFooter/LoginFooter";
 import LoginForm from "./LoginForm/LoginForm";
 import LoginNavbar from "./LoginNavbar/LoginNavbar";
+import { useRouter } from "next/router";
 
 export default function LoginPage() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace("/login");
+  }, []);
+
+  
   return (
     <>
       <LoginNavbar />

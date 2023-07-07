@@ -38,16 +38,26 @@ class Utils {
   }
 
   static setItem(key: string, data: any) {
-    localStorage.setItem(key, JSON.stringify(data));
+    if (typeof window !== "undefined") {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    return null;
   }
 
   static getItem(key: string) {
-    const res = JSON.parse(localStorage.getItem(key) || "{}");
-    return res;
+    if (typeof window !== "undefined") {
+      const res = JSON.parse(localStorage.getItem(key) || "{}");
+      return res;
+    }
+
+    return null;
   }
 
   static clearStorage() {
-    localStorage.clear();
+    if (typeof window !== "undefined") {
+      localStorage.clear();
+    }
   }
 
   static capitalizeFirstLetter(string: string | null) {

@@ -1,3 +1,4 @@
+import AuthGuards from "@/AuthGuards/AuthGuards";
 import BottomToTop from "@/common/BottopToTop";
 import SnowEffect from "@/common/SnowEffect";
 import LandingPage from "@/components/LandingPage/LandingPage";
