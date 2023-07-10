@@ -26,7 +26,7 @@ export default function DashboardNavbar() {
       />
       <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
         <Link
-          href="/dashboard"
+          href={"/dashboard"}
           className="flex items-center p-t-[.3125rem] text-[1.25rem]"
           onClick={() => {
             dispatch(

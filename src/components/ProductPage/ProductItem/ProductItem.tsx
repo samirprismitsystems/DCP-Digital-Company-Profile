@@ -1,16 +1,27 @@
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import RHFImageUploader from "@/common/RHFImageUploader";
+import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { productFormSchema } from "@/services/forms/formSchema";
+import { IProduct } from "@/types/products";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export default function ProductItem() {
+export default function ProductItem({
+  lstProducts,
+  onComplete,
+}: {
+  lstProducts: IProduct[];
+  onComplete: () => void;
+}) {
   const objForm = useForm({
     defaultValues: {
-      product_data: [
+      product_data: lstProducts || [
         {
           product_name: "",
           product_price: "",
@@ -28,8 +39,25 @@ export default function ProductItem() {
   });
 
   type IFormData = yup.InferType<typeof productFormSchema>;
-  const onSubmit = (data: IFormData) => {
-    console.log(data.product_data);
+
+  const onSubmit = async (data: IFormData) => {
+    try {
+      let io = new FormData();
+      io.append("user_id", AuthService.getUserEmail());
+      io.append("isupdate", true as any);
+      io.append("product_data", JSON.stringify(data.product_data));
+
+      const res = await ApiService.saveProductPageDetails(io);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        onComplete();
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
   };
 
   return (

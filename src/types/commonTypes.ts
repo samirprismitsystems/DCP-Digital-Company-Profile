@@ -48,3 +48,13 @@ export interface IMap {
   lon: number;
   displayname: string;
 }
+
+export interface IDashboardCounts {
+  clients: number;
+  error: number;
+  inquiry: number;
+  portfolio: number;
+  product: number;
+  service: number;
+  testimonials: number;
+}

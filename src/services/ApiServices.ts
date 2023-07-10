@@ -79,6 +79,32 @@ const ApiService = {
     );
     return res.data;
   },
+
+  async getProductPageDetails() {
+    const res = await axios.get(
+      `${BASE_URI}api/product/getproducts/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
+  async saveProductPageDetails(io: any) {
+    const res = await axios.post(`${BASE_URI}api/product/createproduct`, io);
+    return res.data;
+  },
+
+  async getServicePageDetails() {
+    const res = await axios.get(
+      `${BASE_URI}api/service/getservice/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
+  async getDashboardCounts() {
+    const res = await axios.get(
+      `${BASE_URI}api/user/getcompanydashdata/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
 };
 
 export default ApiService;

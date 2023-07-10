@@ -1,8 +1,23 @@
 import BackButton from "@/common/BackButton";
-import ServicePageItem from "./ServiceItem/ServiceItem";
+import ApiService from "@/services/ApiServices";
+import { useEffect } from "react";
 import ServiceItem from "./ServiceItem/ServiceItem";
+import Utils from "@/services/Utils";
 
 export default function ServicePage() {
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getServicePageDetails();
+      console.log(res);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
       <BackButton />

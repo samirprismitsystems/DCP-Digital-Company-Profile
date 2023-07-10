@@ -10,14 +10,14 @@ export default function RHFImageUploader({
   savePath: string;
   label: string;
 }) {
-  const [selectedImagePath, setSelectedImagePath] = useState('');
+  const [selectedImagePath, setSelectedImagePath] = useState("");
   const objForm = useFormContext();
 
   return (
     <>
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
         <img
-          src={(imagePath as any) || selectedImagePath}
+          src={selectedImagePath || (imagePath as any)}
           alt="image.png"
           className="w-full h-full object-cover object-center align-middle border-none"
         />
