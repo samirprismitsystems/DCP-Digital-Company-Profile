@@ -132,6 +132,13 @@ const ApiService = {
     return res.data;
   },
 
+  async getEnquiryPageDetails() {
+    const res = await axios.get(
+      `${BASE_URI}api/inquiry/getinquiry/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
   async saveImageGalleryDetails(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/portfolio/createportfolio`,
@@ -140,9 +147,17 @@ const ApiService = {
     return res.data;
   },
 
-  async activeDeactiveTestimonial(io: any) {
+  async activeDeactiveTestimonialStatus(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/testimonial/updatetestimonialstatus`,
+      io
+    );
+    return res.data;
+  },
+
+  async activeDeactiveEnquiryStatus(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/inquiry/updateinquirystatus`,
       io
     );
     return res.data;

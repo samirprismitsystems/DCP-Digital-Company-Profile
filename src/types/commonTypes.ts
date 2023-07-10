@@ -100,3 +100,15 @@ export interface ITestimonial {
   testimonial_id: string;
   updated_on: string;
 }
+
+export interface IEnquiry {
+  client_name: string;
+  company_id: string;
+  created_on: string;
+  email_address: string;
+  inquiry_id: string;
+  message: string;
+  phone_number: string;
+  status: string;
+  updated_on: string;
+}

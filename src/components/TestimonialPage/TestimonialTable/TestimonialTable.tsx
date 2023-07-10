@@ -47,7 +47,7 @@ export default function TestimonialTable() {
       io.append("testimonial_id", tid);
       io.append("status", status);
 
-      const res = await ApiService.activeDeactiveTestimonial(io);
+      const res = await ApiService.activeDeactiveTestimonialStatus(io);
       if (!res.error) {
         onComplete();
         Utils.showSuccessMessage(res.message);
@@ -148,7 +148,7 @@ export default function TestimonialTable() {
                             !Boolean(parseInt(item.status)) && "bg-gray-200"
                           } peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-3 ${
                             Boolean(parseInt(item.status))
-                              ? "after:left-[34px]"
+                              ? "after:xs:left-[25px] after:xl:left-[24px] after:xlOne:left-[28px] after:xlTwo:left-[30px]"
                               : "after:left-[5px]"
                           } after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 ${
                             Boolean(parseInt(item.status)) && "bg-blue-600"

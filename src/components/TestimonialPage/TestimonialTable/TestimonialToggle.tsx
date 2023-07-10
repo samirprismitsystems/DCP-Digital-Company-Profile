@@ -16,7 +16,7 @@ export default function TestimonialToggle(props: {
       io.append("testimonial_id", tid);
       io.append("status", status ? "0" : "1");
 
-      const res = await ApiService.activeDeactiveTestimonial(io);
+      const res = await ApiService.activeDeactiveTestimonialStatus(io);
       if (!res.error) {
         props.onComplete();
         Utils.showSuccessMessage(res.message);
