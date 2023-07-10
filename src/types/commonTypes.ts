@@ -88,3 +88,15 @@ export interface IImageGallery {
   portfolio_name: string;
   updated_at: string;
 }
+
+export interface ITestimonial {
+  client_name: string;
+  comment: string;
+  company_id: string;
+  created_on: string;
+  email_address: string;
+  ratting: string;
+  status: string;
+  testimonial_id: string;
+  updated_on: string;
+}

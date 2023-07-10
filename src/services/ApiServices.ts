@@ -125,9 +125,24 @@ const ApiService = {
     return res.data;
   },
 
+  async getTestimonialList() {
+    const res = await axios.get(
+      `${BASE_URI}api/testimonial/gettestimonial/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
   async saveImageGalleryDetails(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/portfolio/createportfolio`,
+      io
+    );
+    return res.data;
+  },
+
+  async activeDeactiveTestimonial(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/testimonial/updatetestimonialstatus`,
       io
     );
     return res.data;
