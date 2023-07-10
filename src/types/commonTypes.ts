@@ -78,3 +78,13 @@ export interface IClients {
   created_on: string;
   updated_on: string;
 }
+
+export interface IImageGallery {
+  company_id: string;
+  created_at: string;
+  portfolio_desc: string;
+  portfolio_id: string;
+  portfolio_image: string;
+  portfolio_name: string;
+  updated_at: string;
+}

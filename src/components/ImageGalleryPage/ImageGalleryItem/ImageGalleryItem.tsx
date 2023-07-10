@@ -1,16 +1,26 @@
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import RHFImageUploader from "@/common/RHFImageUploader";
+import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { portfolioFormSchema } from "@/services/forms/formSchema";
+import { IImageGallery } from "@/types/commonTypes";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export default function ImageGalleryItem() {
+export default function ImageGalleryItem({
+  lstImageGallery,
+  onComplete,
+}: {
+  lstImageGallery: IImageGallery[];
+  onComplete: () => void;
+}) {
   const objForm = useForm({
     defaultValues: {
-      portfolio_data: [
+      portfolio_data: lstImageGallery || [
         {
           portfolio_desc: "",
           portfolio_image: "",
@@ -27,8 +37,27 @@ export default function ImageGalleryItem() {
   });
 
   type IFormData = yup.InferType<typeof portfolioFormSchema>;
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (data: IFormData) => {
+    try {
+      let io = new FormData();
+      io.append("user_id", AuthService.getUserEmail());
+      io.append(
+        "isupdate",
+        (lstImageGallery && lstImageGallery.length > 0 ? true : false) as any
+      );
+      io.append("portfolio_data", JSON.stringify(data.portfolio_data));
+
+      const res = await ApiService.saveImageGalleryDetails(io);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        onComplete();
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
   };
 
   return (

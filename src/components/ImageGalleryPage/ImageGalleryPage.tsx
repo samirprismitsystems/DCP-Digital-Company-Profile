@@ -1,7 +1,35 @@
 import BackButton from "@/common/BackButton";
+import { useEffect, useState } from "react";
 import ImageGalleryItem from "./ImageGalleryItem/ImageGalleryItem";
+import Utils from "@/services/Utils";
+import ApiService from "@/services/ApiServices";
+import { IImageGallery } from "@/types/commonTypes";
 
 export default function ImageGalleryPage() {
+  const [lstImageGallery, setLstImageGallery] = useState<IImageGallery[]>();
+
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getImageGalleryDetails();
+      if (!res.error) {
+        setLstImageGallery(res.portfolio);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const onComplete = () => {
+    loadData();
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
       <BackButton />
@@ -16,7 +44,12 @@ export default function ImageGalleryPage() {
         }}
       >
         <div className="row -mr-3 -ml-3">
-          <ImageGalleryItem />
+          {lstImageGallery && (
+            <ImageGalleryItem
+              lstImageGallery={lstImageGallery}
+              onComplete={onComplete}
+            />
+          )}
         </div>
       </div>
     </>

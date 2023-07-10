@@ -117,6 +117,21 @@ const ApiService = {
     const res = await axios.post(`${BASE_URI}api/service/createservice`, io);
     return res.data;
   },
+
+  async getImageGalleryDetails() {
+    const res = await axios.get(
+      `${BASE_URI}api/portfolio/getportfolio/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
+  async saveImageGalleryDetails(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/portfolio/createportfolio`,
+      io
+    );
+    return res.data;
+  },
 };
 
 export default ApiService;
