@@ -58,3 +58,14 @@ export interface IDashboardCounts {
   service: number;
   testimonials: number;
 }
+
+export interface IServicePageData {
+  company_id: string;
+  created_on: string;
+  service_desc: string;
+  service_id: string;
+  service_image: string;
+  service_name: string;
+  service_price: string;
+  updated_on: string;
+}

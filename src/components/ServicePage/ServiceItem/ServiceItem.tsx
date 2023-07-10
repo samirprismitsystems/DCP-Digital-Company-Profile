@@ -1,16 +1,27 @@
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import RHFImageUploader from "@/common/RHFImageUploader";
+import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { serviceFormSchema } from "@/services/forms/formSchema";
+import { IServicePageData } from "@/types/commonTypes";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export default function ServiceItem() {
+export default function ServiceItem({
+  lstServiceData,
+  onComplete,
+}: {
+  lstServiceData: IServicePageData[];
+  onComplete: () => void;
+}) {
+  console.log(lstServiceData);
   const objForm = useForm({
     defaultValues: {
-      service_data: [
+      service_data: lstServiceData || [
         {
           service_desc: "",
           service_image: "",
@@ -28,8 +39,29 @@ export default function ServiceItem() {
   });
 
   type IFormData = yup.InferType<typeof serviceFormSchema>;
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (data: IFormData) => {
+    try {
+      let io = new FormData();
+      io.append("user_id", AuthService.getUserEmail());
+      io.append("isupdate", true as any);
+      io.append("service_data", JSON.stringify(data.service_data));
+      const res = await ApiService.saveServicePageDetails(io);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        return null;
+      }
+
+      throw new Error(res.error);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const itemDelete = async (index: number) => {
+    const isValid = await Utils.showWarningMessage("Do you want to delete?");
+    if (isValid.isConfirmed) {
+      remove(index);
+    }
   };
 
   return (
@@ -46,8 +78,9 @@ export default function ServiceItem() {
                   </h5>
                   <button
                     onClick={() => {
-                      remove(index);
+                      itemDelete(index);
                     }}
+                    type="button"
                     className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />

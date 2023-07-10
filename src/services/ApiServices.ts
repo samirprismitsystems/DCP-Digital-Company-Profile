@@ -105,6 +105,11 @@ const ApiService = {
     );
     return res.data;
   },
+
+  async saveServicePageDetails(io: any) {
+    const res = await axios.post(`${BASE_URI}api/service/createservice`, io);
+    return res.data;
+  },
 };
 
 export default ApiService;

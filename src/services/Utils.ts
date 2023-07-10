@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 class Utils {
   static showErrorMessage(message: string) {
@@ -24,6 +25,15 @@ class Utils {
       draggable: true,
       progress: undefined,
       theme: "light",
+    });
+  }
+
+  static async showWarningMessage(message: string) {
+    return await Swal.fire({
+      title: message,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
     });
   }
 

@@ -1,17 +1,28 @@
 import BackButton from "@/common/BackButton";
 import ApiService from "@/services/ApiServices";
-import { useEffect } from "react";
-import ServiceItem from "./ServiceItem/ServiceItem";
 import Utils from "@/services/Utils";
+import { IServicePageData } from "@/types/commonTypes";
+import { useEffect, useState } from "react";
+import ServiceItem from "./ServiceItem/ServiceItem";
 
 export default function ServicePage() {
+  const [lstServiceData, setLstServiceData] = useState<IServicePageData[]>();
+
   const loadData = async () => {
     try {
       const res = await ApiService.getServicePageDetails();
-      console.log(res);
+      if (!res.error) {
+        setLstServiceData(res.service);
+        return null;
+      }
+
+      throw new Error(res.error);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
+  };
+  const onComplete = () => {
+    loadData();
   };
 
   useEffect(() => {
@@ -32,7 +43,12 @@ export default function ServicePage() {
         }}
       >
         <div className="row -mr-3 -ml-3">
-          <ServiceItem />
+          {lstServiceData && (
+            <ServiceItem
+              lstServiceData={lstServiceData}
+              onComplete={onComplete}
+            />
+          )}
         </div>
       </div>
     </>

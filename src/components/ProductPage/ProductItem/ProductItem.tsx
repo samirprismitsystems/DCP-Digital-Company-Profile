@@ -8,7 +8,6 @@ import { IProduct } from "@/types/products";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -60,6 +59,13 @@ export default function ProductItem({
     }
   };
 
+  const itemDelete = async (index: number) => {
+    const isValid = await Utils.showWarningMessage("Do you want to delete?");
+    if (isValid.isConfirmed) {
+      remove(index);
+    }
+  };
+
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
@@ -73,8 +79,9 @@ export default function ProductItem({
                 </h5>
                 <button
                   onClick={() => {
-                    remove(index);
+                    itemDelete(index);
                   }}
+                  type="button"
                   className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"
                 >
                   <FontAwesomeIcon icon={faTrashAlt} />
