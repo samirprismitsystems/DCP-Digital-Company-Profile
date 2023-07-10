@@ -43,7 +43,10 @@ export default function ProductItem({
     try {
       let io = new FormData();
       io.append("user_id", AuthService.getUserEmail());
-      io.append("isupdate", true as any);
+      io.append(
+        "isupdate",
+        (lstProducts && lstProducts.length > 0 ? true : false) as any
+      );
       io.append("product_data", JSON.stringify(data.product_data));
 
       const res = await ApiService.saveProductPageDetails(io);

@@ -106,6 +106,13 @@ const ApiService = {
     return res.data;
   },
 
+  async getClientsPageDetails() {
+    const res = await axios.get(
+      `${BASE_URI}api/client/getclients/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
   async saveServicePageDetails(io: any) {
     const res = await axios.post(`${BASE_URI}api/service/createservice`, io);
     return res.data;

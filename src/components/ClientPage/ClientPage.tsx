@@ -1,7 +1,35 @@
 import BackButton from "@/common/BackButton";
+import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
+import { IClients } from "@/types/commonTypes";
+import { useEffect, useState } from "react";
 import ClientItem from "./ClientItem/ClientItem";
 
 export default function ClientPage() {
+  const [lstClient, setLstClient] = useState<IClients[]>();
+
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getClientsPageDetails();
+      if (!res.error) {
+        setLstClient(res.client);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const onComplete = () => {
+    loadData();
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
       <BackButton />
@@ -16,7 +44,7 @@ export default function ClientPage() {
         }}
       >
         <div className="row -mr-3 -ml-3">
-          <ClientItem />
+          {lstClient && <ClientItem lstClient={lstClient} onComplete={onComplete} />}
         </div>
       </div>
     </>

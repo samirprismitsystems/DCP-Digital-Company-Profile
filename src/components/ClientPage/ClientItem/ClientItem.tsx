@@ -1,16 +1,26 @@
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import RHFImageUploader from "@/common/RHFImageUploader";
+import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { clientFormSchema } from "@/services/forms/formSchema";
+import { IClients } from "@/types/commonTypes";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export default function ClientItem() {
+export default function ClientItem({
+  lstClient,
+  onComplete,
+}: {
+  lstClient: IClients[];
+  onComplete: () => void;
+}) {
   const objForm = useForm({
     defaultValues: {
-      client_data: [
+      client_data: lstClient || [
         {
           client_name: "",
           client_image: "",
@@ -26,8 +36,34 @@ export default function ClientItem() {
   });
 
   type IFormData = yup.InferType<typeof clientFormSchema>;
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (data: IFormData) => {
+    try {
+      console.log(data);
+      let io = new FormData();
+      io.append("user_id", AuthService.getUserEmail());
+      io.append(
+        "isupdate",
+        (lstClient && lstClient.length > 0 ? true : false) as any
+      );
+      io.append("client_data", JSON.stringify(data.client_data));
+      const res = await ApiService.saveServicePageDetails(io);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        onComplete();
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const itemDelete = async (index: number) => {
+    const isValid = await Utils.showWarningMessage("Do you want to delete?");
+    if (isValid.isConfirmed) {
+      remove(index);
+    }
   };
 
   return (
@@ -44,8 +80,9 @@ export default function ClientItem() {
                   </h5>
                   <button
                     onClick={() => {
-                      remove(index);
+                      itemDelete(index);
                     }}
+                    type="button"
                     className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />

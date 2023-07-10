@@ -69,3 +69,12 @@ export interface IServicePageData {
   service_price: string;
   updated_on: string;
 }
+
+export interface IClients {
+  client_id: string;
+  client_logo: string;
+  client_name: string;
+  company_id: string;
+  created_on: string;
+  updated_on: string;
+}

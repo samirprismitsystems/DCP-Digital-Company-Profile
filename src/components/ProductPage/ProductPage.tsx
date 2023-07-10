@@ -11,7 +11,12 @@ export default function ProductPage() {
   const loadData = async () => {
     try {
       const res = await ApiService.getProductPageDetails();
-      setLstProducts(res.product);
+      if (!res.error) {
+        setLstProducts(res.product);
+        return null;
+      }
+
+      throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }

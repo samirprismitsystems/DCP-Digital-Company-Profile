@@ -43,15 +43,19 @@ export default function ServiceItem({
     try {
       let io = new FormData();
       io.append("user_id", AuthService.getUserEmail());
-      io.append("isupdate", true as any);
+      io.append(
+        "isupdate",
+        (lstServiceData && lstServiceData.length > 0 ? true : false) as any
+      );
       io.append("service_data", JSON.stringify(data.service_data));
       const res = await ApiService.saveServicePageDetails(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
+        onComplete();
         return null;
       }
 
-      throw new Error(res.error);
+      throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
