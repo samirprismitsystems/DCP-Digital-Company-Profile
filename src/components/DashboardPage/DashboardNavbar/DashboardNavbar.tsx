@@ -75,9 +75,7 @@ export default function DashboardNavbar() {
             </button>
           </Link>
         </div> */}
-        <DashboardNavigationMenu
-          lstNavigationMenu={lstDashboardNavigationMenu}
-        />
+        <DashboardNavigationMenu />
       </div>
     </nav>
   );
