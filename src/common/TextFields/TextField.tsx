@@ -26,7 +26,7 @@ export default function TextField(props: ITextField) {
         </label>
         <input
           className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
-          type={props.type}
+          type={props.type || "text"}
           placeholder={props.placeHolder ? props.placeHolder : ""}
           {...register(props.name)}
         />

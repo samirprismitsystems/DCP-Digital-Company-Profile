@@ -1,4 +1,4 @@
-import { IUser } from "@/types/commonTypes";
+import { IPaymentOptions, IUser } from "@/types/commonTypes";
 import axios from "axios";
 import AuthService from "./AuthServices";
 import { BASE_URI } from "./config";
@@ -146,6 +146,13 @@ const ApiService = {
     return res.data;
   },
 
+  async getPaymentOptionDetails() {
+    const res = await axios.get(
+      `${BASE_URI}api/company/fetchpaymentoptions/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
   async saveImageGalleryDetails(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/portfolio/createportfolio`,
@@ -165,6 +172,14 @@ const ApiService = {
   async activeDeactiveEnquiryStatus(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/inquiry/updateinquirystatus`,
+      io
+    );
+    return res.data;
+  },
+
+  async savePaymentOptionDetails(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/company/savepaymentoptions`,
       io
     );
     return res.data;

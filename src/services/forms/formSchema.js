@@ -61,7 +61,7 @@ export const socialLinkFormSchema = yup.object({
 export const paymentOptionFormSchema = yup.object({
   bankName: yup.string().optional(),
   QRCodeImage: yup.mixed().optional(),
-  bankAccountNumber: yup.number().optional(),
+  bankAccountNumber: yup.string().optional(),
   accountHolderName: yup.string().optional(),
   payTMNumber: yup.string().optional(),
   googlePayNumber: yup.string().optional(),

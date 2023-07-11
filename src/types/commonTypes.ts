@@ -141,3 +141,21 @@ export interface ICompanyDetails {
   working_hours_from: string;
   working_hours_to: string;
 }
+
+export interface IPaymentOptions {
+  account_holder_name: string;
+  account_type: string;
+  bank_account_number: string;
+  bank_ifsc_code: string;
+  bank_name: string;
+  company_id: string;
+  created_at: string;
+  googlepay_number: string;
+  option_id: string;
+  paytm_number: string;
+  phonepay_number: string;
+  qrcode: string;
+  razorpay_key_id: string;
+  razorpay_key_secret: string;
+  updated_at: string;
+}

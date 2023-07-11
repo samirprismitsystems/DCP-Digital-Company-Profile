@@ -1,24 +1,89 @@
 import BackButton from "@/common/BackButton";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import TextField from "@/common/TextFields/TextField";
+import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { paymentOptionFormSchema } from "@/services/forms/formSchema";
+import { IPaymentOptions } from "@/types/commonTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
-import RazorpayCheckout from "./Childs/RazorpayCheckout";
 import BankAccountDetails from "./Childs/BankAccountDetails";
 import QRCodeImageUploader from "./Childs/QRCodeImageUploader";
+import RazorpayCheckout from "./Childs/RazorpayCheckout";
 
 export default function PaymentOptionPage() {
   const objForm = useForm({
-    defaultValues: {},
     resolver: yupResolver(paymentOptionFormSchema),
   });
 
   type IFormData = yup.InferType<typeof paymentOptionFormSchema>;
   const onSave: any = async (data: IFormData) => {
-    console.log(data);
+    try {
+      let io: any = new FormData();
+      io.append("paytm_number", data.payTMNumber);
+      io.append("googlepay_number", data.googlePayNumber);
+      io.append("phonepay_number", data.phonePeNumber);
+      io.append("razorpay_key_id", data.keyID);
+      io.append("razorpay_key_secret", data.keySecret);
+      io.append("bank_name", data.bankName);
+      io.append("account_holder_name", data.accountHolderName);
+      io.append("bank_account_number", data.bankAccountNumber);
+      io.append("bank_ifsc_code", data.bankIFSCCode);
+      io.append("account_type", data.accountType);
+      io.append("user_id", AuthService.getUserEmail());
+      io.append("qrcode", data.QRCodeImage);
+      io.append("isupdate", true);
+
+      const res = await ApiService.savePaymentOptionDetails(io);
+      if (!res.error) {
+        onComplete();
+        Utils.showSuccessMessage(res.message);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
   };
+
+  const onComplete = () => {
+    loadData();
+  };
+
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getPaymentOptionDetails();
+      if (!res.error) {
+        let result: IPaymentOptions = res.paymentdata;
+        const defaultValue: any = {
+          accountHolderName: result.account_holder_name,
+          accountType: result.account_type,
+          bankAccountNumber: result.bank_account_number,
+          bankIFSCCode: result.bank_ifsc_code,
+          bankName: result.bank_name,
+          googlePayNumber: result.googlepay_number,
+          keyID: result.razorpay_key_id,
+          keySecret: result.razorpay_key_secret,
+          payTMNumber: result.paytm_number,
+          phonePeNumber: result.phonepay_number,
+          QRCodeImage: result.qrcode,
+        };
+        objForm.reset(defaultValue);
+        return null;
+      }
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <>
@@ -50,7 +115,7 @@ export default function PaymentOptionPage() {
                 <TextField
                   title={"Google Pay Number / UPI ID (Optional)"}
                   placeHolder="Google Pay Number / UPI ID "
-                  name="googlePeNumber"
+                  name="googlePayNumber"
                 />
               </div>
               <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">

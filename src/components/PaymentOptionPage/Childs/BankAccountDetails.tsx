@@ -24,6 +24,7 @@ export default function BankAccountDetails() {
         <TextField
           title={"Bank Account Number (Optional)"}
           placeHolder="Account Number"
+          type="text"
           name="bankAccountNumber"
         />
       </div>
