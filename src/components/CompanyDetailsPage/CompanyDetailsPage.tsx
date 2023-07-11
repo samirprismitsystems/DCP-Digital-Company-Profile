@@ -3,7 +3,7 @@ import CompanyTextField from "@/components/CompanyDetailsPage/FormFields/Company
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { companyDetailsFormSchema } from "@/services/forms/formSchema";
-import { IMap } from "@/types/commonTypes";
+import { ICompanyDetails, IMap } from "@/types/commonTypes";
 import { IStates } from "@/types/companyTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
@@ -14,8 +14,11 @@ import CompanyImageUploader from "./FormFields/CompanyImageUploader";
 import CompanyStateAndCitySelector from "./FormFields/CompanyStateAndCitySelector";
 import CompanyWorkingHoursSelectorField from "./FormFields/CompanyWorkingHoursField";
 import MapInformation from "./MapInformation/MapInformation";
+import AuthService from "@/services/AuthServices";
 
 export default function CompanyDetailsPage() {
+  const [objCompanyDetails, setObjCompanyDetails] = useState<ICompanyDetails>();
+
   const [mapLocation, setMapLocation] = useState<IMap>({
     lat: 21.1875694,
     lon: 72.8147383,
@@ -27,23 +30,75 @@ export default function CompanyDetailsPage() {
   const objForm = useForm({
     defaultValues: {
       aboutCompany: "",
-      businessType: "",
-      city: "",
+      businessType:
+        (objCompanyDetails && objCompanyDetails.business_segment) || "",
+      city: objCompanyDetails?.city || "",
       companyEstDate: "",
-      country: "",
-      emailID: "",
+      country: objCompanyDetails?.country || "India",
+      emailID: objCompanyDetails?.company_email || "",
       fullName: "",
       houseNumber: "",
       mapAddress: "",
-      state: "",
+      state: objCompanyDetails?.state || "",
       workingHours: "",
-      alternatePhoneNumber: "",
+      alternatePhoneNumber: objCompanyDetails?.company_alternate_contact || "",
     },
     resolver: yupResolver(companyDetailsFormSchema),
   });
 
+  console.log(objForm.formState.errors);
   const onSave = (data: IFormData) => {
     console.log("hi", data);
+
+    try {
+      let io = new FormData();
+      // let slug = this.$refs.cname.value.replace(/[^a-zA-Z ]/g, "");
+      // let company_slug = slug
+      //   .replace(" ", "-")
+      //   .replace(/\s+/g, "")
+      //   .toLowerCase();
+
+      // io.append("user_id", AuthService.getUserEmail());
+      // io.append("company_name", this.$refs.cname.value);
+      // io.append("company_slug", company_slug);
+      // io.append("company_desc", this.$refs.cdesc.value);
+      // io.append("established_in", this.$refs.esdate.value);
+      // io.append("business_segment", this.$refs.bsegment.value);
+      // // io.append('address',this.$refs.address.value);
+      // io.append("area", this.$refs.area.value);
+      // io.append("city", this.city);
+      // io.append("state", this.state);
+      // io.append("country", this.country);
+      // io.append("post_code", this.$refs.postcode.value);
+      // io.append("company_email", this.$refs.cemail.value);
+      // io.append("company_contact", this.$refs.cnumber.value);
+      // io.append("company_alternate_contact", this.$refs.canumber.value);
+      // io.append("working_hours_day", this.workingdays);
+      // io.append("working_hours_from", this.$refs.fromtime.value);
+      // io.append("working_hours_to", this.$refs.totime.value);
+      // io.append("map_lat", this.osmdata.lat);
+      // io.append("map_lng", this.osmdata.lon);
+      // io.append("isupdate", false);
+
+      // if (this.ischangepic == true) {
+      //   io.append("company_logo", this.companydata.logo);
+      //   this.ischangepic = false;
+      // }
+
+      // if (this.ischangebannerpic == true) {
+      //   io.append("company_banner", this.companydata.banner);
+      //   this.ischangepic = false;
+      // }
+
+      // if (this.isupdate == true) {
+      //   io.append("company_id", this.company_id);
+      //   io.append("logo", this.logo);
+      //   io.append("banner", this.banner);
+      //   io.append("isupdate", true);
+      // }
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
   };
 
   const loadStates = async () => {
@@ -93,9 +148,25 @@ export default function CompanyDetailsPage() {
     }
   };
 
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getCompanyDetailsPageData();
+      if (!res.error) {
+        setObjCompanyDetails(res.company[0]);
+        return null;
+      }
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
   useEffect(() => {
     loadStates();
+    loadData();
   }, []);
+
+  if (!objCompanyDetails) return null;
 
   return (
     <>
@@ -120,12 +191,14 @@ export default function CompanyDetailsPage() {
                 title="Full Name / Business Name / Company Name *"
                 placeHolder="Enter Your Full Name / Business Name / Company Name"
                 type="text"
+                isRequired={true}
               />
               <CompanyTextField
                 name="businessType"
                 title="Business Type / Description *"
                 placeHolder="Business Type / Description"
                 type="text"
+                isRequired={true}
               />
               <div className="grid grid-cols-2 gap-8">
                 <CompanyTextField
@@ -133,6 +206,7 @@ export default function CompanyDetailsPage() {
                   title="Phone No. (WhatsApp No) *"
                   placeHolder="Enter Your WhatsApp No"
                   type="number"
+                  isRequired={true}
                 />
                 <CompanyTextField
                   name="alternatePhoneNumber"
@@ -146,6 +220,7 @@ export default function CompanyDetailsPage() {
                 title="Email Id *"
                 placeHolder="Enter Your Email"
                 type="email"
+                isRequired={true}
               />
             </div>
             <CompanyImageUploader
@@ -168,12 +243,13 @@ export default function CompanyDetailsPage() {
                 title="House No, Street, Area *"
                 placeHolder="Enter House No, Street (Area)"
                 type="text"
+                isRequired={true}
               />
               <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  mb-16 transition-all duration-300 ease-linear">
                 <label
                   className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none`}
                 >
-                 Country *
+                  Country *
                 </label>
                 <select
                   disabled
@@ -196,6 +272,7 @@ export default function CompanyDetailsPage() {
                 title="Postal Code *"
                 placeHolder="Enter Postcode"
                 type="number"
+                isRequired={true}
               />
             </div>
           </div>

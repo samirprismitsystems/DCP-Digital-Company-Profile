@@ -139,6 +139,13 @@ const ApiService = {
     return res.data;
   },
 
+  async getCompanyDetailsPageData() {
+    const res = await axios.get(
+      `${BASE_URI}api/company/getcompany/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
   async saveImageGalleryDetails(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/portfolio/createportfolio`,

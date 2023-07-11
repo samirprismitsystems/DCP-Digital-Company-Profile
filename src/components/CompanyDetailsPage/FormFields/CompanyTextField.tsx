@@ -13,7 +13,6 @@ export default function CompanyTextField(props: ICompanyTextField) {
     register,
     formState: { errors },
   } = useFormContext();
-
   return (
     <>
       <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
@@ -25,8 +24,9 @@ export default function CompanyTextField(props: ICompanyTextField) {
           {props.title}
         </label>
         <input
+          required={props.isRequired || false}
           className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
-          type={props.type}
+          type={props.type || "text"}
           placeholder={props.placeHolder ? props.placeHolder : ""}
           {...register(props.name)}
         />
