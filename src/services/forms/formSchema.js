@@ -22,6 +22,7 @@ export const createNewAccountSchema = yup.object({
 
 export const companyDetailsFormSchema = yup.object({
   fullName: yup.string().optional(),
+  companyID: yup.number().optional(),
   businessType: yup.string().optional(),
   phoneNumber: yup.number().optional(),
   alternatePhoneNumber: yup.mixed().optional(),
@@ -38,8 +39,13 @@ export const companyDetailsFormSchema = yup.object({
   workingHoursDay: yup.string(),
   workingHoursFromTime: yup.string(),
   workingHoursToTime: yup.string(),
-  logoPath: yup.mixed(),
-  bannerPath: yup.mixed(),
+  mapLocation: yup.object().shape({
+    lat: yup.number().optional().default(21.1875694),
+    lon: yup.number().optional().default(72.8147383),
+    displayName: yup.string().optional().default(""),
+  }),
+  logoPath: yup.string().optional(),
+  bannerPath: yup.string().optional(),
 });
 
 export const socialLinkFormSchema = yup.object({

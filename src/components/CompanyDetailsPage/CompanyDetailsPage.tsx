@@ -3,8 +3,7 @@ import CompanyTextField from "@/components/CompanyDetailsPage/FormFields/Company
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { companyDetailsFormSchema } from "@/services/forms/formSchema";
-import { ICompanyDetails, IMap } from "@/types/commonTypes";
-import { IStates } from "@/types/companyTypes";
+import { IAPICompanyDetailsPage, IStates } from "@/types/companyTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -14,91 +13,82 @@ import CompanyImageUploader from "./FormFields/CompanyImageUploader";
 import CompanyStateAndCitySelector from "./FormFields/CompanyStateAndCitySelector";
 import CompanyWorkingHoursSelectorField from "./FormFields/CompanyWorkingHoursField";
 import MapInformation from "./MapInformation/MapInformation";
+import { defaultConfig } from "next/dist/server/config-shared";
 import AuthService from "@/services/AuthServices";
 
 export default function CompanyDetailsPage() {
-  const [objCompanyDetails, setObjCompanyDetails] = useState<ICompanyDetails>();
-
-  const [mapLocation, setMapLocation] = useState<IMap>({
-    lat: 21.1875694,
-    lon: 72.8147383,
-    displayname: "",
-  });
   const [lstStates, setState] = useState<IStates[]>();
   type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
 
   const objForm = useForm({
     defaultValues: {
-      aboutCompany: "",
-      businessType:
-        (objCompanyDetails && objCompanyDetails.business_segment) || "",
-      city: objCompanyDetails?.city || "",
+      aboutCompany: "364545454",
+      businessType: "",
+      city: "",
       companyEstDate: "",
-      country: objCompanyDetails?.country || "India",
-      emailID: objCompanyDetails?.company_email || "",
+      country: "India",
+      emailID: "",
       fullName: "",
       houseNumber: "",
       mapAddress: "",
-      state: objCompanyDetails?.state || "",
+      state: "India",
       workingHours: "",
-      alternatePhoneNumber: objCompanyDetails?.company_alternate_contact || "",
+      alternatePhoneNumber: "",
+      logoPath: "",
+      bannerPath: "",
     },
     resolver: yupResolver(companyDetailsFormSchema),
   });
 
-  console.log(objForm.formState.errors);
-  const onSave = (data: IFormData) => {
-    console.log("hi", data);
-
+  const onSave = async (data: IFormData) => {
     try {
-      let io = new FormData();
-      // let slug = this.$refs.cname.value.replace(/[^a-zA-Z ]/g, "");
-      // let company_slug = slug
-      //   .replace(" ", "-")
-      //   .replace(/\s+/g, "")
-      //   .toLowerCase();
+      let io: any = new FormData();
+      let slug = data.fullName?.replace(/[^a-zA-Z ]/g, "");
+      let company_slug = slug
+        ?.replace(" ", "-")
+        .replace(/\s+/g, "")
+        .toLowerCase();
 
-      // io.append("user_id", AuthService.getUserEmail());
-      // io.append("company_name", this.$refs.cname.value);
-      // io.append("company_slug", company_slug);
-      // io.append("company_desc", this.$refs.cdesc.value);
-      // io.append("established_in", this.$refs.esdate.value);
-      // io.append("business_segment", this.$refs.bsegment.value);
-      // // io.append('address',this.$refs.address.value);
-      // io.append("area", this.$refs.area.value);
-      // io.append("city", this.city);
-      // io.append("state", this.state);
-      // io.append("country", this.country);
-      // io.append("post_code", this.$refs.postcode.value);
-      // io.append("company_email", this.$refs.cemail.value);
-      // io.append("company_contact", this.$refs.cnumber.value);
-      // io.append("company_alternate_contact", this.$refs.canumber.value);
-      // io.append("working_hours_day", this.workingdays);
-      // io.append("working_hours_from", this.$refs.fromtime.value);
-      // io.append("working_hours_to", this.$refs.totime.value);
-      // io.append("map_lat", this.osmdata.lat);
-      // io.append("map_lng", this.osmdata.lon);
-      // io.append("isupdate", false);
+      io.append("user_id", AuthService.getUserEmail());
+      io.append("company_name", data.fullName);
+      io.append("company_slug", company_slug || data.fullName?.toLowerCase());
+      io.append("company_desc", data.aboutCompany);
+      io.append("established_in", data.companyEstDate);
+      io.append("business_segment", data.businessType);
+      io.append("area", data.houseNumber);
+      io.append("city", data.city);
+      io.append("state", data.state);
+      io.append("country", data.country);
+      io.append("post_code", data.postalCode);
+      io.append("company_email", data.emailID);
+      io.append("company_contact", data.phoneNumber);
+      io.append("company_alternate_contact", data.alternatePhoneNumber);
+      io.append("working_hours_day", data.workingHoursDay);
+      io.append("working_hours_from", data.workingHoursFromTime);
+      io.append("working_hours_to", data.workingHoursToTime);
+      io.append("map_lat", data.mapLocation.lat);
+      io.append("map_lng", data.mapLocation.lon);
+      io.append("isupdate", true);
+      io.append("company_banner", data.bannerPath);
+      io.append("company_id", data.companyID);
+      io.append("company_logo", data.logoPath);
+      io.append("logo", data.logoPath);
+      io.append("banner", data.bannerPath);
 
-      // if (this.ischangepic == true) {
-      //   io.append("company_logo", this.companydata.logo);
-      //   this.ischangepic = false;
-      // }
-
-      // if (this.ischangebannerpic == true) {
-      //   io.append("company_banner", this.companydata.banner);
-      //   this.ischangepic = false;
-      // }
-
-      // if (this.isupdate == true) {
-      //   io.append("company_id", this.company_id);
-      //   io.append("logo", this.logo);
-      //   io.append("banner", this.banner);
-      //   io.append("isupdate", true);
-      // }
+      const res = await ApiService.saveCompanyDetailsPageData(io);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        onComplete();
+        return null;
+      }
+      throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
+  };
+
+  const onComplete = () => {
+    loadData();
   };
 
   const loadStates = async () => {
@@ -133,11 +123,9 @@ export default function CompanyDetailsPage() {
       }
 
       if (res.length > 0) {
-        setMapLocation({
-          lon: res[0].lon,
-          lat: res[0].lat,
-          displayname: res[0].display_name,
-        });
+        objForm.setValue("mapLocation.lat", res[0].lat);
+        objForm.setValue("mapLocation.lon", res[0].lon);
+        objForm.setValue("mapLocation.displayName", res[0].display_name);
 
         return null;
       }
@@ -152,7 +140,34 @@ export default function CompanyDetailsPage() {
     try {
       const res = await ApiService.getCompanyDetailsPageData();
       if (!res.error) {
-        setObjCompanyDetails(res.company[0]);
+        const result: IAPICompanyDetailsPage = res.company[0];
+        const defaultValue: IFormData = {
+          alternatePhoneNumber: result.company_alternate_contact,
+          bannerPath: result.banner,
+          businessType: result.business_segment,
+          city: result.city,
+          emailID: result.company_email,
+          country: result.country,
+          fullName: result.company_name,
+          aboutCompany: result.company_desc,
+          postalCode: result.post_code,
+          state: result.state,
+          phoneNumber: result.company_contact,
+          logoPath: result.logo,
+          houseNumber: result.area,
+          companyEstDate: result.established_in,
+          mapLocation: {
+            lat: parseFloat(result.map_lat),
+            lon: parseFloat(result.map_lng),
+            displayName: "",
+          },
+          workingHoursDay: result.working_hours_day,
+          workingHoursFromTime: result.working_hours_from,
+          workingHoursToTime: result.working_hours_to,
+          companyID: result.company_id,
+        };
+
+        objForm.reset(defaultValue);
         return null;
       }
       throw new Error(res.message);
@@ -165,8 +180,6 @@ export default function CompanyDetailsPage() {
     loadStates();
     loadData();
   }, []);
-
-  if (!objCompanyDetails) return null;
 
   return (
     <>
@@ -223,16 +236,7 @@ export default function CompanyDetailsPage() {
                 isRequired={true}
               />
             </div>
-            <CompanyImageUploader
-              bannerPath={objForm.getValues("logoPath")}
-              logoPath={objForm.getValues("bannerPath")}
-              setBannerPath={(path: string) => {
-                objForm.setValue("logoPath", path);
-              }}
-              setLogoPath={(path: string) => {
-                objForm.setValue("bannerPath", path);
-              }}
-            />
+            <CompanyImageUploader />
             <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
           </div>
           <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">
@@ -282,26 +286,16 @@ export default function CompanyDetailsPage() {
             title="Company Est Date"
             type="date"
           />
-          <CompanyWorkingHoursSelectorField
-            handleDayChange={(e: any) => {
-              objForm.setValue("workingHoursDay", e.target.value);
-            }}
-            handleFromTime={(e: any) => {
-              objForm.setValue("workingHoursFromTime", e.target.value);
-            }}
-            handleToTime={(e: any) => {
-              objForm.setValue("workingHoursToTime", e.target.value);
-            }}
-          />
+          <CompanyWorkingHoursSelectorField />
           <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
             <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
               About Company
             </label>
             <textarea
               className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
-              name="cname"
               placeholder="Add Company Business / Description"
               rows={8}
+              {...objForm.register("aboutCompany")}
             />
           </div>
           <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
@@ -343,15 +337,13 @@ export default function CompanyDetailsPage() {
             </label>
             <div className="w-full h-[400px] relative z-0">
               <MapInformation
-                displayName={mapLocation?.displayname}
-                lat={mapLocation?.lat}
-                lon={mapLocation?.lon}
+                displayName={objForm.getValues("mapLocation.displayName") || ""}
+                lat={objForm.getValues("mapLocation.lat") || 21.1875694}
+                lon={objForm.getValues("mapLocation.lon") || 72.8147383}
                 setMapData={({ lat, lon }: any) => {
-                  setMapLocation({
-                    lat: lat,
-                    lon: lon,
-                    displayname: "",
-                  });
+                  objForm.setValue("mapLocation.lat", lat);
+                  objForm.setValue("mapLocation.lon", lon);
+                  objForm.setValue("mapLocation.displayName", "");
                 }}
               />
             </div>

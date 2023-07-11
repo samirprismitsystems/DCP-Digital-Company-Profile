@@ -11,7 +11,7 @@ export default function ThemeCards() {
     <div className="flex flex-wrap flex-col">
       <div className="flex items-center justify-between mb-2">
         <h5>
-          Themes #<span className="count">1</span>
+          Theme #<span className="count">1</span>
         </h5>
       </div>
       <div

@@ -161,6 +161,11 @@ const ApiService = {
     return res.data;
   },
 
+  async saveCompanyDetailsPageData(io: any) {
+    const res = await axios.post(`${BASE_URI}api/company/createcompany`, io);
+    return res.data;
+  },
+
   async activeDeactiveTestimonialStatus(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/testimonial/updatetestimonialstatus`,

@@ -11,6 +11,7 @@ interface ICompanyTextField {
 export default function CompanyTextField(props: ICompanyTextField) {
   const {
     register,
+    getValues,
     formState: { errors },
   } = useFormContext();
   return (

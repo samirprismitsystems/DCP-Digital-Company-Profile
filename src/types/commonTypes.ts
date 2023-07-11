@@ -113,35 +113,6 @@ export interface IEnquiry {
   updated_on: string;
 }
 
-export interface ICompanyDetails {
-  address: string;
-  area: string;
-  business_segment: string;
-  city: string;
-  company_alternate_contact: string;
-  company_banner: string;
-  company_contact: string;
-  company_email: string;
-  company_id: string;
-  company_logo: string;
-  company_name: string;
-  company_slug: string;
-  country: string;
-  created_on: string;
-  established_in: string;
-  map_lat: string;
-  map_lng: string;
-  post_code: string;
-  state: string;
-  status: string;
-  theme_id: string;
-  updated_on: string;
-  user_id: string;
-  working_hours_day: string;
-  working_hours_from: string;
-  working_hours_to: string;
-}
-
 export interface IPaymentOptions {
   account_holder_name: string;
   account_type: string;

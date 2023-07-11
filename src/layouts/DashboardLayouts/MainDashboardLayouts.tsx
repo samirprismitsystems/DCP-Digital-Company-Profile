@@ -17,17 +17,14 @@ export default function MainDashboardLayouts({ children }: any) {
   );
 
   const loadData = () => {
-    let link = window.location.pathname;
-    let modifiedLink = link.replace(/\/dashboard\//, "");
-    for (let item of lstDashboardPanels) {
-      if (item.link === modifiedLink) {
-        dispatch(
-          setSelectedObj({
-            selectedIndex: item.id,
-            selectedTitle: item.link,
-          })
-        );
-      }
+    const modifiedLink = window.location.pathname.replace(/\/dashboard\//, "");
+    const selectedItem = lstDashboardPanels.find(
+      (item) => item.link === modifiedLink
+    );
+
+    if (selectedItem) {
+      const { id, link } = selectedItem;
+      dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
     }
   };
 
@@ -59,12 +56,6 @@ export default function MainDashboardLayouts({ children }: any) {
                           : "bg-secondary-main"
                       } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
-                        dispatch(
-                          setSelectedObj({
-                            selectedIndex: index + 1,
-                            selectedTitle: item.link,
-                          })
-                        );
                         router.push(`/dashboard/${item.link}`);
                       }}
                     >
