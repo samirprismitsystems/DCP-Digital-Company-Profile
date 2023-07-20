@@ -42,6 +42,18 @@ export default function ProductItem({
   const onSubmit = async (data: IFormData) => {
     try {
       let io = new FormData();
+      let imgcount = 0;
+      if (data && data.product_data) {
+        data.product_data.forEach((item, index) => {
+          if (typeof item.product_image === "object") {
+            io.append(`oldimages${index}`, item.product_image as any);
+            imgcount += 1;
+          }
+        });
+      }
+      if (imgcount > 0) {
+        io.append("imgcount", imgcount as any);
+      }
       io.append("user_id", AuthService.getUserEmail());
       io.append(
         "isupdate",
@@ -73,64 +85,73 @@ export default function ProductItem({
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
         <div className="grid mb-16 gap-6 max-w-full xl:grid-cols-5 md:grid-cols-2 sm:grid-cols-2">
-          {fields.map((item, index) => (
-            <div key={item.id}>
-              <div className='item_no flex justify-between items-center mb-2 font-["GothamRoundedLight"]  '>
-                <h5 className="capitalize font-medium">
-                  Product
-                  <span className="inline-block ml-2">#{index + 1}</span>
-                </h5>
-                <button
-                  onClick={() => {
-                    itemDelete(index);
+          {fields.map((item: any, index: number) => {
+            return (
+              <div key={item.id}>
+                <div className='item_no flex justify-between items-center mb-2 font-["GothamRoundedLight"]  '>
+                  <h5 className="capitalize font-medium">
+                    Product
+                    <span className="inline-block ml-2">#{index + 1}</span>
+                  </h5>
+                  <button
+                    onClick={() => {
+                      itemDelete(index);
+                    }}
+                    type="button"
+                    className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
+                </div>
+                <div
+                  className="item_div border-solid border-[1px] border-[#ccc] bg-[rgb(255, 255, 255)] p-6 rounded-[0.6rem]"
+                  style={{
+                    boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
                   }}
-                  type="button"
-                  className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"
                 >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </button>
-              </div>
-              <div
-                className="item_div border-solid border-[1px] border-[#ccc] bg-[rgb(255, 255, 255)] p-6 rounded-[0.6rem]"
-                style={{
-                  boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                <div>
-                  <RHFImageUploader
-                    imagePath={item.product_image}
-                    savePath={`product_data.${index}.product_image`}
-                    label="Upload Product Image"
-                  />
-                  <input
-                    type="text"
-                    className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
-                    placeholder="Enter Product Name"
-                    {...objForm.register(`product_data.${index}.product_name`)}
-                    defaultValue={item.product_name}
-                    required
-                  />
-                  <input
-                    type="number"
-                    className="py-5 px-4 border-[1px] imageUploaderInputs placeholder:text-gray-400 border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
-                    placeholder="Enter Product MRP"
-                    required
-                    {...objForm.register(`product_data.${index}.product_price`)}
-                    defaultValue={item.product_price}
-                  />
-                  <textarea
-                    className="py-5 px-4 border-[1px] imageUploaderInputs placeholder:text-gray-400 border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic bg-transparent"
-                    required
-                    {...objForm.register(`product_data.${index}.product_desc`)}
-                    placeholder="Enter Product Description"
-                    defaultValue={item.product_desc}
-                    cols={0}
-                    rows={4}
-                  ></textarea>
+                  <div>
+                    <RHFImageUploader
+                      imagePath={item.product_image}
+                      savePath={`product_data.${index}.product_image`}
+                      label="Upload Product Image"
+                      companyID={item.company_id}
+                    />
+                    <input
+                      type="text"
+                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      placeholder="Enter Product Name"
+                      {...objForm.register(
+                        `product_data.${index}.product_name`
+                      )}
+                      defaultValue={item.product_name}
+                      required
+                    />
+                    <input
+                      type="number"
+                      className="py-5 px-4 border-[1px] imageUploaderInputs placeholder:text-gray-400 border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      placeholder="Enter Product MRP"
+                      required
+                      {...objForm.register(
+                        `product_data.${index}.product_price`
+                      )}
+                      defaultValue={item.product_price}
+                    />
+                    <textarea
+                      className="py-5 px-4 border-[1px] imageUploaderInputs placeholder:text-gray-400 border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic bg-transparent"
+                      required
+                      {...objForm.register(
+                        `product_data.${index}.product_desc`
+                      )}
+                      placeholder="Enter Product Description"
+                      defaultValue={item.product_desc}
+                      cols={0}
+                      rows={4}
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="flex w-full xs:flex-wrap sm:flex-nowrap space-x-6">
           <button
