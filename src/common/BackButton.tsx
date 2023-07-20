@@ -1,12 +1,15 @@
 import { lstDashboardPanels } from "@/data/DashboardSideBar";
 import { useAppSelector } from "@/services/store/hooks/hooks";
+import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 export default function BackButton() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const selectedIndex = useAppSelector(
     (state: RootState) => state.dashboard.selectedIndex
   );
@@ -20,7 +23,17 @@ export default function BackButton() {
     });
 
     if (isDataValid) {
-      router.push(isDataValid.link);
+      dispatch(
+        setSelectedObj({
+          selectedIndex: isDataValid.id,
+          selectedTitle: isDataValid.link,
+        })
+      );
+      window.history.replaceState(
+        isDataValid.link,
+        "",
+        `/dashboard/${isDataValid.link}`
+      );
     }
   };
   return (
