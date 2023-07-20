@@ -4,28 +4,42 @@ import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { clientFormSchema } from "@/services/forms/formSchema";
-import { IClients } from "@/types/commonTypes";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export default function ClientItem({
-  lstClient,
-  onComplete,
-}: {
-  lstClient: IClients[];
-  onComplete: () => void;
-}) {
+export default function ClientItem() {
+  const [lstClient, setLstClient] = useState<any>([
+    {
+      client_name: "",
+      client_logo: "",
+    },
+  ]);
+
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getClientsPageDetails();
+      if (!res.error) {
+        setLstClient(res.client);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const onComplete = () => {
+    loadData();
+  };
+
   const objForm = useForm({
     defaultValues: {
-      client_data: lstClient || [
-        {
-          client_name: "",
-          client_image: "",
-        },
-      ],
+      client_data: lstClient,
     },
     resolver: yupResolver(clientFormSchema),
   });
@@ -38,49 +52,139 @@ export default function ClientItem({
   type IFormData = yup.InferType<typeof clientFormSchema>;
   const onSubmit = async (data: IFormData) => {
     try {
-      console.log(data);
-      let io = new FormData();
+      const oldData = data.client_data?.filter((item: any) => {
+        if (item.client_id) {
+          return item;
+        }
+      });
+
+      let io: any = new FormData();
       io.append("user_id", AuthService.getUserEmail());
-      io.append(
-        "isupdate",
-        (lstClient && lstClient.length > 0 ? true : false) as any
-      );
-      io.append("client_data", JSON.stringify(data.client_data));
-      const res = await ApiService.saveServicePageDetails(io);
+      io.append("isupdate", true);
+      let imgcount = 0;
+
+      if (oldData) {
+        oldData.forEach((item: any, index: any) => {
+          if (typeof item.client_logo === "object") {
+            io.append(`oldimages${index}`, item.client_logo);
+          } else {
+            io.append(`oldimages${index}`, "undefined");
+          }
+          imgcount += 1;
+        });
+      }
+      if (imgcount > 0) {
+        io.append("imgcount", imgcount);
+      }
+      io.append("client_data", JSON.stringify(oldData));
+      const res = await ApiService.saveClientPageDetails(io);
+
+      const newData = data.client_data?.filter((item: any) => {
+        if (!item.client_id) {
+          return item;
+        }
+      });
+
+      if (newData && newData.length > 0) {
+        let newIO: any = new FormData();
+        let newImgcount = 0;
+        newData.forEach((item: any, index: number) => {
+          if (typeof item.client_logo === "object") {
+            newIO.append(`oldimages${index}`, item.client_logo);
+          } else {
+            newIO.append(`oldimages${index}`, "undefined");
+          }
+          newImgcount += 1;
+        });
+        if (newImgcount > 0) {
+          newIO.append("imgcount", newImgcount);
+        }
+        newIO.append("user_id", AuthService.getUserEmail());
+        newIO.append("isupdate", false);
+        newIO.append("client_data", JSON.stringify(newData));
+
+        const res = await ApiService.saveClientPageDetails(newIO);
+        if (!res.error) {
+          Utils.showSuccessMessage(res.message);
+          onComplete();
+          return null;
+        }
+      }
+
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
         onComplete();
         return null;
       }
 
-      throw new Error(res.message);
+      if (res.message !== "Empty Client Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
   };
 
   const itemDelete = async (index: number) => {
+    try {
+      const isValid = await Utils.showWarningMessage("Do you want to delete?");
+      if (isValid.isConfirmed) {
+        const res = await ApiService.deleteClientItem(index);
+        if (!res.error) {
+          Utils.showSuccessMessage(res.message);
+          onComplete();
+          setLstClient([
+            {
+              client_name: "",
+              client_logo: "",
+            },
+          ]);
+          return null;
+        }
+
+        if (res.message !== "Empty Client Data") throw new Error(res.message);
+      }
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const deleteDummyItem = async (index: number) => {
     const isValid = await Utils.showWarningMessage("Do you want to delete?");
     if (isValid.isConfirmed) {
       remove(index);
     }
   };
 
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    if (lstClient && lstClient.length > 0) {
+      objForm.reset({
+        client_data: lstClient,
+      });
+    }
+  }, [lstClient]);
+
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
         <div className="grid mb-16 gap-6 max-w-full xl:grid-cols-5 md:grid-cols-2 sm:grid-cols-2">
-          {fields.map((item, index) => {
+          {fields.map((item: any, index: number) => {
             return (
               <div key={item.id}>
-                <div className='item_no flex justify-between items-center mb-2 font-["GothamRoundedLight"]  '>
+                <div className='item_no flex justify-between items-center mb-2 font-["GothamRoundedLight"]'>
                   <h5 className="capitalize font-medium">
                     Client
                     <span className="inline-block ml-2">#{index + 1}</span>
                   </h5>
                   <button
                     onClick={() => {
-                      itemDelete(index);
+                      if (item.client_id) {
+                        itemDelete(item.client_id);
+                      } else {
+                        deleteDummyItem(index);
+                      }
                     }}
                     type="button"
                     className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"
@@ -96,9 +200,11 @@ export default function ClientItem({
                 >
                   <div>
                     <RHFImageUploader
-                      imagePath={item.client_image}
-                      savePath={`client_data.${index}.client_image`}
+                      srcPath={item.client_logo}
+                      savePath={`client_data.${index}.client_logo`}
                       label="Upload Client Image"
+                      companyID={item.company_id}
+                      folderPath="client"
                     />
                     <input
                       type="text"
@@ -116,7 +222,7 @@ export default function ClientItem({
         </div>
         <div className="flex w-full xs:flex-wrap sm:flex-nowrap space-x-6">
           <button
-            className="add_btn cursor-pointer  bg-white text-black rounded-xl sm:min-w-[15rem] xs:min-w-full font-semibold py-5 px-9 text-3xl text-center mb-16 capitalize border-solid border-[1px] border-primary-light "
+            className="add_btn cursor-pointer  bg-white text-black rounded-xl sm:min-w-[15rem] xs:min-w-full font-semibold py-5 px-9 text-3xl text-center mb-16 capitalize border-solid border-[1px] border-primary-light"
             style={{
               transition: "all 0.3s linear",
             }}

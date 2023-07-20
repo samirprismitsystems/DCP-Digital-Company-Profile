@@ -11,6 +11,9 @@
   --color-100: #126e83;
 }
 
+.add_btn:hover{
+  background-color: #d8e3e7;
+}
 .socialmedia_color_1 {
   color: #3b5999;
 }

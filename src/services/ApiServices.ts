@@ -92,6 +92,11 @@ const ApiService = {
     return res.data;
   },
 
+  async saveClientPageDetails(io: any) {
+    const res = await axios.post(`${BASE_URI}api/client/createclient`, io);
+    return res.data;
+  },
+
   async getServicePageDetails() {
     const res = await axios.get(
       `${BASE_URI}api/service/getservice/${AuthService.getUserEmail()}`
@@ -200,6 +205,13 @@ const ApiService = {
   async deleteServiceItem(serviceID: any) {
     const res = await axios.get(
       `${BASE_URI}api/service/deleteservice/${serviceID}`
+    );
+    return res.data;
+  },
+
+  async deleteClientItem(clientID: any) {
+    const res = await axios.get(
+      `${BASE_URI}api/client/deleteclient/${clientID}`
     );
     return res.data;
   },
