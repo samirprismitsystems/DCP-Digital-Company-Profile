@@ -16,16 +16,20 @@ export default function CompanyImageUploader({
 
   const handleBannerChange = (event: any) => {
     const files = event.target.files[0];
-    setValue("bannerPath", event.target.files[0].name);
-    setValue("company_banner", files);
-    setBannerPath(URL.createObjectURL(files));
+    if(files){
+      setValue("bannerPath", event.target.files[0].name);
+      setValue("company_banner", files);
+      setBannerPath(URL.createObjectURL(files));
+    }
   };
 
   const handleLogoPathChange = (event: any) => {
     const files = event.target.files[0];
-    setValue("logoPath", event.target.files[0].name);
-    setValue("company_logo", files);
-    setLogoPath(URL.createObjectURL(files));
+    if(files){
+      setValue("logoPath", event.target.files[0].name);
+      setValue("company_logo", files);
+      setLogoPath(URL.createObjectURL(files));
+    }
   };
 
   return (

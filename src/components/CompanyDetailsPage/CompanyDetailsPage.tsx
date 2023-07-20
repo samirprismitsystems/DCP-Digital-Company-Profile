@@ -25,7 +25,7 @@ export default function CompanyDetailsPage() {
   type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
   const objForm = useForm({
     defaultValues: {
-      aboutCompany: "364545454",
+      aboutCompany: "",
       businessType: "",
       city: "",
       companyEstDate: "",
@@ -34,16 +34,17 @@ export default function CompanyDetailsPage() {
       fullName: "",
       houseNumber: "",
       mapAddress: "",
-      state: "India",
+      state: "",
       workingHours: "",
       alternatePhoneNumber: "",
-      logoPath: "",
-      bannerPath: "",
     },
     resolver: yupResolver(companyDetailsFormSchema),
   });
 
   const onSave = async (data: IFormData) => {
+    console.log(data);
+    // return null;
+
     try {
       let io: any = new FormData();
       let slug = data.fullName?.replace(/[^a-zA-Z ]/g, "");
@@ -72,12 +73,16 @@ export default function CompanyDetailsPage() {
       io.append("map_lat", data.mapLocation.lat);
       io.append("map_lng", data.mapLocation.lon);
       io.append("isupdate", true);
-      io.append("company_banner", data.company_banner);
       io.append("company_id", data.companyID);
-      io.append("company_logo", data.company_logo);
       io.append("logo", data.logoPath);
       io.append("banner", data.bannerPath);
 
+      if (typeof data.company_banner === "object") {
+        io.append("company_banner", data.company_banner);
+      }
+      if (typeof data.company_logo === "object") {
+        io.append("company_logo", data.company_logo);
+      }
       const res = await ApiService.saveCompanyDetailsPageData(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -150,7 +155,6 @@ export default function CompanyDetailsPage() {
         const result: IAPICompanyDetailsPage = res.company[0];
         const defaultValue: IFormData = {
           alternatePhoneNumber: result.company_alternate_contact,
-          bannerPath: result.banner,
           businessType: result.business_segment,
           city: result.city,
           emailID: result.company_email,
@@ -160,7 +164,6 @@ export default function CompanyDetailsPage() {
           postalCode: result.post_code,
           state: result.state,
           phoneNumber: result.company_contact,
-          logoPath: result.logo,
           houseNumber: result.area,
           companyEstDate: result.established_in,
           mapLocation: {
@@ -170,6 +173,8 @@ export default function CompanyDetailsPage() {
           },
           company_banner: result.company_banner,
           company_logo: result.company_logo,
+          bannerPath: result.company_banner,
+          logoPath: result.company_logo,
           workingHoursDay: result.working_hours_day,
           workingHoursFromTime: result.working_hours_from,
           workingHoursToTime: result.working_hours_to,
@@ -262,13 +267,6 @@ export default function CompanyDetailsPage() {
                 isRequired={true}
               />
             </div>
-            {/* {objImageUploader && (
-              <CompanyImageUploader
-                companyLogo={objImageUploader && objImageUploader.logo}
-                companyBanner={objImageUploader && objImageUploader.banner}
-                companyID={objImageUploader && objImageUploader.ID}
-              />
-            )} */}
             {objImageUploader && (
               <CompanyImageUploader
                 companyLogo={objImageUploader && objImageUploader.logo}
