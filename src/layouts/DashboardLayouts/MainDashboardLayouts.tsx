@@ -1,16 +1,33 @@
+import PageCircularLoading from "@/common/PageCircularLoading";
+import ClientPage from "@/components/ClientPage/ClientPage";
+import CompanyDetailsPage from "@/components/CompanyDetailsPage/CompanyDetailsPage";
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
 import DashboardNavbar from "@/components/DashboardPage/DashboardNavbar/DashboardNavbar";
+import DashboardPage from "@/components/DashboardPage/DashboardPage";
+import EnquiryPage from "@/components/EnquiryPage/EnquiryPage";
+import ImageGalleryPage from "@/components/ImageGalleryPage/ImageGalleryPage";
+import PaymentOptionPage from "@/components/PaymentOptionPage/PaymentOptionPage";
+import ProductPage from "@/components/ProductPage/ProductPage";
+import ServicePage from "@/components/ServicePage/ServicePage";
+import SocialLinksPage from "@/components/SocialLinksPage/SocialLinksPage";
+import TestimonialPage from "@/components/TestimonialPage/TestimonialPage";
+import ThemesPage from "@/components/ThemesPage/ThemesPage";
 import { lstDashboardPanels } from "@/data/DashboardSideBar";
+import NotFoundPage from "@/pages/404";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export default function MainDashboardLayouts({ children }: any) {
   const dispatch = useAppDispatch();
+  const [routeIsChanged, setRouteIsChanged] = useState(false);
+  const [dashboardContent, setDashboardContent] = useState<
+    ReactNode | null | undefined
+  >(null);
   const router = useRouter();
   const { selectedIndex, selectedTitle } = useAppSelector(
     (state: RootState) => state.dashboard
@@ -18,20 +35,73 @@ export default function MainDashboardLayouts({ children }: any) {
 
   const loadData = () => {
     const modifiedLink = window.location.pathname.replace(/\/dashboard\//, "");
-    const selectedItem = lstDashboardPanels.find(
-      (item) => item.link === modifiedLink
-    );
+    if (modifiedLink === "/dashboard") {
+      dispatch(
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "dashboard" })
+      );
+      setRouteIsChanged(true);
+    } else {
+      const selectedItem = lstDashboardPanels.find(
+        (item) => item.link === modifiedLink
+      );
 
-    if (selectedItem) {
-      const { id, link } = selectedItem;
-      dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+      if (selectedItem) {
+        const { id, link } = selectedItem;
+        dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+      }
     }
   };
+
+  useEffect(() => {
+    if (routeIsChanged || selectedIndex) {
+      switch (selectedTitle) {
+        case "dashboard":
+          setDashboardContent(<DashboardPage />);
+          break;
+        case "company":
+          setDashboardContent(<CompanyDetailsPage />);
+          break;
+        case "sociallinks":
+          setDashboardContent(<SocialLinksPage />);
+          break;
+        case "product":
+          setDashboardContent(<ProductPage />);
+          break;
+        case "service":
+          setDashboardContent(<ServicePage />);
+          break;
+        case "client":
+          setDashboardContent(<ClientPage />);
+          break;
+        case "portfolio":
+          setDashboardContent(<ImageGalleryPage />);
+          break;
+        case "testimonial":
+          setDashboardContent(<TestimonialPage />);
+          break;
+        case "enquiry":
+          setDashboardContent(<EnquiryPage />);
+          break;
+        case "paymentoptions":
+          setDashboardContent(<PaymentOptionPage />);
+          break;
+        case "themes":
+          setDashboardContent(<ThemesPage />);
+          break;
+
+        default:
+          setDashboardContent(undefined);
+          break;
+      }
+      setRouteIsChanged(false);
+    }
+  }, [routeIsChanged, selectedIndex]);
 
   useEffect(() => {
     loadData();
   }, []);
 
+  if (dashboardContent === undefined) return <NotFoundPage />;
   return (
     <>
       <Head>
@@ -40,7 +110,7 @@ export default function MainDashboardLayouts({ children }: any) {
             "Digital Company Profile"}
         </title>
       </Head>
-      <DashboardNavbar />
+      <DashboardNavbar toggleContent={setRouteIsChanged} />
       <section className="main">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
@@ -56,7 +126,17 @@ export default function MainDashboardLayouts({ children }: any) {
                           : "bg-secondary-main"
                       } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
-                        router.push(`/dashboard/${item.link}`);
+                        dispatch(
+                          setSelectedObj({
+                            selectedIndex: item.id,
+                            selectedTitle: item.link,
+                          })
+                        );
+                        window.history.replaceState(
+                          item.link,
+                          "",
+                          `/dashboard/${item.link}`
+                        );
                       }}
                     >
                       <div className="flex justify-center items-center">
@@ -72,7 +152,11 @@ export default function MainDashboardLayouts({ children }: any) {
               </ul>
             </div>
             <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8">
-              {children}
+              {dashboardContent === null ? (
+                <PageCircularLoading />
+              ) : (
+                dashboardContent
+              )}
             </div>
           </div>
         </div>

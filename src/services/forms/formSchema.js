@@ -40,12 +40,14 @@ export const companyDetailsFormSchema = yup.object({
   workingHoursFromTime: yup.string(),
   workingHoursToTime: yup.string(),
   mapLocation: yup.object().shape({
-    lat: yup.number().optional().default(21.1875694),
-    lon: yup.number().optional().default(72.8147383),
+    lat: yup.number().optional(),
+    lon: yup.number().optional(),
     displayName: yup.string().optional().default(""),
   }),
   logoPath: yup.string().optional(),
   bannerPath: yup.string().optional(),
+  company_banner: yup.mixed().optional(),
+  company_logo: yup.mixed().optional(),
 });
 
 export const socialLinkFormSchema = yup.object({

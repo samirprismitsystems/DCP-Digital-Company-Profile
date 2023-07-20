@@ -55,6 +55,8 @@ export interface IAPICompanyDetailsPage {
   company_contact: number;
   company_alternate_contact: number;
   working_hours_day: string;
+  company_banner: string;
+  company_logo: string;
   working_hours_from: string;
   working_hours_to: string;
   map_lat: string;

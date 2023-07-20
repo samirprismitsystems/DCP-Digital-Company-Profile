@@ -1,38 +1,33 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-export default function CompanyImageUploader() {
-  const { register, setValue, getValues } = useFormContext();
-  const [logoPath, setLogoPath] = useState<string>("");
-  const [bannerPath, setBannerPath] = useState<string>("");
+export default function CompanyImageUploader({
+  companyLogo,
+  companyBanner,
+  companyID,
+}: any) {
+  const { setValue } = useFormContext();
+  const [logoPath, setLogoPath] = useState<string>(
+    `http://localhost:8080/control/upload/${companyID}/logo/${companyLogo}`
+  );
+  const [bannerPath, setBannerPath] = useState<string>(
+    `http://localhost:8080/control/upload/${companyID}/banner/${companyBanner}`
+  );
 
   const handleBannerChange = (event: any) => {
     const files = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      setValue("bannerPath", reader.result as any);
-      setBannerPath(reader.result as any);
-    };
-
-    if (files) {
-      reader.readAsDataURL(files);
-    }
+    setValue("bannerPath", event.target.files[0].name);
+    setValue("company_banner", files);
+    setBannerPath(URL.createObjectURL(files));
   };
 
   const handleLogoPathChange = (event: any) => {
     const files = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      setValue("logoPath", reader.result as any);
-      setBannerPath(reader.result as any);
-    };
-
-    if (files) {
-      reader.readAsDataURL(files);
-    }
+    setValue("logoPath", event.target.files[0].name);
+    setValue("company_logo", files);
+    setLogoPath(URL.createObjectURL(files));
   };
+
   return (
     <>
       <div className="lg:mb-8 xs:mb-0  rightSide text-black text-3xl xl:grid xl:grid-cols-2 xl:gap-8 h-[90%] xs:flex xs:flex-wrap xs:justify-center lg:justify-evenly xl:flex-nowrap">
@@ -44,8 +39,7 @@ export default function CompanyImageUploader() {
         >
           <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] flex items-center justify-center relative">
             <img
-              id="get_img"
-              src={logoPath || getValues("logoPath")}
+              src={logoPath}
               alt="logo image"
               className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
               style={{
@@ -74,8 +68,7 @@ export default function CompanyImageUploader() {
         >
           <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] flex items-center justify-center relative">
             <img
-              id="get_img"
-              src={bannerPath || getValues("bannerPath")}
+              src={bannerPath}
               alt="logo image"
               className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
               style={{

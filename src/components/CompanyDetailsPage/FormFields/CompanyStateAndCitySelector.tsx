@@ -12,7 +12,6 @@ export default function CompanyStateAndCitySelector({
   const [lstCity, setLstCity] = useState<ICompanyCityList[]>();
   const objForm = useFormContext();
   const getCityList = async (stateName: string) => {
-    console.log(stateName);
     try {
       const res = await ApiService.getCities(stateName);
       if (!res.error) {

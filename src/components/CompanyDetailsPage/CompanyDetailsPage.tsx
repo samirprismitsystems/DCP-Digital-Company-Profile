@@ -1,8 +1,10 @@
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import CompanyTextField from "@/components/CompanyDetailsPage/FormFields/CompanyTextField";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { companyDetailsFormSchema } from "@/services/forms/formSchema";
+import { IMap } from "@/types/commonTypes";
 import { IAPICompanyDetailsPage, IStates } from "@/types/companyTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
@@ -13,13 +15,14 @@ import CompanyImageUploader from "./FormFields/CompanyImageUploader";
 import CompanyStateAndCitySelector from "./FormFields/CompanyStateAndCitySelector";
 import CompanyWorkingHoursSelectorField from "./FormFields/CompanyWorkingHoursField";
 import MapInformation from "./MapInformation/MapInformation";
-import { defaultConfig } from "next/dist/server/config-shared";
-import AuthService from "@/services/AuthServices";
 
 export default function CompanyDetailsPage() {
+  const [isChange, setIsChange] = useState<boolean>(false);
   const [lstStates, setState] = useState<IStates[]>();
-  type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
+  const [mapLocation, setMapLocation] = useState<IMap>();
+  const [objImageUploader, setObjImageUploader] = useState<any>();
 
+  type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
   const objForm = useForm({
     defaultValues: {
       aboutCompany: "364545454",
@@ -69,9 +72,9 @@ export default function CompanyDetailsPage() {
       io.append("map_lat", data.mapLocation.lat);
       io.append("map_lng", data.mapLocation.lon);
       io.append("isupdate", true);
-      io.append("company_banner", data.bannerPath);
+      io.append("company_banner", data.company_banner);
       io.append("company_id", data.companyID);
-      io.append("company_logo", data.logoPath);
+      io.append("company_logo", data.company_logo);
       io.append("logo", data.logoPath);
       io.append("banner", data.bannerPath);
 
@@ -108,7 +111,6 @@ export default function CompanyDetailsPage() {
 
   const getMapLocation = async () => {
     try {
-      console.log(objForm.getValues("mapAddress"));
       const res = await ApiService.getMapLocation(
         objForm.getValues("mapAddress") || ""
       );
@@ -123,10 +125,15 @@ export default function CompanyDetailsPage() {
       }
 
       if (res.length > 0) {
-        objForm.setValue("mapLocation.lat", res[0].lat);
-        objForm.setValue("mapLocation.lon", res[0].lon);
+        objForm.setValue("mapLocation.lat", parseFloat(res[0].lat as any));
+        objForm.setValue("mapLocation.lon", parseFloat(res[0].lon));
         objForm.setValue("mapLocation.displayName", res[0].display_name);
-
+        setMapLocation({
+          lat: res[0].lat,
+          lon: res[0].lon,
+          displayname: res[0].display_name,
+        });
+        setIsChange(true);
         return null;
       }
 
@@ -159,13 +166,26 @@ export default function CompanyDetailsPage() {
           mapLocation: {
             lat: parseFloat(result.map_lat),
             lon: parseFloat(result.map_lng),
-            displayName: "",
+            displayName: result.area,
           },
+          company_banner: result.company_banner,
+          company_logo: result.company_logo,
           workingHoursDay: result.working_hours_day,
           workingHoursFromTime: result.working_hours_from,
           workingHoursToTime: result.working_hours_to,
           companyID: result.company_id,
         };
+        setMapLocation({
+          lat: defaultValue.mapLocation.lat || 21.1875694,
+          lon: defaultValue.mapLocation.lon || 72.8147383,
+          displayname: defaultValue.mapLocation.displayName || "",
+        });
+
+        setObjImageUploader({
+          banner: defaultValue.company_banner,
+          logo: defaultValue.company_logo,
+          ID: defaultValue.companyID,
+        });
 
         objForm.reset(defaultValue);
         return null;
@@ -180,6 +200,12 @@ export default function CompanyDetailsPage() {
     loadStates();
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (isChange) {
+      setIsChange(false);
+    }
+  }, [isChange]);
 
   return (
     <>
@@ -236,7 +262,20 @@ export default function CompanyDetailsPage() {
                 isRequired={true}
               />
             </div>
-            <CompanyImageUploader />
+            {/* {objImageUploader && (
+              <CompanyImageUploader
+                companyLogo={objImageUploader && objImageUploader.logo}
+                companyBanner={objImageUploader && objImageUploader.banner}
+                companyID={objImageUploader && objImageUploader.ID}
+              />
+            )} */}
+            {objImageUploader && (
+              <CompanyImageUploader
+                companyLogo={objImageUploader && objImageUploader.logo}
+                companyBanner={objImageUploader && objImageUploader.banner}
+                companyID={objImageUploader && objImageUploader.ID}
+              />
+            )}
             <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
           </div>
           <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">
@@ -261,9 +300,7 @@ export default function CompanyDetailsPage() {
                   placeholder="Select City"
                   defaultValue={"India"}
                 >
-                  <option value={"India"} selected>
-                    India
-                  </option>
+                  <option value={"India"}>India</option>
                 </select>
               </div>
             </div>
@@ -280,7 +317,6 @@ export default function CompanyDetailsPage() {
               />
             </div>
           </div>
-
           <CompanyTextField
             name="companyEstDate"
             title="Company Est Date"
@@ -331,23 +367,20 @@ export default function CompanyDetailsPage() {
               Get Location
             </button>
           </div>
-          <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-            <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
-              Map
-            </label>
-            <div className="w-full h-[400px] relative z-0">
-              <MapInformation
-                displayName={objForm.getValues("mapLocation.displayName") || ""}
-                lat={objForm.getValues("mapLocation.lat") || 21.1875694}
-                lon={objForm.getValues("mapLocation.lon") || 72.8147383}
-                setMapData={({ lat, lon }: any) => {
-                  objForm.setValue("mapLocation.lat", lat);
-                  objForm.setValue("mapLocation.lon", lon);
-                  objForm.setValue("mapLocation.displayName", "");
-                }}
-              />
+          {mapLocation && (
+            <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+              <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
+                Map
+              </label>
+              <div className="w-full h-[400px] relative z-0">
+                <MapInformation
+                  isChange={isChange}
+                  setIsChange={setIsChange}
+                  mapLocation={mapLocation}
+                />
+              </div>
             </div>
-          </div>
+          )}
           <div className="w-full flex justify-end">
             <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
               <DashboardCommonButtons />
