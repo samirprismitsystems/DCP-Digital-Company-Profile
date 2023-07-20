@@ -2,18 +2,20 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function RHFImageUploader({
-  imagePath,
+  srcPath,
   savePath,
   label,
   companyID,
+  folderPath,
 }: {
-  imagePath: any;
+  srcPath: any;
   savePath: string;
   label: string;
   companyID: string;
+  folderPath: string;
 }) {
   const [selectedImagePath, setSelectedImagePath] = useState(
-    `http://localhost:8080/control/upload/${companyID}/product/${imagePath}`
+    `http://localhost:8080/control/upload/${companyID}/${folderPath}/${srcPath}`
   );
 
   const objForm = useFormContext();

@@ -72,7 +72,7 @@ export default function ServiceItem({
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
         <div className="grid mb-16 gap-6 max-w-full xl:grid-cols-5 md:grid-cols-2 sm:grid-cols-2">
-          {fields.map((item, index) => {
+          {fields.map((item: any, index) => {
             return (
               <div key={item.id}>
                 <div className='item_no flex justify-between items-center mb-2 font-["GothamRoundedLight"]  '>
@@ -98,9 +98,11 @@ export default function ServiceItem({
                 >
                   <div>
                     <RHFImageUploader
-                      imagePath={item.service_image}
+                      srcPath={item.service_image}
                       savePath={`service_data.${index}.service_image`}
                       label="Upload Service Image"
+                      companyID={item.company_id}
+                      folderPath="service"
                     />
                     <input
                       type="text"

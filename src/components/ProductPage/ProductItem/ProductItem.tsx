@@ -47,8 +47,10 @@ export default function ProductItem({
         data.product_data.forEach((item, index) => {
           if (typeof item.product_image === "object") {
             io.append(`oldimages${index}`, item.product_image as any);
-            imgcount += 1;
+          } else {
+            io.append(`oldimages${index}`, 'undefined');
           }
+          imgcount += 1;
         });
       }
       if (imgcount > 0) {
@@ -111,10 +113,11 @@ export default function ProductItem({
                 >
                   <div>
                     <RHFImageUploader
-                      imagePath={item.product_image}
+                      srcPath={item.product_image}
                       savePath={`product_data.${index}.product_image`}
                       label="Upload Product Image"
                       companyID={item.company_id}
+                      folderPath="product"
                     />
                     <input
                       type="text"
