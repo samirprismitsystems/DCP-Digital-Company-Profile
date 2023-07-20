@@ -4,30 +4,45 @@ import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { productFormSchema } from "@/services/forms/formSchema";
-import { IProduct } from "@/types/products";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export default function ProductItem({
-  lstProducts,
-  onComplete,
-}: {
-  lstProducts: IProduct[];
-  onComplete: () => void;
-}) {
+export default function ProductItem() {
+  const [lstProducts, setLstProducts] = useState<any>([
+    {
+      product_name: "",
+      product_price: "",
+      product_desc: "",
+      product_image: "",
+    },
+  ]);
+
+  const loadData = async () => {
+    try {
+      const res = await ApiService.getProductPageDetails();
+      if (!res.error) {
+        if (res.product.length > 0) {
+          setLstProducts(res.product);
+        }
+        return null;
+      }
+      if (res.message !== "Empty Product Data") throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const onComplete = () => {
+    loadData();
+  };
+
   const objForm = useForm({
     defaultValues: {
-      product_data: lstProducts || [
-        {
-          product_name: "",
-          product_price: "",
-          product_desc: "",
-          product_image: "",
-        },
-      ],
+      product_data: lstProducts,
     },
     resolver: yupResolver(productFormSchema),
   });
@@ -41,47 +56,121 @@ export default function ProductItem({
 
   const onSubmit = async (data: IFormData) => {
     try {
-      let io = new FormData();
+      const oldData = data.product_data?.filter((item: any) => {
+        if (item.product_id) {
+          return item;
+        }
+      });
+
+      let io: any = new FormData();
+      io.append("user_id", AuthService.getUserEmail());
+      io.append("isupdate", true);
       let imgcount = 0;
-      if (data && data.product_data) {
-        data.product_data.forEach((item, index) => {
+
+      if (oldData) {
+        oldData.forEach((item: any, index: any) => {
           if (typeof item.product_image === "object") {
-            io.append(`oldimages${index}`, item.product_image as any);
+            io.append(`oldimages${index}`, item.product_image);
           } else {
-            io.append(`oldimages${index}`, 'undefined');
+            io.append(`oldimages${index}`, "undefined");
           }
           imgcount += 1;
         });
       }
       if (imgcount > 0) {
-        io.append("imgcount", imgcount as any);
+        io.append("imgcount", imgcount);
       }
-      io.append("user_id", AuthService.getUserEmail());
-      io.append(
-        "isupdate",
-        (lstProducts && lstProducts.length > 0 ? true : false) as any
-      );
-      io.append("product_data", JSON.stringify(data.product_data));
-
+      io.append("product_data", JSON.stringify(oldData));
       const res = await ApiService.saveProductPageDetails(io);
+
+      const newData = data.product_data?.filter((item: any) => {
+        if (!item.product_id) {
+          return item;
+        }
+      });
+
+      if (newData && newData.length > 0) {
+        let newIO: any = new FormData();
+        let newImgcount = 0;
+        newData.forEach((item: any, index: number) => {
+          if (typeof item.product_image === "object") {
+            newIO.append(`oldimages${index}`, item.product_image);
+          } else {
+            newIO.append(`oldimages${index}`, "undefined");
+          }
+          newImgcount += 1;
+        });
+        if (newImgcount > 0) {
+          newIO.append("imgcount", newImgcount);
+        }
+        newIO.append("user_id", AuthService.getUserEmail());
+        newIO.append("isupdate", false);
+        newIO.append("product_data", JSON.stringify(newData));
+
+        const res = await ApiService.saveProductPageDetails(newIO);
+        if (!res.error) {
+          Utils.showSuccessMessage(res.message);
+          onComplete();
+          return null;
+        }
+      }
+
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
         onComplete();
         return null;
       }
 
-      throw new Error(res.message);
+      if (res.message !== "Empty Product Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
   };
 
   const itemDelete = async (index: number) => {
+    try {
+      const isValid = await Utils.showWarningMessage("Do you want to delete?");
+      if (isValid.isConfirmed) {
+        const res = await ApiService.deleteProductItem(index);
+        if (!res.error) {
+          Utils.showSuccessMessage(res.message);
+          onComplete();
+          setLstProducts([
+            {
+              product_name: "",
+              product_price: "",
+              product_desc: "",
+              product_image: "",
+            },
+          ]);
+          return null;
+        }
+
+        if (res.message !== "Empty Product Data") throw new Error(res.message);
+      }
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const deleteDummyItem = async (index: number) => {
     const isValid = await Utils.showWarningMessage("Do you want to delete?");
     if (isValid.isConfirmed) {
       remove(index);
     }
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    if (lstProducts && lstProducts.length > 0) {
+      objForm.reset({
+        product_data: lstProducts,
+      });
+    }
+  }, [lstProducts]);
 
   return (
     <FormProvider {...objForm}>
@@ -97,7 +186,11 @@ export default function ProductItem({
                   </h5>
                   <button
                     onClick={() => {
-                      itemDelete(index);
+                      if (item.product_id) {
+                        itemDelete(item.product_id);
+                      } else {
+                        deleteDummyItem(index);
+                      }
                     }}
                     type="button"
                     className="before:content-normal text-black font-bold text-3xl p-2 border-0 bg-[#eeeeee]"

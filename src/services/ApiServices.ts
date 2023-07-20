@@ -1,4 +1,4 @@
-import { IPaymentOptions, IUser } from "@/types/commonTypes";
+import { IUser } from "@/types/commonTypes";
 import axios from "axios";
 import AuthService from "./AuthServices";
 import { BASE_URI } from "./config";
@@ -186,6 +186,20 @@ const ApiService = {
     const res = await axios.post(
       `${BASE_URI}api/company/savepaymentoptions`,
       io
+    );
+    return res.data;
+  },
+
+  async deleteProductItem(productID: any) {
+    const res = await axios.get(
+      `${BASE_URI}api/product/deleteproduct/${productID}`
+    );
+    return res.data;
+  },
+
+  async deleteServiceItem(serviceID: any) {
+    const res = await axios.get(
+      `${BASE_URI}api/service/deleteservice/${serviceID}`
     );
     return res.data;
   },

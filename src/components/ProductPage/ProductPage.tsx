@@ -1,35 +1,7 @@
 import BackButton from "@/common/BackButton";
-import ApiService from "@/services/ApiServices";
-import Utils from "@/services/Utils";
-import { IProduct } from "@/types/products";
-import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem/ProductItem";
 
 export default function ProductPage() {
-  const [lstProducts, setLstProducts] = useState<IProduct[]>();
-
-  const loadData = async () => {
-    try {
-      const res = await ApiService.getProductPageDetails();
-      if (!res.error) {
-        setLstProducts(res.product);
-        return null;
-      }
-
-      throw new Error(res.message);
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
-
-  const onComplete = () => {
-    loadData();
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
   return (
     <>
       <BackButton />
@@ -46,9 +18,7 @@ export default function ProductPage() {
         }}
       >
         <div className="row -mr-3 -ml-3">
-          {lstProducts && (
-            <ProductItem lstProducts={lstProducts} onComplete={onComplete} />
-          )}
+          <ProductItem />
         </div>
       </div>
     </>
