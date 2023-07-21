@@ -207,7 +207,6 @@ export default function ServiceItem() {
                       srcPath={item.service_image}
                       savePath={`service_data.${index}.service_image`}
                       label="Upload Service Image"
-                      companyID={item.company_id}
                       folderPath="service"
                     />
                     <input

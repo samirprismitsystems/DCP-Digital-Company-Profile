@@ -130,3 +130,11 @@ export interface IPaymentOptions {
   razorpay_key_secret: string;
   updated_at: string;
 }
+
+export interface ITheme {
+  created_at: string;
+  theme_id: string;
+  theme_image: string;
+  theme_name: string;
+  updated_at: string;
+}

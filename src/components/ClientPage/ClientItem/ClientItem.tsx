@@ -203,7 +203,6 @@ export default function ClientItem() {
                       srcPath={item.client_logo}
                       savePath={`client_data.${index}.client_logo`}
                       label="Upload Client Image"
-                      companyID={item.company_id}
                       folderPath="client"
                     />
                     <input

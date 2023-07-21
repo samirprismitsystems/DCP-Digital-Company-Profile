@@ -215,6 +215,23 @@ const ApiService = {
     );
     return res.data;
   },
+
+  async deletePortfolio(portfolioID: any) {
+    const res = await axios.get(
+      `${BASE_URI}api/portfolio/deleteportfolio/${portfolioID}`
+    );
+    return res.data;
+  },
+
+  async getThemes() {
+    const res = await axios.get(`${BASE_URI}api/theme/getthemes`);
+    return res.data;
+  },
+
+  async saveThemes(io: any) {
+    const res = await axios.post(`${BASE_URI}api/theme/savecompanytheme`, io);
+    return res.data;
+  },
 };
 
 export default ApiService;

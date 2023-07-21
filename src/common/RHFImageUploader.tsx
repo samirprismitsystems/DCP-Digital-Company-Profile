@@ -1,3 +1,5 @@
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -5,20 +7,20 @@ export default function RHFImageUploader({
   srcPath,
   savePath,
   label,
-  companyID,
   folderPath,
 }: {
   srcPath: any;
   savePath: string;
   label: string;
-  companyID: string;
   folderPath: string;
 }) {
+  const objForm = useFormContext();
   const [selectedImagePath, setSelectedImagePath] = useState(
-    `http://localhost:8080/control/upload/${companyID}/${folderPath}/${srcPath}`
+    `${UPLOAD_IMAGE_URI}/${Utils.getItem(
+      "IMAGE_UPLOAD_ID"
+    )}/${folderPath}/${srcPath}`
   );
 
-  const objForm = useFormContext();
   return (
     <>
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">

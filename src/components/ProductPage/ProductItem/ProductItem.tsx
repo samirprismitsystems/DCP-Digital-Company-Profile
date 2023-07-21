@@ -209,7 +209,6 @@ export default function ProductItem() {
                       srcPath={item.product_image}
                       savePath={`product_data.${index}.product_image`}
                       label="Upload Product Image"
-                      companyID={item.company_id}
                       folderPath="product"
                     />
                     <input

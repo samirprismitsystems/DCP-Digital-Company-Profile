@@ -1,17 +1,30 @@
 import BackButton from "@/common/BackButton";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
-import { socialLinkFormSchema } from "@/services/forms/formSchema";
 
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
+import { useState } from "react";
 import ThemeCards from "./ThemeCards/ThemeCards";
 
 export default function ThemesPage() {
-  const objForm = useForm();
+  const [themeID, setThemeID] = useState<any>(null);
+  const onSave = async (e: any) => {
+    try {
+      e.preventDefault();
+      const io: any = new FormData();
+      io.append("user_id", AuthService.getUserEmail());
+      io.append("theme_id", parseInt(themeID));
+      const res = await ApiService.saveThemes(io);
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        return null;
+      }
 
-  type IFormData = yup.InferType<typeof socialLinkFormSchema>;
-  const onSave: any = async (data: IFormData) => {
-    console.log(data);
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
   };
 
   return (
@@ -27,18 +40,20 @@ export default function ThemesPage() {
           boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
         }}
       >
-        <div className="row -mr-3 -ml-3 grid grid-cols-5 gap-8 pb-16">
-          <ThemeCards />
-          <ThemeCards />
-          <ThemeCards />
-          <ThemeCards />
-          <div></div>
-        </div>
-        <div className="w-full flex justify-end">
-          <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
-            <DashboardCommonButtons />
+        <form onSubmit={onSave}>
+          <div className="row -mr-3 -ml-3 grid xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4  xlOne:grid-cols-5 gap-8 pb-16">
+            <ThemeCards
+              onThemeSelect={(id: string) => {
+                setThemeID(id);
+              }}
+            />
           </div>
-        </div>
+          <div className="w-full flex justify-end">
+            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
+              <DashboardCommonButtons />
+            </div>
+          </div>
+        </form>
       </div>
     </>
   );

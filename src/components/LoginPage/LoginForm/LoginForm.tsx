@@ -3,6 +3,8 @@ import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import { USER_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
+import { useAppDispatch } from "@/services/store/hooks/hooks";
+import { setWebsiteSlug } from "@/services/store/slices/dashboardSlice";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,6 +21,26 @@ export default function LoginForm() {
     resolver: yupResolver(loginSchema),
   });
 
+  const dispatch = useAppDispatch();
+  const loadCompanyPageDetails = async () => {
+    try {
+      const res = await ApiService.getCompanyDetailsPageData();
+      if (!res.error) {
+        let result = res.company[0];
+        if (result) {
+          let websiteSlug = result.company_slug;
+          dispatch(setWebsiteSlug(websiteSlug));
+          Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
+        }
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
   const onLogin: any = async (data: { userID: string; password: string }) => {
     try {
       setIsLoading(true);
@@ -31,20 +53,22 @@ export default function LoginForm() {
       if (!res.error) {
         const userData = res.userdata;
         const isValid = AuthService.setLoginUserData(userData);
-        if (!isValid) {
-          throw new Error("something went wrong while save user data!");
-        }
+        if (isValid) {
+          loadCompanyPageDetails();
 
-        if (userData.type === USER_TYPE.ADMIN) {
-          router.push("/admindashboard");
-        }
+          if (userData.type === USER_TYPE.ADMIN) {
+            router.push("/admindashboard");
+            return null;
+          }
 
-        if (userData.type === USER_TYPE.USER) {
-          router.push("/dashboard");
-        }
+          if (userData.type === USER_TYPE.USER) {
+            router.push("/dashboard");
+            return null;
+          }
 
-        Utils.showSuccessMessage("User Login Successfully");
-        return null;
+          Utils.showSuccessMessage("User Login Successfully");
+          return null;
+        }
       }
 
       throw new Error("Something went wrong while login");

@@ -7,7 +7,7 @@ import Utils from "@/services/Utils";
 import { paymentOptionFormSchema } from "@/services/forms/formSchema";
 import { IPaymentOptions } from "@/types/commonTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import BankAccountDetails from "./Childs/BankAccountDetails";
@@ -15,6 +15,7 @@ import QRCodeImageUploader from "./Childs/QRCodeImageUploader";
 import RazorpayCheckout from "./Childs/RazorpayCheckout";
 
 export default function PaymentOptionPage() {
+  const [objPayment, setObjPayment] = useState<any>({});
   const objForm = useForm({
     resolver: yupResolver(paymentOptionFormSchema),
   });
@@ -72,7 +73,8 @@ export default function PaymentOptionPage() {
           phonePeNumber: result.phonepay_number,
           QRCodeImage: result.qrcode,
         };
-        objForm.reset(defaultValue);
+
+        setObjPayment(defaultValue);
         return null;
       }
       throw new Error(res.message);
@@ -84,6 +86,12 @@ export default function PaymentOptionPage() {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (objPayment && Object.keys(objPayment).length > 0) {
+      objForm.reset(objPayment);
+    }
+  }, [objPayment]);
 
   return (
     <>
@@ -126,9 +134,11 @@ export default function PaymentOptionPage() {
                 />
               </div>
             </div>
-            <div className="right xs:w-full lg:w-[50%] xl:w-[25%]">
-              <QRCodeImageUploader />
-            </div>
+            {objPayment && Object.keys(objPayment).length > 0 && (
+              <div className="right xs:w-full lg:w-[50%] xl:w-[25%]">
+                <QRCodeImageUploader imagePath={objPayment.QRCodeImage} />
+              </div>
+            )}
             <RazorpayCheckout />
             <BankAccountDetails />
           </div>
