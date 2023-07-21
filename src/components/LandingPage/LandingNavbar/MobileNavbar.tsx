@@ -2,6 +2,7 @@ import Utils from "@/services/Utils";
 import { INavigationMenu } from "@/types/commonTypes";
 import { useRouter } from "next/router";
 import { useState } from "react";
+
 export default function MobileNavbar({
   isOpen,
   toggle,
@@ -13,16 +14,21 @@ export default function MobileNavbar({
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
+
   return (
     <>
       <div
-        className={`h-screen w-${isOpen && "full"} ${
+        className={`h-screen w-${isOpen ? "full" : "0"} ${
           !isOpen && "sideBarEffectNoWidth"
         }  float-right sideBarEffect bg-black  text-white`}
       >
         {isOpen && (
           <div className={`py-16 w-${isOpen ? "full" : "0"} `}>
-            <button className="float-right relative px-16" onClick={toggle}>
+            <button
+              type="button"
+              className="float-right relative px-16"
+              onClick={toggle}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -45,7 +51,7 @@ export default function MobileNavbar({
                     lstNavigations.map(
                       (item: INavigationMenu, index: number) => (
                         <a
-                        key={index}
+                          key={index}
                           onClick={(event: any) => {
                             event.preventDefault();
 

@@ -42,9 +42,6 @@ export default function CompanyDetailsPage() {
   });
 
   const onSave = async (data: IFormData) => {
-    console.log(data);
-    // return null;
-
     try {
       let io: any = new FormData();
       let slug = data.fullName?.replace(/[^a-zA-Z ]/g, "");
@@ -153,6 +150,7 @@ export default function CompanyDetailsPage() {
       const res = await ApiService.getCompanyDetailsPageData();
       if (!res.error) {
         const result: IAPICompanyDetailsPage = res.company[0];
+        Utils.setItem("slug", result.company_slug);
         const defaultValue: IFormData = {
           alternatePhoneNumber: result.company_alternate_contact,
           businessType: result.business_segment,

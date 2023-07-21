@@ -1,3 +1,5 @@
+import Utils from "@/services/Utils";
+
 export const landingPageNavigationMenuList = [
   {
     id: 0,
@@ -47,7 +49,7 @@ export const lstDashboardNavigationMenu = [
   {
     id: 0,
     name: "Visit Site",
-    link: "/prismitsystems",
+    link: Utils.getItem("slug"),
     target: true,
   },
   {

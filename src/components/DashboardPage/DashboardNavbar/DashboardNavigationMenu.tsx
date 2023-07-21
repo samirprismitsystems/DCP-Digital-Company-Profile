@@ -24,7 +24,7 @@ export default function DashboardNavigationMenu() {
                   onClick={(event: any) => {
                     event.preventDefault();
                     if (item.target) {
-                      window.open(`/${websiteSlug}`, "_blank");
+                      window.open(`/${Utils.getItem("slug")}`, "_blank");
                     } else {
                       router.push(item.link);
                     }

@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        50: "50%",
+      },
       colors: {
         primary: {
           main: "#d8e3e7",
@@ -29,6 +32,11 @@ module.exports = {
         },
         inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",
+        theme01: "#8d1c9a",
+        whiteSmoke: "#f5f5f5",
+        grey: "#b2b2b2",
+        redThemeTextColor: "#1a1a1a",
+        redThemeGreyTextColor: "#666666",
       },
       screens: {
         xs: "370px",

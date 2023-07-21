@@ -3,8 +3,6 @@ import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import { USER_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
-import { useAppDispatch } from "@/services/store/hooks/hooks";
-import { setWebsiteSlug } from "@/services/store/slices/dashboardSlice";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,7 +19,6 @@ export default function LoginForm() {
     resolver: yupResolver(loginSchema),
   });
 
-  const dispatch = useAppDispatch();
   const loadCompanyPageDetails = async () => {
     try {
       const res = await ApiService.getCompanyDetailsPageData();
@@ -29,8 +26,8 @@ export default function LoginForm() {
         let result = res.company[0];
         if (result) {
           let websiteSlug = result.company_slug;
-          dispatch(setWebsiteSlug(websiteSlug));
           Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
+          Utils.setItem("slug", websiteSlug);
         }
         return null;
       }
