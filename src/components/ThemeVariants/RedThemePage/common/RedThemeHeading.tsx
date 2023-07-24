@@ -7,7 +7,7 @@ export default function RedThemeHeading({ title }: { title: string }) {
           "-webkit-linear-gradient( 0deg, rgb(141,28,154) 0%, rgb(212,0,0) 100%)",
       }}
     >
-      <h3 className="text-center text-white  font-semibold  m-0 capitalize">
+      <h3 className="text-center text-white  font-medium  m-0 py-2 text-5xl capitalize">
         {title}
       </h3>
     </div>

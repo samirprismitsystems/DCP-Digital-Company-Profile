@@ -32,6 +32,7 @@
 .add_btn:hover {
   background-color: #d8e3e7;
 }
+
 .socialmedia_color_1 {
   color: #3b5999;
 }
@@ -61,6 +62,28 @@
 }
 .socialmedia_color_8 {
   color: #cd201f;
+}
+
+.social-link.fb-icon {
+  background-color: #3b5999;
+}
+.social-link.twt-icon {
+  background-color: #55acee;
+}
+.social-link.insta-icon {
+  background-color: #e4405f;
+}
+.social-link.in-icon {
+  background-color: #0077b5;
+}
+.social-link.yt-icon {
+  background-color: #cd201f;
+}
+.social-link.tele-icon {
+  background-color: #0088cc;
+}
+.social-link.tumblr-icon {
+  background-color: #34465d;
 }
 
 label span[data-v-1dcf67d3] {
@@ -193,6 +216,9 @@ h6,
 .btnHoverEffect {
   @apply bg-secondary-main transition-all duration-300 ease-linear hover:bg-secondary-greyDark hover:border-cyan-200 hover:border rounded-full;
 }
+.share_links {
+  font-family: Gill Sans, sans-serif !important;
+}
 p,
 ul li {
   font-size: 1.8rem;
@@ -202,6 +228,32 @@ ul li {
 
 ul.theme_list {
   list-style: none;
+}
+.slick-dots {
+  bottom: -20px !important;
+}
+.slick-dots li.slick-active button:before {
+  color: #8d1c9a !important;
+}
+.slick-dots li:hover {
+  color: #8d1c9a !important;
+}
+
+.slick-dots li button:before {
+  font-family: "slick";
+  font-size: 15px !important;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  content: "•";
+  text-align: center;
+  opacity: 0.25;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ul.theme_list li:before {

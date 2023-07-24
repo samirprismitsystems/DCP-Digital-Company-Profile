@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
@@ -76,6 +77,14 @@ class Utils {
     }
 
     return "";
+  }
+
+  static getAMPMTime(one: any, two: any) {
+    const outputFormat = "h:mm:ss a";
+    return `${format(new Date(`2000-01-01T${one}`), outputFormat)} - ${format(
+      new Date(`2000-01-01T${two}`),
+      outputFormat
+    )}`;
   }
 }
 
