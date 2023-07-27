@@ -181,8 +181,26 @@ h6,
   line-height: 1.3;
 }
 
+.mainLayoutSideBar {
+  min-height: calc(100vh - 20rem) ;
+  /* height: calc(100vh - 10em) ; */
+}
+
+.right_sidebar_content_main_layout {
+  width: calc(100% - 35rem) ;
+}
+
 .left_sidebar_nav {
   min-height: calc(100vh - 20rem) !important;
+  height: calc(100vh - 10em) !important;
+}
+
+.right_sidebar_content {
+  width: calc(100% - 35rem) !important;
+}
+
+.footer-h {
+  width: calc(100% - 35rem);
 }
 
 .social-link-icons {
@@ -342,7 +360,7 @@ body {
 }
 
 body .dashboardCardFont {
-  font-family: 'GothamRoundedBook' !important;
+  font-family: "GothamRoundedBook" !important;
   font-weight: 600;
   color: #555;
 }

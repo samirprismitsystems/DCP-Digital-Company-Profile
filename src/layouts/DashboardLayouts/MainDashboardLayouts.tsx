@@ -112,8 +112,8 @@ export default function MainDashboardLayouts({ children }: any) {
       <section className="main">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
-            <div className="left_sidebar_nav text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark">
-              <ul className="sticky md:top-40 xs:top-44 w-full list-none m-0 p-0">
+            <div className="mainLayoutSideBar xs:h-[calc(100vh - 10em)] xs:z-[1111] lg:z-[99] overflow-y-auto overflow-x-hidden fixed w-[35rem] p-12 bg-secondary-greyDark text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-6 md:p-12 xs:h-full">
+              <ul className="sticky xs:top-0 md:top-4 w-full list-none m-0 p-0">
                 {lstDashboardPanels &&
                   lstDashboardPanels.map((item, index: number) => (
                     <li
@@ -149,7 +149,7 @@ export default function MainDashboardLayouts({ children }: any) {
                   ))}
               </ul>
             </div>
-            <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8">
+            <div className="right_sidebar_content_main_layout bg-white lg:ml-[35rem] p-12 mb-28 xs:w-full lg:w-[calc(100% - 35rem)] xs:ml-28">
               {dashboardContent === null ? (
                 <PageCircularLoading />
               ) : dashboardContent ? (

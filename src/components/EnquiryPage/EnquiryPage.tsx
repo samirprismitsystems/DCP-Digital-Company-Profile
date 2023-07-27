@@ -11,7 +11,7 @@ export default function EnquiryPage() {
         <div className="h4 mt-1">Inquiry From Users</div>
       </div>
       <div
-        className="digital_profile_form form_shadow xs:w-full xl:w-4/5 m-auto mt-28 bg-white rounded-2xl p-10 pb-0 block"
+        className="digital_profile_form  form_shadow xs:w-full xl:w-4/5 m-auto mt-28 bg-white rounded-2xl p-10 pb-0 block"
         style={{
           boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
         }}

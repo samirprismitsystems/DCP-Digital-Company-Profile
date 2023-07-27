@@ -212,7 +212,7 @@ export default function CompanyDetailsPage() {
 
   return (
     <>
-      <div className="tab_titles mb-8 -mt-4">
+      <div className="tab_titles pb-32 -mt-4">
         <div className="h2">Make Your Business Profile</div>
         <div className="h4 mt-1">
           Please fill up the details to create your profile

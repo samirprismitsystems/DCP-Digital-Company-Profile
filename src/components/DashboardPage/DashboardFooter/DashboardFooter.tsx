@@ -12,10 +12,10 @@ export default function DashboardFooter() {
   return (
     <>
       <nav
-        className={`shadow-md bg-secondary-main w-full bottom-0 xs:h-[12rem] z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center`}
+        className={`right-0 px-16 xs:h-[11rem] flex flex-wrap items-center bg-secondary-main fixed bottom-0 z-[600]`}
       >
-        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-0 pt-6 xs:pt-8 mx-0 xs:flex-col md:flex-row  xs:space-y-5 md:space-y-0">
-          <div className="flex flex-wrap space-x-10">
+        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full pb-0 mx-0 xs:flex-col md:flex-row  xs:space-y-5 md:space-y-0 relative left-8">
+          <div className="flex flex-wrap space-x-10 justify-center">
             <Link href={"https://www.facebook.com/"} target="_blank">
               <li className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-[4.5rem] w-[4.5rem]">
                 <FontAwesomeIcon
@@ -46,7 +46,7 @@ export default function DashboardFooter() {
               </li>
             </Link>
           </div>
-          <div className="">
+          <div>
             <ul className="xs:space-x-6 flex justify-between sm:justify-center sm:space-x-16 items-center">
               {loginScreenPrivacyPolicyList.map(
                 (item: ILoginScreenPrivacyPolicy) => (
