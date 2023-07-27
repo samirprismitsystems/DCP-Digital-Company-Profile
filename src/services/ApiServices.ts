@@ -240,6 +240,11 @@ const ApiService = {
     );
     return res.data;
   },
+
+  async getAdminDashboardData() {
+    const res = await axios.get(`${BASE_URI}api/user/getadmindashdata`);
+    return res.data;
+  },
 };
 
 export default ApiService;

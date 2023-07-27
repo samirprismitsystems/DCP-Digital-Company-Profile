@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function NotFoundPage() {
+export default function PageNotFound() {
   const router = useRouter();
 
   return (

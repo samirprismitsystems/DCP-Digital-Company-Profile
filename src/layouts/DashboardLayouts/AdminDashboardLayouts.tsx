@@ -1,18 +1,14 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
+import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
+import AdminDashboardPage from "@/components/Admin/AdminDashboardPage/AdminDashboardPage";
 import ClientPage from "@/components/ClientPage/ClientPage";
 import CompanyDetailsPage from "@/components/CompanyDetailsPage/CompanyDetailsPage";
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
-import DashboardNavbar from "@/components/DashboardPage/DashboardNavbar/DashboardNavbar";
-import DashboardPage from "@/components/DashboardPage/DashboardPage";
-import EnquiryPage from "@/components/EnquiryPage/EnquiryPage";
 import ImageGalleryPage from "@/components/ImageGalleryPage/ImageGalleryPage";
-import PaymentOptionPage from "@/components/PaymentOptionPage/PaymentOptionPage";
 import ProductPage from "@/components/ProductPage/ProductPage";
 import ServicePage from "@/components/ServicePage/ServicePage";
 import SocialLinksPage from "@/components/SocialLinksPage/SocialLinksPage";
-import TestimonialPage from "@/components/TestimonialPage/TestimonialPage";
-import ThemesPage from "@/components/ThemesPage/ThemesPage";
-import { lstDashboardPanels } from "@/data/DashboardSideBar";
+import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
@@ -21,7 +17,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 
-export default function MainDashboardLayouts({ children }: any) {
+export default function AdminDashboardLayout({ children }: any) {
   const dispatch = useAppDispatch();
   const [routeIsChanged, setRouteIsChanged] = useState(false);
   const [dashboardContent, setDashboardContent] = useState<
@@ -33,14 +29,17 @@ export default function MainDashboardLayouts({ children }: any) {
   );
 
   const loadData = () => {
-    const modifiedLink = window.location.pathname.replace(/\/dashboard\//, "");
-    if (modifiedLink === "/dashboard") {
+    const modifiedLink = window.location.pathname.replace(
+      /\/admindashboard\//,
+      ""
+    );
+    if (modifiedLink === "/admindashboard") {
       dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "dashboard" })
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "admindashboard" })
       );
       setRouteIsChanged(true);
     } else {
-      const selectedItem = lstDashboardPanels.find(
+      const selectedItem = lstAdminDashboardPanels.find(
         (item) => item.link === modifiedLink
       );
 
@@ -54,44 +53,32 @@ export default function MainDashboardLayouts({ children }: any) {
   useEffect(() => {
     if (routeIsChanged || selectedIndex) {
       switch (selectedTitle) {
-        case "dashboard":
-          setDashboardContent(<DashboardPage />);
+        case "admindashboard":
+          setDashboardContent(<AdminDashboardPage />);
           break;
-        case "company":
+        case "companylist":
           setDashboardContent(<CompanyDetailsPage />);
           break;
-        case "sociallinks":
+        case "socailmediaadd":
           setDashboardContent(<SocialLinksPage />);
           break;
-        case "product":
+        case "pages":
           setDashboardContent(<ProductPage />);
           break;
-        case "service":
+        case "userreview":
           setDashboardContent(<ServicePage />);
           break;
-        case "client":
+        case "addtheme":
           setDashboardContent(<ClientPage />);
           break;
-        case "portfolio":
+        case "setting":
           setDashboardContent(<ImageGalleryPage />);
           break;
-        case "testimonial":
-          setDashboardContent(<TestimonialPage />);
-          break;
-        case "enquiry":
-          setDashboardContent(<EnquiryPage />);
-          break;
-        case "paymentoptions":
-          setDashboardContent(<PaymentOptionPage />);
-          break;
-        case "themes":
-          setDashboardContent(<ThemesPage />);
-          break;
-
         default:
           setDashboardContent(undefined);
           break;
       }
+
       setRouteIsChanged(false);
     }
   }, [routeIsChanged, selectedIndex]);
@@ -104,18 +91,17 @@ export default function MainDashboardLayouts({ children }: any) {
     <>
       <Head>
         <title>
-          {Utils.capitalizeFirstLetter(selectedTitle) ||
-            "Digital Company Profile"}
+          {Utils.capitalizeFirstLetter(selectedTitle) || "Admin Dashboard"}
         </title>
       </Head>
-      <DashboardNavbar toggleContent={setRouteIsChanged} />
+      <AdminDashboardNavbar setRouteIsChanged={setRouteIsChanged} />
       <section className="main">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
             <div className="left_sidebar_nav text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark">
               <ul className="sticky md:top-40 xs:top-44 w-full list-none m-0 p-0">
-                {lstDashboardPanels &&
-                  lstDashboardPanels.map((item, index: number) => (
+                {lstAdminDashboardPanels &&
+                  lstAdminDashboardPanels.map((item, index: number) => (
                     <li
                       key={item.id}
                       className={`text-white ${
@@ -133,7 +119,7 @@ export default function MainDashboardLayouts({ children }: any) {
                         window.history.replaceState(
                           item.link,
                           "",
-                          `/dashboard/${item.link}`
+                          `/admindashboard/${item.link}`
                         );
                       }}
                     >
@@ -152,16 +138,14 @@ export default function MainDashboardLayouts({ children }: any) {
             <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8">
               {dashboardContent === null ? (
                 <PageCircularLoading />
-              ) : dashboardContent ? (
-                dashboardContent
               ) : (
-                children
+                dashboardContent
               )}
+              <DashboardFooter />
             </div>
           </div>
         </div>
       </section>
-      <DashboardFooter />
     </>
   );
 }

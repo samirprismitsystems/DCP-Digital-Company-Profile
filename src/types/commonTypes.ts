@@ -1,3 +1,5 @@
+import { ICompanyDetails } from "./companyTypes";
+
 export interface IUser {
   email: string;
   contactemail: string;
@@ -57,6 +59,19 @@ export interface IDashboardCounts {
   product: number;
   service: number;
   testimonials: number;
+}
+
+export interface IAdminDashboardCounts {
+  clients: number;
+  company: ICompanyDetails[];
+  error: boolean;
+  inquiry: number;
+  orders: number;
+  portfolio: number;
+  product: number;
+  service: number;
+  testimonials: number;
+  users: number;
 }
 
 export interface IServicePageData {

@@ -68,7 +68,7 @@ export default function LoginForm() {
         }
       }
 
-      throw new Error("Something went wrong while login");
+      throw new Error(res.message || "Something went wrong while login");
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     } finally {

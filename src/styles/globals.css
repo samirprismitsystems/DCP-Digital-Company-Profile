@@ -232,6 +232,14 @@ ul.theme_list {
 .slick-dots {
   bottom: -20px !important;
 }
+.demo {
+  background-color: #f9f9f9;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0px 1px 3px rgb(0 0 0 / 10%);
+  margin: 2rem 0 3rem;
+  border-radius: 0.25rem;
+}
 .slick-dots li.slick-active button:before {
   color: #8d1c9a !important;
 }
@@ -330,7 +338,13 @@ body {
   box-sizing: border-box;
   color: #d8e3e7;
   background-color: #132c33;
-  font-family: "Montserrat" !important   ;
+  font-family: "Montserrat" !important;
+}
+
+body .dashboardCardFont {
+  font-family: 'GothamRoundedBook' !important;
+  font-weight: 600;
+  color: #555;
 }
 
 html {

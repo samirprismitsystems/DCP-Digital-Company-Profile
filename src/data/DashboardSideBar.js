@@ -60,3 +60,42 @@ export const lstDashboardPanels = [
     link: "themes",
   },
 ];
+
+export const lstAdminDashboardPanels = [
+  {
+    id: 1,
+    name: "Company List",
+    icon: "/assets/dashboard/company_details.png",
+    link: "companylist",
+  },
+  {
+    id: 2,
+    name: "Social Media",
+    icon: "/assets/dashboard/social_links.png",
+    link: "socailmediaadd",
+  },
+  {
+    id: 3,
+    name: "Pages",
+    icon: "/assets/dashboard/product.png",
+    link: "Pages",
+  },
+  {
+    id: 4,
+    name: "User Review",
+    icon: "/assets/dashboard/services.png",
+    link: "userreview",
+  },
+  {
+    id: 5,
+    name: "Add Theme",
+    icon: "/assets/dashboard/clients.webp",
+    link: "addtheme",
+  },
+  {
+    id: 6,
+    name: "Setting",
+    icon: "/assets/dashboard/image_gallery.png",
+    link: "setting",
+  },
+];

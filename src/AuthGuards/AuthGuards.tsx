@@ -12,15 +12,28 @@ export default function AuthGuard({ children }: { children: any }) {
       if (AuthService.getUserType() === USER_TYPE.ADMIN) {
         router.push("/admindashboard");
         return null;
-      }
-
-      if (AuthService.getUserType() === USER_TYPE.USER) {
-        console.log(AuthService.getUserType(), USER_TYPE.USER);
+      } else {
         router.push("/dashboard");
         return null;
       }
     }
   }
+
+  // if (
+  //   AuthService.getUserType() === USER_TYPE.ADMIN &&
+  //   pathname.startsWith("/dashboard")
+  // ) {
+  //   router.push("/admindashboard");
+  //   return null;
+  // }
+
+  // if (
+  //   AuthService.getUserType() === USER_TYPE.USER &&
+  //   pathname.startsWith("/admindashboard")
+  // ) {
+  //   router.push("/dashboard");
+  //   return null;
+  // }
 
   if (AuthService.isUserLoggedIn()) {
     return children;

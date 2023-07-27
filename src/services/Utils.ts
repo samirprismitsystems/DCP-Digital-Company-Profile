@@ -76,7 +76,7 @@ class Utils {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    return "";
+    return null;
   }
 
   static getAMPMTime(one: any, two: any) {
