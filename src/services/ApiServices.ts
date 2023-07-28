@@ -245,6 +245,41 @@ const ApiService = {
     const res = await axios.get(`${BASE_URI}api/user/getadmindashdata`);
     return res.data;
   },
+
+  async getAllCompanies() {
+    const res = await axios.get(`${BASE_URI}api/company/fetchallcompany`);
+    return res.data;
+  },
+
+  async updateCompanyStatus(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/company/updatecompanystatus`,
+      io
+    );
+    return res.data;
+  },
+
+  async getAdminSocialMediaInfo() {
+    const res = await axios.get(`${BASE_URI}api/company/fetchallsocial`);
+    return res.data;
+  },
+
+  async getAdminSocialMediaColors() {
+    const res = await axios.get(`${BASE_URI}/api/company/fetchsocialcolor`);
+    return res.data;
+  },
+
+  async deleteAdminSocialMediaItem(socialMediaItemID: any) {
+    const res = await axios.get(
+      `${BASE_URI}api/company/deletesocial/${socialMediaItemID}`
+    );
+    return res.data;
+  },
+
+  async saveAdminSocialMediaInfo(io: any) {
+    const res = await axios.post(`${BASE_URI}api/company/createsocial`, io);
+    return res.data;
+  },
 };
 
 export default ApiService;

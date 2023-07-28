@@ -86,6 +86,10 @@ class Utils {
       outputFormat
     )}`;
   }
+
+  static getTotalPages(data: any, itemPerPage: number) {
+    return Math.ceil(data.length / itemPerPage);
+  }
 }
 
 export default Utils;

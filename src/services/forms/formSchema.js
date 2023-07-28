@@ -91,6 +91,16 @@ export const productFormSchema = yup.object({
   ),
 });
 
+export const adminSocialMediaInfo = yup.object({
+  adminSocialMediaInfo: yup.array().of(
+    yup.object().shape({
+      socialmedia_logo: yup.mixed().optional(),
+      socialmedia_name: yup.string().optional(),
+      link: yup.string().optional(),
+    })
+  ),
+});
+
 export const serviceFormSchema = yup.object({
   service_data: yup.array().of(
     yup.object().shape({

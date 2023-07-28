@@ -153,3 +153,10 @@ export interface ITheme {
   theme_name: string;
   updated_at: string;
 }
+
+export interface ISocialMediaColors {
+  created_at: string;
+  socialmedia_color_id: string;
+  socialmedia_color_name: string;
+  updated_at: string;
+}

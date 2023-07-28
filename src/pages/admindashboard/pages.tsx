@@ -1,12 +1,12 @@
 import AuthGuard from "@/AuthGuards/AuthGuards";
-import AdminCompanyPage from "@/components/Admin/AdminCompanyPage/AdminCompanyPage";
+import AdminPagesPage from "@/components/Admin/AdminPagesPage/AdminPagesPage";
 import AdminDashboardLayout from "@/layouts/DashboardLayouts/AdminDashboardLayouts";
 
-export default function companylist() {
+export default function pages() {
   return (
     <AuthGuard>
       <AdminDashboardLayout>
-        <AdminCompanyPage />
+        <AdminPagesPage />
       </AdminDashboardLayout>
     </AuthGuard>
   );

@@ -1,13 +1,13 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
+import AdminCompanyPage from "@/components/Admin/AdminCompanyPage/AdminCompanyPage";
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
 import AdminDashboardPage from "@/components/Admin/AdminDashboardPage/AdminDashboardPage";
+import AdminPagesPage from "@/components/Admin/AdminPagesPage/AdminPagesPage";
+import AdminSocialMediaPage from "@/components/Admin/AdminSocialMediaPage/AdminSocialMediaPage";
 import ClientPage from "@/components/ClientPage/ClientPage";
-import CompanyDetailsPage from "@/components/CompanyDetailsPage/CompanyDetailsPage";
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
 import ImageGalleryPage from "@/components/ImageGalleryPage/ImageGalleryPage";
-import ProductPage from "@/components/ProductPage/ProductPage";
 import ServicePage from "@/components/ServicePage/ServicePage";
-import SocialLinksPage from "@/components/SocialLinksPage/SocialLinksPage";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
@@ -33,6 +33,7 @@ export default function AdminDashboardLayout({ children }: any) {
       /\/admindashboard\//,
       ""
     );
+
     if (modifiedLink === "/admindashboard") {
       dispatch(
         setSelectedObj({ selectedIndex: 0, selectedTitle: "admindashboard" })
@@ -46,6 +47,7 @@ export default function AdminDashboardLayout({ children }: any) {
       if (selectedItem) {
         const { id, link } = selectedItem;
         dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+        setRouteIsChanged(true);
       }
     }
   };
@@ -57,13 +59,13 @@ export default function AdminDashboardLayout({ children }: any) {
           setDashboardContent(<AdminDashboardPage />);
           break;
         case "companylist":
-          setDashboardContent(<CompanyDetailsPage />);
+          setDashboardContent(<AdminCompanyPage />);
           break;
-        case "socailmediaadd":
-          setDashboardContent(<SocialLinksPage />);
+        case "socialmediaadd":
+          setDashboardContent(<AdminSocialMediaPage />);
           break;
         case "pages":
-          setDashboardContent(<ProductPage />);
+          setDashboardContent(<AdminPagesPage />);
           break;
         case "userreview":
           setDashboardContent(<ServicePage />);
@@ -138,14 +140,16 @@ export default function AdminDashboardLayout({ children }: any) {
             <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8">
               {dashboardContent === null ? (
                 <PageCircularLoading />
-              ) : (
+              ) : dashboardContent ? (
                 dashboardContent
+              ) : (
+                children
               )}
-              <DashboardFooter />
             </div>
           </div>
         </div>
       </section>
+      <DashboardFooter />
     </>
   );
 }

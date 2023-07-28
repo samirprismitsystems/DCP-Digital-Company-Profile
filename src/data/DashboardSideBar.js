@@ -72,13 +72,13 @@ export const lstAdminDashboardPanels = [
     id: 2,
     name: "Social Media",
     icon: "/assets/dashboard/social_links.png",
-    link: "socailmediaadd",
+    link: "socialmediaadd",
   },
   {
     id: 3,
     name: "Pages",
     icon: "/assets/dashboard/product.png",
-    link: "Pages",
+    link: "pages",
   },
   {
     id: 4,
