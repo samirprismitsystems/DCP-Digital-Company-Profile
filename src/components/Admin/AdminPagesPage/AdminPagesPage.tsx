@@ -1,6 +1,8 @@
 import AdminBackButton from "@/common/AdminBackButton";
+import AdminCommonButton from "@/common/AdminCommonButton";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AdminPagesTable from "./AdminPagesTable";
 
 export default function AdminPagesPage() {
   return (
@@ -24,7 +26,10 @@ export default function AdminPagesPage() {
           boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
         }}
       >
-        <div className="row -mr-3 -ml-3">{/* <AdminSocialMediaItem /> */}</div>
+        <AdminPagesTable />
+        <div className="pb-4 pt-16">
+          <AdminCommonButton hideSaveButton={true} />
+        </div>
       </div>
     </>
   );

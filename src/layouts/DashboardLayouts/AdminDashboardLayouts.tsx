@@ -3,11 +3,11 @@ import AdminCompanyPage from "@/components/Admin/AdminCompanyPage/AdminCompanyPa
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
 import AdminDashboardPage from "@/components/Admin/AdminDashboardPage/AdminDashboardPage";
 import AdminPagesPage from "@/components/Admin/AdminPagesPage/AdminPagesPage";
+import AdminReviewPage from "@/components/Admin/AdminReviewPage/AdminReviewPage";
 import AdminSocialMediaPage from "@/components/Admin/AdminSocialMediaPage/AdminSocialMediaPage";
-import ClientPage from "@/components/ClientPage/ClientPage";
+import AdminThemePage from "@/components/Admin/AdminThemePage/AdminThemePage";
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
 import ImageGalleryPage from "@/components/ImageGalleryPage/ImageGalleryPage";
-import ServicePage from "@/components/ServicePage/ServicePage";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
@@ -68,10 +68,10 @@ export default function AdminDashboardLayout({ children }: any) {
           setDashboardContent(<AdminPagesPage />);
           break;
         case "userreview":
-          setDashboardContent(<ServicePage />);
+          setDashboardContent(<AdminReviewPage />);
           break;
         case "addtheme":
-          setDashboardContent(<ClientPage />);
+          setDashboardContent(<AdminThemePage />);
           break;
         case "setting":
           setDashboardContent(<ImageGalleryPage />);

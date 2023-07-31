@@ -121,6 +121,16 @@ export const clientFormSchema = yup.object({
   ),
 });
 
+export const themeFormSchema = yup.object({
+  theme_data: yup.array().of(
+    yup.object().shape({
+      theme_image: yup.mixed().optional(),
+      theme_name: yup.string().optional(),
+      theme_id: yup.string().optional(),
+    })
+  ),
+});
+
 export const portfolioFormSchema = yup.object({
   portfolio_data: yup.array().of(
     yup.object().shape({

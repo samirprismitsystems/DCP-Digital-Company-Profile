@@ -98,6 +98,11 @@ const ApiService = {
     return res.data;
   },
 
+  async saveAdminThemeInfo(io: any) {
+    const res = await axios.post(`${BASE_URI}api/theme/createtheme`, io);
+    return res.data;
+  },
+
   async getServicePageDetails() {
     const res = await axios.get(
       `${BASE_URI}api/service/getservice/${AuthService.getUserEmail()}`
@@ -116,6 +121,11 @@ const ApiService = {
     const res = await axios.get(
       `${BASE_URI}api/client/getclients/${AuthService.getUserEmail()}`
     );
+    return res.data;
+  },
+
+  async getAdminThemes() {
+    const res = await axios.get(`${BASE_URI}api/theme/getthemes`);
     return res.data;
   },
 
@@ -217,6 +227,11 @@ const ApiService = {
     return res.data;
   },
 
+  async deleteAdminTheme(themeID: any) {
+    const res = await axios.get(`${BASE_URI}api/theme/deletetheme/${themeID}`);
+    return res.data;
+  },
+
   async deletePortfolio(portfolioID: any) {
     const res = await axios.get(
       `${BASE_URI}api/portfolio/deleteportfolio/${portfolioID}`
@@ -276,8 +291,28 @@ const ApiService = {
     return res.data;
   },
 
+  async getAllPagesInfo() {
+    const res = await axios.get(`${BASE_URI}api/pages/getpages`);
+    return res.data;
+  },
+
+  async deletePageItem(pageID: number) {
+    const res = await axios.get(`${BASE_URI}api/pages/deletepage/${pageID}`);
+    return res.data;
+  },
+
   async saveAdminSocialMediaInfo(io: any) {
     const res = await axios.post(`${BASE_URI}api/company/createsocial`, io);
+    return res.data;
+  },
+
+  async getAllAdminUserReview() {
+    const res = await axios.get(`${BASE_URI}api/user/getuserreview/all`);
+    return res.data;
+  },
+
+  async updateUserReviewStatus(io: any) {
+    const res = await axios.post(`${BASE_URI}api/user/updatereviewstatus`, io);
     return res.data;
   },
 };

@@ -8,17 +8,21 @@ export default function RHFImageUploader({
   savePath,
   label,
   folderPath,
+  isIDNotAvailable,
 }: {
   srcPath: any;
   savePath: string;
   label: string;
   folderPath: string;
+  isIDNotAvailable?: boolean;
 }) {
   const objForm = useFormContext();
   const [selectedImagePath, setSelectedImagePath] = useState(
-    `${UPLOAD_IMAGE_URI}/${Utils.getItem(
-      "IMAGE_UPLOAD_ID"
-    )}/${folderPath}/${srcPath}`
+    !isIDNotAvailable
+      ? `${UPLOAD_IMAGE_URI}/${Utils.getItem(
+          "IMAGE_UPLOAD_ID"
+        )}/${folderPath}/${srcPath}`
+      : `${UPLOAD_IMAGE_URI}/${folderPath}/${srcPath}`
   );
 
   return (

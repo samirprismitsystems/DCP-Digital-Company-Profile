@@ -160,3 +160,24 @@ export interface ISocialMediaColors {
   socialmedia_color_name: string;
   updated_at: string;
 }
+
+export interface IPagesInfo {
+  meta_description: string;
+  meta_image: string;
+  meta_keywords: string;
+  page_id: string;
+  meta_title: string;
+  page_content: any;
+  page_name: string;
+  page_slug: string;
+  template_name: string;
+}
+
+export interface IAdminUserReview {
+  created_at: string;
+  review_id: string;
+  status: string;
+  updated_at: string;
+  user_message: string;
+  user_name: string;
+}
