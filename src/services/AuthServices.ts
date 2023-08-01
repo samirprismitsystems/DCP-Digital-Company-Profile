@@ -1,4 +1,5 @@
 import { ILoginUser } from "@/types/commonTypes";
+import { USER_TYPE } from "./Enums";
 import Utils from "./Utils";
 
 const LOGIN_USER_EMAIL_KEY = "loginUserEmail";
@@ -34,6 +35,18 @@ class AuthService {
   static getUserEmail() {
     if (typeof window !== "undefined") {
       return Utils.getItem("userEmail");
+    }
+    return null;
+  }
+
+  static isUserAdmin() {
+    if (typeof window !== "undefined") {
+      const user = this.getUserType();
+      if (user === USER_TYPE.ADMIN) {
+        return true;
+      } else {
+        return false;
+      }
     }
     return null;
   }

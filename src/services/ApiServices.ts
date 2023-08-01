@@ -333,6 +333,28 @@ const ApiService = {
     );
     return res.data;
   },
+
+  async getUserProfileInfo() {
+    const res = await axios.get(
+      `${BASE_URI}api/user/getuser/${AuthService.getUserEmail()}`
+    );
+    return res.data;
+  },
+
+  async saveUserProfileInfo(io: any) {
+    const res = await axios.post(`${BASE_URI}api/user/registeruser`, io);
+    return res.data;
+  },
+
+  async changeUserPassword(io: any) {
+    const res = await axios.post(`${BASE_URI}/api/user/changepassword`, io);
+    return res.data;
+  },
+
+  async registerUserAdmin(io: any) {
+    const res = await axios.post(`${BASE_URI}api/user/registeruseradmin`, io);
+    return res.data;
+  },
 };
 
 export default ApiService;

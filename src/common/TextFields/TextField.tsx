@@ -5,6 +5,8 @@ interface ITextField {
   name: string;
   title: string | ReactNode;
   type?: string;
+  isTextArea?: boolean;
+  isRequired?: boolean;
   placeHolder?: string;
 }
 
@@ -24,12 +26,29 @@ export default function TextField(props: ITextField) {
         >
           {props.title}
         </label>
-        <input
+        {/* <input
           className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
           type={props.type || "text"}
           placeholder={props.placeHolder ? props.placeHolder : ""}
           {...register(props.name)}
-        />
+        /> */}
+        {props.isTextArea ? (
+          <textarea
+            rows={5}
+            required={props.isRequired}
+            className="w-full h-auto text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
+            placeholder={props.placeHolder ? props.placeHolder : ""}
+            {...register(props.name)}
+          />
+        ) : (
+          <input
+            required={props.isRequired}
+            className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
+            type={props.type || "text"}
+            placeholder={props.placeHolder ? props.placeHolder : ""}
+            {...register(props.name)}
+          />
+        )}
       </div>
     </>
   );

@@ -2,11 +2,12 @@ import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { loginPageNavigationMenuList } from "@/data/NavigationMenu";
 import Utils from "@/services/Utils";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function AdminDashboardNavbar({ setRouteIsChanged }: any) {
+export default function AdminDashboardNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function AdminDashboardNavbar({ setRouteIsChanged }: any) {
                 selectedTitle: "admindashboard",
               })
             );
-            setRouteIsChanged(true);
+            dispatch(setRouteIsChanged(true));
             window.history.replaceState("", "", `/admindashboard`);
           }}
         >
@@ -48,7 +49,18 @@ export default function AdminDashboardNavbar({ setRouteIsChanged }: any) {
             <button
               className={`text-[2.0rem] block px-2 py-3  text-secondary-main font-[500]`}
               onClick={(event: any) => {
-                console.log("clicked");
+                dispatch(
+                  setSelectedObj({
+                    selectedIndex: 0,
+                    selectedTitle: "profile",
+                  })
+                );
+                dispatch(setRouteIsChanged(true));
+                window.history.replaceState(
+                  "proile",
+                  "",
+                  `/admindashboard/profile`
+                );
               }}
             >
               Hi, Admin

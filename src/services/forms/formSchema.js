@@ -158,3 +158,48 @@ export const googleAnalyticsFormSchema = yup.object({
   beforeTag: yup.string().optional(),
   afterTag: yup.string().optional(),
 });
+
+export const adminProfileFormSchema = yup.object({
+  firstName: yup.string().optional(),
+  lastName: yup.string().optional(),
+  email: yup.string().optional(),
+  mobile: yup.string().optional(),
+  userID: yup.string().optional(),
+  profilePhoto: yup.string().optional(),
+});
+
+export const adminChangePasswordFormSchema = yup.object({
+  email: yup.string().optional(),
+  currentPassword: yup.string().optional(),
+  newPassword: yup.string().optional(),
+  confirmPassword: yup
+    .string()
+    .optional()
+    .test(
+      "passwords-match",
+      "New Password and Confirm Password not match!",
+      function (value) {
+        const { newPassword } = this.parent;
+        return newPassword === value;
+      }
+    ),
+});
+
+export const adminAddCompanyFormSchema = yup.object({
+  firstName: yup.string().optional(),
+  lastName: yup.string().optional(),
+  email: yup.string().optional(),
+  mobile: yup.string().optional(),
+  createPassword: yup.string().optional(),
+  confirmPassword: yup
+    .string()
+    .optional()
+    .test(
+      "passwords-match",
+      "New Password and Confirm Password not match!",
+      function (value) {
+        const { createPassword } = this.parent;
+        return createPassword === value;
+      }
+    ),
+});

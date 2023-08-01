@@ -1,8 +1,11 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
+import AdminAddCompanyPage from "@/components/Admin/AdminAddCompanyPage/AdminAddCompanyPage";
+import AdminChangePasswordPage from "@/components/Admin/AdminChangePasswordPage/AdminChangePasswordPage";
 import AdminCompanyPage from "@/components/Admin/AdminCompanyPage/AdminCompanyPage";
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
 import AdminDashboardPage from "@/components/Admin/AdminDashboardPage/AdminDashboardPage";
 import AdminPagesPage from "@/components/Admin/AdminPagesPage/AdminPagesPage";
+import AdminProfilePage from "@/components/Admin/AdminProfilePage/AdminProfilePage";
 import AdminReviewPage from "@/components/Admin/AdminReviewPage/AdminReviewPage";
 import AdminSettingPage from "@/components/Admin/AdminSettingPage/AdminSettingPage";
 import AdminSocialMediaPage from "@/components/Admin/AdminSocialMediaPage/AdminSocialMediaPage";
@@ -11,6 +14,7 @@ import DashboardFooter from "@/components/DashboardPage/DashboardFooter/Dashboar
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import Head from "next/head";
@@ -19,7 +23,9 @@ import { ReactNode, useEffect, useState } from "react";
 
 export default function AdminDashboardLayout({ children }: any) {
   const dispatch = useAppDispatch();
-  const [routeIsChanged, setRouteIsChanged] = useState(false);
+  const routeIsChanged = useAppSelector((s) => s.common.routeIsChanged);
+  // const [routeIsChanged, setRouteIsChanged] = useState(false);
+
   const [dashboardContent, setDashboardContent] = useState<
     ReactNode | null | undefined
   >(null);
@@ -38,7 +44,20 @@ export default function AdminDashboardLayout({ children }: any) {
       dispatch(
         setSelectedObj({ selectedIndex: 0, selectedTitle: "admindashboard" })
       );
-      setRouteIsChanged(true);
+      dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "profile") {
+      dispatch(setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" }));
+      dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "addcompany") {
+      dispatch(
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "addcompany" })
+      );
+      dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "changepassword") {
+      dispatch(
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "changepassword" })
+      );
+      dispatch(setRouteIsChanged(true));
     } else {
       const selectedItem = lstAdminDashboardPanels.find(
         (item) => item.link === modifiedLink
@@ -47,7 +66,7 @@ export default function AdminDashboardLayout({ children }: any) {
       if (selectedItem) {
         const { id, link } = selectedItem;
         dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
-        setRouteIsChanged(true);
+        dispatch(setRouteIsChanged(true));
       }
     }
   };
@@ -57,6 +76,15 @@ export default function AdminDashboardLayout({ children }: any) {
       switch (selectedTitle) {
         case "admindashboard":
           setDashboardContent(<AdminDashboardPage />);
+          break;
+        case "profile":
+          setDashboardContent(<AdminProfilePage />);
+          break;
+        case "changepassword":
+          setDashboardContent(<AdminChangePasswordPage />);
+          break;
+        case "addcompany":
+          setDashboardContent(<AdminAddCompanyPage />);
           break;
         case "companylist":
           setDashboardContent(<AdminCompanyPage />);
@@ -81,7 +109,7 @@ export default function AdminDashboardLayout({ children }: any) {
           break;
       }
 
-      setRouteIsChanged(false);
+      dispatch(setRouteIsChanged(false));
     }
   }, [routeIsChanged, selectedIndex]);
 
@@ -96,7 +124,7 @@ export default function AdminDashboardLayout({ children }: any) {
           {Utils.capitalizeFirstLetter(selectedTitle) || "Admin Dashboard"}
         </title>
       </Head>
-      <AdminDashboardNavbar setRouteIsChanged={setRouteIsChanged} />
+      <AdminDashboardNavbar />
       <section className="main">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">

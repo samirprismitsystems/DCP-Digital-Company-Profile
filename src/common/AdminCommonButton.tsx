@@ -60,7 +60,7 @@ export default function AdminCommonButton({
               className={`py-4 ${
                 hideNextButton && "px-8"
               } font-medium text-center text-3xl hover:text-white ${
-                hideNextButton ? "w-9/12" : "w-full"
+                hideNextButton ? "xs:w-[53%] sm:w-[30%] md:w-[50%] lg:w-[80%] w-9/12" : "w-full"
               } text-primary-light bg-primary-main  hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]`}
             >
               Save Changes
