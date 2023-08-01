@@ -5,6 +5,7 @@ import Utils from "@/services/Utils";
 import { ICompanyDetails } from "@/types/companyTypes";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { format } from "date-fns";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -120,7 +121,9 @@ export default function AdminCompanyTable() {
                   {index % 2 == 0 ? (
                     <tr className="bg-white border-0">
                       <td className="p-4 text-2xl">{item.company_name}</td>
-                      <td className="p-4 text-2xl">{item.established_in}</td>
+                      <td className="p-4 text-2xl">
+                        {format(new Date(item.established_in), "dd-MMM-yyyy")}
+                      </td>
                       <td className="p-4 text-2xl">{item.company_email}</td>
                       <td className="p-4 text-2xl">{item.company_contact}</td>
                       <td className="p-4 text-2xl">
@@ -153,7 +156,10 @@ export default function AdminCompanyTable() {
                   ) : (
                     <tr className="bg-primary-main border-red-100">
                       <td className="p-4 text-2xl">{item.company_name}</td>
-                      <td className="p-4 text-2xl">{item.established_in}</td>
+                      <td className="p-4 text-2xl">
+                        {" "}
+                        {format(new Date(item.established_in), "dd-MMM-yyyy")}
+                      </td>
                       <td className="p-4 text-2xl">{item.company_email}</td>
                       <td className="p-4 text-2xl">{item.company_contact}</td>
                       <td className="p-4 text-2xl">
