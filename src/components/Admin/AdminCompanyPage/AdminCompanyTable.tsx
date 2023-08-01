@@ -115,7 +115,7 @@ export default function AdminCompanyTable() {
               .map((item, index: number) => (
                 <tbody
                   key={index}
-                  className="text-2xl text-center border-0 p-[10px] align-middle text-secondary-main"
+                  className="text-2xl text-center border-0 p-[10px] align-middle text-secondary-dark"
                 >
                   {index % 2 == 0 ? (
                     <tr className="bg-white border-0">

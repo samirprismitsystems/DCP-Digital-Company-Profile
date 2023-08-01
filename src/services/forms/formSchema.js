@@ -66,6 +66,19 @@ export const socialLinkFormSchema = yup.object({
   ),
 });
 
+export const adminSiteSettingFormSchema = yup.object({
+  siteTitle: yup.string().optional(),
+  siteDescription: yup.string().optional(),
+  siteEmail: yup.string().optional(),
+  facebook: yup.string().optional(),
+  instagram: yup.string().optional(),
+  linkedIn: yup.string().optional(),
+  siteLogo: yup.mixed().optional(),
+  selectedOption: yup.string().optional(),
+  beforeTag: yup.string().optional(),
+  afterTag: yup.string().optional(),
+});
+
 export const paymentOptionFormSchema = yup.object({
   bankName: yup.string().optional(),
   QRCodeImage: yup.mixed().optional(),
@@ -139,4 +152,9 @@ export const portfolioFormSchema = yup.object({
       portfolio_desc: yup.string().required(),
     })
   ),
+});
+
+export const googleAnalyticsFormSchema = yup.object({
+  beforeTag: yup.string().optional(),
+  afterTag: yup.string().optional(),
 });

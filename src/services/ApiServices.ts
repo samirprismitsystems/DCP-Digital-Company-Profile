@@ -81,6 +81,16 @@ const ApiService = {
     return res.data;
   },
 
+  async getAdminSiteSettingInfo() {
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`);
+    return res.data;
+  },
+
+  async saveAdminSiteSetting(io: any) {
+    const res = await axios.post(`${BASE_URI}api/sitesetting/savesetting`, io);
+    return res.data;
+  },
+
   async getProductPageDetails() {
     const res = await axios.get(
       `${BASE_URI}api/product/getproducts/${AuthService.getUserEmail()}`
@@ -313,6 +323,14 @@ const ApiService = {
 
   async updateUserReviewStatus(io: any) {
     const res = await axios.post(`${BASE_URI}api/user/updatereviewstatus`, io);
+    return res.data;
+  },
+
+  async saveAdminGoogleAnalyticsInfo(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/sitesetting/savegoogleanalytics`,
+      io
+    );
     return res.data;
   },
 };

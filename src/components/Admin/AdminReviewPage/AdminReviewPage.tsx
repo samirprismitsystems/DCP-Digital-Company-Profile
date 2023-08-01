@@ -1,3 +1,4 @@
+import AdminBackButton from "@/common/AdminBackButton";
 import AdminCommonButton from "@/common/AdminCommonButton";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +7,7 @@ import AdminReviewTable from "./AdminReviewTable";
 export default function AdminReviewPage() {
   return (
     <>
+      <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">User Review</div>
         <div className="h4 mt-1">Add Or Update User Review</div>

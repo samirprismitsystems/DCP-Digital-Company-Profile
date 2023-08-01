@@ -229,10 +229,7 @@ export default function AdminSocialMediaItem() {
         </div>
         <div className="flex w-full xs:flex-wrap sm:flex-nowrap sm:space-x-6">
           <button
-            className="add_btn cursor-pointer  bg-white text-black rounded-xl sm:min-w-[15rem] xs:min-w-full font-semibold py-5 imageUploaderInputs px-9 text-3xl text-center mb-16 capitalize border-solid border-[1px] border-primary-light "
-            style={{
-              transition: "all 0.3s linear",
-            }}
+            className="add_btn cursor-pointer  bg-white text-black rounded-xl sm:min-w-[15rem] xs:min-w-full font-semibold py-5 imageUploaderInputs px-9 text-3xl text-center mb-16 capitalize border-solid border-[1px] border-primary-light transition-all duration-150 ease-linear"
             onClick={() =>
               append({
                 socialmedia_logo: "",

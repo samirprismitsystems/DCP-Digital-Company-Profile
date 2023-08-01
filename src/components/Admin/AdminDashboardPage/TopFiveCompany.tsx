@@ -28,7 +28,7 @@ export default function TopFiveCompany({
           {lstCompany.map((item, index: number) => (
             <tbody
               key={index}
-              className="text-2xl text-center p-[10px] align-middle text-primary-light"
+              className="text-2xl text-center p-[10px] align-middle text-secondary-main"
             >
               {index % 2 == 0 ? (
                 <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">

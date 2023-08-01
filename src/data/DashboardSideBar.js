@@ -77,25 +77,25 @@ export const lstAdminDashboardPanels = [
   {
     id: 3,
     name: "Pages",
-    icon: "/assets/dashboard/product.png",
+    icon: "/assets/pages.png",
     link: "pages",
   },
   {
     id: 4,
     name: "User Review",
-    icon: "/assets/dashboard/services.png",
+    icon: "/assets/clientreview.webp",
     link: "userreview",
   },
   {
     id: 5,
     name: "Add Theme",
-    icon: "/assets/dashboard/clients.webp",
+    icon: "/assets/theme.png",
     link: "addtheme",
   },
   {
     id: 6,
     name: "Setting",
-    icon: "/assets/dashboard/image_gallery.png",
+    icon: "/assets/setting.webp",
     link: "setting",
   },
 ];

@@ -4,10 +4,10 @@ import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminD
 import AdminDashboardPage from "@/components/Admin/AdminDashboardPage/AdminDashboardPage";
 import AdminPagesPage from "@/components/Admin/AdminPagesPage/AdminPagesPage";
 import AdminReviewPage from "@/components/Admin/AdminReviewPage/AdminReviewPage";
+import AdminSettingPage from "@/components/Admin/AdminSettingPage/AdminSettingPage";
 import AdminSocialMediaPage from "@/components/Admin/AdminSocialMediaPage/AdminSocialMediaPage";
 import AdminThemePage from "@/components/Admin/AdminThemePage/AdminThemePage";
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
-import ImageGalleryPage from "@/components/ImageGalleryPage/ImageGalleryPage";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
@@ -74,7 +74,7 @@ export default function AdminDashboardLayout({ children }: any) {
           setDashboardContent(<AdminThemePage />);
           break;
         case "setting":
-          setDashboardContent(<ImageGalleryPage />);
+          setDashboardContent(<AdminSettingPage />);
           break;
         default:
           setDashboardContent(undefined);

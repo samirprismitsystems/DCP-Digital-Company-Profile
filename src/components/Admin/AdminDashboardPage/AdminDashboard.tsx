@@ -91,7 +91,7 @@ export default function AdminDashboard({
       digit: objData?.clients || 0,
       afterBorderClass: "after:border-[#9b82ae]",
       borderClass: "border-[#9b82ae]",
-      textColor: "text-[#c2a9ff]",
+      textColor: "text-[#9b82ae]",
     },
     {
       id: 5,
@@ -112,7 +112,7 @@ export default function AdminDashboard({
       name: "Total Testimonials",
       icon: (
         <FontAwesomeIcon
-          className="text-[35px] transition-all duration-300 ease-linear"
+          className="text-[40px] transition-all duration-300 ease-linear"
           icon={faQuoteRight}
         />
       ),

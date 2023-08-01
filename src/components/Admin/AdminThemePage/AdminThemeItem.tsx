@@ -72,7 +72,7 @@ export default function AdminThemeItem() {
           if (typeof item.theme_image === "object") {
             io.append(`images${index}`, item.theme_image);
             imgcount += 1;
-            break;
+            continue;
           } else {
             io.append(`images${index}`, "undefined");
             imgcount += 1;
@@ -81,7 +81,7 @@ export default function AdminThemeItem() {
       }
       if (imgcount > 0) {
         io.append("imgcount", imgcount);
-      }else{
+      } else {
         io.append("imgcount", 0);
       }
 

@@ -181,3 +181,11 @@ export interface IAdminUserReview {
   user_message: string;
   user_name: string;
 }
+
+export interface ISiteSetting {
+  created_on: string; 
+  setting_id: string;
+  setting_name: string;
+  setting_value: string;
+  updated_on: string;
+}

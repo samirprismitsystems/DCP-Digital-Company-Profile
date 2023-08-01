@@ -30,7 +30,7 @@
 }
 
 .add_btn:hover {
-  background-color: #d8e3e7;
+  background-color: #d8e3e7 !important;
 }
 
 .socialmedia_color_1 {

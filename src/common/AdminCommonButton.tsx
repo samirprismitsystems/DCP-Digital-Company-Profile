@@ -44,7 +44,13 @@ export default function AdminCommonButton({
   return (
     <>
       <div className="flex justify-end w-full">
-        <div className="form_field pb-16 space-x-8 xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%] flex justify-end">
+        <div
+          className={`form_field pb-16 space-x-8 flex justify-end  ${
+            hideSaveButton
+              ? "xl:w-[20%] pt-8 xs:w-[73%] sm:w-[33%] md:w-[33%] lg:w-[35%]"
+              : "xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%]"
+          }`}
+        >
           {!hideSaveButton && (
             <button
               style={{

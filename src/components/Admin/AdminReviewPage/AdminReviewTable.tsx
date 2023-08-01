@@ -113,12 +113,12 @@ export default function AdminReviewTable() {
               .map((item, index: number) => (
                 <tbody
                   key={index}
-                  className="text-2xl text-center border-0 p-[10px] align-middle text-secondary-main"
+                  className="text-2xl text-center border-0 p-[10px] align-middle text-secondary-dark"
                 >
                   {index % 2 == 0 ? (
                     <tr className="bg-white border-0">
                       <td className="p-4 text-2xl">{item.user_name}</td>
-                      <td className="p-4 text-2xl">{item.user_message}</td>
+                      <td className="p-4 text-2xl w-2/5">{item.user_message}</td>
                       <td className="p-4 text-2xl">
                         <Link target="_blank" href={"/dashboard/company"}>
                           <FontAwesomeIcon
