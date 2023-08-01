@@ -90,6 +90,10 @@ class Utils {
   static getTotalPages(data: any, itemPerPage: number) {
     return Math.ceil(data.length / itemPerPage);
   }
+
+  static removeLSItem(name: string) {
+    localStorage.removeItem(name);
+  }
 }
 
 export default Utils;

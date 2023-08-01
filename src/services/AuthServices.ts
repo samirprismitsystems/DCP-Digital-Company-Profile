@@ -1,4 +1,5 @@
 import { ILoginUser } from "@/types/commonTypes";
+import { ICompanyDetails } from "@/types/companyTypes";
 import { USER_TYPE } from "./Enums";
 import Utils from "./Utils";
 
@@ -12,6 +13,13 @@ class AuthService {
     Utils.setItem("userName", data.first_name);
     Utils.setItem("siteTitle", "Admin Dashboard");
     Utils.setItem("isUserLoggedIn", true);
+
+    return true;
+  }
+
+  static setLocalUserInformation(data: ICompanyDetails) {
+    Utils.setItem("localUserEmail", data.company_email);
+    Utils.setItem("localUserCompanyID", data.company_id);
 
     return true;
   }
@@ -32,9 +40,16 @@ class AuthService {
     return null;
   }
 
+  static getLocalUserEmail() {
+    if (typeof window !== "undefined") {
+      return Utils.getItem("localUserEmail");
+    }
+    return null;
+  }
+
   static getUserEmail() {
     if (typeof window !== "undefined") {
-      return Utils.getItem("userEmail");
+      return this.getLocalUserEmail() || Utils.getItem("userEmail");
     }
     return null;
   }

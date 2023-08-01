@@ -1,15 +1,17 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
 import Pagination from "@/common/Pagination";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { ICompanyDetails } from "@/types/companyTypes";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from "date-fns";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function AdminCompanyTable() {
+  const router = useRouter();
   const [lstCompany, setLstCompany] = useState<ICompanyDetails[]>([]);
   const [objPagination, setObjPagination] = useState({
     currentPage: 1,
@@ -85,6 +87,26 @@ export default function AdminCompanyTable() {
     }
   };
 
+  const getUserByCompanyID = async (companyID: string) => {
+    try {
+      const res = await ApiService.getUserByCompanyID(companyID);
+      if (!res.error) {
+        AuthService.setLocalUserInformation(res.companydata);
+        return null;
+      }
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  const redirect = async (companyID: string) => {
+    await getUserByCompanyID(companyID);
+    if (typeof window !== "undefined") {
+      window.open("/dashboard/company", "_blank");
+    }
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -127,12 +149,17 @@ export default function AdminCompanyTable() {
                       <td className="p-4 text-2xl">{item.company_email}</td>
                       <td className="p-4 text-2xl">{item.company_contact}</td>
                       <td className="p-4 text-2xl">
-                        <Link target="_blank" href={"/dashboard/company"}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            redirect(item.company_id);
+                          }}
+                        >
                           <FontAwesomeIcon
                             className="text-secondary-main text-3xl text-center"
                             icon={faEdit}
                           />
-                        </Link>
+                        </button>
                       </td>
                       <td className="p-4 text-2xl">
                         <label className="relative inline-flex items-center cursor-pointer">
@@ -163,12 +190,17 @@ export default function AdminCompanyTable() {
                       <td className="p-4 text-2xl">{item.company_email}</td>
                       <td className="p-4 text-2xl">{item.company_contact}</td>
                       <td className="p-4 text-2xl">
-                        <Link target="_blank" href={"/dashboard/company"}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            redirect(item.company_id);
+                          }}
+                        >
                           <FontAwesomeIcon
                             className="text-secondary-main text-3xl text-center"
                             icon={faEdit}
                           />
-                        </Link>
+                        </button>
                       </td>
                       <td className="p-4 text-2xl rounded-b-l-xl">
                         <label className="relative inline-flex items-center cursor-pointer">

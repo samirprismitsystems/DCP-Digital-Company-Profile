@@ -355,6 +355,13 @@ const ApiService = {
     const res = await axios.post(`${BASE_URI}api/user/registeruseradmin`, io);
     return res.data;
   },
+
+  async getUserByCompanyID(companyID: string) {
+    const res = await axios.get(
+      `${BASE_URI}api/user/getcompanyuser/${companyID}`
+    );
+    return res.data;
+  },
 };
 
 export default ApiService;
