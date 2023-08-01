@@ -1,10 +1,14 @@
 import AdminBackButton from "@/common/AdminBackButton";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 import AdminSocialMediaItem from "./AdminSocialMediaItem";
+import { useDispatch } from "react-redux";
+import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 
 export default function AdminSocialMediaPage() {
-  
+  const dispatch = useDispatch();
   return (
     <>
       <AdminBackButton />
@@ -12,7 +16,23 @@ export default function AdminSocialMediaPage() {
         <div className="h2">Add Social Media Data</div>
         <div className="h4 mt-1">Upload Social Media For Company</div>
       </div>
-      <button className="cursor-pointer bg-[#666666] text-white  border-0 transition transition-[all 0.3s linear] rounded-xl min-w-[auto] py-4 px-7 font-normal text-2xl text-center mb-16 capitalize">
+      <button
+        onClick={() => {
+          dispatch(
+            setSelectedObj({
+              selectedIndex: 0,
+              selectedTitle: "addsocialcolors",
+            })
+          );
+          dispatch(setRouteIsChanged(true));
+          window.history.replaceState(
+            "addsocialcolors",
+            "",
+            `/admindashboard/addsocialcolors`
+          );
+        }}
+        className="cursor-pointer bg-[#666666] text-white  border-0 transition transition-[all 0.3s linear] rounded-xl min-w-[auto] py-4 px-7 font-normal text-2xl text-center mb-16 capitalize"
+      >
         <FontAwesomeIcon
           size="lg"
           className="mr-4  font-extrabold text-white"

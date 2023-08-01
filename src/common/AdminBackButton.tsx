@@ -4,9 +4,11 @@ import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 export default function AdminBackButton() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const selectedIndex = useAppSelector(
     (state: RootState) => state.dashboard.selectedIndex
@@ -27,11 +29,14 @@ export default function AdminBackButton() {
           selectedTitle: isDataValid.link,
         })
       );
+
       window.history.replaceState(
         isDataValid.link,
         "",
         `/admindashboard/${isDataValid.link}`
       );
+    } else {
+      router.back();
     }
   };
 

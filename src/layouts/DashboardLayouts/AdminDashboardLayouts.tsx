@@ -1,5 +1,6 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
 import AdminAddCompanyPage from "@/components/Admin/AdminAddCompanyPage/AdminAddCompanyPage";
+import AdminAddSocialColorPage from "@/components/Admin/AdminAddSocialColorPage/AdminAddSocialColorPage";
 import AdminChangePasswordPage from "@/components/Admin/AdminChangePasswordPage/AdminChangePasswordPage";
 import AdminCompanyPage from "@/components/Admin/AdminCompanyPage/AdminCompanyPage";
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
@@ -48,6 +49,11 @@ export default function AdminDashboardLayout({ children }: any) {
     } else if (modifiedLink === "profile") {
       dispatch(setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" }));
       dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "addsocialcolors") {
+      dispatch(
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "addsocialcolors" })
+      );
+      dispatch(setRouteIsChanged(true));
     } else if (modifiedLink === "addcompany") {
       dispatch(
         setSelectedObj({ selectedIndex: 0, selectedTitle: "addcompany" })
@@ -82,6 +88,9 @@ export default function AdminDashboardLayout({ children }: any) {
           break;
         case "changepassword":
           setDashboardContent(<AdminChangePasswordPage />);
+          break;
+        case "addsocialcolors":
+          setDashboardContent(<AdminAddSocialColorPage />);
           break;
         case "addcompany":
           setDashboardContent(<AdminAddCompanyPage />);
