@@ -1,6 +1,7 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
 import AdminAddCompanyPage from "@/components/Admin/AdminAddCompanyPage/AdminAddCompanyPage";
 import AdminAddSocialColorPage from "@/components/Admin/AdminAddSocialColorPage/AdminAddSocialColorPage";
+import AdminAddUserReviewPage from "@/components/Admin/AdminAddUserReviewPage/AdminAddUserReviewPage";
 import AdminChangePasswordPage from "@/components/Admin/AdminChangePasswordPage/AdminChangePasswordPage";
 import AdminCompanyPage from "@/components/Admin/AdminCompanyPage/AdminCompanyPage";
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
@@ -25,7 +26,6 @@ import { ReactNode, useEffect, useState } from "react";
 export default function AdminDashboardLayout({ children }: any) {
   const dispatch = useAppDispatch();
   const routeIsChanged = useAppSelector((s) => s.common.routeIsChanged);
-  // const [routeIsChanged, setRouteIsChanged] = useState(false);
 
   const [dashboardContent, setDashboardContent] = useState<
     ReactNode | null | undefined
@@ -54,6 +54,11 @@ export default function AdminDashboardLayout({ children }: any) {
         setSelectedObj({ selectedIndex: 0, selectedTitle: "addsocialcolors" })
       );
       dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "adduserreview") {
+      dispatch(
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "adduserreview" })
+      );
+      dispatch(setRouteIsChanged(true));
     } else if (modifiedLink === "addcompany") {
       dispatch(
         setSelectedObj({ selectedIndex: 0, selectedTitle: "addcompany" })
@@ -73,7 +78,10 @@ export default function AdminDashboardLayout({ children }: any) {
         const { id, link } = selectedItem;
         dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
         dispatch(setRouteIsChanged(true));
+        return null;
       }
+
+      dispatch(setRouteIsChanged(true));
     }
   };
 
@@ -91,6 +99,9 @@ export default function AdminDashboardLayout({ children }: any) {
           break;
         case "addsocialcolors":
           setDashboardContent(<AdminAddSocialColorPage />);
+          break;
+        case "adduserreview":
+          setDashboardContent(<AdminAddUserReviewPage />);
           break;
         case "addcompany":
           setDashboardContent(<AdminAddCompanyPage />);

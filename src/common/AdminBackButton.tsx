@@ -1,5 +1,6 @@
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import { useAppSelector } from "@/services/store/hooks/hooks";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -7,7 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
-export default function AdminBackButton() {
+export default function AdminBackButton({
+  backPath,
+  index,
+}: {
+  backPath?: string;
+  index?: number;
+}) {
   const router = useRouter();
   const dispatch = useDispatch();
   const selectedIndex = useAppSelector(
@@ -15,28 +22,45 @@ export default function AdminBackButton() {
   );
 
   const handleBack = () => {
-    let isDataValid: any = lstAdminDashboardPanels.find((item) => {
-      if (item.id === selectedIndex - 1) {
-        return item;
+    if (!index) {
+      let isDataValid: any = lstAdminDashboardPanels.find((item) => {
+        if (item.id === selectedIndex - 1) {
+          return item;
+        }
+        return false;
+      });
+
+      if (isDataValid) {
+        dispatch(
+          setSelectedObj({
+            selectedIndex: isDataValid.id,
+            selectedTitle: isDataValid.link,
+          })
+        );
+
+        window.history.replaceState(
+          isDataValid.link,
+          "",
+          `/admindashboard/${isDataValid.link}`
+        );
       }
-      return false;
-    });
+    }
 
-    if (isDataValid) {
-      dispatch(
-        setSelectedObj({
-          selectedIndex: isDataValid.id,
-          selectedTitle: isDataValid.link,
-        })
-      );
-
-      window.history.replaceState(
-        isDataValid.link,
-        "",
-        `/admindashboard/${isDataValid.link}`
-      );
-    } else {
-      router.back();
+    if (index) {
+      if (backPath) {
+        dispatch(
+          setSelectedObj({
+            selectedIndex: index,
+            selectedTitle: backPath,
+          })
+        );
+        dispatch(setRouteIsChanged(true));
+        window.history.replaceState(
+          backPath,
+          "",
+          `/admindashboard/${backPath}`
+        );
+      }
     }
   };
 

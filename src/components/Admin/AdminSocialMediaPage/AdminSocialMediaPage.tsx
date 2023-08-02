@@ -20,7 +20,7 @@ export default function AdminSocialMediaPage() {
         onClick={() => {
           dispatch(
             setSelectedObj({
-              selectedIndex: 0,
+              selectedIndex: 2,
               selectedTitle: "addsocialcolors",
             })
           );

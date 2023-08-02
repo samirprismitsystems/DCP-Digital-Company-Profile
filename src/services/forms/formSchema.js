@@ -203,3 +203,20 @@ export const adminAddCompanyFormSchema = yup.object({
       }
     ),
 });
+
+export const adminSocialMediaClassFormSchema = yup.object({
+  socialcolor: yup.array().of(
+    yup.object().shape({
+      created_at: yup.string().optional(),
+      socialmedia_color_id: yup.string().optional(),
+      socialmedia_color_name: yup.string().optional(),
+      updated_at: yup.string().optional(),
+    })
+  ),
+  socialMediaClass: yup.string().optional(),
+});
+
+export const adminUserReviewFormSchema = yup.object({
+  userName: yup.string().optional(),
+  userReview: yup.string().optional(),
+});

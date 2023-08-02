@@ -362,6 +362,39 @@ const ApiService = {
     );
     return res.data;
   },
+
+  async getAdminSocialColors() {
+    const res = await axios.get(`${BASE_URI}api/company/fetchsocialcolor`);
+    return res.data;
+  },
+
+  async saveAdminSocialMediaColorInfo(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/company/createsocialmediacolor`,
+      io
+    );
+    return res.data;
+  },
+
+  async deleteAdminSocialMediaClass(deleteID: string) {
+    const res = await axios.get(
+      `${BASE_URI}api/company/deletesocialcolor/${deleteID}`
+    );
+    return res.data;
+  },
+
+  async updateAdminSocialClass(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/company/updatesocialmediacolor`,
+      io
+    );
+    return res.data;
+  },
+
+  async addAdminUserReview(io: any) {
+    const res = await axios.post(`${BASE_URI}api/user/addreview`, io);
+    return res.data;
+  },
 };
 
 export default ApiService;

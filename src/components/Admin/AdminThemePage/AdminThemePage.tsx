@@ -1,10 +1,10 @@
-import BackButton from "@/common/BackButton";
+import AdminBackButton from "@/common/AdminBackButton";
 import AdminThemeItem from "./AdminThemeItem";
 
 export default function AdminThemePage() {
   return (
     <>
-      <BackButton />
+      <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Add Themes For Company</div>
         <div className="h4 mt-1">Add Themes</div>

@@ -1,4 +1,4 @@
-import BackButton from "@/common/BackButton";
+import AdminBackButton from "@/common/AdminBackButton";
 import { useState } from "react";
 import GoogleAnalytics from "./GoogleAnalytics/GoogleAnalytics";
 import SiteSetting from "./SiteSetting/SiteSetting";
@@ -9,7 +9,7 @@ export default function AdminSettingPage() {
 
   return (
     <>
-      <BackButton />
+      <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Website Setting</div>
         <div className="h4 mt-1">Change Website Settings</div>

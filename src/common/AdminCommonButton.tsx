@@ -8,9 +8,13 @@ import { useDispatch } from "react-redux";
 export default function AdminCommonButton({
   hideSaveButton,
   hideNextButton,
+  isLeft,
+  saveBtnTitle,
 }: {
   hideSaveButton?: boolean;
   hideNextButton?: boolean;
+  isLeft?: boolean;
+  saveBtnTitle?: string;
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -43,9 +47,13 @@ export default function AdminCommonButton({
 
   return (
     <>
-      <div className="flex justify-end w-full">
+      <div
+        className={`flex ${isLeft ? "justify-start" : "justify-end"} w-full`}
+      >
         <div
-          className={`form_field pb-16 space-x-8 flex justify-end  ${
+          className={`form_field pb-16 space-x-8 flex ${
+            isLeft ? "justify-start" : "justify-end"
+          }  ${
             hideSaveButton
               ? "xl:w-[20%] pt-8 xs:w-[73%] sm:w-[33%] md:w-[33%] lg:w-[35%]"
               : "xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%]"
@@ -60,10 +68,14 @@ export default function AdminCommonButton({
               className={`py-4 ${
                 hideNextButton && "px-8"
               } font-medium text-center text-3xl hover:text-white ${
-                hideNextButton ? "xs:w-[53%] sm:w-[30%] md:w-[50%] lg:w-[80%] w-9/12" : "w-full"
+                hideNextButton
+                  ? !isLeft
+                    ? "xs:w-full sm:w-[80%] lg:w-[80%] w-9/12"
+                    : "xs:w-[28%] sm:w-[20%] md:w-[30%] lg:w-[50%] w-9/12"
+                  : "w-full"
               } text-primary-light bg-primary-main  hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]`}
             >
-              Save Changes
+              {saveBtnTitle ? saveBtnTitle : "Save Changes"}
             </button>
           )}
           {!hideNextButton && (
