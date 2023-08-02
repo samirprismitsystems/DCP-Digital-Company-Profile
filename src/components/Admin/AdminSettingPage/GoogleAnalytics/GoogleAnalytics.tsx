@@ -44,7 +44,7 @@ export default function GoogleAnalytics() {
 
   const onSave = async (data: any) => {
     try {
-      console.log(data)
+      console.log(data);
       const io: any = new FormData();
       io.append("before_body", data.beforeTag);
       io.append("after_body", data.afterTag);
@@ -92,7 +92,11 @@ export default function GoogleAnalytics() {
           placeHolder="After Body Tag Google Analytics"
           isTextArea={true}
         />
-        <AdminCommonButton hideNextButton={true} />
+        <AdminCommonButton
+          saveBtnTitle="Save"
+          isLeft={true}
+          hideNextButton={true}
+        />
       </form>
     </FormProvider>
   );

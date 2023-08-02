@@ -1,5 +1,6 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
 import AdminAddCompanyPage from "@/components/Admin/AdminAddCompanyPage/AdminAddCompanyPage";
+import AdminAddPagesPage from "@/components/Admin/AdminAddPagesPage/AdminAddPagesPage";
 import AdminAddSocialColorPage from "@/components/Admin/AdminAddSocialColorPage/AdminAddSocialColorPage";
 import AdminAddUserReviewPage from "@/components/Admin/AdminAddUserReviewPage/AdminAddUserReviewPage";
 import AdminChangePasswordPage from "@/components/Admin/AdminChangePasswordPage/AdminChangePasswordPage";
@@ -51,13 +52,16 @@ export default function AdminDashboardLayout({ children }: any) {
       dispatch(setRouteIsChanged(true));
     } else if (modifiedLink === "addsocialcolors") {
       dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "addsocialcolors" })
+        setSelectedObj({ selectedIndex: 2, selectedTitle: "addsocialcolors" })
       );
       dispatch(setRouteIsChanged(true));
     } else if (modifiedLink === "adduserreview") {
       dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "adduserreview" })
+        setSelectedObj({ selectedIndex: 4, selectedTitle: "adduserreview" })
       );
+      dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "addpages") {
+      dispatch(setSelectedObj({ selectedIndex: 3, selectedTitle: "addpages" }));
       dispatch(setRouteIsChanged(true));
     } else if (modifiedLink === "addcompany") {
       dispatch(
@@ -105,6 +109,9 @@ export default function AdminDashboardLayout({ children }: any) {
           break;
         case "addcompany":
           setDashboardContent(<AdminAddCompanyPage />);
+          break;
+        case "addpages":
+          setDashboardContent(<AdminAddPagesPage />);
           break;
         case "companylist":
           setDashboardContent(<AdminCompanyPage />);

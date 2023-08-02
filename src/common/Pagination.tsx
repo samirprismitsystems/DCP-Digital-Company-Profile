@@ -36,7 +36,7 @@ export default function Pagination({
           <div className="inline-flex">
             <button
               onClick={onPrevChange}
-              className="py-8 px-8 flex items-center justify-center h-8 text-3xl font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="py-8 px-8 flex items-center justify-center h-8 text-3xl font-medium text-white bg-gray-800 rounded-bl-xl rounded-tl-xl hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
                 className="w-7 h-7 text-3xl mr-2"
@@ -57,7 +57,7 @@ export default function Pagination({
             </button>
             <button
               onClick={onNextChange}
-              className="flex items-center justify-center h-8 text-3xl font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white py-8 px-8"
+              className="flex items-center justify-center h-8 text-3xl font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-br-xl rounded-tr-xl hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white py-8 px-8"
             >
               Next
               <svg

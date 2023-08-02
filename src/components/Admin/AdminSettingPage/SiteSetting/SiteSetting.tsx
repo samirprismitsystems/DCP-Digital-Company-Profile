@@ -167,11 +167,11 @@ export default function SiteSetting() {
               placeHolder="Enter The LinkedIn URL"
             />
           </div>
-          <div className="w-full flex justify-end">
-            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
-              <AdminCommonButton hideNextButton={true} />
-            </div>
-          </div>
+          <AdminCommonButton
+            saveBtnTitle="Save"
+            isLeft={true}
+            hideNextButton={true}
+          />
         </div>
       </form>
     </FormProvider>
