@@ -70,7 +70,7 @@ export default function AdminCommonButton({
               } font-medium text-center text-3xl hover:text-white ${
                 hideNextButton
                   ? !isLeft
-                    ? "xs:w-full sm:w-[80%] lg:w-[80%]"
+                    ? "xs:w-full sm:w-[80%] lg:w-[100%]"
                     : "xs:w-[28%] sm:w-[20%] md:w-[30%] lg:w-[50%] w-9/12"
                   : "w-full"
               } text-primary-light bg-primary-main  hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]`}

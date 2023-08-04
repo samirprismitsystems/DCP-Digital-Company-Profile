@@ -75,7 +75,7 @@ export default function LandingPageTemplate() {
   return (
     <>
       <ul
-        className={`tabs text-base pt-4 list-none  m-0 flex border-b border-solid border-secondary-main`}
+        className={`tabs text-base pt-4 list-none  m-0 flex border-b border-solid border-secondary-main flex-wrap`}
       >
         {templateTabList.map((tab, index) => (
           <li

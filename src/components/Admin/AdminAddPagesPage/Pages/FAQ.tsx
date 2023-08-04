@@ -28,7 +28,7 @@ export default function FAQs() {
       <TemplateImageUploader savePath="faqImage" title="Upload FAQ Image" />
       <h3 className="pb-6">Accordion</h3>
       {fields.map((item, index) => (
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6">
           <TextField
             name={`faq_data.${index}.faqtitle`}
             title="Title"

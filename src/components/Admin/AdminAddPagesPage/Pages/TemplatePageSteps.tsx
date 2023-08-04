@@ -13,13 +13,13 @@ export default function TemplatePageSteps() {
   return (
     <>
       {fields.map((item, index) => (
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6">
           <TextField
             name={`steps.${index}.stepstitle`}
             title="Title"
             placeHolder="Enter Step Title"
           />
-          <div className="flex flex-wrap w-full justify-start items-center">
+          <div className="xs:flex sm:flex-wrap w-full justify-start items-center">
             <TextField
               name={`steps.${index}.stepsdesc`}
               isRequired={true}
