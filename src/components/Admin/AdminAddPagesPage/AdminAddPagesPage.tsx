@@ -28,6 +28,12 @@ export default function AdminAddPagesPage() {
           featurelogo: "",
         },
       ],
+      faq_data: [
+        {
+          faqtitle: "",
+          faqdesc: "",
+        },
+      ],
     },
   });
   const dispatch = useDispatch();
@@ -66,7 +72,63 @@ export default function AdminAddPagesPage() {
       }
 
       if (parseInt(data.selectedOption) === 3) {
-        console.log("333333", data);
+        const io: any = new FormData();
+
+        io.append("page_slug", Utils.getPageSlug(data.pageTitle));
+        io.append("page_name", Utils.getPageSlug(data.pageName));
+        io.append("template_name", "landingpage_template");
+        io.append("meta_title", data.metaTitle);
+        io.append("meta_description", data.metaDesc);
+        io.append("meta_image", data.metaImage);
+        io.append("hometitle", data.homeTitle);
+        io.append("homesubtitle", data.homeSubTitle);
+        io.append("homedesc", data.homeDesc);
+        io.append("homeimg", data.homeImage);
+        io.append("homebtntitle", data.homeBtnTitle);
+        io.append("steps", JSON.stringify(data.steps));
+        io.append("cardtitle1", data.cardTitle1);
+        io.append("carddesc1", data.cardContent1);
+        io.append("cardimg1", data.cardImage1);
+        io.append("cardtitle2", data.cardTitle2);
+        io.append("carddesc2", data.cardContent2);
+        io.append("cardimg2", data.cardImage2);
+        io.append("featuretitle", data.featureTitle);
+        io.append("featuresubtitle", data.featureSubTitle);
+        io.append("featuredesc", data.featureDescription);
+        io.append("featurebtntitle", data.featureBtnTitle);
+        io.append("featurebtnlink", data.featureBtnLink);
+        io.append("logoandtext", JSON.stringify(data.features_data));
+        io.append("faqtitle", data.faqTitle);
+        io.append("faqdesc", data.faqDesc);
+        io.append("faqimg", data.faqImage);
+        io.append("accordian", JSON.stringify(data.faq_data));
+        io.append("fttitle", data.freeTrailTitle);
+        io.append("ftdesc", data.freeTrailDesc);
+        io.append("ftimg", data.freeTrailImage);
+        io.append("ftbtntitle", data.freeTrailBtnTitle);
+        io.append("ftbtnlink", data.freeTrailBtnLink);
+        io.append("reviewtitle", data.reviewTitle);
+        io.append("reviewsubtitle", data.reviewSubTitle);
+        io.append("reviewdesc", data.reviewDescription);
+        io.append("contacttitle", data.contactTitle);
+        io.append("contactdesc", data.contactDescription);
+        io.append("footerpages", data.contactDescription);
+        
+        const res = await ApiService.createCompanyPage(io);
+        // if (!res.error) {
+        //   Utils.showSuccessMessage(res.message);
+        //   dispatch(
+        //     setSelectedObj({
+        //       selectedIndex: 3,
+        //       selectedTitle: "pages",
+        //     })
+        //   );
+        //   dispatch(setRouteIsChanged(true));
+        //   window.history.replaceState("pages", "", `/admindashboard/pages`);
+        //   return null;
+        // }
+
+        // throw new Error(res.message);
       }
 
       objForm.reset();

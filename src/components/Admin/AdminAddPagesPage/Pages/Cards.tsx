@@ -12,7 +12,7 @@ export default function Cards() {
       <TextField
         name={"cardTitle1"}
         isRequired={true}
-        title="Card Title"
+        title="Title"
         placeHolder="Enter Card Title"
       />
       <TemplateImageUploader savePath="cardImage1" title="Upload Card Image" />
@@ -22,7 +22,7 @@ export default function Cards() {
       <TextField
         name={"cardTitle2"}
         isRequired={true}
-        title="Card Title"
+        title="Title"
         placeHolder="Enter Card Title"
       />
       <TemplateImageUploader savePath="cardImage2" title="Upload Card Image" />

@@ -8,10 +8,10 @@ export default function Home() {
         name="homeTitle"
         isRequired={true}
         placeHolder="Enter Home Title"
-        title="Home Title"
+        title="Title"
       />
       <TextField
-        name="subTitle"
+        name="homeSubTitle"
         isRequired={true}
         placeHolder="Enter Home Sub Title"
         title="Sub Title"
@@ -25,16 +25,16 @@ export default function Home() {
       />
       <TemplateImageUploader
         title="Upload Main Image File"
-        savePath="homeMainImage"
+        savePath="homeImage"
       />
       <TextField
-        name="btnTitle"
+        name="homeBtnTitle"
         isRequired={true}
         placeHolder="Enter Button Title"
         title="Button Title"
       />
       <TextField
-        name="btnLink"
+        name="homeBtnLink"
         isRequired={true}
         placeHolder="Enter Button Link"
         title="Button Link"

@@ -1,3 +1,4 @@
+import AddMore from "@/common/AddMore";
 import AdminCommonButton from "@/common/AdminCommonButton";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
@@ -243,22 +244,15 @@ export default function AdminThemeItem() {
             );
           })}
         </div>
-        <div className="flex w-full xs:flex-wrap sm:flex-nowrap space-x-6">
-          <button
-            className="add_btn cursor-pointer  bg-white text-black rounded-xl sm:min-w-[15rem] xs:min-w-full font-semibold py-5 px-9 text-3xl text-center mb-16 capitalize border-solid border-[1px] border-primary-light"
-            type="button"
-            style={{
-              transition: "all 0.3s linear",
-            }}
-            onClick={() =>
+        <div className="flex w-full xs:flex-wrap sm:flex-nowrap sm:space-x-6">
+          <AddMore
+            onClick={() => {
               append({
                 theme_name: "",
                 theme_image: "",
-              })
-            }
-          >
-            Add More
-          </button>
+              });
+            }}
+          />
           <AdminCommonButton />
         </div>
       </form>

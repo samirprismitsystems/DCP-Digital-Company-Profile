@@ -16,7 +16,7 @@ export default function TemplateFeatures() {
         name="featureTitle"
         isRequired={true}
         placeHolder="Enter Feature Title"
-        title={"Feature Title"}
+        title={"Title"}
         type="text"
       />
       <TextField
@@ -50,14 +50,14 @@ export default function TemplateFeatures() {
         <div className="grid grid-cols-2 gap-6">
           <TextField
             name={`features_data.${index}.featuretext`}
-            title="Feature Text"
+            title="Text"
             placeHolder="Enter Feature Text"
           />
           <div className="grid gap-6 grid-cols-2">
             <TextField
               name={`features_data.${index}.featurelogo`}
               isRequired={true}
-              title="Feature Logo"
+              title="Logo"
               placeHolder="Enter Feature Logo"
             />
             <div>
@@ -70,9 +70,9 @@ export default function TemplateFeatures() {
           </div>
         </div>
       ))}
-
+      
       <AddMore
-        onChange={() => {
+        onClick={() => {
           append({
             featuretext: "",
             featurelogo: "",
