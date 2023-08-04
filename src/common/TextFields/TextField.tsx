@@ -8,6 +8,7 @@ interface ITextField {
   isTextArea?: boolean;
   isRequired?: boolean;
   placeHolder?: string;
+  rows?: number;
 }
 
 export default function TextField(props: ITextField) {
@@ -36,7 +37,7 @@ export default function TextField(props: ITextField) {
         /> */}
         {props.isTextArea ? (
           <textarea
-            rows={5}
+            rows={props.rows ? props.rows : 5}
             required={props.isRequired}
             className="w-full h-auto text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
             placeholder={props.placeHolder ? props.placeHolder : ""}

@@ -10,10 +10,10 @@ export default function RHFImageUploader({
   folderPath,
   isIDNotAvailable,
 }: {
-  srcPath: any;
+  srcPath?: any;
   savePath: string;
   label: string;
-  folderPath: string;
+  folderPath?: string;
   isIDNotAvailable?: boolean;
 }) {
   const objForm = useFormContext();

@@ -59,6 +59,10 @@ class Utils {
   static getItem(key: string) {
     if (typeof window !== "undefined") {
       const res = JSON.parse(localStorage.getItem(key) || "{}");
+      if (typeof res === "object" && Object.keys(res).length === 0) {
+        return null;
+      }
+
       return res;
     }
 
@@ -93,6 +97,20 @@ class Utils {
 
   static removeLSItem(name: string) {
     localStorage.removeItem(name);
+  }
+
+  static getPageSlug(name: string) {
+    let slug = name.replace(/[^a-zA-Z ]/g, "");
+    if (slug) {
+      let company_slug = slug
+        ?.replace(" ", "-")
+        .replace(/\s+/g, "")
+        .toLowerCase();
+
+      return company_slug;
+    }
+
+    return null;
   }
 }
 

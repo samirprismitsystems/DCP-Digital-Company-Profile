@@ -395,6 +395,11 @@ const ApiService = {
     const res = await axios.post(`${BASE_URI}api/user/addreview`, io);
     return res.data;
   },
+
+  async createCompanyPage(io: any) {
+    const res = await axios.post(`${BASE_URI}api/pages/createpage`, io);
+    return res.data;
+  },
 };
 
 export default ApiService;
