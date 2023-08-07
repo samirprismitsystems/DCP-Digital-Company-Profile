@@ -60,7 +60,7 @@ export default function FaqsList(props: IFaqsListProps) {
               transition: "max-height 0.7s ease-out",
             }}
           >
-            <p className={`text-[1.8rem]`}>{props.desc}</p>
+            <p className={`text-[1.8rem] text-white`}>{props.desc}</p>
           </div>
         </div>
       </div>

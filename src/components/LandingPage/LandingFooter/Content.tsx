@@ -12,17 +12,19 @@ import { LandingPageContextApi } from "../LandingPage";
 export default function Content() {
   const result = useContext(LandingPageContextApi);
   const data = result.pageDetails;
-
-  console.log(data)
   return (
     <section className="container xs:pt-24 pt-16 pb-16">
       <div className="row ">
         <MainScrollAnimation>
           <div className="text-center  font-bold font-600">
             <div className="text-[4.6rem]">
-              <Link href="#!">DCP</Link>
+              <Link href="/" className="text-white">
+                DCP
+              </Link>
             </div>
-            <h4 className="text-[2.2rem] font-600 ">Digital Company Profile</h4>
+            <h4 className="text-[2.2rem] font-600   text-white">
+              Digital Company Profile
+            </h4>
           </div>
           <div className="w-2/5 md:w-1/4 m-auto xs:pt-12 pt-16">
             <ul className="flex lg:justify-center sm:justify-evenly xs:justify-between items-center md:space-x-8">
@@ -53,7 +55,7 @@ export default function Content() {
               <li className="text-[1.8rem] font-400">
                 <Link
                   href="#!"
-                  className="hover:text-primary-light font-medium "
+                  className="hover:text-primary-light text-white font-medium "
                 >
                   PRIVACY
                 </Link>
@@ -61,7 +63,7 @@ export default function Content() {
               <li className="text-[1.8rem] font-400">
                 <Link
                   href="#!"
-                  className="hover:text-primary-light font-medium "
+                  className="hover:text-primary-light text-white font-medium "
                 >
                   COOKIE POLICY
                 </Link>
@@ -69,7 +71,7 @@ export default function Content() {
               <li className="text-[1.8rem] font-400">
                 <Link
                   href="#!"
-                  className="hover:text-primary-light font-medium "
+                  className="hover:text-primary-light text-white font-medium "
                 >
                   TERMS OF SERVICE{" "}
                 </Link>

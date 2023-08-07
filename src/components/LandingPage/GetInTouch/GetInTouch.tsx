@@ -56,7 +56,7 @@ export default function GetInTouch() {
             <h3 className="text-center text-[3.0rem] font-600 font-bold text-white">
               {data.contacttitle}
             </h3>
-            <p className="text-center pt-6 text-[1.8rem] md:pb-16">
+            <p className="text-center text-white pt-6 text-[1.8rem] md:pb-16">
               {data.contactdesc}
             </p>
           </div>

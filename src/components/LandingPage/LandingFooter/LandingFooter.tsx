@@ -11,7 +11,7 @@ export default function LandingFooter() {
         }}
       >
         <div className="col-md-6 col-sm-12  left-col md:w-[50%]">
-          <p className="xs:mb-2">
+          <p className="xs:mb-2  text-white">
             Copyright @2021{" "}
             <a href="/" className="text-primary-lightDark">
               Digital Company Profile

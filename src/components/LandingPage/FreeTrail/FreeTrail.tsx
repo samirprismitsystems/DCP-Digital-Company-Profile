@@ -1,4 +1,3 @@
-import MainScrollAnimation from "@/common/MainScrollAnimation";
 import Link from "next/link";
 import { useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";
@@ -23,7 +22,7 @@ export default function FreeTrail() {
           {data.ftdesc}
         </p>
         <Link
-          href="#"
+          href={data.ftbtnlink}
           className="mt-4 first-letter text-xl btnHoverEffect text-white  text-center px-12 py-6"
         >
           <button
@@ -32,7 +31,7 @@ export default function FreeTrail() {
               fontFamily: "GothamRoundedBook",
             }}
           >
-            {data.ftbtnlink}
+            Start Now
           </button>
         </Link>
       </div>

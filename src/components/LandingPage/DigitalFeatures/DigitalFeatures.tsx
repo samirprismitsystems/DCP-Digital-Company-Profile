@@ -72,7 +72,9 @@ export default function DigitalFeatures() {
                       >
                         <FeatureCards logoText={item.featurelogo} />
                       </div>
-                      <h1 className="text-[1.5rem] text-white pt-4 font-normal">{item.featuretext}</h1>
+                      <h1 className="text-[1.5rem] text-white pt-4 font-normal">
+                        {item.featuretext}
+                      </h1>
                     </div>
                   );
                 })}
