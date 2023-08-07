@@ -54,7 +54,9 @@ export default function DashboardCommonButtons({
               className={`py-4 ${
                 hideNextButton && "px-8"
               } font-medium text-center text-3xl hover:text-white ${
-                hideNextButton ? "w-9/12" : "w-full"
+                hideNextButton
+                  ? "xs:w-[70%] sm:w-[40%] lg:w-[70%] xl:w-[60%]"
+                  : "w-full"
               } text-primary-light bg-primary-main  hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]`}
             >
               Save Changes

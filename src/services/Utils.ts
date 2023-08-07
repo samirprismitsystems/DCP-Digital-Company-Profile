@@ -99,7 +99,7 @@ class Utils {
     localStorage.removeItem(name);
   }
 
-  static getPageSlug(name: string) {
+  static generatePageSlug(name: string) {
     let slug = name.replace(/[^a-zA-Z ]/g, "");
     if (slug) {
       let company_slug = slug

@@ -48,11 +48,7 @@ export default function ThemesPage() {
               }}
             />
           </div>
-          <div className="w-full flex justify-end">
-            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
-              <DashboardCommonButtons hideNextButton={true} />
-            </div>
-          </div>
+            <DashboardCommonButtons hideNextButton={true} />
         </form>
       </div>
     </>

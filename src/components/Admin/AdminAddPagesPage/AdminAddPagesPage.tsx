@@ -54,7 +54,7 @@ export default function AdminAddPagesPage() {
     try {
       if (parseInt(data.selectedOption) === 1) {
         const io: any = new FormData();
-        io.append("page_slug", Utils.getPageSlug(data.pageTitle));
+        io.append("page_slug", Utils.generatePageSlug(data.pageTitle));
         io.append("isupdate", false);
         io.append("template_name", "default_template");
         io.append("page_name", data.pageTitle);
@@ -87,7 +87,7 @@ export default function AdminAddPagesPage() {
       if (parseInt(data.selectedOption) === 3) {
         const io: any = new FormData();
 
-        io.append("page_slug", Utils.getPageSlug(data.pageName));
+        io.append("page_slug", Utils.generatePageSlug(data.pageName));
         io.append("page_name", data.pageName);
         io.append("template_name", "landingpage_template");
         io.append("meta_title", data.metaTitle);

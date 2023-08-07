@@ -1,19 +1,25 @@
 import Utils from "@/services/Utils";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
+import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { INavigationMenu } from "@/types/commonTypes";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function MobileNavbar({
   isOpen,
   toggle,
   lstNavigations,
+  redirectPath,
 }: {
   isOpen: boolean;
+  redirectPath?: string;
   lstNavigations: any;
   toggle: () => void;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -57,6 +63,33 @@ export default function MobileNavbar({
 
                             if (item.isNavigate) {
                               router.push(`${item.link}`);
+                            }
+
+                            if (item.isNewTab) {
+                              if (typeof window !== "undefined") {
+                                window.open(item.link);
+                              }
+                            }
+
+                            if (item.isUseIndex) {
+                              dispatch(
+                                setSelectedObj({
+                                  selectedIndex: 0,
+                                  selectedTitle: "profile",
+                                })
+                              );
+                              window.history.replaceState(
+                                `/${redirectPath}/profile`,
+                                "",
+                                `/${redirectPath}/profile`
+                              );
+                              dispatch(setRouteIsChanged(true));
+                            }
+
+                            if (item.isLogout) {
+                              Utils.clearStorage();
+                              router.push("/login");
+                              return null;
                             }
 
                             setSelectedIndex(item.id);

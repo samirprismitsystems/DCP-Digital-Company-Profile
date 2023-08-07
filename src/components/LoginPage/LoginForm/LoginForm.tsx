@@ -54,16 +54,17 @@ export default function LoginForm() {
           loadCompanyPageDetails();
 
           if (userData.type === USER_TYPE.ADMIN) {
+            Utils.showSuccessMessage("Admin Login Successfully");
             router.push("/admindashboard");
             return null;
           }
 
           if (userData.type === USER_TYPE.USER) {
+            Utils.showSuccessMessage("User Login Successfully");
             router.push("/dashboard");
             return null;
           }
 
-          Utils.showSuccessMessage("User Login Successfully");
           return null;
         }
       }

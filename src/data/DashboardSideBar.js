@@ -1,3 +1,6 @@
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
+
 export const lstDashboardPanels = [
   {
     id: 1,
@@ -97,5 +100,26 @@ export const lstAdminDashboardPanels = [
     name: "Setting",
     icon: "/assets/setting.webp",
     link: "setting",
+  },
+];
+
+export const lstUserResponsiveNavbar = [
+  {
+    id: 1,
+    name: "Visit Site",
+    link: `/${Utils.getItem("slug")}`,
+    isNewTab: true,
+  },
+  {
+    id: 2,
+    name: `Hi, ${AuthService.getUserName() || "N/A"}`,
+    link: `profile`,
+    isUseIndex: true,
+  },
+  {
+    id: 3,
+    name: "Logout",
+    isLogout: true,
+    link: "/login",
   },
 ];

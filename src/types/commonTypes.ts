@@ -13,6 +13,9 @@ export interface INavigationMenu {
   link: string;
   isNavigate?: boolean;
   target?: boolean;
+  isNewTab?: boolean;
+  isUseIndex?: boolean;
+  isLogout?: boolean;
 }
 
 export interface ILoginScreenPrivacyPolicy {

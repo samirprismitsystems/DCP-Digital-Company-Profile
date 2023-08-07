@@ -1,19 +1,18 @@
 import { lstDashboardNavigationMenu } from "@/data/NavigationMenu";
 import Utils from "@/services/Utils";
-import { useAppSelector } from "@/services/store/hooks/hooks";
-import { RootState } from "@/services/store/store";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
+import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { INavigationMenu } from "@/types/commonTypes";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 export default function DashboardNavigationMenu() {
-  const websiteSlug = useAppSelector(
-    (state: RootState) => state.dashboard.websiteSlug
-  );
-
   const router = useRouter();
+  const dispatch = useDispatch();
+  
   return (
     <>
-      <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+      <div className="w-full md:w-auto" id="navbar-default">
         <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
           {lstDashboardNavigationMenu &&
             lstDashboardNavigationMenu.map(
@@ -26,7 +25,18 @@ export default function DashboardNavigationMenu() {
                     if (item.target) {
                       window.open(`/${Utils.getItem("slug")}`, "_blank");
                     } else {
-                      router.push(item.link);
+                      dispatch(
+                        setSelectedObj({
+                          selectedIndex: 0,
+                          selectedTitle: "profile",
+                        })
+                      );
+                      dispatch(setRouteIsChanged(true));
+                      window.history.replaceState(
+                        "proile",
+                        "",
+                        `/dashboard/profile`
+                      );
                     }
                   }}
                 >

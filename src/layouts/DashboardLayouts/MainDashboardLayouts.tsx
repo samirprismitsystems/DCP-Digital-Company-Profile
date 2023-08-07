@@ -12,9 +12,12 @@ import ServicePage from "@/components/ServicePage/ServicePage";
 import SocialLinksPage from "@/components/SocialLinksPage/SocialLinksPage";
 import TestimonialPage from "@/components/TestimonialPage/TestimonialPage";
 import ThemesPage from "@/components/ThemesPage/ThemesPage";
+import UserChangePasswordPage from "@/components/UserChangePasswordPage/UserChangePasswordPage";
+import UserProfilePage from "@/components/UserProfilePage/UserProfilePage";
 import { lstDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import Head from "next/head";
@@ -23,7 +26,11 @@ import { ReactNode, useEffect, useState } from "react";
 
 export default function MainDashboardLayouts({ children }: any) {
   const dispatch = useAppDispatch();
-  const [routeIsChanged, setRouteIsChanged] = useState(false);
+  // const [routeIsChanged, setRouteIsChanged] = useState(false);
+  const routeIsChanged = useAppSelector(
+    (s: RootState) => s.common.routeIsChanged
+  );
+
   const [dashboardContent, setDashboardContent] = useState<
     ReactNode | null | undefined
   >(null);
@@ -38,7 +45,15 @@ export default function MainDashboardLayouts({ children }: any) {
       dispatch(
         setSelectedObj({ selectedIndex: 0, selectedTitle: "dashboard" })
       );
-      setRouteIsChanged(true);
+      dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "profile") {
+      dispatch(setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" }));
+      dispatch(setRouteIsChanged(true));
+    } else if (modifiedLink === "changepassword") {
+      dispatch(
+        setSelectedObj({ selectedIndex: 0, selectedTitle: "changepassword" })
+      );
+      dispatch(setRouteIsChanged(true));
     } else {
       const selectedItem = lstDashboardPanels.find(
         (item) => item.link === modifiedLink
@@ -62,6 +77,12 @@ export default function MainDashboardLayouts({ children }: any) {
           break;
         case "sociallinks":
           setDashboardContent(<SocialLinksPage />);
+          break;
+        case "profile":
+          setDashboardContent(<UserProfilePage />);
+          break;
+        case "changepassword":
+          setDashboardContent(<UserChangePasswordPage />);
           break;
         case "product":
           setDashboardContent(<ProductPage />);
@@ -92,7 +113,7 @@ export default function MainDashboardLayouts({ children }: any) {
           setDashboardContent(undefined);
           break;
       }
-      setRouteIsChanged(false);
+      dispatch(setRouteIsChanged(false));
     }
   }, [routeIsChanged, selectedIndex]);
 
@@ -108,7 +129,7 @@ export default function MainDashboardLayouts({ children }: any) {
             "Digital Company Profile"}
         </title>
       </Head>
-      <DashboardNavbar toggleContent={setRouteIsChanged} />
+      <DashboardNavbar />
       <section className="main">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">

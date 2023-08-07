@@ -1,3 +1,4 @@
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 
 export const landingPageNavigationMenuList = [
@@ -24,6 +25,21 @@ export const loginPageNavigationMenuList = [
     name: "Home",
     link: "/",
     isNavigate: true,
+  },
+];
+
+export const lstAdminResNavbar = [
+  {
+    id: 0,
+    name: `Hi, ${AuthService.getUserName() || "N/A"}`,
+    link: "profile",
+    isUseIndex: true,
+  },
+  {
+    id: 1,
+    name: `Logout`,
+    isLogout: true,
+    link: "/login",
   },
 ];
 
@@ -54,7 +70,7 @@ export const lstDashboardNavigationMenu = [
   },
   {
     id: 1,
-    name: "Hi, Zaid",
-    link: "#",
+    name: `Hi, ${AuthService.getUserName() || "N/A"}`,
+    link: "profile",
   },
 ];

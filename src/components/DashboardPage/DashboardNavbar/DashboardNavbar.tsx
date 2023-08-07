@@ -1,13 +1,13 @@
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
-import { loginPageNavigationMenuList } from "@/data/NavigationMenu";
+import { lstUserResponsiveNavbar } from "@/data/DashboardSideBar";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { useState } from "react";
 import DashboardNavigationMenu from "./DashboardNavigationMenu";
+import ResponsiveNavbar from "./ResponsiveNavbar";
 
-export default function DashboardNavbar(props: {
-  toggleContent: (isChanged: boolean) => void;
-}) {
+export default function DashboardNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -20,9 +20,10 @@ export default function DashboardNavbar(props: {
       className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
-        lstNavigations={loginPageNavigationMenuList}
+        lstNavigations={lstUserResponsiveNavbar}
         toggle={toggle}
         isOpen={isOpen}
+        redirectPath="dashboard"
       />
       <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
         <button
@@ -36,14 +37,19 @@ export default function DashboardNavbar(props: {
               })
             );
             window.history.replaceState("", "", `/dashboard`);
-            props.toggleContent(true);
+            dispatch(setRouteIsChanged(true));
           }}
         >
           <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
             DCP
           </h1>
         </button>
-        <DashboardNavigationMenu />
+        <div className="hidden md:block">
+          <DashboardNavigationMenu />
+        </div>
+        <div className="block md:hidden">
+          <ResponsiveNavbar toggle={toggle} />
+        </div>
       </div>
     </nav>
   );

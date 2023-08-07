@@ -24,6 +24,15 @@ class AuthService {
     return true;
   }
 
+  static getUserName() {
+    const userName = Utils.getItem("userName");
+    if (userName) {
+      return userName;
+    }
+
+    return null;
+  }
+
   static isUserLoggedIn() {
     const res = Utils.getItem("isUserLoggedIn");
     if (res && typeof res === "boolean") {
