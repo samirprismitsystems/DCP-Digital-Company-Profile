@@ -7,10 +7,11 @@ import { useRouter } from "next/router";
 export default function LoginPage() {
   const router = useRouter();
   useEffect(() => {
-    router.replace("/login");
+    if (typeof window !== "undefined") {
+      router.replace("/login");
+    }
   }, []);
 
-  
   return (
     <>
       <LoginNavbar />
@@ -31,7 +32,7 @@ export default function LoginPage() {
             </picture>
             <span
               style={{
-                textShadow: "0 0 15px rgba(0, 0, 0, 1);",
+                textShadow: "0 0 15px rgba(0, 0, 0, 1)",
               }}
               className="text-[7rem] xs:text-[6rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-64 xs:top-52  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
             >

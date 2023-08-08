@@ -147,7 +147,9 @@ export default function AdminDashboardLayout({ children }: any) {
   }, [routeIsChanged, selectedIndex]);
 
   useEffect(() => {
-    loadData();
+    if (typeof window !== "undefined") {
+      loadData();
+    }
   }, []);
 
   return (

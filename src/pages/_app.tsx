@@ -7,17 +7,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import React from "react";
 
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <React.StrictMode>
       <Provider store={store}>
         <div className="absolute z-[99999]">
           <ToastContainer />
         </div>
         <Component {...pageProps} />
       </Provider>
-    </>
+    </React.StrictMode>
   );
 }

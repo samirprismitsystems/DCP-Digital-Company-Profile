@@ -7,12 +7,10 @@ export default function MainScrollAnimation(props: any) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (typeof window !== "undefined") {
-        const currentPosition = window.pageYOffset;
+      const currentPosition = window.pageYOffset;
 
-        setScrollDirection(currentPosition > scrollPosition ? "down" : "up");
-        setScrollPosition(currentPosition);
-      }
+      setScrollDirection(currentPosition > scrollPosition ? "down" : "up");
+      setScrollPosition(currentPosition);
     };
 
     if (typeof window !== "undefined") {

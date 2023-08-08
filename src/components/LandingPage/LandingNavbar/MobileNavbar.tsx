@@ -28,11 +28,13 @@ export default function MobileNavbar({
           toggle();
         }
       };
-
-      document.addEventListener("keydown", handleEscapeKey);
-
+      if (typeof window !== "undefined") {
+        document.addEventListener("keydown", handleEscapeKey);
+      }
       return () => {
-        document.removeEventListener("keydown", handleEscapeKey);
+        if (typeof window !== "undefined") {
+          document.removeEventListener("keydown", handleEscapeKey);
+        }
       };
     }
   }, [isOpen, toggle]);

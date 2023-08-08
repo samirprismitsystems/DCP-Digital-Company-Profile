@@ -42,9 +42,9 @@ export default function DashboardNavbar() {
             }
           }}
         >
-          <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
+          <span className="self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
             DCP
-          </h1>
+          </span>
         </button>
 
         <div className="hidden md:block">

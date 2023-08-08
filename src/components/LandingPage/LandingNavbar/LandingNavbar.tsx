@@ -15,10 +15,8 @@ export default function LandingNavbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (typeof window !== "undefined") {
-        if (window.scrollY <= 70) {
-          setScrollY(window.scrollY);
-        }
+      if (window.scrollY <= 70) {
+        setScrollY(window.scrollY);
       }
     };
 
