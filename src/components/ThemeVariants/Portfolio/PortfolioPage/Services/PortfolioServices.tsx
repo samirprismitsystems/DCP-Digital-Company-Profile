@@ -20,7 +20,7 @@ export default function PortfolioServices() {
   };
 
   return (
-    <div className="service-block">
+    <div className="service-block" id="services">
       <GetHeader title="Services" />
       <div className="pt-8 pb-16">
         <Slider {...configuration}>

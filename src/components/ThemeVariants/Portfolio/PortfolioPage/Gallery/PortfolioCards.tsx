@@ -10,6 +10,7 @@ export default function PortfolioCards({ path, id }: any) {
             height="335"
             alt="gallery-img"
             title="gallery-img"
+            id="upload-image"
             className="w-full max-w-full h-auto align-middle"
             src={`${UPLOAD_IMAGE_URI}/${id}/portfolio/${path}`}
           />

@@ -20,7 +20,7 @@ export default function PortfolioProducts() {
   };
 
   return (
-    <div className="product-block ">
+    <div className="product-block">
       <GetHeader title="Products" />
       <div className="pt-8 pb-16">
         <Slider {...configuration}>

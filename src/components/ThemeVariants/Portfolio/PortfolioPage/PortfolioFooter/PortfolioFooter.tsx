@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lstPortfolioFooter } from "../../data/data";
 export default function PortfolioFooter() {
@@ -15,6 +16,10 @@ export default function PortfolioFooter() {
           style={{
             transition: "all .3s linear",
             textDecoration: "none",
+          }}
+          onClick={() => {
+            Utils.scrollToView(item.link);
+            return null;
           }}
         >
           <FontAwesomeIcon

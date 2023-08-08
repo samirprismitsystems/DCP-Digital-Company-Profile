@@ -18,7 +18,7 @@ export default function PortfolioGallery() {
   };
 
   return (
-    <div className="gallery-block ">
+    <div className="gallery-block " id="gallery">
       <GetHeader title="Gallery" />
       <div className="pt-8 pb-16">
         <Slider {...configuration}>

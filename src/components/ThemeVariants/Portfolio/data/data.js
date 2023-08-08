@@ -8,19 +8,19 @@ import { faArrowCircleUp, faCogs } from "@fortawesome/free-solid-svg-icons";
 export const lstPortfolioFooter = [
   {
     name: "Back To Top",
-    link: "#back",
+    link: "#profile",
     color: "text-black",
     icon: faArrowCircleUp,
   },
   {
     name: "About Us",
-    link: "#about",
+    link: "#aboutus",
     color: "text-portfolioTheme-primary",
     icon: faUserCircle,
   },
   {
     name: "Gallery",
-    link: "#portfolio",
+    link: "#gallery",
     color: "text-portfolioTheme-primary",
     icon: faImages,
   },

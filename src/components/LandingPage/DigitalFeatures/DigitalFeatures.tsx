@@ -1,9 +1,9 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
+import { ILandingPageDetails } from "@/types/landingPageType";
 import Link from "next/link";
 import { ReactNode, useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";
 import FeatureCards from "./FeatureCards";
-import { ILandingPageDetails } from "@/types/landingPageType";
 
 interface IFeature {
   featurelogo: string;
@@ -59,7 +59,6 @@ export default function DigitalFeatures() {
             <div className="text-white rounded-lg md:ml-auto mt-10 md:mt-0 grid grid-cols-3">
               {lstFeatures &&
                 lstFeatures.map((item: IFeature, index: number) => {
-                  console.log(item.featurelogo)
                   return (
                     <div
                       key={index}

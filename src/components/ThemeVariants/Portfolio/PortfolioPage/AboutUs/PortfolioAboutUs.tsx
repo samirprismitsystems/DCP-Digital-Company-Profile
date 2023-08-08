@@ -7,7 +7,7 @@ export default function PortfolioAboutUs() {
   const objCompany = useContext(PortfolioContextApi).company;
 
   return (
-    <div className="about-block ">
+    <div className="about-block" id="aboutus">
       <GetHeader title="About" />
       <div className="pt-8">
         <p className="text-[2rem] c-text text-portfolioTheme-textColor">
