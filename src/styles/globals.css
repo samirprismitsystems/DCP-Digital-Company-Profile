@@ -411,10 +411,16 @@ html {
   .container {
     max-width: 100%;
   }
+  .container-portfolio {
+    max-width: 100%;
+  }
 }
 
 @media (min-width: 768px) {
   .container {
+    max-width: 720px;
+  }
+  .container-portfolio {
     max-width: 720px;
   }
 }
@@ -423,10 +429,16 @@ html {
   .container {
     max-width: 960px;
   }
+  .container-portfolio {
+    max-width: 960px;
+  }
 }
 
 @media (min-width: 1200px) {
   .container {
+    max-width: 1140px;
+  }
+  .container-portfolio {
     max-width: 1140px;
   }
 }
@@ -441,6 +453,9 @@ html {
 
 @media (min-width: 1400px) {
   .container {
+    max-width: 1320px;
+  }
+  .container-portfolio {
     max-width: 1320px;
   }
 }

@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 export default function DashboardNavigationMenu() {
   const router = useRouter();
   const dispatch = useDispatch();
-  
+
   return (
     <>
       <div className="w-full md:w-auto" id="navbar-default">
@@ -23,7 +23,9 @@ export default function DashboardNavigationMenu() {
                   onClick={(event: any) => {
                     event.preventDefault();
                     if (item.target) {
-                      window.open(`/${Utils.getItem("slug")}`, "_blank");
+                      if (typeof window !== "undefined") {
+                        window.open(`/${Utils.getItem("slug")}`, "_blank");
+                      }
                     } else {
                       dispatch(
                         setSelectedObj({
@@ -32,11 +34,13 @@ export default function DashboardNavigationMenu() {
                         })
                       );
                       dispatch(setRouteIsChanged(true));
-                      window.history.replaceState(
-                        "proile",
-                        "",
-                        `/dashboard/profile`
-                      );
+                      if (typeof window !== "undefined") {
+                        window.history.replaceState(
+                          "proile",
+                          "",
+                          `/dashboard/profile`
+                        );
+                      }
                     }
                   }}
                 >

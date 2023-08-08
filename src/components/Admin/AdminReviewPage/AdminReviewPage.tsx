@@ -9,7 +9,7 @@ import AdminReviewTable from "./AdminReviewTable";
 
 export default function AdminReviewPage() {
   const dispatch = useDispatch();
-  
+
   return (
     <>
       <AdminBackButton />
@@ -26,11 +26,13 @@ export default function AdminReviewPage() {
             })
           );
           dispatch(setRouteIsChanged(true));
-          window.history.replaceState(
-            "adduserreview",
-            "",
-            `/admindashboard/adduserreview`
-          );
+          if (typeof window !== "undefined") {
+            window.history.replaceState(
+              "adduserreview",
+              "",
+              `/admindashboard/adduserreview`
+            );
+          }
         }}
         type="button"
         className="cursor-pointer bg-[#666666] text-white  border-0 transition transition-[all 0.3s linear] rounded-xl min-w-[auto] py-5 px-8 font-normal text-2xl text-center mb-16 capitalize"

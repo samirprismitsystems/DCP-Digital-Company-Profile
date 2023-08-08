@@ -39,7 +39,9 @@ export default function AdminDashboardNavbar() {
               })
             );
             dispatch(setRouteIsChanged(true));
-            window.history.replaceState("", "", `/admindashboard`);
+            if (typeof window !== "undefined") {
+              window.history.replaceState("", "", `/admindashboard`);
+            }
           }}
         >
           <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
@@ -62,11 +64,13 @@ export default function AdminDashboardNavbar() {
                   })
                 );
                 dispatch(setRouteIsChanged(true));
-                window.history.replaceState(
-                  "proile",
-                  "",
-                  `/admindashboard/profile`
-                );
+                if (typeof window !== "undefined") {
+                  window.history.replaceState(
+                    "proile",
+                    "",
+                    `/admindashboard/profile`
+                  );
+                }
               }}
             >
               Hi, Admin

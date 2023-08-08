@@ -144,7 +144,9 @@ export default function ProfileForm() {
             })
           );
           dispatch(setRouteIsChanged(true));
-          window.history.replaceState("changepassword", "", "changepassword");
+          if (typeof window !== "undefined") {
+            window.history.replaceState("changepassword", "", "changepassword");
+          }
         }}
         type="button"
         className="inline text-black text-3xl font-semibold font-['GothamRoundedBook'] text-center capitalize transition  transition-[all 0.3s linear] flex items-center"

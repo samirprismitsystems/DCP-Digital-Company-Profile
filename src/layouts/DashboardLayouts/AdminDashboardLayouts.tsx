@@ -37,55 +37,61 @@ export default function AdminDashboardLayout({ children }: any) {
   );
 
   const loadData = () => {
-    const modifiedLink = window.location.pathname.replace(
-      /\/admindashboard\//,
-      ""
-    );
-
-    if (modifiedLink === "/admindashboard") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "admindashboard" })
-      );
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "profile") {
-      dispatch(setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" }));
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "addsocialcolors") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 2, selectedTitle: "addsocialcolors" })
-      );
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "adduserreview") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 4, selectedTitle: "adduserreview" })
-      );
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "addpages") {
-      dispatch(setSelectedObj({ selectedIndex: 3, selectedTitle: "addpages" }));
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "addcompany") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "addcompany" })
-      );
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "changepassword") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "changepassword" })
-      );
-      dispatch(setRouteIsChanged(true));
-    } else {
-      const selectedItem = lstAdminDashboardPanels.find(
-        (item) => item.link === modifiedLink
+    if (typeof window !== "undefined") {
+      const modifiedLink = window.location.pathname.replace(
+        /\/admindashboard\//,
+        ""
       );
 
-      if (selectedItem) {
-        const { id, link } = selectedItem;
-        dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+      if (modifiedLink === "/admindashboard") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "admindashboard" })
+        );
         dispatch(setRouteIsChanged(true));
-        return null;
-      }
+      } else if (modifiedLink === "profile") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "addsocialcolors") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 2, selectedTitle: "addsocialcolors" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "adduserreview") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 4, selectedTitle: "adduserreview" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "addpages") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 3, selectedTitle: "addpages" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "addcompany") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "addcompany" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "changepassword") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "changepassword" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else {
+        const selectedItem = lstAdminDashboardPanels.find(
+          (item) => item.link === modifiedLink
+        );
 
-      dispatch(setRouteIsChanged(true));
+        if (selectedItem) {
+          const { id, link } = selectedItem;
+          dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+          dispatch(setRouteIsChanged(true));
+          return null;
+        }
+
+        dispatch(setRouteIsChanged(true));
+      }
     }
   };
 
@@ -173,11 +179,13 @@ export default function AdminDashboardLayout({ children }: any) {
                             selectedTitle: item.link,
                           })
                         );
-                        window.history.replaceState(
-                          item.link,
-                          "",
-                          `/admindashboard/${item.link}`
-                        );
+                        if (typeof window !== "undefined") {
+                          window.history.replaceState(
+                            item.link,
+                            "",
+                            `/admindashboard/${item.link}`
+                          );
+                        }
                       }}
                     >
                       <div className="flex justify-center items-center">

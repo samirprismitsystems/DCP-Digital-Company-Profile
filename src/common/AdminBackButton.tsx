@@ -38,11 +38,13 @@ export default function AdminBackButton({
           })
         );
 
-        window.history.replaceState(
-          isDataValid.link,
-          "",
-          `/admindashboard/${isDataValid.link}`
-        );
+        if (typeof window !== "undefined") {
+          window.history.replaceState(
+            isDataValid.link,
+            "",
+            `/admindashboard/${isDataValid.link}`
+          );
+        }
       }
     }
 
@@ -55,11 +57,13 @@ export default function AdminBackButton({
           })
         );
         dispatch(setRouteIsChanged(true));
-        window.history.replaceState(
-          backPath,
-          "",
-          `/admindashboard/${backPath}`
-        );
+        if (typeof window !== "undefined") {
+          window.history.replaceState(
+            backPath,
+            "",
+            `/admindashboard/${backPath}`
+          );
+        }
       }
     }
   };

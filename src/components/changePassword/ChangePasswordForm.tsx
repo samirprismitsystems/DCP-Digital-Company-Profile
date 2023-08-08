@@ -118,7 +118,11 @@ export default function ChangePasswordForm() {
           placeHolder="Enter Your Confirm Password"
           type="password"
         />
-        {passWordError && <span className="text-red-600 text-2xl font-medium">{passWordError}</span>}
+        {passWordError && (
+          <span className="text-red-600 text-2xl font-medium">
+            {passWordError}
+          </span>
+        )}
         <AdminCommonButton hideNextButton={true} />
       </form>
       <button
@@ -130,7 +134,9 @@ export default function ChangePasswordForm() {
             })
           );
           dispatch(setRouteIsChanged(true));
-          window.history.replaceState("profile", "", "profile");
+          if (typeof window !== "undefined") {
+            window.history.replaceState("profile", "", "profile");
+          }
         }}
         type="button"
         className="inline text-black text-3xl font-semibold font-['GothamRoundedBook'] text-center capitalize transition  transition-[all 0.3s linear] flex items-center"

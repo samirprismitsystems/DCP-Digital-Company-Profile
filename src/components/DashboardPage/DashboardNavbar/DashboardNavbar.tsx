@@ -30,25 +30,30 @@ export default function DashboardNavbar() {
           type="button"
           className="flex items-center p-t-[.3125rem] text-[1.25rem]"
           onClick={() => {
-            dispatch(
-              setSelectedObj({
-                selectedIndex: 0,
-                selectedTitle: "dashboard",
-              })
-            );
-            window.history.replaceState("", "", `/dashboard`);
-            dispatch(setRouteIsChanged(true));
+            if (typeof window !== "undefined") {
+              dispatch(
+                setSelectedObj({
+                  selectedIndex: 0,
+                  selectedTitle: "dashboard",
+                })
+              );
+              window.history.replaceState("", "", `/dashboard`);
+              dispatch(setRouteIsChanged(true));
+            }
           }}
         >
           <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
             DCP
           </h1>
         </button>
+
         <div className="hidden md:block">
-          <DashboardNavigationMenu />
+          {typeof window !== "undefined" && <DashboardNavigationMenu />}
         </div>
         <div className="block md:hidden">
-          <ResponsiveNavbar toggle={toggle} />
+          {typeof window !== "undefined" && (
+            <ResponsiveNavbar toggle={toggle} />
+          )}
         </div>
       </div>
     </nav>

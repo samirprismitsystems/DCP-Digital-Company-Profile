@@ -33,11 +33,13 @@ export default function DashboardCommonButtons({
           selectedTitle: isDataValid.link,
         })
       );
-      window.history.replaceState(
-        isDataValid.link,
-        "",
-        `/dashboard/${isDataValid.link}`
-      );
+      if (typeof window !== "undefined") {
+        window.history.replaceState(
+          isDataValid.link,
+          "",
+          `/dashboard/${isDataValid.link}`
+        );
+      }
     }
   };
 

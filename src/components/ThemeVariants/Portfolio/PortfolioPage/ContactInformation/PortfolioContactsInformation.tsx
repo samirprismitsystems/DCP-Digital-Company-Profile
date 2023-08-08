@@ -13,7 +13,7 @@ export default function PortfolioContactsInformation() {
 
   return (
     <div
-      className="container profile-body rounded-[4rem 4rem 0 0] pt-24"
+      className="container-portfolio profile-body rounded-[4rem 4rem 0 0] pt-24"
       id="top"
     >
       <div className="container-portfolio contacts-section mt-24">

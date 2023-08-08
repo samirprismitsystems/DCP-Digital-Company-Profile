@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ScrollAnimation from "react-animate-on-scroll";
 
 export default function MainScrollAnimation(props: any) {
@@ -7,16 +7,22 @@ export default function MainScrollAnimation(props: any) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentPosition = window.pageYOffset;
+      if (typeof window !== "undefined") {
+        const currentPosition = window.pageYOffset;
 
-      setScrollDirection(currentPosition > scrollPosition ? "down" : "up");
-      setScrollPosition(currentPosition);
+        setScrollDirection(currentPosition > scrollPosition ? "down" : "up");
+        setScrollPosition(currentPosition);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+    }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleScroll);
+      }
     };
   }, [scrollPosition]);
 

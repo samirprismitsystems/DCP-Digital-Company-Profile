@@ -26,11 +26,13 @@ export default function AdminPagesPage() {
             })
           );
           dispatch(setRouteIsChanged(true));
-          window.history.replaceState(
-            "addpages",
-            "",
-            `/admindashboard/addpages`
-          );
+          if (typeof window !== "undefined") {
+            window.history.replaceState(
+              "addpages",
+              "",
+              `/admindashboard/addpages`
+            );
+          }
         }}
         type="button"
         className="cursor-pointer bg-[#666666] text-white  border-0 transition transition-[all 0.3s linear] rounded-xl min-w-[auto] py-4 px-7 font-normal text-2xl text-center mb-16 capitalize"

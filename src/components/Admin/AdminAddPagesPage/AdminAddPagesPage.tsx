@@ -75,7 +75,9 @@ export default function AdminAddPagesPage() {
             })
           );
           dispatch(setRouteIsChanged(true));
-          window.history.replaceState("pages", "", `/admindashboard/pages`);
+          if (typeof window !== "undefined") {
+            window.history.replaceState("pages", "", `/admindashboard/pages`);
+          }
           return null;
         }
 
@@ -139,14 +141,15 @@ export default function AdminAddPagesPage() {
             })
           );
           dispatch(setRouteIsChanged(true));
-          window.history.replaceState("pages", "", `/admindashboard/pages`);
+          if (typeof window !== "undefined") {
+            window.history.replaceState("pages", "", `/admindashboard/pages`);
+          }
           return null;
         }
 
         objForm.reset();
         throw new Error(res.message);
       }
-
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }

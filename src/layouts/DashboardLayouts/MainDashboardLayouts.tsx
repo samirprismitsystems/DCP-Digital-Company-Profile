@@ -40,28 +40,35 @@ export default function MainDashboardLayouts({ children }: any) {
   );
 
   const loadData = () => {
-    const modifiedLink = window.location.pathname.replace(/\/dashboard\//, "");
-    if (modifiedLink === "/dashboard") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "dashboard" })
+    if (typeof window !== "undefined") {
+      const modifiedLink = window.location.pathname.replace(
+        /\/dashboard\//,
+        ""
       );
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "profile") {
-      dispatch(setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" }));
-      dispatch(setRouteIsChanged(true));
-    } else if (modifiedLink === "changepassword") {
-      dispatch(
-        setSelectedObj({ selectedIndex: 0, selectedTitle: "changepassword" })
-      );
-      dispatch(setRouteIsChanged(true));
-    } else {
-      const selectedItem = lstDashboardPanels.find(
-        (item) => item.link === modifiedLink
-      );
+      if (modifiedLink === "/dashboard") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "dashboard" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "profile") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "profile" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else if (modifiedLink === "changepassword") {
+        dispatch(
+          setSelectedObj({ selectedIndex: 0, selectedTitle: "changepassword" })
+        );
+        dispatch(setRouteIsChanged(true));
+      } else {
+        const selectedItem = lstDashboardPanels.find(
+          (item) => item.link === modifiedLink
+        );
 
-      if (selectedItem) {
-        const { id, link } = selectedItem;
-        dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+        if (selectedItem) {
+          const { id, link } = selectedItem;
+          dispatch(setSelectedObj({ selectedIndex: id, selectedTitle: link }));
+        }
       }
     }
   };
@@ -151,11 +158,13 @@ export default function MainDashboardLayouts({ children }: any) {
                             selectedTitle: item.link,
                           })
                         );
-                        window.history.replaceState(
-                          item.link,
-                          "",
-                          `/dashboard/${item.link}`
-                        );
+                        if (typeof window !== "undefined") {
+                          window.history.replaceState(
+                            item.link,
+                            "",
+                            `/dashboard/${item.link}`
+                          );
+                        }
                       }}
                     >
                       <div className="flex justify-center items-center">

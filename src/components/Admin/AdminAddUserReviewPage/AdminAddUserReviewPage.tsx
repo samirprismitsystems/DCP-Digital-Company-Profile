@@ -30,7 +30,13 @@ export default function AdminAddUserReviewPage() {
       })
     );
     dispatch(setRouteIsChanged(true));
-    window.history.replaceState("userreview", "", `/admindashboard/userreview`);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(
+        "userreview",
+        "",
+        `/admindashboard/userreview`
+      );
+    }
   };
 
   type IFormData = yup.InferType<typeof adminUserReviewFormSchema>;

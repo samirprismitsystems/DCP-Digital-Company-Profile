@@ -15,14 +15,20 @@ export default function LandingNavbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY <= 70) {
-        setScrollY(window.scrollY);
+      if (typeof window !== "undefined") {
+        if (window.scrollY <= 70) {
+          setScrollY(window.scrollY);
+        }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+    }
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
 

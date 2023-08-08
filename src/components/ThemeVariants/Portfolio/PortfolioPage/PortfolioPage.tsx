@@ -47,7 +47,7 @@ export default function PortfolioPage() {
       <div className="container-flued-portfolio c-text bg-white">
         <PortfolioProfile />
         <PortfolioContactsInformation />
-        <div className="container">
+        <div className="container-portfolio">
           <FollowUs />
           <PortfolioAboutUs />
           <PortfolioGallery />
@@ -58,7 +58,7 @@ export default function PortfolioPage() {
           <PortfolioContactUs />
         </div>
       </div>
-      <PortfolioFooter/>
+      <PortfolioFooter />
     </PortfolioContextApi.Provider>
   );
 }

@@ -37,11 +37,13 @@ export default function AdminCommonButton({
           selectedTitle: isDataValid.link,
         })
       );
-      window.history.replaceState(
-        isDataValid.link,
-        "",
-        `/admindashboard/${isDataValid.link}`
-      );
+      if (typeof window !== "undefined") {
+        window.history.replaceState(
+          isDataValid.link,
+          "",
+          `/admindashboard/${isDataValid.link}`
+        );
+      }
     }
   };
 
