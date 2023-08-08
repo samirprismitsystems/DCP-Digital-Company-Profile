@@ -30,6 +30,13 @@ module.exports = {
         warning: {
           main: "#f27f21",
         },
+        portfolioTheme: {
+          primary: "#8d1c9a",
+          secondary: "#d40000",
+          textColor: "#666666",
+          titleColor: "#1a1a1a",
+          black: "#00000",
+        },
         inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",
         theme01: "#8d1c9a",

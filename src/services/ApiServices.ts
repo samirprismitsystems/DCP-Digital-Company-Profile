@@ -200,6 +200,14 @@ const ApiService = {
     return res.data;
   },
 
+  async createTestimonial(io: any) {
+    const res = await axios.post(
+      `${BASE_URI}api/testimonial/createtestimonial`,
+      io
+    );
+    return res.data;
+  },
+
   async activeDeactiveEnquiryStatus(io: any) {
     const res = await axios.post(
       `${BASE_URI}api/inquiry/updateinquirystatus`,

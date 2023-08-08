@@ -59,6 +59,7 @@ export default function DigitalFeatures() {
             <div className="text-white rounded-lg md:ml-auto mt-10 md:mt-0 grid grid-cols-3">
               {lstFeatures &&
                 lstFeatures.map((item: IFeature, index: number) => {
+                  console.log(item.featurelogo)
                   return (
                     <div
                       key={index}

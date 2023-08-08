@@ -15,6 +15,7 @@ import { ILandingPageData, ILandingPageDetails, IMeta } from "@/types/landingPag
 export const LandingPageContextApi = createContext<ILandingPageData>(
   {} as ILandingPageData
 );
+
 export default function LandingPage() {
   const [metaData, setMetaData] = useState<IMeta>({} as IMeta);
   const [pageDetails, setPageDetails] = useState<ILandingPageDetails>(

@@ -30,7 +30,7 @@ export default function RedThemeFeedBack({ lstTestimonial }: any) {
           </div>
           <input
             type="text"
-            className="border border-[1px solid #e5e5e5] rounded-[10px] bg-white w-full min-h-[5rem] py-4 px-8 text-2xl "
+            className="border border-[1px solid #e5e5e5] rounded-[10px] bg-white w-full min-h-[5rem] py-4 px-8 text-portfolioTheme-textColor text-2xl"
           />
         </form>
       </div>

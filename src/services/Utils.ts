@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
@@ -111,6 +111,15 @@ class Utils {
     }
 
     return null;
+  }
+
+  static getWorkingHours(timeString: string) {
+    const parsedTime = parse(timeString, "HH:mm:ss", new Date());
+    return format(parsedTime, "h:mm a");
+  }
+
+  static getYear(date: string) {
+    return format(new Date(date), "yyyy");
   }
 }
 
