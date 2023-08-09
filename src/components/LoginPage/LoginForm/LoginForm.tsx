@@ -11,6 +11,24 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../../services/forms/formSchema";
+export const loadCompanyPageDetails = async () => {
+  try {
+    const res = await ApiService.getCompanyDetailsPageData();
+    if (!res.error) {
+      let result = res.company[0];
+      if (result) {
+        let websiteSlug = result.company_slug;
+        Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
+        Utils.setItem("slug", websiteSlug);
+      }
+      return null;
+    }
+
+    throw new Error(res.message);
+  } catch (ex: any) {
+    Utils.showErrorMessage(ex.message);
+  }
+};
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,25 +36,6 @@ export default function LoginForm() {
   const objForm = useForm({
     resolver: yupResolver(loginSchema),
   });
-
-  const loadCompanyPageDetails = async () => {
-    try {
-      const res = await ApiService.getCompanyDetailsPageData();
-      if (!res.error) {
-        let result = res.company[0];
-        if (result) {
-          let websiteSlug = result.company_slug;
-          Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
-          Utils.setItem("slug", websiteSlug);
-        }
-        return null;
-      }
-
-      throw new Error(res.message);
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
 
   const onLogin: any = async (data: { userID: string; password: string }) => {
     try {
@@ -51,8 +50,6 @@ export default function LoginForm() {
         const userData = res.userdata;
         const isValid = AuthService.setLoginUserData(userData);
         if (isValid) {
-          loadCompanyPageDetails();
-
           if (userData.type === USER_TYPE.ADMIN) {
             Utils.showSuccessMessage("Admin Login Successfully");
             router.push("/admindashboard");
@@ -60,6 +57,7 @@ export default function LoginForm() {
           }
 
           if (userData.type === USER_TYPE.USER) {
+            await loadCompanyPageDetails();
             Utils.showSuccessMessage("User Login Successfully");
             router.push("/dashboard");
             return null;
