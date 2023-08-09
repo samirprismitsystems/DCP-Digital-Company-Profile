@@ -33,7 +33,6 @@ export default function MainDashboardLayouts({ children }: any) {
   const [dashboardContent, setDashboardContent] = useState<
     ReactNode | null | undefined
   >(null);
-  const router = useRouter();
   const { selectedIndex, selectedTitle } = useAppSelector(
     (state: RootState) => state.dashboard
   );
