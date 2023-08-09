@@ -95,12 +95,14 @@ export default function ProfileForm() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (objUser && Object.keys(objUser).length > 0) {
       objForm.reset(objUser);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [objUser]);
 
   return (

@@ -165,6 +165,7 @@ export default function ClientItem() {
         client_data: lstClient,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstClient]);
 
   return (

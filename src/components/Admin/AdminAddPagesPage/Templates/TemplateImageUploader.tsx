@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -16,9 +17,9 @@ export default function TemplateImageUploader(
       const img = URL.createObjectURL(objForm.getValues(props.savePath));
       setSelectedImagePath(img);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.savePath]);
 
-  
   return (
     <div className="form_field xs:w-full  sm:w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 pb-3 mb-16 transition-all duration-300 ease-linear">
       <div
@@ -28,13 +29,15 @@ export default function TemplateImageUploader(
         }}
       >
         <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] items-center justify-center relative">
-          <img
-            src={selectedImagePath}
+          <Image
+            src={`/${selectedImagePath}`}
             alt="logo image"
             className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
             style={{
               transform: "translate(-50%, -50%)",
             }}
+            width={800}
+            height={800}
           />
         </div>
         <p className="text-red-600 my-3  mx-auto text-center">

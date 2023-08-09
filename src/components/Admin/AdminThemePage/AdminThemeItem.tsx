@@ -189,6 +189,7 @@ export default function AdminThemeItem() {
         theme_data: lstTheme,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstTheme]);
 
   return (

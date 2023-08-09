@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import LoginFooter from "../LoginPage/LoginFooter/LoginFooter";
 import LoginNavbar from "../LoginPage/LoginNavbar/LoginNavbar";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
+import Image from "next/image";
 
 export default function RegistrationPage() {
   const router = useRouter();
@@ -20,9 +21,11 @@ export default function RegistrationPage() {
         <div className="h-full  flex flex-wrap xl:flex-nowrap xs:flex-col lg:flex-row -mt-4 -mb-4">
           <div className="relative z-0 h-screen xs:h-[25vh] sm:h-[22vh] xl:h-screen xs:w-full w-2/4">
             <picture className="block h-full xs:h-auto">
-              <img
+              <Image
+                width={800}
+                height={800}
                 className="md:h-[42vh] sm:h-[29vh] h-full w-full xl:h-screen object-center object-cover"
-                src="assets/loginScreen/login_img.webp"
+                src="/assets/loginScreen/login_img.webp"
                 alt=""
               />
             </picture>

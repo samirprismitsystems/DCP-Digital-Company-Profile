@@ -47,7 +47,7 @@ export default function TemplateFeatures() {
       />
       <h3 className="pb-6">Logo And Text</h3>
       {fields.map((item, index) => (
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6" key={index}>
           <TextField
             name={`features_data.${index}.featuretext`}
             title="Text"

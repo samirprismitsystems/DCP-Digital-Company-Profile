@@ -159,6 +159,7 @@ export default function ImageGalleryItem() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -167,6 +168,7 @@ export default function ImageGalleryItem() {
         portfolio_data: lstImageGallery,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstImageGallery]);
 
   return (

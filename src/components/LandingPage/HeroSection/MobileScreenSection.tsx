@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 
 export default function MobileScreenSection() {
@@ -19,7 +20,9 @@ export default function MobileScreenSection() {
             borderRadius: "4rem",
           }}
         >
-          <img
+          <Image
+            width={800}
+            height={800}
             src="/assets/landing/digital_profile.jpg"
             alt="image.jpg"
             className={`transition-all duration-[12000ms] linear ${
@@ -27,7 +30,9 @@ export default function MobileScreenSection() {
             }`}
           />
         </div>
-        <img
+        <Image
+          width={800}
+          height={800}
           className="block object-cover sm:w-auto sm:h-auto  object-center md:w-[408px] md:h-[772px]"
           src="/assets/landing/mobileScreen.webp"
           alt="mobile-screen"

@@ -2,6 +2,7 @@ import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { ITheme } from "@/types/commonTypes";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function ThemeCards({onThemeSelect}:any) {
@@ -49,7 +50,9 @@ export default function ThemeCards({onThemeSelect}:any) {
               className="item_div p-6 rounded-xl"
             >
               <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
-                <img
+                <Image
+                  width={800}
+                  height={800}
                   src={`${UPLOAD_IMAGE_URI}/themes/${theme.theme_image}`}
                   alt="image"
                   className="w-full  h-full object-cover object-center align-middle border-none"

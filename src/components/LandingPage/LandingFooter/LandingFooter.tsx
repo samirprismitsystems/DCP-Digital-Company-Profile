@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import Content from "./Content";
 
 export default function LandingFooter() {
@@ -13,24 +15,24 @@ export default function LandingFooter() {
         <div className="col-md-6 col-sm-12  left-col md:w-[50%]">
           <p className="xs:mb-2  text-white">
             Copyright @2021{" "}
-            <a href="/" className="text-primary-lightDark">
+            <Link href="/" className="text-primary-lightDark">
               Digital Company Profile
-            </a>
+            </Link>
             . All rights reserved
           </p>
         </div>
         <div className="sm:mt-2 xs:mt-4 md:w-[50%]">
           <p className="xs:flex-col xs:items-center flex md:justify-end md:item-center space-x-4 md:flex-row">
-            <a
+            <Link
               href="https://www.prismitsystems.com/"
               className="text-primary-lightDark xs:mb-10 sm:mb-6"
             >
               A Prism I. T. Systems Enterprise
-            </a>
-            <img
-              src="assets/landing/company_logo.png"
-              width="57"
-              height="38"
+            </Link>
+            <Image
+              width={57}
+              height={38}
+              src="/assets/landing/company_logo.png"
               alt="Prism I. T. Systems"
               title="Prism I. T. Systems"
             />

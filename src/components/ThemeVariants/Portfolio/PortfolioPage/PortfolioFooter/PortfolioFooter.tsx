@@ -1,5 +1,6 @@
 import Utils from "@/services/Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { lstPortfolioFooter } from "../../data/data";
 export default function PortfolioFooter() {
   return (
@@ -9,8 +10,9 @@ export default function PortfolioFooter() {
         boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
       }}
     >
-      {lstPortfolioFooter.map((item) => (
-        <a
+      {lstPortfolioFooter.map((item, index: number) => (
+        <Link
+          key={index}
           href={item.link}
           className="flex justify-center items-center  flex-col site-link back_to_top text-center text-[#818181]"
           style={{
@@ -30,7 +32,7 @@ export default function PortfolioFooter() {
             }}
           />
           <span className="block text-[1.7rem] c-text">{item.name}</span>
-        </a>
+        </Link>
       ))}
     </div>
   );

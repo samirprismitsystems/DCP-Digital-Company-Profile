@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";
 import Steps from "./Steps";
 import { ILandingPageCardSteps, ILandingPageDetails } from "@/types/landingPageType";
+import Image from "next/image";
 
 export default function HowItsWork() {
   const data = useContext(LandingPageContextApi);
@@ -32,7 +33,9 @@ export default function HowItsWork() {
           <div className="container mx-auto flex md:px-0 px-5 xs:py-0 py-16 md:flex-row flex-col md:items-start items-center">
             <div className="sm:w-full md:w-1/2 mb-10 md:mb-0">
               <MainScrollAnimation>
-                <img
+                <Image
+                  width={800}
+                  height={800}
                   className="w-full h-auto max-w-full rounded-2xl border border-white"
                   alt="hero"
                   src="/assets/landing/doctor.png"
@@ -61,7 +64,9 @@ export default function HowItsWork() {
         <div className="container mt-20 mx-auto flex md:px-0 px-5  md:flex-row flex-col md:items-start items-center">
           <div className="md:hidden sm:w-full md:w-1/2 mb-10 md:mb-0">
             <MainScrollAnimation>
-              <img
+              <Image
+                width={800}
+                height={800}
                 className="w-full h-auto max-w-full rounded-2xl border border-white"
                 alt="hero"
                 src="/assets/landing/weAreOpen.png"
@@ -86,7 +91,9 @@ export default function HowItsWork() {
           </div>
           <div className="xs:hidden md:block sm:w-full md:w-1/2 mb-10 md:mb-0">
             <MainScrollAnimation>
-              <img
+              <Image
+                width={800}
+                height={800}
                 className="w-full h-auto max-w-full rounded-2xl border border-white"
                 alt="hero"
                 src="/assets/landing/weAreOpen.png"

@@ -203,12 +203,14 @@ export default function CompanyDetailsPage() {
   useEffect(() => {
     loadStates();
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (isChange) {
       setIsChange(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChange]);
 
   return (

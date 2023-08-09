@@ -67,48 +67,7 @@ const MapInformation = (props: IMapInformationProps) => {
       }
     }
   };
-
-  const getDisplayName = async (latitude: string, longitude: string) => {
-    try {
-      const response = await axios.get(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-      );
-      return response.data.display_name;
-    } catch (error) {
-      console.error("Error fetching display name:", error);
-      return null;
-    }
-  };
-
-  const loadData = async () => {
-    try {
-      const position: any = await getGEOCurrentPosition();
-      const { latitude, longitude } = position;
-      const displayName = await getDisplayName(latitude, longitude);
-      objForm.setValue("mapLocation.lat", latitude);
-      objForm.setValue("mapLocation.lon", longitude);
-      objForm.setValue("mapLocation.displayName", displayName);
-    } catch (error) {
-      console.error("Error getting current location:", error);
-    }
-  };
-
-  const getGEOCurrentPosition = () => {
-    return new Promise((resolve, reject) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => resolve(position.coords),
-          (error) => reject(error)
-        );
-      } else {
-        reject("Geolocation is not supported by this browser.");
-      }
-    });
-  };
-
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
+  
 
   useEffect(() => {
     if (props.isChange) {
@@ -119,6 +78,7 @@ const MapInformation = (props: IMapInformationProps) => {
       });
       props.setIsChange(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.isChange]);
 
   return (

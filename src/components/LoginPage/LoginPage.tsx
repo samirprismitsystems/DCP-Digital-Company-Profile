@@ -3,6 +3,7 @@ import LoginFooter from "./LoginFooter/LoginFooter";
 import LoginForm from "./LoginForm/LoginForm";
 import LoginNavbar from "./LoginNavbar/LoginNavbar";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function LoginPage() {
     if (typeof window !== "undefined") {
       router.replace("/login");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -24,9 +26,11 @@ export default function LoginPage() {
         <div className="h-full flex flex-wrap xl:flex-nowrap xs:flex-col lg:flex-row -mt-4 -mb-4">
           <div className="relative  z-0 h-screen xs:h-[24vh] xl:h-screen xs:w-full w-2/4 sm:h-[28vh]">
             <picture className="block h-full xs:h-auto">
-              <img
+              <Image
+                width={800}
+                height={800}
                 className="sm:h-[33vh] md:h-[42vh] h-full w-full xl:h-screen object-center object-cover"
-                src="assets/loginScreen/login_img.webp"
+                src="/assets/loginScreen/login_img.webp"
                 alt=""
               />
             </picture>

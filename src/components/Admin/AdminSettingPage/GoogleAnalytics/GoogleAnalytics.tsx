@@ -66,11 +66,12 @@ export default function GoogleAnalytics() {
   useEffect(() => {
     loadData();
   }, []);
-
+  
   useEffect(() => {
     if (objSiteSetting && Object.keys(objSiteSetting).length > 0) {
       objForm.reset(objSiteSetting);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [objSiteSetting]);
 
   return (

@@ -25,13 +25,17 @@ export default function RHFImageUploader({
       : `${UPLOAD_IMAGE_URI}/${folderPath}/${srcPath}`
   );
 
+  // eslint-disable-next-line @next/next/no-img-element
   return (
     <>
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
         <img
-          src={selectedImagePath}
+          suppressHydrationWarning
+          src={`${selectedImagePath}`}
           alt="image.png"
           className="w-full h-full object-cover object-center align-middle border-none"
+          width={800}
+          height={800}
         />
       </div>
       <div

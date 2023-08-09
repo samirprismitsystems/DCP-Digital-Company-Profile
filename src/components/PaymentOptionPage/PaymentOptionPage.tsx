@@ -85,12 +85,14 @@ export default function PaymentOptionPage() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (objPayment && Object.keys(objPayment).length > 0) {
       objForm.reset(objPayment);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [objPayment]);
 
   return (

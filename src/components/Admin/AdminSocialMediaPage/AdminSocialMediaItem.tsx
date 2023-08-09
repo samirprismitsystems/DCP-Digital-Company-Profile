@@ -160,6 +160,7 @@ export default function AdminSocialMediaItem() {
         adminSocialMediaInfo: lstSocialMedia,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstSocialMedia]);
 
   return (

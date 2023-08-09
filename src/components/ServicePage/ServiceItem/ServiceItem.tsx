@@ -161,6 +161,7 @@ export default function ServiceItem() {
         service_data: lstServiceData,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstServiceData]);
 
   const onComplete = () => {
@@ -169,6 +170,7 @@ export default function ServiceItem() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

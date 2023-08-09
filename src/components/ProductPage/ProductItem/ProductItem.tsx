@@ -163,6 +163,7 @@ export default function ProductItem() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -171,6 +172,7 @@ export default function ProductItem() {
         product_data: lstProducts,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstProducts]);
 
   return (

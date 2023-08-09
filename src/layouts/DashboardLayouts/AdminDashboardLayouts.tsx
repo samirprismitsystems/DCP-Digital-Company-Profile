@@ -21,6 +21,7 @@ import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 
@@ -144,12 +145,29 @@ export default function AdminDashboardLayout({ children }: any) {
 
       dispatch(setRouteIsChanged(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeIsChanged, selectedIndex]);
 
+  const changeLayout = (item: any) => {
+    dispatch(
+      setSelectedObj({
+        selectedIndex: item.id,
+        selectedTitle: item.link,
+      })
+    );
+    if (typeof window !== "undefined") {
+      window.history.replaceState(
+        item.link,
+        "",
+        `/admindashboard/${item.link}`
+      );
+    }
+  };
   useEffect(() => {
     if (typeof window !== "undefined") {
       loadData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -175,23 +193,13 @@ export default function AdminDashboardLayout({ children }: any) {
                           : "bg-secondary-main"
                       } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
-                        dispatch(
-                          setSelectedObj({
-                            selectedIndex: item.id,
-                            selectedTitle: item.link,
-                          })
-                        );
-                        if (typeof window !== "undefined") {
-                          window.history.replaceState(
-                            item.link,
-                            "",
-                            `/admindashboard/${item.link}`
-                          );
-                        }
+                        changeLayout(item);
                       }}
                     >
                       <div className="flex justify-center items-center">
-                        <img
+                        <Image
+                          width={800}
+                          height={800}
                           src={item.icon}
                           className="w-16 h-auto md:mr-6 xs:m-0"
                           alt="error"

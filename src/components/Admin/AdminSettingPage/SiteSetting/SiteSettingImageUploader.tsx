@@ -1,4 +1,5 @@
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -21,7 +22,9 @@ export default function SiteSettingImageUploader(
         `${UPLOAD_IMAGE_URI}/${props.folderPath}/${props.srcPath}`
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.srcPath]);
+
   return (
     <div className="form_field xs:w-full  sm:w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
       <div
@@ -31,7 +34,9 @@ export default function SiteSettingImageUploader(
         }}
       >
         <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] items-center justify-center relative">
-          <img
+          <Image
+            width={800}
+            height={800}
             src={selectedImagePath}
             alt="logo image"
             className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"

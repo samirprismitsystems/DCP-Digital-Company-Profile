@@ -34,7 +34,7 @@ const Ratting = ({
       .fill(0)
       .map((_, i) => i + 1)
       .map((idx) => (
-        <span className="mx-1">
+        <span className="mx-1" key={idx}>
           <FontAwesomeIcon
             key={idx}
             className="cursor-pointer w-12 h-12"
@@ -46,6 +46,7 @@ const Ratting = ({
           />
         </span>
       ));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, rating, hoverRating]);
 
   return <div>{starRating}</div>;

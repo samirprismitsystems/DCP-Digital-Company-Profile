@@ -84,6 +84,7 @@ export default function ChangePasswordForm() {
     if (objUser && Object.keys(objUser).length > 0) {
       objForm.reset(objUser);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [objUser]);
 
   const passWordError = objForm.formState.errors["confirmPassword"]?.message;

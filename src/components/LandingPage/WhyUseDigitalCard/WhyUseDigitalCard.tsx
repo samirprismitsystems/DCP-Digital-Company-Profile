@@ -1,5 +1,6 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
 import Accordion from "./Accordion";
+import Image from "next/image";
 
 export default function WhyUseDigitalCard() {
   return (
@@ -10,7 +11,9 @@ export default function WhyUseDigitalCard() {
             <Accordion />
           </div>
           <div className="xs:hidden md:block md:w-[50%]">
-            <img
+            <Image
+              width={800}
+              height={800}
               className="max-w-full lg:w-[413px] h-auto block m-auto"
               alt="hero"
               src="/assets/landing/mobile_overlay_sm.webp"

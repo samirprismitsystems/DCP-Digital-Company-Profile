@@ -26,12 +26,12 @@ export default function PortfolioServices() {
         <Slider {...configuration}>
           {lstProduct.map((item, index) => (
             <PortfolioServiceCard
+              key={index}
               index={parseInt(item.service_id)}
               path={item.service_image}
               id={item.company_id}
               name={item.service_name}
               description={item.service_desc}
-              
             />
           ))}
         </Slider>

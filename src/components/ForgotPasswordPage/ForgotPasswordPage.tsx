@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import LoginFooter from "../LoginPage/LoginFooter/LoginFooter";
 import LoginNavbar from "../LoginPage/LoginNavbar/LoginNavbar";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -57,9 +58,11 @@ export default function ForgotPasswordPage() {
         <div className="h-full  flex flex-wrap xl:flex-nowrap xs:flex-col lg:flex-row -mt-4 -mb-4">
           <div className="relative z-0 h-screen xs:h-[21vh] xl:h-screen xs:w-full w-2/4">
             <picture className="block h-full xs:h-auto">
-              <img
+              <Image
+                width={800}
+                height={800}
                 className="md:h-[42vh] h-full w-full xl:h-screen object-center object-cover sm:h-[40vh]"
-                src="assets/loginScreen/login_img.webp"
+                src="/assets/loginScreen/login_img.webp"
                 alt=""
               />
             </picture>

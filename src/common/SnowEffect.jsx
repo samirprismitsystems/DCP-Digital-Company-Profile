@@ -7,7 +7,8 @@ function SnowEffect() {
 
   const init = useCallback(async (engine) => {
     await loadFull(engine);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -27,7 +28,7 @@ function SnowEffect() {
               type: "circle",
             },
             size: {
-              value: { min: 1, max:2 },
+              value: { min: 1, max: 2 },
             },
             move: {
               direction: "none",

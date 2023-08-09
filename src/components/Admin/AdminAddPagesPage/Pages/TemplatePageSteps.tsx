@@ -13,7 +13,7 @@ export default function TemplatePageSteps() {
   return (
     <>
       {fields.map((item, index) => (
-        <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6" key={index}>
           <TextField
             name={`steps.${index}.stepstitle`}
             title="Title"

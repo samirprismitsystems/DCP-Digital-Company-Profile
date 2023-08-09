@@ -9,7 +9,7 @@ export default function GetPortfolioFeedBackReview({
   lstTestimonial: ITestimonial[];
 }) {
   return lstTestimonial.map((item: ITestimonial, index: number) => (
-    <div className="pt-4 w-full flex flex-col items-start c-text">
+    <div className="pt-4 w-full flex flex-col items-start c-text" key={index}>
       <h5 className="text-portfolioTheme-primary c-text text-4xl">
         {item.client_name}
       </h5>

@@ -110,6 +110,7 @@ export default function AdminAddSocialColorPage() {
         socialMediaClass: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstSocialClasses]);
 
   const { fields, append, remove } = useFieldArray({

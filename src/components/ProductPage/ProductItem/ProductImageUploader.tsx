@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -14,8 +15,10 @@ export default function ProductImageUploader({
   return (
     <>
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
-        <img
-          src={(imagePath as any) || selectedImagePath}
+        <Image
+          width={800}
+          height={800}
+          src={`/${(imagePath as any) || selectedImagePath}`}
           alt="image"
           className="w-full h-full object-cover object-center align-middle border-none"
         />

@@ -26,6 +26,7 @@ export default function PortfolioProducts() {
         <Slider {...configuration}>
           {lstProduct.map((item, index) => (
             <PortfolioProductCard
+              key={index}
               index={item.id}
               path={item.product_image}
               id={item.company_id}

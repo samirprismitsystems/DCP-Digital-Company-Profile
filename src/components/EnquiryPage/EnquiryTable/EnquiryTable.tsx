@@ -62,6 +62,7 @@ export default function EnquiryTable() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onPrevChange = () => {

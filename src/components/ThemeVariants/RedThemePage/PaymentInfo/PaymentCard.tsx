@@ -1,5 +1,6 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import Image from "next/image";
 
 export default function PaymentCard({
   name,
@@ -21,10 +22,10 @@ export default function PaymentCard({
               {name}
             </span>
             <div className="link-icon m-0 bg-[#f2f2f2] w-20 h-20 rounded-[1rem] flex justify-center items-center">
-              <img
+              <Image
+                width={35}
+                height={30}
                 rel="preload"
-                width="35"
-                height="30"
                 alt="Digital Profile"
                 title="Digital Profile"
                 className="h-auto w-[3.2rem] "
@@ -39,10 +40,10 @@ export default function PaymentCard({
                   QR Code .:
                 </dt>
                 <dd className="float-left p-0 m-0 text-[1.5rem]">
-                  <img
+                  <Image
+                    width={90}
+                    height={90}
                     rel="preload"
-                    width="90"
-                    height="90"
                     alt="Digital Profile"
                     title="Digital Profile"
                     className="h-auto w-[15.2rem] "
@@ -62,14 +63,14 @@ export default function PaymentCard({
               {name}
             </span>
             <div className="link-icon m-0 bg-white w-20 h-20 rounded-[1rem] flex justify-center items-center">
-              <img
+              <Image
                 rel="preload"
-                width="35"
-                height="30"
+                width={35}
+                height={30}
                 alt="Digital Profile"
                 title="Digital Profile"
                 className="h-auto w-[3.2rem] "
-                src={imagePath}
+                src={`/${imagePath || ""}`}
               />
             </div>
             <div className="pay-info ml-6">

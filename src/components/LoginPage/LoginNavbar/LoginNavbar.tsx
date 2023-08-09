@@ -10,6 +10,7 @@ export default function LoginNavbar() {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+  
   return (
     <nav
       className={`shadow-md bg-white fixed w-full top-0 h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}

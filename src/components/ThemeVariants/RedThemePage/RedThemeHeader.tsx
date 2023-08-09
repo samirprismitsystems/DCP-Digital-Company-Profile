@@ -1,4 +1,6 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
+import Image from "next/image";
 
 export default function RedThemeHeader({ objCompany }: { objCompany: any }) {
   if (!objCompany) return <PageCircularLoading />;
@@ -29,8 +31,10 @@ export default function RedThemeHeader({ objCompany }: { objCompany: any }) {
                 boxShadow: "0 0 10px rgb(191 191 191 / 50%)",
               }}
             >
-              <img
-                src={`http://localhost:8080/control/upload/${objCompany.company_id}/logo/${objCompany.company_logo}`}
+              <Image
+                width={800}
+                height={800}
+                src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id}/logo/${objCompany.company_logo}`}
                 className="w-full h-full object-cover rounded-50 object-center"
                 alt=""
               />

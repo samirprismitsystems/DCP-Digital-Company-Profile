@@ -9,7 +9,7 @@ export default function FeedBackReview({
   lstTestimonial: ITestimonial[];
 }) {
   return lstTestimonial.map((item: ITestimonial, index: number) => (
-    <div className="p-4 py-2 w-full flex flex-col items-start">
+    <div className="p-4 py-2 w-full flex flex-col items-start" key={index}>
       <h5 className="text-theme01">{item.client_name}</h5>
       <div className="flex flex-wrap justify-center items-center">
         {item.ratting && parseInt(item.ratting) > 1 ? (

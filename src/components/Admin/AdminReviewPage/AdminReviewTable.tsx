@@ -86,6 +86,7 @@ export default function AdminReviewTable() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!lstUserReview) return <PageCircularLoading />;
@@ -118,7 +119,9 @@ export default function AdminReviewTable() {
                   {index % 2 == 0 ? (
                     <tr className="bg-white border-0">
                       <td className="p-4 text-2xl">{item.user_name}</td>
-                      <td className="p-4 text-2xl w-2/5">{item.user_message}</td>
+                      <td className="p-4 text-2xl w-2/5">
+                        {item.user_message}
+                      </td>
                       <td className="p-4 text-2xl">
                         <Link target="_blank" href={"/dashboard/company"}>
                           <FontAwesomeIcon

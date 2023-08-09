@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function PortfolioPaymentCard({
   imgPath,
   Upi,
@@ -18,13 +20,13 @@ export default function PortfolioPaymentCard({
         {title}
       </span>
       <div className="link-icon google-icon m-0 bg-[#f2f2f2] w-24 h-24 rounded-2xl flex justify-center mr-4 items-center c-text">
-        <img
-          width="35"
-          height="30"
+        <Image
+          width={35}
+          height={30}
           alt="image.png"
           title="image.png"
           className="w-[3.5rem] h-auto align-middle object-center"
-          src={imgPath}
+          src={`/${imgPath}`}
         />
       </div>
       <div className="pay-info ml-6 c-text">

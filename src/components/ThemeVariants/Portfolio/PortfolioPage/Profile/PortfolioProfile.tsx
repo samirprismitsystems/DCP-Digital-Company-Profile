@@ -1,4 +1,5 @@
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import Image from "next/image";
 import { useContext } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 
@@ -30,11 +31,11 @@ export default function PortfolioProfile() {
             <div className="col-12 text-center w-full shrink-0 max-w-full">
               <div className="profile-img w-72 h-72 rounded-50 bg-white flex justify-center items-center mx-auto overflow-hidden border-[1rem] border-solid border-white absolute top-[70%] transform transform-[translateY(-20%)] left-0 right-0 shadow-md">
                 {" "}
-                <img
+                <Image
                   // src="/assets/templates/portfolio/profile_img.png"
+                  width={62}
+                  height={49}
                   src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id}/logo/${objCompany.company_logo}`}
-                  width="62"
-                  height="49"
                   alt="logo"
                   title="logo-img"
                   className="img-fit w-full h-full object-cover object-center align-middle"

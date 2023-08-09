@@ -1,4 +1,5 @@
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import Image from "next/image";
 
 export default function PortfolioProductCard({
   id,
@@ -19,7 +20,7 @@ export default function PortfolioProductCard({
     <div key={index} className="w-[283.846px] px-4">
       <div className="product-box rounded-3xl border-[1px] border-solid border-portfolioTheme-primary mb-6 overflow-hidden">
         <div className="product-img text-center h-96 mb-4 min-h-[2.3rem] bg-[#f5f5f5]">
-          <img
+          <Image
             alt="product-img"
             title="product-img"
             width="156"
