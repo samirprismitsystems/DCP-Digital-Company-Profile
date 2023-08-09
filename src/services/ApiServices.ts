@@ -7,7 +7,13 @@ import { BASE_URI } from "./config";
 const ApiService = {
   async getLandingPageResource() {
     const res = await axios.get(
-      `${BASE_URI}api/pages/getsinglepage/landing-page`
+      `api/pages/getsinglepage/landing-page`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     if (res) {

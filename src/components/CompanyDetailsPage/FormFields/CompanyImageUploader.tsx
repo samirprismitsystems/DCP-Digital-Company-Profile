@@ -1,3 +1,4 @@
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -9,10 +10,10 @@ export default function CompanyImageUploader({
 }: any) {
   const { setValue } = useFormContext();
   const [logoPath, setLogoPath] = useState<string>(
-    `http://localhost:8080/control/upload/${companyID}/logo/${companyLogo}`
+    `${UPLOAD_IMAGE_URI}/${companyID}/logo/${companyLogo}`
   );
   const [bannerPath, setBannerPath] = useState<string>(
-    `http://localhost:8080/control/upload/${companyID}/banner/${companyBanner}`
+    `${UPLOAD_IMAGE_URI}/${companyID}/banner/${companyBanner}`
   );
 
   const handleBannerChange = (event: any) => {

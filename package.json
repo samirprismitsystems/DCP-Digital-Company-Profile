@@ -2,8 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost/digital-company-profile/control/",
   "scripts": {
-    "dev": "next dev && node src/setupProxy.js ",
+    "dev": "next dev && node src/setupProxy.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
