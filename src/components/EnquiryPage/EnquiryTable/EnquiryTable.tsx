@@ -116,7 +116,7 @@ export default function EnquiryTable() {
                 )
               )
               .map((item) => (
-                <tbody className="text-2xl  text-white">
+                <tbody key={item.inquiry_id} className="text-2xl  text-white">
                   <tr className="text-black border-b">
                     <th
                       scope="row"

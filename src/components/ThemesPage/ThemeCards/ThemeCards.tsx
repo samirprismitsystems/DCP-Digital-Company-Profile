@@ -13,8 +13,6 @@ export default function ThemeCards({onThemeSelect}:any) {
     onThemeSelect(themeId);
   };
 
-  console.log('render')
-
   const loadData = async () => {
     try {
       const res = await ApiService.getThemes();

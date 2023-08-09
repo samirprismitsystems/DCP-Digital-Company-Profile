@@ -10,10 +10,10 @@ import PortfolioFeedback from "./Feedback/PortfolioFeedback";
 import FollowUs from "./FollowUs/PortfolioFollowUs";
 import PortfolioGallery from "./Gallery/PortfolioGallery";
 import PortfolioPaymentInfo from "./PaymentInfo/PortfolioPaymentInfo";
+import PortfolioFooter from "./PortfolioFooter/PortfolioFooter";
 import PortfolioProducts from "./Products/PortfolioProducts";
 import PortfolioProfile from "./Profile/PortfolioProfile";
 import PortfolioServices from "./Services/PortfolioServices";
-import PortfolioFooter from "./PortfolioFooter/PortfolioFooter";
 
 export const PortfolioContextApi = createContext<IPortfolioInfo>(
   {} as IPortfolioInfo

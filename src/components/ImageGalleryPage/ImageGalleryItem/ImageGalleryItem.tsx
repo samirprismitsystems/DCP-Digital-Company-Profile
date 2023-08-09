@@ -110,7 +110,6 @@ export default function ImageGalleryItem() {
     try {
       const res = await ApiService.getImageGalleryDetails();
       if (!res.error) {
-        console.log(res.portfolio);
         setLstImageGallery(res.portfolio);
         return null;
       }

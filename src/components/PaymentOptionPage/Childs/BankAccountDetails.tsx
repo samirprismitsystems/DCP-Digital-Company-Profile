@@ -6,7 +6,7 @@ export default function BankAccountDetails() {
   const [accountType, setAccountType] = useState("");
 
   const objForm = useFormContext();
-  console.log(objForm.getValues("accountType"));
+  
   return (
     <div className="w-full">
       <div className="h3 pb-16">Bank Account Details:</div>

@@ -116,7 +116,10 @@ export default function TestimonialTable() {
                 )
               )
               .map((item) => (
-                <tbody className="text-2xl  text-white">
+                <tbody
+                  key={item.testimonial_id}
+                  className="text-2xl  text-white"
+                >
                   <tr className="text-black border-b">
                     <th
                       scope="row"

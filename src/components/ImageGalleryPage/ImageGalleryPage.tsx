@@ -1,8 +1,4 @@
 import BackButton from "@/common/BackButton";
-import ApiService from "@/services/ApiServices";
-import Utils from "@/services/Utils";
-import { IImageGallery } from "@/types/commonTypes";
-import { useEffect, useState } from "react";
 import ImageGalleryItem from "./ImageGalleryItem/ImageGalleryItem";
 
 export default function ImageGalleryPage() {
@@ -20,7 +16,7 @@ export default function ImageGalleryPage() {
         }}
       >
         <div className="row -mr-3 -ml-3">
-          <ImageGalleryItem/>
+          <ImageGalleryItem />
         </div>
       </div>
     </>
