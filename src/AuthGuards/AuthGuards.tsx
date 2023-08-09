@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import LoginPage from "@/components/LoginPage/LoginPage";
 import AuthService from "@/services/AuthServices";
 import { USER_TYPE } from "@/services/Enums";
@@ -7,18 +8,16 @@ export default function AuthGuard({ children }: { children: any }) {
   const router = useRouter();
   const { pathname } = router;
 
-  if (AuthService.isUserLoggedIn() && pathname == "/login") {
-    if (typeof window !== "undefined") {
+  useEffect(() => {
+    if (AuthService.isUserLoggedIn() && pathname === "/login") {
       if (AuthService.getUserType() === USER_TYPE.ADMIN) {
         router.push("/admindashboard");
-        return null;
       } else {
         router.push("/dashboard");
-        return null;
       }
     }
-  }
-  
+  }, [pathname]);
+
   if (AuthService.isUserLoggedIn()) {
     return children;
   }

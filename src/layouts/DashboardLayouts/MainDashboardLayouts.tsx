@@ -26,7 +26,6 @@ import { ReactNode, useEffect, useState } from "react";
 
 export default function MainDashboardLayouts({ children }: any) {
   const dispatch = useAppDispatch();
-  // const [routeIsChanged, setRouteIsChanged] = useState(false);
   const routeIsChanged = useAppSelector(
     (s: RootState) => s.common.routeIsChanged
   );

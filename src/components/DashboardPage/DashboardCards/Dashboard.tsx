@@ -1,3 +1,4 @@
+import PageCircularLoading from "@/common/PageCircularLoading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { IDashboardCounts } from "@/types/commonTypes";
@@ -122,12 +123,11 @@ export default function Dashboard() {
     loadData();
   }, []);
 
-  return (
-    lstDashbordCards &&
-    lstDashbordCards.map((item) => (
-      <div key={item.id} className="dashboard_card max-w-full px-[12px]">
-        <DashboardCards item={item} />
-      </div>
-    ))
-  );
+  if (!lstDashbordCards) return <PageCircularLoading />;
+  
+  return lstDashbordCards.map((item) => (
+    <div key={item.id} className="dashboard_card max-w-full px-[12px]">
+      <DashboardCards item={item} />
+    </div>
+  ));
 }
