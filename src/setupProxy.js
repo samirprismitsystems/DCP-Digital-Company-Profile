@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "http://localhost/digital-company-profile/control/",
+      target: "https://dcp.prismcodehub.com/control/",
       headers: {
         Connection: "keep-alive",
       },
@@ -12,4 +12,3 @@ module.exports = function (app) {
     })
   );
 };
- 

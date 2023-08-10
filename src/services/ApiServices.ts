@@ -18,7 +18,6 @@ const ApiService = {
   },
 
   async getReviewData() {
-    console.log(process.env.NEXT_PUBLIC_API_URI);
     const res = await axios.get(`${BASE_URI}api/user/getuserreview/active`);
 
     if (res) {
@@ -34,7 +33,7 @@ const ApiService = {
     return res.data;
   },
 
-  async loginUser(data: { email: string; password: string }) {
+  async loginUser(data: any) {
     const res = await axios.post(`${BASE_URI}api/user/loginuser`, data);
 
     return res.data;
