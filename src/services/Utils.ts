@@ -116,19 +116,33 @@ class Utils {
   }
 
   static getWorkingHours(timeString: string) {
-    const parsedTime = parse(timeString, "HH:mm:ss", new Date());
-    if (parsedTime) {
-      return format(parsedTime, "h:mm a");
+    if (timeString) {
+      const parsedTime = parse(timeString, "HH:mm:ss", new Date());
+      if (parsedTime) {
+        return format(parsedTime, "h:mm a");
+      }
+    } else {
+      return "N/A";
     }
-
-    return "N/A";
   }
 
   static getYear(date: string) {
-    if (format(new Date(date), "yyyy")) {
-      return format(new Date(date), "yyyy");
+    if (date) {
+      if (format(new Date(date), "yyyy")) {
+        return format(new Date(date), "yyyy");
+      }
+    } else {
+      return "N/A";
     }
-    return "N/A";
+  }
+
+  static getPageSlug() {
+    const result = this.getItem("slug");
+    if (result) {
+      return result;
+    } else {
+      return null;
+    }
   }
 }
 

@@ -10,7 +10,7 @@ export default function PortfolioPaymentInfo() {
   return (
     <div className="payment-info">
       <GetHeader title="Payment Info" />
-      <div className="pt-8 pb-8">
+      <div className="pt-8 pb-8 md:grid md:grid-cols-3 md:gap-8">
         <PortfolioPaymentCard
           title="Google Pay"
           imgPath="assets/payments/google-pay.png"

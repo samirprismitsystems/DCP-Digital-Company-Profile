@@ -2,6 +2,7 @@ import Utils from "@/services/Utils";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { INavigationMenu } from "@/types/commonTypes";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -18,8 +19,57 @@ export default function MobileNavbar({
   toggle: () => void;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isChange, setIsChange] = useState(false);
+
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const handleNavigationOperation = (event: any, item: INavigationMenu) => {
+    event.preventDefault();
+
+    if (item.isNavigate) {
+      router.push(`${item.link}`);
+    }
+
+    if (item.isNewTab) {
+      if (typeof window !== "undefined") {
+        window.open(item.link);
+      }
+    }
+
+    if (item.isUseIndex) {
+      dispatch(
+        setSelectedObj({
+          selectedIndex: 0,
+          selectedTitle: "profile",
+        })
+      );
+      if (typeof window !== "undefined") {
+        window.history.replaceState(
+          `/${redirectPath}/profile`,
+          "",
+          `/${redirectPath}/profile`
+        );
+      }
+      dispatch(setRouteIsChanged(true));
+    }
+
+    if (item.isLogout) {
+      Utils.clearStorage();
+      router.push("/login");
+      return null;
+    }
+
+    setSelectedIndex(item.id);
+    Utils.scrollToView(item.link);
+    toggle();
+  };
+
+  useEffect(() => {
+    if (!isChange) {
+      setIsChange(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -72,47 +122,10 @@ export default function MobileNavbar({
               <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
                 {lstNavigations &&
                   lstNavigations.map((item: INavigationMenu, index: number) => (
-                    <a
+                    <Link
                       key={index}
                       onClick={(event: any) => {
-                        event.preventDefault();
-
-                        if (item.isNavigate) {
-                          router.push(`${item.link}`);
-                        }
-
-                        if (item.isNewTab) {
-                          if (typeof window !== "undefined") {
-                            window.open(item.link);
-                          }
-                        }
-
-                        if (item.isUseIndex) {
-                          dispatch(
-                            setSelectedObj({
-                              selectedIndex: 0,
-                              selectedTitle: "profile",
-                            })
-                          );
-                          if (typeof window !== "undefined") {
-                            window.history.replaceState(
-                              `/${redirectPath}/profile`,
-                              "",
-                              `/${redirectPath}/profile`
-                            );
-                          }
-                          dispatch(setRouteIsChanged(true));
-                        }
-
-                        if (item.isLogout) {
-                          Utils.clearStorage();
-                          router.push("/login");
-                          return null;
-                        }
-
-                        setSelectedIndex(item.id);
-                        Utils.scrollToView(item.link);
-                        toggle();
+                        handleNavigationOperation(event, item);
                       }}
                       href="#"
                       className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
@@ -123,7 +136,7 @@ export default function MobileNavbar({
                       aria-current="page"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
               </ul>
             </div>

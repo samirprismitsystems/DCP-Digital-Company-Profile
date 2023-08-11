@@ -3,17 +3,24 @@ import { lstUserResponsiveNavbar } from "@/data/DashboardSideBar";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardNavigationMenu from "./DashboardNavigationMenu";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
 export default function DashboardNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isChange, setIsChange] = useState(false);
   const dispatch = useAppDispatch();
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    if (!isChange) {
+      setIsChange(true);
+    }
+  }, []);
 
   return (
     <nav

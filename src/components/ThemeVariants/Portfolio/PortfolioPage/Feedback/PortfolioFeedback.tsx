@@ -45,8 +45,10 @@ export default function PortfolioFeedback() {
   return (
     <div className="feedback-block">
       <GetHeader title="Feedback" />
-      <div className="py-8">
-        <GetPortfolioFeedBackReview lstTestimonial={lstTestimonial} />
+      <div className="py-8 lg:grid lg:grid-cols-2 lg:gap-8">
+        <div>
+          <GetPortfolioFeedBackReview lstTestimonial={lstTestimonial} />
+        </div>
         <div className="content-box feedback-box rounded-[2rem] bg-white  overflow-hidden ">
           <h3 className="c-text text-center text-[3rem] pb-4 pt-6 font-bold text-portfolioTheme-titleColor">
             Give Your Feedback

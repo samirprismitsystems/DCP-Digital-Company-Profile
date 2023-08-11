@@ -4,12 +4,7 @@ import Link from "next/link";
 import { lstPortfolioFooter } from "../../data/data";
 export default function PortfolioFooter() {
   return (
-    <div
-      className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center justify-between m-0 sticky z-0 bottom-0 space-x-6"
-      style={{
-        boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
-      }}
-    >
+    <>
       {lstPortfolioFooter.map((item, index: number) => (
         <Link
           key={index}
@@ -34,6 +29,6 @@ export default function PortfolioFooter() {
           <span className="block text-[1.7rem] c-text">{item.name}</span>
         </Link>
       ))}
-    </div>
+    </>
   );
 }

@@ -15,7 +15,7 @@ export default function PortfolioServiceCard({
   description: string;
 }) {
   return (
-    <div key={index} className="item w-[283.846px] px-4 h-full">
+    <div key={index} className="item xs:w-full xlOne:w-[283.846px] px-4 h-full">
       <div className="services-box relative pt-0 mb-4 overflow-hidden  rounded-3xl">
         <div className="services-img flex justify-center items-center bg-portfolioTheme-primary h-96 ">
           <Image

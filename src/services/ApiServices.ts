@@ -268,7 +268,7 @@ const ApiService = {
 
   async getWebsiteDetails() {
     const res = await axios.get(
-      `${BASE_URI}api/company/fetchcompanyfront/${Utils.getItem("slug")}`
+      `${BASE_URI}api/company/fetchcompanyfront/${Utils.getPageSlug()}`
     );
     return res.data;
   },

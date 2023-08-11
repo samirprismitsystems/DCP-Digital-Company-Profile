@@ -9,7 +9,7 @@ export default function PortfolioContactUs() {
   return (
     <div className="contact-box" id="contactus">
       <GetHeader title="Contact Us" />
-      <form onSubmit={onSave} className="c-text pt-9 pb-32 -mb-12">
+      <form onSubmit={onSave} className="c-text pt-9 pb-32 md:px-64 lg:px-40 xlOne:px-80 -mb-12">
         <input
           required={true}
           type="text"

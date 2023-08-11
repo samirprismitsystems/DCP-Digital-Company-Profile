@@ -20,7 +20,7 @@ export default function PortfolioContactCards() {
   const objCompany = useContext(PortfolioContextApi).company;
 
   return (
-    <div className="grid grid-cols-2 gap-8">
+    <div className="xs:grid xs:grid-cols-2 md:grid-cols-4 gap-8">
       <div className="col-6 col-md-3 share_link max-w-full shrink-0 ">
         <a
           href={`https://wa.me/+91${objCompany.company_contact}`}

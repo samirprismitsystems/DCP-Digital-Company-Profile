@@ -32,7 +32,7 @@ export default function PortfolioFollowUs() {
         <h3 className="text-center portfolio-h3 text-portfolioTheme-titleColor font-semibold">
           Follow Us On
         </h3>
-        <div className="social-links pt-6 flex flex-wrap justify-center md:justify-between items-center c-text">
+        <div className="social-links pt-6 flex flex-wrap xs:justify-center md:justify-center items-center c-text">
           {lstSocial.map((item) => {
             const iconComponent = iconMapping[item.socialmedia_logo];
             return (

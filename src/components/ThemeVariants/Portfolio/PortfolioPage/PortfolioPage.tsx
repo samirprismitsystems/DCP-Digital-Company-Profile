@@ -2,6 +2,7 @@ import PageCircularLoading from "@/common/PageCircularLoading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { IPortfolioInfo } from "@/types/themes/portfolio";
+import Head from "next/head";
 import { createContext, useEffect, useState } from "react";
 import PortfolioAboutUs from "./AboutUs/PortfolioAboutUs";
 import PortfolioContactsInformation from "./ContactInformation/PortfolioContactsInformation";
@@ -19,9 +20,8 @@ export const PortfolioContextApi = createContext<IPortfolioInfo>(
   {} as IPortfolioInfo
 );
 
-export default function PortfolioPage() {
+export default function PortfolioPage(props: any) {
   const [result, setResult] = useState<IPortfolioInfo>();
-
   const loadData = async () => {
     try {
       const res = await ApiService.getWebsiteDetails();
@@ -41,9 +41,11 @@ export default function PortfolioPage() {
   }, []);
 
   if (!result) return <PageCircularLoading />;
-
   return (
     <PortfolioContextApi.Provider value={result}>
+      <Head>
+        <link rel="icon" href={result.company.company_logo} sizes="any" />
+      </Head>
       <div className="container-flued-portfolio c-text bg-white">
         <PortfolioProfile />
         <PortfolioContactsInformation />
@@ -56,9 +58,24 @@ export default function PortfolioPage() {
           <PortfolioPaymentInfo />
           <PortfolioFeedback />
           <PortfolioContactUs />
+          <div
+            className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:hidden md:flex justify-between m-0 sticky z-0 bottom-0 space-x-6"
+            style={{
+              boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
+            }}
+          >
+            <PortfolioFooter />
+          </div>
         </div>
       </div>
-      <PortfolioFooter />
+      <div
+        className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:flex md:hidden justify-between m-0 sticky z-0 bottom-0 space-x-6"
+        style={{
+          boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
+        }}
+      >
+        <PortfolioFooter />
+      </div>
     </PortfolioContextApi.Provider>
   );
 }

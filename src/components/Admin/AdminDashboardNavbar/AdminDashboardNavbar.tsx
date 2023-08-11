@@ -7,16 +7,23 @@ import { useAppDispatch } from "@/services/store/hooks/hooks";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AdminDashboardNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isChange, setIsChange] = useState(false);
+
   const dispatch = useAppDispatch();
   const router = useRouter();
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    if (!isChange) {
+      setIsChange(true);
+    }
+  }, []);
   return (
     <nav
       className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}

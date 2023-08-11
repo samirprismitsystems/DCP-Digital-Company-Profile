@@ -34,7 +34,7 @@ export default function PortfolioPaymentCard({
           <dt className="clear-both mr-2 p-0 font-semibold text-black float-left m-0  text-[2rem]">
             UPI.:
           </dt>
-          <dd className="float-left m-0 p-0  text-[2rem] c-text">{Upi}</dd>
+          <dd className="float-left m-0 p-0  text-[2rem] c-text">{Upi || "N/A"}</dd>
         </dl>
       </div>
     </div>
