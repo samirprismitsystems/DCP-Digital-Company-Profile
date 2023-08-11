@@ -117,11 +117,18 @@ class Utils {
 
   static getWorkingHours(timeString: string) {
     const parsedTime = parse(timeString, "HH:mm:ss", new Date());
-    return format(parsedTime, "h:mm a");
+    if (parsedTime) {
+      return format(parsedTime, "h:mm a");
+    }
+
+    return "N/A";
   }
 
   static getYear(date: string) {
-    return format(new Date(date), "yyyy");
+    if (format(new Date(date), "yyyy")) {
+      return format(new Date(date), "yyyy");
+    }
+    return "N/A";
   }
 }
 

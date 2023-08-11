@@ -56,7 +56,7 @@ export default function PortfolioContactsInformation() {
               href={`http://maps.google.com/maps/search/${objCompany.address}`}
               className="contact-link mb-8  rounded-2xl flex items-center bg-whiteSmoke no-underline transition transition-[all .3s linear]"
             >
-              <span className="link-icon call-icon w-48 h-24 rounded-3xl bg-portfolioTheme-primary flex items-center justify-center mr-4">
+              <span className="link-icon call-icon xs:w-48 sm:w-24 h-24 rounded-3xl bg-portfolioTheme-primary flex items-center justify-center mr-4">
                 <FontAwesomeIcon
                   className="text-white text-6xl font-bold"
                   icon={faMapMarkerAlt}
@@ -67,9 +67,8 @@ export default function PortfolioContactsInformation() {
               </span>
             </a>
           </div>
-
-          {/* Cards */}
         </div>
+        {/* Cards */}
         <PortfolioContactCards />
       </div>
     </div>

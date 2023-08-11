@@ -31,7 +31,7 @@ export const loginPageNavigationMenuList = [
 export const lstAdminResNavbar = [
   {
     id: 0,
-    name: `Hi, ${AuthService.getUserName() || "N/A"}`,
+    name: `Hi, ${AuthService.getUserName()}`,
     link: "profile",
     isUseIndex: true,
   },
@@ -70,7 +70,7 @@ export const lstDashboardNavigationMenu = [
   },
   {
     id: 1,
-    name: `Hi, ${AuthService.getUserName() || "N/A"}`,
+    name: `Hi, ${AuthService.getUserName()}`,
     link: "profile",
   },
 ];

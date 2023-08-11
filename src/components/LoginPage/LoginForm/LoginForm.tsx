@@ -115,7 +115,7 @@ export default function LoginForm() {
           <h1 className="text-primary-lightDark font-bold text-center text-3xl">
             <Link href={"/forgetpassword"}>Forgot Password?</Link>
           </h1>
-          <div className="w-full text-center">
+          <div className="w-full text-center pb-8">
             <button
               type="submit"
               className={`${

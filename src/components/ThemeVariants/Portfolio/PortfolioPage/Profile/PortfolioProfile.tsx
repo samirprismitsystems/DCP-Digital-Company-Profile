@@ -32,9 +32,8 @@ export default function PortfolioProfile() {
               <div className="profile-img w-72 h-72 rounded-50 bg-white flex justify-center items-center mx-auto overflow-hidden border-[1rem] border-solid border-white absolute top-[70%] transform transform-[translateY(-20%)] left-0 right-0 shadow-md">
                 {" "}
                 <Image
-                  // src="/assets/templates/portfolio/profile_img.png"
-                  width={62}
-                  height={49}
+                  width={800}
+                  height={800}
                   src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id}/logo/${objCompany.company_logo}`}
                   alt="logo"
                   title="logo-img"

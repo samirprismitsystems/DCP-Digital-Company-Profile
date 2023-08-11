@@ -1,6 +1,7 @@
 import ResponsiveNavbar from "@/components/DashboardPage/DashboardNavbar/ResponsiveNavbar";
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { lstAdminResNavbar } from "@/data/NavigationMenu";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
@@ -73,7 +74,7 @@ export default function AdminDashboardNavbar() {
                 }
               }}
             >
-              Hi, Admin
+              Hi, {AuthService.getUserName()}
             </button>
             <li>
               <button
