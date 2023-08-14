@@ -2,6 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+.homeCareBody {
+  background-image: url("/assets/homecare/background.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 0;
+  height: 100%;
+}
+
+.dropdown, [type=button], [type=reset], [type=submit], button, input, select {
+  -webkit-appearance: none;
+}
+
+
+.form-control-input:focus {
+  outline: 0;
+  border-color: rgba(5, 59, 123, 1) !important;
+  box-shadow: 0 0 4px 0px rgba(5, 59, 123) !important;
+}
+
+.homecarefont {
+  font-family: Open Sans, sans-serif;
+}
+
+.head6 {
+  font-size: 18px;
+  margin-bottom: 0;
+  font-family: Open Sans, sans-serif;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: center;
+  color: #202739;
+}
+
+.link_title {
+  font-family: Open Sans, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-align: center;
+  display: block;
+  color: #202739a1;
+  margin-bottom: 0;
+}
+
+.homeCareBody:before {
+  position: fixed !important;
+  content: "" !important;
+  z-index: -1 !important;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(5, 59, 123, 0.8) 0%,
+    transparent 100%
+  );
+}
+
 .portfolio-h1 {
   font-size: 4rem;
   line-height: 1.5;
@@ -411,6 +474,9 @@ html {
   .container {
     max-width: 100%;
   }
+  .homeCareBody {
+    padding-top: 0;
+  }
   .container-portfolio {
     max-width: 100%;
   }
@@ -493,5 +559,11 @@ html {
   }
   .mobileImage {
     border-radius: 4rem !important;
+  }
+}
+
+@media (max-width: 575px) {
+  #home {
+    margin-bottom: 30vh;
   }
 }

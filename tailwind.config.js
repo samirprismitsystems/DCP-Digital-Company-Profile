@@ -37,6 +37,10 @@ module.exports = {
           titleColor: "#1a1a1a",
           black: "#00000",
         },
+        homeCareTheme: {
+          primary: "rgba(5, 59, 123,1)",
+          textColor: "#93959d",
+        },
         inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",
         theme01: "#8d1c9a",

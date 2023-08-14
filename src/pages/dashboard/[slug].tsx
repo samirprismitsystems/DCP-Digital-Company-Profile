@@ -1,10 +1,11 @@
 import AuthGuard from "@/AuthGuards/AuthGuards";
-import PortfolioPage from "@/components/ThemeVariants/Portfolio/PortfolioPage/PortfolioPage";
+import HomeCarePage from "@/components/ThemeVariants/HomeCare/HomeCarePage/HomeCarePage";
 
 export default function UserVisitTheme() {
   return (
     <AuthGuard>
-      <PortfolioPage />
+      {/* <PortfolioPage /> */}
+      <HomeCarePage />
     </AuthGuard>
   );
 }
