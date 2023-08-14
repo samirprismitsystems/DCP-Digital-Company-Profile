@@ -24,7 +24,7 @@ export default function DashboardNavigationMenu() {
                     event.preventDefault();
                     if (item.target) {
                       if (typeof window !== "undefined") {
-                        window.open(`/${Utils.getItem("slug")}`, "_blank");
+                        window.open(`dashboard/${Utils.getItem("slug")}`, "_blank");
                       }
                     } else {
                       dispatch(

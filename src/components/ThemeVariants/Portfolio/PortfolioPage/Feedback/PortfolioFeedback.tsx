@@ -1,10 +1,10 @@
-import Ratting from "@/components/ThemeVariants/RedThemePage/FeedBack/Ratting";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { useContext, useState } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import GetPortfolioFeedBackReview from "./GetPortfolioFeedBackReview";
+import Ratting from "./Ratting";
 
 export default function PortfolioFeedback() {
   const lstTestimonial = useContext(PortfolioContextApi).testimonial;
@@ -16,7 +16,7 @@ export default function PortfolioFeedback() {
   });
   const [rate, setRate] = useState(0);
 
-  const onSave = async (e:any) => {
+  const onSave = async (e: any) => {
     try {
       e.preventDefault();
 

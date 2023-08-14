@@ -107,7 +107,7 @@ export const lstUserResponsiveNavbar = [
   {
     id: 1,
     name: "Visit Site",
-    link: `/${Utils.getItem("slug")}`,
+    link: `dashboard/${Utils.getItem("slug")}`,
     isNewTab: true,
   },
   {

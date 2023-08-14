@@ -22,6 +22,7 @@ export const PortfolioContextApi = createContext<IPortfolioInfo>(
 
 export default function PortfolioPage(props: any) {
   const [result, setResult] = useState<IPortfolioInfo>();
+  
   const loadData = async () => {
     try {
       const res = await ApiService.getWebsiteDetails();
