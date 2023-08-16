@@ -1,7 +1,5 @@
 import {
   faFacebook,
-  faFacebookF,
-  faSquareWhatsapp,
   faTwitter,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
@@ -17,60 +15,67 @@ export default function HomeCareSaveContact() {
         }}
         className="text-center contact-information mb-16 bg-white rounded-3xl p-5"
       >
-        <div className="my-6  grid grid-cols-2 gap-8 mx-3 py-6">
-          <div className="">
+        <div className="grid grid-cols-2 gap-8 my-16 mx-8">
+          <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
             <a
               href="nitin_patel.vcf"
-              className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont"
+              className="span btn btn-primary w-100"
               download
-              style={{
-                border: "1px solid rgba(5,59,123,1)",
-              }}
             >
               SAVE CONTACT
             </a>
           </div>
-          <div className="section py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
-            <div className="flex w-full flex-wrap mt-4 mb-4 justify-start">
-              <div className="dropdown w-full">
-                <details className="dropdown-menu w-full">
-                  <summary className="block btn-outline-primary btn-primary">
-                    SHARE <FontAwesomeIcon icon={faCaretDown} />
-                  </summary>
-                  <div className="dropdown_list bg-white text-homeCareTheme-primary  h-full flex justify-start items-center flex-col relative top-[80px] w-full">
-                    <a
-                      className="w-full px-12 dropdown-item py-4 flex justify-between items-center "
-                      href="whatsapp://send?text=The text to share!"
-                      data-action="share/whatsapp/share"
-                    >
-                      <FontAwesomeIcon className="text-4xl" icon={faWhatsapp} />
-                      <div className="text-4xl ml-4">Whatsapp</div>
-                    </a>
-                    <a
-                      className="w-full px-12 dropdown-item py-4 flex justify-start items-center "
-                      href="whatsapp://send?text=The text to share!"
-                      data-action="share/whatsapp/share"
-                    >
-                      <FontAwesomeIcon
-                        className="text-4xl mr-4"
-                        icon={faFacebook}
-                      />
-                      <div className="text-4xl">Facebook</div>
-                    </a>
-                    <a
-                      className="w-full px-12 dropdown-item py-4 flex justify-start items-center "
-                      href="whatsapp://send?text=The text to share!"
-                      data-action="share/whatsapp/share"
-                    >
-                      <FontAwesomeIcon
-                        className="text-4xl mr-4"
-                        icon={faTwitter}
-                      />
-                      <div className="text-4xl">Twitter</div>
-                    </a>
-                  </div>
-                </details>
-              </div>
+          <div className="">
+            <div className="dropdown">
+              <details className="dropdown_menu">
+                <summary className="btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
+                  <span className="mr-4">SHARE</span>{" "}
+                  <FontAwesomeIcon icon={faCaretDown} />
+                </summary>
+                <div
+                  className="dropdown_list bg-white flex justify-center items-center flex-col pt-4"
+                  style={{ boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)" }}
+                >
+                  <a
+                    className="flex justify-center items-center py-2 px-4 text-left homecarefont rounded-3xl focus:bg-homeCareTheme-primary "
+                    href="whatsapp://send?text=The text to share!"
+                    data-action="share/whatsapp/share"
+                  >
+                    <FontAwesomeIcon
+                      className="focus:text-white text-4xl font-medium text-homeCareTheme-primary"
+                      icon={faWhatsapp}
+                    />
+                    <span className="focus:text-white active:text-white text-homeCareTheme-primary text-3xl text-left font-medium">
+                      Whatsapp
+                    </span>
+                  </a>
+
+                  <a
+                    className="w-full dropdown-item flex justify-start gap-4 py-4"
+                    href="https://facebook.com/sharer/sharer.php?u=#"
+                  >
+                    <FontAwesomeIcon
+                      className="text-3xl font-medium text-homeCareTheme-primary"
+                      icon={faFacebook}
+                    />
+                    <span className="text-3xl font-medium text-homeCareTheme-primary text-left">
+                      Facebook
+                    </span>
+                  </a>
+                  <a
+                    className="w-full dropdown-item flex justify-start gap-4 py-4"
+                    href="https://twitter.com/share?url=#"
+                  >
+                    <FontAwesomeIcon
+                      className="text-3xl font-medium text-homeCareTheme-primary"
+                      icon={faTwitter}
+                    />
+                    <span className="text-3xl font-medium text-homeCareTheme-primary text-left">
+                      Twitter
+                    </span>
+                  </a>
+                </div>
+              </details>
             </div>
           </div>
         </div>

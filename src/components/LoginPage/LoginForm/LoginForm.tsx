@@ -120,7 +120,7 @@ export default function LoginForm() {
               type="submit"
               className={`${
                 isLoading && "opacity-20"
-              } border py-4 px-14 text-3xl my-16 btnHoverEffect  text-white text-center`}
+              } border py-4 px-14 text-3xl xs:mt-4 md:my-16 btnHoverEffect  text-white text-center`}
             >
               {isLoading && <CircularLoadingEffectForButton />}
               Login
