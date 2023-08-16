@@ -10,12 +10,12 @@ export default function HomeCareContactInformation() {
   return (
     <>
       <div
-        className="bg-white rounded-3xl mb-16 pt-8"
+        className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl mb-10 pt-8"  
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}
       >
-        <div className="w-full pb-6 px-4">
+        <div className="w-full pb-6 px-12">
           <a className="border-t-0  cursor-default flex items-center pb-8 border-0 text-homeCareTheme-textColor homecarefont text-base font-bold h-auto break-words whitespace-normal">
             <div
               className="per_link"
@@ -32,7 +32,7 @@ export default function HomeCareContactInformation() {
           </a>
           <hr />
         </div>
-        <div className="w-full pb-6 px-4">
+        <div className="w-full pb-6 px-12">
           <a className="border-t-0  cursor-default flex items-center pb-8 border-0 text-homeCareTheme-textColor homecarefont text-base font-bold h-auto break-words whitespace-normal">
             <div
               className="per_link"
@@ -49,7 +49,7 @@ export default function HomeCareContactInformation() {
           </a>
           <hr />
         </div>
-        <div className="w-full pb-6 px-4">
+        <div className="w-full pb-6 px-12">
           <a className="border-t-0  cursor-default flex items-center pb-8 border-0 text-homeCareTheme-textColor homecarefont text-base font-bold h-auto break-words whitespace-normal">
             <div
               className="per_link"
@@ -68,7 +68,7 @@ export default function HomeCareContactInformation() {
           </a>
           <hr />
         </div>
-        <div className="w-full px-4">
+        <div className="w-full px-12">
           <a className="border-t-0  cursor-default flex items-center pb-8 border-0 text-homeCareTheme-textColor homecarefont text-base font-bold h-auto break-words whitespace-normal">
             <div
               className="per_link"

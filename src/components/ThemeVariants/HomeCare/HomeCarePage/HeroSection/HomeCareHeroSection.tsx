@@ -5,7 +5,7 @@ export default function HomeCareHeroSection() {
     <>
       <div
         id="home"
-        className="section-1 bg-white py-8 rounded-3xl"
+        className="section-1 xs:mb-[30vh] sm:mb-10 bg-white py-8 rounded-3xl border border-solid border-homeCareTheme-opacityBorder"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,128,0.2)",
         }}

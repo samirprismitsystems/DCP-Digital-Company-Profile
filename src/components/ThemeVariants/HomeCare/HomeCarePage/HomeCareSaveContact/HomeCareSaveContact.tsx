@@ -13,7 +13,7 @@ export default function HomeCareSaveContact() {
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}
-        className="text-center contact-information mb-16 bg-white rounded-3xl p-5"
+        className="border border-solid border-homeCareTheme-opacityBorder text-center contact-information mb-10 bg-white rounded-3xl p-5"
       >
         <div className="grid grid-cols-2 gap-8 my-16 mx-8">
           <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
@@ -25,7 +25,7 @@ export default function HomeCareSaveContact() {
               SAVE CONTACT
             </a>
           </div>
-          <div className="">
+          <div>
             <div className="dropdown">
               <details className="dropdown_menu">
                 <summary className="btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">

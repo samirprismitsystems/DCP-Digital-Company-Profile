@@ -14,10 +14,10 @@ export default function HomeCareShareCard() {
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}
-        className="text-center contact-information mb-16 bg-white rounded-3xl p-5"
+        className="border border-solid border-homeCareTheme-opacityBorder text-center contact-information mb-10 bg-white rounded-3xl py-5 px-16"
       >
         <form onSubmit={onSave} className="text-center">
-          <h4 className="text-[22px] text-black font-bold  mb-6 text-center homecarefont">
+          <h4 className="text-[22px] text-black font-bold pt-4 mb-6 text-center homecarefont">
             Share Your Card
           </h4>
           <div className="form-group mb-5 text-center">

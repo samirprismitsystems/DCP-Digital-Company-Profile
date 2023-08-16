@@ -13,7 +13,7 @@ export default function HomeCareContactIcons() {
   return (
     <>
       <div
-        className="contact-information mb-16 bg-white rounded-3xl p-5 text-center "
+        className="border border-solid border-homeCareTheme-opacityBorder contact-information mb-10 bg-white rounded-3xl pt-12 pb-8 text-center "
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}

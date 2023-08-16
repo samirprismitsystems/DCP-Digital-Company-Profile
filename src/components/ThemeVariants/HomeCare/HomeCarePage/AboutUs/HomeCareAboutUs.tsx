@@ -2,12 +2,12 @@ export default function HomeCareAboutUs() {
   return (
     <>
       <div
-        className=" bg-white rounded-3xl p-5 mb-5"
+        className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl p-5 mb-10"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}
       >
-        <h4 className="text-[22px] text-center text-black  font-bold mb-6 homecarefont">
+        <h4 className="text-[22px] text-center text-black  font-bold mb-6 homecarefont pt-4">
           About Us
         </h4>
         <p className="text-justify homecarefont pt-4 pb-8 px-4 text-homeCareTheme-textColor">
