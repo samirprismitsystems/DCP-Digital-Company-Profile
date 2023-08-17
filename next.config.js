@@ -3,8 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     disableStaticImages: true,
-    domains: ["localhost"],
-    domains: ["https://data.digimen.in"],
+    domains: ["localhost", "https://data.digimen.in"],
   },
 };
 

@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
     isRender && (
       <Provider store={store}>
         <div className="absolute z-[99999]">
-          <ToastContainer />
+          <ToastContainer position="top-right" theme="light" autoClose={3000} pauseOnHover={true} />
         </div>
         <Component {...pageProps} />
       </Provider>
