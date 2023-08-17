@@ -20,6 +20,7 @@ export default function DashboardNavbar() {
     if (!isChange) {
       setIsChange(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

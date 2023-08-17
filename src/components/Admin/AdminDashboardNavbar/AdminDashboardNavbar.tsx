@@ -23,6 +23,7 @@ export default function AdminDashboardNavbar() {
     if (!isChange) {
       setIsChange(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <nav

@@ -11,6 +11,7 @@ export default function QRCodeImageUploader({ imagePath }: { imagePath: any }) {
       "IMAGE_UPLOAD_ID"
     )}/${"qrcode"}/${imagePath}`
   );
+  
 
   return (
     <>

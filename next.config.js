@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     disableStaticImages: true,
     domains: ["localhost"],
+    domains: ["https://data.digimen.in"],
   },
 };
 

@@ -69,6 +69,7 @@ export default function MobileNavbar({
     if (!isChange) {
       setIsChange(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export default function MobileNavbar({
         }
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, toggle]);
 
   return (
