@@ -1,4 +1,4 @@
-import PageCircularLoading from "@/common/PageCircularLoading";
+import TableDataNotPresent from "@/common/TableDataNotPresent";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { IPagesInfo } from "@/types/commonTypes";
@@ -8,10 +8,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function AdminPagesTable() {
-  const [lstPagesInfo, setLstPagesInfo] = useState<IPagesInfo[]>([]);
+  const [lstPagesInfo, setLstPagesInfo] = useState<IPagesInfo[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getAllPagesInfo();
       if (!res.error) {
         setLstPagesInfo(res.pages);
@@ -21,6 +23,8 @@ export default function AdminPagesTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,8 +54,6 @@ export default function AdminPagesTable() {
     loadData();
   }, []);
 
-  if (!lstPagesInfo) return <PageCircularLoading />;
-
   return (
     <>
       <div className="relative w-full overflow-x-auto rounded-2xl">
@@ -63,7 +65,8 @@ export default function AdminPagesTable() {
               <th className="p-4 font-medium">Action</th>
             </tr>
           </thead>
-          {lstPagesInfo.length > 0 &&
+          {lstPagesInfo &&
+            lstPagesInfo.length > 0 &&
             lstPagesInfo.map((item, index: number) => (
               <tbody
                 key={index}
@@ -121,18 +124,11 @@ export default function AdminPagesTable() {
               </tbody>
             ))}
 
-          {lstPagesInfo.length <= 0 && (
-            <tbody className="text-2xl  text-white">
-              <tr aria-rowspan={8} className="text-black text-center border-b">
-                <th
-                  colSpan={8}
-                  className="px-6  py-8 font-medium whitespace-nowrap"
-                >
-                  No Records Found
-                </th>
-              </tr>
-            </tbody>
-          )}
+          <TableDataNotPresent
+            data={lstPagesInfo}
+            rows={8}
+            isLoading={isLoading}
+          />
         </table>
       </div>
     </>

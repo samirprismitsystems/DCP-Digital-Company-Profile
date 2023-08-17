@@ -9,7 +9,7 @@ import AdminReviewTable from "./AdminReviewTable";
 
 export default function AdminReviewPage() {
   const dispatch = useDispatch();
-
+  
   return (
     <>
       <AdminBackButton />

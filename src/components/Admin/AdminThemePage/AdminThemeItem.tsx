@@ -1,5 +1,6 @@
 import AddMore from "@/common/AddMore";
 import AdminCommonButton from "@/common/AdminCommonButton";
+import Loading from "@/common/Loading";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
@@ -12,6 +13,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 export default function AdminThemeItem() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstTheme, setLstTheme] = useState<any>([
     {
       theme_name: "",
@@ -21,6 +23,7 @@ export default function AdminThemeItem() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getAdminThemes();
       if (!res.error) {
         setLstTheme(res.theme);
@@ -30,6 +33,8 @@ export default function AdminThemeItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -192,6 +197,7 @@ export default function AdminThemeItem() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstTheme]);
 
+   if (isLoading) return <Loading />;
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>

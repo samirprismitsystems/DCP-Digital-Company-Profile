@@ -15,7 +15,13 @@ import AdminSocialLinkSelector from "./AdminSocialLinkSelector";
 
 export default function AdminSocialMediaItem() {
   const [lstSocialColor, setLstSocialColor] = useState<ISocialMediaColors[]>();
-  const [lstSocialMedia, setLstSocialMedia] = useState<any>();
+  const [lstSocialMedia, setLstSocialMedia] = useState<any>([
+    {
+      socialmedia_logo: "",
+      socialmedia_name: "",
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getColors = async () => {
     try {
@@ -37,6 +43,7 @@ export default function AdminSocialMediaItem() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getAdminSocialMediaInfo();
       if (!res.error) {
         if (res.social.length > 0) {
@@ -47,6 +54,8 @@ export default function AdminSocialMediaItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -158,7 +167,7 @@ export default function AdminSocialMediaItem() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstSocialMedia]);
 
-  if (!lstSocialMedia) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
