@@ -1,6 +1,7 @@
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { adminProfileFormSchema } from "@/services/forms/formSchema";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
@@ -57,6 +58,8 @@ export default function ProfileForm() {
           profilePhoto: result.profile_photo,
         };
         setObjUser(objItem);
+        AuthService.setUserName(objItem.firstName);
+        AuthService.setUserEmail(objItem.email);
         return null;
       }
       throw new Error(res.message);

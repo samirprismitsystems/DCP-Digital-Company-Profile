@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 export default function AdminDashboardNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isChange, setIsChange] = useState(false);
-
   const dispatch = useAppDispatch();
   const router = useRouter();
   const toggle = () => {
@@ -25,6 +24,7 @@ export default function AdminDashboardNavbar() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <nav
       className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}

@@ -24,6 +24,14 @@ class AuthService {
     return true;
   }
 
+  static setUserName(userName: string) {
+    Utils.setItem("userName", userName);
+  }
+
+  static setUserEmail(userEmail: string) {
+    Utils.setItem("userEmail", userEmail);
+  }
+
   static getUserName() {
     const userName = Utils.getItem("userName");
     if (userName) {
