@@ -1,6 +1,5 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -11,7 +10,6 @@ export default function QRCodeImageUploader({ imagePath }: { imagePath: any }) {
       "IMAGE_UPLOAD_ID"
     )}/${"qrcode"}/${imagePath}`
   );
-  
 
   return (
     <>
@@ -23,9 +21,7 @@ export default function QRCodeImageUploader({ imagePath }: { imagePath: any }) {
           }}
         >
           <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] flex items-center justify-center relative">
-            <Image
-              width={800}
-              height={800}
+            <img
               id="get_img"
               src={selectedImage}
               alt="logo image"
