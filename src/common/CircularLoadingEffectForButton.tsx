@@ -6,7 +6,7 @@ export default function CircularLoadingEffectForButton() {
       <svg
         aria-hidden="true"
         role="status"
-        className="inline mr-3 w-7 h-7 text-white animate-spin"
+        className="inline mr-3 w-10 h-10 text-white animate-spin"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

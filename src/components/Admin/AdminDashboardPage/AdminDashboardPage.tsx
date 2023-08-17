@@ -40,7 +40,7 @@ export default function AdminDashboardPage() {
       {objData && objData.company && (
         <div className="row company_table w-full font-['GothamRoundedLight']">
           <h3 className="w-full mb-12 mt-24 ">Top 5 Companies</h3>
-          <TopFiveCompany lstCompany={objData.company} />
+          <TopFiveCompany lstCompany={objData.company || []} />
         </div>
       )}
     </div>

@@ -1,5 +1,5 @@
-import PageCircularLoading from "@/common/PageCircularLoading";
 import Pagination from "@/common/Pagination";
+import TableDataNotPresent from "@/common/TableDataNotPresent";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 export default function AdminCompanyTable() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstCompany, setLstCompany] = useState<ICompanyDetails[]>([]);
   const [objPagination, setObjPagination] = useState({
     currentPage: 1,
@@ -21,6 +22,7 @@ export default function AdminCompanyTable() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getAllCompanies();
       if (!res.error) {
         setLstCompany(res.company);
@@ -37,6 +39,8 @@ export default function AdminCompanyTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,7 +116,6 @@ export default function AdminCompanyTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!lstCompany) return <PageCircularLoading />;
   return (
     <>
       <div className="relative w-full overflow-x-auto rounded-2xl">
@@ -127,7 +130,8 @@ export default function AdminCompanyTable() {
               <th className="p-4 font-medium">Active / InActive</th>
             </tr>
           </thead>
-          {lstCompany.length > 0 &&
+          {lstCompany &&
+            lstCompany.length > 0 &&
             lstCompany
               .slice(
                 (objPagination.currentPage - 1) * objPagination.itemPerPage,
@@ -225,22 +229,14 @@ export default function AdminCompanyTable() {
                   )}
                 </tbody>
               ))}
-
-          {lstCompany.length <= 0 && (
-            <tbody className="text-2xl  text-white">
-              <tr aria-rowspan={8} className="text-black text-center border-b">
-                <th
-                  colSpan={8}
-                  className="px-6  py-8 font-medium whitespace-nowrap"
-                >
-                  No Records Found
-                </th>
-              </tr>
-            </tbody>
-          )}
+          <TableDataNotPresent
+            isLoading={isLoading}
+            rows={8}
+            data={lstCompany}
+          />
         </table>
       </div>
-      {lstCompany.length > 1 && (
+      {lstCompany && lstCompany.length > 1 && (
         <Pagination
           onNextChange={onNextChange}
           onPrevChange={onPrevChange}

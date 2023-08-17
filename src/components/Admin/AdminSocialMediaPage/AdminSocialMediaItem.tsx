@@ -1,5 +1,6 @@
 import AddMore from "@/common/AddMore";
 import AdminCommonButton from "@/common/AdminCommonButton";
+import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { adminSocialMediaInfo } from "@/services/forms/formSchema";
@@ -14,13 +15,7 @@ import AdminSocialLinkSelector from "./AdminSocialLinkSelector";
 
 export default function AdminSocialMediaItem() {
   const [lstSocialColor, setLstSocialColor] = useState<ISocialMediaColors[]>();
-  const [lstSocialMedia, setLstSocialMedia] = useState<any>([
-    {
-      socialmedia_logo: "",
-      socialmedia_name: "",
-      socialmedia_color: "",
-    },
-  ]);
+  const [lstSocialMedia, setLstSocialMedia] = useState<any>();
 
   const getColors = async () => {
     try {
@@ -163,6 +158,7 @@ export default function AdminSocialMediaItem() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstSocialMedia]);
 
+  if (!lstSocialMedia) return <Loading />;
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
