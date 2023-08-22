@@ -5,8 +5,12 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import { HomeCareContextApi } from "../HomeCarePage";
 
 export default function HomeCareSaveContact() {
+  const objCompany = useContext(HomeCareContextApi).company;
+
   return (
     <>
       <div
@@ -16,9 +20,9 @@ export default function HomeCareSaveContact() {
         className=" border border-solid border-homeCareTheme-opacityBorder text-center contact-information mb-10 bg-white rounded-3xl p-5"
       >
         <div className="lg:w-1/2 xl:w-1/3 md:m-auto md:p-12 grid grid-cols-2 gap-8 my-16 mx-8">
-          <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
+          <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] font-medium homecarefont">
             <a
-              href="nitin_patel.vcf"
+              href="samirshaikh.vcf"
               className="xs:text-[1.875rem] span btn btn-primary w-100 xl:text-2xl"
               download
             >
@@ -27,52 +31,51 @@ export default function HomeCareSaveContact() {
           </div>
           <div>
             <div className="dropdown">
-              <details className="dropdown_menu">
-                <summary className="btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
-                  <span className="mr-4 xs:text-[1.875rem] xl:text-2xl">
+              <details className="dropdown_menu relative">
+                <summary className="hover:cursor-pointer btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] font-medium homecarefont">
+                  <span className="text-2xl mr-4 xs:text-[1.875rem] xl:text-2xl">
                     SHARE
                   </span>{" "}
                   <FontAwesomeIcon icon={faCaretDown} />
                 </summary>
                 <div
-                  className="dropdown_list bg-white flex justify-center items-center flex-col pt-4"
+                  className="dropdown_list pt-5 min-w-full h-auto  absolute bg-white flex flex-wrap"
                   style={{ boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)" }}
                 >
                   <a
-                    className="flex justify-center items-center py-2 px-4 text-left homecarefont rounded-3xl focus:bg-homeCareTheme-primary "
-                    href="whatsapp://send?text=The text to share!"
+                    className="group w-full dropdown-item flex justify-start gap-4 py-4 pl-6 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
+                    href={`https://api.whatsapp.com/send?phone=${objCompany.company_contact}&text=hi`}
                     data-action="share/whatsapp/share"
                   >
                     <FontAwesomeIcon
-                      className="focus:text-white text-4xl font-medium text-homeCareTheme-primary"
+                      className="group-hover:text-white text-4xl font-medium text-homeCareTheme-primary"
                       icon={faWhatsapp}
                     />
-                    <span className="focus:text-white active:text-white text-homeCareTheme-primary text-3xl text-left font-medium">
+                    <span className="text-2xl text-homeCareTheme-primary text-left font-medium group-hover:text-white">
                       Whatsapp
                     </span>
                   </a>
-
                   <a
-                    className="w-full dropdown-item flex justify-start gap-4 py-4"
+                    className="group hover:bg-homeCareTheme-primary  hover:rounded-[25px]  w-full dropdown-item flex justify-start gap-4 py-4 pl-6"
                     href="https://facebook.com/sharer/sharer.php?u=#"
                   >
                     <FontAwesomeIcon
-                      className="text-3xl font-medium text-homeCareTheme-primary"
+                      className="group-hover:text-white text-3xl font-medium text-homeCareTheme-primary"
                       icon={faFacebook}
                     />
-                    <span className="text-3xl font-medium text-homeCareTheme-primary text-left">
+                    <span className="group-hover:text-white text-2xl font-medium text-homeCareTheme-primary text-left">
                       Facebook
                     </span>
                   </a>
                   <a
-                    className="w-full dropdown-item flex justify-start gap-4 py-4"
+                    className="group hover:bg-homeCareTheme-primary  hover:rounded-[25px] w-full dropdown-item flex justify-start gap-4 py-4 pl-6"
                     href="https://twitter.com/share?url=#"
                   >
                     <FontAwesomeIcon
-                      className="text-3xl font-medium text-homeCareTheme-primary"
+                      className="group-hover:text-white text-3xl font-medium text-homeCareTheme-primary"
                       icon={faTwitter}
                     />
-                    <span className="text-3xl font-medium text-homeCareTheme-primary text-left">
+                    <span className="group-hover:text-white text-2xl font-medium text-homeCareTheme-primary text-left">
                       Twitter
                     </span>
                   </a>

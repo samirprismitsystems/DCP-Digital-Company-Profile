@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import {
   faEnvelope,
   faMapMarkerAlt,
@@ -5,8 +6,12 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import { HomeCareContextApi } from "../HomeCarePage";
 
 export default function HomeCareContactInformation() {
+  const objCompany = useContext(HomeCareContextApi).company;
+
   return (
     <>
       <div
@@ -28,7 +33,9 @@ export default function HomeCareContactInformation() {
                 icon={faPhone}
               />
             </div>
-            <div className="per_text xs:text-3xl xl:text-2xl ml-8">9876543210</div>
+            <div className="per_text xs:text-3xl xl:text-2xl ml-8">
+              {objCompany.company_contact}
+            </div>
           </a>
           <hr />
         </div>
@@ -45,7 +52,9 @@ export default function HomeCareContactInformation() {
                 icon={faMessage}
               />
             </div>
-            <div className="per_text xs:text-3xl xl:text-2xl ml-8">samirshaikh@gmail.com</div>
+            <div className="per_text xs:text-3xl xl:text-2xl ml-8">
+              {objCompany.company_email}
+            </div>
           </a>
           <hr />
         </div>
@@ -63,7 +72,10 @@ export default function HomeCareContactInformation() {
               />
             </div>
             <div className="per_text xs:text-3xl xl:text-2xl ml-8">
-              Mon - Sat Day: 09.30 to 6.30 - Sunday Closed
+              {Utils.getMondayToSundayDateTime(
+                objCompany.working_hours_from,
+                objCompany.working_hours_to
+              )}
             </div>
           </a>
           <hr />

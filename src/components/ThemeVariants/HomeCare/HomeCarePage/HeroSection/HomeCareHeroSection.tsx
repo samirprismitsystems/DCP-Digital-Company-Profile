@@ -1,6 +1,12 @@
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
+import { useContext } from "react";
+import { HomeCareContextApi } from "../HomeCarePage";
 
 export default function HomeCareHeroSection() {
+  const objCompany = useContext(HomeCareContextApi).company;
+
   return (
     <>
       <div
@@ -14,7 +20,9 @@ export default function HomeCareHeroSection() {
             <div className="brand-img w-auto m-auto table-cell h-32 align-middle text-center justify-center items-center">
               <div className="flex items-center justify-center">
                 <Image
-                  src={"/assets/homecare/homecarelogo.png"}
+                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
+                    objCompany.company_logo
+                  }`}
                   width={500}
                   height={500}
                   alt="image.png"
@@ -24,9 +32,9 @@ export default function HomeCareHeroSection() {
             </div>
           </div>
 
-          <h5 className="head6 text-center">Home Care Products</h5>
+          <h5 className="head6 text-center">{objCompany.company_name}</h5>
           <h5 className="link_title font-bold homecarefont">
-            Founder &amp; CEO
+            {objCompany.business_segment}
           </h5>
         </div>
       </div>

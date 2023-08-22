@@ -24,3 +24,18 @@ export interface IPortfolioInfo {
   social: ISocialLinks[];
   testimonial: ITestimonial[];
 }
+
+export interface IHomeCareInfo {
+  client: IClients[];
+  company: ICompanyDetails;
+  companycities: ICompanyCityList[];
+  error: string;
+  message: string;
+  inquiry: IEnquiry[];
+  paymentinfo: IPaymentOptions;
+  portfolio: IImageGallery[];
+  product: IProduct[];
+  service: IServicePageData[];
+  social: ISocialLinks[];
+  testimonial: ITestimonial[];
+}

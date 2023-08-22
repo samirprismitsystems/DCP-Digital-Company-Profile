@@ -138,6 +138,34 @@ class Utils {
       return null;
     }
   }
+
+  static getCompanyID() {
+    const result = this.getItem("IMAGE_UPLOAD_ID");
+    if (result) {
+      return result;
+    } else {
+      return null;
+    }
+  }
+  
+  static getMondayToSundayDateTime(
+    working_hours_from: string,
+    working_hours_to: string
+  ): string {
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    const workingHoursFrom = parse(working_hours_from, "HH:mm:ss", new Date());
+    const workingHoursTo = parse(working_hours_to, "HH:mm:ss", new Date());
+
+    const formattedWorkingHours = `${daysOfWeek[1]} - ${
+      daysOfWeek[6]
+    } Day: ${format(workingHoursFrom, "hh.mm")} to ${format(
+      workingHoursTo,
+      "hh.mm"
+    )} - ${daysOfWeek[0]} Closed`;
+
+    return formattedWorkingHours;
+  }
 }
 
 export default Utils;

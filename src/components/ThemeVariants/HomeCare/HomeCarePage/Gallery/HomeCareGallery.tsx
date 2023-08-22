@@ -1,11 +1,87 @@
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
 import HomeCarePagination from "../../Common/HomeCarePagination";
+import { HomeCareContextApi } from "../HomeCarePage";
 
 export default function HomeCareGallery() {
+  const lstPortfolio = useContext(HomeCareContextApi).portfolio;
+  const [objPagination, setObjPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    itemPerPage: 6,
+  });
+
+  const loadData = () => {
+    setObjPagination((prevState) => ({
+      ...prevState,
+      totalPages: Utils.getTotalPages(lstPortfolio, objPagination.itemPerPage),
+    }));
+  };
+
+  const onPrevChange = (index?: number) => {
+    if (index) {
+      if (objPagination.currentPage > 1) {
+        setObjPagination((prevState) => ({
+          ...prevState,
+          currentPage: index,
+        }));
+      }
+    } else {
+      if (objPagination.currentPage > 1) {
+        setObjPagination((prevState) => ({
+          ...prevState,
+          currentPage: prevState.currentPage - 1,
+        }));
+      }
+    }
+  };
+
+  const onNextChange = (index?: number) => {
+    if (index) {
+      if (objPagination.currentPage < objPagination.totalPages) {
+        setObjPagination((prevState) => ({
+          ...prevState,
+          currentPage: index + 1,
+        }));
+      }
+    } else {
+      if (objPagination.currentPage < objPagination.totalPages) {
+        setObjPagination((prevState) => ({
+          ...prevState,
+          currentPage: prevState.currentPage + 1,
+        }));
+      }
+    }
+  };
+
+  const onFirstPage = () => {
+    if (objPagination.currentPage > 1) {
+      setObjPagination((prevState) => ({
+        ...prevState,
+        currentPage: 1,
+      }));
+    }
+  };
+
+  const onLastPage = () => {
+    if (objPagination.currentPage < objPagination.totalPages) {
+      setObjPagination((prevState) => ({
+        ...prevState,
+        currentPage: objPagination.totalPages,
+      }));
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
       <div
-      id="gallery"
+        id="gallery"
         className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl p-5 mb-10"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
@@ -15,53 +91,39 @@ export default function HomeCareGallery() {
           Gallery
         </h4>
         <div className="homecarefont pt-4 pb-8 px-4 grid xs:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="image w-full h-auto py-6">
-            <Image
-              alt="image.png"
-              src={"/assets/homecare/homecarelogo.png"}
-              width={600}
-              className="max-w-[200px] block m-auto p-4 w-full h-full align-middle"
-              height={600}
-            />
-          </div>
-          <div className="image w-full h-auto py-6">
-            <Image
-              alt="image.png"
-              src={"/assets/homecare/homecarelogo.png"}
-              width={600}
-              className="max-w-[200px] block m-auto p-4 w-full h-full align-middle"
-              height={600}
-            />
-          </div>
-          <div className="image w-full h-auto py-6">
-            <Image
-              alt="image.png"
-              src={"/assets/homecare/homecarelogo.png"}
-              width={600}
-              className="max-w-[200px] block m-auto p-4 w-full h-full align-middle"
-              height={600}
-            />
-          </div>
-          <div className="image w-full h-auto py-6">
-            <Image
-              alt="image.png"
-              src={"/assets/homecare/homecarelogo.png"}
-              width={600}
-              className="max-w-[200px] block m-auto p-4 w-full h-full align-middle"
-              height={600}
-            />
-          </div>
-          <div className="image w-full h-auto py-6">
-            <Image
-              alt="image.png"
-              src={"/assets/homecare/homecarelogo.png"}
-              width={600}
-              className="max-w-[200px] block m-auto p-4 w-full h-full align-middle"
-              height={600}
-            />
-          </div>
+          {lstPortfolio
+            .slice(
+              (objPagination.currentPage - 1) * objPagination.itemPerPage,
+              Math.min(
+                objPagination.currentPage * objPagination.itemPerPage,
+                lstPortfolio.length
+              )
+            )
+            .map((item) => (
+              <div key={item.portfolio_id} className="image w-full h-auto py-6">
+                <Image
+                  alt="image.png"
+                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${
+                    item.portfolio_image
+                  }`}
+                  width={600}
+                  className="max-w-[400px] block m-auto p-4 w-full h-full align-middle"
+                  height={600}
+                />
+              </div>
+            ))}
         </div>
-        <HomeCarePagination />
+        {lstPortfolio && (
+          <HomeCarePagination
+            totalPages={objPagination.totalPages}
+            currentPage={objPagination.currentPage}
+            itemPerPage={objPagination.itemPerPage}
+            onNextChange={onNextChange}
+            onPrevChange={onPrevChange}
+            onLastPage={onLastPage}
+            onFirstPage={onFirstPage}
+          />
+        )}
       </div>
     </>
   );

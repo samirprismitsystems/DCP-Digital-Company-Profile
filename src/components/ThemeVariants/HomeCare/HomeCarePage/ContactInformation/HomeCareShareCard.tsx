@@ -1,11 +1,19 @@
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function HomeCareShareCard() {
-  const onSave = (event: any) => {
-    event.preventDefault();
-    
-    console.log("share card data");
+  const router = useRouter();
+  const [objUser, SetObjUser] = useState({
+    name: "",
+    mobile: "",
+  });
+
+  const onSave = (e: any) => {
+    e.preventDefault();
+    let redirectLink = `https://api.whatsapp.com/send?phone=${objUser.mobile}&text='hello i am ${objUser.name}'`;
+    router.push(redirectLink);
   };
 
   return (
@@ -23,13 +31,20 @@ export default function HomeCareShareCard() {
           <div className="form-group mb-5 text-center">
             <input
               type="text"
+              required
               className="form-control-input rounded-xl p-6 text-[14px]  text-homeCareTheme-textColor w-full font-medium homecarefont whitespace-normal break-words focus:outline focus:border-[1px] focus:border-solid placeholder:text-[#757575] focus:border-homeCareTheme-primary"
               style={{
                 border: "2px solid #ced4da",
               }}
               placeholder="Name"
               name="name"
-              value=""
+              value={objUser.name || ""}
+              onChange={(e: any) => {
+                SetObjUser((prevState: any) => ({
+                  ...prevState,
+                  name: e.target.value,
+                }));
+              }}
             ></input>
           </div>
           <div className="form-group mb-5 text-center">
@@ -41,7 +56,13 @@ export default function HomeCareShareCard() {
               }}
               placeholder="Mobile"
               name="mobile"
-              value=""
+              value={objUser.mobile || ""}
+              onChange={(e: any) => {
+                SetObjUser((prevState: any) => ({
+                  ...prevState,
+                  mobile: e.target.value,
+                }));
+              }}
             ></input>
           </div>
           <div className="flex justify-center items-center py-4">

@@ -1,7 +1,12 @@
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
-import HomeCarePagination from "../../Common/HomeCarePagination";
+import { useContext } from "react";
+import { HomeCareContextApi } from "../HomeCarePage";
 
 export default function HomeCareServices() {
+  const lstService = useContext(HomeCareContextApi).service;
+
   return (
     <>
       <div
@@ -15,66 +20,29 @@ export default function HomeCareServices() {
           Services
         </h4>
         <div className="homecarefont pt-4 pb-8 px-4 grid xs:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="image  flex flex-wrap justify-start items-center">
-            <div className="w-full h-auto">
-              <Image
-                alt="image.png"
-                src={"/assets/homecare/homecarelogo.png"}
-                width={600}
-                className="max-w-[200px] block m-auto w-full h-full align-middle"
-                height={600}
-              />
+          {lstService.map((item) => (
+            <div
+              key={item.service_id}
+              className="image  flex flex-wrap justify-start items-center"
+            >
+              <div className="w-full h-auto">
+                <div className="image w-full h-auto py-6">
+                  <Image
+                    alt="image.png"
+                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
+                      item.service_image
+                    }`}
+                    width={600}
+                    className="max-w-[400px] block m-auto w-full h-full align-middle"
+                    height={600}
+                  />
+                </div>
+                <h4 className="pb-2 text-homeCareTheme-textColor">
+                  {item.service_name}
+                </h4>
+              </div>
             </div>
-            <h4 className="pb-2 pt-6">Image Title-1</h4>
-          </div>
-          <div className="image  flex flex-wrap justify-start items-center">
-            <div className="w-full h-auto">
-              <Image
-                alt="image.png"
-                src={"/assets/homecare/homecarelogo.png"}
-                width={600}
-                className="max-w-[200px] block m-auto w-full h-full align-middle"
-                height={600}
-              />
-            </div>
-            <h4 className="pb-2 pt-6">Image Title-2</h4>
-          </div>
-          <div className="image  flex flex-wrap justify-start items-center">
-            <div className="w-full h-auto">
-              <Image
-                alt="image.png"
-                src={"/assets/homecare/homecarelogo.png"}
-                width={600}
-                className="max-w-[200px] block m-auto w-full h-full align-middle"
-                height={600}
-              />
-            </div>
-            <h4 className="pb-2 pt-6">Image Title-3</h4>
-          </div>
-          <div className="image  flex flex-wrap justify-start items-center">
-            <div className="w-full h-auto">
-              <Image
-                alt="image.png"
-                src={"/assets/homecare/homecarelogo.png"}
-                width={600}
-                className="max-w-[200px] block m-auto w-full h-full align-middle"
-                height={600}
-              />
-            </div>
-            <h4 className="pb-2 pt-6">Image Title-4</h4>
-          </div>
-          <div className="image  flex flex-wrap justify-start items-center">
-            <div className="w-full h-auto">
-              <Image
-                alt="image.png"
-                src={"/assets/homecare/homecarelogo.png"}
-                width={600}
-                className="max-w-[200px] block m-auto w-full h-full align-middle"
-                height={600}
-              />
-            </div>
-            <h4 className="pb-2 pt-6">Image Title-5</h4>
-          </div>
+          ))}
         </div>
       </div>
     </>
