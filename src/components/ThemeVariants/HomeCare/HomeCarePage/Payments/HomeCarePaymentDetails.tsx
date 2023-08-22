@@ -11,6 +11,7 @@ export default function HomeCarePaymentDetails() {
   return (
     <>
       <div
+      id="payment"
         className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl p-5 mb-10"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",

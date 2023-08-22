@@ -34,7 +34,7 @@ export default function HomeCarePaymentInfo(props: IHomeCarePaymentInfo) {
             />
           )}
         </div>
-        <div className="payment_label text-3xl text-homeCareTheme-textColor homecarefont w-auto ml-8 max-w-full">
+        <div className="payment_label text-3xl text-homeCareTheme-textColor homecarefont w-auto ml-8 max-w-full lg:text-4xl lg:ml-12">
           <strong>{props.label}:</strong> {props.value}
         </div>
       </div>

@@ -13,13 +13,13 @@ export default function HomeCareSaveContact() {
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}
-        className="border border-solid border-homeCareTheme-opacityBorder text-center contact-information mb-10 bg-white rounded-3xl p-5"
+        className=" border border-solid border-homeCareTheme-opacityBorder text-center contact-information mb-10 bg-white rounded-3xl p-5"
       >
-        <div className="grid grid-cols-2 gap-8 my-16 mx-8">
+        <div className="lg:w-1/2 xl:w-1/3 md:m-auto md:p-12 grid grid-cols-2 gap-8 my-16 mx-8">
           <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
             <a
               href="nitin_patel.vcf"
-              className="span btn btn-primary w-100"
+              className="xs:text-[1.875rem] span btn btn-primary w-100 xl:text-2xl"
               download
             >
               SAVE CONTACT
@@ -29,7 +29,9 @@ export default function HomeCareSaveContact() {
             <div className="dropdown">
               <details className="dropdown_menu">
                 <summary className="btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] text-3xl font-medium homecarefont">
-                  <span className="mr-4">SHARE</span>{" "}
+                  <span className="mr-4 xs:text-[1.875rem] xl:text-2xl">
+                    SHARE
+                  </span>{" "}
                   <FontAwesomeIcon icon={faCaretDown} />
                 </summary>
                 <div

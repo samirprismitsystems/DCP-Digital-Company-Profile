@@ -7,7 +7,7 @@ export default function HomeCareMadeWithLove() {
   return (
     <>
       <div
-        className="bg-[#fff] rounded-[20px]  p-5 mb-10  text-center border border-solid border-homeCareTheme-opacityBorder"
+        className="bg-[#fff] rounded-[20px]  p-5 py-12 mb-10  text-center border border-solid border-homeCareTheme-opacityBorder"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}

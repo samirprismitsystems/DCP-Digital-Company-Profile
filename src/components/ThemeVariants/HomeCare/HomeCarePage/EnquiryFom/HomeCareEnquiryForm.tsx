@@ -13,13 +13,14 @@ export default function HomeCareEnquiryForm() {
   return (
     <>
       <div
+        id="enquiry"
         className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl p-5 mb-10"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
         }}
       >
         <h4 className="pt-4 text-[22px] text-center text-black  font-bold mb-6 homecarefont">
-          Google Map
+          Enquiry Form
         </h4>
         <div className="homecarefont pt-4 pb-8 px-4">
           <form onSubmit={onSave}>
@@ -63,7 +64,10 @@ export default function HomeCareEnquiryForm() {
                 type="submit"
                 className="border border-solid border-homeCareTheme-primary text-center bg-homeCareTheme-primary  rounded-[10px]  flex justify-center items-center  font-normal homecarefont max-h-[40px] text-white mt-8 py-6 px-8"
               >
-                <FontAwesomeIcon className="text-3xl" icon={faPaperPlane} />
+                <FontAwesomeIcon
+                  className="text-[1.8rem]"
+                  icon={faPaperPlane}
+                />
                 <span className="ml-4 text-3xl"> Submit</span>
               </button>
             </div>

@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.relative_box_for_loading{
+.relative_box_for_loading {
   position: relative;
 }
-
 
 .homeCareBody {
   background-image: url("/assets/homecare/background.jpg");
@@ -55,8 +54,8 @@ select {
 
 .link_title {
   font-family: Open Sans, sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: normal;
   text-align: center;
   display: block;
@@ -455,6 +454,76 @@ ul.theme_list li {
   padding: 0 !important;
 }
 
+
+.slick-prev,
+.slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  z-index: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: "slick";
+  font-size: 27px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #053b7b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.max-w-full.mx-auto.rounded-bl-none.rounded-br-none.sticky.bottom-0.z-\[1\].w-full.bg-\[\#fff\].rounded-\[20px\].p-5.border.border-solid.border-homeCareTheme-opacityBorder.text-center {
+  padding: 20px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: "slick";
+  font-size: 27px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #053b7b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slick-prev,
+.slick-next {
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -17px !important;
+  display: block;
+}
+.slick-next {
+  right: -17px !important;
+  display: block;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #053b7b !important;
+  font-size: 23px !important;
+}
+
+
 .container-portfolio,
 .container-flued-portfolio {
   width: 100%;
@@ -503,6 +572,20 @@ html {
   .container-portfolio {
     max-width: 720px;
   }
+  .main-container{
+    width: 80% !important;
+  }
+
+  .slick-prev {
+  left: 0px !important;
+  display: block;
+}
+.slick-next {
+  right: 0px !important;
+  display: block;
+}
+
+  
 }
 
 @media (min-width: 992px) {
@@ -520,6 +603,9 @@ html {
   }
   .container-portfolio {
     max-width: 1140px;
+  }
+  .main-container{
+    width: 1170px !important;
   }
 }
 

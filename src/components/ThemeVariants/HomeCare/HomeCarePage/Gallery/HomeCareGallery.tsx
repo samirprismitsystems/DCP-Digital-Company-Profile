@@ -5,6 +5,7 @@ export default function HomeCareGallery() {
   return (
     <>
       <div
+      id="gallery"
         className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl p-5 mb-10"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
@@ -13,7 +14,7 @@ export default function HomeCareGallery() {
         <h4 className="pt-4 text-[22px] text-center text-black  font-bold mb-6 homecarefont">
           Gallery
         </h4>
-        <div className="homecarefont pt-4 pb-8 px-4 grid grid-cols-2 gap-4">
+        <div className="homecarefont pt-4 pb-8 px-4 grid xs:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="image w-full h-auto py-6">
             <Image
               alt="image.png"
