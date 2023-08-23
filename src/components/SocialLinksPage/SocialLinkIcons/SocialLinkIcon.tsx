@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faInstagram,
@@ -9,6 +8,7 @@ import {
   faWhatsapp,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SocialLinkIcon({
   icons,
@@ -30,7 +30,19 @@ export default function SocialLinkIcon({
 
   const iconComponent = iconMapping[icons];
 
-  if (!iconComponent) return null;
+  console.log("iconComponent", iconComponent);
+  console.log("icons", icons);
+  console.log("socialID", socialID);
+
+  console.log(
+    "-----",
+    <FontAwesomeIcon
+      className={`social-link-icons socialmedia_color_${socialID}`}
+      icon={iconComponent}
+    />
+  );
+
+  
   return (
     <>
       <FontAwesomeIcon
