@@ -30,7 +30,7 @@ export default function SocialLinkIcon({
 
   const iconComponent = iconMapping[icons];
 
-  console.log("iconComponent", iconComponent);
+  console.log("iconComponent-1", iconComponent);
   console.log("icons", icons);
   console.log("socialID", socialID);
 
@@ -42,7 +42,7 @@ export default function SocialLinkIcon({
     />
   );
 
-  
+  console.log("iconComponent-2", iconComponent);
   return (
     <>
       <FontAwesomeIcon
