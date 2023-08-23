@@ -21,10 +21,12 @@ export default function HomeCarePagination({
 
   useEffect(() => {
     setSelectedIndex(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   useEffect(() => {
     setSelectedIndex(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -53,12 +55,13 @@ export default function HomeCarePagination({
         {Array.from({ length: totalPages }, (_, index) => {
           return (
             <li
+              key={index}
               onClick={() => {
                 setSelectedIndex(index + 1);
-                if (index+1 > selectedIndex) {
+                if (index + 1 > selectedIndex) {
                   onNextChange(index);
                 } else {
-                  onPrevChange(index+1);
+                  onPrevChange(index + 1);
                 }
               }}
               className={`flex items-center justify-center text-center  active:border active:border-solid active:border-homeCareTheme-primary border-solid border border-homeCareTheme-primary rounded-[4px]  mr-4 ${

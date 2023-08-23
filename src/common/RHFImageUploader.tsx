@@ -1,5 +1,6 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -29,7 +30,7 @@ export default function RHFImageUploader({
   return (
     <>
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
-        <img
+        <Image
           suppressHydrationWarning
           src={`${selectedImagePath}`}
           alt="image.png"
