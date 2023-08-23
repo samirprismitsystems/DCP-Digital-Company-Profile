@@ -29,20 +29,6 @@ export default function SocialLinkIcon({
   };
 
   const iconComponent = iconMapping[icons];
-
-  console.log("iconComponent-1", iconComponent);
-  console.log("icons", icons);
-  console.log("socialID", socialID);
-
-  console.log(
-    "-----",
-    <FontAwesomeIcon
-      className={`social-link-icons socialmedia_color_${socialID}`}
-      icon={iconComponent}
-    />
-  );
-
-  console.log("iconComponent-2", iconComponent);
   return (
     <>
       <FontAwesomeIcon
