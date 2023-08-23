@@ -65,7 +65,7 @@ export const lstDashboardNavigationMenu = [
   {
     id: 0,
     name: "Visit Site",
-    link: `${Utils.getItem("slug")}`,
+    link: `/${Utils.getItem("slug")}`,
     target: true,
   },
   {

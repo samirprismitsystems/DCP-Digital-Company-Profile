@@ -49,6 +49,12 @@ module.exports = {
         grey: "#b2b2b2",
         redThemeTextColor: "#1a1a1a",
         redThemeGreyTextColor: "#666666",
+        gadgetTheme:{
+          primary: "#3baa96",
+          secondary: "#f7fffe",
+          text:"#666666",
+          title:"#1a1a1a",
+        }
       },
       screens: {
         xs: "370px",
