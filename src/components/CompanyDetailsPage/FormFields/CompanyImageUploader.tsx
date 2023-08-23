@@ -44,9 +44,7 @@ export default function CompanyImageUploader({
           }}
         >
           <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] flex items-center justify-center relative">
-            <Image
-              width={650}
-              height={650}
+            <img
               src={logoPath}
               alt="logo image"
               className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
@@ -75,15 +73,13 @@ export default function CompanyImageUploader({
           }}
         >
           <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] flex items-center justify-center relative">
-            <Image
+            <img
               src={bannerPath}
               alt="logo image"
               className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
               style={{
                 transform: "translate(-50%, -50%)",
-              }}
-              width={650}
-              height={650}
+            }}
             />
           </div>
           <p className="text-red-600 my-3  mx-auto text-center">

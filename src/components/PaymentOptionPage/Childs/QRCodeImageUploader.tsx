@@ -22,9 +22,7 @@ export default function QRCodeImageUploader({ imagePath }: { imagePath: any }) {
           }}
         >
           <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] flex items-center justify-center relative">
-            <Image
-              width={600}
-              height={600}
+            <img
               id="get_img"
               src={selectedImage}
               alt="logo image"

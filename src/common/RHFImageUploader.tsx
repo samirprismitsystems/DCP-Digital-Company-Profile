@@ -30,13 +30,11 @@ export default function RHFImageUploader({
   return (
     <>
       <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
-        <Image
+        <img
           suppressHydrationWarning
           src={`${selectedImagePath}`}
           alt="image.png"
           className="w-full h-full object-cover object-center align-middle border-none"
-          width={800}
-          height={800}
         />
       </div>
       <div
