@@ -7,13 +7,17 @@ import {
   faShareSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetStoreContactInfo from "./GetStoreContactInfo";
 
 export default function StoreContactsInfo() {
+  const objCompany = useContext(GadgetShopContextApi).company;
   return (
     <div className="container store-contact">
       <div className="flex  flex-wrap xs:justify-center sm:justify-between xl:justify-center -mx-3 gadgetfontfamily text-gadgetTheme-text">
         <GetStoreContactInfo
+          href={`tel:${objCompany.company_contact}`}
           icon={
             <FontAwesomeIcon
               icon={faPhone}
@@ -24,6 +28,7 @@ export default function StoreContactsInfo() {
           title="Call"
         />
         <GetStoreContactInfo
+          href={`https://wa.me/+91${objCompany.company_contact}`}
           icon={
             <FontAwesomeIcon
               icon={faWhatsapp}
@@ -34,6 +39,7 @@ export default function StoreContactsInfo() {
           title="WhatsApp"
         />
         <GetStoreContactInfo
+          href={`http://maps.google.com/maps/search/?api=1&query=${objCompany.address}`}
           icon={
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
@@ -44,6 +50,7 @@ export default function StoreContactsInfo() {
           title="Location"
         />
         <GetStoreContactInfo
+          href={`mailto:${objCompany.company_email}`}
           icon={
             <FontAwesomeIcon
               icon={faEnvelope}
@@ -54,6 +61,7 @@ export default function StoreContactsInfo() {
           title="Mail"
         />
         <GetStoreContactInfo
+          href="#"
           icon={
             <FontAwesomeIcon
               icon={faShareSquare}
@@ -64,6 +72,8 @@ export default function StoreContactsInfo() {
           title="Mail"
         />
         <GetStoreContactInfo
+          href={`/nitin_patel.vcf`}
+          isDownload={true}
           icon={
             <FontAwesomeIcon
               icon={faSave}
