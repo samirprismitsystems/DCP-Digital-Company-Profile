@@ -44,7 +44,7 @@ export default function GadgetServices() {
      arrows: false,
      slidesToShow: slidesToShow,
      slidesToScroll: slidesToScroll,
-     autoplay: false,
+     autoplay: true,
      autoplaySpeed: 3000,
    };
 
