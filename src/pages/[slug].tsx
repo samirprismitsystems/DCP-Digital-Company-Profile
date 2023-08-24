@@ -6,8 +6,8 @@ import React from 'react'
 export default function UserViewSection() {
   return (
     <div>
-      {/* <PortfolioPage /> */}
-      <GadgetShopPage />
+      <PortfolioPage />
+      {/* <GadgetShopPage /> */}
       {/* <HomeCarePage /> */}
     </div>
   );
