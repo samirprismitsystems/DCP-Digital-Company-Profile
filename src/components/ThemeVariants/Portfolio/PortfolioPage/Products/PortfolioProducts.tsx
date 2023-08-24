@@ -43,11 +43,11 @@ export default function PortfolioProducts() {
     dots: true,
     speed: 500,
     arrows: false,
-    slidesToShow: slidesToShow,
+    slidesToShow:6,
     slidesToScroll: slidesToScroll,
     centerMode: true,
     centerPadding: "30px",
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
   };
 
