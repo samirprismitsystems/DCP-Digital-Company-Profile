@@ -1,6 +1,10 @@
 import GadgetAboutUs from "./AboutUs/GadgetAboutUs";
+import GadgetFeedback from "./Feedback/GadgetFeedback";
 import GadgetFollowUs from "./FollowUs/GadgetFollowUs";
+import GadgetGallery from "./Gallery/GadgetGallery";
+import GadgetPaymentInfo from "./PaymentInfo/GadgetPaymentInfo";
 import GadgetProducts from "./Products/GadgetProducts";
+import GadgetServices from "./Service/GadgetServices";
 import StoreContactsInfo from "./StoreContactInformation/StoreContactsInfo";
 import GadgetWhatsAppShare from "./WhatsAppShare/GadgetWhatsAppShare";
 
@@ -16,6 +20,10 @@ export default function GadgetMainContent() {
         <GadgetFollowUs />
         <GadgetAboutUs />
         <GadgetProducts />
+        <GadgetServices />
+        <GadgetGallery />
+        <GadgetPaymentInfo/>
+        <GadgetFeedback/>
       </div>
     </div>
   );

@@ -31,10 +31,12 @@ export default function PortfolioPaymentCard({
       </div>
       <div className="pay-info ml-6 c-text">
         <dl className="mb-4 mt-0 c-text ">
-          <dt className="clear-both mr-2 p-0 font-semibold text-black float-left m-0  text-[2rem]">
+          <dt className="clear-both mr-2 p-0 font-semibold text-black float-left m-0  xs:text-[2rem] md:text-[1.6rem]">
             UPI.:
           </dt>
-          <dd className="float-left m-0 p-0  text-[2rem] c-text">{Upi || "N/A"}</dd>
+          <dd className="float-left m-0 p-0 xs:text-[2rem] md:text-[1.6rem] c-text">
+            {Upi || "N/A"}
+          </dd>
         </dl>
       </div>
     </div>

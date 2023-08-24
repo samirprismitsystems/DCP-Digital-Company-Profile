@@ -1,6 +1,11 @@
+import Utils from "@/services/Utils";
+import { useContext } from "react";
+import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "./GetGadgetHeader";
 
 export default function GadgetAboutUs() {
+  const objCompany = useContext(GadgetShopContextApi).company;
+
   return (
     <>
       <div className="about-block " id="about-us">
@@ -12,13 +17,10 @@ export default function GadgetAboutUs() {
           }}
         >
           <p className="xs:text-[2rem] md:text-[1.6rem] text-center gadgetfontfamily">
-            <strong>Since 2005</strong>
+            <strong>Since {Utils.getYear(objCompany.established_in)}</strong>
           </p>
           <p className="xs:text-[2rem] md:text-[1.6rem] mt-6 text-center gadgetfontfamily">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-            ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
-            accumsan lacus vel facilisis.{" "}
+            {objCompany.company_desc}
           </p>
         </div>
       </div>

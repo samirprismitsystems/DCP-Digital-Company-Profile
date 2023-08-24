@@ -296,10 +296,6 @@ h6,
   min-height: calc(100vh - 20rem) !important;
 }
 
-.gadgetfontfamily {
-  font-family: Gill Sans, sans-serif !important;
-}
-
 .social-link-icons {
   width: 2rem;
   height: 2rem;
@@ -365,7 +361,7 @@ ul.theme_list {
 .gadgetShop_theme .slick-dots li.slick-active button:before {
   color: #3baa96 !important;
 }
-.gadgetShop_theme .slick-dots li:hover{
+.gadgetShop_theme .slick-dots li:hover {
   color: #3baa96 !important;
 }
 
@@ -534,8 +530,6 @@ ul.theme_list li {
   font-size: 23px !important;
 }
 
-
-
 .container-portfolio,
 .container-flued-portfolio {
   width: 100%;
@@ -559,8 +553,19 @@ body .dashboardCardFont {
   color: #555;
 }
 
-.gadgetShop_theme .slick-slide:not(.slick-active) {
-  transform: scale(0.8);
+/* .gadgetShop_theme .slick-current:not(.slick-active) {
+  transform: scale(0.5);
+}
+.gadgetShop_theme .slick-slide .slick-active {
+  transform: scale(1);
+} */
+
+.about-block .slick-slide.slick-active.slick-current{
+  transform: scale(1);
+}
+
+.about-block .slick-slide{
+  transform: scale(0.9);
 }
 
 html {
@@ -621,6 +626,10 @@ html {
   .main-container {
     width: 1170px !important;
   }
+}
+
+.gadgetShop_theme .gadgetfontfamily {
+  font-family: Gill Sans, sans-serif !important;
 }
 
 input::-webkit-outer-spin-button,

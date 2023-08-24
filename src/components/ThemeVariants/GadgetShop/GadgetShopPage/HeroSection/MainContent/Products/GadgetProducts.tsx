@@ -20,7 +20,7 @@ export default function GadgetProducts() {
         setSlidesToShow(3);
         setSlidesToScroll(1);
       } else if (window.innerWidth < 2000) {
-        setSlidesToShow(4);
+        setSlidesToShow(3);
         setSlidesToScroll(1);
       } else {
         setSlidesToShow(1);
@@ -37,8 +37,10 @@ export default function GadgetProducts() {
   }, []);
 
   const configuration: any = {
-    dots: true,
+    dots: false,
     speed: 500,
+    centerMode: true,
+    centerPadding: "20px",
     arrows: false,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToScroll,
@@ -48,13 +50,13 @@ export default function GadgetProducts() {
 
   return (
     <>
-      <div className="about-block " id="about-us">
+      <div className="about-block" id="product">
         <GetGadgetHeader title="Products" />
         {lstProduct.length > 0 && (
           <Slider {...configuration}>
             {lstProduct.map((item, index) => (
               <div
-                className="content-box rounded-[2rem] text-center bg-white p-8 overflow-hidden gadgetfontfamily"
+                className="content-box rounded-[2rem] text-center min-h-[31.32rem] bg-white p-8 overflow-hidden gadgetfontfamily"
                 style={{
                   boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
                 }}
