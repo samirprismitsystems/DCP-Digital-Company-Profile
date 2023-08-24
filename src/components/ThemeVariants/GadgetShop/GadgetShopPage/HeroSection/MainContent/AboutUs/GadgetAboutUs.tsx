@@ -8,7 +8,7 @@ export default function GadgetAboutUs() {
 
   return (
     <>
-      <div className="about-block " id="about-us">
+      <div className="about-block " id="about">
         <GetGadgetHeader title="About" />
         <div
           className="content-box rounded-[2rem] text-center bg-white p-8 overflow-hidden gadgetfontfamily"

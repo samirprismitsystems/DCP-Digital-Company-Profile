@@ -11,7 +11,7 @@ export default function GadgetPaymentInfo() {
     <>
       <div className="about-block " id="about-us">
         <GetGadgetHeader title="Payment Info" />
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 xs:grid-cols-1 gap-16">
           <div className="paymentCards">
             <PortfolioPaymentCard
               title="Google Pay"

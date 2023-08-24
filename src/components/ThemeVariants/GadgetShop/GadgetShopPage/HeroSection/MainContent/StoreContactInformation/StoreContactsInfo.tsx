@@ -12,12 +12,12 @@ import GetStoreContactInfo from "./GetStoreContactInfo";
 export default function StoreContactsInfo() {
   return (
     <div className="container store-contact">
-      <div className="row flex xs:justify-center md:justify-evenly flex-wrap -mx-3 gadgetfontfamily text-gadgetTheme-text">
+      <div className="flex  flex-wrap xs:justify-center sm:justify-between xl:justify-center -mx-3 gadgetfontfamily text-gadgetTheme-text">
         <GetStoreContactInfo
           icon={
             <FontAwesomeIcon
               icon={faPhone}
-              className="text-[#f57d00] xs:text-[3.8rem] md:text-[3rem]"
+              className="text-[#f57d00] xs:text-[3.8rem] xl:text-[5rem] xlTwo:text-[3rem]"
             />
           }
           bgColor="rgba(245, 125, 0, 0.20)"
@@ -27,7 +27,7 @@ export default function StoreContactsInfo() {
           icon={
             <FontAwesomeIcon
               icon={faWhatsapp}
-              className="text-[#25D366] xs:text-[3.8rem] md:text-[3rem]"
+              className="text-[#25D366] xs:text-[3.8rem] xl:text-[5rem] xlTwo:text-[3rem]"
             />
           }
           bgColor="rgba(37, 211, 102, 0.2)"
@@ -37,7 +37,7 @@ export default function StoreContactsInfo() {
           icon={
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
-              className="text-[#cd201f] xs:text-[3.8rem] md:text-[3rem]"
+              className="text-[#cd201f] xs:text-[3.8rem] xl:text-[5rem] xlTwo:text-[3rem]"
             />
           }
           bgColor="rgba(205, 32, 31, 0.2)"
@@ -47,7 +47,7 @@ export default function StoreContactsInfo() {
           icon={
             <FontAwesomeIcon
               icon={faEnvelope}
-              className="text-gadgetTheme-primary xs:text-[3.8rem] md:text-[3rem]"
+              className="text-gadgetTheme-primary xs:text-[3.8rem] xl:text-[5rem] xlTwo:text-[3rem]"
             />
           }
           bgColor="rgba(59, 170, 150, 0.2)"
@@ -57,7 +57,7 @@ export default function StoreContactsInfo() {
           icon={
             <FontAwesomeIcon
               icon={faShareSquare}
-              className="text-[#007ee5] xs:text-[3.8rem] md:text-[3rem]"
+              className="text-[#007ee5] xs:text-[3.8rem] xl:text-[5rem] xlTwo:text-[3rem]"
             />
           }
           bgColor="rgba(0, 126, 229, 0.2)"
@@ -67,7 +67,7 @@ export default function StoreContactsInfo() {
           icon={
             <FontAwesomeIcon
               icon={faSave}
-              className="text-[#f94877] xs:text-[3.8rem] md:text-[3rem]"
+              className="text-[#f94877] xs:text-[3.8rem] xl:text-[5rem] xlTwo:text-[3rem]"
             />
           }
           bgColor="rgba(249, 72, 119, 0.2)"

@@ -5,6 +5,7 @@ import { IHomeCareInfo } from "@/types/themes/portfolio";
 import { createContext, useEffect, useState } from "react";
 import GadgetHeroSection from "./HeroSection/GadgetHeroSection";
 import GadgetMainContent from "./HeroSection/MainContent/GadgetMainContent";
+import GadgetFooter from "./GadgetFooter";
 
 export const GadgetShopContextApi = createContext<IHomeCareInfo>(
   {} as IHomeCareInfo
@@ -35,7 +36,7 @@ export default function GadgetShopPage() {
 
   return (
     <GadgetShopContextApi.Provider value={result}>
-      <div className="p-0 gadgetfontfamily gadgetShop_theme" id="">
+      <div className="p-0 gadgetfontfamily gadgetShop_theme" id="home">
         <GadgetHeroSection />
         <GadgetMainContent />
       </div>

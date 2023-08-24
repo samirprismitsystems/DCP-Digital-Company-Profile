@@ -17,7 +17,7 @@ export default function GadgetGallery() {
         setSlidesToShow(1);
         setSlidesToScroll(1);
       } else if (window.innerWidth < 950) {
-        setSlidesToShow(3);
+        setSlidesToShow(2);
         setSlidesToScroll(1);
       } else if (window.innerWidth < 2000) {
         setSlidesToShow(3);
@@ -61,7 +61,7 @@ export default function GadgetGallery() {
               >
                 <div style={{
                   boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
-                }} className="content-box gallery-box min-h-[412px] p-0 overflow-hidden mx-4 my-6 rounded-[2rem]">
+                }} className="content-box gallery-box p-0 overflow-hidden mx-4 my-6 rounded-[2rem]">
                   {" "}
                   <img
                     src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${

@@ -9,9 +9,9 @@ export default function GadgetFeedback() {
 
   return (
     <>
-      <div className="about-block " id="about-us">
+      <div className="about-block " id="feedback">
         <GetGadgetHeader title="Feedback" />
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 xs:grid-cols-1 gap-16">
           <div className=" h-[550px] overflow-auto">
             <GetPortfolioFeedBackReview lstTestimonial={lstTestimonial} />
           </div>

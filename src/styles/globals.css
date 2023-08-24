@@ -560,11 +560,11 @@ body .dashboardCardFont {
   transform: scale(1);
 } */
 
-.about-block .slick-slide.slick-active.slick-current{
+.about-block .slick-slide.slick-active.slick-current {
   transform: scale(1);
 }
 
-.about-block .slick-slide{
+.about-block .slick-slide {
   transform: scale(0.9);
 }
 
@@ -578,6 +578,9 @@ html {
   .container {
     max-width: 100%;
   }
+  .gadgetShop_theme .container {
+    max-width: 100% !important;
+  }
   .homeCareBody {
     padding-top: 0;
   }
@@ -589,6 +592,9 @@ html {
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
+  }
+  .gadgetShop_theme .container {
+    max-width: 720px !important;
   }
   .container-portfolio {
     max-width: 720px;
@@ -611,6 +617,9 @@ html {
   .container {
     max-width: 960px;
   }
+  .gadgetShop_theme .container {
+    max-width: 960px !important;
+  }
   .container-portfolio {
     max-width: 960px;
   }
@@ -619,6 +628,9 @@ html {
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
+  }
+  .gadgetShop_theme .container {
+    max-width: 1140px !important;
   }
   .container-portfolio {
     max-width: 1140px;
@@ -638,6 +650,12 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.gadgetShop_theme .container {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
 .container-navbar {
   width: 100%;
   padding-right: 12px;
@@ -652,6 +670,9 @@ input::-webkit-inner-spin-button {
   }
   .container-portfolio {
     max-width: 1320px;
+  }
+  .gadgetShop_theme .container {
+    max-width: 1320px !important;
   }
 }
 

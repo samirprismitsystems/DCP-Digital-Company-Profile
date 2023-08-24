@@ -17,7 +17,7 @@ export default function GadgetServices() {
         setSlidesToShow(1);
         setSlidesToScroll(1);
       } else if (window.innerWidth < 950) {
-        setSlidesToShow(3);
+        setSlidesToShow(2);
         setSlidesToScroll(1);
       } else if (window.innerWidth < 2000) {
         setSlidesToShow(3);
@@ -57,7 +57,7 @@ export default function GadgetServices() {
           <Slider {...configuration}>
             {lstService.map((item, index) => (
               <div
-                className="content-box rounded-[2rem] text-center min-h-[39.319rem] bg-white p-8 overflow-hidden gadgetfontfamily"
+                className="content-box rounded-[2rem] text-center  bg-white p-8 overflow-hidden gadgetfontfamily"
                 style={{
                   boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
                 }}
@@ -65,7 +65,7 @@ export default function GadgetServices() {
               >
                 <div
                   key={index}
-                  className="content-box services-box pt-0 min-h-[39.319rem] rounded-[2rem] p-8 overflow-hidden"
+                  className="content-box services-box pt-0  rounded-[2rem] p-8 overflow-hidden"
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
                     boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",

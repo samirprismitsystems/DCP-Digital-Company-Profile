@@ -1,4 +1,6 @@
+import GadgetFooter from "../../GadgetFooter";
 import GadgetAboutUs from "./AboutUs/GadgetAboutUs";
+import GadgetEnquiry from "./EnquiryForm/GadgetEnquiry";
 import GadgetFeedback from "./Feedback/GadgetFeedback";
 import GadgetFollowUs from "./FollowUs/GadgetFollowUs";
 import GadgetGallery from "./Gallery/GadgetGallery";
@@ -22,8 +24,17 @@ export default function GadgetMainContent() {
         <GadgetProducts />
         <GadgetServices />
         <GadgetGallery />
-        <GadgetPaymentInfo/>
-        <GadgetFeedback/>
+        <GadgetPaymentInfo />
+        <GadgetFeedback />
+        <GadgetEnquiry />
+      </div>
+      <div
+        className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:flex justify-between m-0 sticky z-0 bottom-0 space-x-6"
+        style={{
+          boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
+        }}
+      >
+        <GadgetFooter />
       </div>
     </div>
   );
