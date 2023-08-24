@@ -53,7 +53,7 @@ export default function PortfolioGallery() {
           <Slider {...configuration}>
             {lstImageGallery.map((item, index) => (
               <PortfolioCards
-                index={index}
+                key={index}
                 path={item.portfolio_image}
                 id={item.company_id}
               />
