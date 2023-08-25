@@ -657,20 +657,20 @@ input::-webkit-inner-spin-button {
 }
 
 .portfolio_theme .owl-dots button.owl-dot.active {
-  background: #8d1c9a;
+  background: #8d1c9a !important;
 }
 
 .portfolio_theme .owl-dots button.owl-dot {
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  display: inline-block;
-  background: hsl(294deg 69% 36% / 30%);
-  margin: 0 0.5rem;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  background: hsl(294deg 69% 36% / 30%) !important;
+  margin: 0 0.5rem !important;
 }
 
 .portfolio_theme .owl-dots button.owl-dot:focus {
-  outline: none;
+  outline: none !important;
 }
 .portfolio_theme .owl-theme .owl-dots .owl-dot {
   display: inline-flex !important;

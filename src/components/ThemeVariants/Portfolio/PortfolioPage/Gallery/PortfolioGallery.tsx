@@ -41,7 +41,7 @@ export default function PortfolioGallery() {
     loop: true,
     items: slidesToShow,
     margin: 0,
-    // autoplay: true,
+    autoplay: true,
     dots: true,
     autoplayTimeout: 3000,
     smartSpeed: 800,
