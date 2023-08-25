@@ -5,10 +5,11 @@ import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import GetPortfolioFeedBackReview from "./GetPortfolioFeedBackReview";
 import Ratting from "./Ratting";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioFeedback() {
-  const lstTestimonial = useContext(PortfolioContextApi).testimonial;
-  const objCompany = useContext(PortfolioContextApi).company;
+  const lstTestimonial = useContext(ThemeContextApi).testimonial;
+  const objCompany = useContext(ThemeContextApi).company;
   const [objFeedback, setObjFeedback] = useState({
     clientName: "",
     email: "",

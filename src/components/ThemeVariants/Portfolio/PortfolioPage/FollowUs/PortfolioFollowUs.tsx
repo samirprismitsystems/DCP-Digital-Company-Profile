@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 const iconMapping: any = {
   faFacebookF: faFacebookF,
@@ -24,7 +25,7 @@ const iconMapping: any = {
 };
 
 export default function PortfolioFollowUs() {
-  const lstSocial = useContext(PortfolioContextApi).social;
+  const lstSocial = useContext(ThemeContextApi).social;
 
   return (
     <>

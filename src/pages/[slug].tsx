@@ -41,7 +41,7 @@ export default function UserViewSection() {
     <ThemeContextApi.Provider value={result}>
       {themeID === THEME_TYPE.GADGET && <GadgetShopPage />}
       {themeID === THEME_TYPE.HOMECARE && <HomeCarePage />}
-      {themeID === THEME_TYPE.PORTFOLIO ? <PortfolioPage /> : <PageNotFound />}
+      {themeID === THEME_TYPE.PORTFOLIO ? <PortfolioPage result={result} /> : <PageNotFound />}
     </ThemeContextApi.Provider>
   );
 }

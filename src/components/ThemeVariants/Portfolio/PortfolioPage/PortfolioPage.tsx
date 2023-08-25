@@ -24,7 +24,7 @@ export default function PortfolioPage(props: any) {
   return (
     <>
       <Head>
-        <link rel="icon" href={result.company.company_logo} sizes="any" />
+        <link rel="icon" href={props.result.company.company_logo} sizes="any" />
       </Head>
       <div className="container-flued-portfolio portfolio_theme c-text bg-white">
         <PortfolioProfile />

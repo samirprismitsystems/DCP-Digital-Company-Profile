@@ -8,9 +8,10 @@ import Link from "next/link";
 import { useContext } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 import PortfolioContactCards from "./PortfolioContactCards";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioContactsInformation() {
-  const objCompany = useContext(PortfolioContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <div

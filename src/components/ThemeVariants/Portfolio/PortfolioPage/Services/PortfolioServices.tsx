@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioServiceCard from "./PortfolioServiceCard";
+import { ThemeContextApi } from "@/pages/[slug]";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
 
 export default function PortfolioServices() {
-  const lstService = useContext(PortfolioContextApi).service;
+  const lstService = useContext(ThemeContextApi).service;
 
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
   const [slidesToScroll, setSlidesToScroll] = useState<number>(1);

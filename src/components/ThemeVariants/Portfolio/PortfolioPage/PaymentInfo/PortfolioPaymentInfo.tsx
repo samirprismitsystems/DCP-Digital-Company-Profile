@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioPaymentCard from "./PortfolioPaymentCard";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioPaymentInfo() {
-  const objPaymentInfo = useContext(PortfolioContextApi).paymentinfo;
+  const objPaymentInfo = useContext(ThemeContextApi).paymentinfo;
 
 
   return (

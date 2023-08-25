@@ -2,9 +2,10 @@ import Utils from "@/services/Utils";
 import { useContext } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioAboutUs() {
-  const objCompany = useContext(PortfolioContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <div className="about-block" id="aboutus">
