@@ -45,10 +45,10 @@ export default function PortfolioProducts() {
     loop: true,
     items: slidesToShow,
     margin: 0,
-    autoplay: true,
+    // autoplay: true,
     dots: true,
     nav: false,
-    autoplayTimeout: 3000,
+    // autoplayTimeout: 3000,
     smartSpeed: 1100,
   };
 
