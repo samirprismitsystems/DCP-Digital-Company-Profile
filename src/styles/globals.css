@@ -339,9 +339,9 @@ ul li {
 ul.theme_list {
   list-style: none;
 }
-.slick-dots {
+/* .slick-dots {
   bottom: -20px !important;
-}
+} */
 .demo {
   background-color: #f9f9f9;
   width: 100%;
@@ -350,22 +350,22 @@ ul.theme_list {
   margin: 2rem 0 3rem;
   border-radius: 0.25rem;
 }
-.slick-dots li.slick-active button:before {
+/* .slick-dots li.slick-active button:before {
   color: #8d1c9a !important;
 }
 
 .slick-dots li:hover {
   color: #8d1c9a !important;
-}
+} */
 
-.gadgetShop_theme .slick-dots li.slick-active button:before {
+/* .gadgetShop_theme .slick-dots li.slick-active button:before {
   color: #3baa96 !important;
 }
 .gadgetShop_theme .slick-dots li:hover {
   color: #3baa96 !important;
-}
+} */
 
-.slick-dots li button:before {
+/* .slick-dots li button:before {
   font-family: "slick";
   font-size: 15px !important;
   line-height: 20px;
@@ -380,7 +380,7 @@ ul.theme_list {
   color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 ul.theme_list li:before {
   content: "";
@@ -462,7 +462,7 @@ ul.theme_list li {
   padding: 0 !important;
 }
 
-.slick-prev,
+/* .slick-prev,
 .slick-next {
   font-size: 0;
   line-height: 0;
@@ -528,7 +528,7 @@ ul.theme_list li {
 .slick-next:before {
   color: #053b7b !important;
   font-size: 23px !important;
-}
+} */
 
 .container-portfolio,
 .container-flued-portfolio {
@@ -560,13 +560,13 @@ body .dashboardCardFont {
   transform: scale(1);
 } */
 
-.about-block .slick-slide.slick-active.slick-current {
+/* .about-block .slick-slide.slick-active.slick-current {
   transform: scale(1);
 }
 
 .about-block .slick-slide {
   transform: scale(0.9);
-}
+} */
 
 html {
   font-size: 62.5%;
@@ -603,14 +603,14 @@ html {
     width: 80% !important;
   }
 
-  .slick-prev {
+  /* .slick-prev {
     left: 0px !important;
     display: block;
   }
   .slick-next {
     right: 0px !important;
     display: block;
-  }
+  } */
 }
 
 @media (min-width: 992px) {
@@ -664,9 +664,9 @@ input::-webkit-inner-spin-button {
   margin-left: auto;
 }
 
-.slick-track{
+/* .slick-track{
   display: inline !important;
-}
+} */
 
 @media (min-width: 1400px) {
   .container {

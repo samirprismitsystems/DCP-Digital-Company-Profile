@@ -12,8 +12,8 @@ const Ratting = ({
   count: number;
   rating: number;
   color: {
-    unfilled: any;
-    filled: any;
+    unfilled: string;
+    filled: string;
   };
   onRating: (value: any) => void;
 }) => {
@@ -24,9 +24,9 @@ const Ratting = ({
       return color.filled;
     } else if (!hoverRating && rating >= index) {
       return color.filled;
+    } else {
+      return color.unfilled;
     }
-
-    return color.unfilled;
   };
 
   const starRating = useMemo(() => {
@@ -34,13 +34,13 @@ const Ratting = ({
       .fill(0)
       .map((_, i) => i + 1)
       .map((idx) => (
-        <span className="mx-1" key={idx}>
+        <span className="mx-1 block" key={idx}>
           <FontAwesomeIcon
             key={idx}
             className="cursor-pointer w-12 h-12"
             icon={faStar}
             onClick={() => onRating(idx)}
-            style={{ color: getColor(idx) }}
+            style={{ color: getColor(idx) as any }}
             onMouseEnter={() => setHoverRating(idx)}
             onMouseLeave={() => setHoverRating(0)}
           />
@@ -49,17 +49,14 @@ const Ratting = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, rating, hoverRating]);
 
-  return <div>{starRating}</div>;
+  return starRating;
 };
 
 Ratting.propTypes = {
   count: PropTypes.number,
   rating: PropTypes.number,
-  onChange: PropTypes.func,
-  color: {
-    filled: PropTypes.string,
-    unfilled: PropTypes.string,
-  },
+  onChange: PropTypes.any,
+  color: PropTypes.any,
 };
 
 Ratting.defaultProps = {

@@ -38,6 +38,7 @@ export default function Document() {
           crossOrigin=""
           async
         ></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
       </body>
     </Html>
   );
