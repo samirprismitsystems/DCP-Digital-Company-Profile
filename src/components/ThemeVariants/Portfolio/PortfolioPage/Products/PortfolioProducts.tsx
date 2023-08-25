@@ -43,7 +43,7 @@ export default function PortfolioProducts() {
     dots: true,
     speed: 500,
     arrows: false,
-    slidesToShow:6,
+    slidesToShow:4,
     slidesToScroll: slidesToScroll,
     centerMode: true,
     centerPadding: "30px",

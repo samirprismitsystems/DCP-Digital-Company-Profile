@@ -1,5 +1,4 @@
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 
 export default function PortfolioServiceCard({
   path,
@@ -18,7 +17,7 @@ export default function PortfolioServiceCard({
     <div key={index} className="item xs:w-full xlOne:w-[283.846px] px-4 h-full">
       <div className="services-box relative pt-0 mb-4 overflow-hidden  rounded-3xl">
         <div className="services-img flex justify-center items-center bg-portfolioTheme-primary h-96 ">
-          <Image
+          <img
             width={298}
             height={199}
             alt="services-img"
