@@ -12,34 +12,12 @@ export const GadgetShopContextApi = createContext<IHomeCareInfo>(
 );
 
 export default function GadgetShopPage() {
-  const [result, setResult] = useState<IHomeCareInfo>();
-
-  const loadData = async () => {
-    try {
-      const res = await ApiService.getWebsiteDetails();
-      if (!res.error) {
-        setResult(res);
-        return null;
-      }
-
-      throw new Error(res.message);
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  if (!result) return <PageCircularLoading />;
-
   return (
-    <GadgetShopContextApi.Provider value={result}>
+    <>
       <div className="p-0 gadgetfontfamily gadgetShop_theme" id="home">
         <GadgetHeroSection />
         <GadgetMainContent />
       </div>
-    </GadgetShopContextApi.Provider>
+    </>
   );
 }

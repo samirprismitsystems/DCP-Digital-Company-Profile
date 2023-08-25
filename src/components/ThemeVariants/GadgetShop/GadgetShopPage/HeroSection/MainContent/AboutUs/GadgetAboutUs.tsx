@@ -2,9 +2,10 @@ import Utils from "@/services/Utils";
 import { useContext } from "react";
 import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "./GetGadgetHeader";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function GadgetAboutUs() {
-  const objCompany = useContext(GadgetShopContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <>

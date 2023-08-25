@@ -21,29 +21,8 @@ export const PortfolioContextApi = createContext<IPortfolioInfo>(
 );
 
 export default function PortfolioPage(props: any) {
-  const [result, setResult] = useState<IPortfolioInfo>();
-  
-  const loadData = async () => {
-    try {
-      const res = await ApiService.getWebsiteDetails();
-      if (!res.error) {
-        setResult(res);
-        return null;
-      }
-
-      throw new Error(res.message);
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  if (!result) return <PageCircularLoading />;
   return (
-    <PortfolioContextApi.Provider value={result}>
+    <>
       <Head>
         <link rel="icon" href={result.company.company_logo} sizes="any" />
       </Head>
@@ -77,6 +56,6 @@ export default function PortfolioPage(props: any) {
       >
         <PortfolioFooter />
       </div>
-    </PortfolioContextApi.Provider>
+    </>
   );
 }

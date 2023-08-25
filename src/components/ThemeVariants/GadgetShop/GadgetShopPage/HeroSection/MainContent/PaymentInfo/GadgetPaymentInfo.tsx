@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
 import GadgetBankDetails from "./GadgetBankDetails";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function GadgetPaymentInfo() {
-  const objPaymentInfo = useContext(GadgetShopContextApi).paymentinfo;
+  const objPaymentInfo = useContext(ThemeContextApi).paymentinfo;
 
   return (
     <>

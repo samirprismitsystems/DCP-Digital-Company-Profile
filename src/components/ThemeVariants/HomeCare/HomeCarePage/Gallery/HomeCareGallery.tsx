@@ -4,9 +4,10 @@ import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import HomeCarePagination from "../../Common/HomeCarePagination";
 import { HomeCareContextApi } from "../HomeCarePage";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareGallery() {
-  const lstPortfolio = useContext(HomeCareContextApi).portfolio;
+  const lstPortfolio = useContext(ThemeContextApi).portfolio;
   const [objPagination, setObjPagination] = useState({
     currentPage: 1,
     totalPages: 1,

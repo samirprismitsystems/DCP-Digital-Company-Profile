@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { GadgetShopContextApi } from "../../../GadgetShopPage";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 const iconMapping: any = {
   faFacebookF: faFacebookF,
@@ -22,7 +23,7 @@ const iconMapping: any = {
 };
 
 export default function GadgetFollowUs() {
-  const lstSocial = useContext(GadgetShopContextApi).social;
+  const lstSocial = useContext(ThemeContextApi).social;
 
   return (
     <>

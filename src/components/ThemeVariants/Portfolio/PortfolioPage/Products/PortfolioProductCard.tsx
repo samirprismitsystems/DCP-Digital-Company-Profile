@@ -10,8 +10,8 @@ export default function PortfolioProductCard(objData: {
 }) {
 
   return (
-    <div className="xs:w-full xlOne:w-[270.5px] px-4">
-      <div className="product-box rounded-3xl border-[1px] border-solid border-portfolioTheme-primary mb-6 overflow-hidden">
+    <div className="xs:w-full px-4">
+    <div className="product-box rounded-3xl border-[1px] border-solid border-portfolioTheme-primary mb-6 overflow-hidden">
         <div className="product-img text-center h-96 mb-4 min-h-[2.3rem] bg-[#f5f5f5]">
           <img
             alt="product-img"

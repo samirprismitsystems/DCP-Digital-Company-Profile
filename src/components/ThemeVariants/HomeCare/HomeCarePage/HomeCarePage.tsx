@@ -25,36 +25,11 @@ export const HomeCareContextApi = createContext<IHomeCareInfo>(
 );
 
 export default function HomeCarePage() {
-  const [result, setResult] = useState<IHomeCareInfo>();
-
-  const loadData = async () => {
-    try {
-      const res = await ApiService.getWebsiteDetails();
-      if (!res.error) {
-        setResult(res);
-        return null;
-      }
-
-      throw new Error(res.message);
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  console.log(result);
-
-  if (!result) return <PageCircularLoading />;
-
   return (
     <>
       <Head>
         <title>Home Care Products</title>
       </Head>
-      <HomeCareContextApi.Provider value={result}>
         <div className="homeCareBody pl-0 pr-0 pb-0 w-full bg-homeCareTheme-primary">
           <div className="main-container xs:pt-[30vh] xlOne:pt-[10vh] max-w-full xs:w-[500px] md:w-[62%] rounded-tl-3xl rounded-tr-3xl rounded-bl-none rounded-br-none m-auto relative py-0 px-7">
             <div id="home">
@@ -85,7 +60,6 @@ export default function HomeCarePage() {
             <HomeCareFooter />
           </div>
         </div>
-      </HomeCareContextApi.Provider>
     </>
   );
 }

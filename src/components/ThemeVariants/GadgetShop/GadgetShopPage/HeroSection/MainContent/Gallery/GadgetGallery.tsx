@@ -4,9 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function GadgetGallery() {
-  const lstPortfolio = useContext(GadgetShopContextApi).portfolio;
+  const lstPortfolio = useContext(ThemeContextApi).portfolio;
 
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
   const [slidesToScroll, setSlidesToScroll] = useState<number>(1);

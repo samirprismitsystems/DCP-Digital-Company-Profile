@@ -8,11 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetStoreContactInfo from "./GetStoreContactInfo";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function StoreContactsInfo() {
-  const objCompany = useContext(GadgetShopContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
   return (
     <div className="container store-contact">
       <div className="flex  flex-wrap xs:justify-center sm:justify-between xl:justify-center -mx-3 gadgetfontfamily text-gadgetTheme-text">

@@ -656,8 +656,10 @@ input::-webkit-inner-spin-button {
   height: auto;
 }
 
-.portfolio_theme .owl-dots button.owl-dot.active {
+.portfolio_theme .owl-dots button.owl-dot.active,
+.portfolio_theme .owl-dots button.owl-dot:hover {
   background: #8d1c9a !important;
+   transform: scale(1.2);
 }
 
 .portfolio_theme .owl-dots button.owl-dot {

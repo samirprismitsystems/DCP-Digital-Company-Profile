@@ -3,9 +3,10 @@ import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
 import { useContext } from "react";
 import { HomeCareContextApi } from "../HomeCarePage";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareHeroSection() {
-  const objCompany = useContext(HomeCareContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <>
@@ -19,12 +20,10 @@ export default function HomeCareHeroSection() {
           <div className="brand-image w-72 table  ml-auto mr-auto mt-auto mb-7 text-center  justify-center items-center">
             <div className="brand-img w-auto m-auto table-cell h-32 align-middle text-center justify-center items-center">
               <div className="flex items-center justify-center">
-                <Image
+                <img
                   src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
                     objCompany.company_logo
                   }`}
-                  width={500}
-                  height={500}
                   alt="image.png"
                   className="max-w-[150px] h-auto w-full align-middle text-center"
                 />

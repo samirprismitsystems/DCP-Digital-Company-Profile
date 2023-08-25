@@ -3,9 +3,10 @@ import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
 import { useContext } from "react";
 import { HomeCareContextApi } from "../HomeCarePage";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareProducts() {
-  const lstProduct = useContext(HomeCareContextApi).product;
+  const lstProduct = useContext(ThemeContextApi).product;
 
   return (
     <>

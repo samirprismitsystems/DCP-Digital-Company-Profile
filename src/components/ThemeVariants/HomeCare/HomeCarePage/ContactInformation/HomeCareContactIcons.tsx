@@ -10,9 +10,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { HomeCareContextApi } from "../HomeCarePage";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareContactIcons() {
-  const objCompany = useContext(HomeCareContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <>
