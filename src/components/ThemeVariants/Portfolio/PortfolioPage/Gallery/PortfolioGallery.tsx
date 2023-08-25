@@ -43,9 +43,9 @@ export default function PortfolioGallery() {
     margin: 0,
     autoplay: true,
     dots: true,
+    nav: false,
     autoplayTimeout: 3000,
-    smartSpeed: 800,
-    // nav: true,
+    smartSpeed: 1100,
   };
 
   return (

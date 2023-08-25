@@ -56,7 +56,7 @@ export default function PortfolioFeedback() {
           <form id="feedback_form" className="mt-8" onSubmit={onSave}>
             <div className="row flex flex-wrap justify-center items-center -mx-3">
               <div className="flex justify-center items-center">
-                <p className="start-ratting  text-center  mb-6 text-base mt-0">
+                <p className=" flex start-ratting  text-center  mb-6 text-base mt-0">
                   <Ratting
                     rating={rate}
                     onRating={(rattingValue: number) => {

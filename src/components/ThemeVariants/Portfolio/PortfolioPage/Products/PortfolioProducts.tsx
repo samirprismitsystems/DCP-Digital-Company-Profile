@@ -1,54 +1,55 @@
+import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import Slider from "react-slick";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioProductCard from "./PortfolioProductCard";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+  ssr: false,
+});
 
 export default function PortfolioProducts() {
   const lstProduct = useContext(PortfolioContextApi).product;
 
-    const [slidesToShow, setSlidesToShow] = useState<number>(1);
-    const [slidesToScroll, setSlidesToScroll] = useState<number>(1);
+  const [slidesToShow, setSlidesToShow] = useState<number>(1);
+  const [slidesToScroll, setSlidesToScroll] = useState<number>(1);
 
-    useEffect(() => {
-      const handleResize = () => {
-        if (window.innerWidth < 620) {
-          setSlidesToShow(1);
-          setSlidesToScroll(1);
-        } else if (window.innerWidth < 950) {
-          setSlidesToShow(3);
-          setSlidesToScroll(1);
-        } else if (window.innerWidth < 1200) {
-          setSlidesToShow(3);
-          setSlidesToScroll(1);
-        } else if (window.innerWidth < 2000) {
-          setSlidesToShow(4);
-          setSlidesToScroll(1);
-        } else {
-          setSlidesToShow(1);
-          setSlidesToScroll(1);
-        }
-      };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 620) {
+        setSlidesToShow(1);
+        setSlidesToScroll(1);
+      } else if (window.innerWidth < 950) {
+        setSlidesToShow(3);
+        setSlidesToScroll(1);
+      } else if (window.innerWidth < 1200) {
+        setSlidesToShow(3);
+        setSlidesToScroll(1);
+      } else if (window.innerWidth < 2000) {
+        setSlidesToShow(4);
+        setSlidesToScroll(1);
+      } else {
+        setSlidesToShow(1);
+        setSlidesToScroll(1);
+      }
+    };
 
-      handleResize();
-      window.addEventListener("resize", handleResize);
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-
-  const configuration = {
-    dots: true,
-    speed: 500,
-    arrows: false,
-    slidesToShow: slidesToShow,
-    slidesToScroll: slidesToScroll,
-    centerMode: true,
-    centerPadding: "30px",
+  const options = {
+    loop: true,
+    items: slidesToShow,
+    margin: 0,
     autoplay: true,
-    autoplaySpeed: 3000,
+    dots: true,
+    nav: false,
+    autoplayTimeout: 3000,
+    smartSpeed: 1100,
   };
 
   return (
@@ -56,11 +57,10 @@ export default function PortfolioProducts() {
       <GetHeader title="Products" />
       <div className="pt-8 pb-16">
         {lstProduct.length > 0 && (
-          <Slider {...configuration}>
+          <OwlCarousel className="owl-carousel owl-theme" {...options}>
             {lstProduct.map((item, index) => (
               <PortfolioProductCard
                 key={index}
-                index={item.id}
                 path={item.product_image}
                 id={item.company_id}
                 description={item.product_desc}
@@ -68,7 +68,7 @@ export default function PortfolioProducts() {
                 name={item.product_name}
               />
             ))}
-          </Slider>
+          </OwlCarousel>
         )}
         {lstProduct.length === 0 && (
           <>

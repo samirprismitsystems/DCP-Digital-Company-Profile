@@ -2,19 +2,17 @@ import { UPLOAD_IMAGE_URI } from "@/services/config";
 
 export default function PortfolioServiceCard({
   path,
-  index,
   id,
   name,
   description,
 }: {
   path: string;
-  index: number;
   id: string;
   name: string;
   description: string;
 }) {
   return (
-    <div key={index} className="item xs:w-full xlOne:w-[283.846px] px-4 h-full">
+    <div className="item xs:w-full xlOne:w-[283.846px] px-4 h-full">
       <div className="services-box relative pt-0 mb-4 overflow-hidden  rounded-3xl">
         <div className="services-img flex justify-center items-center bg-portfolioTheme-primary h-96 ">
           <img

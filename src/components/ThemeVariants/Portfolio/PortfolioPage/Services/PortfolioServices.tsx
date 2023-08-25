@@ -1,8 +1,11 @@
+import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import Slider from "react-slick";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioServiceCard from "./PortfolioServiceCard";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+  ssr: false,
+});
 
 export default function PortfolioServices() {
   const lstService = useContext(PortfolioContextApi).service;
@@ -34,17 +37,16 @@ export default function PortfolioServices() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const configuration = {
-    dots: true,
-    speed: 500,
-    arrows: false,
-    slidesToShow: slidesToShow,
-    slidesToScroll: slidesToScroll,
-    centerMode: true,
-    centerPadding: "30px",
+  const options = {
+    loop: true,
+    items: slidesToShow,
+    margin: 0,
     autoplay: true,
-    autoplaySpeed: 3000,
+    dots: true,
+    center: true,
+    nav: false,
+    autoplayTimeout: 3000,
+    smartSpeed: 1100,
   };
 
   return (
@@ -52,18 +54,17 @@ export default function PortfolioServices() {
       <GetHeader title="Services" />
       <div className="pt-8 pb-16">
         {lstService.length > 0 && (
-          <Slider {...configuration}>
+          <OwlCarousel className="owl-carousel owl-theme" {...options}>
             {lstService.map((item, index) => (
               <PortfolioServiceCard
-                key={index}
-                index={parseInt(item.service_id)}
+                key={item.service_id}
                 path={item.service_image}
                 id={item.company_id}
                 name={item.service_name}
                 description={item.service_desc}
               />
             ))}
-          </Slider>
+          </OwlCarousel>
         )}
         {lstService.length === 0 && (
           <>
