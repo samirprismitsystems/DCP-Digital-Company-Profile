@@ -1,14 +1,14 @@
+import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
 import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioCards from "./PortfolioCards";
-import dynamic from "next/dynamic";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
+
 export default function PortfolioGallery() {
   const lstImageGallery = useContext(PortfolioContextApi).portfolio;
-
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
   const [slidesToScroll, setSlidesToScroll] = useState<number>(1);
 
@@ -37,21 +37,23 @@ export default function PortfolioGallery() {
     };
   }, []);
 
+  const options = {
+    loop: true,
+    items: slidesToShow,
+    margin: 0,
+    // autoplay: true,
+    dots: true,
+    autoplayTimeout: 3000,
+    smartSpeed: 800,
+    // nav: true,
+  };
+
   return (
-    <div className="gallery-block " id="gallery">
+    <div className="gallery-block" id="gallery">
       <GetHeader title="Gallery" />
       <div className="pt-8 pb-16">
         {lstImageGallery.length > 0 && (
-          <OwlCarousel
-            margin={10}
-            items={slidesToShow}
-            nav={false}
-            autoPlay={true}
-            autoplaySpeed={3000}
-            autoplayTimeout={8500}
-            dots={true}
-            rewind={true}
-          >
+          <OwlCarousel className="owl-carousel owl-theme" {...options}>
             {lstImageGallery.map((item, index) => (
               <PortfolioCards
                 key={index}

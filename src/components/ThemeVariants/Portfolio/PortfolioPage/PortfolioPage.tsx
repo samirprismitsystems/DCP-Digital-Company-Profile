@@ -47,7 +47,7 @@ export default function PortfolioPage(props: any) {
       <Head>
         <link rel="icon" href={result.company.company_logo} sizes="any" />
       </Head>
-      <div className="container-flued-portfolio c-text bg-white">
+      <div className="container-flued-portfolio portfolio_theme c-text bg-white">
         <PortfolioProfile />
         <PortfolioContactsInformation />
         <div className="container-portfolio">
@@ -60,7 +60,7 @@ export default function PortfolioPage(props: any) {
           <PortfolioFeedback />
           <PortfolioContactUs />
           <div
-            className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:hidden md:flex justify-between m-0 sticky z-0 bottom-0 space-x-6"
+            className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:hidden md:flex justify-between m-0 sticky z-10 bottom-0 space-x-6 "
             style={{
               boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
             }}
@@ -70,7 +70,7 @@ export default function PortfolioPage(props: any) {
         </div>
       </div>
       <div
-        className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:flex md:hidden justify-between m-0 sticky z-0 bottom-0 space-x-6"
+        className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:flex md:hidden justify-between m-0 sticky z-10 bottom-0 space-x-6"
         style={{
           boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
         }}

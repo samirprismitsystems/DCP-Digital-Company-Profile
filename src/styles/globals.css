@@ -656,6 +656,26 @@ input::-webkit-inner-spin-button {
   height: auto;
 }
 
+.portfolio_theme .owl-dots button.owl-dot.active {
+  background: #8d1c9a;
+}
+
+.portfolio_theme .owl-dots button.owl-dot {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  display: inline-block;
+  background: hsl(294deg 69% 36% / 30%);
+  margin: 0 0.5rem;
+}
+
+.portfolio_theme .owl-dots button.owl-dot:focus {
+  outline: none;
+}
+.portfolio_theme .owl-theme .owl-dots .owl-dot {
+  display: inline-flex !important;
+}
+
 .container-navbar {
   width: 100%;
   padding-right: 12px;
