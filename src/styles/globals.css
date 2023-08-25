@@ -687,6 +687,18 @@ input::-webkit-inner-spin-button {
 /* .slick-track{
   display: inline !important;
 } */
+h4.product-title.helvetica.font-semibold.text-portfolioTheme-primary.text-\[2\.8rem\].my-2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+}
+
+p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 @media (min-width: 1400px) {
   .container {
