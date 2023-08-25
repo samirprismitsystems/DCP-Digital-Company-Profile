@@ -1,3 +1,4 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import {
   faFacebookF,
@@ -14,10 +15,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
 
 export default function PortfolioContactCards() {
-  const objCompany = useContext(PortfolioContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <div className="xs:grid xs:grid-cols-2 md:grid-cols-4 gap-8">
