@@ -1,4 +1,11 @@
+import PageCircularLoading from "@/common/PageCircularLoading";
 import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
+import {
+  ILandingPageData,
+  ILandingPageDetails,
+  IMeta,
+} from "@/types/landingPageType";
 import Head from "next/head";
 import { createContext, useEffect, useState } from "react";
 import DigitalFeatures from "./DigitalFeatures/DigitalFeatures";
@@ -10,7 +17,6 @@ import LandingFooter from "./LandingFooter/LandingFooter";
 import LandingNavbar from "./LandingNavbar/LandingNavbar";
 import Testimonial from "./Testimonials/Testimonial";
 import WhyUseDigitalCard from "./WhyUseDigitalCard/WhyUseDigitalCard";
-import { ILandingPageData, ILandingPageDetails, IMeta } from "@/types/landingPageType";
 
 export const LandingPageContextApi = createContext<ILandingPageData>(
   {} as ILandingPageData
@@ -26,13 +32,13 @@ export default function LandingPage() {
     try {
       const result = await ApiService.getLandingPageResource();
       if (result.error) {
-        throw new Error("An error occurred! Contact admin now.");
+        throw new Error(result.message);
       }
 
       setMetaData(result.page);
       setPageDetails(result.page_content);
-    } catch (ex) {
-      console.log(ex);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
     }
   };
 
@@ -40,7 +46,9 @@ export default function LandingPage() {
     loadData();
   }, []);
 
-  if (metaData && Object.keys(metaData).length <= 0) return null;
+  if (metaData && Object.keys(metaData).length <= 0)
+    return <PageCircularLoading />;
+    
   return (
     <LandingPageContextApi.Provider value={{ metaData, pageDetails }}>
       <Head>
@@ -58,7 +66,7 @@ export default function LandingPage() {
       <HeroSection />
       <HowItsWork />
       <DigitalFeatures />
-      <WhyUseDigitalCard />
+      <WhyUseDigitalCard cardImage={pageDetails.ftimg} />
       <FreeTrail />
       <Testimonial />
       <GetInTouch />

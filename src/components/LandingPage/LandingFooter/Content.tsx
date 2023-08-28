@@ -12,6 +12,7 @@ import { LandingPageContextApi } from "../LandingPage";
 export default function Content() {
   const result = useContext(LandingPageContextApi);
   const data = result.pageDetails;
+
   return (
     <section className="container xs:pt-24 pt-16 pb-16">
       <div className="row ">
@@ -28,54 +29,54 @@ export default function Content() {
           </div>
           <div className="w-2/5 md:w-1/4 m-auto xs:pt-12 pt-16">
             <ul className="flex lg:justify-center sm:justify-evenly xs:justify-between items-center md:space-x-8">
-              <li className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-20 w-20 ">
+              <Link href={"/facebook.com"} target="_blank" className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-20 w-20 ">
                 <FontAwesomeIcon
                   className="group-hover:text-white text-center text-secondary-main text-[3rem]"
                   icon={faFacebookF}
                 />
-              </li>
-              <li className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 ">
+              </Link>
+              <Link href={"/instagram.com"} target="_blank" className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 ">
                 <FontAwesomeIcon
                   className="hover:text-white group-hover:text-white text-center bg-transparent text-secondary-main text-[3rem]"
                   icon={faInstagram}
                 />
-              </li>
-              <li className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 ">
+              </Link>
+              <Link href={"/linked.com"} target="_blank" className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 ">
                 <FontAwesomeIcon
                   className="hover:text-white group-hover:text-white text-center text-secondary-main text-[3rem]"
                   icon={faLinkedinIn}
                 />
-              </li>
+              </Link>
             </ul>
           </div>
         </MainScrollAnimation>
         <MainScrollAnimation>
           <div className="xs:w-full md:w-3/5 m-auto xs:pt-12 md:pt-16 ">
             <ul className="flex justify-between sm:justify-center sm:space-x-16 items-center">
-              <li className="text-[1.8rem] font-400">
+              <Link href={"facebook.com"} target="_blank" className="text-[1.8rem] font-400">
                 <Link
                   href="#!"
                   className="hover:text-primary-light text-white font-medium "
                 >
                   PRIVACY
                 </Link>
-              </li>
-              <li className="text-[1.8rem] font-400">
+              </Link>
+              <Link href={"facebook.com"} target="_blank" className="text-[1.8rem] font-400">
                 <Link
                   href="#!"
                   className="hover:text-primary-light text-white font-medium "
                 >
                   COOKIE POLICY
                 </Link>
-              </li>
-              <li className="text-[1.8rem] font-400">
+              </Link>
+              <Link href={"facebook.com"} target="_blank" className="text-[1.8rem] font-400">
                 <Link
                   href="#!"
                   className="hover:text-primary-light text-white font-medium "
                 >
                   TERMS OF SERVICE{" "}
                 </Link>
-              </li>
+              </Link>
             </ul>
           </div>
         </MainScrollAnimation>

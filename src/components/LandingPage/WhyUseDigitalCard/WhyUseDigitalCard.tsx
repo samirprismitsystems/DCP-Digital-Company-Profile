@@ -1,8 +1,12 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Accordion from "./Accordion";
-import Image from "next/image";
 
-export default function WhyUseDigitalCard() {
+export default function WhyUseDigitalCard({
+  cardImage,
+}: {
+  cardImage: string;
+}) {
   return (
     <MainScrollAnimation>
       <div className="px-5">
@@ -11,12 +15,10 @@ export default function WhyUseDigitalCard() {
             <Accordion />
           </div>
           <div className="xs:hidden md:block md:w-[50%]">
-            <Image
-              width={800}
-              height={800}
+            <img
               className="max-w-full lg:w-[413px] h-auto block m-auto"
               alt="hero"
-              src="/assets/landing/mobile_overlay_sm.webp"
+              src={`${UPLOAD_IMAGE_URI}/landingpageoriginal/${cardImage}`}
             />
           </div>
         </div>

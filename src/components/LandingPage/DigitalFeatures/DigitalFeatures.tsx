@@ -27,19 +27,19 @@ export default function DigitalFeatures() {
               style={{ lineHeight: "1.3" }}
               className="xs:mb-2 font-semibold xs:text-left text-primary-lightDark text-[2.2rem]"
             >
-              {pageDetails.featuretitle}
+              {pageDetails.featuretitle || "N/A"}
             </h2>
             <h1
               className="xs:text-left xs:mb-2 title-font font-600 font-medium text-[3.0rem] text-white"
               style={{ lineHeight: "1.3" }}
             >
-              {pageDetails.featuresubtitle}
+              {pageDetails.featuresubtitle || "N/A"}
             </h1>
             <p
               className="xs:text-left sm:text-left md:xs:text-left text-white w-full py-8 mb-4 text-[1.8rem]"
               style={{ lineHeight: "1.5" }}
             >
-              {pageDetails.featuredesc}
+              {pageDetails.featuredesc || "N/A"}
             </p>
             <Link
               href="#"
@@ -51,7 +51,7 @@ export default function DigitalFeatures() {
                   fontFamily: "GothamRoundedBook",
                 }}
               >
-                {pageDetails.featurebtntitle}
+                {pageDetails.featurebtntitle || "N/A"}
               </button>
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default function DigitalFeatures() {
                         <FeatureCards logoText={item.featurelogo} />
                       </div>
                       <h1 className="text-[1.5rem] text-white pt-4 font-normal">
-                        {item.featuretext}
+                        {item.featuretext || "N/A"}
                       </h1>
                     </div>
                   );

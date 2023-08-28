@@ -1,5 +1,7 @@
+import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForButton";
 import MainScrollAnimation from "@/common/MainScrollAnimation";
 import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
 import { IUser } from "@/types/commonTypes";
 import { useContext, useState } from "react";
 import { LandingPageContextApi } from "../LandingPage";
@@ -11,6 +13,7 @@ interface IFormUser {
 }
 
 export default function GetInTouch() {
+  const [isLoading, setIsLoading] = useState(false);
   const result = useContext(LandingPageContextApi);
   const data = result.pageDetails;
   const [objUser, setObjUser] = useState<IFormUser>();
@@ -23,8 +26,9 @@ export default function GetInTouch() {
   };
 
   const onSave = async (e: any) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
+      setIsLoading(true);
       if (objUser) {
         const io: IUser = {
           name: objUser.fullName,
@@ -32,16 +36,19 @@ export default function GetInTouch() {
           email: "16mscit072@gmail.com",
           message: objUser.message,
         };
+
+        // Cors Error occurred in this section
         const res = await ApiService.sendEmail(io);
-        console.log(res, "res");
-        // cors error occurred the issues from the backend side so this work is pending from here
-      } else {
-        throw new Error("There is no user information available!");
+        if (!res.error) {
+          Utils.showSuccessMessage(res.message);
+          return null;
+        }
+        throw new Error(res.message);
       }
-    } catch (ex) {
-      console.log("from get in touch component", ex);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
     } finally {
-      // we can do other things here
+      setIsLoading(false);
     }
   };
 
@@ -54,10 +61,10 @@ export default function GetInTouch() {
         <div className="mx-auto pb-12">
           <div className="xs:px-8 xs:pt-0 md:pt-16">
             <h3 className="text-center text-[3.0rem] font-600 font-bold text-white">
-              {data.contacttitle}
+              {data.contacttitle || "N/A"}
             </h3>
-            <p className="text-center text-white pt-6 text-[1.8rem] md:pb-16">
-              {data.contactdesc}
+            <p className="xs:text-justify md:text-center text-white pt-6 text-[1.8rem] md:pb-16">
+              {data.contactdesc || "N/A"}
             </p>
           </div>
         </div>
@@ -111,10 +118,10 @@ export default function GetInTouch() {
               </div>
               <div className="flex justify-center text-[4rem]">
                 <button
-                  className="xs:text-[2.3rem] text-[1.8rem] xs:py-4 text-center first-letter xs:block xs:m-auto xs:w-full sm:w-52 btnHoverEffect px-9 py-4 rounded text-white bg-primary-light"
+                  className="xs:text-[2.3rem] text-[1.8rem] xs:py-4 text-center first-letter xs:block xs:m-auto xs:w-full sm:w-52 btnHoverEffect px-9 py-4 rounded text-white bg-primary-light min-h-[5rem]"
                   type="submit"
                 >
-                  Send
+                  {isLoading ? <CircularLoadingEffectForButton /> : "Send"}
                 </button>
               </div>
             </div>

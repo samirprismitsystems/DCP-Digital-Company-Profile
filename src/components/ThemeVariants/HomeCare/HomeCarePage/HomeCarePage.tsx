@@ -52,11 +52,11 @@ export default function HomeCarePage() {
             </div>
             <HomeCareEnquiryForm />
             <HomeCareMadeWithLove />
-            <div className="xs:hidden sm:block max-w-full mx-auto  rounded-bl-none rounded-br-none sticky  bottom-0 z-[1] w-full bg-[#fff] rounded-[20px] text-center">
+            <div className="xs:hidden sm:visible max-w-full mx-auto  rounded-bl-none rounded-br-none sticky  bottom-0 z-0 w-full bg-[#fff] rounded-[20px] text-center">
               <HomeCareFooter />
             </div>
           </div>
-          <div className="xs:visible sm:hidden max-w-full mx-auto  rounded-bl-none rounded-br-none sticky  bottom-0 z-[1] w-full bg-[#fff] rounded-[20px] text-center">
+          <div className="xs:visible sm:hidden max-w-full mx-auto  rounded-bl-none rounded-br-none sticky  bottom-0 z-0 w-full bg-[#fff] rounded-[20px] text-center">
             <HomeCareFooter />
           </div>
         </div>

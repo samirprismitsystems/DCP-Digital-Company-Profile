@@ -4,7 +4,7 @@ export enum USER_TYPE {
 }
 
 export enum THEME_TYPE {
-  HOMECARE = 2,
+  HOMECARE = 3,
   GADGET = 9,
   PORTFOLIO = 1,
 }

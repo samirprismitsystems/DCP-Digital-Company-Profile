@@ -1,5 +1,7 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
+import PageCircularLoading from "@/common/PageCircularLoading";
 import ApiService from "@/services/ApiServices";
+import { ILandingPageReview } from "@/types/landingPageType";
 import { faQuoteLeft, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
@@ -8,7 +10,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { LandingPageContextApi } from "../LandingPage";
-import { ILandingPageReview } from "@/types/landingPageType";
+import Utils from "@/services/Utils";
 
 export default function Testimonial() {
   const [lstReview, setLstReview] = useState<ILandingPageReview[]>();
@@ -24,10 +26,8 @@ export default function Testimonial() {
       }
 
       setLstReview(res.review);
-    } catch (Ex) {
-      console.log(Ex);
-    } finally {
-      // other operation
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
     }
   };
 
@@ -35,8 +35,7 @@ export default function Testimonial() {
     loadData();
   }, []);
 
-  if (!lstReview) return null;
-
+  if (!lstReview) return <PageCircularLoading />;
   return (
     <div className="container py-32">
       <MainScrollAnimation>
@@ -45,14 +44,14 @@ export default function Testimonial() {
             <div className="xs:p-16 flex flex-col md:flex-row items-center justify-between border-none h-full">
               <div className="md:border-b-0 md:border-r border-r-primary-lightDark md:w-2/5 mr-10 p-8 md:p-16 xs:p-0 xs:m-0">
                 <h4 className="text-[2.2rem] text-primary-lightDark font-600 text-center md:text-left font-medium xs:mb-2">
-                  {data.reviewtitle}
+                  {data.reviewtitle || "N/A"}
                 </h4>
                 <h3 className="xs:mb-4 text-[3.0rem] text-secondary-greyDark font-600 text-center md:text-left font-semibold">
-                  {data.reviewsubtitle}
+                  {data.reviewsubtitle || "N/A"}
                 </h3>
                 <div className="flex items-center  justify-center w-full mb-10 md:mb-0">
                   <p className="text-secondary-greyDark pt-6 text-[1.8rem] text-center md:text-left">
-                    {data.reviewdesc}
+                    {data.reviewdesc || "N/A"}
                   </p>
                 </div>
               </div>

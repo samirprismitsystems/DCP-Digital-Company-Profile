@@ -1,18 +1,15 @@
 import { faAdd, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 
 interface IFaqsListProps {
   title: string;
   desc: string;
+  openItem: string | null; // Track the currently open item
+  onToggle: (title: string) => void; // Function to handle toggling
 }
 
 export default function FaqsList(props: IFaqsListProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
-  };
+  const isOpen = props.openItem === props.title;
 
   return (
     <>
@@ -25,9 +22,9 @@ export default function FaqsList(props: IFaqsListProps) {
           }}
         >
           <button
-            className="flex  items-center justify-start hover:cursor-pointer text-[2.3rem] bg-transparent text-white font-Montserrat relative w-full text-left font-medium p-4"
+            className="flex items-center justify-start hover:cursor-pointer text-[2.3rem] bg-transparent text-white font-Montserrat relative w-full text-left font-medium p-4"
             onClick={() => {
-              toggleAccordion();
+              props.onToggle(props.title);
             }}
           >
             {isOpen ? (

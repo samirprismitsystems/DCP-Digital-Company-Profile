@@ -39,6 +39,7 @@ export interface ILandingPageDetails {
   ftdesc: string;
   ftimg: string;
   fttitle: string;
+  ftbtntitle: string;
   homebtnlink: string;
   homebtntitle: string;
   homedesc: string;
