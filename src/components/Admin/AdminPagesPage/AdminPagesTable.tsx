@@ -1,13 +1,18 @@
 import TableDataNotPresent from "@/common/TableDataNotPresent";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
+import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { IPagesInfo } from "@/types/commonTypes";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function AdminPagesTable() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [lstPagesInfo, setLstPagesInfo] = useState<IPagesInfo[]>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -77,12 +82,17 @@ export default function AdminPagesTable() {
                     <td className="p-4 text-2xl">{item.page_name}</td>
                     <td className="p-4 text-2xl">{item.template_name}</td>
                     <td className="p-4 text-2xl space-x-5">
-                      <Link target="_blank" href={"/dashboard/company"}>
+                      <button
+                        onClick={() => {
+                          router.push(`editpage/${item.page_slug}`);
+                          dispatch(setRouteIsChanged(true));
+                        }}
+                      >
                         <FontAwesomeIcon
                           className="text-secondary-main text-3xl text-center"
                           icon={faEdit}
                         />
-                      </Link>
+                      </button>
                       <button
                         type="button"
                         onClick={() => {
@@ -101,12 +111,17 @@ export default function AdminPagesTable() {
                     <td className="p-4 text-2xl">{item.page_name}</td>
                     <td className="p-4 text-2xl">{item.template_name}</td>
                     <td className="p-4 text-2xl space-x-5">
-                      <Link target="_blank" href={"/dashboard/company"}>
+                      <button
+                        onClick={() => {
+                          router.push(`editpage/${item.page_slug}`);
+                          dispatch(setRouteIsChanged(true));
+                        }}
+                      >
                         <FontAwesomeIcon
                           className="text-secondary-main text-3xl text-center"
                           icon={faEdit}
                         />
-                      </Link>
+                      </button>
                       <button
                         type="button"
                         onClick={() => {

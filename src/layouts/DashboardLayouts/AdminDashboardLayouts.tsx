@@ -22,17 +22,14 @@ import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import { RootState } from "@/services/store/store";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 
 export default function AdminDashboardLayout({ children }: any) {
   const dispatch = useAppDispatch();
   const routeIsChanged = useAppSelector((s) => s.common.routeIsChanged);
-
   const [dashboardContent, setDashboardContent] = useState<
     ReactNode | null | undefined
   >(null);
-  const router = useRouter();
   const { selectedIndex, selectedTitle } = useAppSelector(
     (state: RootState) => state.dashboard
   );

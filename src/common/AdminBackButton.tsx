@@ -22,6 +22,15 @@ export default function AdminBackButton({
   );
 
   const handleBack = () => {
+    const url = router.pathname;
+    const parts = url.split("/");
+    const editPageString = parts[2];
+    
+    if (editPageString === "editpage") {
+      router.push('/admindashboard/pages');
+      return null;
+    }
+
     if (!index) {
       let isDataValid: any = lstAdminDashboardPanels.find((item) => {
         if (item.id === selectedIndex - 1) {
