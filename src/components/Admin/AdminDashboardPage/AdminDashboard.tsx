@@ -21,7 +21,6 @@ export default function AdminDashboard({
   data: IAdminDashboardCounts;
 }) {
   const [objData, setObjData] = useState<IAdminDashboardCounts>(data);
-
   const lstAdminDashboardCards = [
     {
       id: 0,

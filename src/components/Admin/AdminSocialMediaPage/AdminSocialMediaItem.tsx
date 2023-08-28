@@ -208,7 +208,7 @@ export default function AdminSocialMediaItem() {
                       {...objForm.register(
                         `adminSocialMediaInfo.${index}.socialmedia_name`
                       )}
-                      defaultValue={item.socialmedia_name}
+                      defaultValue={item.socialmedia_name || "N/A"}
                       required={true}
                     />
                   </div>
@@ -216,11 +216,11 @@ export default function AdminSocialMediaItem() {
                     <input
                       type="text"
                       className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
-                      placeholder="Enter Social Name"
+                      placeholder="Enter Social Logo Class"
                       {...objForm.register(
                         `adminSocialMediaInfo.${index}.socialmedia_logo`
                       )}
-                      defaultValue={item.socialmedia_logo}
+                      defaultValue={item.socialmedia_logo || "N/A"}
                       required={true}
                     />
                   </div>

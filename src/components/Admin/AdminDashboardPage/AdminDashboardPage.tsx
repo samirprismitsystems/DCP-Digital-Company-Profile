@@ -17,7 +17,7 @@ export default function AdminDashboardPage() {
         return null;
       }
 
-      throw new Error("Error occurred while getting admin dashboard data!");
+      throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
     }
@@ -28,7 +28,6 @@ export default function AdminDashboardPage() {
   }, []);
 
   if (!objData) return <PageCircularLoading />;
-  
   return (
     <div className="tab_title mb-8 -mt-4">
       <div className="h2">Admin Dashboard</div>
