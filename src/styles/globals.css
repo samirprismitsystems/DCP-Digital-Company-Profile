@@ -553,12 +553,9 @@ body .dashboardCardFont {
   color: #555;
 }
 
-/* .gadgetShop_theme .slick-current:not(.slick-active) {
-  transform: scale(0.5);
+.gadgetShop_theme .owl-item.active.center{
+  transform: scale(1.1) !important;
 }
-.gadgetShop_theme .slick-slide .slick-active {
-  transform: scale(1);
-} */
 
 /* .about-block .slick-slide.slick-active.slick-current {
   transform: scale(1);

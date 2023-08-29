@@ -1,10 +1,12 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import Slider from "react-slick";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
-import { ThemeContextApi } from "@/pages/[slug]";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+  ssr: false,
+});
 
 export default function GadgetServices() {
   const lstService = useContext(ThemeContextApi).service;
@@ -37,67 +39,56 @@ export default function GadgetServices() {
     };
   }, []);
 
-   const configuration: any = {
-     dots: false,
-     speed: 500,
-     centerMode: true,
-     centerPadding: "20px",
-     arrows: false,
-     slidesToShow: slidesToShow,
-     slidesToScroll: slidesToScroll,
-     autoplay: true,
-     autoplaySpeed: 3000,
-   };
-
+  const options = {
+    items: slidesToShow,
+    margin: 25,
+    autoplay: true,
+    dots: false,
+    center: true,
+    nav: false,
+    autoplayTimeout: 3000,
+    smartSpeed: 1100,
+  };
 
   return (
     <>
       <div className="about-block" id="service">
         <GetGadgetHeader title="Services" />
         {lstService.length > 0 && (
-          <Slider {...configuration}>
+          <OwlCarousel className="owl-carousel owl-theme" {...options}>
             {lstService.map((item, index) => (
               <div
-                className="content-box rounded-[2rem] text-center  bg-white p-8 overflow-hidden gadgetfontfamily"
+                className=" xs:mx-14 md:mx-4  content-box rounded-[2rem] text-center  bg-white px-8 pb-8 my-16 overflow-hidden gadgetfontfamily min-h-[30rem]"
                 style={{
                   boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
                 }}
                 key={index}
               >
-                <div
-                  key={index}
-                  className="content-box services-box pt-0  rounded-[2rem] p-8 overflow-hidden"
-                  style={{
-                    backgroundColor: "rgb(255, 255, 255)",
-                    boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
-                  }}
-                >
-                  <div className="services-img -mx-8 mb-8">
-                    {" "}
-                    <img
-                      data-src="assets/img/services-01.jpg"
-                      width="298"
-                      height="199"
-                      alt="services-img"
-                      title="services-img"
-                      className="lazyload img-fluid w-full max-w-full min-h-full h-auto align-middle"
-                      src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
-                        item.service_image
-                      }`}
-                    />{" "}
-                  </div>
-                  <div className="services-info text-left">
-                    <h4 className="services-title titleClr text-black text-[2.2rem] font-medium">
-                      {item.service_name}
-                    </h4>
-                    <p className="services-description text-[1.6rem] text-black">
-                      {item.service_desc}
-                    </p>
-                  </div>
+                <div className="services-img -mx-8 mb-8 h-[25rem]">
+                  {" "}
+                  <img
+                    data-src="assets/img/services-01.jpg"
+                    width="298"
+                    height="199"
+                    alt="services-img"
+                    title="services-img"
+                    className="lazyload h-[25rem] img-fluid w-full max-w-full min-h-full align-middle"
+                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
+                      item.service_image
+                    }`}
+                  />{" "}
+                </div>
+                <div className="services-info text-left">
+                  <h4 className="services-title titleClr text-black text-[2.2rem] font-medium">
+                    {item.service_name}
+                  </h4>
+                  <p className="services-description text-[1.6rem] text-black">
+                    {item.service_desc}
+                  </p>
                 </div>
               </div>
             ))}
-          </Slider>
+          </OwlCarousel>
         )}
       </div>
     </>

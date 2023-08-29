@@ -29,7 +29,7 @@ export default function GadgetMainContent() {
         <GadgetEnquiry />
       </div>
       <div
-        className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:flex justify-between m-0 sticky z-0 bottom-0 space-x-6"
+        className="list-none rounded-tl-[3rem] rounded-tr-[3rem] bg-white pt-8 pb-4 px-6 overflow-hidden flex items-center xs:flex justify-between m-0 sticky z-10 bottom-0 space-x-6"
         style={{
           boxShadow: "0px 0px 20px 0px rgb(128 128 128 / 30%)",
         }}

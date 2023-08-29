@@ -1,10 +1,12 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
+import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import Slider from "react-slick";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
-import { ThemeContextApi } from "@/pages/[slug]";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+  ssr: false,
+});
 
 export default function GadgetGallery() {
   const lstPortfolio = useContext(ThemeContextApi).portfolio;
@@ -37,15 +39,15 @@ export default function GadgetGallery() {
     };
   }, []);
 
-  const configuration: any = {
-    dots: true,
-    speed: 500,
-    // centerMode: true,
-    arrows: false,
-    slidesToShow: slidesToShow,
-    slidesToScroll: slidesToScroll,
+  const options = {
+    items: slidesToShow,
+    margin: 25,
     autoplay: true,
-    autoplaySpeed: 3000,
+    dots: true,
+    center: true,
+    nav: false,
+    autoplayTimeout: 3000,
+    smartSpeed: 1100,
   };
 
   return (
@@ -53,16 +55,18 @@ export default function GadgetGallery() {
       <div id="gallery">
         <GetGadgetHeader title="Gallery" />
         {lstPortfolio.length > 0 && (
-          <Slider {...configuration}>
+          <OwlCarousel className="owl-carousel owl-theme" {...options}>
             {lstPortfolio.map((item, index) => (
               <div
                 key={index}
-                className="content-box gallery-box p-0 overflow-hidden mx-4 my-6 rounded-[2rem]"
-                
+                className="xs:mx-14 md:mx-4  content-box gallery-box p-0 xs:my-16 rounded-[2rem] h-[35rem]"
               >
-                <div style={{
-                  boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
-                }} className="content-box gallery-box p-0 overflow-hidden mx-4 my-6 rounded-[2rem]">
+                <div
+                  style={{
+                    boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
+                  }}
+                  className="content-box gallery-box p-0 overflow-hidden mx-4 my-6 rounded-[2rem] h-full"
+                >
                   {" "}
                   <img
                     src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${
@@ -70,12 +74,12 @@ export default function GadgetGallery() {
                     }`}
                     alt="gallery-img"
                     title="gallery-img"
-                    className="lazyload img-fluid w-full max-w-full h-auto align-middle"
+                    className="lazyload object-cover img-fluid w-full max-w-full h-full align-middle"
                   />{" "}
                 </div>
               </div>
             ))}
-          </Slider>
+          </OwlCarousel>
         )}
       </div>
     </>

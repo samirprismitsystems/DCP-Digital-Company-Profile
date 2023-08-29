@@ -80,7 +80,7 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
           {!props.addEmailMobile && (
             <div className="row flex flex-wrap justify-center items-center -mx-3">
               <div className="flex justify-center items-center">
-                <p className="start-ratting  text-center  mb-6 text-base mt-0">
+                <p className="start-ratting flex text-center  mb-8 text-base mt-0">
                   <Ratting
                     rating={rate}
                     onRating={(rattingValue: number) => {
