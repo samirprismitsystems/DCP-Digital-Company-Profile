@@ -8,7 +8,6 @@ const Editor = dynamic(() => import("@/common/Editor/Editor"), {
 });
 
 export default function DefaultTemplate() {
-  const objForm = useForm();
   return (
     <>
       <TextField

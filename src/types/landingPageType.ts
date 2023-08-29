@@ -51,6 +51,8 @@ export interface ILandingPageDetails {
   reviewtitle: string;
   reviewdesc: string;
   steps: string;
+  page_title?: string;
+  page_content?: string;
 }
 
 export interface ILandingPageCardSteps {

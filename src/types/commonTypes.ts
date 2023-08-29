@@ -1,4 +1,5 @@
 import { ICompanyDetails } from "./companyTypes";
+import { ILandingPageDetails } from "./landingPageType";
 
 export interface IUser {
   email: string;
@@ -164,6 +165,18 @@ export interface ISocialMediaColors {
   updated_at: string;
 }
 
+export interface IPagesPageInfo {
+  meta_description: string;
+  meta_image: string;
+  meta_keywords: string;
+  meta_title: string;
+  page_content: ILandingPageDetails;
+  page_id: string;
+  page_name: string;
+  page_slug: string;
+  template_name: string;
+}
+
 export interface IPagesInfo {
   meta_description: string;
   meta_image: string;
@@ -186,7 +199,7 @@ export interface IAdminUserReview {
 }
 
 export interface ISiteSetting {
-  created_on: string; 
+  created_on: string;
   setting_id: string;
   setting_name: string;
   setting_value: string;

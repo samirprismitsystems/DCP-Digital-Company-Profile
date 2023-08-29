@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -10,12 +10,19 @@ export default function TemplateImageUploader(
   props: ITemplateImageUploaderProps
 ) {
   const objForm = useFormContext();
-  const [selectedImagePath, setSelectedImagePath] = useState("");
+  const [selectedImagePath, setSelectedImagePath] = useState(
+    `${UPLOAD_IMAGE_URI}/landingpageoriginal/${objForm.getValues(
+      props.savePath
+    )}` || ""
+  );
 
   useEffect(() => {
     if (objForm.getValues(props.savePath)) {
-      const img = URL.createObjectURL(objForm.getValues(props.savePath));
-      setSelectedImagePath(img);
+      let img = `${UPLOAD_IMAGE_URI}/landingpageoriginal/${objForm.getValues(
+        props.savePath
+      )}`;
+
+      setSelectedImagePath(img)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.savePath]);
@@ -29,15 +36,13 @@ export default function TemplateImageUploader(
         }}
       >
         <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] items-center justify-center relative">
-          <Image
-            src={`/${selectedImagePath}`}
+          <img
+            src={selectedImagePath}
             alt="logo image"
             className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
             style={{
               transform: "translate(-50%, -50%)",
             }}
-            width={800}
-            height={800}
           />
         </div>
         <p className="text-red-600 my-3  mx-auto text-center">

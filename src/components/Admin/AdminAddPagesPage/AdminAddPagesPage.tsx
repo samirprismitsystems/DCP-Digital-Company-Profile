@@ -4,6 +4,9 @@ import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
+import { IPagesPageInfo } from "@/types/commonTypes";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import TemplateSelector from "./TemplateSelector";
@@ -11,8 +14,14 @@ import DefaultTemplate from "./Templates/DefaultTemplate";
 import LandingPageTemplate from "./Templates/LandingPageTemplate";
 import TemplateTwo from "./Templates/TemplateTwo";
 
-export default function AdminAddPagesPage() {
-  const objForm = useForm({
+export default function AdminAddPagesPage({
+  objPageInfo,
+}: {
+  objPageInfo?: IPagesPageInfo;
+}) {
+  const router = useRouter();
+  const [isEdit, setIsEdit] = useState<boolean>(Boolean(objPageInfo));
+  const objForm = useForm<any>({
     defaultValues: {
       selectedOption: 1,
       pageName: "",
@@ -36,6 +45,7 @@ export default function AdminAddPagesPage() {
       ],
     },
   });
+
   const dispatch = useDispatch();
   const selectedOption = objForm.watch("selectedOption");
 
@@ -53,11 +63,12 @@ export default function AdminAddPagesPage() {
   const onSave: SubmitHandler<any> = async (data: any) => {
     try {
       if (parseInt(data.selectedOption) === 1) {
+
         const io: any = new FormData();
         io.append("page_slug", Utils.generatePageSlug(data.pageTitle));
-        io.append("isupdate", false);
+        io.append("isupdate", isEdit ? true : false);
         io.append("template_name", "default_template");
-        io.append("page_name", data.pageTitle);
+        io.append("page_name", data.pageName);
         io.append("page_title", data.pageTitle);
         io.append("meta_title", data.metaTitle);
         io.append("meta_description", data.metaDesc);
@@ -68,6 +79,11 @@ export default function AdminAddPagesPage() {
         const res = await ApiService.createCompanyPage(io);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
+          if (isEdit) {
+            objForm.reset();
+            router.back();
+            return null;
+          }
           dispatch(
             setSelectedObj({
               selectedIndex: 3,
@@ -155,23 +171,71 @@ export default function AdminAddPagesPage() {
     }
   };
 
+  useEffect(() => {
+    if (isEdit && objPageInfo && Object.keys(objPageInfo).length > 0) {
+      let defaultTemplate = 0;
+      if (objPageInfo.template_name === "template2") {
+        defaultTemplate = 2;
+      } else if (objPageInfo.template_name === "landingpage_template") {
+        defaultTemplate = 3;
+      } else {
+        defaultTemplate = 1;
+      }
+
+      objForm.reset({
+        selectedOption: defaultTemplate,
+        pageName: objPageInfo.page_name || "",
+        pageTitle: objPageInfo.page_content.page_title || "",
+        pageContent: objPageInfo.page_content.page_content || "",
+        metaTitle: objPageInfo.meta_title || "",
+        metaDesc: objPageInfo.meta_description || "",
+        metaKeywords: objPageInfo.meta_keywords || "",
+        metaImage: objPageInfo.meta_image || "",
+        steps: [
+          {
+            stepstitle: "",
+            stepsdesc: "",
+          },
+        ],
+        features_data: [
+          {
+            featuretext: "",
+            featurelogo: "",
+          },
+        ],
+        faq_data: [
+          {
+            faqtitle: "",
+            faqdesc: "",
+          },
+        ],
+      });
+    }
+  }, []);
+
   return (
     <>
       <AdminBackButton backPath="pages" index={3} />
-      <div className="tab_titles mb-8 -mt-4">
-        <div className="h2">Add Pages</div>
+      <div className="tab_titles mb-16 -mt-4">
+        <div className="h2">{isEdit ? "Update Pages" : "Add Pages"}</div>
       </div>
       <FormProvider {...objForm}>
         <form onSubmit={objForm.handleSubmit(onSave as any)}>
           <div className="digital_profile_form form_shadow bg-white min-h-[50%] rounded-2xl pb-0 block">
-            <div className="xs:w-full lg:w-4/6 lg:m-auto grid xs:grid-cols-1 md:grid-cols-2 gap-14">
+            <div
+              className={`xs:w-full ${
+                isEdit ? "lg:w-full" : "lg:w-4/6"
+              } lg:m-auto grid ${
+                isEdit ? "xs:grid-cols-1" : "xs:grid-cols-1 md:grid-cols-2"
+              } gap-14`}
+            >
               <TextField
                 name="pageName"
                 title={"Page Name"}
                 placeHolder="Enter Page Name"
                 isRequired={true}
               />
-              <TemplateSelector />
+              {!isEdit && <TemplateSelector />}
             </div>
             {selectedOption == 1 && <DefaultTemplate />}
             {selectedOption == 2 && <TemplateTwo />}
