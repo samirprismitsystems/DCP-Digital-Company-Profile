@@ -1,7 +1,6 @@
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import dynamic from "next/dynamic";
-import { useForm } from "react-hook-form";
 import TemplateImageUploader from "./TemplateImageUploader";
 const Editor = dynamic(() => import("@/common/Editor/Editor"), {
   ssr: false,
@@ -19,7 +18,11 @@ export default function DefaultTemplate() {
       <Editor savePath="pageContent" />
       <div className="pt-32">
         <h2 className="pb-8">SEO Section</h2>
-        <TemplateImageUploader title="Select Meta Image" savePath="metaImage" />
+        <TemplateImageUploader
+          uploadPath="metaimg"
+          title="Select Meta Image"
+          savePath="metaImage"
+        />
       </div>
       <TextField
         name="metaTitle"

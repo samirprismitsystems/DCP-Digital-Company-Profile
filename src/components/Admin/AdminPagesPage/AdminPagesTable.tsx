@@ -84,7 +84,9 @@ export default function AdminPagesTable() {
                     <td className="p-4 text-2xl space-x-5">
                       <button
                         onClick={() => {
-                          router.push(`editpage/${item.page_id}`);
+                          router.push(
+                            `/admindashboard/editpage/${item.page_id}`
+                          );
                           dispatch(setRouteIsChanged(true));
                         }}
                       >
@@ -113,7 +115,9 @@ export default function AdminPagesTable() {
                     <td className="p-4 text-2xl space-x-5">
                       <button
                         onClick={() => {
-                          router.push(`editpage/${item.page_id}`);
+                          router.push(
+                            `/admindashboard/editpage/${item.page_id}`
+                          );
                           dispatch(setRouteIsChanged(true));
                         }}
                       >

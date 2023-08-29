@@ -46,7 +46,7 @@ export interface ILandingPageDetails {
   homeimg: string;
   homesubtitle: string;
   hometitle: string;
-  logoandtext: string;
+  logoandtext: any;
   reviewsubtitle: string;
   reviewtitle: string;
   reviewdesc: string;

@@ -5,7 +5,11 @@ import TemplateImageUploader from "../Templates/TemplateImageUploader";
 export default function SEO() {
   return (
     <>
-      <TemplateImageUploader savePath="metaImage" title="Upload Meta Image" />
+      <TemplateImageUploader
+        uploadPath="landingpageoriginal"
+        savePath="metaImage"
+        title="Upload Meta Image"
+      />
       <TextField
         name={"metaTitle"}
         title="Title"

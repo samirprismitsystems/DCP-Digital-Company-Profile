@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 interface ITemplateImageUploaderProps {
   savePath: string;
+  uploadPath: string;
   title: string;
 }
 export default function TemplateImageUploader(
@@ -11,14 +12,14 @@ export default function TemplateImageUploader(
 ) {
   const objForm = useFormContext();
   const [selectedImagePath, setSelectedImagePath] = useState(
-    `${UPLOAD_IMAGE_URI}/landingpageoriginal/${objForm.getValues(
+    `${UPLOAD_IMAGE_URI}/${props.uploadPath}/${objForm.getValues(
       props.savePath
     )}` || ""
   );
 
   useEffect(() => {
     if (objForm.getValues(props.savePath)) {
-      let img = `${UPLOAD_IMAGE_URI}/landingpageoriginal/${objForm.getValues(
+      let img = `${UPLOAD_IMAGE_URI}/${props.uploadPath}/${objForm.getValues(
         props.savePath
       )}`;
 
@@ -26,6 +27,7 @@ export default function TemplateImageUploader(
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.savePath]);
+
 
   return (
     <div className="form_field xs:w-full  sm:w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 pb-3 mb-16 transition-all duration-300 ease-linear">

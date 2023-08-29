@@ -63,7 +63,6 @@ export default function AdminAddPagesPage({
   const onSave: SubmitHandler<any> = async (data: any) => {
     try {
       if (parseInt(data.selectedOption) === 1) {
-
         const io: any = new FormData();
         io.append("page_slug", Utils.generatePageSlug(data.pageTitle));
         io.append("isupdate", isEdit ? true : false);
@@ -76,6 +75,9 @@ export default function AdminAddPagesPage({
         io.append("meta_image", data.metaImage);
         io.append("page_content", data.pageContent);
 
+        if (isEdit) {
+          io.append("page_id", objPageInfo?.page_id);
+        }
         const res = await ApiService.createCompanyPage(io);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
@@ -94,6 +96,7 @@ export default function AdminAddPagesPage({
           if (typeof window !== "undefined") {
             window.history.replaceState("pages", "", `/admindashboard/pages`);
           }
+
           return null;
         }
 
@@ -145,11 +148,19 @@ export default function AdminAddPagesPage({
         io.append("contacttitle", data.contactTitle);
         io.append("contactdesc", data.contactDescription);
         io.append("footerpages", data.contactDescription);
+        if (isEdit) {
+          io.append("page_id", objPageInfo?.page_id);
+        }
 
         const res = await ApiService.createCompanyPage(io);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
-          loadData();
+          if (isEdit) {
+            objForm.reset();
+            loadData();
+            router.back();
+            return null;
+          }
           dispatch(
             setSelectedObj({
               selectedIndex: 3,
@@ -191,19 +202,52 @@ export default function AdminAddPagesPage({
         metaDesc: objPageInfo.meta_description || "",
         metaKeywords: objPageInfo.meta_keywords || "",
         metaImage: objPageInfo.meta_image || "",
-        steps: [
+        homeTitle: objPageInfo.page_content.hometitle || "",
+        homeSubTitle: objPageInfo.page_content.homesubtitle || "",
+        homeDesc: objPageInfo.page_content.homedesc || "",
+        homeImage: objPageInfo.page_content.homeimg || "",
+        homeBtnTitle: objPageInfo.page_content.homebtntitle || "",
+        homeBtnLink: objPageInfo.page_content.homebtnlink || "",
+        cardTitle1: objPageInfo.page_content.cardtitle1 || "",
+        cardTitle2: objPageInfo.page_content.cardtitle2 || "",
+        cardImage1: objPageInfo.page_content.cardimg1 || "",
+        cardImage2: objPageInfo.page_content.cardimg2 || "",
+        cardContent1: objPageInfo.page_content.carddesc1 || "",
+        cardContent2: objPageInfo.page_content.carddesc2 || "",
+        featureTitle: objPageInfo.page_content.featuretitle || "",
+        featureSubTitle: objPageInfo.page_content.featuresubtitle || "",
+        featureDescription: objPageInfo.page_content.featuredesc || "",
+        featureBtnTitle: objPageInfo.page_content.featurebtntitle || "",
+        featureBtnLink: objPageInfo.page_content.featurebtnlink || "",
+        faqTitle: objPageInfo.page_content.faqtitle || "",
+        faqDesc: objPageInfo.page_content.faqdesc || "",
+        faqImage: objPageInfo.page_content.faqimg || "",
+        freeTrailTitle: objPageInfo.page_content.fttitle || "",
+        freeTrailDesc: objPageInfo.page_content.ftdesc || "",
+        freeTrailImage: objPageInfo.page_content.ftimg || "",
+        freeTrailBtnTitle: objPageInfo.page_content.ftbtntitle || "",
+        freeTrailBtnLink: objPageInfo.page_content.ftbtnlink || "",
+        reviewTitle: objPageInfo.page_content.reviewtitle || "",
+        reviewSubTitle: objPageInfo.page_content.reviewsubtitle || "",
+        reviewDescription: objPageInfo.page_content.reviewdesc || "",
+        contactTitle: objPageInfo.page_content.contacttitle || "",
+        contactDescription: objPageInfo.page_content.contactdesc || "",
+
+        steps: JSON.parse(objPageInfo.page_content.steps || "{}") || [
           {
             stepstitle: "",
             stepsdesc: "",
           },
         ],
-        features_data: [
+        features_data: JSON.parse(
+          objPageInfo.page_content.logoandtext || "{}"
+        ) || [
           {
             featuretext: "",
             featurelogo: "",
           },
         ],
-        faq_data: [
+        faq_data: JSON.parse(objPageInfo.page_content.accordian || "{}") || [
           {
             faqtitle: "",
             faqdesc: "",

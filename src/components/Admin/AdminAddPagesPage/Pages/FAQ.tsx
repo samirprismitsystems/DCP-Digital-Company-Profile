@@ -25,7 +25,11 @@ export default function FAQs() {
         placeHolder="Enter FAQ Description"
         isRequired={true}
       />
-      <TemplateImageUploader savePath="faqImage" title="Upload FAQ Image" />
+      <TemplateImageUploader
+        uploadPath="landingpageoriginal"
+        savePath="faqImage"
+        title="Upload FAQ Image"
+      />
       <h3 className="pb-6">Accordion</h3>
       {fields.map((item, index) => (
         <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6" key={index}>

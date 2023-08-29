@@ -24,6 +24,7 @@ export default function Home() {
         isTextArea={true}
       />
       <TemplateImageUploader
+        uploadPath="landingpageoriginal"
         title="Upload Main Image File"
         savePath="homeImage"
       />

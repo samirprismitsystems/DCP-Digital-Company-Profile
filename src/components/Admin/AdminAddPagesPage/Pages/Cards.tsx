@@ -15,7 +15,11 @@ export default function Cards() {
         title="Title"
         placeHolder="Enter Card Title"
       />
-      <TemplateImageUploader savePath="cardImage1" title="Upload Card Image" />
+      <TemplateImageUploader
+        uploadPath="landingpageoriginal"
+        savePath="cardImage1"
+        title="Upload Card Image"
+      />
       <Editor savePath="cardContent1" />
 
       <h4 className="py-5 pt-16">Card 2</h4>
@@ -25,7 +29,11 @@ export default function Cards() {
         title="Title"
         placeHolder="Enter Card Title"
       />
-      <TemplateImageUploader savePath="cardImage2" title="Upload Card Image" />
+      <TemplateImageUploader
+        uploadPath="landingpageoriginal"
+        savePath="cardImage2"
+        title="Upload Card Image"
+      />
       <div className="pb-16">
         <Editor savePath="cardContent2" />
       </div>

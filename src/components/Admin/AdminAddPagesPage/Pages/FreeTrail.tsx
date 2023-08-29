@@ -17,6 +17,7 @@ export default function FreeTrail() {
         isRequired={true}
       />
       <TemplateImageUploader
+        uploadPath="landingpageoriginal"
         savePath="freeTrailImage"
         title="Upload Image"
       />
