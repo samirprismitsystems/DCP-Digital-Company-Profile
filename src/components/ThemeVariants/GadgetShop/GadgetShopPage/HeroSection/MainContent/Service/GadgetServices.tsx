@@ -58,7 +58,7 @@ export default function GadgetServices() {
           <OwlCarousel className="owl-carousel owl-theme" {...options}>
             {lstService.map((item, index) => (
               <div
-                className=" xs:mx-14 md:mx-4  content-box rounded-[2rem] text-center  bg-white px-8 pb-8 my-16 overflow-hidden gadgetfontfamily min-h-[30rem]"
+                className="xs:mx-14 md:mx-4  content-box rounded-[2rem] text-center  bg-white px-8 pb-8 my-16 overflow-hidden gadgetfontfamily min-h-[30rem]"
                 style={{
                   boxShadow: "0px 0px 20px 0px rgba(128, 128, 128, 0.3)",
                 }}
