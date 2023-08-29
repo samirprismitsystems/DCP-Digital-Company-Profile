@@ -1,9 +1,7 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareProducts() {
   const lstProduct = useContext(ThemeContextApi).product;
@@ -27,13 +25,11 @@ export default function HomeCareProducts() {
               className="mb-4 text-center p-0 homecarefont "
             >
               <div className="product-image w-full h-auto  mb-1 bg-homeCareTheme-primary text-center min-h-[243px]">
-                <Image
+                <img
                   alt="image.png"
                   src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/product/${
                     item.product_image
                   }`}
-                  width={800}
-                  height={800}
                   className="min-h-[243px] img-fluid w-full h-full text-center align-middle "
                 />
               </div>

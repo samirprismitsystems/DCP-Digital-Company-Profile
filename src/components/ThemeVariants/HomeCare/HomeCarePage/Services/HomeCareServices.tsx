@@ -28,14 +28,12 @@ export default function HomeCareServices() {
             >
               <div className="w-full h-auto">
                 <div className="image w-full h-auto py-6">
-                  <Image
+                  <img
                     alt="image.png"
                     src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
                       item.service_image
                     }`}
-                    width={600}
                     className="max-w-[400px] block m-auto w-full h-full align-middle"
-                    height={600}
                   />
                 </div>
                 <h4 className="pb-2 text-homeCareTheme-textColor">

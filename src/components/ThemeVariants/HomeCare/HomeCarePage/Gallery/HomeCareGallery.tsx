@@ -1,10 +1,8 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import HomeCarePagination from "../../Common/HomeCarePagination";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareGallery() {
   const lstPortfolio = useContext(ThemeContextApi).portfolio;
@@ -103,14 +101,12 @@ export default function HomeCareGallery() {
             )
             .map((item) => (
               <div key={item.portfolio_id} className="image w-full h-auto py-6">
-                <Image
+                <img
                   alt="image.png"
                   src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${
                     item.portfolio_image
                   }`}
-                  width={600}
                   className="max-w-[400px] block m-auto p-4 w-full h-full align-middle"
-                  height={600}
                 />
               </div>
             ))}
