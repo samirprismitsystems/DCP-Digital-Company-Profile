@@ -18,16 +18,21 @@ export default function TemplateImageUploader(
   );
 
   useEffect(() => {
-    if (objForm.getValues(props.savePath)) {
+    if (typeof objForm.getValues(props.savePath) == "object") {
+      let img = URL?.createObjectURL(objForm.getValues(props.savePath));
+      setSelectedImagePath(img);
+    }
+
+    if (typeof objForm.getValues(props.savePath) !== "object") {
       let img = `${UPLOAD_IMAGE_URI}/${props.uploadPath}/${objForm.getValues(
         props.savePath
       )}`;
 
-      setSelectedImagePath(img)
+      setSelectedImagePath(img);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.savePath]);
-
 
   return (
     <div className="form_field xs:w-full  sm:w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 pb-3 mb-16 transition-all duration-300 ease-linear">

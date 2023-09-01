@@ -18,7 +18,7 @@ class AuthService {
   }
 
   static setLocalUserInformation(data: ICompanyDetails) {
-    Utils.setItem("localUserEmail", data.company_email);
+    Utils.setItem("localUserEmail", data.email_id);
     Utils.setItem("IMAGE_UPLOAD_ID", data.company_id);
 
     return true;

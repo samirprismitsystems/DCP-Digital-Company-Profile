@@ -12,7 +12,7 @@ export default function AdminCompanyPage() {
         <div className="h4 mt-1">All Company List</div>
       </div>
       <Link
-        href={"addcompany"}
+        href={"/admindashboard/addcompany"}
         target="_blank"
         className="cursor-pointer bg-[#666666] text-white  border-0 transition transition-[all 0.3s linear] rounded-xl min-w-[auto] py-5 px-8 font-normal text-2xl text-center mb-16 capitalize"
       >

@@ -30,7 +30,6 @@ export default function AdminSocialLinkSelector({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstSocialMediaColor, selectedColorId]);
 
-
   return (
     <>
       <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black my-4 transition-all duration-300 ease-linear">
@@ -38,12 +37,21 @@ export default function AdminSocialLinkSelector({
           <select
             className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
             onChange={(e: any) => {
-              // Set the selected color value in the form
-              objForm.setValue(
-                `adminSocialMediaInfo.${indexNumber}.socialmedia_color`,
-                e.target.value
-              );
-              setSelectedColor(e.target.value);
+              if (Boolean(e.target.value)) {
+                objForm.setValue(
+                  `adminSocialMediaInfo.${indexNumber}.socialmedia_color`,
+                  e.target.value
+                );
+
+                setSelectedColor(e.target.value);
+              } else {
+                objForm.setValue(
+                  `adminSocialMediaInfo.${indexNumber}.socialmedia_color`,
+                  "1"
+                );
+
+                setSelectedColor("1");
+              }
             }}
             value={selectedColor}
           >

@@ -1,7 +1,9 @@
 import TextField from "@/common/TextFields/TextField";
 import TemplateImageUploader from "../Templates/TemplateImageUploader";
+import { useFormContext, useWatch } from "react-hook-form";
 
 export default function Home() {
+  
   return (
     <>
       <TextField

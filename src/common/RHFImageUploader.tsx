@@ -1,6 +1,5 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -10,12 +9,14 @@ export default function RHFImageUploader({
   label,
   folderPath,
   isIDNotAvailable,
+  showImageRequiredMessage,
 }: {
   srcPath?: any;
   savePath: string;
   label: string;
   folderPath?: string;
   isIDNotAvailable?: boolean;
+  showImageRequiredMessage?: boolean;
 }) {
   const objForm = useFormContext();
   const [selectedImagePath, setSelectedImagePath] = useState(
@@ -37,6 +38,11 @@ export default function RHFImageUploader({
           className="w-full h-full object-cover object-center align-middle border-none"
         />
       </div>
+      {showImageRequiredMessage && (
+        <p className="text-red-600 my-3  mx-auto text-center">
+          Image Required* 250KB max size
+        </p>
+      )}
       <div
         className="upload_btn btn_100 site_btn relative z-0 border-[1px] border-solid  border-secondary-main bg-secondary-main text-white no-underline rounded-xl min-w-[12rem] py-4 px-10 not-italic font-normal text-center capitalize"
         style={{

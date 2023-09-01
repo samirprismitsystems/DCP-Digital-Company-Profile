@@ -19,7 +19,7 @@ export default function DefaultTemplate() {
       <div className="pt-32">
         <h2 className="pb-8">SEO Section</h2>
         <TemplateImageUploader
-          uploadPath="metaimg"
+          uploadPath="metaimgoriginal"
           title="Select Meta Image"
           savePath="metaImage"
         />

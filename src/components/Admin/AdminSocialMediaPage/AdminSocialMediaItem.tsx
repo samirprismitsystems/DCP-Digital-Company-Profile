@@ -19,6 +19,7 @@ export default function AdminSocialMediaItem() {
     {
       socialmedia_logo: "",
       socialmedia_name: "",
+      socialmedia_color: "",
     },
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -94,6 +95,12 @@ export default function AdminSocialMediaItem() {
       const newData = data.adminSocialMediaInfo?.filter((item: any) => {
         if (!item.socialmedia_id) {
           return item;
+        }
+      });
+
+      newData?.forEach((item) => {
+        if (!Boolean(item.socialmedia_color)) {
+          item.socialmedia_color = "1";
         }
       });
 

@@ -109,6 +109,7 @@ export const adminSocialMediaInfo = yup.object({
     yup.object().shape({
       socialmedia_logo: yup.mixed().optional(),
       socialmedia_name: yup.string().optional(),
+      socialmedia_color: yup.string().optional(),
       link: yup.string().optional(),
     })
   ),

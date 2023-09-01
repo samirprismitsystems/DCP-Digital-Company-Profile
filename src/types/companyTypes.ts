@@ -13,6 +13,7 @@ export interface IStates {
 export interface ICompanyDetails {
   address: string;
   area: string;
+  email_id: string;
   company_desc: string;
   business_segment: string;
   city: string;

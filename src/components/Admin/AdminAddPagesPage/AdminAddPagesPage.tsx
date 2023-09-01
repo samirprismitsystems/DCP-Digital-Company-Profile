@@ -21,9 +21,12 @@ export default function AdminAddPagesPage({
 }) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState<boolean>(Boolean(objPageInfo));
+  const [isImageChange, setIsImageChange] = useState<boolean>(false);
+
   const objForm = useForm<any>({
     defaultValues: {
       selectedOption: 1,
+      isEdit: isEdit,
       pageName: "",
       steps: [
         {
@@ -83,7 +86,7 @@ export default function AdminAddPagesPage({
           Utils.showSuccessMessage(res.message);
           if (isEdit) {
             objForm.reset();
-            router.back();
+            router.push("/admindashboard/pages");
             return null;
           }
           dispatch(
@@ -107,7 +110,7 @@ export default function AdminAddPagesPage({
 
       if (parseInt(data.selectedOption) === 3) {
         const io: any = new FormData();
-
+        io.append("isupdate", isEdit ? true : false);
         io.append("page_slug", Utils.generatePageSlug(data.pageName));
         io.append("page_name", data.pageName);
         io.append("template_name", "landingpage_template");
@@ -120,6 +123,7 @@ export default function AdminAddPagesPage({
         io.append("homedesc", data.homeDesc);
         io.append("homeimg", data.homeImage);
         io.append("homebtntitle", data.homeBtnTitle);
+        io.append("homebtnlink", data.homeBtnLink);
         io.append("steps", JSON.stringify(data.steps));
         io.append("cardtitle1", data.cardTitle1);
         io.append("carddesc1", data.cardContent1);
@@ -158,7 +162,7 @@ export default function AdminAddPagesPage({
           if (isEdit) {
             objForm.reset();
             loadData();
-            router.back();
+            router.push("/admindashboard/pages");
             return null;
           }
           dispatch(
@@ -196,6 +200,7 @@ export default function AdminAddPagesPage({
       objForm.reset({
         selectedOption: defaultTemplate,
         pageName: objPageInfo.page_name || "",
+        isEdit: isEdit,
         pageTitle: objPageInfo.page_content.page_title || "",
         pageContent: objPageInfo.page_content.page_content || "",
         metaTitle: objPageInfo.meta_title || "",
