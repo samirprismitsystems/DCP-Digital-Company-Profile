@@ -18,13 +18,12 @@ export default function Pages() {
           onChange={(e: any) => {
             objForm.setValue("selectedFooterPage", e.target.value);
             setSelectedFooterPage(e.target.value);
-            console.log(e.target.value, "selected option");
           }}
           value={objForm.getValues("selectedFooterPage") || selectedFooterPage}
         >
-          <option value={"Saving Account"}>Saving Account</option>
-          <option value={"Current Account"}>Current Account</option>
-          <option value={"Salary Account"}>Salary Account</option>
+          <option value={"Saving Account"}>Simple footer</option>
+          <option value={"Current Account"}>Modern footer</option>
+          <option value={"Salary Account"}>Creative footer</option>
         </select>
       </div>
     </div>
