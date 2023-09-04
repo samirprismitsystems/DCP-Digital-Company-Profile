@@ -1,9 +1,4 @@
-import PageCircularLoading from "@/common/PageCircularLoading";
-import ApiService from "@/services/ApiServices";
-import Utils from "@/services/Utils";
-import { IPortfolioInfo } from "@/types/themes/portfolio";
 import Head from "next/head";
-import { createContext, useEffect, useState } from "react";
 import PortfolioAboutUs from "./AboutUs/PortfolioAboutUs";
 import PortfolioContactsInformation from "./ContactInformation/PortfolioContactsInformation";
 import PortfolioContactUs from "./ContactUs/PortfolioContactUs";

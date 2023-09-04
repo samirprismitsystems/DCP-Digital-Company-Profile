@@ -1,3 +1,4 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import {
   faFacebookF,
   faInstagram,
@@ -10,8 +11,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 const iconMapping: any = {
   faFacebookF: faFacebookF,

@@ -1,7 +1,6 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useContext } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioProfile() {
   const objCompany = useContext(ThemeContextApi).company;

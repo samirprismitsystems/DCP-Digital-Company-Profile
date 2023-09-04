@@ -1,12 +1,10 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import { useContext } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioPaymentCard from "./PortfolioPaymentCard";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioPaymentInfo() {
   const objPaymentInfo = useContext(ThemeContextApi).paymentinfo;
-
 
   return (
     <div className="payment-info">
@@ -16,17 +14,17 @@ export default function PortfolioPaymentInfo() {
           title="Google Pay"
           imgPath="assets/payments/google-pay.png"
           Upi={objPaymentInfo.googlepay_number}
-          />
+        />
         <PortfolioPaymentCard
           title="Phone Pay"
           imgPath="assets/payments/phone-pe.png"
           Upi={objPaymentInfo.phonepay_number}
-          />
+        />
         <PortfolioPaymentCard
           title="Paytm"
           imgPath="assets/payments/paytm.png"
           Upi={objPaymentInfo.paytm_number}
-          />
+        />
       </div>
     </div>
   );

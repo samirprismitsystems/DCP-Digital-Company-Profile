@@ -1,11 +1,10 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { useContext, useState } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import GetPortfolioFeedBackReview from "./GetPortfolioFeedBackReview";
 import Ratting from "./Ratting";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioFeedback() {
   const lstTestimonial = useContext(ThemeContextApi).testimonial;

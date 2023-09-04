@@ -1,9 +1,8 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
 import PortfolioProductCard from "./PortfolioProductCard";
-import { ThemeContextApi } from "@/pages/[slug]";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });

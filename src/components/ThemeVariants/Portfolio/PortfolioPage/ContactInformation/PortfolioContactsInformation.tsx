@@ -1,3 +1,4 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import {
   faEnvelope,
   faMapMarkerAlt,
@@ -6,9 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useContext } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
 import PortfolioContactCards from "./PortfolioContactCards";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioContactsInformation() {
   const objCompany = useContext(ThemeContextApi).company;

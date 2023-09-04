@@ -1,8 +1,7 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { useContext } from "react";
-import { PortfolioContextApi } from "../PortfolioPage";
 import GetHeader from "../common/GetHeader";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function PortfolioAboutUs() {
   const objCompany = useContext(ThemeContextApi).company;
