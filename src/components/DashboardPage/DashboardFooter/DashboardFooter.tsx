@@ -11,10 +11,10 @@ import Link from "next/link";
 export default function DashboardFooter() {
   return (
     <>
-      <nav
-        className={`shadow-md bg-secondary-main w-full bottom-0 xs:h-[12rem] z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center`}
+      <footer
+        className={`h-[80px] shadow-md bg-secondary-main bottom-0 z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center fixed right-0 px-8 pt-3 footer_width`}
       >
-        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-0 pt-6 xs:pt-8 mx-0 xs:flex-col md:flex-row  xs:space-y-5 md:space-y-0">
+        <div className="footer_main_dashboard_footer container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between xs:flex-col sm:flex-row  xs:space-y-5 sm:space-y-0 md:space-y-0 p-8 sm:justify-between sm:items-center">
           <div className="flex flex-wrap space-x-10">
             <Link href={"https://www.facebook.com/"} target="_blank">
               <li className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-[4.5rem] w-[4.5rem]">
@@ -46,7 +46,7 @@ export default function DashboardFooter() {
               </li>
             </Link>
           </div>
-          <div className="">
+          <div>
             <ul className="xs:space-x-6 flex justify-between sm:justify-center sm:space-x-16 items-center">
               {loginScreenPrivacyPolicyList.map(
                 (item: ILoginScreenPrivacyPolicy) => (
@@ -63,7 +63,7 @@ export default function DashboardFooter() {
             </ul>
           </div>
         </div>
-      </nav>
+      </footer>
     </>
   );
 }

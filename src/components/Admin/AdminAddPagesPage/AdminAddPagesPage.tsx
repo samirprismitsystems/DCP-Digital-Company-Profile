@@ -21,7 +21,6 @@ export default function AdminAddPagesPage({
 }) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState<boolean>(Boolean(objPageInfo));
-  const [isImageChange, setIsImageChange] = useState<boolean>(false);
 
   const objForm = useForm<any>({
     defaultValues: {
@@ -185,6 +184,8 @@ export default function AdminAddPagesPage({
       Utils.showErrorMessage(ex.message);
     }
   };
+
+  console.log(objForm.formState)
 
   useEffect(() => {
     if (isEdit && objPageInfo && Object.keys(objPageInfo).length > 0) {

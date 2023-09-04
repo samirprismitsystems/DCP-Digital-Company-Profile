@@ -10,12 +10,14 @@ export default function RHFImageUploader({
   folderPath,
   isIDNotAvailable,
   showImageRequiredMessage,
+  isRounded,
 }: {
   srcPath?: any;
   savePath: string;
   label: string;
   folderPath?: string;
   isIDNotAvailable?: boolean;
+  isRounded?: boolean;
   showImageRequiredMessage?: boolean;
 }) {
   const objForm = useFormContext();
@@ -30,12 +32,22 @@ export default function RHFImageUploader({
   // eslint-disable-next-line @next/next/no-img-element
   return (
     <>
-      <div className="item_image mb-4 w-full h-[20rem] border-0 bg-primary-main">
+      <div
+        className={`${
+          isRounded
+            ? "upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] items-center justify-center flex relative"
+            : "item_image mb-4 w-full h-[20rem] border-0 bg-primary-main"
+        }`}
+      >
         <img
           suppressHydrationWarning
           src={`${selectedImagePath}`}
           alt="image.png"
-          className="w-full h-full object-cover object-center align-middle border-none"
+          className={`${
+            isRounded
+              ? "w-[80%] h-[80%] object-cover object-center align-middle border-none"
+              : "w-full h-full object-cover object-center align-middle border-none"
+          }`}
         />
       </div>
       {showImageRequiredMessage && (

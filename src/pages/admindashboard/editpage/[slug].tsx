@@ -6,7 +6,11 @@ import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { IPagesPageInfo } from "@/types/commonTypes";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+
+export const TemplateContextApi = createContext<IPagesPageInfo>(
+  {} as IPagesPageInfo
+);
 
 export default function EditAdminPages() {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,12 +44,14 @@ export default function EditAdminPages() {
     loadData();
   }, []);
 
-  if (isLoading) return <PageCircularLoading />;
+  if (isLoading || !objPageInfo) return <PageCircularLoading />;
   return (
     <AuthGuard>
-      <AdminNormalLayout>
-        <AdminAddPagesPage objPageInfo={objPageInfo} />
-      </AdminNormalLayout>
+      <TemplateContextApi.Provider value={objPageInfo}>
+        <AdminNormalLayout>
+          <AdminAddPagesPage objPageInfo={objPageInfo} />
+        </AdminNormalLayout>
+      </TemplateContextApi.Provider>
     </AuthGuard>
   );
 }

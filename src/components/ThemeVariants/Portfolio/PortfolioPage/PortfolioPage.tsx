@@ -16,10 +16,6 @@ import PortfolioProducts from "./Products/PortfolioProducts";
 import PortfolioProfile from "./Profile/PortfolioProfile";
 import PortfolioServices from "./Services/PortfolioServices";
 
-export const PortfolioContextApi = createContext<IPortfolioInfo>(
-  {} as IPortfolioInfo
-);
-
 export default function PortfolioPage(props: any) {
   return (
     <>
