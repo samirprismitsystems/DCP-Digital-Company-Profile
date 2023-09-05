@@ -1,5 +1,7 @@
 import BackButton from "@/common/BackButton";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
+import ErrorPlaceholder from "@/common/ErrorPlaceholder";
+import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
@@ -13,13 +15,13 @@ import SocialLinkIcon from "./SocialLinkIcons/SocialLinkIcon";
 import SocialLinkTextField from "./SocialLinkTextField/SocialLinkTextField";
 
 export default function SocialLinksPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstSocialData, setLstSocialData] = useState<ISocialLinks[]>();
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
   });
 
   type IFormData = yup.InferType<typeof socialLinkFormSchema>;
-
   const onSave: any = async (data: IFormData) => {
     try {
       let pureFormData = data.socialData?.filter((item) => {
@@ -52,6 +54,7 @@ export default function SocialLinksPage() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getSocialLinksData();
       if (!res.error) {
         setLstSocialData(res.social);
@@ -61,6 +64,8 @@ export default function SocialLinksPage() {
       throw new Error("Error occurred while getting social media links!");
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -79,12 +84,17 @@ export default function SocialLinksPage() {
       </div>
       <FormProvider {...objForm}>
         <form
-          className="digital_profile_form form_shadow bg-white rounded-2xl p-10 pb-0 block"
+          className="relative_box_for_loading digital_profile_form form_shadow bg-white rounded-2xl p-10 pb-0 block"
           style={{
             boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
           }}
           onSubmit={objForm.handleSubmit(onSave)}
         >
+          {isLoading && (
+            <div className="py-[10rem]">
+              <Loading />
+            </div>
+          )}
           <div className="row -mr-3 -ml-3">
             {lstSocialData &&
               lstSocialData.length > 0 &&
@@ -118,11 +128,18 @@ export default function SocialLinksPage() {
                 );
               })}
           </div>
-          <div className="w-full flex justify-end">
-            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
-              <DashboardCommonButtons />
+          {!isLoading && (!lstSocialData || lstSocialData.length <= 0) && (
+            <div className="pb-9">
+              <ErrorPlaceholder error="No Data Found!" />
             </div>
-          </div>
+          )}
+          {lstSocialData && lstSocialData.length > 0 && (
+            <div className="w-full flex justify-end">
+              <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
+                <DashboardCommonButtons />
+              </div>
+            </div>
+          )}
         </form>
       </FormProvider>
     </>

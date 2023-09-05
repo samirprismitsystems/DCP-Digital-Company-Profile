@@ -151,33 +151,35 @@ export default function CompanyDetailsPage() {
       const res = await ApiService.getCompanyDetailsPageData();
       if (!res.error) {
         const result: IAPICompanyDetailsPage = res.company[0];
-        Utils.setItem("slug", result.company_slug);
+        if(result && result.company_slug){
+          // Utils.setItem("slug", result.company_slug);
+        }
         const defaultValue: IFormData = {
-          alternatePhoneNumber: result.company_alternate_contact,
-          businessType: result.business_segment,
-          city: result.city,
-          emailID: result.company_email,
-          country: result.country,
-          fullName: result.company_name,
-          aboutCompany: result.company_desc,
-          postalCode: result.post_code,
-          state: result.state,
-          phoneNumber: result.company_contact,
-          houseNumber: result.area,
-          companyEstDate: result.established_in,
+          alternatePhoneNumber: result?.company_alternate_contact || "",
+          businessType: result?.business_segment || "",
+          city: result?.city || "",
+          emailID: result?.company_email || "",
+          country: result?.country || "",
+          fullName: result?.company_name || "",
+          aboutCompany: result?.company_desc || "",
+          postalCode: result?.post_code || "",
+          state: result?.state || "",
+          phoneNumber: result?.company_contact || "",
+          houseNumber: result?.area || "",
+          companyEstDate: result?.established_in || "",
           mapLocation: {
-            lat: parseFloat(result.map_lat),
-            lon: parseFloat(result.map_lng),
-            displayName: result.area,
+            lat: parseFloat(result?.map_lat) || 21.1875694,
+            lon: parseFloat(result?.map_lng) || 72.8147383,
+            displayName: result?.area || "",
           },
-          company_banner: result.company_banner,
-          company_logo: result.company_logo,
-          bannerPath: result.company_banner,
-          logoPath: result.company_logo,
-          workingHoursDay: result.working_hours_day,
-          workingHoursFromTime: result.working_hours_from,
-          workingHoursToTime: result.working_hours_to,
-          companyID: result.company_id,
+          company_banner: result?.company_banner || "",
+          company_logo: result?.company_logo || "",
+          bannerPath: result?.company_banner || "",
+          logoPath: result?.company_logo || "",
+          workingHoursDay: result?.working_hours_day || "",
+          workingHoursFromTime: result?.working_hours_from || "",
+          workingHoursToTime: result?.working_hours_to || "",
+          companyID: result?.company_id || "",
         };
         setMapLocation({
           lat: defaultValue.mapLocation.lat || 21.1875694,
@@ -186,9 +188,9 @@ export default function CompanyDetailsPage() {
         });
 
         setObjImageUploader({
-          banner: defaultValue.company_banner,
-          logo: defaultValue.company_logo,
-          ID: defaultValue.companyID,
+          banner: defaultValue.company_banner || "",
+          logo: defaultValue.company_logo || "",
+          ID: defaultValue.companyID || "",
         });
 
         objForm.reset(defaultValue);
@@ -268,13 +270,13 @@ export default function CompanyDetailsPage() {
                 isRequired={true}
               />
             </div>
-            {objImageUploader && (
-              <CompanyImageUploader
-                companyLogo={objImageUploader && objImageUploader.logo}
-                companyBanner={objImageUploader && objImageUploader.banner}
-                companyID={objImageUploader && objImageUploader.ID}
-              />
-            )}
+            {/* {objImageUploader && ( */}
+            <CompanyImageUploader
+              companyLogo={objImageUploader && objImageUploader.logo}
+              companyBanner={objImageUploader && objImageUploader.banner}
+              companyID={objImageUploader && objImageUploader.ID}
+            />
+            {/* )} */}
             <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
           </div>
           <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">

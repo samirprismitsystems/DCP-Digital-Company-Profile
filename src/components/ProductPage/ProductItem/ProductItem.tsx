@@ -1,5 +1,6 @@
 import AddMore from "@/common/AddMore";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
+import Loading from "@/common/Loading";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
@@ -13,6 +14,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 export default function ProductItem() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstProducts, setLstProducts] = useState<any>([
     {
       product_name: "",
@@ -24,6 +26,7 @@ export default function ProductItem() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getProductPageDetails();
       if (!res.error) {
         if (res.product.length > 0) {
@@ -34,6 +37,8 @@ export default function ProductItem() {
       if (res.message !== "Empty Product Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -54,7 +59,6 @@ export default function ProductItem() {
   });
 
   type IFormData = yup.InferType<typeof productFormSchema>;
-
   const onSubmit = async (data: IFormData) => {
     try {
       const oldData = data.product_data?.filter((item: any) => {
@@ -174,6 +178,13 @@ export default function ProductItem() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstProducts]);
+
+  if (isLoading)
+    return (
+      <div className="py-[10rem]">
+        <Loading />
+      </div>
+  );
 
   return (
     <FormProvider {...objForm}>

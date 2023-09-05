@@ -184,7 +184,7 @@ export default function MainDashboardLayouts({ children }: any) {
                   ))}
               </ul>
             </div>
-            <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[90vh] h-full mb-[49px]">
+            <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] xs:min-h-[84vh] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[90vh] h-full mb-[49px]">
               {dashboardContent === null ? (
                 <PageCircularLoading />
               ) : dashboardContent ? (

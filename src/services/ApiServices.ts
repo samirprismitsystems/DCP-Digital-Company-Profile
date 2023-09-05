@@ -28,7 +28,10 @@ const ApiService = {
   },
 
   async sendEmail(data: IUser) {
-    const res = await axios.post(`${BASE_URI}api/pages/sendemail`, data);
+    const res = await axios.post(
+      `${BASE_URI}api/pages/sendemailgetintouch`,
+      data
+    );
 
     return res.data;
   },

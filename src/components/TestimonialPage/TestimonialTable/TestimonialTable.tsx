@@ -1,9 +1,11 @@
+import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { ITestimonial } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
 
 export default function TestimonialTable() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstTestimonial, setLstTestimonial] = useState<ITestimonial[]>();
   const [paginationData, setPaginationData] = useState({
     currentPage: 1,
@@ -13,6 +15,7 @@ export default function TestimonialTable() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getTestimonialList();
       if (!res.error) {
         setLstTestimonial(res.testimonial);
@@ -28,6 +31,8 @@ export default function TestimonialTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,7 +111,8 @@ export default function TestimonialTable() {
               </th>
             </tr>
           </thead>
-          {lstTestimonial &&
+          {!isLoading &&
+            lstTestimonial &&
             lstTestimonial.length > 0 &&
             lstTestimonial
               .slice(
@@ -138,11 +144,6 @@ export default function TestimonialTable() {
                       {item.ratting || "N/A"}
                     </td>
                     <td className="font-normal  px-6 py-6">
-                      {/* <TestimonialToggle
-                        onComplete={onComplete}
-                        testimonialID={item.testimonial_id}
-                        isActive={item.status === "1"}
-                      /> */}
                       <label className="relative inline-flex items-center cursor-pointer">
                         <div
                           onClick={() => {
@@ -164,7 +165,17 @@ export default function TestimonialTable() {
                 </tbody>
               ))}
 
-          {lstTestimonial && lstTestimonial.length <= 0 && (
+          {isLoading && (
+            <tbody className="text-2xl  text-white">
+              <tr aria-rowspan={8} className="text-black text-center">
+                <th colSpan={8} className="relative overflow-hidden py-10">
+                  <Loading />
+                </th>
+              </tr>
+            </tbody>
+          )}
+
+          {!isLoading && lstTestimonial && lstTestimonial.length <= 0 && (
             <tbody className="text-2xl  text-white">
               <tr aria-rowspan={8} className="text-black text-center border-b">
                 <th
@@ -178,7 +189,8 @@ export default function TestimonialTable() {
           )}
         </table>
       </div>
-      {lstTestimonial && lstTestimonial.length > 1 && (
+
+      {!isLoading && lstTestimonial && lstTestimonial.length > 1 && (
         <div className="flex flex-row space-x-8 items-center justify-end pb-8">
           <span className="text-3xl py-4 text-gray-700 dark:text-gray-400">
             Showing{" "}

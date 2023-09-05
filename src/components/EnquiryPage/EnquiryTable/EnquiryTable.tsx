@@ -1,9 +1,11 @@
+import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { IEnquiry } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
 
 export default function EnquiryTable() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstEnquiry, setLstEnquiry] = useState<IEnquiry[]>();
   const [paginationData, setPaginationData] = useState({
     currentPage: 1,
@@ -13,6 +15,7 @@ export default function EnquiryTable() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getEnquiryPageDetails();
       if (!res.error) {
         setLstEnquiry(res.inquiry);
@@ -28,6 +31,8 @@ export default function EnquiryTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,7 +111,8 @@ export default function EnquiryTable() {
               </th>
             </tr>
           </thead>
-          {lstEnquiry &&
+          {!isLoading &&
+            lstEnquiry &&
             lstEnquiry.length > 0 &&
             lstEnquiry
               .slice(
@@ -156,7 +162,17 @@ export default function EnquiryTable() {
                 </tbody>
               ))}
 
-          {lstEnquiry && lstEnquiry.length <= 0 && (
+          {isLoading && (
+            <tbody className="text-2xl  text-white">
+              <tr aria-rowspan={8} className="text-black text-center">
+                <th colSpan={8} className="relative overflow-hidden py-10">
+                  <Loading />
+                </th>
+              </tr>
+            </tbody>
+          )}
+
+          {!isLoading && lstEnquiry && lstEnquiry.length <= 0 && (
             <tbody className="text-2xl  text-white">
               <tr aria-rowspan={8} className="text-black text-center border-b">
                 <th
@@ -170,7 +186,7 @@ export default function EnquiryTable() {
           )}
         </table>
       </div>
-      {lstEnquiry && lstEnquiry.length > 1 && (
+      {!isLoading && lstEnquiry && lstEnquiry.length > 1 && (
         <div className="flex flex-row space-x-8 items-center justify-end pb-8">
           <span className="text-3xl py-4 text-gray-700 dark:text-gray-400">
             Showing{" "}

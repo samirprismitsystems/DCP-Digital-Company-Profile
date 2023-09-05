@@ -1,5 +1,6 @@
 import AddMore from "@/common/AddMore";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
+import Loading from "@/common/Loading";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
@@ -13,6 +14,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 export default function ImageGalleryItem() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstImageGallery, setLstImageGallery] = useState<any>([
     {
       portfolio_desc: "",
@@ -108,6 +110,7 @@ export default function ImageGalleryItem() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getImageGalleryDetails();
       if (!res.error) {
         setLstImageGallery(res.portfolio);
@@ -117,6 +120,8 @@ export default function ImageGalleryItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -171,6 +176,13 @@ export default function ImageGalleryItem() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstImageGallery]);
 
+  if (isLoading)
+    return (
+      <div className="py-[10rem]">
+        <Loading />
+      </div>
+    );
+    
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>

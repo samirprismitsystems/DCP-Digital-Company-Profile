@@ -1,5 +1,6 @@
 import AddMore from "@/common/AddMore";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
+import Loading from "@/common/Loading";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
@@ -13,6 +14,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 export default function ClientItem() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstClient, setLstClient] = useState<any>([
     {
       client_name: "",
@@ -22,6 +24,7 @@ export default function ClientItem() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getClientsPageDetails();
       if (!res.error) {
         setLstClient(res.client);
@@ -31,6 +34,8 @@ export default function ClientItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -167,6 +172,13 @@ export default function ClientItem() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstClient]);
+
+  if (isLoading)
+    return (
+      <div className="py-[10rem]">
+        <Loading />
+      </div>
+    );
 
   return (
     <FormProvider {...objForm}>

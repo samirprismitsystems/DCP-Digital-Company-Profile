@@ -1,5 +1,6 @@
 import AddMore from "@/common/AddMore";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
+import Loading from "@/common/Loading";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
@@ -13,6 +14,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 export default function ServiceItem() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstServiceData, setLstServiceData] = useState<any>([
     {
       service_desc: "",
@@ -24,6 +26,7 @@ export default function ServiceItem() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getServicePageDetails();
       if (!res.error) {
         setLstServiceData(res.service);
@@ -33,6 +36,8 @@ export default function ServiceItem() {
       if (res.message !== "Empty Product Data") throw new Error(res.error);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -172,6 +177,13 @@ export default function ServiceItem() {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (isLoading)
+    return (
+      <div className="py-[10rem]">
+        <Loading />
+      </div>
+    );
 
   return (
     <FormProvider {...objForm}>

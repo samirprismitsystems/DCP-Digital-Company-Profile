@@ -17,8 +17,9 @@ import { useEffect, useState } from "react";
 import DashboardCards from "./DashboardCards";
 
 export default function Dashboard() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [objData, setObjData] = useState<IDashboardCounts>();
-  const lstDashbordCards = [
+  const lstDashboardCards = [
     {
       id: 0,
       name: "Total Products",
@@ -107,6 +108,7 @@ export default function Dashboard() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getDashboardCounts();
       if (!res.error) {
         setObjData(res);
@@ -116,6 +118,8 @@ export default function Dashboard() {
       throw new Error("Error occurred while getting dashboard data!");
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -123,9 +127,9 @@ export default function Dashboard() {
     loadData();
   }, []);
 
-  if (!lstDashbordCards) return <PageCircularLoading />;
-  
-  return lstDashbordCards.map((item) => (
+  if (isLoading) return <PageCircularLoading />;
+
+  return lstDashboardCards.map((item) => (
     <div key={item.id} className="dashboard_card max-w-full px-[12px]">
       <DashboardCards item={item} />
     </div>

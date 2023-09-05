@@ -2,7 +2,6 @@ import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForBut
 import MainScrollAnimation from "@/common/MainScrollAnimation";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
-import { IUser } from "@/types/commonTypes";
 import { useContext, useState } from "react";
 import { LandingPageContextApi } from "../LandingPage";
 
@@ -30,12 +29,11 @@ export default function GetInTouch() {
       e.preventDefault();
       setIsLoading(true);
       if (objUser) {
-        const io: IUser = {
-          name: objUser.fullName,
-          contactemail: objUser.email,
-          email: "16mscit072@gmail.com",
-          message: objUser.message,
-        };
+        const io: any = new FormData();
+        io.append("name", objUser.fullName);
+        io.append("contactemail", objUser.email);
+        io.append("email", "16mscit072@gmail.com");
+        io.append("message", objUser.message);
 
         // Cors Error occurred in this section
         const res = await ApiService.sendEmail(io);
