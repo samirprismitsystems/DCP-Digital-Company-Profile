@@ -28,10 +28,6 @@ class AuthService {
     Utils.setItem("userName", userName);
   }
 
-  static setUserEmail(userEmail: string) {
-    Utils.setItem("userEmail", userEmail);
-  }
-
   static getUserName() {
     const userName = Utils.getItem("userName");
     if (userName) {
@@ -62,6 +58,10 @@ class AuthService {
       return Utils.getItem("localUserEmail");
     }
     return null;
+  }
+
+  static setUserEmail(userEmail: string) {
+    Utils.setItem("userEmail", userEmail);
   }
 
   static getUserEmail() {

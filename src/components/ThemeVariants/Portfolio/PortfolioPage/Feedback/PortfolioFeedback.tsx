@@ -8,26 +8,24 @@ import Ratting from "./Ratting";
 
 export default function PortfolioFeedback() {
   const lstTestimonial = useContext(ThemeContextApi).testimonial;
-  const objCompany = useContext(ThemeContextApi).company;
+  console.log(lstTestimonial);
   const [objFeedback, setObjFeedback] = useState({
     clientName: "",
-    email: "",
+    emailAddress: "",
     comment: "",
   });
-  const [rate, setRate] = useState(0);
+  const [rate, setRate] = useState(1);
 
   const onSave = async (e: any) => {
     try {
       e.preventDefault();
-
-      const io: any = {
-        client_name: objFeedback.clientName,
-        email_address: objFeedback.email,
-        ratting: rate,
-        comment: objFeedback.comment,
-        company_id: objCompany.company_id,
-        isupdate: false,
-      };
+      const io: any = new FormData();
+      io.append("client_name", objFeedback.clientName);
+      io.append("email_address", objFeedback.emailAddress);
+      io.append("ratting", rate);
+      io.append("comment", objFeedback.comment);
+      io.append("company_id", Utils.getCompanyID());
+      io.append("isupdate", false);
 
       const res = await ApiService.createTestimonial(io);
 
@@ -40,6 +38,13 @@ export default function PortfolioFeedback() {
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
+  };
+
+  const handleOnCHange = (obj: any) => {
+    setObjFeedback((prevState: any) => ({
+      ...prevState,
+      ...obj,
+    }));
   };
 
   return (
@@ -71,12 +76,22 @@ export default function PortfolioFeedback() {
               type="text"
               className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
               placeholder="Enter Your Name"
+              onChange={(e: any) => {
+                handleOnCHange({
+                  clientName: e.target.value,
+                });
+              }}
             />
             <input
               type="email"
               required={true}
               className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
               placeholder="Enter Your Email"
+              onChange={(e: any) => {
+                handleOnCHange({
+                  emailAddress: e.target.value,
+                });
+              }}
             />
             <textarea
               className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
@@ -84,14 +99,15 @@ export default function PortfolioFeedback() {
               rows={5}
               required={true}
               placeholder="Enter Your Feedback"
+              onChange={(e: any) => {
+                handleOnCHange({
+                  comment: e.target.value,
+                });
+              }}
             />
             <button
               type="submit"
               className="w-full max-h-[375px] bg-[#4d4d4d] text-center py-6 px-8 capitalize text-4xl c-text text-white rounded-lg"
-              onClick={() => {
-                console.log("data submitted");
-                // onSave()
-              }}
               style={{
                 borderRadius: "13px",
               }}

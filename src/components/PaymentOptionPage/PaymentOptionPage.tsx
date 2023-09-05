@@ -1,5 +1,6 @@
 import BackButton from "@/common/BackButton";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
+import Loading from "@/common/Loading";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
@@ -15,6 +16,8 @@ import QRCodeImageUploader from "./Childs/QRCodeImageUploader";
 import RazorpayCheckout from "./Childs/RazorpayCheckout";
 
 export default function PaymentOptionPage() {
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [objPayment, setObjPayment] = useState<any>({});
   const objForm = useForm({
     resolver: yupResolver(paymentOptionFormSchema),
@@ -36,7 +39,7 @@ export default function PaymentOptionPage() {
       io.append("account_type", data.accountType);
       io.append("user_id", AuthService.getUserEmail());
       io.append("qrcode", data.QRCodeImage);
-      io.append("isupdate", true);
+      io.append("isupdate", isUpdate);
 
       const res = await ApiService.savePaymentOptionDetails(io);
       if (!res.error) {
@@ -57,9 +60,15 @@ export default function PaymentOptionPage() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getPaymentOptionDetails();
       if (!res.error) {
         let result: IPaymentOptions = res.paymentdata;
+
+        if (result != null) {
+          setIsUpdate(true);
+        }
+        
         const defaultValue: any = {
           accountHolderName: result.account_holder_name,
           accountType: result.account_type,
@@ -80,6 +89,8 @@ export default function PaymentOptionPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,49 +117,57 @@ export default function PaymentOptionPage() {
       </div>
       <FormProvider {...objForm}>
         <form
-          className="digital_profile_form form_shadow bg-white rounded-2xl p-10 pb-0 block"
+          className="relative digital_profile_form form_shadow bg-white rounded-2xl p-10 pb-0 block"
           style={{
             boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
           }}
           onSubmit={objForm.handleSubmit(onSave)}
         >
-          <div className="row -mr-3 -ml-3 flex flex-wrap">
-            <div className="left xs:w-full lg:w-[50%] xl:w-[75%]">
-              <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">
-                <TextField
-                  title={"PayTm Number (Optional)"}
-                  name="payTMNumber"
-                  placeHolder="PayTm Number"
-                />
-              </div>
-              <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">
-                <TextField
-                  title={"Google Pay Number / UPI ID (Optional)"}
-                  placeHolder="Google Pay Number / UPI ID "
-                  name="googlePayNumber"
-                />
-              </div>
-              <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">
-                <TextField
-                  title={"PhonePe Number / UPI ID (Optional)"}
-                  placeHolder="PhonePe Number / UPI ID "
-                  name="phonePeNumber"
-                />
-              </div>
+          {isLoading ? (
+            <div className="py-[10rem]">
+              <Loading />
             </div>
-            {objPayment && Object.keys(objPayment).length > 0 && (
-              <div className="right xs:w-full lg:w-[50%] xl:w-[25%]">
-                <QRCodeImageUploader imagePath={objPayment.QRCodeImage} />
+          ) : (
+            <>
+              <div className="row -mr-3 -ml-3 flex flex-wrap">
+                <div className="left xs:w-full lg:w-[50%] xl:w-[75%]">
+                  <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">
+                    <TextField
+                      title={"PayTm Number (Optional)"}
+                      name="payTMNumber"
+                      placeHolder="PayTm Number"
+                    />
+                  </div>
+                  <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">
+                    <TextField
+                      title={"Google Pay Number / UPI ID (Optional)"}
+                      placeHolder="Google Pay Number / UPI ID "
+                      name="googlePayNumber"
+                    />
+                  </div>
+                  <div className="form_field border-b-[1px]border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-6 transition-all duration-300 ease-linear">
+                    <TextField
+                      title={"PhonePe Number / UPI ID (Optional)"}
+                      placeHolder="PhonePe Number / UPI ID "
+                      name="phonePeNumber"
+                    />
+                  </div>
+                </div>
+                {objPayment && Object.keys(objPayment).length > 0 && (
+                  <div className="right xs:w-full lg:w-[50%] xl:w-[25%]">
+                    <QRCodeImageUploader imagePath={objPayment.QRCodeImage} />
+                  </div>
+                )}
+                <RazorpayCheckout />
+                <BankAccountDetails />
               </div>
-            )}
-            <RazorpayCheckout />
-            <BankAccountDetails />
-          </div>
-          <div className="w-full flex justify-end">
-            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
-              <DashboardCommonButtons />
-            </div>
-          </div>
+              <div className="w-full flex justify-end">
+                <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
+                  <DashboardCommonButtons />
+                </div>
+              </div>
+            </>
+          )}
         </form>
       </FormProvider>
     </>

@@ -139,6 +139,10 @@ class Utils {
     }
   }
 
+  static setCompanyID(companyID: any) {
+    this.setItem("IMAGE_UPLOAD_ID", companyID);
+  }
+
   static getCompanyID() {
     const result = this.getItem("IMAGE_UPLOAD_ID");
     if (result) {
@@ -147,7 +151,20 @@ class Utils {
       return null;
     }
   }
-  
+
+  static setUserID(userID: any) {
+    this.setItem("userID", userID);
+  }
+
+  static getUserID() {
+    const result = this.getItem("userID");
+    if (result) {
+      return result;
+    } else {
+      return null;
+    }
+  }
+
   static getMondayToSundayDateTime(
     working_hours_from: string,
     working_hours_to: string

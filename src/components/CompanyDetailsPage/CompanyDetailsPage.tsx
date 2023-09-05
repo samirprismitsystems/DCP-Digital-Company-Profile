@@ -17,10 +17,10 @@ import CompanyWorkingHoursSelectorField from "./FormFields/CompanyWorkingHoursFi
 import MapInformation from "./MapInformation/MapInformation";
 
 export default function CompanyDetailsPage() {
+  const [objData, setObjData] = useState<any>();
   const [isChange, setIsChange] = useState<boolean>(false);
   const [lstStates, setState] = useState<IStates[]>();
   const [mapLocation, setMapLocation] = useState<IMap>();
-  const [objImageUploader, setObjImageUploader] = useState<any>();
 
   type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
   const objForm = useForm({
@@ -29,7 +29,7 @@ export default function CompanyDetailsPage() {
       businessType: "",
       city: "",
       companyEstDate: "",
-      country: "India",
+      country: "IN",
       emailID: "",
       fullName: "",
       houseNumber: "",
@@ -69,10 +69,12 @@ export default function CompanyDetailsPage() {
       io.append("working_hours_to", data.workingHoursToTime);
       io.append("map_lat", data.mapLocation.lat);
       io.append("map_lng", data.mapLocation.lon);
-      io.append("isupdate", true);
-      io.append("company_id", data.companyID);
+      io.append("isupdate", Utils.getCompanyID() ? true : false);
       io.append("logo", data.logoPath);
       io.append("banner", data.bannerPath);
+      if (Utils.getCompanyID()) {
+        io.append("company_id", data.companyID);
+      }
 
       if (typeof data.company_banner === "object") {
         io.append("company_banner", data.company_banner);
@@ -151,51 +153,53 @@ export default function CompanyDetailsPage() {
       const res = await ApiService.getCompanyDetailsPageData();
       if (!res.error) {
         const result: IAPICompanyDetailsPage = res.company[0];
-        if(result && result.company_slug){
-          // Utils.setItem("slug", result.company_slug);
+        if (result && result.company_slug) {
+          setObjData(result);
+          if (!Utils.getPageSlug()) Utils.setItem("slug", result.company_slug);
+          if (!Utils.getCompanyID()) Utils.setCompanyID(result.company_id);
+          if (!Utils.getUserID()) Utils.setUserID(result.user_id);
+
+          if (!AuthService.getUserEmail())
+            AuthService.setUserEmail(result.company_email);
+        } else {
+          const defaultValue: IFormData = {
+            alternatePhoneNumber: "",
+            businessType: "",
+            city: "",
+            emailID: "",
+            country: "IN",
+            fullName: "",
+            aboutCompany: "",
+            postalCode: "",
+            state: "",
+            phoneNumber: "",
+            houseNumber: "",
+            companyEstDate: "",
+            mapLocation: {
+              lat: 21.1875694,
+              lon: 72.8147383,
+              displayName: "Current Place",
+            },
+            company_banner: "",
+            company_logo: "",
+            bannerPath: "",
+            logoPath: "",
+            workingHoursDay: "",
+            workingHoursFromTime: "",
+            workingHoursToTime: "",
+            companyID: "",
+          };
+          setMapLocation({
+            lat: 21.1875694,
+            lon: 72.8147383,
+            displayname: "Current Place",
+          });
+
+          objForm.reset(defaultValue);
         }
-        const defaultValue: IFormData = {
-          alternatePhoneNumber: result?.company_alternate_contact || "",
-          businessType: result?.business_segment || "",
-          city: result?.city || "",
-          emailID: result?.company_email || "",
-          country: result?.country || "",
-          fullName: result?.company_name || "",
-          aboutCompany: result?.company_desc || "",
-          postalCode: result?.post_code || "",
-          state: result?.state || "",
-          phoneNumber: result?.company_contact || "",
-          houseNumber: result?.area || "",
-          companyEstDate: result?.established_in || "",
-          mapLocation: {
-            lat: parseFloat(result?.map_lat) || 21.1875694,
-            lon: parseFloat(result?.map_lng) || 72.8147383,
-            displayName: result?.area || "",
-          },
-          company_banner: result?.company_banner || "",
-          company_logo: result?.company_logo || "",
-          bannerPath: result?.company_banner || "",
-          logoPath: result?.company_logo || "",
-          workingHoursDay: result?.working_hours_day || "",
-          workingHoursFromTime: result?.working_hours_from || "",
-          workingHoursToTime: result?.working_hours_to || "",
-          companyID: result?.company_id || "",
-        };
-        setMapLocation({
-          lat: defaultValue.mapLocation.lat || 21.1875694,
-          lon: defaultValue.mapLocation.lon || 72.8147383,
-          displayname: defaultValue.mapLocation.displayName || "",
-        });
-
-        setObjImageUploader({
-          banner: defaultValue.company_banner || "",
-          logo: defaultValue.company_logo || "",
-          ID: defaultValue.companyID || "",
-        });
-
-        objForm.reset(defaultValue);
         return null;
       }
+
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
@@ -214,6 +218,45 @@ export default function CompanyDetailsPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChange]);
+
+  useEffect(() => {
+    if (objData && Object.keys(objData).length > 0) {
+      const defaultValue: IFormData = {
+        alternatePhoneNumber: objData.company_alternate_contact,
+        businessType: objData.business_segment,
+        city: objData.city,
+        emailID: objData.company_email,
+        country: objData.country,
+        fullName: objData.company_name,
+        aboutCompany: objData.company_desc,
+        postalCode: objData.post_code,
+        state: objData.state,
+        phoneNumber: objData.company_contact,
+        houseNumber: objData.area,
+        companyEstDate: objData.established_in,
+        mapLocation: {
+          lat: parseFloat(objData.map_lat) || 21.1875694,
+          lon: parseFloat(objData.map_lng) || 72.8147383,
+          displayName: objData.area,
+        },
+        company_banner: objData.company_banner,
+        company_logo: objData.company_logo,
+        bannerPath: objData.company_banner,
+        logoPath: objData.company_logo,
+        workingHoursDay: objData.working_hours_day,
+        workingHoursFromTime: objData.working_hours_from,
+        workingHoursToTime: objData.working_hours_to,
+        companyID: objData.company_id,
+      };
+      setMapLocation({
+        lat: defaultValue.mapLocation.lat || 21.1875694,
+        lon: defaultValue.mapLocation.lon || 72.8147383,
+        displayname: defaultValue.mapLocation.displayName,
+      });
+
+      objForm.reset(defaultValue);
+    }
+  }, [objData]);
 
   return (
     <>
@@ -270,13 +313,20 @@ export default function CompanyDetailsPage() {
                 isRequired={true}
               />
             </div>
-            {/* {objImageUploader && ( */}
-            <CompanyImageUploader
-              companyLogo={objImageUploader && objImageUploader.logo}
-              companyBanner={objImageUploader && objImageUploader.banner}
-              companyID={objImageUploader && objImageUploader.ID}
-            />
-            {/* )} */}
+            {objData &&
+              Object.keys(objData).length > 0 &&
+              Utils.getCompanyID() && (
+                <CompanyImageUploader
+                  logoPath={(objData && objData.company_logo) || ""}
+                  bannerPath={(objData && objData.company_banner) || ""}
+                />
+              )}
+            {!Utils.getCompanyID() && (
+              <CompanyImageUploader
+                logoPath={(objData && objData.company_logo) || ""}
+                bannerPath={(objData && objData.company_banner) || ""}
+              />
+            )}
             <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
           </div>
           <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">

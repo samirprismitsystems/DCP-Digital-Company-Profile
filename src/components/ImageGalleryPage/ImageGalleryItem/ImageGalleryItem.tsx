@@ -5,7 +5,10 @@ import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
-import { portfolioFormSchema } from "@/services/forms/formSchema";
+import {
+  portfolioFormSchema,
+  productFormSchema,
+} from "@/services/forms/formSchema";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,16 +18,38 @@ import * as yup from "yup";
 
 export default function ImageGalleryItem() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [lstImageGallery, setLstImageGallery] = useState<any>([
+  const [lstPortfolio, setLstPortfolio] = useState<any>([
     {
+      portfolio_name: "",
       portfolio_desc: "",
       portfolio_image: "",
-      portfolio_name: "",
     },
   ]);
+
+  const loadData = async () => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.getImageGalleryDetails();
+      if (!res.error) {
+        setLstPortfolio(res.portfolio);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onComplete = () => {
+    loadData();
+  };
+
   const objForm = useForm({
     defaultValues: {
-      portfolio_data: lstImageGallery,
+      portfolio_data: lstPortfolio,
     },
     resolver: yupResolver(portfolioFormSchema),
   });
@@ -108,27 +133,6 @@ export default function ImageGalleryItem() {
     }
   };
 
-  const loadData = async () => {
-    try {
-      setIsLoading(true);
-      const res = await ApiService.getImageGalleryDetails();
-      if (!res.error) {
-        setLstImageGallery(res.portfolio);
-        return null;
-      }
-
-      throw new Error(res.message);
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const onComplete = () => {
-    loadData();
-  };
-
   const itemDelete = async (index: number) => {
     try {
       const isValid = await Utils.showWarningMessage("Do you want to delete?");
@@ -137,18 +141,17 @@ export default function ImageGalleryItem() {
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
           onComplete();
-          setLstImageGallery([
+          setLstPortfolio([
             {
+              portfolio_name: "",
               portfolio_desc: "",
               portfolio_image: "",
-              portfolio_name: "",
             },
           ]);
           return null;
         }
 
-        if (res.message !== "Empty Portfolio Data")
-          throw new Error(res.message);
+        if (res.message !== "Empty Portfolio Data") throw new Error(res.message);
       }
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
@@ -168,13 +171,13 @@ export default function ImageGalleryItem() {
   }, []);
 
   useEffect(() => {
-    if (lstImageGallery && lstImageGallery.length > 0) {
+    if (lstPortfolio && lstPortfolio.length > 0) {
       objForm.reset({
-        portfolio_data: lstImageGallery,
+        portfolio_data: lstPortfolio,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lstImageGallery]);
+  }, [lstPortfolio]);
 
   if (isLoading)
     return (
@@ -182,14 +185,14 @@ export default function ImageGalleryItem() {
         <Loading />
       </div>
     );
-    
+
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
         <div className="grid mb-16 gap-6 max-w-full xl:grid-cols-5 md:grid-cols-2 sm:grid-cols-2">
           {fields.map((item: any, index: number) => {
             return (
-              <div key={index}>
+              <div key={item.id}>
                 <div className='item_no flex justify-between items-center mb-2 font-["GothamRoundedLight"]  '>
                   <h5 className="capitalize font-medium">
                     Portfolio
@@ -216,22 +219,12 @@ export default function ImageGalleryItem() {
                   }}
                 >
                   <div>
-                    {item.portfolio_image && (
-                      <RHFImageUploader
-                        srcPath={item.portfolio_image}
-                        savePath={`portfolio_data.${index}.portfolio_image`}
-                        label="Upload Portfolio Image"
-                        folderPath="portfolio"
-                      />
-                    )}
-                    {!item.portfolio_id && (
-                      <RHFImageUploader
-                        srcPath={item.portfolio_image}
-                        savePath={`portfolio_data.${index}.portfolio_image`}
-                        label="Upload Portfolio Image"
-                        folderPath="portfolio"
-                      />
-                    )}
+                    <RHFImageUploader
+                      srcPath={item.portfolio_image}
+                      savePath={`portfolio_data.${index}.portfolio_image`}
+                      label="Upload Portfolio Image"
+                      folderPath="portfolio"
+                    />
                     <input
                       type="text"
                       className="py-5 imageUploaderInputs px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 bg-[#f6f4f4] placeholder:text-gray-400 font-normal w-full  text-3xl text-secondary-main focus-within:outline-none not-italic bg-transparent "
@@ -263,8 +256,8 @@ export default function ImageGalleryItem() {
           <AddMore
             onClick={() =>
               append({
-                portfolio_name: "",
                 portfolio_desc: "",
+                portfolio_name: "",
                 portfolio_image: "",
               })
             }

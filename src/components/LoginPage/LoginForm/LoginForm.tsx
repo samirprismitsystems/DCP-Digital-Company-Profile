@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../../services/forms/formSchema";
+
 export const loadCompanyPageDetails = async () => {
   try {
     const res = await ApiService.getCompanyDetailsPageData();
@@ -20,6 +21,7 @@ export const loadCompanyPageDetails = async () => {
         let websiteSlug = result.company_slug;
         Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
         Utils.setItem("slug", websiteSlug);
+        Utils.setItem("userID", result.user_id);
       }
       return null;
     }
