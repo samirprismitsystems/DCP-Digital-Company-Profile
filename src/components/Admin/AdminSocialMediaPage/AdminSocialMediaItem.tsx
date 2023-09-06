@@ -174,7 +174,12 @@ export default function AdminSocialMediaItem() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lstSocialMedia]);
 
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return (
+      <div className="py-[10rem]">
+        <Loading />
+      </div>
+    );
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSubmit)}>
