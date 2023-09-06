@@ -415,6 +415,25 @@ const ApiService = {
     const res = await axios.post(`${BASE_URI}api/inquiry/createinquiry`, io);
     return res.data;
   },
+
+  async getSomePageData(io: any) {
+    const res = await axios.post(`${BASE_URI}api/pages/getsomepagedata`, io);
+    return res.data;
+  },
+
+  async getPrivacyPolicy() {
+    const res = await axios.get(
+      `${BASE_URI}api/pages/getsinglepage/privacy-policy`
+    );
+    return res.data;
+  },
+
+  async getCookiePolicy() {
+    const res = await axios.get(
+      `${BASE_URI}api/pages/getsinglepage/cookie-policy`
+    );
+    return res.data;
+  },
 };
 
 export default ApiService;

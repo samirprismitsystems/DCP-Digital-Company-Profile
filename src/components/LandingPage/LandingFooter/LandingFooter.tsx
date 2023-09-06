@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import Content from "./Content";
+import FooterTopContent from "./FooterTopContent";
 
 export default function LandingFooter() {
   return (
     <>
-      <Content />
+      <FooterTopContent />
       <section
         className="w-full xs:flex-col xs:text-center p-12 border-t border-primary-lightDark flex md:flex-row md:justify-between md:text-left item-center px-16"
         style={{

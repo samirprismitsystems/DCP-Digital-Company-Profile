@@ -1,11 +1,18 @@
-import Utils from "@/services/Utils";
 import { useRouter } from "next/router";
 
-export default function ResponsiveNavbar({toggle}:any) {
+export default function ResponsiveNavbar({
+  toggle,
+  isLogin,
+}: {
+  toggle: any;
+  isLogin?: boolean;
+}) {
+  const router = useRouter();
+
   return (
     <>
       <div className="w-full md:w-auto">
-        <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0 md:border-0">
+        <ul className="xs:flex-row-reverse font-[500] font-Montserrat flex justify-center items-center p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0 md:border-0">
           <li>
             <button
               data-collapse-toggle="navbar-default"
@@ -30,6 +37,18 @@ export default function ResponsiveNavbar({toggle}:any) {
               </svg>
             </button>
           </li>
+          {isLogin && (
+            <li>
+              <button
+                className="border py-2 px-9 btnHoverEffect  text-white block  text-center"
+                onClick={() => {
+                  router.push("/login");
+                }}
+              >
+                Login
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </>

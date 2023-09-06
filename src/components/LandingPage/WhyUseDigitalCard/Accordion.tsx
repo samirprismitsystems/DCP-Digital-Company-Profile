@@ -15,7 +15,8 @@ const Accordion = () => {
       setOpenItem(title);
     }
   };
-  console.log(data.pageDetails)
+
+  
   return (
     <>
       <div className="mb-[3rem]">

@@ -1,5 +1,6 @@
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { lstUserResponsiveNavbar } from "@/data/DashboardSideBar";
+import { lstDashboardNavigationMenu } from "@/data/NavigationMenu";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
@@ -7,7 +8,10 @@ import { useEffect, useState } from "react";
 import DashboardNavigationMenu from "./DashboardNavigationMenu";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
-export default function DashboardNavbar() {
+export default function DashboardNavbar(props: {
+  lstNav?: any;
+  isLogin?: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isChange, setIsChange] = useState(false);
   const dispatch = useAppDispatch();
@@ -25,10 +29,10 @@ export default function DashboardNavbar() {
 
   return (
     <nav
-      className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}
+      className={`shadow-md bg-white sticky z-[999] w-full top-0 xl:h-[10rem] xs:h-[8.5rem] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
-        lstNavigations={lstUserResponsiveNavbar}
+        lstNavigations={props.lstNav || lstUserResponsiveNavbar}
         toggle={toggle}
         isOpen={isOpen}
         redirectPath="dashboard"
@@ -56,11 +60,16 @@ export default function DashboardNavbar() {
         </button>
 
         <div className="hidden md:block">
-          {typeof window !== "undefined" && <DashboardNavigationMenu />}
+          {typeof window !== "undefined" && (
+            <DashboardNavigationMenu
+              lstNav={props.lstNav || lstDashboardNavigationMenu}
+              isLogin={props.isLogin}
+            />
+          )}
         </div>
         <div className="block md:hidden">
           {typeof window !== "undefined" && (
-            <ResponsiveNavbar toggle={toggle} />
+            <ResponsiveNavbar isLogin={props.isLogin} toggle={toggle} />
           )}
         </div>
       </div>

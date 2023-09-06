@@ -107,7 +107,7 @@ export const lstUserResponsiveNavbar = [
   {
     id: 1,
     name: "Visit Site",
-    link: `dashboard/${Utils.getItem("slug")}`,
+    link: `/${Utils.getItem("slug")}`,
     isNewTab: true,
   },
   {
@@ -121,5 +121,13 @@ export const lstUserResponsiveNavbar = [
     name: "Logout",
     isLogout: true,
     link: "/login",
+  },
+];
+
+export const privacyPolicyNavList = [
+  {
+    id: 1,
+    name: "Home",
+    link: `/`,
   },
 ];
