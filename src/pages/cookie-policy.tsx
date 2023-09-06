@@ -6,7 +6,7 @@ import Utils from "@/services/Utils";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-export default function cookiePolicy() {
+export default function CookiePolicy() {
   const [objItem, setObjItem] = useState<any>();
 
   const loadData = async () => {
@@ -24,6 +24,8 @@ export default function cookiePolicy() {
 
   useEffect(() => {
     loadData();
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
