@@ -28,19 +28,23 @@ export default function DashboardNavigationMenu(props: {
                       window.open(`/${Utils.getItem("slug")}`, "_blank");
                     }
                   } else {
-                    dispatch(
-                      setSelectedObj({
-                        selectedIndex: 0,
-                        selectedTitle: "profile",
-                      })
-                    );
-                    dispatch(setRouteIsChanged(true));
-                    if (typeof window !== "undefined") {
-                      window.history.replaceState(
-                        "proile",
-                        "",
-                        `/dashboard/profile`
+                    if (props.isLogin) {
+                      router.push("/");
+                    } else {
+                      dispatch(
+                        setSelectedObj({
+                          selectedIndex: 0,
+                          selectedTitle: "profile",
+                        })
                       );
+                      dispatch(setRouteIsChanged(true));
+                      if (typeof window !== "undefined") {
+                        window.history.replaceState(
+                          "proile",
+                          "",
+                          `/dashboard/profile`
+                        );
+                      }
                     }
                   }
                 }}

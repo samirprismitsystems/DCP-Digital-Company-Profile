@@ -92,8 +92,8 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
               {/* loginScreenPrivacyPolicyList */}
               {objSetting.footerList &&
                 objSetting.footerList.length > 0 &&
-                objSetting.footerList.map((item: any) => (
-                  <li className="text-white" key={item.id}>
+                objSetting.footerList.map((item: any, index) => (
+                  <li className="text-white" key={index}>
                     <Link
                       href={`${item.page_slug}`}
                       target="_blank"

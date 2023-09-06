@@ -12,11 +12,13 @@ export default function MobileNavbar({
   toggle,
   lstNavigations,
   redirectPath,
+  isLogin,
 }: {
   isOpen: boolean;
   redirectPath?: string;
   lstNavigations: INavigationMenu[]; // Replace 'any' with the actual type
   toggle: () => void;
+  isLogin?: boolean;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isChange, setIsChange] = useState(false);
@@ -57,6 +59,11 @@ export default function MobileNavbar({
     if (item.isLogout) {
       Utils.clearStorage();
       router.push("/login");
+      return null;
+    }
+
+    if (isLogin) {
+      router.push("/");
       return null;
     }
 
