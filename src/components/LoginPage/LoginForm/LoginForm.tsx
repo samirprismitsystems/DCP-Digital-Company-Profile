@@ -22,6 +22,7 @@ export const loadCompanyPageDetails = async () => {
         Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
         Utils.setItem("slug", websiteSlug);
         Utils.setItem("userID", result.user_id);
+        Utils.setItem("themeID", result.theme_id);
       }
       return null;
     }

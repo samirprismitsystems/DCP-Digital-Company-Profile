@@ -7,7 +7,7 @@ import { useState } from "react";
 import ThemeCards from "./ThemeCards/ThemeCards";
 
 export default function ThemesPage() {
-  const [themeID, setThemeID] = useState<any>(null);
+  const [themeID, setThemeID] = useState<any>(Utils.getSelectedThemeID());
 
   const onSave = async (e: any) => {
     try {
@@ -18,6 +18,11 @@ export default function ThemesPage() {
       const res = await ApiService.saveThemes(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
+        const result = await ApiService.getCompanyDetailsPageData();
+        let objCompany = result?.company[0];
+        if (objCompany) {
+          Utils.setSelectedThemeID(objCompany.theme_id);
+        }
         return null;
       }
 
@@ -27,6 +32,7 @@ export default function ThemesPage() {
     }
   };
 
+  console.log(themeID);
   return (
     <>
       <BackButton />

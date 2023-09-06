@@ -64,6 +64,7 @@ export default function PortfolioContactUs() {
         <input
           required={true}
           type="text"
+          value={objData.mobile || ""}
           className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
           placeholder="Enter Your Mobile Number"
           onChange={(e: any) => {
@@ -75,6 +76,7 @@ export default function PortfolioContactUs() {
         <input
           required={true}
           type="email"
+          value={objData.email || ""}
           className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
           placeholder="Enter Your Email"
           onChange={(e: any) => {
@@ -84,6 +86,7 @@ export default function PortfolioContactUs() {
           }}
         />
         <textarea
+          value={objData.message || ""}
           className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
           cols={5}
           rows={5}

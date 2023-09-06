@@ -1,7 +1,7 @@
 import { ITestimonial } from "@/types/commonTypes";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { differenceInYears } from "date-fns";
+import { formatDistance } from "date-fns";
 
 export default function GetPortfolioFeedBackReview({
   lstTestimonial,
@@ -38,9 +38,12 @@ export default function GetPortfolioFeedBackReview({
         )}
         <div className="text-[1.6rem] pt-[6px] text-portfolioTheme-textColor pl-6">
           <span>
-            {differenceInYears(new Date(), new Date(item.created_on))}
+            {formatDistance(new Date(item.created_on), new Date(), {
+              addSuffix: true,
+            })}
+            {/* {differenceInYears(new Date(), new Date())} */}
           </span>
-          <span className="p-2">years ago</span>
+          {/* <span className="p-2">years ago</span> */}
         </div>
       </div>
       <h2

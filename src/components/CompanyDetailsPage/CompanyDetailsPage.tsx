@@ -158,6 +158,7 @@ export default function CompanyDetailsPage() {
           if (!Utils.getPageSlug()) Utils.setItem("slug", result.company_slug);
           if (!Utils.getCompanyID()) Utils.setCompanyID(result.company_id);
           if (!Utils.getUserID()) Utils.setUserID(result.user_id);
+          Utils.setSelectedThemeID(result.theme_id);
 
           if (!AuthService.getUserEmail())
             AuthService.setUserEmail(result.company_email);

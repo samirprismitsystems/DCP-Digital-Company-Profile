@@ -38,7 +38,13 @@ export default function PaymentOptionPage() {
       io.append("bank_ifsc_code", data.bankIFSCCode);
       io.append("account_type", data.accountType);
       io.append("user_id", AuthService.getUserEmail());
-      io.append("qrcode", data.QRCodeImage);
+      if(typeof data.QRCodeImage == 'object'){
+        io.append("qrcode", data.QRCodeImage);
+      }
+
+      if(typeof data.logo == 'string'){
+        io.append("logo", objPayment.logo);
+      }
       io.append("isupdate", isUpdate);
 
       const res = await ApiService.savePaymentOptionDetails(io);
@@ -81,6 +87,7 @@ export default function PaymentOptionPage() {
           payTMNumber: result.paytm_number,
           phonePeNumber: result.phonepay_number,
           QRCodeImage: result.qrcode,
+          logo: result.qrcode,
         };
 
         setObjPayment(defaultValue);

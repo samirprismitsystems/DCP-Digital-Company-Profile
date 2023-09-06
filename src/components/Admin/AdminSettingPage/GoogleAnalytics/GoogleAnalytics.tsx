@@ -66,7 +66,7 @@ export default function GoogleAnalytics() {
   useEffect(() => {
     loadData();
   }, []);
-  
+
   useEffect(() => {
     if (objSiteSetting && Object.keys(objSiteSetting).length > 0) {
       objForm.reset(objSiteSetting);
@@ -78,17 +78,13 @@ export default function GoogleAnalytics() {
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSave)}>
         <SiteSettingTextField
-          title={
-            <div className="flex items-center mb-1">Site Email Address</div>
-          }
+          title={<div className="flex items-center mb-1">Before Body Tag</div>}
           name="beforeTag"
           placeHolder="Before Body Tag Google Analytics"
           isTextArea={true}
         />
         <SiteSettingTextField
-          title={
-            <div className="flex items-center mb-1">Site Email Address</div>
-          }
+          title={<div className="flex items-center mb-1">After Body Tag</div>}
           name="afterTag"
           placeHolder="After Body Tag Google Analytics"
           isTextArea={true}

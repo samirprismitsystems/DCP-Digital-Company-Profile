@@ -10,7 +10,9 @@ import { useEffect, useState } from "react";
 export default function ThemeCards({ onThemeSelect }: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstThemes, setLstThemes] = useState([]);
-  const [selectedThemeId, setSelectedThemeId] = useState<string | null>(null);
+  const [selectedThemeId, setSelectedThemeId] = useState<string | null>(
+    Utils.getSelectedThemeID()
+  );
 
   const toggle = (themeId: string) => {
     setSelectedThemeId(themeId);

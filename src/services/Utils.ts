@@ -165,6 +165,19 @@ class Utils {
     }
   }
 
+  static getSelectedThemeID() {
+    const result = this.getItem("themeID");
+    if (result) {
+      return result;
+    } else {
+      return null;
+    }
+  }
+
+  static setSelectedThemeID(themeID: any) {
+    this.setItem("themeID", themeID);
+  }
+
   static getMondayToSundayDateTime(
     working_hours_from: string,
     working_hours_to: string

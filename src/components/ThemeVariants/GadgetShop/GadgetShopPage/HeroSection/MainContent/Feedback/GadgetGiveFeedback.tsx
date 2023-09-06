@@ -29,12 +29,15 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
       const io: any = new FormData();
       io.append("client_name", objFeedback.clientName);
       io.append("email_address", objFeedback.email);
-      io.append("ratting", rate);
-      io.append("comment", objFeedback.comment);
+      if (!props.isAnotherSubmit) {
+        io.append("ratting", rate);
+        io.append("comment", objFeedback.comment);
+      }
       io.append("company_id", Utils.getCompanyID());
       io.append("isupdate", false);
 
       if (props.isAnotherSubmit) {
+        io.append("message", objFeedback.comment);
         io.append("phone_number", objFeedback.phoneNumber);
         if (Utils.getUserID()) {
           io.append("user_id", Utils.getUserID());
@@ -113,6 +116,7 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
           <input
             required={true}
             type="text"
+            value={objFeedback.clientName || ""}
             className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
             placeholder="Enter Your Name"
             onChange={(e: any) => {
@@ -123,6 +127,7 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
           />
           <input
             type="email"
+            value={objFeedback.email || ""}
             required={true}
             className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
             placeholder="Enter Your Email"
@@ -136,12 +141,13 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
             <>
               <input
                 type="number"
+                value={objFeedback.phoneNumber || ""}
                 required={true}
                 className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
                 placeholder="Enter Your Mobile No"
                 onChange={(e: any) => {
                   handleOnChange({
-                    mobile: e.target.value,
+                    phoneNumber: e.target.value,
                   });
                 }}
               />
@@ -151,6 +157,7 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
             className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
             cols={5}
             rows={5}
+            value={objFeedback.comment || ""}
             required={true}
             placeholder="Enter Your Feedback"
             onChange={(e: any) => {

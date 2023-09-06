@@ -66,5 +66,6 @@ export interface IAPICompanyDetailsPage {
   isupdate: boolean;
   company_id: number;
   logo: string;
+  theme_id: string;
   banner: string;
 }

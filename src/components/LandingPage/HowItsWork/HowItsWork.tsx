@@ -48,9 +48,10 @@ export default function HowItsWork() {
                 <h1 className="text-white font-600 md:leading-5 lg:leading-[3.5rem] xs:text-left title-font text-[3.0rem] mb-4 font-semibold">
                   {pageDetails.cardtitle1 || "N/A"}
                 </h1>
-                <p className="text-white xs:text-left md:text-left  text-[1.8rem] pb-4">
-                  {pageDetails.carddesc1 || "N/A"}
-                </p>
+                <p
+                  className="text-white xs:text-left md:text-left  text-[1.8rem] pb-4"
+                  dangerouslySetInnerHTML={{ __html: pageDetails.carddesc1 }}
+                ></p>
                 {/* <ul className="theme_list text-[1.8rem] ml-6 mt-4 ">
                   <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
                   <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
@@ -77,9 +78,10 @@ export default function HowItsWork() {
               <h1 className="text-white title-font text-[3.0rem] mb-4 font-semibold">
                 {pageDetails.cardtitle2 || "N/A"}
               </h1>
-              <p className="text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4">
-                {pageDetails.carddesc2 || "N/A"}
-              </p>
+              <p
+                className="text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4"
+                dangerouslySetInnerHTML={{ __html: pageDetails.carddesc2 }}
+              ></p>
               {/* <ul className="theme_list text-[1.8rem] ml-6 mt-4">
                 <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
                 <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>

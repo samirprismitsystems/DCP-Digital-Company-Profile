@@ -1,17 +1,30 @@
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function GadgetWhatsAppShare() {
+  const [mobile, setMobile] = useState();
+  const router = useRouter();
+
   return (
     <>
       <div className="whatsapp-share-form xs:mt-0 md:mt-6 lg:mt-0 gadgetfontfamily text-gadgetTheme-text">
         <form
-          action="https://api.whatsapp.com/send"
-          id="wtsp_share"
           target="_blank"
           className="xs:h-[7rem] md:h-[8rem]  xs:w-[600px] sm:w-[515px] md:w-[600px] xl:h-[9.5rem] flex items-center pl-6 overflow-hidden mx-auto my-0 max-w-full rounded-[1rem] xlTwo:h-[6rem]"
           style={{
             backgroundColor: "rgb(232, 246, 243)",
+          }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (mobile)
+              window.open(
+                `https://api.whatsapp.com/send/?phone=${mobile}&text=Hi`,
+                "_blank"
+              );
+
+            setMobile(undefined);
           }}
         >
           <span className="border-0 bg-transparent py-6 px-2 gadgetfontfamily  xs:text-[2rem] xl:text-[2.7rem] font-medium text-black xlTwo:text-[2rem]">
@@ -19,8 +32,12 @@ export default function GadgetWhatsAppShare() {
           </span>
           <input
             type="number"
+            required={true}
             className="focus-within:outline-none text-black font-medium border-0 bg-transparent w-full py-6 px-2 gadgetfontfamily xs:text-[2rem] xl:text-[2.7rem] xlTwo:text-[2rem]"
-            value="8238255166"
+            value={mobile || ""}
+            onChange={(e: any) => {
+              setMobile(e.target.value);
+            }}
           />
           <button
             type="submit"

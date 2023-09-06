@@ -82,6 +82,7 @@ export const adminSiteSettingFormSchema = yup.object({
 export const paymentOptionFormSchema = yup.object({
   bankName: yup.string().optional(),
   QRCodeImage: yup.mixed().optional(),
+  logo: yup.mixed().optional(),
   bankAccountNumber: yup.string().optional(),
   accountHolderName: yup.string().optional(),
   payTMNumber: yup.string().optional(),
