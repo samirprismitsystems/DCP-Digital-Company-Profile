@@ -13,7 +13,7 @@ export default function AdminPagesTable() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [lstPagesInfo, setLstPagesInfo] = useState<IPagesInfo[]>();
+  const [lstPagesInfo, setLstPagesInfo] = useState<IPagesInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loadData = async () => {
@@ -142,7 +142,6 @@ export default function AdminPagesTable() {
                 )}
               </tbody>
             ))}
-
           <TableDataNotPresent
             data={lstPagesInfo}
             rows={8}
