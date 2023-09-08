@@ -185,8 +185,6 @@ export default function AdminAddPagesPage({
     }
   };
 
-  console.log(objForm.formState)
-
   useEffect(() => {
     if (isEdit && objPageInfo && Object.keys(objPageInfo).length > 0) {
       let defaultTemplate = 0;

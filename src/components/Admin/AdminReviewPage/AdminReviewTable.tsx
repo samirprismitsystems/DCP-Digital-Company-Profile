@@ -5,7 +5,7 @@ import Utils from "@/services/Utils";
 import { IAdminUserReview } from "@/types/commonTypes";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function AdminReviewTable() {
@@ -16,6 +16,7 @@ export default function AdminReviewTable() {
     totalPages: 1,
     itemPerPage: 2,
   });
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -127,12 +128,16 @@ export default function AdminReviewTable() {
                         {item.user_message}
                       </td>
                       <td className="p-4 text-2xl">
-                        <Link target="_blank" href={"/dashboard/company"}>
+                        <button
+                          onClick={() => {
+                            router.push(`edituserreview/${item.review_id}`);
+                          }}
+                        >
                           <FontAwesomeIcon
                             className="text-secondary-main text-3xl text-center"
                             icon={faEdit}
                           />
-                        </Link>
+                        </button>
                       </td>
                       <td className="p-4 text-2xl">
                         <label className="relative inline-flex items-center cursor-pointer">
@@ -159,14 +164,18 @@ export default function AdminReviewTable() {
                   ) : (
                     <tr className="bg-primary-main border-red-100">
                       <td className="p-4 text-2xl">{item.user_name}</td>
-                      <td className="p-4 text-2xl">{item.user_name}</td>
+                      <td className="p-4 text-2xl">{item.user_message}</td>
                       <td className="p-4 text-2xl">
-                        <Link target="_blank" href={"/dashboard/company"}>
+                        <button
+                          onClick={() => {
+                            router.push(`edituserreview/${item.review_id}`);
+                          }}
+                        >
                           <FontAwesomeIcon
                             className="text-secondary-main text-3xl text-center"
                             icon={faEdit}
                           />
-                        </Link>
+                        </button>
                       </td>
                       <td className="p-4 text-2xl rounded-b-l-xl">
                         <label className="relative inline-flex items-center cursor-pointer">

@@ -25,9 +25,14 @@ export default function AdminBackButton({
     const url = router.pathname;
     const parts = url.split("/");
     const editPageString = parts[2];
-    
+
     if (editPageString === "editpage") {
-      router.push('/admindashboard/pages');
+      router.push("/admindashboard/pages");
+      return null;
+    }
+
+    if (editPageString === "edituserreview") {
+      router.push("/admindashboard/userreview");
       return null;
     }
 

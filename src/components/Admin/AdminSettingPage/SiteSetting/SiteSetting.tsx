@@ -66,7 +66,6 @@ export default function SiteSetting() {
   const onSave: any = async (data: IFormData) => {
     try {
       const io: any = new FormData();
-      io.append("site_logo", data.siteLogo);
       io.append("site_title", data.siteTitle);
       io.append("site_desc", data.siteDescription);
       io.append("site_email", data.siteEmail);
@@ -74,6 +73,11 @@ export default function SiteSetting() {
       io.append("instaurl", data.instagram);
       io.append("linkedurl", data.linkedIn);
       io.append("footer_pages", data.selectedOption);
+      if (typeof data.siteLogo == "object") {
+        io.append("site_logo", data.siteLogo);
+      } else {
+        io.append("logo", data.siteLogo);
+      }
 
       const res = await ApiService.saveAdminSiteSetting(io);
       if (!res.error) {

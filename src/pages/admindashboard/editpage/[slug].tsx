@@ -44,6 +44,10 @@ export default function EditAdminPages() {
     loadData();
   }, []);
 
+  useEffect(() => {
+    loadData();
+  }, [router.query.slug]);
+
   if (isLoading || !objPageInfo) return <PageCircularLoading />;
   return (
     <AuthGuard>
