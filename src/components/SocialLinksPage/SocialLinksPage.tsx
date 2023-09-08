@@ -6,7 +6,6 @@ import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { socialLinkFormSchema } from "@/services/forms/formSchema";
-import { ISocialLinks } from "@/types/sociallinks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -15,8 +14,9 @@ import SocialLinkIcon from "./SocialLinkIcons/SocialLinkIcon";
 import SocialLinkTextField from "./SocialLinkTextField/SocialLinkTextField";
 
 export default function SocialLinksPage() {
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [lstSocialData, setLstSocialData] = useState<ISocialLinks[]>();
+  const [lstSocialData, setLstSocialData] = useState<any>([]);
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
   });
@@ -24,12 +24,46 @@ export default function SocialLinksPage() {
   type IFormData = yup.InferType<typeof socialLinkFormSchema>;
   const onSave: any = async (data: IFormData) => {
     try {
-      let pureFormData = data.socialData?.filter((item) => {
-        if (item.social_id && item.link) {
-          return true;
+      let pureFormData: any = [];
+      if (isUpdate) {
+        if (data.socialData) {
+          data.socialData.forEach((item) => {
+            if (item.social_id && item.link) {
+              let objItem = {
+                company_id: Utils.getCompanyID(),
+                company_social_id: item.company_social_id,
+                created_at: item.created_at,
+                link: item.link,
+                social_id: item.social_id,
+                socialmedia_color: item.socialmedia_color,
+                socialmedia_logo: item.socialmedia_logo,
+                socialmedia_name: item.socialmedia_name,
+                updated_at: item.updated_at,
+              };
+
+              pureFormData.push(objItem);
+            }
+          });
         }
-        return false;
-      });
+      } else {
+        if (data.socialData) {
+          data.socialData.forEach((item) => {
+            if (item.social_id && item.link) {
+              let objItem = {
+                created_at: item.created_at,
+                link: item.link,
+                socialmedia_id: item.social_id,
+                socialmedia_color: item.socialmedia_color,
+                socialmedia_logo: item.socialmedia_logo,
+                socialmedia_name: item.socialmedia_name,
+                updated_at: item.updated_at,
+              };
+
+              pureFormData.push(objItem);
+            }
+          });
+        }
+      }
 
       const uniqueArray = pureFormData?.concat(
         lstSocialData?.filter(
@@ -43,10 +77,15 @@ export default function SocialLinksPage() {
       let io = new FormData();
       io.append("socialdata", JSON.stringify(uniqueArray || lstSocialData));
       io.append("user_id", AuthService.getUserEmail());
-      io.append("isupdate", true as any);
+      io.append("isupdate", isUpdate as any);
       const res = await ApiService.saveSocialLinks(io);
-      Utils.showSuccessMessage(res.message);
-      loadData();
+      if (!res.error) {
+        Utils.showSuccessMessage(res.message);
+        loadData();
+        return null;
+      }
+
+      throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     }
@@ -57,7 +96,92 @@ export default function SocialLinksPage() {
       setIsLoading(true);
       const res = await ApiService.getSocialLinksData();
       if (!res.error) {
-        setLstSocialData(res.social);
+        if (res.message == "Company not found") {
+          Utils.showErrorMessage("Please First Setup Company Details!");
+          return null;
+        }
+        
+        if (res.social && res.social.length > 0) {
+          setIsUpdate(true);
+          setLstSocialData(res.social);
+        } else {
+          setIsUpdate(false);
+          setLstSocialData([
+            {
+              social_id: "1",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Facebook",
+              socialmedia_logo: "faFacebookF",
+              socialmedia_color: "1",
+            },
+            {
+              social_id: "2",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Instagram",
+              socialmedia_logo: "faInstagram",
+              socialmedia_color: "2",
+            },
+            {
+              social_id: "3",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Linkedin",
+              socialmedia_logo: "faLinkedinIn",
+              socialmedia_color: "3",
+            },
+            {
+              social_id: "4",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Twitter",
+              socialmedia_logo: "faTwitter",
+              socialmedia_color: "4",
+            },
+            {
+              social_id: "5",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Whatsapp Group Link",
+              socialmedia_logo: "faWhatsapp",
+              socialmedia_color: "5",
+            },
+            {
+              social_id: "6",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Pintrest",
+              socialmedia_logo: "faPinterestP",
+              socialmedia_color: "8",
+            },
+            {
+              social_id: "7",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Telegram Channel",
+              socialmedia_logo: "faTelegramPlane",
+              socialmedia_color: "6",
+            },
+            {
+              social_id: "8",
+              link: "",
+              created_at: "2023-09-08 11:38:47",
+              updated_at: "2023-09-08 11:42:20",
+              socialmedia_name: "Youtube",
+              socialmedia_logo: "faYoutube",
+              socialmedia_color: "8",
+            },
+          ]);
+        }
+
         return null;
       }
 
@@ -98,7 +222,7 @@ export default function SocialLinksPage() {
           <div className="row -mr-3 -ml-3">
             {lstSocialData &&
               lstSocialData.length > 0 &&
-              lstSocialData.map((item, index: number) => {
+              lstSocialData.map((item: any, index: number) => {
                 return (
                   <div key={index}>
                     <SocialLinkTextField
@@ -128,7 +252,7 @@ export default function SocialLinksPage() {
                 );
               })}
           </div>
-          {!isLoading && (!lstSocialData || lstSocialData.length <= 0) && (
+          {!isLoading && lstSocialData && lstSocialData.length <= 0 && (
             <div className="pb-9">
               <ErrorPlaceholder error="No Data Found!" />
             </div>
