@@ -48,7 +48,7 @@ export default function AdminReviewTable() {
 
   const updateUserReviewStatus = async (userReviewID: any, status: any) => {
     try {
-      if (status == 0) {
+      if (parseInt(status) == 0) {
         status = 1;
       } else {
         status = 0;

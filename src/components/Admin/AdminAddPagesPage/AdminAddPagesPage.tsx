@@ -74,7 +74,11 @@ export default function AdminAddPagesPage({
         io.append("meta_title", data.metaTitle);
         io.append("meta_description", data.metaDesc);
         io.append("meta_keywords", data.metaKeywords);
-        io.append("meta_image", data.metaImage);
+        if(typeof data.metaImage === 'object'){
+          io.append("meta_image", data.metaImage);
+        }else{
+          io.append("meta_image_name", data.metaImage);
+        }
         io.append("page_content", data.pageContent);
 
         if (isEdit) {
@@ -115,21 +119,37 @@ export default function AdminAddPagesPage({
         io.append("template_name", "landingpage_template");
         io.append("meta_title", data.metaTitle);
         io.append("meta_description", data.metaDesc);
-        io.append("meta_image", data.metaImage);
+        if(typeof data.metaImage =='object'){
+          io.append("meta_image", data.metaImage);
+        }else{
+          io.append("meta_image_name", data.metaImage);
+        }
         io.append("meta_keywords", data.metaKeywords);
         io.append("hometitle", data.homeTitle);
         io.append("homesubtitle", data.homeSubTitle);
         io.append("homedesc", data.homeDesc);
-        io.append("homeimg", data.homeImage);
+        if (typeof data.homeImage == "object") {
+          io.append("homeimg", data.homeImage);
+        } else {
+          io.append("homeimgpic", data.homeImage);
+        }
         io.append("homebtntitle", data.homeBtnTitle);
         io.append("homebtnlink", data.homeBtnLink);
         io.append("steps", JSON.stringify(data.steps));
         io.append("cardtitle1", data.cardTitle1);
         io.append("carddesc1", data.cardContent1);
-        io.append("cardimg1", data.cardImage1);
+        if (typeof data.cardImage1 == "object") {
+          io.append("cardimg1", data.cardImage1);
+        } else {
+          io.append("cardimg1pic", data.cardImage1);
+        }
         io.append("cardtitle2", data.cardTitle2);
         io.append("carddesc2", data.cardContent2);
-        io.append("cardimg2", data.cardImage2);
+         if (typeof data.cardImage2 == "object") {
+           io.append("cardimg2", data.cardImage2);
+         } else {
+           io.append("cardimg2pic", data.cardImage2);
+         }
         io.append("featuretitle", data.featureTitle);
         io.append("featuresubtitle", data.featureSubTitle);
         io.append("featuredesc", data.featureDescription);
@@ -138,11 +158,22 @@ export default function AdminAddPagesPage({
         io.append("logoandtext", JSON.stringify(data.features_data));
         io.append("faqtitle", data.faqTitle);
         io.append("faqdesc", data.faqDesc);
-        io.append("faqimg", data.faqImage);
+        if (typeof data.faqImage == "object") {
+          io.append("faqimg", data.faqImage);
+        } else {
+          io.append("faqimgpic", data.faqImage);
+        }
+        
+        
         io.append("accordian", JSON.stringify(data.faq_data));
         io.append("fttitle", data.freeTrailTitle);
         io.append("ftdesc", data.freeTrailDesc);
-        io.append("ftimg", data.freeTrailImage);
+        if (typeof data.freeTrailImage == "object") {
+          io.append("ftimg", data.freeTrailImage);
+        } else {
+          io.append("ftimgpic", data.freeTrailImage);
+        }
+        
         io.append("ftbtntitle", data.freeTrailBtnTitle);
         io.append("ftbtnlink", data.freeTrailBtnLink);
         io.append("reviewtitle", data.reviewTitle);
