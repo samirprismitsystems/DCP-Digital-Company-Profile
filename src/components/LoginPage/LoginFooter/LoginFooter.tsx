@@ -1,5 +1,6 @@
-import { loginScreenPrivacyPolicyList } from "@/data/NavigationMenu";
-import { ILoginScreenPrivacyPolicy } from "@/types/commonTypes";
+// import { loginScreenPrivacyPolicyList } from "@/data/NavigationMenu";
+import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
 import {
   faFacebookF,
   faInstagram,
@@ -7,16 +8,61 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function LoginFooter() {
+  const [objSetting, setObjSetting] = useState({
+    facebook: "#",
+    instaGram: "#",
+    linkedIn: "#",
+    siteDesc: "",
+    siteTitle: "",
+    footerList: [],
+  });
+
+  const loadData = async () => {
+    try {
+      const objRes = await ApiService.getLandingPageResource();
+      const footerPages =
+        objRes.page_content && objRes.page_content?.footerpages;
+
+      const res = await ApiService.getAdminSiteSettingInfo();
+      const setting = res.setting;
+
+      const io: any = new FormData();
+      io.append("pages[]", JSON.parse(footerPages));
+
+      const pageData = await ApiService.getSomePageData(io);
+
+      if (!res.error && setting) {
+        setObjSetting({
+          facebook: setting[3]?.setting_value,
+          instaGram: setting[4]?.setting_value,
+          linkedIn: setting[5]?.setting_value,
+          siteTitle: setting[1]?.setting_value,
+          siteDesc: setting[2]?.setting_value,
+          footerList: pageData?.pages || [],
+        });
+      }
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
-      <nav
-        className={`shadow-md bg-secondary-main fixed w-full bottom-0 h-[10rem] z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center`}
+      <footer
+        className={`h-[80px] shadow-md bg-secondary-main bottom-0 z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center fixed right-0 px-8 pt-3 ${
+          true ? "w-full" : "footer_width"
+        }`}
       >
-        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 xs:pt-8 mx-0 xs:flex-col md:flex-row  xs:space-y-5 md:space-y-0">
+        <div className="footer_main_dashboard_footer container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between xs:flex-col sm:flex-row  xs:space-y-5 sm:space-y-0 md:space-y-0 p-8 sm:justify-between sm:items-center">
           <div className="flex flex-wrap space-x-10">
-            <Link href={"https://www.facebook.com/"} target="_blank">
+            <Link href={`${objSetting.facebook || "#"}`} target="_blank">
               <li className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-[4.5rem] w-[4.5rem]">
                 <FontAwesomeIcon
                   className="group-hover:text-white text-center text-secondary-main text-3xl"
@@ -24,7 +70,7 @@ export default function LoginFooter() {
                 />
               </li>
             </Link>
-            <Link href={"https://www.instagram.com/"} target="_blank">
+            <Link href={`${objSetting.instaGram || "#"}`} target="_blank">
               <li className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-[4.5rem] w-[4.5rem] ">
                 <FontAwesomeIcon
                   className="hover:text-white group-hover:text-white text-center bg-transparent text-secondary-main text-3xl"
@@ -32,12 +78,7 @@ export default function LoginFooter() {
                 />
               </li>
             </Link>
-            <Link
-              href={
-                "https://www.linkedin.com/signup/cold-join?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Ffeed%2F&trk=login_reg_redirect"
-              }
-              target="_blank"
-            >
+            <Link href={`${objSetting.linkedIn || "#"}`} target="_blank">
               <li className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-[4.5rem] w-[4.5rem] ">
                 <FontAwesomeIcon
                   className="hover:text-white group-hover:text-white text-center text-secondary-main text-3xl"
@@ -46,24 +87,26 @@ export default function LoginFooter() {
               </li>
             </Link>
           </div>
-          <div className="">
+          <div>
             <ul className="xs:space-x-6 flex justify-between sm:justify-center sm:space-x-16 items-center">
-              {loginScreenPrivacyPolicyList.map(
-                (item: ILoginScreenPrivacyPolicy) => (
-                  <li className="text-white" key={item.id}>
+              {/* loginScreenPrivacyPolicyList */}
+              {objSetting.footerList &&
+                objSetting.footerList.length > 0 &&
+                objSetting.footerList.map((item: any, index) => (
+                  <li className="text-white" key={index}>
                     <Link
-                      href="#!"
+                      href={`${item.page_slug}`}
+                      target="_blank"
                       className=" text-white hover:text-black transition-all duration-200 ease-linear font-normal"
                     >
-                      {item.name}
+                      {item.page_name}
                     </Link>
                   </li>
-                )
-              )}
+                ))}
             </ul>
           </div>
         </div>
-      </nav>
+      </footer>
     </>
   );
 }
