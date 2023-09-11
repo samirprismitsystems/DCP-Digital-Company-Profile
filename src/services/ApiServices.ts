@@ -1,7 +1,6 @@
 import { IUser } from "@/types/commonTypes";
 import axios from "axios";
 import AuthService from "./AuthServices";
-import Utils from "./Utils";
 import { BASE_URI } from "./config";
 
 const ApiService = {
@@ -269,9 +268,9 @@ const ApiService = {
     return res.data;
   },
 
-  async getWebsiteDetails() {
+  async getWebsiteDetails(slug: any) {
     const res = await axios.get(
-      `${BASE_URI}api/company/fetchcompanyfront/${Utils.getPageSlug()}`
+      `${BASE_URI}api/company/fetchcompanyfront/${slug}`
     );
     return res.data;
   },
