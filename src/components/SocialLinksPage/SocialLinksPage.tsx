@@ -16,7 +16,7 @@ import SocialLinkTextField from "./SocialLinkTextField/SocialLinkTextField";
 export default function SocialLinksPage() {
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [lstSocialData, setLstSocialData] = useState<any>();
+  const [lstSocialData, setLstSocialData] = useState<any>([]);
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
   });
@@ -101,7 +101,6 @@ export default function SocialLinksPage() {
           return null;
         }
 
-        console.log(res.social);
         if (res.social && res.social.length > 0) {
           setIsUpdate(true);
           setLstSocialData(res.social);
@@ -221,7 +220,8 @@ export default function SocialLinksPage() {
             </div>
           )}
           <div className="row -mr-3 -ml-3">
-            {lstSocialData &&
+            {Utils.getCompanyID() &&
+              lstSocialData &&
               lstSocialData.length > 0 &&
               lstSocialData.map((item: any, index: number) => {
                 return (
@@ -253,11 +253,13 @@ export default function SocialLinksPage() {
                 );
               })}
           </div>
+          
           {!isLoading && lstSocialData && lstSocialData.length <= 0 && (
             <div className="pb-9">
               <ErrorPlaceholder error="No Data Found!" />
             </div>
           )}
+
           {lstSocialData && lstSocialData.length > 0 && (
             <div className="w-full flex justify-end">
               <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
