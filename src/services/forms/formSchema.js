@@ -74,7 +74,7 @@ export const adminSiteSettingFormSchema = yup.object({
   instagram: yup.string().optional(),
   linkedIn: yup.string().optional(),
   siteLogo: yup.mixed().optional(),
-  selectedOption: yup.string().optional(),
+  footer_pages: yup.mixed().optional(),
   beforeTag: yup.string().optional(),
   afterTag: yup.string().optional(),
 });

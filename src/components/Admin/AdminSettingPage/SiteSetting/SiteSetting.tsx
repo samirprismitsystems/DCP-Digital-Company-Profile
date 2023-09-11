@@ -1,4 +1,5 @@
 import AdminCommonButton from "@/common/AdminCommonButton";
+import PageCircularLoading from "@/common/PageCircularLoading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { adminSiteSettingFormSchema } from "@/services/forms/formSchema";
@@ -25,10 +26,10 @@ export default function SiteSetting() {
       facebook: "",
       instagram: "",
       linkedIn: "",
-      selectedOption: "",
       siteDescription: "",
       siteEmail: "",
       siteTitle: "",
+      footer_pages: [],
     },
     resolver: yupResolver(adminSiteSettingFormSchema),
   });
@@ -47,8 +48,9 @@ export default function SiteSetting() {
           instagram: result[4].setting_value || "",
           linkedIn: result[5].setting_value || "",
           siteEmail: result[8].setting_value || "",
-          selectedOption: result[9].setting_value || "",
+          footer_pages: result[9].setting_value || "",
         };
+        // objForm.reset(objItem);
         setObjSiteSetting(objItem);
         return null;
       }
@@ -63,16 +65,25 @@ export default function SiteSetting() {
     loadData();
   };
 
-  const onSave: any = async (data: IFormData) => {
+  const onSave: any = async (data: any) => {
     try {
       const io: any = new FormData();
+      if (data.footer_pages) {
+        let arr: any = [];
+        data.footer_pages?.forEach((item: any) => {
+          let footerID = item.value;
+          arr.push(footerID);
+        });
+        io.append("footer_pages", JSON.stringify(arr));
+      } else {
+        io.append("footer_pages", []);
+      }
       io.append("site_title", data.siteTitle);
       io.append("site_desc", data.siteDescription);
       io.append("site_email", data.siteEmail);
       io.append("facebookurl", data.facebook);
       io.append("instaurl", data.instagram);
       io.append("linkedurl", data.linkedIn);
-      io.append("footer_pages", data.selectedOption);
       if (typeof data.siteLogo == "object") {
         io.append("site_logo", data.siteLogo);
       } else {
@@ -102,6 +113,7 @@ export default function SiteSetting() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [objSiteSetting]);
 
+  if (!objSiteSetting) return <PageCircularLoading />;
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSave)}>

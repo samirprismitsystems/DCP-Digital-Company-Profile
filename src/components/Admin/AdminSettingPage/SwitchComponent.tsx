@@ -10,13 +10,9 @@ export interface ISiteSettingState {
   instagram: string;
   siteEmail: string;
   siteLogo: string;
-  selectedOption: string;
+  footer_pages: any;
 }
 
 export default function SwitchComponent({ isSwitch }: { isSwitch: boolean }) {
-  return (
-    <div className="row -mr-3 -ml-3">
-      
-    </div>
-  );
+  return <div className="row -mr-3 -ml-3"></div>;
 }
