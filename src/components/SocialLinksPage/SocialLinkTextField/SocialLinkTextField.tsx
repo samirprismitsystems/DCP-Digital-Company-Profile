@@ -23,6 +23,7 @@ export default function SocialLinkTextField(props: ITextField) {
           className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
           type={props.type}
           value={text || ""}
+          required={true}
           placeholder={props.placeHolder ? props.placeHolder : ""}
           onChange={(e: any) => {
             setText(e.target.value);
