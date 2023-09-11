@@ -11,7 +11,9 @@ export default function HomeCareFooter() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1074) {
+      if (window.innerWidth < 400) {
+        setSlidesToShow(3);
+      } else if (window.innerWidth < 1074) {
         setSlidesToShow(5);
       } else if (window.innerWidth < 2000) {
         setSlidesToShow(7);

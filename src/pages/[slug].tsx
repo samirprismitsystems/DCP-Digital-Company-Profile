@@ -45,18 +45,22 @@ export default function UserViewSection() {
     loadData();
   }, []);
 
-  console.log(router.query.slug);
+  const getTheme = () => {
+    if (themeID === THEME_TYPE.GADGET) {
+      return <GadgetShopPage />;
+    } else if (themeID === THEME_TYPE.HOMECARE) {
+      return <HomeCarePage />;
+    } else if (themeID === THEME_TYPE.PORTFOLIO) {
+      return <PortfolioPage result={result} />;
+    } else {
+      return <PageNotFound title="Themes Not Available!" />;
+    }
+  };
 
   if (!result) return <PageCircularLoading />;
   return (
     <ThemeContextApi.Provider value={result}>
-      {themeID === THEME_TYPE.GADGET && <GadgetShopPage />}
-      {themeID === THEME_TYPE.HOMECARE && <HomeCarePage />}
-      {themeID === THEME_TYPE.PORTFOLIO ? (
-        <PortfolioPage result={result} />
-      ) : (
-        <PageNotFound />
-      )}
+      {getTheme()}
     </ThemeContextApi.Provider>
   );
 }
