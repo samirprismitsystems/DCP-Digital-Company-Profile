@@ -34,9 +34,7 @@ export default function SiteSettingImageUploader(
         }}
       >
         <div className="upload_here bg-primary-main rounded-2xl p-4  w-full h-[27.5rem] items-center justify-center relative">
-          <Image
-            width={800}
-            height={800}
+          <img
             src={selectedImagePath}
             alt="logo image"
             className="upload_img w-[80%] h-[80%] object-contain object-center absolute top-[50%] left-[50%] align-middle"
