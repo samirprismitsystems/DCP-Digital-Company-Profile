@@ -183,7 +183,7 @@ export default function SocialLinksPage() {
         return null;
       }
 
-      throw new Error("Error occurred while getting social media links!");
+      throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
     } finally {
