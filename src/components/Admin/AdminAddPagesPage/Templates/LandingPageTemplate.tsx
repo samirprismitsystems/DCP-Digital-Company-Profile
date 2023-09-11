@@ -80,7 +80,7 @@ export default function LandingPageTemplate() {
       >
         {templateTabList.map((tab, index) => (
           <li
-            key={tab.id}
+            key={index}
             className="nav_item text-base  list-none p-0 m-0"
             onClick={() => handleTabClick(tab.id)}
           >

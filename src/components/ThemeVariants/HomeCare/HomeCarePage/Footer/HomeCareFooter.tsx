@@ -1,7 +1,10 @@
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
 import { lstHomeCareFooterButton } from "../../data/homeCareFooterButtons";
 import GetHomeCareFooterButton from "./GetHomeCareFooterButton";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+  ssr: false,
+});
 
 export default function HomeCareFooter() {
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
@@ -25,13 +28,12 @@ export default function HomeCareFooter() {
     };
   }, []);
 
-  const configuration: any = {
+  const configuration = {
+    items: slidesToShow,
     dots: false,
-    speed: 500,
-    arrows: true,
-    slidesToShow: slidesToShow,
-    slidesToScroll: 1,
-    autoplay: false,
+    nav: true,
+    autoplayTimeout: 3000,
+    smartSpeed: 1100,
   };
 
   return (
@@ -43,7 +45,7 @@ export default function HomeCareFooter() {
           padding: "25px",
         }}
       >
-        <Slider {...configuration}>
+        <OwlCarousel {...configuration}>
           {lstHomeCareFooterButton.map((item, index) => (
             <GetHomeCareFooterButton
               key={index}
@@ -52,7 +54,7 @@ export default function HomeCareFooter() {
               link={item.link}
             />
           ))}
-        </Slider>
+        </OwlCarousel>
       </div>
     </>
   );

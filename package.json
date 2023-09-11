@@ -40,6 +40,7 @@
     "react-owl-carousel": "^2.3.3",
     "react-quill": "^2.0.0",
     "react-redux": "^8.1.1",
+    "react-select": "^5.7.4",
     "react-simple-star-rating": "^5.1.7",
     "react-slick": "0.28.1",
     "react-spring": "^9.7.2",

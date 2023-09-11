@@ -1,31 +1,94 @@
-import { useState } from "react";
+import ApiService from "@/services/ApiServices";
+import { IPagesInfo } from "@/types/commonTypes";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import Select from "react-select";
 
 export default function Pages() {
-  const [selectedFooterPage, setSelectedFooterPage] = useState("");
   const objForm = useFormContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [lstFooterPage, setLstFooterPage] = useState<any>([]);
+  const [selectedOption, setSelectedOption] = useState<any>(
+    objForm.getValues("footerPages") || []
+  );
 
+  const loadAgain = (arr: any) => {
+    setLstFooterPage(arr);
+    if (
+      objForm.getValues("isEdit") &&
+      selectedOption &&
+      selectedOption.length > 0
+    ) {
+      let newArr: any = [];
+      const parseList = JSON.parse(selectedOption);
+      let mainList =
+        typeof selectedOption === "string" ? parseList : selectedOption;
+      for (let item of mainList) {
+        if (arr && arr.length > 0) {
+          arr.forEach((data: any) => {
+            if (parseInt(data.value) === parseInt(item)) {
+              let objItem = {
+                label: data.label,
+                value: data.value,
+              };
+              newArr.push(objItem);
+            }
+          });
+        }
+      }
+      setSelectedOption(newArr);
+    }
+  };
+
+  const loadData = async () => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.getAllPagesInfo();
+      if (!res.error) {
+        let arr: any = [];
+        res.pages.forEach((item: IPagesInfo, index: number) => {
+          let objItem = {
+            label: item.page_name,
+            value: item.page_id,
+          };
+          arr.push(objItem);
+        });
+        loadAgain(arr);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      // Utils.showErrorMessage(ex.message);
+      console.log(ex.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  if (isLoading) return <h6>Loading....</h6>;
   return (
-    <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+    <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-16 transition-all duration-300 ease-linear">
       <label
         className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none`}
       >
         Select Footer Pages
       </label>
-      <div className="flex">
-        <select
-          className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
-          onChange={(e: any) => {
-            objForm.setValue("selectedFooterPage", e.target.value);
-            setSelectedFooterPage(e.target.value);
-          }}
-          value={objForm.getValues("selectedFooterPage") || selectedFooterPage}
-        >
-          <option value={"Saving Account"}>Simple footer</option>
-          <option value={"Current Account"}>Modern footer</option>
-          <option value={"Salary Account"}>Creative footer</option>
-        </select>
-      </div>
+      <Select
+        className="text-4xl"
+        defaultValue={selectedOption}
+        onChange={(selectedValue) => {
+          objForm.setValue("footerPages", selectedValue);
+          setSelectedOption(selectedValue);
+        }}
+        isMulti={true}
+        options={lstFooterPage}
+        placeholder={"Footer list"}
+      />
     </div>
   );
 }

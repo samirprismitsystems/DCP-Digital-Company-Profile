@@ -712,11 +712,30 @@ h4.product-title.helvetica.font-semibold.text-portfolioTheme-primary.text-\[2\.8
   text-align: center;
 }
 
-
 p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.owl-nav {
+  font-size: 60px;
+  color: #053b7b;
+}
+
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel .owl-nav button.owl-prev {
+  position: absolute;
+  top: calc(50% - 17px);
+  transform: translateY(-50%);
+  font-size: 150px;
+  color: rgba(var(5, 59, 123), 1);
+}
+.owl-carousel .owl-nav button.owl-next {
+  right: -20px;
+}
+.owl-carousel .owl-nav button.owl-prev {
+  left: -20px;
 }
 
 @media (min-width: 1400px) {
@@ -805,8 +824,6 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
     padding-bottom: 2rem;
   }
 }
-
-
 
 @media (max-width: 1199px) {
   html {
