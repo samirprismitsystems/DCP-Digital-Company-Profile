@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { HomeCareContextApi } from "../HomeCarePage";
 import { ThemeContextApi } from "@/pages/[slug]";
+import QRCode from "react-qr-code";
 
 export default function HomeCareSaveContact() {
   const objCompany = useContext(ThemeContextApi).company;
@@ -20,6 +21,22 @@ export default function HomeCareSaveContact() {
         }}
         className=" border border-solid border-homeCareTheme-opacityBorder text-center contact-information mb-10 bg-white rounded-3xl p-5"
       >
+        <div
+          className="pt-16"
+          style={{
+            height: "auto",
+            margin: "0 auto",
+            maxWidth: 120,
+            width: "100%",
+          }}
+        >
+          <QRCode
+            size={55}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value={window.location.href}
+            viewBox={`0 0 256 256`}
+          />
+        </div>
         <div className="lg:w-1/2 xl:w-1/3 md:m-auto md:p-12 grid grid-cols-2 gap-8 my-16 mx-8">
           <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] font-medium homecarefont">
             <a

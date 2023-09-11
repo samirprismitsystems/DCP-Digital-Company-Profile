@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import { ThemeContextApi } from "@/pages/[slug]";
+import QRCode from "react-qr-code";
 
 const iconMapping: any = {
   faFacebookF: faFacebookF,
@@ -28,6 +29,22 @@ export default function GadgetFollowUs() {
   return (
     <>
       <div className="follow-us-block xs:mt-24 md:mt-16 gadgetfontfamily">
+        <div
+          className="pb-8 pt-4"
+          style={{
+            height: "auto",
+            margin: "0 auto",
+            maxWidth: 120,
+            width: "100%",
+          }}
+        >
+          <QRCode
+            size={55}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value={window.location.href}
+            viewBox={`0 0 256 256`}
+          />
+        </div>
         <h3 className="text-center gadgetfontfamily text-gadgetTheme-title xs:text-[3rem] md:text-[2.7rem] font-semibold xl:text-[3.5rem] xlTwo:text-[2.7rem]">
           Follow Us On
         </h3>

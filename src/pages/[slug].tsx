@@ -7,6 +7,7 @@ import { THEME_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
 import { IPortfolioInfo } from "@/types/themes/portfolio";
 import { createContext, useEffect, useState } from "react";
+import PageNotFound from "./404";
 
 export const ThemeContextApi = createContext<IPortfolioInfo>(
   {} as IPortfolioInfo
@@ -40,7 +41,11 @@ export default function UserViewSection() {
     <ThemeContextApi.Provider value={result}>
       {themeID === THEME_TYPE.GADGET && <GadgetShopPage />}
       {themeID === THEME_TYPE.HOMECARE && <HomeCarePage />}
-      {themeID === THEME_TYPE.PORTFOLIO && <PortfolioPage result={result} />}
+      {themeID === THEME_TYPE.PORTFOLIO ? (
+        <PortfolioPage result={result} />
+      ) : (
+        <PageNotFound />
+      )}
     </ThemeContextApi.Provider>
   );
 }

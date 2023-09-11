@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
+import QRCode from "react-qr-code";
 
 const iconMapping: any = {
   faFacebookF: faFacebookF,
@@ -28,6 +29,22 @@ export default function PortfolioFollowUs() {
 
   return (
     <>
+      <div
+        className="pt-16"
+        style={{
+          height: "auto",
+          margin: "0 auto",
+          maxWidth: 120,
+          width: "100%",
+        }}
+      >
+        <QRCode
+          size={55}
+          style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+          value={window.location.href}
+          viewBox={`0 0 256 256`}
+        />
+      </div>
       <div className="follow-us-block mt-30 mt-16 c-text text-portfolioTheme-textColor">
         <h3 className="text-center portfolio-h3 text-portfolioTheme-titleColor font-semibold">
           Follow Us On
