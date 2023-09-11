@@ -68,7 +68,8 @@ export default function SiteSetting() {
   const onSave: any = async (data: any) => {
     try {
       const io: any = new FormData();
-      if (data.footer_pages) {
+      console.log(data);
+      if (data.footer_pages && typeof data.footer_pages !== "string") {
         let arr: any = [];
         data.footer_pages?.forEach((item: any) => {
           let footerID = item.value;
@@ -76,7 +77,7 @@ export default function SiteSetting() {
         });
         io.append("footer_pages", JSON.stringify(arr));
       } else {
-        io.append("footer_pages", []);
+        io.append("footer_pages", data.footer_pages);
       }
       io.append("site_title", data.siteTitle);
       io.append("site_desc", data.siteDescription);
