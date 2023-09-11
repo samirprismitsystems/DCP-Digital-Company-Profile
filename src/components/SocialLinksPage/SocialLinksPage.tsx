@@ -177,8 +177,9 @@ export default function SocialLinksPage() {
         if (res.social && res.social.length > 0) {
           setIsUpdate(true);
           setLstSocialData(res.social);
+        }else{ 
+          setIsUpdate(false);
         }
-        setIsUpdate(false);
 
         return null;
       }
