@@ -16,7 +16,80 @@ import SocialLinkTextField from "./SocialLinkTextField/SocialLinkTextField";
 export default function SocialLinksPage() {
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [lstSocialData, setLstSocialData] = useState<any>([]);
+  const [lstSocialData, setLstSocialData] = useState<any>([
+    {
+      social_id: "1",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Facebook",
+      socialmedia_logo: "faFacebookF",
+      socialmedia_color: "1",
+    },
+    {
+      social_id: "2",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Instagram",
+      socialmedia_logo: "faInstagram",
+      socialmedia_color: "2",
+    },
+    {
+      social_id: "3",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Linkedin",
+      socialmedia_logo: "faLinkedinIn",
+      socialmedia_color: "3",
+    },
+    {
+      social_id: "4",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Twitter",
+      socialmedia_logo: "faTwitter",
+      socialmedia_color: "4",
+    },
+    {
+      social_id: "5",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Whatsapp Group Link",
+      socialmedia_logo: "faWhatsapp",
+      socialmedia_color: "5",
+    },
+    {
+      social_id: "6",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Pintrest",
+      socialmedia_logo: "faPinterestP",
+      socialmedia_color: "8",
+    },
+    {
+      social_id: "7",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Telegram Channel",
+      socialmedia_logo: "faTelegramPlane",
+      socialmedia_color: "6",
+    },
+    {
+      social_id: "8",
+      link: "",
+      created_at: "2023-09-08 11:38:47",
+      updated_at: "2023-09-08 11:42:20",
+      socialmedia_name: "Youtube",
+      socialmedia_logo: "faYoutube",
+      socialmedia_color: "8",
+    },
+  ]);
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
   });
@@ -100,87 +173,12 @@ export default function SocialLinksPage() {
           Utils.showErrorMessage("Please First Setup Company Details!");
           return null;
         }
-        
+
         if (res.social && res.social.length > 0) {
           setIsUpdate(true);
           setLstSocialData(res.social);
-        } else {
-          setIsUpdate(false);
-          setLstSocialData([
-            {
-              social_id: "1",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Facebook",
-              socialmedia_logo: "faFacebookF",
-              socialmedia_color: "1",
-            },
-            {
-              social_id: "2",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Instagram",
-              socialmedia_logo: "faInstagram",
-              socialmedia_color: "2",
-            },
-            {
-              social_id: "3",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Linkedin",
-              socialmedia_logo: "faLinkedinIn",
-              socialmedia_color: "3",
-            },
-            {
-              social_id: "4",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Twitter",
-              socialmedia_logo: "faTwitter",
-              socialmedia_color: "4",
-            },
-            {
-              social_id: "5",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Whatsapp Group Link",
-              socialmedia_logo: "faWhatsapp",
-              socialmedia_color: "5",
-            },
-            {
-              social_id: "6",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Pintrest",
-              socialmedia_logo: "faPinterestP",
-              socialmedia_color: "8",
-            },
-            {
-              social_id: "7",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Telegram Channel",
-              socialmedia_logo: "faTelegramPlane",
-              socialmedia_color: "6",
-            },
-            {
-              social_id: "8",
-              link: "",
-              created_at: "2023-09-08 11:38:47",
-              updated_at: "2023-09-08 11:42:20",
-              socialmedia_name: "Youtube",
-              socialmedia_logo: "faYoutube",
-              socialmedia_color: "8",
-            },
-          ]);
         }
+        setIsUpdate(false);
 
         return null;
       }
