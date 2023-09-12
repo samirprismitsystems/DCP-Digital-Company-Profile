@@ -9,11 +9,10 @@ import { useEffect, useState } from "react";
 
 export default function PrivacyPolicy() {
   const [objItem, setObjItem] = useState<any>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const loadData = async () => {
     try {
-      setIsLoading(true);
       const res = await ApiService.getPrivacyPolicy();
       const data = res.page_content;
       setObjItem(data);
@@ -22,8 +21,6 @@ export default function PrivacyPolicy() {
       }
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -31,6 +28,13 @@ export default function PrivacyPolicy() {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (objItem && Object.keys(objItem).length > 0) {
+      setIsLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [objItem]);
 
   if (isLoading) return <PageCircularLoading />;
   return (
