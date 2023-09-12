@@ -1,3 +1,4 @@
+import PageCircularLoading from "@/common/PageCircularLoading";
 import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
 import DashboardNavbar from "@/components/DashboardPage/DashboardNavbar/DashboardNavbar";
 import { privacyPolicyNavList } from "@/data/DashboardSideBar";
@@ -8,9 +9,11 @@ import { useEffect, useState } from "react";
 
 export default function PrivacyPolicy() {
   const [objItem, setObjItem] = useState<any>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getPrivacyPolicy();
       const data = res.page_content;
       setObjItem(data);
@@ -19,6 +22,8 @@ export default function PrivacyPolicy() {
       }
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -27,6 +32,7 @@ export default function PrivacyPolicy() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (isLoading) return <PageCircularLoading />;
   return (
     <>
       <Head>
