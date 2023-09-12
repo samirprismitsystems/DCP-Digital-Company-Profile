@@ -10,7 +10,7 @@ export default function WhyUseDigitalCard({
   return (
     <MainScrollAnimation>
       <div className="px-5">
-        <div className="container mx-auto flex px-5 py-16 xs:pb-40 md:flex-row flex-col items-start md:item-start md:space-x-6">
+        <div className="container mx-auto flex px-5 xs:py-8 py-16 xs:pb-40 md:flex-row flex-col items-start md:item-start md:space-x-6">
           <div className="md:w-[50%] flex flex-col sm:items-start md:text-left items-center text-left">
             <Accordion />
           </div>

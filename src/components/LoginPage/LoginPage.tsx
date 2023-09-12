@@ -1,9 +1,9 @@
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import LoginFooter from "./LoginFooter/LoginFooter";
 import LoginForm from "./LoginForm/LoginForm";
 import LoginNavbar from "./LoginNavbar/LoginNavbar";
-import { useRouter } from "next/router";
-import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,7 +24,7 @@ export default function LoginPage() {
         }}
       >
         <div className="h-full flex flex-wrap xl:flex-nowrap xs:flex-col lg:flex-row -mt-4 -mb-4">
-          <div className="relative  z-0 h-screen xs:h-[24vh] xl:h-screen xs:w-full w-2/4 sm:h-[28vh]">
+          <div className="relative z-0 h-screen xs:h-[24vh] xl:h-screen xs:w-full w-2/4 sm:h-[28vh]">
             <picture className="block h-full xs:h-auto">
               <Image
                 width={800}
@@ -44,7 +44,7 @@ export default function LoginPage() {
             </span>
           </div>
           <div className="relative z-0 h-screen xs:h-[70vh] xl:h-screen w-2/4 xs:w-full bg-white">
-            <div className="w-full h-full p-20 xs:p-16 md:p-20">
+            <div className="w-full h-full p-4 sm:p-8 md:p-20">
               <div className="xl:pt-[33rem] xlOne:pt-[25rem] xlTwo:pt-[24rem] xlThree:pt-[10rem] xs:pt-0 w-3/4 xs:w-full m-auto md:w-3/4">
                 <h1 className="xs:text-5xl text-black text-center xl:text-7xl font-bold">
                   Welcome to
