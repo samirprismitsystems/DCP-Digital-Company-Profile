@@ -117,7 +117,7 @@ export default function ForgotPasswordPage() {
                       </button>
                     </div>
                   </form>
-                  <div className="xs:pt-24 sm:pt-0 text-black text-3xl text-center font-medium space-x-12 flex xs:flex-col sm:flex-row justify-center items-center sm:space-y-0 xs:space-y-6 lg:py-6">
+                  <div className="xs:pt-0 md:pt-24 text-black text-3xl text-center font-medium space-x-12 flex xs:flex-col sm:flex-row justify-center items-center sm:space-y-0 xs:space-y-6 lg:py-6">
                     <button
                       className="hover:text-secondary-main"
                       onClick={() => {
