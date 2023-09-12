@@ -55,7 +55,7 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
   return (
     <>
       <footer
-        className={`h-[80px] shadow-md bg-secondary-main bottom-0 z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center fixed right-0 px-8 pt-3 ${
+        className={`h-[100px] shadow-md bg-secondary-main bottom-0 z-10 p-t-[2.3rem] p-b-[1.5rem] flex justify-center items-center fixed right-0 px-8 pt-3 ${
           props.fullWidth ? "w-full" : "footer_width"
         }`}
       >
