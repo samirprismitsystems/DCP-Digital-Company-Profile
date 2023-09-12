@@ -11,7 +11,7 @@ export default function HeroSection() {
   return (
     <>
       <div
-        className="relative xs:h-[991px] sm:h-[917px] lg:h-[1160px] md:h-[1102px] xl:h-[70vh] min-h-[100vh] overflow-hidden mt-[1.5rem]"
+        className="relative xs:h-[997px] sm:h-[934px] lg:h-[1160px] md:h-[1102px] xl:h-[70vh] min-h-[100vh] overflow-hidden mt-[1.5rem]"
         id="heroSection"
       >
         <svg
@@ -31,7 +31,7 @@ export default function HeroSection() {
             d="M1153.475,795.576 C1098.805,821.791 1035.195,821.791 980.525,795.576 L114.568,380.339 C-77.351,288.312 -11.800,-0.000 201.042,-0.000 L1932.958,-0.000 C2145.800,-0.000 2211.351,288.312 2019.432,380.339 L1153.475,795.576 Z"
           />
         </svg>
-        <div className="absolute left-0 right-0 bottom-0 xs:top-[9%] m-auto container max-w-full">
+        <div className="absolute left-0 right-0 bottom-0 xs:top-[7%] lg:top-[9%] m-auto container max-w-full">
           <div className="relative">
             <h1
               className="text-secondary-greyDark text-center xs:text-[3.6rem] md:text-[4.6rem] font-normal"
