@@ -1,7 +1,6 @@
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { lstUserResponsiveNavbar } from "@/data/DashboardSideBar";
 import { lstDashboardNavigationMenu } from "@/data/NavigationMenu";
-import Utils from "@/services/Utils";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
@@ -65,11 +64,13 @@ export default function DashboardNavbar(props: {
           <span className="self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
             DCP
           </span>
-          {!Utils.getCompanyID() && (
-            <span className="ml-8 text-center text-red-600 text-3xl font-medium">
-              -- Please setup company details first.
-            </span>
-          )}
+          {/* 
+          {router.pathname.startsWith("/dashboard") &&
+            !Utils.getCompanyID() && (
+              <span className="ml-8 text-center text-red-600 text-3xl font-medium">
+                -- Please setup company details first.
+              </span>
+            )} */}
         </button>
 
         <div className="hidden md:block">

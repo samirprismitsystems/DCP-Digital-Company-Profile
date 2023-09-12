@@ -58,7 +58,7 @@ export default function AdminDashboardNavbar() {
           </span>
         </button>
 
-        <div className="block md:hidden">
+        <div className="xs:block md:hidden">
           <ResponsiveNavbar toggle={toggle} />
         </div>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
