@@ -23,16 +23,15 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
   const loadData = async () => {
     try {
       const objRes = await ApiService.getLandingPageResource();
-      const footerPages =
-        objRes.page_content && objRes.page_content?.footerpages;
 
       const res = await ApiService.getAdminSiteSettingInfo();
       const setting = res.setting;
-
+      const footerPages = setting[9]?.setting_value;
       const io: any = new FormData();
       io.append("pages[]", JSON.parse(footerPages));
 
       const pageData = await ApiService.getSomePageData(io);
+      console.log(pageData);
 
       if (!res.error && setting) {
         setObjSetting({
@@ -87,12 +86,10 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
               </li>
             </Link>
           </div>
-          <div>
-            <ul className="xs:space-x-6 flex justify-between sm:justify-center sm:space-x-16 items-center">
-              {/* loginScreenPrivacyPolicyList */}
-              {objSetting.footerList &&
-                objSetting.footerList.length > 0 &&
-                objSetting.footerList.map((item: any, index) => (
+          {objSetting.footerList && objSetting.footerList.length > 0 && (
+            <div>
+              <ul className="xs:space-x-6 flex justify-between sm:justify-center sm:space-x-16 items-center">
+                {objSetting.footerList.map((item: any, index) => (
                   <li className="text-white" key={index}>
                     <Link
                       href={`${item.page_slug}`}
@@ -103,8 +100,9 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
                     </Link>
                   </li>
                 ))}
-            </ul>
-          </div>
+              </ul>
+            </div>
+          )}
         </div>
       </footer>
     </>

@@ -24,7 +24,9 @@ export default function FaqsList(props: IFaqsListProps) {
           <button
             className="flex items-center justify-start hover:cursor-pointer text-[2.3rem] bg-transparent text-white font-Montserrat relative w-full text-left font-medium p-4"
             onClick={() => {
-              props.onToggle(props.title);
+              if (props.onToggle) {
+                props.onToggle(props.title);
+              }
             }}
           >
             {isOpen ? (
@@ -47,17 +49,17 @@ export default function FaqsList(props: IFaqsListProps) {
                 }}
               />
             )}
-            {props.title}
+            {props.title || "N/A"}
           </button>
           <div
             className={`p-4 pb-0 ${
               isOpen ? "max-h-[250px]" : "max-h-0"
             } overflow-hidden`}
             style={{
-              transition: "max-height 0.7s ease-out",
+              transition: "max-height 0.5s ease-out",
             }}
           >
-            <p className={`text-[1.8rem] text-white`}>{props.desc}</p>
+            <p className={`text-[1.8rem] text-white`}>{props.desc || "N/A"}</p>
           </div>
         </div>
       </div>

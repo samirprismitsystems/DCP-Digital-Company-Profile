@@ -52,11 +52,12 @@ export default function HeroSection() {
               lineHeight: "1.5",
               fontFamily: "GothamRoundedBook",
             }}
-            dangerouslySetInnerHTML={{ __html: pageDetails.homedesc }}
+            dangerouslySetInnerHTML={{ __html: pageDetails.homedesc || "N/A" }}
           />
-          <MobileScreenSection />
+          <MobileScreenSection homeImage={pageDetails.homeimg} />
           <Link
             href={pageDetails.homebtnlink || "N/A"}
+            target="_blank"
             className="btnHoverEffect  block m-auto w-96 text-white  text-center  overflow-hidden mt-4"
           >
             <button className="py-6 text-center text-3xl rounded text-white font-medium">

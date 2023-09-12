@@ -50,7 +50,6 @@ export default function SiteSetting() {
           siteEmail: result[8].setting_value || "",
           footer_pages: result[9].setting_value || "",
         };
-        // objForm.reset(objItem);
         setObjSiteSetting(objItem);
         return null;
       }
@@ -68,7 +67,6 @@ export default function SiteSetting() {
   const onSave: any = async (data: any) => {
     try {
       const io: any = new FormData();
-      console.log(data);
       if (data.footer_pages && typeof data.footer_pages !== "string") {
         let arr: any = [];
         data.footer_pages?.forEach((item: any) => {
@@ -94,7 +92,9 @@ export default function SiteSetting() {
       const res = await ApiService.saveAdminSiteSetting(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
-        onComplete();
+        if (typeof window !== "undefined") {
+          window.location.reload();
+        }
         return null;
       }
       throw new Error(res.message);

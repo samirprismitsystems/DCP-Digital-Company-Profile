@@ -32,7 +32,6 @@ export default function ThemesPage() {
     }
   };
 
-  console.log(themeID);
   return (
     <>
       <BackButton />

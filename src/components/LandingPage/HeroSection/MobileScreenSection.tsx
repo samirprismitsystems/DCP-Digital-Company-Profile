@@ -1,9 +1,12 @@
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function MobileScreenSection() {
+export default function MobileScreenSection(props: { homeImage: string }) {
   const [isHover, setIsHover] = useState(false);
-
+  const [image, setImage] = useState(
+    `${UPLOAD_IMAGE_URI}/landingpageoriginal/${props.homeImage}`
+  );
   return (
     <>
       <div
@@ -13,7 +16,7 @@ export default function MobileScreenSection() {
         onMouseLeave={() => {
           setIsHover(false);
         }}
-        className={`mt-[2rem] text-center relative table hover:cursor-pointer overflow-hidden m-auto `}
+        className={`mt-[2rem] text-center relative table hover:cursor-pointer overflow-hidden m-auto  `}
       >
         <div
           className="mobileImage absolute left-1 right-0 m-auto xs:w-[84%] xl:w-[88%] h-[93%] -z-10 xs:top-[3rem] xl:top-[1.3rem] overflow-hidden"
@@ -21,10 +24,8 @@ export default function MobileScreenSection() {
             borderRadius: "4rem",
           }}
         >
-          <Image
-            width={800}
-            height={800}
-            src="/assets/landing/digital_profile.jpg"
+          <img
+            src={`${image || "/assets/landing/digital_profile.jpg"}`}
             alt="image.jpg"
             className={`transition-all duration-[12000ms] linear ${
               isHover ? "-translate-y-[77%]" : ""

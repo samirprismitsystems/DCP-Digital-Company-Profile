@@ -722,6 +722,9 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   font-size: 60px;
   color: #053b7b;
 }
+.border_hover_50c4d3:hover {
+  border: #50c4d3 solid 1px !important;
+}
 
 .owl-carousel .owl-nav button.owl-next,
 .owl-carousel .owl-nav button.owl-prev {

@@ -8,7 +8,6 @@ import Ratting from "./Ratting";
 
 export default function PortfolioFeedback() {
   const lstTestimonial = useContext(ThemeContextApi).testimonial;
-  console.log(lstTestimonial);
   const [objFeedback, setObjFeedback] = useState({
     clientName: "",
     emailAddress: "",

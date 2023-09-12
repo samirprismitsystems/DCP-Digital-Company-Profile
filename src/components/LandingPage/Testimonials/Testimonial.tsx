@@ -1,6 +1,7 @@
 import MainScrollAnimation from "@/common/MainScrollAnimation";
 import PageCircularLoading from "@/common/PageCircularLoading";
 import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
 import { ILandingPageReview } from "@/types/landingPageType";
 import { faQuoteLeft, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,9 +11,9 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { LandingPageContextApi } from "../LandingPage";
-import Utils from "@/services/Utils";
 
 export default function Testimonial() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstReview, setLstReview] = useState<ILandingPageReview[]>();
   const result = useContext(LandingPageContextApi);
   const data = result.pageDetails;
@@ -20,6 +21,7 @@ export default function Testimonial() {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       const res = await ApiService.getReviewData();
       if (res.error) {
         throw new Error(res.message);
@@ -28,6 +30,8 @@ export default function Testimonial() {
       setLstReview(res.review);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -35,7 +39,7 @@ export default function Testimonial() {
     loadData();
   }, []);
 
-  if (!lstReview) return <PageCircularLoading />;
+  if (isLoading) return <PageCircularLoading />;
   return (
     <div className="container py-32">
       <MainScrollAnimation>
@@ -55,37 +59,41 @@ export default function Testimonial() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center xs:p-0 sm:p-16  justify-center w-full md:w-3/5 mb-10 md:mb-0">
-                <Swiper autoplay className="w-full">
-                  {lstReview &&
-                    lstReview.map((item: ILandingPageReview, index: number) => (
-                      <SwiperSlide
-                        key={item.review_id}
-                        className="text-2xl xs:p-0"
-                      >
-                        <div className="testimonial-slider flex flex-col item-start">
-                          <p className="md:text-left text-center text-black text-[1.8rem] italic mb-6">
-                            <FontAwesomeIcon
-                              className="bg-transparent text-primary-lightDark text-[6rem] mr-4"
-                              icon={faQuoteLeft}
-                            />
-                            {item.user_message || "N/A"}
-                          </p>
+              
+              {lstReview && lstReview.length > 0 && (
+                <div className="flex items-center xs:p-0 sm:p-16  justify-center w-full md:w-3/5 mb-10 md:mb-0">
+                  <Swiper autoplay className="w-full">
+                    {lstReview.map(
+                      (item: ILandingPageReview, index: number) => (
+                        <SwiperSlide
+                          key={item.review_id}
+                          className="text-2xl xs:p-0"
+                        >
+                          <div className="testimonial-slider flex flex-col item-start">
+                            <p className="md:text-left text-center text-black text-[1.8rem] italic mb-6">
+                              <FontAwesomeIcon
+                                className="bg-transparent text-primary-lightDark text-[6rem] mr-4"
+                                icon={faQuoteLeft}
+                              />
+                              {item.user_message || "N/A"}
+                            </p>
 
-                          <div className="flex items-center justify-center md:justify-start w-full space-x-4">
-                            <FontAwesomeIcon
-                              className="bg-transparent text-secondary-greyDark text-[3rem]"
-                              icon={faUserCircle}
-                            />
-                            <h4 className="text-[2.2rem] text-secondary-greyDark text-left  font-bold">
-                              {item.user_name || "N/A"}
-                            </h4>
+                            <div className="flex items-center justify-center md:justify-start w-full space-x-4">
+                              <FontAwesomeIcon
+                                className="bg-transparent text-secondary-greyDark text-[3rem]"
+                                icon={faUserCircle}
+                              />
+                              <h4 className="text-[2.2rem] text-secondary-greyDark text-left  font-bold">
+                                {item.user_name || "N/A"}
+                              </h4>
+                            </div>
                           </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                </Swiper>
-              </div>
+                        </SwiperSlide>
+                      )
+                    )}
+                  </Swiper>
+                </div>
+              )}
             </div>
           </div>
         </section>

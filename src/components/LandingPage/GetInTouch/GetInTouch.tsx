@@ -15,7 +15,11 @@ export default function GetInTouch() {
   const [isLoading, setIsLoading] = useState(false);
   const result = useContext(LandingPageContextApi);
   const data = result.pageDetails;
-  const [objUser, setObjUser] = useState<IFormUser>();
+  const [objUser, setObjUser] = useState<IFormUser>({
+    email: "",
+    fullName: "",
+    message: "",
+  });
 
   const handleChange = (data: any) => {
     setObjUser({
@@ -35,12 +39,12 @@ export default function GetInTouch() {
         io.append("email", "16mscit072@gmail.com");
         io.append("message", objUser.message);
 
-        // Cors Error occurred in this section
         const res = await ApiService.sendEmail(io);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
           return null;
         }
+
         throw new Error(res.message);
       }
     } catch (ex: any) {
@@ -52,7 +56,7 @@ export default function GetInTouch() {
 
   return (
     <section
-      className="container lg:w-[60%] mx-auto flex md:px-0 px-5  items-center xs:mt-0 flex-col xs:py-0 md:my-16"
+      className="container lg:w-[60%] xl:w-[50%] mx-auto flex md:px-0 px-5  items-center xs:mt-0 flex-col xs:py-0 md:my-16"
       id="getInTouch"
     >
       <MainScrollAnimation>
@@ -78,7 +82,7 @@ export default function GetInTouch() {
                   style={{
                     backgroundColor: "rgba(18, 110, 131, 0.5)",
                   }}
-                  value={objUser?.fullName || ""}
+                  value={objUser.fullName}
                   onChange={(e) => {
                     handleChange({ fullName: e.target.value });
                   }}
@@ -87,7 +91,7 @@ export default function GetInTouch() {
                 <input
                   type="text"
                   name="name"
-                  value={objUser?.email || ""}
+                  value={objUser.email}
                   onChange={(e) => {
                     handleChange({ email: e.target.value });
                   }}
@@ -104,7 +108,7 @@ export default function GetInTouch() {
                   className="w-full rounded-[2.5rem] p-[1.8rem] border border-primary-lightDark text-[1.8rem] mb-[3rem]  text-primary-main "
                   placeholder="Type Message"
                   rows={6}
-                  value={objUser?.message || ""}
+                  value={objUser.message}
                   onChange={(e) => {
                     handleChange({ message: e.target.value });
                   }}
@@ -116,6 +120,7 @@ export default function GetInTouch() {
               </div>
               <div className="flex justify-center text-[4rem]">
                 <button
+                  disabled={isLoading}
                   className="xs:text-[2.3rem] text-[1.8rem] xs:py-4 text-center first-letter xs:block xs:m-auto xs:w-full sm:w-52 btnHoverEffect px-9 py-4 rounded text-white bg-primary-light min-h-[5rem]"
                   type="submit"
                 >

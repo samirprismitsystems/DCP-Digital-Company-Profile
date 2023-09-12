@@ -6,7 +6,7 @@ export default function SEO() {
   return (
     <>
       <TemplateImageUploader
-        uploadPath="landingpageoriginal"
+        uploadPath="metaimgoriginal"
         savePath="metaImage"
         title="Upload Meta Image"
       />

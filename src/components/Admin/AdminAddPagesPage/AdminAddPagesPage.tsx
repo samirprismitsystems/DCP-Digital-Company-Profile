@@ -113,7 +113,9 @@ export default function AdminAddPagesPage({
 
       if (parseInt(data.selectedOption) === 3) {
         const io: any = new FormData();
-        if (data.footerPages) {
+
+        // return null;
+        if (data.footerPages && typeof data.footerPages !== "string") {
           let arr: any = [];
           data.footerPages.forEach((item: any) => {
             let footerID = item.value;
@@ -121,9 +123,8 @@ export default function AdminAddPagesPage({
           });
           io.append("footerpages", JSON.stringify(arr));
         } else {
-          io.append("footerpages", JSON.stringify([]));
+          io.append("footerpages", data.footerPages);
         }
-
         io.append("isupdate", isEdit ? true : false);
         io.append("page_slug", Utils.generatePageSlug(data.pageName));
         io.append("page_name", data.pageName);

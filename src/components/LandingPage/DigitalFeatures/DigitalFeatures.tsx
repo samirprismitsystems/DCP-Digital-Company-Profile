@@ -42,7 +42,7 @@ export default function DigitalFeatures() {
               {pageDetails.featuredesc || "N/A"}
             </p>
             <Link
-              href="#"
+              href={`${pageDetails.featurebtnlink || "#"}`}
               className="xs:m-0 w-60 xs:block lg:inline-block first-letter text-xl btnHoverEffect text-white  text-center px-6 py-6"
             >
               <button
@@ -55,20 +55,20 @@ export default function DigitalFeatures() {
               </button>
             </Link>
           </div>
-          <div className="w-52 xs:w-full sm:w-full mb-10 md:mb-0">
-            <div className="text-white rounded-lg md:ml-auto mt-10 md:mt-0 grid grid-cols-3">
-              {lstFeatures &&
-                lstFeatures.map((item: IFeature, index: number) => {
+          {lstFeatures && lstFeatures.length > 0 && (
+            <div className="w-52 xs:w-full sm:w-full mb-10 md:mb-0">
+              <div className="text-white rounded-lg md:ml-auto mt-10 md:mt-0 grid grid-cols-3">
+                {lstFeatures.map((item: IFeature, index: number) => {
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-center flex-col mb-5 -z-10"
+                      className="flex items-center text-center overflow-hidden flex-col mb-5 z-10"
                     >
                       <div
                         style={{
                           backgroundColor: "rgba(80, 196, 211, 0.102)",
                         }}
-                        className="hover:border hover:border-primary-lightDark h-full py-4 px-14  rounded-lg  text-center text-white relative text-[4rem]"
+                        className="hover:cursor-pointer hover:border hover:border-primary-lightDark border border-transparent h-full py-4 px-14  rounded-lg  text-center text-white relative text-[4rem]"
                       >
                         <FeatureCards logoText={item.featurelogo} />
                       </div>
@@ -78,8 +78,9 @@ export default function DigitalFeatures() {
                     </div>
                   );
                 })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </MainScrollAnimation>
     </section>

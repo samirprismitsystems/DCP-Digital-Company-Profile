@@ -15,7 +15,6 @@ export default function HomeCareEnquiryForm() {
   });
 
   const updateState = (objState: any) => {
-    console.log(objState);
     setObjEnquiry((prevState) => ({
       ...prevState,
       ...objState,

@@ -44,7 +44,6 @@ export default function GoogleAnalytics() {
 
   const onSave = async (data: any) => {
     try {
-      console.log(data);
       const io: any = new FormData();
       io.append("before_body", data.beforeTag);
       io.append("after_body", data.afterTag);

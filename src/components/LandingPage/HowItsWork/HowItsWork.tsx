@@ -15,11 +15,11 @@ export default function HowItsWork() {
 
   return (
     <div className="container">
-      <section className="mb-16">
-        <div className="container md:px-0 px-5 xs:pt-16 sm:py-44 mx-auto">
-          <div className="flex flex-wrap sm:flex-nowrap -m-4 -z-10">
-            {steps &&
-              steps.map((item: ILandingPageCardSteps, index: number) => (
+      {steps && steps.length > 0 && (
+        <section className="mb-16">
+          <div className="container md:px-0 px-5 xs:pt-16 sm:py-44 mx-auto">
+            <div className="flex flex-wrap sm:flex-nowrap -m-4 -z-10">
+              {steps.map((item: ILandingPageCardSteps, index: number) => (
                 <Steps
                   key={index}
                   index={index + 1}
@@ -27,9 +27,10 @@ export default function HowItsWork() {
                   desc={item.stepsdesc}
                 />
               ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="text-gray-600 body-font">
         <MainScrollAnimation>
@@ -50,14 +51,10 @@ export default function HowItsWork() {
                 </h1>
                 <p
                   className="text-white xs:text-left md:text-left  text-[1.8rem] pb-4"
-                  dangerouslySetInnerHTML={{ __html: pageDetails.carddesc1 }}
+                  dangerouslySetInnerHTML={{
+                    __html: pageDetails.carddesc1 || "N/A",
+                  }}
                 ></p>
-                {/* <ul className="theme_list text-[1.8rem] ml-6 mt-4 ">
-                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                  <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                </ul> */}
               </MainScrollAnimation>
             </div>
           </div>
@@ -82,12 +79,6 @@ export default function HowItsWork() {
                 className="text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4"
                 dangerouslySetInnerHTML={{ __html: pageDetails.carddesc2 }}
               ></p>
-              {/* <ul className="theme_list text-[1.8rem] ml-6 mt-4">
-                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-                <li className="text-[1.8rem]">Lorem ipsum dolor sit Lorem</li>
-              </ul> */}
             </MainScrollAnimation>
           </div>
           <div className="xs:hidden md:block sm:w-full md:w-1/2 mb-10 md:mb-0">

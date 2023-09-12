@@ -8,7 +8,6 @@ export default function TestimonialToggle(props: {
   onComplete: () => void;
 }) {
   const [isActive, setIsActive] = useState<boolean>(props.isActive);
-  console.log(isActive);
   const toggle = async (tid: any, status: any) => {
     try {
       setIsActive(!isActive);

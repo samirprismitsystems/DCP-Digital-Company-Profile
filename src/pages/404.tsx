@@ -16,6 +16,7 @@ export default function PageNotFound(props: { title?: string }) {
         onClick={() => {
           router.back();
         }}
+        type="button"
       >
         Go Back
       </button>

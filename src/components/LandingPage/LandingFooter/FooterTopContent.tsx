@@ -8,13 +8,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
-import { LandingPageContextApi } from "../LandingPage";
+import { useEffect, useState } from "react";
 
 export default function FooterTopContent() {
-  const footerPages = useContext(LandingPageContextApi).pageDetails
-    ?.footerpages;
-
   const [objSetting, setObjSetting] = useState({
     facebook: "#",
     instaGram: "#",
@@ -28,12 +24,11 @@ export default function FooterTopContent() {
     try {
       const res = await ApiService.getAdminSiteSettingInfo();
       const setting = res.setting;
-
+      const footerPages = setting[9]?.setting_value;
       const io: any = new FormData();
       io.append("pages[]", JSON.parse(footerPages));
-
       const pageData = await ApiService.getSomePageData(io);
-
+      
       if (!res.error && setting) {
         setObjSetting({
           facebook: setting[3]?.setting_value,
@@ -70,7 +65,7 @@ export default function FooterTopContent() {
           <div className="w-2/5 md:w-1/4 m-auto xs:pt-12 pt-16">
             <ul className="flex lg:justify-center sm:justify-evenly xs:justify-between items-center md:space-x-8">
               <Link
-                href={`${objSetting.facebook}`}
+                href={`${objSetting.facebook || "#"}`}
                 target="_blank"
                 className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-20 w-20 "
               >
@@ -80,7 +75,7 @@ export default function FooterTopContent() {
                 />
               </Link>
               <Link
-                href={`${objSetting.instaGram}`}
+                href={`${objSetting.instaGram || "#"}`}
                 target="_blank"
                 className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 "
               >
@@ -90,7 +85,7 @@ export default function FooterTopContent() {
                 />
               </Link>
               <Link
-                href={`${objSetting.linkedIn}`}
+                href={`${objSetting.linkedIn || "#"}`}
                 target="_blank"
                 className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 "
               >
@@ -102,12 +97,12 @@ export default function FooterTopContent() {
             </ul>
           </div>
         </MainScrollAnimation>
-        <MainScrollAnimation>
-          <div className="xs:w-full md:w-3/5 m-auto xs:pt-12 md:pt-16 ">
-            <ul className="flex justify-between sm:justify-center sm:space-x-16 items-center">
-              {objSetting.footerList &&
-                objSetting.footerList.length > 0 &&
-                objSetting.footerList.map((item: any, index) => (
+
+        {objSetting.footerList && objSetting.footerList.length > 0 && (
+          <MainScrollAnimation>
+            <div className="xs:w-full md:w-3/5 m-auto xs:pt-12 md:pt-16 ">
+              <ul className="flex justify-between sm:justify-center sm:space-x-16 items-center">
+                {objSetting.footerList.map((item: any, index) => (
                   <Link
                     key={index}
                     href={item.page_slug}
@@ -117,9 +112,10 @@ export default function FooterTopContent() {
                     {item.page_name || "N/A"}
                   </Link>
                 ))}
-            </ul>
-          </div>
-        </MainScrollAnimation>
+              </ul>
+            </div>
+          </MainScrollAnimation>
+        )}
       </div>
     </section>
   );

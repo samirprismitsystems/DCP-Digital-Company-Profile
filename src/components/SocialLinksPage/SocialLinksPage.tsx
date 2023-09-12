@@ -196,7 +196,6 @@ export default function SocialLinksPage() {
     loadData();
   }, []);
 
-  console.log(lstSocialData);
   return (
     <>
       <BackButton />

@@ -72,7 +72,6 @@ export default function FooterPageSelector() {
     loadData();
   }, []);
 
-  console.log(selectedOption)
   if (isLoading) return <h6>Loading....</h6>;
   return (
     <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black pb-3 mb-16 transition-all duration-300 ease-linear">
