@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .w-custom-width {
   @apply w-[calc(100%-35rem)];
 }

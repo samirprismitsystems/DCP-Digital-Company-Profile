@@ -15,6 +15,7 @@ export default function DigitalFeatures() {
   const pageDetails: ILandingPageDetails = data.pageDetails;
   const lstFeatures: IFeature[] = JSON.parse(pageDetails.logoandtext);
 
+  console.log(lstFeatures)
   return (
     <section
       className="container mx-auto text-gray-600 body-font xs:mt-0 sm:mt-20 mt-20 xs:py-16 py-32"

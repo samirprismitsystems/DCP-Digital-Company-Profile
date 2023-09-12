@@ -31,7 +31,6 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
       io.append("pages[]", JSON.parse(footerPages));
 
       const pageData = await ApiService.getSomePageData(io);
-      console.log(pageData);
 
       if (!res.error && setting) {
         setObjSetting({

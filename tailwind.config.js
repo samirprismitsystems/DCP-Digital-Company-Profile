@@ -8,6 +8,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      listStyleType: {
+        none: "none",
+      },
+      margin: {},
+      padding: {},
       borderRadius: {
         50: "50%",
       },
@@ -49,12 +54,12 @@ module.exports = {
         grey: "#b2b2b2",
         redThemeTextColor: "#1a1a1a",
         redThemeGreyTextColor: "#666666",
-        gadgetTheme:{
+        gadgetTheme: {
           primary: "#3baa96",
           secondary: "#f7fffe",
-          text:"#666666",
-          title:"#1a1a1a",
-        }
+          text: "#666666",
+          title: "#1a1a1a",
+        },
       },
       screens: {
         xs: "320px",
