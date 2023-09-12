@@ -8,13 +8,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import LoginFooter from "../LoginPage/LoginFooter/LoginFooter";
 import LoginNavbar from "../LoginPage/LoginNavbar/LoginNavbar";
-import { useState } from "react";
-import Image from "next/image";
 
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -75,8 +75,8 @@ export default function ForgotPasswordPage() {
               hello world
             </span>
           </div>
-          <div className="relative  z-0 xs:h-[73vh] lg:h-screen h-screen sm-h-screen w-2/4 xs:w-full bg-white">
-            <div className="w-full xs:flex lg:block h-full p-20  md:p-20 xl:flex">
+          <div className="relative  z-0 xs:h-[73vh] lg:h-screen h-screen sm:h-screen w-2/4 xs:w-full bg-white">
+            <div className="w-full xs:flex lg:block h-full xs:p-8 sm:p-20  md:p-20 xl:flex">
               <div className="w-full h-full xs:h-auto  md:p-20 flex justify-center items-center flex-row">
                 <div className="w-3/4 xs:w-full m-auto">
                   <h1 className="xl:text-5xl font-normal text-center text-black xs:text-[2.5rem]">

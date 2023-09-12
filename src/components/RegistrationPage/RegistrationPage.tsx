@@ -38,7 +38,7 @@ export default function RegistrationPage() {
               hello world
             </span>
           </div>
-          <div className="relative z-0 min-h-full h-screen xs:h-[74vh] sm:h-[74vh] xl:h-screen w-2/4 xs:w-full bg-white">
+          <div className="relative z-0 xs:min-h-[80vh] h-screen sm:min-h-screen xl:h-screen w-2/4 xs:w-full bg-white">
             <div className="w-full h-full p-20 xs:p-8 md:p-8 xs:h-full">
               <div className="xs:pt-0 w-3/4 xs:w-full m-auto md:w-3/4 xl:pt-[33rem] xlOne:pt-[25rem] xlTwo:pt-[24rem] xlThree:pt-[10rem]">
                 <h1 className="xs:text-4xl text-black text-center xl:text-6xl font-bold">
