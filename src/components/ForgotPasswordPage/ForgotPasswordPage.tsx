@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
         }}
       >
         <div className="h-full  flex flex-wrap xl:flex-nowrap xs:flex-col lg:flex-row -mt-4 -mb-4">
-          <div className="relative z-0 h-screen xs:h-[21vh] xl:h-screen xs:w-full w-2/4">
+          <div className="relative z-0 h-screen xs:h-[25vh] sm:h-[21vh] xl:h-screen xs:w-full w-2/4">
             <picture className="block h-full xs:h-auto">
               <Image
                 width={800}
