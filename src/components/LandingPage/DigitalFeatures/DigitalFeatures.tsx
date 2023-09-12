@@ -57,7 +57,7 @@ export default function DigitalFeatures() {
           </div>
           {lstFeatures && lstFeatures.length > 0 && (
             <div className="w-52 xs:w-full sm:w-full mb-10 md:mb-0">
-              <div className="text-white rounded-lg md:ml-auto mt-10 md:mt-0 grid grid-cols-3">
+              <div className="text-white rounded-lg md:ml-auto mt-10 md:mt-0 grid xs:grid-cols-2 sm:grid-cols-3">
                 {lstFeatures.map((item: IFeature, index: number) => {
                   return (
                     <div
