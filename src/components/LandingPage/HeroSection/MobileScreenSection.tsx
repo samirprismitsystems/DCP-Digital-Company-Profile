@@ -16,7 +16,7 @@ export default function MobileScreenSection(props: { homeImage: string }) {
         onMouseLeave={() => {
           setIsHover(false);
         }}
-        className={`mt-[2rem] text-center relative table hover:cursor-pointer overflow-hidden m-auto  `}
+        className={`mt-[5rem] text-center relative table hover:cursor-pointer overflow-hidden m-auto  `}
       >
         <div
           className="mobileImage absolute left-1 right-0 m-auto xs:w-[84%] xl:w-[88%] h-[93%] -z-10 xs:top-[3rem] xl:top-[1.3rem] overflow-hidden"

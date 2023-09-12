@@ -21,7 +21,7 @@ export default function DigitalFeatures() {
       id="digitalFeatures"
     >
       <MainScrollAnimation>
-        <div className=" flex md:px-0 px-5 py-8 md:flex-row flex-col items-start">
+        <div className=" flex md:px-0 px-5 py-8 md:flex-row flex-col items-center">
           <div className="xs:mb-6 mt-8 md:w-full  flex flex-col xs:items-start md:items-start md:text-left items-center text-center">
             <h2
               style={{ lineHeight: "1.3" }}

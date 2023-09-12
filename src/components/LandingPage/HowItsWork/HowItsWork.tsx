@@ -34,7 +34,7 @@ export default function HowItsWork() {
 
       <section className="text-gray-600 body-font">
         <MainScrollAnimation>
-          <div className="container mx-auto flex md:px-0 px-5 xs:py-0 py-16 md:flex-row flex-col md:items-start items-center">
+          <div className="container mx-auto flex md:px-0 px-5 xs:py-0 py-16 md:flex-row flex-col md:items-start lg:items-center">
             <div className="xs:w-full md:w-1/2 mb-10 md:mb-0">
               <MainScrollAnimation>
                 <img
@@ -60,7 +60,7 @@ export default function HowItsWork() {
           </div>
         </MainScrollAnimation>
 
-        <div className="container mt-20 mx-auto flex md:px-0 px-5  md:flex-row flex-col md:items-start items-center">
+        <div className="container mt-20 mx-auto flex md:px-0 px-5  md:flex-row flex-col md:items-start lg:items-center">
           <div className="md:hidden sm:w-full md:w-1/2 mb-10 md:mb-0">
             <MainScrollAnimation>
               <img
@@ -70,7 +70,7 @@ export default function HowItsWork() {
               />
             </MainScrollAnimation>
           </div>
-          <div className="xs:items-start md:w-1/2 flex flex-col sm:items-start md:item-center text-left ">
+          <div className="xs:items-start md:w-1/2 flex flex-col text-left ">
             <MainScrollAnimation>
               <h1 className="text-white title-font text-[3.0rem] mb-4 font-semibold">
                 {pageDetails.cardtitle2 || "N/A"}
