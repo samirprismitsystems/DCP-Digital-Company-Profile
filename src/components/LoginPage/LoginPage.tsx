@@ -54,7 +54,7 @@ export default function LoginPage() {
                 </h2>
                 <div className="w-full  border-b-2 border-b-gray-200"></div>
               </div>
-              <div className="w-3/4 xs:w-full m-auto xl:py-20 xs:py-14 text-center xl:text-5xl font-normal text-black xs:text-[2.5rem]">
+              <div className="w-3/4 xs:w-full m-auto xl:py-20 xs:py-6 sm:py-14 text-center xl:text-5xl font-normal text-black xs:text-[2.5rem]">
                 Please Login to Continue
               </div>
               <LoginForm />

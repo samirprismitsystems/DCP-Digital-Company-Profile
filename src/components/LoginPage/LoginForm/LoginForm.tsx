@@ -114,7 +114,7 @@ export default function LoginForm() {
             {...objForm.register("password")}
           />
         </div>
-        <div className="py-10">
+        <div className="xs:py-6 py-10">
           <h1 className="text-primary-lightDark font-bold text-center text-3xl">
             <Link href={"/forgetpassword"}>Forgot Password?</Link>
           </h1>
