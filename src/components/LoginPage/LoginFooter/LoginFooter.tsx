@@ -23,12 +23,11 @@ export default function LoginFooter() {
   const loadData = async () => {
     try {
       const objRes = await ApiService.getLandingPageResource();
-      const footerPages =
-        objRes.page_content && objRes.page_content?.footerpages;
 
       const res = await ApiService.getAdminSiteSettingInfo();
       const setting = res.setting;
-
+      objRes.page_content && objRes.page_content?.footerpages;
+      const footerPages = setting[9]?.setting_value;
       const io: any = new FormData();
       io.append("pages[]", JSON.parse(footerPages));
 
