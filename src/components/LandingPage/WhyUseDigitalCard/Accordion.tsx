@@ -16,8 +16,7 @@ const Accordion = () => {
     }
   };
 
-
-  console.log(lstAccordion)
+  console.log(lstAccordion);
   return (
     <>
       <div className="mb-[3rem]">
@@ -30,17 +29,15 @@ const Accordion = () => {
       </p>
       {lstAccordion &&
         lstAccordion.length > 0 &&
-        lstAccordion.map(
-          (item: { faqtitle: string; faqdesc: string }, index: number) => (
-            <FaqsList
-              key={index}
-              title={item.faqtitle}
-              desc={item.faqdesc}
-              openItem={openItem}
-              onToggle={handleToggle}
-            />
-          )
-        )}
+        lstAccordion.map((item: any, index: number) => (
+          <FaqsList
+            key={index}
+            title={item.faqtitle || item.title}
+            desc={item.faqdesc || item.desc}
+            openItem={openItem}
+            onToggle={handleToggle}
+          />
+        ))}
     </>
   );
 };
