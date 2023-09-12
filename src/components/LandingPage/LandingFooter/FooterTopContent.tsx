@@ -64,7 +64,7 @@ export default function FooterTopContent() {
               {objSetting.siteDesc || "N/A"}
             </h4>
           </div>
-          <div className="w-2/5 md:w-1/4 m-auto xs:pt-12 pt-16">
+          <div className="xs:w-[65%] sm:w-2/5 md:w-1/4 m-auto xs:pt-12 pt-16">
             <ul className="flex lg:justify-center sm:justify-evenly xs:justify-between items-center md:space-x-8">
               <Link
                 href={`${objSetting.facebook || "#"}`}
@@ -103,7 +103,7 @@ export default function FooterTopContent() {
         {objSetting.footerList && objSetting.footerList.length > 0 && (
           <MainScrollAnimation>
             <div className="xs:w-full md:w-3/5 m-auto xs:pt-12 md:pt-16 ">
-              <ul className="flex justify-between sm:justify-center sm:space-x-16 items-center">
+              <ul className="flex xs:justify-around justify-between sm:justify-center sm:space-x-16 items-center">
                 {objSetting.footerList.map((item: any, index) => (
                   <Link
                     key={index}
