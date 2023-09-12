@@ -36,7 +36,7 @@ export default function GetInTouch() {
         const io: any = new FormData();
         io.append("name", objUser.fullName);
         io.append("contactemail", objUser.email);
-        io.append("email", "16mscit072@gmail.com");
+        io.append("email", Utils.getItem("settingEmail"));
         io.append("message", objUser.message);
 
         const res = await ApiService.sendEmail(io);

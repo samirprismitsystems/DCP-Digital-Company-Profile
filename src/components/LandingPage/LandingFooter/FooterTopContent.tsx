@@ -25,10 +25,12 @@ export default function FooterTopContent() {
       const res = await ApiService.getAdminSiteSettingInfo();
       const setting = res.setting;
       const footerPages = setting[9]?.setting_value;
+      const email = setting[8]?.setting_value;
+      Utils.setItem("settingEmail", email);
       const io: any = new FormData();
       io.append("pages[]", JSON.parse(footerPages));
       const pageData = await ApiService.getSomePageData(io);
-      
+
       if (!res.error && setting) {
         setObjSetting({
           facebook: setting[3]?.setting_value,
