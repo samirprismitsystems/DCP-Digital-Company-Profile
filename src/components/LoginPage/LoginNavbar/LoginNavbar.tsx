@@ -13,7 +13,7 @@ export default function LoginNavbar() {
   
   return (
     <nav
-      className={`shadow-md bg-white fixed w-full top-0 h-[10rem] xs:h-[8.5rem] z-10 p-t-[2.3rem] p-b-[1.5rem]`}
+      className={`shadow-md bg-white fixed w-full top-0 h-[10rem] xs:h-[8.5rem] z-[99] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
         lstNavigations={loginPageNavigationMenuList}

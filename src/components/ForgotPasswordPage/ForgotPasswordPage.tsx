@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
               hello world
             </span>
           </div>
-          <div className="relative  z-0 xs:h-[73vh] lg:h-screen h-screen sm:h-screen w-2/4 xs:w-full bg-white">
+          <div className="relative  z-0 xs:h-[73vh] xl:h-screen w-2/4 xs:w-full bg-white">
             <div className="w-full xs:flex lg:block h-full xs:p-8 sm:p-20  md:p-20 xl:flex">
               <div className="w-full h-full xs:h-auto  md:p-20 flex justify-center items-center flex-row">
                 <div className="w-3/4 xs:w-full m-auto">
