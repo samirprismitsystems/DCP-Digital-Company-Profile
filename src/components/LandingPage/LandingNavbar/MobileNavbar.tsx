@@ -126,7 +126,7 @@ export default function MobileNavbar({
               />
             </svg>
           </button>
-          <div className="h-[800px] container py-16 text-white my-32 flex justify-center items-center">
+          <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
             <div className="w-full md:block md:w-auto" id="navbar-default">
               <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
                 {lstNavigations &&

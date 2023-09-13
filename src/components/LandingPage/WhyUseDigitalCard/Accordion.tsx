@@ -16,7 +16,6 @@ const Accordion = () => {
     }
   };
 
-  console.log(lstAccordion);
   return (
     <>
       <div className="mb-[3rem]">

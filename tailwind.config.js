@@ -8,11 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      listStyleType: {
-        none: "none",
-      },
-      margin: {},
-      padding: {},
       borderRadius: {
         50: "50%",
       },

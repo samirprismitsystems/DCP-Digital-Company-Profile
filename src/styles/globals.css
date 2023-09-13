@@ -1,6 +1,10 @@
-@tailwind base;
 @tailwind components;
+ol:not(.custom-list-style ol),ul:not(.custom-list-style ul) {
+    list-style:none !important;
+}
+@tailwind base;
 @tailwind utilities;
+
 
 
 .w-custom-width {
@@ -735,12 +739,15 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   font-size: 150px;
   color: rgba(var(5, 59, 123), 1);
 }
+
 .owl-carousel .owl-nav button.owl-next {
   right: -20px;
 }
+
 .owl-carousel .owl-nav button.owl-prev {
   left: -20px;
 }
+
 
 @media (min-width: 1400px) {
   .container {
