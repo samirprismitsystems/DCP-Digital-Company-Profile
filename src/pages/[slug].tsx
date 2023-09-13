@@ -53,7 +53,13 @@ export default function UserViewSection() {
     } else if (themeID === THEME_TYPE.PORTFOLIO) {
       return <PortfolioPage result={result} />;
     } else {
-      return <PageNotFound title="Themes Not Available!" />;
+      return (
+        <PageNotFound
+          desc={"Please select the theme from dashboard!"}
+          title="Themes Not Available!"
+          hideButton={true}
+        />
+      );
     }
   };
 

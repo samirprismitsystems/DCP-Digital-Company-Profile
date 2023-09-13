@@ -184,7 +184,7 @@ export default function ProductItem() {
       <div className="py-[10rem]">
         <Loading />
       </div>
-  );
+    );
 
   return (
     <FormProvider {...objForm}>
@@ -224,6 +224,11 @@ export default function ProductItem() {
                       savePath={`product_data.${index}.product_image`}
                       label="Upload Product Image"
                       folderPath="product"
+                      imgPlaceholder={
+                        <div className="w-full h-full flex items-center justify-center placeholder_tex text-center select-none opacity-30">
+                          <h3>Please Upload Product Image</h3>
+                        </div>
+                      }
                     />
                     <input
                       type="text"

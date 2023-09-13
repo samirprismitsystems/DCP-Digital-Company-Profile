@@ -218,6 +218,11 @@ export default function ClientItem() {
                       savePath={`client_data.${index}.client_logo`}
                       label="Upload Client Image"
                       folderPath="client"
+                      imgPlaceholder={
+                        <div className="w-full h-full flex items-center justify-center placeholder_tex text-center select-none opacity-30">
+                          <h3>Please Upload Client Image</h3>
+                        </div>
+                      }
                     />
                     <input
                       type="text"

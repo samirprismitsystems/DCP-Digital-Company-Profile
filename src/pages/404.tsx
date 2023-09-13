@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 
-export default function PageNotFound(props: { title?: string }) {
+export default function PageNotFound(props: {
+  hideButton?: boolean;
+  title?: string;
+  desc?: string;
+}) {
   const router = useRouter();
 
   return (
@@ -9,17 +13,19 @@ export default function PageNotFound(props: { title?: string }) {
         {props.title || "Page Not Found"}
       </h1>
       <h2 className="text-center text-xl md:text-2xl text-white">
-        The requested page could not be found.
+        {props.desc || "The requested page could not be found."}
       </h2>
-      <button
-        className="mt-8 btnHoverEffect py-3 px-6 text-xl md:text-2xl"
-        onClick={() => {
-          router.back();
-        }}
-        type="button"
-      >
-        Go Back
-      </button>
+      {!props.hideButton && (
+        <button
+          className="mt-8 btnHoverEffect py-3 px-6 text-xl md:text-2xl"
+          onClick={() => {
+            router.back();
+          }}
+          type="button"
+        >
+          Go Back
+        </button>
+      )}
     </div>
   );
 }

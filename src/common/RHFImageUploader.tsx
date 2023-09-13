@@ -11,7 +11,9 @@ export default function RHFImageUploader({
   isIDNotAvailable,
   showImageRequiredMessage,
   isRounded,
+  imgPlaceholder,
 }: {
+  imgPlaceholder?: Node | any;
   srcPath?: any;
   savePath: string;
   label: string;
@@ -22,11 +24,17 @@ export default function RHFImageUploader({
 }) {
   const objForm = useFormContext();
   const [selectedImagePath, setSelectedImagePath] = useState(
-    !isIDNotAvailable
-      ? `${UPLOAD_IMAGE_URI}/${Utils.getItem(
-          "IMAGE_UPLOAD_ID"
-        )}/${folderPath}/${srcPath}`
-      : `${UPLOAD_IMAGE_URI}/${folderPath}/${srcPath}`
+    Utils.getCompanyID()
+      ? !isIDNotAvailable
+        ? srcPath
+          ? `${UPLOAD_IMAGE_URI}/${Utils.getItem(
+              "IMAGE_UPLOAD_ID"
+            )}/${folderPath}/${srcPath}`
+          : ""
+        : srcPath
+        ? `${UPLOAD_IMAGE_URI}/${folderPath}/${srcPath}`
+        : ""
+      : ""
   );
 
   // eslint-disable-next-line @next/next/no-img-element
@@ -39,16 +47,19 @@ export default function RHFImageUploader({
             : "item_image mb-4 w-full h-[20rem] border-0 bg-primary-main"
         }`}
       >
-        <img
-          suppressHydrationWarning
-          src={`${selectedImagePath}`}
-          alt="image.png"
-          className={`${
-            isRounded
-              ? "w-[80%] h-[80%] object-cover object-center align-middle border-none"
-              : "w-full h-full object-cover object-center align-middle border-none"
-          }`}
-        />
+        {imgPlaceholder && !selectedImagePath && imgPlaceholder}
+        {selectedImagePath && (
+          <img
+            suppressHydrationWarning
+            src={`${selectedImagePath}`}
+            alt="image.png"
+            className={`${
+              isRounded
+                ? "w-[80%] h-[80%] object-cover object-center align-middle border-none"
+                : "w-full h-full object-cover object-center align-middle border-none"
+            }`}
+          />
+        )}
       </div>
       {showImageRequiredMessage && (
         <p className="text-red-600 my-3  mx-auto text-center">

@@ -5,10 +5,7 @@ import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
-import {
-  portfolioFormSchema,
-  productFormSchema,
-} from "@/services/forms/formSchema";
+import { portfolioFormSchema } from "@/services/forms/formSchema";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -151,7 +148,8 @@ export default function ImageGalleryItem() {
           return null;
         }
 
-        if (res.message !== "Empty Portfolio Data") throw new Error(res.message);
+        if (res.message !== "Empty Portfolio Data")
+          throw new Error(res.message);
       }
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
@@ -224,6 +222,11 @@ export default function ImageGalleryItem() {
                       savePath={`portfolio_data.${index}.portfolio_image`}
                       label="Upload Portfolio Image"
                       folderPath="portfolio"
+                      imgPlaceholder={
+                        <div className="w-full h-full flex items-center justify-center placeholder_tex text-center select-none opacity-30">
+                          <h3>Please Upload Gallery Image</h3>
+                        </div>
+                      }
                     />
                     <input
                       type="text"

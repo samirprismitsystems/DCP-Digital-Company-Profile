@@ -7,9 +7,11 @@ import { useFormContext } from "react-hook-form";
 export default function QRCodeImageUploader({ imagePath }: { imagePath: any }) {
   const objForm = useFormContext();
   const [selectedImage, setSelectedImage] = useState(
-    `${UPLOAD_IMAGE_URI}/${Utils.getItem(
-      "IMAGE_UPLOAD_ID"
-    )}/${"qrcode"}/${imagePath}`
+    imagePath
+      ? `${UPLOAD_IMAGE_URI}/${Utils.getItem(
+          "IMAGE_UPLOAD_ID"
+        )}/${"qrcode"}/${imagePath}`
+      : "/qr-code.webp"
   );
 
   return (

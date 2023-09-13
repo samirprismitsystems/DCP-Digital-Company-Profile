@@ -223,6 +223,11 @@ export default function ServiceItem() {
                       savePath={`service_data.${index}.service_image`}
                       label="Upload Service Image"
                       folderPath="service"
+                      imgPlaceholder={
+                        <div className="w-full h-full flex items-center justify-center placeholder_tex text-center select-none opacity-30">
+                          <h3>Please Upload Service Image</h3>
+                        </div>
+                      }
                     />
                     <input
                       type="text"

@@ -21,6 +21,11 @@ export default function ThemeCards({ onThemeSelect }: any) {
 
   const loadData = async () => {
     try {
+      if (!Utils.getCompanyID()) {
+        Utils.showErrorMessage("Please First Setup Company Details!");
+        return null;
+      }
+
       setIsLoading(true);
       const res = await ApiService.getThemes();
       if (!res.error) {

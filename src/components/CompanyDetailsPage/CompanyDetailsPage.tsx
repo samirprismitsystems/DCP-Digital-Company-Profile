@@ -214,13 +214,6 @@ export default function CompanyDetailsPage() {
   }, []);
 
   useEffect(() => {
-    if (isChange) {
-      setIsChange(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isChange]);
-
-  useEffect(() => {
     if (objData && Object.keys(objData).length > 0) {
       const defaultValue: IFormData = {
         alternatePhoneNumber: objData.company_alternate_contact,

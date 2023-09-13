@@ -1,5 +1,6 @@
 import BackButton from "@/common/BackButton";
 
+import CompanyFirstPlease from "@/common/CompanyFirst/CompanyFirstPlease";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
@@ -31,6 +32,10 @@ export default function ThemesPage() {
       Utils.showErrorMessage(ex.message);
     }
   };
+
+  if (!Utils.getCompanyID()) {
+    return <CompanyFirstPlease />;
+  }
 
   return (
     <>

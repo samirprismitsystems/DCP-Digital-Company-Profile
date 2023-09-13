@@ -115,7 +115,7 @@ export default function Dashboard() {
         return null;
       }
 
-      throw new Error("Error occurred while getting dashboard data!");
+      throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
     } finally {
@@ -128,7 +128,6 @@ export default function Dashboard() {
   }, []);
 
   if (isLoading) return <PageCircularLoading />;
-
   return lstDashboardCards.map((item) => (
     <div key={item.id} className="dashboard_card max-w-full px-[12px]">
       <DashboardCards item={item} />

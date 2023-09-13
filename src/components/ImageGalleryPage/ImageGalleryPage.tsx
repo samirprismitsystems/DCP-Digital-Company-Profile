@@ -1,7 +1,13 @@
 import BackButton from "@/common/BackButton";
+import CompanyFirstPlease from "@/common/CompanyFirst/CompanyFirstPlease";
+import Utils from "@/services/Utils";
 import ImageGalleryItem from "./ImageGalleryItem/ImageGalleryItem";
 
 export default function ImageGalleryPage() {
+  
+  if (!Utils.getCompanyID()) {
+    return <CompanyFirstPlease />;
+  }
   return (
     <>
       <BackButton />

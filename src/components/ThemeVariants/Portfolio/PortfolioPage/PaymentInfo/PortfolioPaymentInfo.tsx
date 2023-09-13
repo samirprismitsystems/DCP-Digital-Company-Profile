@@ -13,17 +13,17 @@ export default function PortfolioPaymentInfo() {
         <PortfolioPaymentCard
           title="Google Pay"
           imgPath="assets/payments/google-pay.png"
-          Upi={objPaymentInfo.googlepay_number}
+          Upi={objPaymentInfo?.googlepay_number || ""}
         />
         <PortfolioPaymentCard
           title="Phone Pay"
           imgPath="assets/payments/phone-pe.png"
-          Upi={objPaymentInfo.phonepay_number}
+          Upi={objPaymentInfo?.phonepay_number || ""}
         />
         <PortfolioPaymentCard
           title="Paytm"
           imgPath="assets/payments/paytm.png"
-          Upi={objPaymentInfo.paytm_number}
+          Upi={objPaymentInfo?.paytm_number || ""}
         />
       </div>
     </div>

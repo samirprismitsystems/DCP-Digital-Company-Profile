@@ -1,4 +1,5 @@
 import BackButton from "@/common/BackButton";
+import CompanyFirstPlease from "@/common/CompanyFirst/CompanyFirstPlease";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
 import Loading from "@/common/Loading";
 import TextField from "@/common/TextFields/TextField";
@@ -38,11 +39,11 @@ export default function PaymentOptionPage() {
       io.append("bank_ifsc_code", data.bankIFSCCode);
       io.append("account_type", data.accountType);
       io.append("user_id", AuthService.getUserEmail());
-      if(typeof data.QRCodeImage == 'object'){
+      if (typeof data.QRCodeImage == "object") {
         io.append("qrcode", data.QRCodeImage);
       }
 
-      if(typeof data.logo == 'string'){
+      if (typeof data.logo == "string") {
         io.append("logo", objPayment.logo);
       }
       io.append("isupdate", isUpdate);
@@ -74,7 +75,7 @@ export default function PaymentOptionPage() {
         if (result != null) {
           setIsUpdate(true);
         }
-        
+
         const defaultValue: any = {
           accountHolderName: result.account_holder_name,
           accountType: result.account_type,
@@ -113,6 +114,9 @@ export default function PaymentOptionPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [objPayment]);
 
+  if (!Utils.getCompanyID()) {
+    return <CompanyFirstPlease />;
+  }
   return (
     <>
       <BackButton />

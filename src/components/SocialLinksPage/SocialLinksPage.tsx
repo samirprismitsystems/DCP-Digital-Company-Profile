@@ -1,6 +1,6 @@
 import BackButton from "@/common/BackButton";
+import CompanyFirstPlease from "@/common/CompanyFirst/CompanyFirstPlease";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
-import ErrorPlaceholder from "@/common/ErrorPlaceholder";
 import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";
@@ -17,6 +17,7 @@ export default function SocialLinksPage() {
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstSocialData, setLstSocialData] = useState<any>([]);
+
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
   });
@@ -48,19 +49,33 @@ export default function SocialLinksPage() {
       } else {
         if (data.socialData) {
           data.socialData.forEach((item) => {
-            if (item.social_id && item.link) {
-              let objItem = {
-                created_at: item.created_at,
-                link: item.link,
-                socialmedia_id: item.social_id,
-                socialmedia_color: item.socialmedia_color,
-                socialmedia_logo: item.socialmedia_logo,
-                socialmedia_name: item.socialmedia_name,
-                updated_at: item.updated_at,
-              };
-
-              pureFormData.push(objItem);
-            }
+            let objItem = null;
+            lstSocialData.forEach((socialItem: any) => {
+              if (parseInt(socialItem.social_id) === parseInt(item.social_id)) {
+                objItem = {
+                  created_at: item.created_at,
+                  link: item.link,
+                  socialmedia_id: item.social_id,
+                  socialmedia_color: item.socialmedia_color,
+                  socialmedia_logo: item.socialmedia_logo,
+                  socialmedia_name: item.socialmedia_name,
+                  updated_at: item.updated_at,
+                };
+              } else {
+                objItem = {
+                  created_at: socialItem.created_at,
+                  link: socialItem.link,
+                  socialmedia_id: socialItem.social_id,
+                  socialmedia_color: socialItem.socialmedia_color,
+                  socialmedia_logo: socialItem.socialmedia_logo,
+                  socialmedia_name: socialItem.socialmedia_name,
+                  updated_at: socialItem.updated_at,
+                };
+              }
+              if (objItem) {
+                pureFormData.push(objItem);
+              }
+            });
           });
         }
       }
@@ -75,7 +90,7 @@ export default function SocialLinksPage() {
       );
 
       let io = new FormData();
-      io.append("socialdata", JSON.stringify(uniqueArray || lstSocialData));
+      io.append("socialdata", JSON.stringify(uniqueArray));
       io.append("user_id", AuthService.getUserEmail());
       io.append("isupdate", isUpdate as any);
       const res = await ApiService.saveSocialLinks(io);
@@ -96,11 +111,6 @@ export default function SocialLinksPage() {
       setIsLoading(true);
       const res = await ApiService.getSocialLinksData();
       if (!res.error) {
-        if (res.message == "Company not found") {
-          Utils.showErrorMessage("Please First Setup Company Details!");
-          return null;
-        }
-
         if (res.social && res.social.length > 0) {
           setIsUpdate(true);
           setLstSocialData(res.social);
@@ -196,14 +206,16 @@ export default function SocialLinksPage() {
     loadData();
   }, []);
 
+  if (!Utils.getCompanyID()) {
+    return <CompanyFirstPlease />;
+  }
+
   return (
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Add social media links</div>
-        <div className="h4 mt-1">
-          Please fill up the your social media links
-        </div>
+        <div className="h4 mt-1">Please fill up your social media links</div>
       </div>
       <FormProvider {...objForm}>
         <form
@@ -218,11 +230,9 @@ export default function SocialLinksPage() {
               <Loading />
             </div>
           )}
-          <div className="row -mr-3 -ml-3">
-            {Utils.getCompanyID() &&
-              lstSocialData &&
-              lstSocialData.length > 0 &&
-              lstSocialData.map((item: any, index: number) => {
+          {lstSocialData && lstSocialData.length > 0 && (
+            <div className="row -mr-3 -ml-3">
+              {lstSocialData.map((item: any, index: number) => {
                 return (
                   <div key={index}>
                     <SocialLinkTextField
@@ -242,7 +252,7 @@ export default function SocialLinksPage() {
                       onchange={(event: any) => {
                         let objItem = {
                           ...item,
-                          link: event.target.value,
+                          link: event.target.value || "",
                         };
                         objForm.setValue(`socialData.${index}` as any, objItem);
                       }}
@@ -251,11 +261,6 @@ export default function SocialLinksPage() {
                   </div>
                 );
               })}
-          </div>
-          
-          {!isLoading && lstSocialData && lstSocialData.length <= 0 && (
-            <div className="pb-9">
-              <ErrorPlaceholder error="No Data Found!" />
             </div>
           )}
 

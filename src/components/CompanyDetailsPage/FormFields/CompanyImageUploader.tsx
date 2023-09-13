@@ -1,5 +1,4 @@
 import RHFImageUploader from "@/common/RHFImageUploader";
-import { useFormContext } from "react-hook-form";
 
 export default function CompanyImageUploader(props: {
   logoPath: string;
@@ -21,6 +20,12 @@ export default function CompanyImageUploader(props: {
             showImageRequiredMessage={true}
             isRounded={true}
             label="Please Select Logo Image"
+            imgPlaceholder={
+              <div className="placeholder_tex text-center select-none opacity-30">
+                <h3>Please Upload Here Your Company</h3>
+                <h2>LOGO</h2>
+              </div>
+            }
           />
         </div>
         <div
@@ -36,6 +41,12 @@ export default function CompanyImageUploader(props: {
             showImageRequiredMessage={true}
             isRounded={true}
             label="Please Select Banner Image"
+            imgPlaceholder={
+              <div className="placeholder_tex text-center select-none opacity-30">
+                <h3>Please Upload Company Background</h3>
+                <h2>BANNER</h2>
+              </div>
+            }
           />
         </div>
       </div>

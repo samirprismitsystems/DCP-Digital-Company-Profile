@@ -1,7 +1,13 @@
 import BackButton from "@/common/BackButton";
+import CompanyFirstPlease from "@/common/CompanyFirst/CompanyFirstPlease";
+import Utils from "@/services/Utils";
 import ProductItem from "./ProductItem/ProductItem";
 
 export default function ProductPage() {
+  
+  if (!Utils.getCompanyID()) {
+    return <CompanyFirstPlease />;
+  }
   return (
     <>
       <BackButton />
