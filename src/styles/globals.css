@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .w-custom-width {
   @apply w-[calc(100%-35rem)];
 }
@@ -314,6 +315,7 @@ h5,
   font-weight: 500;
   line-height: 1.3;
 }
+
 h6,
 .h6 {
   font-size: 1.8rem;
@@ -341,6 +343,7 @@ h6,
 .main {
   min-height: calc(100vh - 20rem);
 }
+
 .Toastify__toast {
   font-size: 15px;
 }
@@ -350,6 +353,7 @@ h6,
   transition-duration: 200ms !important;
   transition-timing-function: ease-in !important;
 }
+
 .sideBarEffectNoWidth {
   width: 0px !important;
 }
@@ -357,9 +361,11 @@ h6,
 .btnHoverEffect {
   @apply bg-secondary-main transition-all duration-300 ease-linear hover:bg-secondary-greyDark hover:border-cyan-200 hover:border rounded-full;
 }
+
 .share_links {
   font-family: Gill Sans, sans-serif !important;
 }
+
 p,
 ul li {
   font-size: 1.8rem;
@@ -391,7 +397,6 @@ ul.theme_list li:before {
   margin-left: -1.5rem;
   margin-right: 1.5rem;
 }
-
 ul.theme_list li {
   display: flex;
   align-items: baseline;
@@ -453,6 +458,61 @@ ul.theme_list li {
   width: 100%;
   height: auto;
 }
+
+.container-flued-portfolio {
+  width: 100%;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.container-portfolio,
+.container-flued-portfolio {
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.gadgetShop_theme .owl-item.active.center {
+  transform: scale(1.1) !important;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  background-color: var(--color-111);
+  border: 2px solid var(--color-400);
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-400);
+  border: 2px solid var(--color-400);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-111);
+  border-radius: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #132c33;
+  font-family: "Montserrat" !important;
+}
+
+body .dashboardCardFont {
+  font-family: "GothamRoundedBook" !important;
+  font-weight: 600;
+  color: #555;
+}
+
+html {
+  font-size: 62.5%;
+  transition: all 0.3s linear;
+  scroll-behavior: smooth;
+}
+
+
 .gadgetShop_theme .gadgetfontfamily {
   font-family: Gill Sans, sans-serif !important;
 }
@@ -528,122 +588,11 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   font-size: 150px;
   color: rgba(var(5, 59, 123), 1);
 }
-
 .owl-carousel .owl-nav button.owl-next {
   right: -20px;
 }
-
 .owl-carousel .owl-nav button.owl-prev {
   left: -20px;
-}
-
-.container-flued-portfolio {
-  width: 100%;
-  max-width: 100% !important;
-  padding: 0 !important;
-}
-
-.container-portfolio,
-.container-flued-portfolio {
-  width: 100%;
-  padding-right: 12px;
-  padding-left: 12px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.gadgetShop_theme .owl-item.active.center {
-  transform: scale(1.1) !important;
-}
-
-::-webkit-scrollbar {
-  width: 11px;
-  background-color: var(--color-111);
-  border: 2px solid var(--color-400);
-}
-::-webkit-scrollbar-track {
-  background-color: var(--color-400);
-  border: 2px solid var(--color-400);
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-111);
-  border-radius: 10px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: #132c33;
-  font-family: "Montserrat" !important;
-}
-
-body .dashboardCardFont {
-  font-family: "GothamRoundedBook" !important;
-  font-weight: 600;
-  color: #555;
-}
-
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
-  margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block;
-  vertical-align: middle;
-}
-
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-*,
-::before,
-::after {
-  border-width: 0;
-  border-style: solid;
-  border-color: theme("borderColor.DEFAULT", currentColor);
-}
-
-.google-map * {
-  border-style: none;
-}
-
-html {
-  font-size: 62.5%;
-  transition: all 0.3s linear;
-  scroll-behavior: smooth;
 }
 
 @media (min-width: 576px) {
@@ -732,6 +681,7 @@ html {
     font-size: 45.5%;
   }
 }
+
 @media (max-width: 1366px) {
   html {
     /* font-size: 38.5%; */
