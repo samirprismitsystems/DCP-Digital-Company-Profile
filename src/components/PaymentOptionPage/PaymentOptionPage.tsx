@@ -72,8 +72,10 @@ export default function PaymentOptionPage() {
       if (!res.error) {
         let result: IPaymentOptions = res.paymentdata;
 
-        if (result != null) {
+        if (res.paymentdata && Object.keys(res.paymentdata).length > 0) {
           setIsUpdate(true);
+        } else {
+          setIsUpdate(false);
         }
 
         const defaultValue: any = {

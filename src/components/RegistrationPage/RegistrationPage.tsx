@@ -35,7 +35,7 @@ export default function RegistrationPage() {
               }}
               className="text-[7rem] xs:text-[6rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-[11rem] xs:top-64  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
             >
-              hello world
+              Welcome to DCP
             </span>
           </div>
           <div className="relative z-0 xs:min-h-[80vh] h-screen sm:min-h-screen xl:h-screen w-2/4 xs:w-full bg-white">

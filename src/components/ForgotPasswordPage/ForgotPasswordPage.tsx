@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
               }}
               className="text-[7rem] xs:text-[6rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-52 xs:top-52  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
             >
-              hello world
+              Welcome to DCP
             </span>
           </div>
           <div className="relative  z-0 xs:h-[75vh] xl:h-screen w-2/4 xs:w-full bg-white">
