@@ -31,11 +31,16 @@ export default function DefaultTemplate() {
             <RHFImageUploader
               srcPath={metaImage}
               isIDNotAvailable={true}
-              savePath={`metaImage`}
+              savePath={`metaimgoriginal`}
               isRounded={true}
               label="Select Meta Image"
               folderPath="metaimgoriginal"
               showImageRequiredMessage={true}
+              imgPlaceholder={
+                <div className="placeholder_tex text-center select-none opacity-30">
+                  <h3>Please Upload Meta Image</h3>
+                </div>
+              }
             />
           </div>
         </div>
