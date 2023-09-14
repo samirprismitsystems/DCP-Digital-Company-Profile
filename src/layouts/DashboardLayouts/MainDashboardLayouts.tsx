@@ -152,10 +152,7 @@ export default function MainDashboardLayouts({ children }: any) {
       <section className="main mb-[2rem]">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
-            <div
-              className="left_sidebar_nav xs:mb-[49px] text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[999] md:overflow-y-auto xs:h-[calc(100vh - 7em)]"
-              // style={{ height: "calc(100vh - 10em)" }}
-            >
+            <div className="left_sidebar_nav xs:mb-[49px] text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[999] md:overflow-y-auto xs:h-[calc(100vh - 7em)]">
               <ul className="sticky mb-[20px] md:top-40 xs:top-44 w-full list-none m-0 p-0">
                 {lstDashboardPanels &&
                   lstDashboardPanels.map((item, index: number) => (
@@ -184,7 +181,6 @@ export default function MainDashboardLayouts({ children }: any) {
                   ))}
               </ul>
             </div>
-            {/* xlTwo:min-h-[90vh] */}
             <div className="right_sidebar_content xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] xs:min-h-[84vh] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[80vh] h-full mb-[49px]">
               {dashboardContent === null ? (
                 <PageCircularLoading />

@@ -30,6 +30,7 @@ export default function AdminDashboardNavbar() {
       className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] xs:h-[8.5rem] z-[999] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
+        isAdmin={true}
         lstNavigations={lstAdminResNavbar}
         toggle={toggle}
         isOpen={isOpen}

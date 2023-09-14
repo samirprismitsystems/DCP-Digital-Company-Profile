@@ -8,6 +8,7 @@ import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import DashboardNavigationMenu from "./DashboardNavigationMenu";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
 export default function DashboardNavbar(props: {
@@ -23,6 +24,40 @@ export default function DashboardNavbar(props: {
     setIsOpen(!isOpen);
   };
 
+  const getRedirectToProfile = () => {
+    if (AuthService.isUserAdmin()) {
+      if (!router.pathname.startsWith("/admindashboard")) {
+        router.push("/admindashboard/profile");
+      } else {
+        dispatch(
+          setSelectedObj({
+            selectedIndex: 0,
+            selectedTitle: "profile",
+          })
+        );
+        dispatch(setRouteIsChanged(true));
+        if (typeof window !== "undefined") {
+          window.history.replaceState("proile", "", `/admindashboard/profile`);
+        }
+      }
+    } else {
+      if (!router.pathname.startsWith("/dashboard")) {
+        router.push("/dashboard/profile");
+      } else {
+        dispatch(
+          setSelectedObj({
+            selectedIndex: 0,
+            selectedTitle: "profile",
+          })
+        );
+        dispatch(setRouteIsChanged(true));
+        if (typeof window !== "undefined") {
+          window.history.replaceState("proile", "", `/dashboard/profile`);
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     if (!isChange) {
       setIsChange(true);
@@ -35,6 +70,7 @@ export default function DashboardNavbar(props: {
       className={`shadow-md bg-white sticky z-[999] w-full top-0 xl:h-[10rem] xs:h-[8.5rem] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
+        isDashboard={true}
         lstNavigations={props.lstNav || lstUserResponsiveNavbar}
         toggle={toggle}
         isOpen={isOpen}
@@ -66,51 +102,50 @@ export default function DashboardNavbar(props: {
             DCP
           </span>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
-            <Link href={`/${Utils.getPageSlug()}`} target="_blank">
+        {!(props.isLogin && props.lstNav) && (
+          <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
+              {!AuthService.isUserAdmin() && (
+                <Link href={`/${Utils.getPageSlug()}`} target="_blank">
+                  <button
+                    type="button"
+                    className={`text-[2.0rem] block px-2 py-3  text-secondary-main font-[500]`}
+                  >
+                    Visit Site
+                  </button>
+                </Link>
+              )}
               <button
                 type="button"
                 className={`text-[2.0rem] block px-2 py-3  text-secondary-main font-[500]`}
+                onClick={getRedirectToProfile}
               >
-                Visit Site
+                Hi, {AuthService.getUserName()}
               </button>
-            </Link>
-            <button
-              type="button"
-              className={`text-[2.0rem] block px-2 py-3  text-secondary-main font-[500]`}
-              onClick={(event: any) => {
-                dispatch(
-                  setSelectedObj({
-                    selectedIndex: 0,
-                    selectedTitle: "profile",
-                  })
-                );
-                dispatch(setRouteIsChanged(true));
-                if (typeof window !== "undefined") {
-                  window.history.replaceState(
-                    "proile",
-                    "",
-                    `/admindashboard/profile`
-                  );
-                }
-              }}
-            >
-              Hi, {AuthService.getUserName()}
-            </button>
-            <li>
-              <button
-                className="border py-2 px-9 btnHoverEffect  text-white block  text-center"
-                onClick={() => {
-                  Utils.clearStorage();
-                  router.push("/login");
-                }}
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        </div>
+              <li>
+                <button
+                  className="border py-2 px-9 btnHoverEffect  text-white block  text-center"
+                  onClick={() => {
+                    Utils.clearStorage();
+                    router.push("/login");
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
+        {props.lstNav && props.isLogin && (
+          <div className="hidden md:block">
+            {typeof window !== "undefined" && (
+              <DashboardNavigationMenu
+                lstNav={props.lstNav}
+                isLogin={props.isLogin}
+              />
+            )}
+          </div>
+        )}
         <div className="block md:hidden">
           {typeof window !== "undefined" && (
             <ResponsiveNavbar isLogin={props.isLogin} toggle={toggle} />

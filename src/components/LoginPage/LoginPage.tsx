@@ -37,8 +37,9 @@ export default function LoginPage() {
             <span
               style={{
                 textShadow: "0 0 15px rgba(0, 0, 0, 1)",
+                lineHeight: "1.1",
               }}
-              className="text-[7rem] xs:text-[6rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-64 xs:top-52  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
+              className="xs:text-[5rem] px-[15px] text-[7rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-64 xs:top-52  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
             >
               Welcome to DCP
             </span>

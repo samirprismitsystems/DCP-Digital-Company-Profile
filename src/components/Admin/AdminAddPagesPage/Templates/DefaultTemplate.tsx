@@ -10,6 +10,7 @@ const Editor = dynamic(() => import("@/common/Editor/Editor"), {
 
 export default function DefaultTemplate() {
   const metaImage = useContext(TemplateContextApi)?.meta_image;
+  console.log(metaImage, "metaImage");
   return (
     <>
       <TextField

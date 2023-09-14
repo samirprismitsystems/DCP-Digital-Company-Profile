@@ -69,13 +69,14 @@ export default function ForgotPasswordPage() {
             <span
               style={{
                 textShadow: "0 0 15px rgba(0, 0, 0, 1)",
+                lineHeight: "1.1",
               }}
-              className="text-[7rem] xs:text-[6rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-52 xs:top-52  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
+              className="xs:text-[5rem] px-[15px] md:text-[7rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-52 xs:top-52 xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
             >
               Welcome to DCP
             </span>
           </div>
-          <div className="relative  z-0 xs:h-[75vh] xl:h-screen w-2/4 xs:w-full bg-white">
+          <div className="relative z-0 xs:h-[75vh] xl:h-screen w-2/4 xs:w-full bg-white">
             <div className="w-full xs:h-[50vh] xl:h-screen xs:flex lg:block h-full xs:p-8 sm:p-20  md:p-20 xl:flex">
               <div className="w-full h-full xs:h-auto  md:p-20 flex justify-center items-center flex-row">
                 <div className="w-3/4 xs:w-full m-auto">

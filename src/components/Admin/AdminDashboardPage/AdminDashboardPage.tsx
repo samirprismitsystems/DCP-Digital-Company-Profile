@@ -29,7 +29,7 @@ export default function AdminDashboardPage() {
 
   if (!objData) return <PageCircularLoading />;
   return (
-    <div className="tab_title mb-8 -mt-4">
+    <div className="tab_title mb-20 -mt-4">
       <div className="h2">Admin Dashboard</div>
       <div className="container xlOne:max-w-full mt-12">
         <div className="row xl:grid gap-20 grid-cols-4 xs:flex flex-wrap -mr-3 -ml-3 xs:flex-col sm:flex-row justify-center">

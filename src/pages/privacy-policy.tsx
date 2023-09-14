@@ -3,6 +3,7 @@ import DashboardFooter from "@/components/DashboardPage/DashboardFooter/Dashboar
 import DashboardNavbar from "@/components/DashboardPage/DashboardNavbar/DashboardNavbar";
 import { privacyPolicyNavList } from "@/data/DashboardSideBar";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -42,7 +43,10 @@ export default function PrivacyPolicy() {
       <Head>
         <title>{objItem?.page_title || "N/A"}</title>
       </Head>
-      <DashboardNavbar lstNav={privacyPolicyNavList} isLogin={true} />
+      <DashboardNavbar
+        lstNav={privacyPolicyNavList}
+        isLogin={AuthService.isUserLoggedIn() ? false : true}
+      />
       <div className="bg-white min-h-[85vh] h-full">
         <p className="text-center pt-16 py-8 text-5xl font-bold">
           {objItem?.page_title || "N/A"}

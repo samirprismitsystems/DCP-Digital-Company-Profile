@@ -243,6 +243,11 @@ export default function AdminThemeItem() {
                       label="Upload Theme Image"
                       folderPath="themes"
                       isIDNotAvailable={true}
+                      imgPlaceholder={
+                        <div className="placeholder_tex flex items-center justify-center w-full h-full text-center select-none opacity-30">
+                          <h3>Please Upload Theme Image</h3>
+                        </div>
+                      }
                     />
                     <input
                       type="text"

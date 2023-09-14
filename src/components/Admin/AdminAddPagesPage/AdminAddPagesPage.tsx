@@ -76,6 +76,7 @@ export default function AdminAddPagesPage({
         io.append("meta_keywords", data.metaKeywords);
         if (typeof data.metaImage === "object") {
           io.append("meta_image", data.metaImage);
+          io.append("meta_image_name", objPageInfo?.meta_image);
         } else {
           io.append("meta_image_name", data.metaImage);
         }

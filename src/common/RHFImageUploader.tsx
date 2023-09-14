@@ -1,3 +1,4 @@
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useState } from "react";
@@ -32,6 +33,10 @@ export default function RHFImageUploader({
             )}/${folderPath}/${srcPath}`
           : ""
         : srcPath
+        ? `${UPLOAD_IMAGE_URI}/${folderPath}/${srcPath}`
+        : ""
+      : AuthService.isUserAdmin()
+      ? srcPath
         ? `${UPLOAD_IMAGE_URI}/${folderPath}/${srcPath}`
         : ""
       : ""

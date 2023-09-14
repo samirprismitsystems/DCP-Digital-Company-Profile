@@ -1,10 +1,10 @@
 import { faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import LoginFooter from "../LoginPage/LoginFooter/LoginFooter";
 import LoginNavbar from "../LoginPage/LoginNavbar/LoginNavbar";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
-import Image from "next/image";
 
 export default function RegistrationPage() {
   const router = useRouter();
@@ -32,8 +32,9 @@ export default function RegistrationPage() {
             <span
               style={{
                 textShadow: "0 0 15px rgba(0, 0, 0, 1)",
+                lineHeight: "1.1",
               }}
-              className="text-[7rem] xs:text-[6rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-[11rem] xs:top-64  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
+              className="xs:text-[5rem] px-[15px] text-[7rem] xs:text-center font-['Montserrat'] text-white absolute xl:top-40 sm:top-[11rem] xs:top-64  xl:right-8 xs:w-full xs:right-0 font-bold  xl:text-right capitalize z-10"
             >
               Welcome to DCP
             </span>

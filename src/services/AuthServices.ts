@@ -43,7 +43,7 @@ class AuthService {
 
   static isUserLoggedIn() {
     const res = Utils.getItem("isUserLoggedIn");
-    if (res && typeof res === "boolean") {
+    if (res && typeof JSON.parse(res) === "boolean") {
       return res;
     }
 
@@ -76,15 +76,12 @@ class AuthService {
   }
 
   static isUserAdmin() {
-    if (typeof window !== "undefined") {
-      const user = this.getUserType();
-      if (user === USER_TYPE.ADMIN) {
-        return true;
-      } else {
-        return false;
-      }
+    const user = this.getUserType();
+    if (user === USER_TYPE.ADMIN) {
+      return true;
+    } else {
+      return false;
     }
-    return null;
   }
 }
 

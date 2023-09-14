@@ -1,3 +1,4 @@
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
@@ -13,12 +14,16 @@ export default function MobileNavbar({
   lstNavigations,
   redirectPath,
   isLogin,
+  isAdmin,
+  isDashboard,
 }: {
   isOpen: boolean;
   redirectPath?: string;
   lstNavigations: INavigationMenu[]; // Replace 'any' with the actual type
   toggle: () => void;
   isLogin?: boolean;
+  isAdmin?: boolean;
+  isDashboard?: boolean;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isChange, setIsChange] = useState(false);
@@ -70,6 +75,152 @@ export default function MobileNavbar({
     setSelectedIndex(item.id);
     Utils.scrollToView(item.link);
     toggle();
+  };
+
+  const getContent = () => {
+    if (isAdmin) {
+      return (
+        <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
+          <div className="w-full md:block md:w-auto" id="navbar-default">
+            <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(
+                    setSelectedObj({
+                      selectedIndex: 0,
+                      selectedTitle: "profile",
+                    })
+                  );
+                  if (typeof window !== "undefined") {
+                    window.history.replaceState(
+                      `/${redirectPath}/profile`,
+                      "",
+                      `/${redirectPath}/profile`
+                    );
+                  }
+                  dispatch(setRouteIsChanged(true));
+                  toggle();
+                }}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  0 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
+                aria-current="page"
+              >
+                {`Hi, ${AuthService.getUserName()}`}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  Utils.clearStorage();
+                  router.push("/login");
+                  return null;
+                }}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  1 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
+                aria-current="page"
+              >
+                Logout
+              </button>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+
+    if (isDashboard) {
+      return (
+        <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
+          <div className="w-full md:block md:w-auto" id="navbar-default">
+            <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.open(`/${Utils.getPageSlug()}`);
+                  }
+                  toggle();
+                }}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  1 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
+                aria-current="page"
+              >
+                {`Visit Site`}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(
+                    setSelectedObj({
+                      selectedIndex: 0,
+                      selectedTitle: "profile",
+                    })
+                  );
+                  if (typeof window !== "undefined") {
+                    window.history.replaceState(
+                      `/${redirectPath}/profile`,
+                      "",
+                      `/${redirectPath}/profile`
+                    );
+                  }
+                  dispatch(setRouteIsChanged(true));
+                  toggle();
+                }}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  2 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
+                aria-current="page"
+              >
+                {`Hi, ${AuthService.getUserName()}`}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  Utils.clearStorage();
+                  router.push("/login");
+                  return null;
+                }}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  3 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
+                aria-current="page"
+              >
+                Logout
+              </button>
+            </ul>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
+          <div className="w-full md:block md:w-auto" id="navbar-default">
+            <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
+              {lstNavigations &&
+                lstNavigations.map((item: INavigationMenu, index: number) => (
+                  <Link
+                    key={index}
+                    onClick={(event: any) => {
+                      handleNavigationOperation(event, item);
+                    }}
+                    href="#"
+                    className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                      item.id === selectedIndex
+                        ? "text-primary-lightDark"
+                        : "text-white"
+                    }`}
+                    aria-current="page"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+            </ul>
+          </div>
+        </div>
+      );
+    }
   };
 
   useEffect(() => {
@@ -126,30 +277,7 @@ export default function MobileNavbar({
               />
             </svg>
           </button>
-          <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
-            <div className="w-full md:block md:w-auto" id="navbar-default">
-              <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
-                {lstNavigations &&
-                  lstNavigations.map((item: INavigationMenu, index: number) => (
-                    <Link
-                      key={index}
-                      onClick={(event: any) => {
-                        handleNavigationOperation(event, item);
-                      }}
-                      href="#"
-                      className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
-                        item.id === selectedIndex
-                          ? "text-primary-lightDark"
-                          : "text-white"
-                      }`}
-                      aria-current="page"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-              </ul>
-            </div>
-          </div>
+          {getContent()}
         </div>
       )}
     </div>
