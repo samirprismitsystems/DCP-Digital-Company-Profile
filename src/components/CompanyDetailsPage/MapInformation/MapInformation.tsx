@@ -3,6 +3,7 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { ChangeView } from "./ChangeView";
 
 const MapContainer = dynamic(
   () => import("react-leaflet").then((module) => module.MapContainer),
@@ -67,7 +68,6 @@ const MapInformation = (props: IMapInformationProps) => {
       }
     }
   };
-  
 
   useEffect(() => {
     if (props.isChange) {
@@ -99,6 +99,7 @@ const MapInformation = (props: IMapInformationProps) => {
       >
         <Popup>{mapLocation.displayname}</Popup>
       </Marker>
+      <ChangeView coords={[mapLocation.lat, mapLocation.lon]} />
     </MapContainer>
   );
 };

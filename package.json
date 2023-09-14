@@ -37,6 +37,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
     "react-leaflet": "^4.2.1",
+    "react-leaflet-universal": "^2.2.1",
     "react-owl-carousel": "^2.3.3",
     "react-qr-code": "^2.0.12",
     "react-quill": "^2.0.0",
@@ -56,7 +57,7 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
-    "@types/leaflet": "^1.9.3",
+    "@types/leaflet": "^1.9.4",
     "@types/react-animate-on-scroll": "^2.1.5",
     "@types/react-slick": "^0.23.10",
     "autoprefixer": "^10.4.14",
