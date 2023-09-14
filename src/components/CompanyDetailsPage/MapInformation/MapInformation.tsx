@@ -40,6 +40,8 @@ interface IMapInformationProps {
 }
 
 const MapInformation = (props: IMapInformationProps) => {
+  const [forceRender, setForceRender] = useState(false);
+
   const objForm = useFormContext();
   const [mapLocation, setMapLocation] = useState<IMap>({
     lat: props.mapLocation.lat || 21.1875694,
@@ -70,7 +72,7 @@ const MapInformation = (props: IMapInformationProps) => {
   };
 
   useEffect(() => {
-    if (props.isChange) {
+    if (props.isChange || props.mapLocation) {
       setMapLocation({
         lat: props.mapLocation.lat,
         lon: props.mapLocation.lon,
@@ -79,14 +81,21 @@ const MapInformation = (props: IMapInformationProps) => {
       props.setIsChange(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.isChange]);
+  }, [props.isChange, props.mapLocation]);
 
+  useEffect(() => {
+    if (!forceRender) {
+      setForceRender(true);
+    }
+  }, []);
+
+  if (!forceRender) return null;
   return (
     <MapContainer
       center={[mapLocation.lat, mapLocation.lon]}
       zoom={17}
       scrollWheelZoom={true}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "400px", width: "100%" }}
     >
       <TileLayer
         url={`http://{s}.tile.osm.org/{z}/{x}/{y}.png`}
