@@ -31,7 +31,7 @@ export default function DefaultTemplate() {
             <RHFImageUploader
               srcPath={metaImage}
               isIDNotAvailable={true}
-              savePath={`metaimgoriginal`}
+              savePath={`metaImage`}
               isRounded={true}
               label="Select Meta Image"
               folderPath="metaimgoriginal"
