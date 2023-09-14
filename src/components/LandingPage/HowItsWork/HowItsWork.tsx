@@ -14,7 +14,7 @@ export default function HowItsWork() {
   const steps: ILandingPageCardSteps[] = JSON.parse(pageDetails.steps);
 
   return (
-    <div className="container">
+    <div className="container not-sr-only">
       {steps && steps.length > 0 && (
         <section className="mb-16">
           <div className="container md:px-0 px-5 xs:pt-16 sm:py-44 mx-auto">
@@ -76,7 +76,7 @@ export default function HowItsWork() {
                 {pageDetails.cardtitle2 || "N/A"}
               </h1>
               <div
-                className="text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4 custom-list-style"
+                className="custom-list-style text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4"
                 dangerouslySetInnerHTML={{ __html: pageDetails.carddesc2 }}
               ></div>
             </MainScrollAnimation>

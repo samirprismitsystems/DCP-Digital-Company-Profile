@@ -106,6 +106,7 @@ export default function Dashboard() {
     },
   ];
 
+  
   const loadData = async () => {
     try {
       setIsLoading(true);

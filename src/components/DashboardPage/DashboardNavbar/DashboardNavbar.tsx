@@ -1,12 +1,13 @@
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { lstUserResponsiveNavbar } from "@/data/DashboardSideBar";
-import { lstDashboardNavigationMenu } from "@/data/NavigationMenu";
+import AuthService from "@/services/AuthServices";
+import Utils from "@/services/Utils";
 import { useAppDispatch } from "@/services/store/hooks/hooks";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
 import { setSelectedObj } from "@/services/store/slices/dashboardSlice";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import DashboardNavigationMenu from "./DashboardNavigationMenu";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
 export default function DashboardNavbar(props: {
@@ -64,22 +65,51 @@ export default function DashboardNavbar(props: {
           <span className="self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
             DCP
           </span>
-          {/* 
-          {router.pathname.startsWith("/dashboard") &&
-            !Utils.getCompanyID() && (
-              <span className="ml-8 text-center text-red-600 text-3xl font-medium">
-                -- Please setup company details first.
-              </span>
-            )} */}
         </button>
-
-        <div className="hidden md:block">
-          {typeof window !== "undefined" && (
-            <DashboardNavigationMenu
-              lstNav={props.lstNav || lstDashboardNavigationMenu}
-              isLogin={props.isLogin}
-            />
-          )}
+        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+          <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
+            <Link href={`/${Utils.getPageSlug()}`} target="_blank">
+              <button
+                type="button"
+                className={`text-[2.0rem] block px-2 py-3  text-secondary-main font-[500]`}
+              >
+                Visit Site
+              </button>
+            </Link>
+            <button
+              type="button"
+              className={`text-[2.0rem] block px-2 py-3  text-secondary-main font-[500]`}
+              onClick={(event: any) => {
+                dispatch(
+                  setSelectedObj({
+                    selectedIndex: 0,
+                    selectedTitle: "profile",
+                  })
+                );
+                dispatch(setRouteIsChanged(true));
+                if (typeof window !== "undefined") {
+                  window.history.replaceState(
+                    "proile",
+                    "",
+                    `/admindashboard/profile`
+                  );
+                }
+              }}
+            >
+              Hi, {AuthService.getUserName()}
+            </button>
+            <li>
+              <button
+                className="border py-2 px-9 btnHoverEffect  text-white block  text-center"
+                onClick={() => {
+                  Utils.clearStorage();
+                  router.push("/login");
+                }}
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
         <div className="block md:hidden">
           {typeof window !== "undefined" && (

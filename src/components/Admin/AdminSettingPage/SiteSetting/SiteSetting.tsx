@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -20,6 +21,7 @@ import SiteSettingImageUploader from "./SiteSettingImageUploader";
 import SiteSettingTextField from "./SiteSettingTextField";
 
 export default function SiteSetting() {
+  const router = useRouter();
   const [objSiteSetting, setObjSiteSetting] = useState<ISiteSettingState>();
   const objForm = useForm({
     defaultValues: {
@@ -92,9 +94,7 @@ export default function SiteSetting() {
       const res = await ApiService.saveAdminSiteSetting(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
-        if (typeof window !== "undefined") {
-          window.location.reload();
-        }
+        router.reload();
         return null;
       }
       throw new Error(res.message);

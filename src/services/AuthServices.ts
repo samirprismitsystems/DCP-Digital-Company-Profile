@@ -8,13 +8,17 @@ const LOGIN_USER_TYPE_KEY = "DIGITALCOMPANYPROFILE";
 
 class AuthService {
   static setLoginUserData(data: ILoginUser) {
-    Utils.setItem("userType", data.type);
-    Utils.setItem("userEmail", data.email_id);
-    Utils.setItem("userName", data.first_name);
-    Utils.setItem("siteTitle", "Admin Dashboard");
-    Utils.setItem("isUserLoggedIn", true);
+    if (data) {
+      Utils.setItem("userType", data.type);
+      Utils.setItem("userEmail", data.email_id);
+      Utils.setItem("userName", data.first_name);
+      Utils.setItem("siteTitle", "Admin Dashboard");
+      Utils.setItem("isUserLoggedIn", true);
 
-    return true;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   static setLocalUserInformation(data: ICompanyDetails) {
