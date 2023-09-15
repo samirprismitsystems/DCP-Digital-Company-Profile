@@ -1,9 +1,7 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareHeroSection() {
   const objCompany = useContext(ThemeContextApi).company;
@@ -11,7 +9,7 @@ export default function HomeCareHeroSection() {
   return (
     <>
       <div
-        className="section-1 xs:mb-[30vh] sm:mb-10 bg-white py-8 rounded-3xl border border-solid border-homeCareTheme-opacityBorder"
+        className="section-1 xs:mb-[7vh] md:mb-[30vh] sm:mb-10 bg-white py-8 rounded-3xl border border-solid border-homeCareTheme-opacityBorder"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,128,0.2)",
         }}
@@ -31,9 +29,9 @@ export default function HomeCareHeroSection() {
             </div>
           </div>
 
-          <h5 className="head6 text-center">{objCompany.company_name}</h5>
+          <h5 className="head6 text-center">{objCompany.company_name || "N/A"}</h5>
           <h5 className="link_title font-bold homecarefont">
-            {objCompany.business_segment}
+            {objCompany.business_segment || "N/A"}
           </h5>
         </div>
       </div>

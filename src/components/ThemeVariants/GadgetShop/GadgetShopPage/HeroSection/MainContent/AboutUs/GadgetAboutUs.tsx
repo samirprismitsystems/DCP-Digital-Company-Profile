@@ -1,8 +1,7 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { useContext } from "react";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "./GetGadgetHeader";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function GadgetAboutUs() {
   const objCompany = useContext(ThemeContextApi).company;
@@ -21,7 +20,7 @@ export default function GadgetAboutUs() {
             <strong>Since {Utils.getYear(objCompany.established_in)}</strong>
           </p>
           <p className="xs:text-[2rem] md:text-[1.6rem] mt-6 text-center gadgetfontfamily">
-            {objCompany.company_desc}
+            {objCompany.company_desc || "N/A"}
           </p>
         </div>
       </div>

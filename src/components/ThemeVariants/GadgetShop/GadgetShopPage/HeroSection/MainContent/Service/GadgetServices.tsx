@@ -12,22 +12,17 @@ export default function GadgetServices() {
   const lstService = useContext(ThemeContextApi).service;
 
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
-  const [slidesToScroll, setSlidesToScroll] = useState<number>(1);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 620) {
         setSlidesToShow(1);
-        setSlidesToScroll(1);
       } else if (window.innerWidth < 950) {
         setSlidesToShow(2);
-        setSlidesToScroll(1);
       } else if (window.innerWidth < 2000) {
         setSlidesToShow(3);
-        setSlidesToScroll(1);
       } else {
         setSlidesToShow(1);
-        setSlidesToScroll(1);
       }
     };
 
@@ -80,10 +75,10 @@ export default function GadgetServices() {
                 </div>
                 <div className="services-info text-left">
                   <h4 className="services-title titleClr text-black text-[2.2rem] font-medium">
-                    {item.service_name}
+                    {item.service_name || "N/A"}
                   </h4>
                   <p className="services-description text-[1.6rem] text-black">
-                    {item.service_desc}
+                    {item.service_desc || "N/A"}
                   </p>
                 </div>
               </div>

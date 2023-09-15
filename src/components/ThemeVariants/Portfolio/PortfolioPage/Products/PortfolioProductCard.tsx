@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Link from "next/link";
 
@@ -8,10 +9,9 @@ export default function PortfolioProductCard(objData: {
   description: string;
   price: string;
 }) {
-
   return (
     <div className="xs:w-full px-4">
-    <div className="product-box rounded-3xl border-[1px] border-solid border-portfolioTheme-primary mb-6 overflow-hidden">
+      <div className="product-box rounded-3xl border-[1px] border-solid border-portfolioTheme-primary mb-6 overflow-hidden">
         <div className="product-img text-center h-96 mb-4 min-h-[2.3rem] bg-[#f5f5f5]">
           <img
             alt="product-img"
@@ -19,7 +19,9 @@ export default function PortfolioProductCard(objData: {
             width="156"
             height="190"
             className="w-full h-full object-cover align-middle text-center"
-            src={`${UPLOAD_IMAGE_URI}/${objData.id}/product/${objData.path}`}
+            src={`${UPLOAD_IMAGE_URI}/${
+              objData.id || Utils.getCompanyID()
+            }/product/${objData.path}`}
           />
         </div>
         <div className="product-info text-center py-4 px-4">

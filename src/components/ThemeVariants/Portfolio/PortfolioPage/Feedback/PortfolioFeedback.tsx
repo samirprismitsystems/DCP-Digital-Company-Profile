@@ -1,13 +1,16 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
+import { setRedThemeDataChanged } from "@/services/store/slices/commonSlice";
 import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import GetHeader from "../common/GetHeader";
 import GetPortfolioFeedBackReview from "./GetPortfolioFeedBackReview";
 import Ratting from "./Ratting";
 
 export default function PortfolioFeedback() {
   const lstTestimonial = useContext(ThemeContextApi).testimonial;
+  const dispatch = useDispatch();
   const [objFeedback, setObjFeedback] = useState({
     clientName: "",
     emailAddress: "",
@@ -30,6 +33,7 @@ export default function PortfolioFeedback() {
 
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
+        dispatch(setRedThemeDataChanged(true));
         return null;
       }
 
@@ -50,9 +54,11 @@ export default function PortfolioFeedback() {
     <div className="feedback-block">
       <GetHeader title="Feedback" />
       <div className="py-8 lg:grid lg:grid-cols-2 lg:gap-8">
-        <div>
-          <GetPortfolioFeedBackReview lstTestimonial={lstTestimonial} />
-        </div>
+        {lstTestimonial && (
+          <div className="max-h-[550px] h-auto p-8  overflow-auto">
+            <GetPortfolioFeedBackReview lstTestimonial={lstTestimonial} />
+          </div>
+        )}
         <div className="content-box feedback-box rounded-[2rem] bg-white  overflow-hidden ">
           <h3 className="c-text text-center text-[3rem] pb-4 pt-6 font-bold text-portfolioTheme-titleColor">
             Give Your Feedback

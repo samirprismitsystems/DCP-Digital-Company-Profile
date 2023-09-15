@@ -11,7 +11,7 @@ export default function GetPortfolioFeedBackReview({
   return lstTestimonial.map((item: ITestimonial, index: number) => (
     <div className="pt-4 w-full flex flex-col items-start c-text" key={index}>
       <h5 className="text-portfolioTheme-primary c-text text-4xl">
-        {item.client_name}
+        {item.client_name || "N/A"}
       </h5>
       <div className="flex flex-wrap justify-center items-center">
         {item.ratting && parseInt(item.ratting) > 1 ? (
@@ -52,7 +52,7 @@ export default function GetPortfolioFeedBackReview({
         }}
         className="text-3xl title-font font-medium text-gray-900 mt-4 mb-2"
       >
-        {item.comment}
+        {item.comment || "N/A"}
       </h2>
       <div
         className={`flex items-center flex-wrap pb-4 mb-4 ${

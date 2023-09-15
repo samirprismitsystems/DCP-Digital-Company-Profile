@@ -12,22 +12,17 @@ export default function GadgetProducts() {
   const lstProduct = useContext(ThemeContextApi).product;
 
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
-  const [slidesToScroll, setSlidesToScroll] = useState<number>(1);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 620) {
         setSlidesToShow(1);
-        setSlidesToScroll(1);
       } else if (window.innerWidth < 950) {
         setSlidesToShow(2);
-        setSlidesToScroll(1);
       } else if (window.innerWidth < 2000) {
         setSlidesToShow(3);
-        setSlidesToScroll(1);
       } else {
         setSlidesToShow(1);
-        setSlidesToScroll(1);
       }
     };
 
@@ -49,7 +44,7 @@ export default function GadgetProducts() {
     autoplayTimeout: 3000,
     smartSpeed: 1100,
   };
-  
+
   return (
     <>
       <div className="about-block" id="product">
@@ -79,15 +74,15 @@ export default function GadgetProducts() {
                 </div>
                 <div className="product-info text-center">
                   <h4 className="product-title gadgetfontfamily text-gadgetTheme-primary font-normal text-[2.2rem]">
-                    {item.product_name}
+                    {item.product_name || "N/A"}
                   </h4>
                   <p className="product-description text-[1.6rem] gadgetfontfamily">
-                    {item.product_desc}
+                    {item.product_desc || "N/A"}
                   </p>
                   <div className="px-6 product-action inline-flex justify-between items-center max-w-[37.5rem]  w-full  mt-4">
                     {" "}
                     <span className="text-[2rem] text-gadgetTheme-primary inline-block  product-price gadgetfontfamily">
-                      Rs. {item.product_price}
+                      Rs. {item.product_price || "N/A"}
                     </span>{" "}
                     <a
                       href="#"

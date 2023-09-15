@@ -1,3 +1,6 @@
+import { ThemeContextApi } from "@/pages/[slug]";
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
   faEnvelope,
@@ -9,15 +12,62 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import GetStoreContactInfo from "./GetStoreContactInfo";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function StoreContactsInfo() {
   const objCompany = useContext(ThemeContextApi).company;
+
+  function downloadToFile(content: any, filename: string, contentType: string) {
+    if (typeof window !== "undefined") {
+      const a = document.createElement("a");
+      const file = new Blob([content], { type: contentType });
+
+      a.href = URL.createObjectURL(file);
+      a.download = filename;
+      a.click();
+
+      URL.revokeObjectURL(a.href);
+    }
+  }
+
+  const onSaveCardClick = () => {
+    const makeVCard = () => {
+      const vCardVersion = "VERSION:4.0";
+      const vCardName = `FN:${objCompany.company_name}`;
+      const vCardTitle = `TITLE:${objCompany.business_segment}`;
+      const vCardTel = `TEL;TYPE=WORK,VOICE:${objCompany.company_contact}`;
+      const vCardTelCell = `TEL;TYPE=CELL,VOICE:${objCompany.company_alternate_contact}`;
+      const vCardEmail = `EMAIL;TYPE=WORK:${objCompany.company_email}`;
+      const vCardAddress = `ADR;TYPE=WORK:;;${objCompany.address};;;`;
+      const vCardUrl = `URL:${window.location.href}`;
+      const vCardImage = `PHOTO;VALUE=uri:${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/${
+        objCompany.company_logo
+      }`;
+      const vCardTimeStamp = `REV:${new Date().toISOString()}`;
+
+      const vcard = `BEGIN:VCARD
+${vCardVersion}
+${vCardName}
+${vCardTitle}
+${vCardTel}
+${vCardTelCell}
+${vCardEmail}
+${vCardAddress}
+${vCardUrl}
+${vCardImage}
+${vCardTimeStamp}
+END:VCARD`;
+
+      downloadToFile(vcard, "vcard.vcf", "text/vcard");
+    };
+
+    makeVCard();
+  };
+
   return (
     <div className="container store-contact">
       <div className="flex  flex-wrap xs:justify-center sm:justify-between xl:justify-center -mx-3 gadgetfontfamily text-gadgetTheme-text">
         <GetStoreContactInfo
-          href={`tel:${objCompany.company_contact}`}
+          isButton={true}
           icon={
             <FontAwesomeIcon
               icon={faPhone}
@@ -69,11 +119,11 @@ export default function StoreContactsInfo() {
             />
           }
           bgColor="rgba(0, 126, 229, 0.2)"
-          title="Mail"
+          title="Share"
         />
         <GetStoreContactInfo
-          href={`/nitin_patel.vcf`}
-          isDownload={true}
+          isButton={true}
+          onClick={onSaveCardClick}
           icon={
             <FontAwesomeIcon
               icon={faSave}

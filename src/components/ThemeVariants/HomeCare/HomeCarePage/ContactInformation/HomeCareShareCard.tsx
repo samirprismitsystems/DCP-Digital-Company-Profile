@@ -12,8 +12,11 @@ export default function HomeCareShareCard() {
 
   const onSave = (e: any) => {
     e.preventDefault();
-    let redirectLink = `https://api.whatsapp.com/send?phone=${objUser.mobile}&text='hello i am ${objUser.name}'`;
-    router.push(redirectLink);
+    let redirectLink = `https://api.whatsapp.com/send?phone=+91${objUser.mobile}&text='hello I am ${objUser.name}'`;
+    if (typeof window !== "undefined") {
+      window.open(redirectLink);
+    }
+    return null;
   };
 
   return (
@@ -49,7 +52,7 @@ export default function HomeCareShareCard() {
           </div>
           <div className="form-group mb-5 text-center">
             <input
-              type="text"
+              type="number"
               className="form-control-input rounded-xl p-6 text-[14px]  text-homeCareTheme-textColor w-full font-medium homecarefont whitespace-normal break-words focus:outline focus:border-[1px] focus:border-solid focus:border-homeCareTheme-primary placeholder:text-[#757575]"
               style={{
                 border: "2px solid #ced4da",
@@ -58,10 +61,13 @@ export default function HomeCareShareCard() {
               name="mobile"
               value={objUser.mobile || ""}
               onChange={(e: any) => {
-                SetObjUser((prevState: any) => ({
-                  ...prevState,
-                  mobile: e.target.value,
-                }));
+                const userInput = e.target.value;
+                if (userInput.length <= 10) {
+                  SetObjUser((prevState: any) => ({
+                    ...prevState,
+                    mobile: e.target.value,
+                  }));
+                }
               }}
             ></input>
           </div>

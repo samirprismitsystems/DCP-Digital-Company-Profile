@@ -1,4 +1,11 @@
+import { ThemeContextApi } from "@/pages/[slug]";
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
+import { useContext } from "react";
+
 export default function GadgetHeroSection() {
+  const objCompany = useContext(ThemeContextApi).company;
+
   return (
     <section
       id="home"
@@ -10,12 +17,14 @@ export default function GadgetHeroSection() {
             <div className="store-logo rounded-50  xs:w-[90px] xs:h-[90px] bg-white flex justify-center items-center mx-auto mt-0 xs:mb-6 md:mb-8 text-center text-white gadgetfontfamily ">
               {" "}
               <img
-                src="/assets/gadgetShop/logo.png"
+                src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
+                  objCompany.company_logo
+                }`}
                 width="62"
                 height="49"
                 alt="logo"
                 title="logo-img"
-                className="img-responsive h-auto max-w-full align-middle md:w-[70px] md:h-[70px] xlTwo:w-auto xlTwo:h-auto"
+                className="h-auto img-responsive max-w-full align-middle"
               />{" "}
             </div>
           </div>

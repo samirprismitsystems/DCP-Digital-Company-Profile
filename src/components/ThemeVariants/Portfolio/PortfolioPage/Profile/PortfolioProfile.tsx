@@ -1,4 +1,5 @@
 import { ThemeContextApi } from "@/pages/[slug]";
+import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useContext } from "react";
 
@@ -31,9 +32,11 @@ export default function PortfolioProfile() {
               <div className="profile-img w-72 h-72 rounded-50 bg-white flex justify-center items-center mx-auto overflow-hidden border-[1rem] border-solid border-white absolute top-[70%] transform transform-[translateY(-20%)] left-0 right-0 shadow-md">
                 {" "}
                 <img
-                  src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id}/logo/${objCompany.company_logo}`}
+                  src={`${UPLOAD_IMAGE_URI}/${
+                    objCompany.company_id || Utils.getCompanyID()
+                  }/logo/${objCompany.company_logo}`}
                   alt="logo"
-                  title="logo-img"
+                  title="logo_img.webp"
                   className="img-fit w-full h-full object-cover object-center align-middle"
                 />{" "}
               </div>

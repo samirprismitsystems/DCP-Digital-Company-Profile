@@ -10,6 +10,7 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useContext } from "react";
 import QRCode from "react-qr-code";
 
@@ -52,17 +53,29 @@ export default function PortfolioFollowUs() {
         <div className="social-links pt-6 flex flex-wrap xs:justify-center md:justify-center items-center c-text">
           {lstSocial.map((item) => {
             const iconComponent = iconMapping[item.socialmedia_logo];
-            return (
-              <a
+            return item.link ? (
+              <Link
                 key={item.social_id}
-                href="#!"
+                href={item.link || "#"}
+                target="_blank"
                 className={`${item.socialmedia_color} rounded-2xl social-link fb-icon mx-2 my-4 w-20 h-20 text-center text-white bg-portfolioTheme-primary flex justify-center items-center`}
               >
                 <FontAwesomeIcon
                   className="text-5xl font-bold "
                   icon={iconComponent}
                 />
-              </a>
+              </Link>
+            ) : (
+              <button
+                type="button"
+                key={item.social_id}
+                className={`${item.socialmedia_color} rounded-2xl social-link fb-icon mx-2 my-4 w-20 h-20 text-center text-white bg-portfolioTheme-primary flex justify-center items-center`}
+              >
+                <FontAwesomeIcon
+                  className="text-5xl font-bold "
+                  icon={iconComponent}
+                />
+              </button>
             );
           })}
         </div>

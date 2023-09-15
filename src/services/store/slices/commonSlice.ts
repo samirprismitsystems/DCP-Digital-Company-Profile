@@ -5,6 +5,7 @@ interface IInitialState {
   objData: any;
   routeIsChanged: boolean;
   isProfileHasBeenChanged: boolean;
+  isRedThemeDataChanged: boolean;
 }
 
 const initialState: IInitialState = {
@@ -12,6 +13,7 @@ const initialState: IInitialState = {
   objData: null,
   routeIsChanged: false,
   isProfileHasBeenChanged: false,
+  isRedThemeDataChanged: false,
 };
 
 export const commonSlice = createSlice({
@@ -33,9 +35,17 @@ export const commonSlice = createSlice({
     setIsProfileHasBeenChange: (state, action: PayloadAction<any>) => {
       state.isProfileHasBeenChanged = action.payload;
     },
+
+    setRedThemeDataChanged: (state, action: PayloadAction<any>) => {
+      state.isRedThemeDataChanged = action.payload;
+    },
   },
 });
 
-export const { setCompanyID, setRouteIsChanged, setIsProfileHasBeenChange } =
-  commonSlice.actions;
+export const {
+  setCompanyID,
+  setRouteIsChanged,
+  setIsProfileHasBeenChange,
+  setRedThemeDataChanged,
+} = commonSlice.actions;
 export default commonSlice.reducer;

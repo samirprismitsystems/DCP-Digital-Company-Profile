@@ -5,9 +5,13 @@ import PortfolioPage from "@/components/ThemeVariants/Portfolio/PortfolioPage/Po
 import ApiService from "@/services/ApiServices";
 import { THEME_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
+import { useAppSelector } from "@/services/store/hooks/hooks";
+import { setRedThemeDataChanged } from "@/services/store/slices/commonSlice";
+import { RootState } from "@/services/store/store";
 import { IPortfolioInfo } from "@/types/themes/portfolio";
 import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import PageNotFound from "./404";
 
 export const ThemeContextApi = createContext<IPortfolioInfo>(
@@ -15,13 +19,19 @@ export const ThemeContextApi = createContext<IPortfolioInfo>(
 );
 
 export default function UserViewSection() {
-  const [result, setResult] = useState<IPortfolioInfo>();
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [result, setResult] = useState<IPortfolioInfo>({} as IPortfolioInfo);
   const [themeID, setThemeID] = useState<number | undefined>(undefined);
+  const isRedThemeDataChanged = useAppSelector(
+    (store: RootState) => store.common.isRedThemeDataChanged
+  );
   const router = useRouter();
   const slug = router.query.slug;
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
       if (slug) {
         const res: IPortfolioInfo = await ApiService.getWebsiteDetails(slug);
         if (!res.error) {
@@ -34,12 +44,21 @@ export default function UserViewSection() {
       }
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     loadData();
   }, [router.query.slug]);
+
+  useEffect(() => {
+    if (isRedThemeDataChanged) {
+      loadData();
+      dispatch(setRedThemeDataChanged(false));
+    }
+  }, [isRedThemeDataChanged]);
 
   useEffect(() => {
     loadData();
@@ -63,7 +82,7 @@ export default function UserViewSection() {
     }
   };
 
-  if (!result) return <PageCircularLoading />;
+  if (isLoading) return <PageCircularLoading />;
   return (
     <ThemeContextApi.Provider value={result}>
       {getTheme()}

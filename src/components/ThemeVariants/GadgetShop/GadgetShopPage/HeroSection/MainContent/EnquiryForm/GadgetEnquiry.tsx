@@ -2,6 +2,7 @@ import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
 import GadgetGiveFeedback from "../Feedback/GadgetGiveFeedback";
 
 export default function GadgetEnquiry() {
+  
   return (
     <div className="about-block pb-16" id="about-us">
       <GetGadgetHeader title="Enquiry Form" />

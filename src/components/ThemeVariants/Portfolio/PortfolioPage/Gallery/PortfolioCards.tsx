@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 
 export default function PortfolioCards({ path, id }: any) {
@@ -10,7 +11,9 @@ export default function PortfolioCards({ path, id }: any) {
             title="gallery-img"
             id="upload-image"
             className="w-full max-w-full h-full block object-cover object-center align-middle"
-            src={`${UPLOAD_IMAGE_URI}/${id}/portfolio/${path}`}
+            src={`${UPLOAD_IMAGE_URI}/${
+              id || Utils.getCompanyID()
+            }/portfolio/${path}`}
           />
         </div>
       </div>

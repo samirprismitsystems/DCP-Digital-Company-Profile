@@ -12,22 +12,17 @@ export default function GadgetGallery() {
   const lstPortfolio = useContext(ThemeContextApi).portfolio;
 
   const [slidesToShow, setSlidesToShow] = useState<number>(1);
-  const [slidesToScroll, setSlidesToScroll] = useState<number>(1);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 620) {
         setSlidesToShow(1);
-        setSlidesToScroll(1);
       } else if (window.innerWidth < 950) {
         setSlidesToShow(2);
-        setSlidesToScroll(1);
       } else if (window.innerWidth < 2000) {
         setSlidesToShow(3);
-        setSlidesToScroll(1);
       } else {
         setSlidesToShow(1);
-        setSlidesToScroll(1);
       }
     };
 

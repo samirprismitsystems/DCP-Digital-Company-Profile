@@ -252,6 +252,15 @@ export default function CompanyDetailsPage() {
     }
   }, [objData]);
 
+  if (objForm.formState.errors.phoneNumber) {
+    Utils.showErrorMessage(objForm.formState.errors.phoneNumber?.message || "");
+  }
+
+  if (objForm.formState.errors.alternatePhoneNumber) {
+    Utils.showErrorMessage(
+      objForm.formState.errors.alternatePhoneNumber?.message || ""
+    );
+  }
   return (
     <>
       <div className="tab_titles mb-8 -mt-4">

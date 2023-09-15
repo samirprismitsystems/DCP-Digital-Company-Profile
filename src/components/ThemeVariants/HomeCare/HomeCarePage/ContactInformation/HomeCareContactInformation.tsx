@@ -1,3 +1,4 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import {
   faEnvelope,
@@ -7,8 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareContactInformation() {
   const objCompany = useContext(ThemeContextApi).company;
@@ -35,7 +34,9 @@ export default function HomeCareContactInformation() {
               />
             </div>
             <div className="per_text xs:text-3xl xl:text-2xl ml-8">
-              {objCompany.company_contact}
+              {objCompany.company_contact
+                ? `+91${objCompany.company_contact}`
+                : "N/A"}
             </div>
           </a>
           <hr />
@@ -54,7 +55,7 @@ export default function HomeCareContactInformation() {
               />
             </div>
             <div className="per_text xs:text-3xl xl:text-2xl ml-8">
-              {objCompany.company_email}
+              {objCompany.company_email || "N/A"}
             </div>
           </a>
           <hr />
@@ -94,7 +95,9 @@ export default function HomeCareContactInformation() {
                 icon={faMapMarkerAlt}
               />
             </div>
-            <div className="per_text xs:text-3xl xl:text-2xl ml-8">Surat</div>
+            <div className="per_text xs:text-3xl xl:text-2xl ml-8">
+              {objCompany.address || "N/A"}
+            </div>
           </a>
         </div>
       </div>

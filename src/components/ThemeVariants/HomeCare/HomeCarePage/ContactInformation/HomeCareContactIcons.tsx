@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { HomeCareContextApi } from "../HomeCarePage";
 import { ThemeContextApi } from "@/pages/[slug]";
+import Link from "next/link";
 
 export default function HomeCareContactIcons() {
   const objCompany = useContext(ThemeContextApi).company;
@@ -25,10 +26,7 @@ export default function HomeCareContactIcons() {
       >
         <div className="row wrap flex flex-nowrap text-center px-4">
           <div className="col w-full max-w-full text-center">
-            <a
-              href={`tel:[${objCompany.company_contact}]`}
-              className="per_link"
-            >
+            <button type="button" className="per_link">
               {" "}
               <FontAwesomeIcon
                 className="inline-flex xs:h-12 xl:h-10 p-4 rounded-50  bg-[#e5ebf1] xs:w-12 xl:w-10 justify-center items-center text-homeCareTheme-primary text-center"
@@ -37,11 +35,11 @@ export default function HomeCareContactIcons() {
               <span className="homecarefont text-[12px] block font-normal text-homeCareTheme-textColor pt-4">
                 Call
               </span>{" "}
-            </a>
+            </button>
           </div>
           <div className="col w-full max-w-full text-center">
-            <a
-              href={`https://api.whatsapp.com/send?phone=${objCompany.company_contact}&text=hi`}
+            <Link
+              href={`https://api.whatsapp.com/send?phone=+91${objCompany.company_contact}&text=hi`}
               className="per_link"
               target="_blank"
             >
@@ -53,10 +51,10 @@ export default function HomeCareContactIcons() {
               <span className="homecarefont text-[12px] block font-normal text-homeCareTheme-textColor pt-4">
                 WhatsApp
               </span>{" "}
-            </a>
+            </Link>
           </div>
           <div className="col w-full max-w-full text-center">
-            <a
+            <Link
               href={`mailto:${objCompany.company_email}?subject=Enquiry&body=hi`}
               className="per_link"
             >
@@ -68,10 +66,10 @@ export default function HomeCareContactIcons() {
               <span className="homecarefont text-[12px] block font-normal text-homeCareTheme-textColor pt-4">
                 Mail Us
               </span>{" "}
-            </a>
+            </Link>
           </div>
           <div className="col w-full max-w-full text-center">
-            <a
+            <Link
               href="https://msng.link/o/?Example=fm"
               target="_blank"
               className="per_link"
@@ -84,7 +82,7 @@ export default function HomeCareContactIcons() {
               <span className="homecarefont text-[12px] block font-normal text-homeCareTheme-textColor pt-4">
                 Website
               </span>{" "}
-            </a>
+            </Link>
           </div>
           <div className="col w-full max-w-full text-center">
             <a

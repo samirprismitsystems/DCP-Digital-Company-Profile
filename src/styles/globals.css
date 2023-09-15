@@ -226,6 +226,9 @@ select {
 .social-link.tumblr-icon {
   background-color: #34465d;
 }
+.social-link.whats-icon {
+  background-color: #25d366;
+}
 
 label span[data-v-1dcf67d3] {
   display: flex;

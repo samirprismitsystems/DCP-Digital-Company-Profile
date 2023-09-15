@@ -31,7 +31,7 @@ export default function HomeCarePage() {
         <title>Home Care Products</title>
       </Head>
         <div className="homeCareBody pl-0 pr-0 pb-0 w-full bg-homeCareTheme-primary">
-          <div className="main-container xs:pt-[30vh] xlOne:pt-[10vh] max-w-full xs:w-[500px] md:w-[62%] rounded-tl-3xl rounded-tr-3xl rounded-bl-none rounded-br-none m-auto relative py-0 px-7">
+          <div className="main-container xs:pt-[10vh] md:pt-[30vh] xlOne:pt-[10vh] max-w-full xs:w-[500px] md:w-[62%] rounded-tl-3xl rounded-tr-3xl rounded-bl-none rounded-br-none m-auto relative py-0 px-7">
             <div id="home">
               <HomeCareHeroSection />
               <HomeCareContactIcons />
@@ -56,9 +56,6 @@ export default function HomeCarePage() {
               <HomeCareFooter />
             </div>
           </div>
-          {/* <div className="xs:visible sm:hidden max-w-full mx-auto  rounded-bl-none rounded-br-none sticky  bottom-0 z-0 w-full bg-[#fff] rounded-[20px] text-center">
-            <HomeCareFooter />
-          </div> */}
         </div>
     </>
   );

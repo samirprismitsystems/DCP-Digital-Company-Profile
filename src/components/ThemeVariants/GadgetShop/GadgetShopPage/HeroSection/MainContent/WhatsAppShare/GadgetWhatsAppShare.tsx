@@ -20,7 +20,7 @@ export default function GadgetWhatsAppShare() {
             e.preventDefault();
             if (mobile)
               window.open(
-                `https://api.whatsapp.com/send/?phone=${mobile}&text=Hi`,
+                `https://api.whatsapp.com/send/?phone=+91${mobile}&text=Hi`,
                 "_blank"
               );
 

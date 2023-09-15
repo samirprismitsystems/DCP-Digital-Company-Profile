@@ -1,17 +1,20 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import {
   faBank,
   faHashtag,
   faMoneyCheck,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
 import HomeCarePaymentInfo from "./HomeCarePaymentInfo";
 
 export default function HomeCarePaymentDetails() {
+  const objPayment = useContext(ThemeContextApi).paymentinfo;
+
   return (
     <>
       <div
-      id="payment"
+        id="payment"
         className="border border-solid border-homeCareTheme-opacityBorder bg-white rounded-3xl p-5 mb-10"
         style={{
           boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)",
@@ -24,41 +27,41 @@ export default function HomeCarePaymentDetails() {
           <HomeCarePaymentInfo
             icon={faUserCircle}
             label="A/C Name"
-            value={"Rakesh Solanki"}
+            value={objPayment.account_holder_name}
           />
           <HomeCarePaymentInfo
             icon={faHashtag}
             label="A/C Number"
-            value={"Rakesh Solanki"}
+            value={objPayment.bank_account_number}
           />
           <HomeCarePaymentInfo
             icon={faBank}
             label="Bank Name"
-            value={"Rakesh Solanki"}
+            value={objPayment.bank_name}
           />
           <HomeCarePaymentInfo
             icon={faMoneyCheck}
             label="IFSC"
-            value={"Rakesh Solanki"}
+            value={objPayment.bank_ifsc_code}
           />
           <HomeCarePaymentInfo
             isImage={true}
             label="Goggle Pay"
             imagPath="/assets/homecare/gpay.svg"
-            value={"Rakesh Solanki"}
+            value={objPayment.googlepay_number}
           />
           <HomeCarePaymentInfo
             isImage={true}
             label="Phone Pay"
             imagPath="/assets/homecare/phonepe.svg"
-            value={"Rakesh Solanki"}
+            value={objPayment.phonepay_number}
           />
           <HomeCarePaymentInfo
             isImage={true}
             mb={0}
             label="Paytm"
             imagPath="/assets/homecare/paytm.svg"
-            value={"Rakesh Solanki"}
+            value={objPayment.paytm_number}
           />
         </div>
       </div>

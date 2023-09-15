@@ -2,6 +2,8 @@ import HomeCarePaymentInfo from '@/components/ThemeVariants/HomeCare/HomeCarePag
 import { IPaymentOptions } from '@/types/commonTypes';
 
 export default function GadgetBankDetails({ objPayment }: { objPayment :IPaymentOptions}) {
+
+  
   return (
     <div
       id="payment"

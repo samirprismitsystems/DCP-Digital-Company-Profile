@@ -26,6 +26,12 @@ export default function PortfolioContactUs() {
 
       const res = await ApiService.createEnquiry(io);
       if (!res.error) {
+        setObjData({
+          clientName: "",
+          email: "",
+          mobile: "",
+          message: "",
+        });
         Utils.showSuccessMessage(res.message);
         return null;
       }

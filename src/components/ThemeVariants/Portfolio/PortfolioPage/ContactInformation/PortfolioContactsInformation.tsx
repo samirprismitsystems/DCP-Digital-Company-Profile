@@ -19,12 +19,10 @@ export default function PortfolioContactsInformation() {
     >
       <div className="px-4 contacts-section mt-24">
         <div className="md:grid md:grid-cols-3 mb-4 justify-content-center flex flex-wrap justify-center -mx-3 text-portfolioTheme-textColor gap-8">
-          {/* Plates */}
           <div className=" w-full shrink-0">
-            <Link
-              target="_blank"
-              href={`tel:+91${objCompany.company_contact}`}
-              className="contact-link mb-8  rounded-2xl flex items-center bg-whiteSmoke no-underline transition transition-[all .3s linear]"
+            <button
+              type="button"
+              className="w-full contact-link mb-8  rounded-2xl flex items-center bg-whiteSmoke no-underline transition transition-[all .3s linear]"
             >
               <span className="link-icon call-icon w-24 h-24 rounded-3xl bg-portfolioTheme-primary flex items-center justify-center mr-4">
                 <FontAwesomeIcon
@@ -33,9 +31,11 @@ export default function PortfolioContactsInformation() {
                 />
               </span>
               <span className="c-text text-black  text-3xl ml-4">
-                {objCompany.company_contact || "N/A"}
+                {objCompany.company_contact
+                  ? `+91${objCompany.company_contact}`
+                  : "N/A"}
               </span>
-            </Link>
+            </button>
           </div>
           <div className=" w-full shrink-0">
             <Link
@@ -72,8 +72,9 @@ export default function PortfolioContactsInformation() {
             </Link>
           </div>
         </div>
-        {/* Cards */}
       </div>
+
+      {/* contacts card for the more information */}
       <PortfolioContactCards />
     </div>
   );

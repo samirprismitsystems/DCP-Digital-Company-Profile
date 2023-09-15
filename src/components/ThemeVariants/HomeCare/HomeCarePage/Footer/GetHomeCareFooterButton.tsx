@@ -26,7 +26,7 @@ export default function GetHomeCareFooterButton({
           {icon}
         </div>
         <span className="mt-2 text-[14px] homecarefont font-normal  block text-center text-homeCareTheme-textColor  mb-0">
-          {title}
+          {title || "N/A"}
         </span>{" "}
       </button>
     </>

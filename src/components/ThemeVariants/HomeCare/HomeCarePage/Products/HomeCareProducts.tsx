@@ -18,7 +18,7 @@ export default function HomeCareProducts() {
         <h4 className="pt-4 text-[22px] text-center text-black  font-bold mb-6 homecarefont">
           Our Products
         </h4>
-        <div className="homecarefont pt-4 pb-8 px-4 grid xs:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="homecarefont pt-4 pb-8 px-4 grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {lstProduct.map((item: any) => (
             <div
               key={item.product_id}
@@ -34,10 +34,10 @@ export default function HomeCareProducts() {
                 />
               </div>
               <p className="para-1 homecarefont text-black font-bold mb-2">
-                {item.product_name}
+                {item.product_name || "N/A"}
               </p>
               <p className="para-2 homecarefont font-bold">
-                ₹{item.product_price} /
+                ₹{item.product_price || "N/A"} /
                 <span className="font-normal homecarefont text-homeCareTheme-textColor ml-1 line-through">
                   1800
                 </span>

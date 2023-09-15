@@ -24,8 +24,20 @@ export const companyDetailsFormSchema = yup.object({
   fullName: yup.string().optional(),
   companyID: yup.mixed().optional(),
   businessType: yup.string().optional(),
-  phoneNumber: yup.mixed().optional(),
-  alternatePhoneNumber: yup.mixed().optional(),
+  phoneNumber: yup
+    .string()
+    .optional()
+    .matches(
+      /^[0-9]{10}$/,
+      "Phone number must be a 10-digit number (e.g., 1234567890)"
+    ),
+  alternatePhoneNumber: yup
+    .string()
+    .optional()
+    .matches(
+      /^[0-9]{10}$/,
+      "Alternate phone number must be a 10-digit number (e.g., 1234567890)"
+    ),
   emailID: yup.string().email().optional(),
   houseNumber: yup.string().optional(),
   country: yup.string().optional(),

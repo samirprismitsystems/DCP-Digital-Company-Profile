@@ -19,7 +19,7 @@ export default function GadgetFooter() {
           }}
         >
           <FontAwesomeIcon
-            className={`${item.color} text-[3.3rem] mb-4 opacity-50`}
+            className={`${item.color} text-[2.7rem] mb-4 opacity-50`}
             icon={item.icon}
             style={{
               transition: "all 0.3s linear",

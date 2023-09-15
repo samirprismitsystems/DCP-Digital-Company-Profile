@@ -1,12 +1,9 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
-import Link from "next/link";
 import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareMadeWithLove() {
   const objCompany = useContext(ThemeContextApi).company;
@@ -27,18 +24,13 @@ export default function HomeCareMadeWithLove() {
             />{" "}
             by{" "}
           </span>{" "}
-          <Link href="#" target="_blank">
-            {" "}
-            <Image
-              alt="image.png"
-              className="w-[100px] -mt-[6px] inline-block"
-              src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
-                objCompany.company_logo
-              }`}
-              width={120}
-              height={120}
-            />{" "}
-          </Link>
+          <img
+            alt="image.png"
+            className="w-[100px] -mt-[6px] inline-block"
+            src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
+              objCompany.company_logo
+            }`}
+          />{" "}
         </p>
       </div>
     </>

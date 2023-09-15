@@ -1,9 +1,7 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import Image from "next/image";
 import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function HomeCareServices() {
   const lstService = useContext(ThemeContextApi).service;
@@ -37,7 +35,7 @@ export default function HomeCareServices() {
                   />
                 </div>
                 <h4 className="pb-2 text-homeCareTheme-textColor">
-                  {item.service_name}
+                  {item.service_name || "N/A"}
                 </h4>
               </div>
             </div>

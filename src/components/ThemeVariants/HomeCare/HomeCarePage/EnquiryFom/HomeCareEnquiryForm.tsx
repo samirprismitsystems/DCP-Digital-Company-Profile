@@ -65,7 +65,7 @@ export default function HomeCareEnquiryForm() {
         <h4 className="pt-4 text-[22px] text-center text-black  font-bold mb-6 homecarefont">
           Enquiry Form
         </h4>
-        <div className="homecarefont pt-4 pb-8 px-32">
+        <div className="homecarefont pt-4 pb-8 xs:px-0 sm:px-32">
           <form onSubmit={onSave}>
             <div className="form-group mb-10 ">
               <input
@@ -106,9 +106,12 @@ export default function HomeCareEnquiryForm() {
                 name="name"
                 value={objEnquiry.phone || ""}
                 onChange={(e: any) => {
-                  updateState({
-                    phone: e.target.value,
-                  });
+                  const userInput = e.target.value;
+                  if (userInput.length <= 10) {
+                    updateState({
+                      phone: e.target.value,
+                    });
+                  }
                 }}
               />
             </div>

@@ -1,3 +1,6 @@
+import { ThemeContextApi } from "@/pages/[slug]";
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import {
   faFacebook,
   faTwitter,
@@ -6,12 +9,57 @@ import {
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 import QRCode from "react-qr-code";
 
 export default function HomeCareSaveContact() {
   const objCompany = useContext(ThemeContextApi).company;
+
+  function downloadToFile(content: any, filename: string, contentType: string) {
+    if (typeof window !== "undefined") {
+      const a = document.createElement("a");
+      const file = new Blob([content], { type: contentType });
+
+      a.href = URL.createObjectURL(file);
+      a.download = filename;
+      a.click();
+
+      URL.revokeObjectURL(a.href);
+    }
+  }
+
+  const onSaveCardClick = () => {
+    const makeVCard = () => {
+      const vCardVersion = "VERSION:4.0";
+      const vCardName = `FN:${objCompany.company_name}`;
+      const vCardTitle = `TITLE:${objCompany.business_segment}`;
+      const vCardTel = `TEL;TYPE=WORK,VOICE:${objCompany.company_contact}`;
+      const vCardTelCell = `TEL;TYPE=CELL,VOICE:${objCompany.company_alternate_contact}`;
+      const vCardEmail = `EMAIL;TYPE=WORK:${objCompany.company_email}`;
+      const vCardAddress = `ADR;TYPE=WORK:;;${objCompany.address};;;`;
+      const vCardUrl = `URL:${window.location.href}`;
+      const vCardImage = `PHOTO;VALUE=uri:${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/${
+        objCompany.company_logo
+      }`;
+      const vCardTimeStamp = `REV:${new Date().toISOString()}`;
+
+      const vcard = `BEGIN:VCARD
+${vCardVersion}
+${vCardName}
+${vCardTitle}
+${vCardTel}
+${vCardTelCell}
+${vCardEmail}
+${vCardAddress}
+${vCardUrl}
+${vCardImage}
+${vCardTimeStamp}
+END:VCARD`;
+
+      downloadToFile(vcard, "vcard.vcf", "text/vcard");
+    };
+
+    makeVCard();
+  };
 
   return (
     <>
@@ -37,15 +85,15 @@ export default function HomeCareSaveContact() {
             viewBox={`0 0 256 256`}
           />
         </div>
-        <div className="lg:w-1/2 xl:w-1/3 md:m-auto md:p-12 grid grid-cols-2 gap-8 my-16 mx-8">
+        <div className="lg:w-1/2 xl:w-1/3 md:m-auto md:p-12 grid xs:grid-cols-1 sm:grid-cols-2 gap-8 my-16 mx-8">
           <div className="py-6 text-white text-center bg-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] font-medium homecarefont">
-            <a
-              href="samirshaikh.vcf"
+            <button
+              type="button"
+              onClick={onSaveCardClick}
               className="xs:text-[1.875rem] span btn btn-primary w-100 xl:text-2xl"
-              download
             >
               SAVE CONTACT
-            </a>
+            </button>
           </div>
           <div>
             <div className="dropdown">
@@ -62,7 +110,7 @@ export default function HomeCareSaveContact() {
                 >
                   <a
                     className="group w-full dropdown-item flex justify-start gap-4 py-4 pl-6 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
-                    href={`https://api.whatsapp.com/send?phone=${objCompany.company_contact}&text=hi`}
+                    href={`https://api.whatsapp.com/send?phone=+91${objCompany.company_contact}&text=hi`}
                     data-action="share/whatsapp/share"
                   >
                     <FontAwesomeIcon

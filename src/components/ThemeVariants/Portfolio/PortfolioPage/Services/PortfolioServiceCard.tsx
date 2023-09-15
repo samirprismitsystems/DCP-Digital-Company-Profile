@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 
 export default function PortfolioServiceCard({
@@ -20,7 +21,9 @@ export default function PortfolioServiceCard({
             height={199}
             alt="services-img"
             title="services-img"
-            src={`${UPLOAD_IMAGE_URI}/${id}/service/${path}`}
+            src={`${UPLOAD_IMAGE_URI}/${
+              id || Utils.getCompanyID()
+            }/service/${path}`}
             className="w-full max-w-full h-auto align-middle"
             style={{
               filter: "blur(2px)",

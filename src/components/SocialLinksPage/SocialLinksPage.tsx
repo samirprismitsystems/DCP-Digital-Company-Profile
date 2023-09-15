@@ -29,7 +29,7 @@ export default function SocialLinksPage() {
       if (isUpdate) {
         if (data.socialData) {
           data.socialData.forEach((item) => {
-            if (item.social_id && item.link) {
+            if (item.social_id) {
               let objItem = {
                 company_id: Utils.getCompanyID(),
                 company_social_id: item.company_social_id,

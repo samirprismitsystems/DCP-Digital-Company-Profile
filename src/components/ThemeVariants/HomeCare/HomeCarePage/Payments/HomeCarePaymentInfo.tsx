@@ -18,7 +18,7 @@ export default function HomeCarePaymentInfo(props: IHomeCarePaymentInfo) {
       <div
         className={`items-center  m-0 ${
           props.mb === 0 ? "mb-0" : "mb-10"
-        } flex flex-wrap`}
+        } flex flex-initial`}
       >
         {(props.isImage || props.icon) && (
           <div className="w-[40px] h-[40px] flex justify-center items-center text-center text-homeCareTheme-primary rounded-50 bg-[#e5ebf1]">
@@ -45,14 +45,14 @@ export default function HomeCarePaymentInfo(props: IHomeCarePaymentInfo) {
           }`}
         >
           <strong className="text-homeCareTheme-textColor">
-            {props.label}:
+            {props.label || "N/A"}:
           </strong>{" "}
           <span
             className={`${
               props.isBlack ? "text-black" : "text-homeCareTheme-textColor"
             }`}
           >
-            {props.value}
+            {props.value || "N/A"}
           </span>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Head from "next/head";
 import PortfolioAboutUs from "./AboutUs/PortfolioAboutUs";
 import PortfolioContactsInformation from "./ContactInformation/PortfolioContactsInformation";
@@ -15,7 +17,14 @@ export default function PortfolioPage(props: any) {
   return (
     <>
       <Head>
-        <link rel="icon" href={props.result.company.company_logo} sizes="any" />
+        <link
+          id="favicon"
+          rel="shortcut icon"
+          href={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
+            props.result.company.company_logo
+          }`}
+          sizes="any"
+        />
       </Head>
       <div className="container-flued-portfolio portfolio_theme c-text bg-white">
         <PortfolioProfile />

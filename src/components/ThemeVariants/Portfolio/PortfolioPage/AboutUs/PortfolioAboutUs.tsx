@@ -11,7 +11,9 @@ export default function PortfolioAboutUs() {
       <GetHeader title="About" />
       <div className="pt-8">
         <p className="text-[2rem] c-text text-portfolioTheme-textColor">
-          <strong>Since {Utils.getYear(objCompany.established_in)}</strong>
+          <strong>
+            Since {Utils.getYear(objCompany.established_in) || "N/A"}
+          </strong>
         </p>
         <p
           style={{
@@ -19,7 +21,7 @@ export default function PortfolioAboutUs() {
           }}
           className="pt-4 text-3xl c-text text-portfolioTheme-textColor"
         >
-          {objCompany.company_desc}
+          {objCompany.company_desc || "N/A"}
         </p>
       </div>
     </div>

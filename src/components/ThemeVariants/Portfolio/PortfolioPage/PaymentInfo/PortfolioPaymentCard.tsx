@@ -17,7 +17,7 @@ export default function PortfolioPaymentCard({
       }}
     >
       <span className="app-name absolute top-6 right-6 text-base inline-block c-text">
-        {title}
+        {title || "N/A"}
       </span>
       <div className="link-icon google-icon m-0 bg-[#f2f2f2] w-24 h-24 rounded-2xl flex justify-center mr-4 items-center c-text">
         <Image
@@ -32,7 +32,7 @@ export default function PortfolioPaymentCard({
       <div className="pay-info ml-6 c-text">
         <dl className="mb-4 mt-0 c-text ">
           <dt className="clear-both mr-2 p-0 font-semibold text-black float-left m-0  xs:text-[2rem] md:text-[1.6rem]">
-            UPI.:
+            No / UPI.:
           </dt>
           <dd className="float-left m-0 p-0 xs:text-[2rem] md:text-[1.6rem] c-text">
             {Upi || "N/A"}
