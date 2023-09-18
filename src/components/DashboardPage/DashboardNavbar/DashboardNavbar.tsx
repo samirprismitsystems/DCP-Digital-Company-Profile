@@ -70,7 +70,7 @@ export default function DashboardNavbar(props: {
       className={`shadow-md bg-white sticky z-[999] w-full top-0 xl:h-[10rem] xs:h-[8.5rem] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
-        isDashboard={props.lstNav ? false : true}
+        isDashboard={props.isLogin ? false : true}
         lstNavigations={props.lstNav || lstUserResponsiveNavbar}
         toggle={toggle}
         isOpen={isOpen}

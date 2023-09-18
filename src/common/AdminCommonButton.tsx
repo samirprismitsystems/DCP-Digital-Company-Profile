@@ -53,11 +53,11 @@ export default function AdminCommonButton({
         className={`flex ${isLeft ? "justify-start" : "justify-end"} w-full`}
       >
         <div
-          className={`form_field pb-16 space-x-8 flex ${
+          className={`xs:space-y-4 sm:space-y-0 form_field pb-16 space-x-8 xs:flex-col sm:flex-row flex ${
             isLeft ? "justify-start" : "justify-end"
           }  ${
             hideSaveButton
-              ? "xl:w-[20%] pt-8 xs:w-[73%] sm:w-[33%] md:w-[33%] lg:w-[35%]"
+              ? "xl:w-[20%] pt-8 xs:w-full sm:w-[33%] md:w-[33%] lg:w-[35%]"
               : "xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%]"
           }`}
         >
@@ -72,8 +72,8 @@ export default function AdminCommonButton({
               } font-medium text-center text-3xl hover:text-white ${
                 hideNextButton
                   ? !isLeft
-                    ? "xs:w-[50%] sm:w-[40%] lg:w-[70%] xl:w-[80%]"
-                    : "xs:w-[28%] sm:w-[20%] md:w-[30%] lg:w-[50%] w-9/12"
+                    ? "xs:w-[100%] xsOne:w-[50%] lg:w-[70%] xl:w-[80%]"
+                    : "xs:w-full sm:w-[35%] md:w-[30%] lg:w-[50%] w-9/12"
                   : "w-full"
               } text-primary-light bg-primary-main  hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]`}
             >
@@ -86,7 +86,7 @@ export default function AdminCommonButton({
                 transition: "all 0.3s linear",
               }}
               type="button"
-              className="py-4 hover:cursor-pointer font-medium text-center text-3xl w-[60%] bg-secondary-main border-[1px] border-secondary-main btnHoverEffect text-white rounded-[5rem]"
+              className="ml_0_common_button xs:w-full py-4 hover:cursor-pointer font-medium text-center text-3xl w-[60%] bg-secondary-main border-[1px] border-secondary-main btnHoverEffect text-white rounded-[5rem]"
               onClick={handleNextPage}
             >
               Next

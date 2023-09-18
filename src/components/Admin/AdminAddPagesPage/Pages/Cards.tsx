@@ -22,7 +22,7 @@ export default function Cards() {
       />
       <Editor savePath="cardContent1" />
 
-      <h4 className="py-5 pt-16">Card 2</h4>
+      <h4 className="py-5 pt-32">Card 2</h4>
       <TextField
         name={"cardTitle2"}
         isRequired={true}
@@ -34,7 +34,7 @@ export default function Cards() {
         savePath="cardImage2"
         title="Upload Card Image"
       />
-      <div className="pb-16">
+      <div className="xs:pb-[11rem]">
         <Editor savePath="cardContent2" />
       </div>
     </>

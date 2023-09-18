@@ -47,13 +47,13 @@ export default function TemplateFeatures() {
       />
       <h3 className="pb-6">Logo And Text</h3>
       {fields.map((item, index) => (
-        <div className="grid grid-cols-2 gap-6" key={index}>
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-6" key={index}>
           <TextField
             name={`features_data.${index}.featuretext`}
             title="Text"
             placeHolder="Enter Feature Text"
           />
-          <div className="grid gap-6 grid-cols-2">
+          <div className="grid gap-6 xs:grid-cols-1 sm:grid-cols-2">
             <TextField
               name={`features_data.${index}.featurelogo`}
               isRequired={true}

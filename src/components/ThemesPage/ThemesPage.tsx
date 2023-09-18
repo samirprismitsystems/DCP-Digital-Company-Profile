@@ -41,7 +41,9 @@ export default function ThemesPage() {
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
-        <div className="h2">Themes For Company Profile Page</div>
+        <div className="h2 xs:text-[2.7rem] sm:text-[3rem]">
+          Themes For Company Profile Page
+        </div>
         <div className="h4 mt-1">Select Themes</div>
       </div>
       <div

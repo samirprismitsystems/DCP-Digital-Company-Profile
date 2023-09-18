@@ -107,6 +107,7 @@ export default function AdminEditUserReview(props: {
               title="User Review"
               placeHolder="Enter User Review"
               isTextArea={true}
+              rows={10}
             />
             <div className="xs:w-full md:w-[70%]">
               <AdminCommonButton

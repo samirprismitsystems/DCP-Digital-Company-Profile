@@ -118,7 +118,7 @@ export default function AdminCompanyTable() {
 
   return (
     <>
-      <div className="relative w-full overflow-hidden rounded-2xl">
+      <div className="relative w-full overflow-auto rounded-2xl">
         <table className="w-full text-sm text-left text-gray-500  dark:text-gray-400">
           <thead className="text-xs text-gray-700  bg-gray-50">
             <tr className="text-3xl text-primary-main bg-secondary-greyDark text-center p-3">

@@ -45,8 +45,8 @@ export default function DashboardCommonButtons({
 
   return (
     <>
-      <div className="flex justify-end w-full">
-        <div className="form_field pb-16 space-x-8 xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%] flex justify-end">
+      <div className="flex justify-end w-full ml_0_common_button">
+        <div className="form_field pb-16 sm:space-x-8 xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%] flex justify-end xs:flex-col xs:space-y-6 sm:flex-row sm:space-y-0">
           {!hideSaveButton && (
             <button
               style={{
@@ -57,7 +57,7 @@ export default function DashboardCommonButtons({
                 hideNextButton && "px-8"
               } font-medium text-center text-3xl hover:text-white ${
                 hideNextButton
-                  ? "xs:w-[70%] sm:w-[40%] lg:w-[70%] xl:w-[60%]"
+                  ? "xs:w-[100%] sm:w-[40%] lg:w-[70%] xl:w-[60%]"
                   : "w-full"
               } text-primary-light bg-primary-main  hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]`}
             >
@@ -70,7 +70,7 @@ export default function DashboardCommonButtons({
                 transition: "all 0.3s linear",
               }}
               type="button"
-              className="py-4 hover:cursor-pointer font-medium text-center text-3xl w-[60%] bg-secondary-main border-[1px] border-secondary-main btnHoverEffect text-white rounded-[5rem]"
+              className="py-4 hover:cursor-pointer font-medium text-center text-3xl xs:w-full sm:w-[60%] bg-secondary-main border-[1px] border-secondary-main btnHoverEffect text-white rounded-[5rem]"
               onClick={handleNextPage}
             >
               Next

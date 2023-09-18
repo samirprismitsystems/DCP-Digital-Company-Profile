@@ -97,13 +97,33 @@ END:VCARD`;
         </Link>
       </div>
       <div className="col-6 col-md-3 share_link max-w-full shrink-0 ">
-        <Link
-          href="https://wa.me/+919876543210"
+        <button
+          type="button"
           id="share"
           rel="noopener"
-          className=" shadow-md rounded-2xl bg-white mb-8 flex flex-col p-6 transition transition-[all .3s linear] no-underline"
+          className="w-full shadow-md rounded-2xl bg-white mb-8 flex flex-col p-6 transition transition-[all .3s linear] no-underline"
         >
-          <span className="link-icon mb-8 mr-0  w-24 h-24 rounded-2xl  flex justify-center items-center bg-[#f5f5f5] ">
+          <span
+            onClick={() => {
+              if (navigator.share) {
+                navigator
+                  .share({
+                    title: objCompany.company_name || "N/A",
+                    text: "Take a look at this Site!",
+                    url: window.location.href,
+                  })
+                  .then(() => {})
+                  .catch((error: any) =>
+                    console.log("Error while sharing", error.message)
+                  );
+              } else {
+                Utils.showErrorMessage(
+                  "Share not supported on this browser, do it with old way."
+                );
+              }
+            }}
+            className="link-icon mb-8 mr-0  w-24 h-24 rounded-2xl  flex justify-center items-center bg-[#f5f5f5] "
+          >
             {" "}
             <FontAwesomeIcon
               className="text-6xl font-bold text-portfolioTheme-primary"
@@ -147,7 +167,7 @@ END:VCARD`;
               </span>
             </div>
           </div>
-        </Link>
+        </button>
       </div>
       <div className="col-6 col-md-3 share_link max-w-full shrink-0 ">
         <button

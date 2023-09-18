@@ -19,7 +19,7 @@ export default function TextField(props: ITextField) {
 
   return (
     <>
-      <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+      <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 xs:mb-8 sm:mb-16 transition-all duration-300 ease-linear">
         {props.title && (
           <label
             className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none ${

@@ -32,21 +32,25 @@ export default function FAQs() {
       />
       <h3 className="pb-6">Accordion</h3>
       {fields.map((item, index) => (
-        <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6" key={index}>
-          <TextField
-            name={`faq_data.${index}.faqtitle`}
-            title="Title"
-            placeHolder="Enter Accordion Title"
-          />
-          <div className="grid gap-6 grid-cols-2">
+        <div className="flex xs:flex-col xl:flex-row" key={index}>
+          <div className="xs:w-full xl:w-[35%]">
             <TextField
-              name={`faq_data.${index}.faqdesc`}
-              isRequired={true}
-              title="Description"
-              placeHolder="Enter Accordion Description"
-              isTextArea={true}
-              rows={3}
+              name={`faq_data.${index}.faqtitle`}
+              title="Title"
+              placeHolder="Enter Accordion Title"
             />
+          </div>
+          <div className="w-full xl:ml-8 flex xs:flex-col xl:flex-row xs:mb-16 sm:mb-0">
+            <div className="w-full">
+              <TextField
+                name={`faq_data.${index}.faqdesc`}
+                isRequired={true}
+                title="Description"
+                placeHolder="Enter Accordion Description"
+                isTextArea={true}
+                rows={3}
+              />
+            </div>
             <div>
               <RemoveItem
                 onChange={() => {

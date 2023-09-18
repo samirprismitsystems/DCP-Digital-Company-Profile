@@ -277,7 +277,7 @@ export default function CompanyDetailsPage() {
           }}
           onSubmit={objForm.handleSubmit(onSave)}
         >
-          <div className="row lg:grid lg:grid-cols-1 xl:grid-cols-2 xl:gap-8 lg:gap-8 xs:flex-wrap lg:flex-nowrap -mr-3 -ml-3 xs:flex justify-center">
+          <div className="row lg:grid lg:grid-cols-1 xl:grid-cols-2 xl:gap-8 lg:gap-8 xs:flex-wrap lg:flex-nowrap -mr-3 -ml-3 xs:flex justify-center mb-14">
             <div className="leftSide px-3">
               <CompanyTextField
                 name="fullName"
@@ -293,7 +293,7 @@ export default function CompanyDetailsPage() {
                 type="text"
                 isRequired={true}
               />
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8">
                 <CompanyTextField
                   name="phoneNumber"
                   title="Phone No. (WhatsApp No) *"

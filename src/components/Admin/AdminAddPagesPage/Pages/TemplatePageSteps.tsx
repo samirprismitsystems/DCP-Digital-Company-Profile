@@ -13,21 +13,25 @@ export default function TemplatePageSteps() {
   return (
     <>
       {fields.map((item, index) => (
-        <div className="grid xs:grid-cols-1 xl:grid-cols-2 gap-6" key={index}>
-          <TextField
-            name={`steps.${index}.stepstitle`}
-            title="Title"
-            placeHolder="Enter Step Title"
-          />
-          <div className="xs:flex sm:flex-wrap w-full justify-start items-center">
+        <div className="flex xs:flex-col xl:flex-row" key={index}>
+          <div className="xs:w-full xl:w-[40%] xs:mr-0 lg:mr-8">
             <TextField
-              name={`steps.${index}.stepsdesc`}
-              isRequired={true}
-              title="Description"
-              rows={3}
-              placeHolder="Enter Step Description"
-              isTextArea={true}
+              name={`steps.${index}.stepstitle`}
+              title="Title"
+              placeHolder="Enter Step Title"
             />
+          </div>
+          <div className="xs:flex xs:flex-col md:flex-row sm:flex-wrap w-full justify-start xs:items-start md:items-center">
+            <div className="xs:w-full xl:w-[70%] xs:mr-0 xl:mr-8">
+              <TextField
+                name={`steps.${index}.stepsdesc`}
+                isRequired={true}
+                title="Description"
+                rows={3}
+                placeHolder="Enter Step Description"
+                isTextArea={true}
+              />
+            </div>
             <div>
               <RemoveItem
                 onChange={() => {

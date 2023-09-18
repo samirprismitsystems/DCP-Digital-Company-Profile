@@ -7,7 +7,7 @@ export default function ChangePassword() {
         <div className="h2">Change Password</div>
       </div>
       <div className="row flex flex-wrap justify-center mx-[-12px]">
-        <div className="w-[66%]  max-w-full px-3 pt-8 pb-0">
+        <div className="xs:w-full sm:w-[66%] max-w-full px-3 pt-8 pb-0">
           <ChangePasswordForm />
         </div>
       </div>

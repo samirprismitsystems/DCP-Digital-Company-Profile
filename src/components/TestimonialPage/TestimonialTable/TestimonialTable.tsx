@@ -191,7 +191,7 @@ export default function TestimonialTable() {
       </div>
 
       {!isLoading && lstTestimonial && lstTestimonial.length > 1 && (
-        <div className="flex flex-row space-x-8 items-center justify-end pb-8">
+        <div className="flex xs:flex-col sm:flex-row space-x-8 items-center justify-end pb-8">
           <span className="text-3xl py-4 text-gray-700 dark:text-gray-400">
             Showing{" "}
             <span className="font-semibold text-gray-900 dark:text-white">
