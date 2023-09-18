@@ -14,6 +14,7 @@ import ResponsiveNavbar from "./ResponsiveNavbar";
 export default function DashboardNavbar(props: {
   lstNav?: any;
   isLogin?: boolean;
+  isRouter?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isChange, setIsChange] = useState(false);
@@ -37,7 +38,7 @@ export default function DashboardNavbar(props: {
         );
         dispatch(setRouteIsChanged(true));
         if (typeof window !== "undefined") {
-          window.history.replaceState("proile", "", `/admindashboard/profile`);
+          window.history.replaceState("profile", "", `/admindashboard/profile`);
         }
       }
     } else {
@@ -52,7 +53,7 @@ export default function DashboardNavbar(props: {
         );
         dispatch(setRouteIsChanged(true));
         if (typeof window !== "undefined") {
-          window.history.replaceState("proile", "", `/dashboard/profile`);
+          window.history.replaceState("profile", "", `/dashboard/profile`);
         }
       }
     }
@@ -65,17 +66,22 @@ export default function DashboardNavbar(props: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   return (
     <nav
       className={`shadow-md bg-white sticky z-[999] w-full top-0 xl:h-[10rem] xs:h-[8.5rem] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
-        isDashboard={props.isLogin ? false : true}
-        lstNavigations={props.lstNav || lstUserResponsiveNavbar}
+        isDashboard={props.lstNav ? false : true}
+        lstNavigations={props.lstNav}
         toggle={toggle}
         isOpen={isOpen}
-        redirectPath="dashboard"
+        redirectPath={
+          AuthService.isUserAdmin() ? "admindashboard" : "dashboard"
+        }
+        isRouter={props.isRouter}
         isLogin={props.isLogin}
+        isAdmin={AuthService.isUserAdmin()}
       />
       <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
         <button

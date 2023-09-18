@@ -16,6 +16,7 @@ export default function MobileNavbar({
   isLogin,
   isAdmin,
   isDashboard,
+  isRouter,
 }: {
   isOpen: boolean;
   redirectPath?: string;
@@ -24,6 +25,7 @@ export default function MobileNavbar({
   isLogin?: boolean;
   isAdmin?: boolean;
   isDashboard?: boolean;
+  isRouter?: boolean;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isChange, setIsChange] = useState(false);
@@ -86,21 +88,29 @@ export default function MobileNavbar({
               <button
                 type="button"
                 onClick={() => {
-                  dispatch(
-                    setSelectedObj({
-                      selectedIndex: 0,
-                      selectedTitle: "profile",
-                    })
-                  );
-                  if (typeof window !== "undefined") {
-                    window.history.replaceState(
-                      `/${redirectPath}/profile`,
-                      "",
-                      `/${redirectPath}/profile`
+                  if (isRouter) {
+                    if (AuthService.isUserAdmin()) {
+                      window.location.href = "/admindashboard/profile";
+                    } else {
+                      window.location.href = "/dashboard/profile";
+                    }
+                  } else {
+                    dispatch(
+                      setSelectedObj({
+                        selectedIndex: 0,
+                        selectedTitle: "profile",
+                      })
                     );
+                    if (typeof window !== "undefined") {
+                      window.history.replaceState(
+                        `/${redirectPath}/profile`,
+                        "",
+                        `/${redirectPath}/profile`
+                      );
+                    }
+                    dispatch(setRouteIsChanged(true));
+                    toggle();
                   }
-                  dispatch(setRouteIsChanged(true));
-                  toggle();
                 }}
                 className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
                   0 === selectedIndex ? "text-primary-lightDark" : "text-white"
@@ -152,21 +162,29 @@ export default function MobileNavbar({
               <button
                 type="button"
                 onClick={() => {
-                  dispatch(
-                    setSelectedObj({
-                      selectedIndex: 0,
-                      selectedTitle: "profile",
-                    })
-                  );
-                  if (typeof window !== "undefined") {
-                    window.history.replaceState(
-                      `/${redirectPath}/profile`,
-                      "",
-                      `/${redirectPath}/profile`
+                  if (isRouter) {
+                    if (AuthService.isUserAdmin()) {
+                      window.location.href = "/admindashboard/profile";
+                    } else {
+                      window.location.href = "/dashboard/profile";
+                    }
+                  } else {
+                    dispatch(
+                      setSelectedObj({
+                        selectedIndex: 0,
+                        selectedTitle: "profile",
+                      })
                     );
+                    if (typeof window !== "undefined") {
+                      window.history.replaceState(
+                        `/${redirectPath}/profile`,
+                        "",
+                        `/${redirectPath}/profile`
+                      );
+                    }
+                    dispatch(setRouteIsChanged(true));
+                    toggle();
                   }
-                  dispatch(setRouteIsChanged(true));
-                  toggle();
                 }}
                 className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
                   2 === selectedIndex ? "text-primary-lightDark" : "text-white"
@@ -193,33 +211,37 @@ export default function MobileNavbar({
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
-          <div className="w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
-              {lstNavigations &&
-                lstNavigations.map((item: INavigationMenu, index: number) => (
-                  <Link
-                    key={index}
-                    onClick={(event: any) => {
-                      handleNavigationOperation(event, item);
-                    }}
-                    href="#"
-                    className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
-                      item.id === selectedIndex
-                        ? "text-primary-lightDark"
-                        : "text-white"
-                    }`}
-                    aria-current="page"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-            </ul>
+    }
+
+    if (lstNavigations) {
+      {
+        return (
+          <div className="md:h-[800px] container py-16 text-white my-32 flex justify-center items-center">
+            <div className="w-full md:block md:w-auto" id="navbar-default">
+              <ul className="font-[500] font-Montserrat flex justify-center items-center flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                {lstNavigations &&
+                  lstNavigations.map((item: INavigationMenu, index: number) => (
+                    <Link
+                      key={index}
+                      onClick={(event: any) => {
+                        handleNavigationOperation(event, item);
+                      }}
+                      href="#"
+                      className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                        item.id === selectedIndex
+                          ? "text-primary-lightDark"
+                          : "text-white"
+                      }`}
+                      aria-current="page"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+              </ul>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     }
   };
 

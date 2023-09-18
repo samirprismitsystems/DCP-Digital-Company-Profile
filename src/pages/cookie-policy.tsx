@@ -46,7 +46,8 @@ export default function CookiePolicy() {
         <title>{objItem?.page_title || "N/A"}</title>
       </Head>
       <DashboardNavbar
-        lstNav={privacyPolicyNavList}
+        lstNav={!AuthService.isUserLoggedIn() && privacyPolicyNavList}
+        isRouter={true}
         isLogin={AuthService.isUserLoggedIn() ? false : true}
       />
       <div className="bg-white min-h-[85vh] h-full">
