@@ -5,7 +5,6 @@ import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { ISocialLinks } from "@/types/sociallinks";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -134,8 +133,9 @@ END:VCARD`;
                   style={{ boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)" }}
                 >
                   {lstSocial &&
-                    lstSocial.map((item: ISocialLinks) => (
+                    lstSocial.map((item: ISocialLinks, index: number) => (
                       <Link
+                        key={item.social_id || index}
                         className="group w-full dropdown-item flex justify-start gap-4 py-4 pl-6 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
                         href={`${item.link || "#"}`}
                         data-action="share/whatsapp/share"
