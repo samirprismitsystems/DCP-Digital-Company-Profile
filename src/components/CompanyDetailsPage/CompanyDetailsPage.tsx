@@ -394,7 +394,7 @@ export default function CompanyDetailsPage() {
             </label>
             <div className="flex items-center justify-center">
               <input
-                className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
+                className="w-full xs:mb-6 text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
                 placeholder="Enter Map Address  Eg. Area, City"
                 type={"text"}
                 {...objForm.register("mapAddress")}
@@ -404,7 +404,7 @@ export default function CompanyDetailsPage() {
                   transition: "all 0.3s linear",
                 }}
                 type="button"
-                className="xs:hidden md:block py-4 font-medium text-center text-3xl w-2/12 md:w-96 text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
+                className="xs:hidden sm:block py-4 font-medium text-center text-3xl xs:w-1/2 md:w-96 text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
                 onClick={getMapLocation}
               >
                 Get Location
@@ -415,7 +415,7 @@ export default function CompanyDetailsPage() {
                 transition: "all 0.3s linear",
               }}
               type="button"
-              className="xs:visible py-4 md:hidden font-medium text-center text-3xl xs:w-full text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
+              className="xs:visible py-4 sm:hidden font-medium text-center text-3xl xs:w-full text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
               onClick={getMapLocation}
             >
               Get Location
