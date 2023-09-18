@@ -68,7 +68,7 @@ export default function HomeCareContactIcons() {
               </span>{" "}
             </Link>
           </div>
-          <div className="col w-full max-w-full text-center">
+          {/* <div className="col w-full max-w-full text-center">
             <Link
               href="https://msng.link/o/?Example=fm"
               target="_blank"
@@ -83,7 +83,7 @@ export default function HomeCareContactIcons() {
                 Website
               </span>{" "}
             </Link>
-          </div>
+          </div> */}
           <div className="col w-full max-w-full text-center">
             <a
               target="_blank"

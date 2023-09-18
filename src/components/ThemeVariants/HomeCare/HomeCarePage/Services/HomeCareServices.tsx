@@ -25,13 +25,13 @@ export default function HomeCareServices() {
               className="image  flex flex-wrap justify-start items-center"
             >
               <div className="w-full h-auto">
-                <div className="image w-full h-auto py-6">
+                <div className="image w-full h-[290px] py-6">
                   <img
                     alt="image.png"
                     src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
                       item.service_image
                     }`}
-                    className="max-w-[400px] block m-auto w-full h-full align-middle"
+                    className="max-w-[400px] block object-cover m-auto w-full h-full align-middle"
                   />
                 </div>
                 <h4 className="pb-2 text-homeCareTheme-textColor">

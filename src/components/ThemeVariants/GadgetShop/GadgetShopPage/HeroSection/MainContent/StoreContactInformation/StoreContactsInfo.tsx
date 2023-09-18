@@ -111,7 +111,25 @@ END:VCARD`;
           title="Mail"
         />
         <GetStoreContactInfo
-          href="#"
+          isButton={true}
+          onClick={() => {
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: objCompany.company_name || "N/A",
+                  text: "Take a look at this Site!",
+                  url: window.location.href,
+                })
+                .then(() => {})
+                .catch((error: any) =>
+                  console.log("Error while sharing", error.message)
+                );
+            } else {
+              Utils.showErrorMessage(
+                "Share not supported on this browser, do it with old way."
+              );
+            }
+          }}
           icon={
             <FontAwesomeIcon
               icon={faShareSquare}

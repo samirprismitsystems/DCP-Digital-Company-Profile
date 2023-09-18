@@ -1,4 +1,8 @@
+import { ThemeContextApi } from "@/pages/[slug]";
+import { useContext } from "react";
+
 export default function HomeCareGoogleMap() {
+  const objCompany = useContext(ThemeContextApi).company;
   return (
     <>
       <div
@@ -12,9 +16,11 @@ export default function HomeCareGoogleMap() {
           Google Map
         </h4>
         <div className="homecarefont pt-4 pb-8 px-4">
-          <div className="max-w-full ">
+          <div className="max-w-full">
             <iframe
-              src="https://maps.google.com/maps?q=41.8781136,-87.6297982&amp;z=15&amp;output=embed"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                objCompany.address
+              )}&z=15&output=embed`}
               width="100%"
               height="450"
               frameBorder={0}

@@ -66,9 +66,9 @@ export default function UserViewSection() {
 
   const getTheme = () => {
     if (themeID === THEME_TYPE.GADGET) {
-      return <GadgetShopPage />;
+      return <GadgetShopPage result={result} />;
     } else if (themeID === THEME_TYPE.HOMECARE) {
-      return <HomeCarePage />;
+      return <HomeCarePage result={result} />;
     } else if (themeID === THEME_TYPE.PORTFOLIO) {
       return <PortfolioPage result={result} />;
     } else {

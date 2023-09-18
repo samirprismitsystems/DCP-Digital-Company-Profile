@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
 import GadgetGiveFeedback from "../Feedback/GadgetGiveFeedback";
+import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function GadgetEnquiry() {
+  
+  const objCompany = useContext(ThemeContextApi).company;
   
   return (
     <div className="about-block pb-16" id="about-us">
@@ -20,7 +24,9 @@ export default function GadgetEnquiry() {
           className="content-box gallery-box xs:min-h-[300px] md:min-h-full p-0 overflow-hidden mx-4 rounded-[2rem]"
         >
           <iframe
-            src="https://maps.google.com/maps?q=41.8781136,-87.6297982&amp;z=15&amp;output=embed"
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(
+              objCompany.address
+            )}&z=15&output=embed`}
             width="100%"
             frameBorder={0}
             className="border-0 h-full"

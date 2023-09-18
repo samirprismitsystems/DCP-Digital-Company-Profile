@@ -37,26 +37,30 @@ export default function HomeCareProducts() {
                 {item.product_name || "N/A"}
               </p>
               <p className="para-2 homecarefont font-bold">
-                ₹{item.product_price || "N/A"} /
+                ₹{item.product_price || "N/A"} 
+                {/* /
                 <span className="font-normal homecarefont text-homeCareTheme-textColor ml-1 line-through">
                   1800
-                </span>
+                </span> */}
               </p>
               <div className="open text-center">
                 <div className="xs:flex xs:flex-col sm:flex-row -mx-1 mb-4 justify-center items-center ">
                   <button
+                    onClick={() => {
+                      Utils.scrollToView("enquiry");
+                    }}
                     className="border border-solid border-homeCareTheme-opacityBorder text-white
                 bg-homeCareTheme-primary py-3 px-8 rounded-[6px] inline-block m-1 whitespace-nowrap w-auto font-medium text-center   max-h-[40px] homecarefont text-[1.6rem] hover:text-homeCareTheme-primary hover:bg-white"
                   >
                     Quick Enquiry
                   </button>
-                  <a
+                  {/* <a
                     className="border border-solid border-homeCareTheme-opacityBorder text-homeCareTheme-primary py-3 px-8 rounded-[6px] inline-block m-1 whitespace-nowrap w-auto font-medium text-center bg-transparent  max-h-[40px] homecarefont text-[1.6rem] hover:text-white hover:bg-homeCareTheme-primary"
                     href="#!"
                     target="_blank"
                   >
                     Shop Now
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>

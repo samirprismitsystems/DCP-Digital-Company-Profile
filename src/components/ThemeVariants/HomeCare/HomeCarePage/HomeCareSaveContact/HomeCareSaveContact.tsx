@@ -1,18 +1,38 @@
+import PageCircularLoading from "@/common/PageCircularLoading";
+import SocialLinkIcon from "@/components/SocialLinksPage/SocialLinkIcons/SocialLinkIcon";
 import { ThemeContextApi } from "@/pages/[slug]";
+import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import {
-  faFacebook,
-  faTwitter,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
+import { ISocialLinks } from "@/types/sociallinks";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 
 export default function HomeCareSaveContact() {
   const objCompany = useContext(ThemeContextApi).company;
+  const [lstSocial, setLstSocial] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<any>(false);
+
+  const loadData = async () => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.getSocialLinksData();
+      if (!res.error) {
+        setLstSocial(res.social);
+        return null;
+      }
+
+      throw new Error(res.message);
+    } catch (ex: any) {
+      Utils.showErrorMessage(ex.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   function downloadToFile(content: any, filename: string, contentType: string) {
     if (typeof window !== "undefined") {
@@ -61,6 +81,11 @@ END:VCARD`;
     makeVCard();
   };
 
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  if (isLoading) return <PageCircularLoading />;
   return (
     <>
       <div
@@ -98,53 +123,33 @@ END:VCARD`;
           <div>
             <div className="dropdown">
               <details className="dropdown_menu relative">
-                <summary className="hover:cursor-pointer btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[140px] rounded-2xl max-h-[40px] font-medium homecarefont">
+                <summary className="hover:cursor-pointer btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[170px] rounded-2xl max-h-[40px] font-medium homecarefont">
                   <span className="text-2xl mr-4 xs:text-[1.875rem] xl:text-2xl">
                     SHARE
                   </span>{" "}
                   <FontAwesomeIcon icon={faCaretDown} />
                 </summary>
                 <div
-                  className="dropdown_list pt-5 min-w-full h-auto  absolute bg-white flex flex-wrap"
+                  className="dropdown_list px-6 pb-4 pt-5 min-w-full h-auto  absolute bg-white flex flex-wrap"
                   style={{ boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)" }}
                 >
-                  <a
-                    className="group w-full dropdown-item flex justify-start gap-4 py-4 pl-6 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
-                    href={`https://api.whatsapp.com/send?phone=+91${objCompany.company_contact}&text=hi`}
-                    data-action="share/whatsapp/share"
-                  >
-                    <FontAwesomeIcon
-                      className="group-hover:text-white text-4xl font-medium text-homeCareTheme-primary"
-                      icon={faWhatsapp}
-                    />
-                    <span className="text-2xl text-homeCareTheme-primary text-left font-medium group-hover:text-white">
-                      Whatsapp
-                    </span>
-                  </a>
-                  <a
-                    className="group hover:bg-homeCareTheme-primary  hover:rounded-[25px]  w-full dropdown-item flex justify-start gap-4 py-4 pl-6"
-                    href="https://facebook.com/sharer/sharer.php?u=#"
-                  >
-                    <FontAwesomeIcon
-                      className="group-hover:text-white text-3xl font-medium text-homeCareTheme-primary"
-                      icon={faFacebook}
-                    />
-                    <span className="group-hover:text-white text-2xl font-medium text-homeCareTheme-primary text-left">
-                      Facebook
-                    </span>
-                  </a>
-                  <a
-                    className="group hover:bg-homeCareTheme-primary  hover:rounded-[25px] w-full dropdown-item flex justify-start gap-4 py-4 pl-6"
-                    href="https://twitter.com/share?url=#"
-                  >
-                    <FontAwesomeIcon
-                      className="group-hover:text-white text-3xl font-medium text-homeCareTheme-primary"
-                      icon={faTwitter}
-                    />
-                    <span className="group-hover:text-white text-2xl font-medium text-homeCareTheme-primary text-left">
-                      Twitter
-                    </span>
-                  </a>
+                  {lstSocial &&
+                    lstSocial.map((item: ISocialLinks) => (
+                      <Link
+                        className="group w-full dropdown-item flex justify-start gap-4 py-4 pl-6 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
+                        href={`${item.link || "#"}`}
+                        data-action="share/whatsapp/share"
+                        target="_blank"
+                      >
+                        <SocialLinkIcon
+                          icons={item.socialmedia_logo}
+                          socialID={item.social_id}
+                        />
+                        <span className="text-2xl text-homeCareTheme-primary text-left font-medium group-hover:text-white">
+                          {item.socialmedia_name}
+                        </span>
+                      </Link>
+                    ))}
                 </div>
               </details>
             </div>

@@ -69,7 +69,7 @@ END:VCARD`;
   };
 
   return (
-    <div className="xs:grid xs:grid-cols-2 md:grid-cols-4 gap-8">
+    <div className="xs:grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
       <div className="col-6 col-md-3 share_link max-w-full shrink-0 ">
         <Link
           href={`https://wa.me/+91${objCompany.company_contact}`}
@@ -102,28 +102,26 @@ END:VCARD`;
           id="share"
           rel="noopener"
           className="w-full shadow-md rounded-2xl bg-white mb-8 flex flex-col p-6 transition transition-[all .3s linear] no-underline"
-        >
-          <span
-            onClick={() => {
-              if (navigator.share) {
-                navigator
-                  .share({
-                    title: objCompany.company_name || "N/A",
-                    text: "Take a look at this Site!",
-                    url: window.location.href,
-                  })
-                  .then(() => {})
-                  .catch((error: any) =>
-                    console.log("Error while sharing", error.message)
-                  );
-              } else {
-                Utils.showErrorMessage(
-                  "Share not supported on this browser, do it with old way."
+          onClick={() => {
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: objCompany.company_name || "N/A",
+                  text: "Take a look at this Site!",
+                  url: window.location.href,
+                })
+                .then(() => {})
+                .catch((error: any) =>
+                  console.log("Error while sharing", error.message)
                 );
-              }
-            }}
-            className="link-icon mb-8 mr-0  w-24 h-24 rounded-2xl  flex justify-center items-center bg-[#f5f5f5] "
-          >
+            } else {
+              Utils.showErrorMessage(
+                "Share not supported on this browser, do it with old way."
+              );
+            }
+          }}
+        >
+          <span className="link-icon mb-8 mr-0  w-24 h-24 rounded-2xl  flex justify-center items-center bg-[#f5f5f5] ">
             {" "}
             <FontAwesomeIcon
               className="text-6xl font-bold text-portfolioTheme-primary"
@@ -194,11 +192,9 @@ END:VCARD`;
         </button>
       </div>
       <div className="col-6 col-md-3 share_link max-w-full shrink-0 ">
-        <Link
-          href="nitin.vcf"
-          download={true}
+        <button
           rel="noopener"
-          className=" shadow-md rounded-2xl bg-white mb-8 flex flex-col p-6 transition transition-[all .3s linear] no-underline"
+          className="w-full shadow-md rounded-2xl bg-white mb-8 flex flex-col p-6 transition transition-[all .3s linear] no-underline"
         >
           <span className="link-icon mb-8 mr-0  w-24 h-24 rounded-2xl  flex justify-center items-center bg-[#f5f5f5] ">
             {" "}
@@ -208,7 +204,7 @@ END:VCARD`;
             />
           </span>
           <div className="share_link_detail">
-            <span className="c-text mb-3 block text-3xl text-black">
+            <span className="c-text mb-3 block text-3xl text-left text-black">
               Working Hours
             </span>
             <span className="c-text gary-text text-3xl text-[#b2b2b2]">
@@ -217,7 +213,7 @@ END:VCARD`;
               )} - ${Utils.getWorkingHours(objCompany.working_hours_to)}`}
             </span>
           </div>
-        </Link>
+        </button>
       </div>
     </div>
   );

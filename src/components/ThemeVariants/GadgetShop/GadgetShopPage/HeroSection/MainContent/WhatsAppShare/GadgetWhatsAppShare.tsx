@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function GadgetWhatsAppShare() {
-  const [mobile, setMobile] = useState();
+  const [mobile, setMobile] = useState<any>();
   const router = useRouter();
 
   return (
@@ -18,13 +18,14 @@ export default function GadgetWhatsAppShare() {
           }}
           onSubmit={(e) => {
             e.preventDefault();
-            if (mobile)
+            if (mobile && mobile?.length === 10) {
               window.open(
                 `https://api.whatsapp.com/send/?phone=+91${mobile}&text=Hi`,
                 "_blank"
               );
 
-            setMobile(undefined);
+              setMobile(undefined);
+            }
           }}
         >
           <span className="border-0 bg-transparent py-6 px-2 gadgetfontfamily  xs:text-[2rem] xl:text-[2.7rem] font-medium text-black xlTwo:text-[2rem]">
@@ -36,7 +37,10 @@ export default function GadgetWhatsAppShare() {
             className="focus-within:outline-none text-black font-medium border-0 bg-transparent w-full py-6 px-2 gadgetfontfamily xs:text-[2rem] xl:text-[2.7rem] xlTwo:text-[2rem]"
             value={mobile || ""}
             onChange={(e: any) => {
-              setMobile(e.target.value);
+              const userInput = e.target.value;
+              if (userInput.length <= 10) {
+                setMobile(e.target.value);
+              }
             }}
           />
           <button

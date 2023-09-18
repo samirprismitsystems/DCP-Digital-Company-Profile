@@ -35,7 +35,7 @@ export default function PortfolioProductCard(objData: {
             <span className="product-price text-black text-[2rem] font-semibold  text-center">
               Rs. {objData.price || "N/A"}
             </span>
-            <Link
+            {/* <Link
               href="#"
               className="site_btn text-3xl py-4 px-8 text-center text-white bg-portfolioTheme-primary rounded-2xl inline-block"
               style={{
@@ -44,7 +44,7 @@ export default function PortfolioProductCard(objData: {
               }}
             >
               Buy Now
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

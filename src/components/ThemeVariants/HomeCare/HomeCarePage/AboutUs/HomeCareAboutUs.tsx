@@ -20,9 +20,9 @@ export default function HomeCareAboutUs() {
       <p className="text-justify homecarefont pt-4 pb-8 px-4 text-homeCareTheme-textColor">
         {objCompany.company_desc || "N/A"}
       </p>
-      <p className="gst-text py-8 mb-0  border-t-[1px] border-solid border-[#efefef] pt-6 text-center text-black font-bold text-4xl">
+      {/* <p className="gst-text py-8 mb-0  border-t-[1px] border-solid border-[#efefef] pt-6 text-center text-black font-bold text-4xl">
         GST: 29XXXXXXXXX1006
-      </p>
+      </p> */}
     </div>
   );
 }

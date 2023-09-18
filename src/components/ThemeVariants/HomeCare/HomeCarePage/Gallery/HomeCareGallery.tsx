@@ -106,7 +106,7 @@ export default function HomeCareGallery() {
                   src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${
                     item.portfolio_image
                   }`}
-                  className="max-w-[400px] block m-auto p-4 w-full h-full align-middle"
+                  className="max-w-[400px] object-cover block m-auto p-4 w-full h-full align-middle"
                 />
               </div>
             ))}
