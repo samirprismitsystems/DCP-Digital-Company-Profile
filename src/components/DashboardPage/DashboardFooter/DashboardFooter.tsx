@@ -91,7 +91,7 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
                 {objSetting.footerList.map((item: any, index) => (
                   <li className="text-white" key={index}>
                     <Link
-                      href={`${item.page_slug}`}
+                      href={`/${item.page_slug}`}
                       target="_blank"
                       className=" text-white hover:text-black transition-all duration-200 ease-linear font-normal"
                     >
