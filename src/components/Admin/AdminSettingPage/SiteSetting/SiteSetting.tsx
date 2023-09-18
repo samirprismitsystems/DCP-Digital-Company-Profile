@@ -118,7 +118,7 @@ export default function SiteSetting() {
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSave)}>
-        <div className="digital_profile_form form_shadow bg-white rounded-2xl p-10 pt-0 pb-0 block">
+        <div className="mb-16 digital_profile_form form_shadow bg-white rounded-2xl p-10 pt-0 pb-0 block">
           <div className="row -mr-3 -ml-3">
             <SiteSettingImageUploader
               folderPath="setting"

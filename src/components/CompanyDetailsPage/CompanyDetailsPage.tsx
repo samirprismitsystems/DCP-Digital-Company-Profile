@@ -271,7 +271,7 @@ export default function CompanyDetailsPage() {
       </div>
       <FormProvider {...objForm}>
         <form
-          className="digital_profile_form form_shadow bg-white rounded-2xl p-10 pb-0 block"
+          className="mb-16 pb-0 digital_profile_form form_shadow bg-white rounded-2xl p-10 block"
           style={{
             boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
           }}
@@ -394,7 +394,7 @@ export default function CompanyDetailsPage() {
             </label>
             <div className="flex items-center justify-center">
               <input
-                className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] py-14"
+                className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
                 placeholder="Enter Map Address  Eg. Area, City"
                 type={"text"}
                 {...objForm.register("mapAddress")}

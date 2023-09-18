@@ -19,8 +19,8 @@ export default function EnquiryPage() {
         <div className="row -mr-3 -ml-3">
           <EnquiryTable />
         </div>
-        <div className="row -mr-3 -ml-3 py-32 w-full relative float-right">
-          <div className="xs:w-2/4 relative float-right">
+        <div className="row -mr-3 -ml-3 pt-16 pb-32 w-full relative float-right">
+          <div className={`xs:w-2/4 md:w-full relative float-right`}>
             <DashboardCommonButtons hideSaveButton={true} />
           </div>
         </div>

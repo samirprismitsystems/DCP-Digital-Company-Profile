@@ -57,7 +57,7 @@ export default function AdminCommonButton({
             isLeft ? "justify-start" : "justify-end"
           }  ${
             hideSaveButton
-              ? "xl:w-[20%] pt-8 xs:w-full sm:w-[33%] md:w-[33%] lg:w-[35%]"
+              ? "xl:w-[15%] pt-8 xs:w-full sm:w-[33%] md:w-[33%] lg:w-[35%]"
               : "xl:w-1/4 xs:w-full md:w-[80%] lg:w-[40%]"
           }`}
         >
