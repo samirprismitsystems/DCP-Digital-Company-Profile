@@ -121,7 +121,7 @@ END:VCARD`;
           </div>
           <div>
             <div className="dropdown">
-              <details className="dropdown_menu relative">
+              <details className={`dropdown_menu relative`}>
                 <summary className="hover:cursor-pointer btn-outline-primary btn-primary py-6 border border-homeCareTheme-primary text-center bg-white text-homeCareTheme-primary flex items-center justify-center min-w-[170px] rounded-2xl max-h-[40px] font-medium homecarefont">
                   <span className="text-2xl mr-4 xs:text-[1.875rem] xl:text-2xl">
                     SHARE
@@ -129,14 +129,14 @@ END:VCARD`;
                   <FontAwesomeIcon icon={faCaretDown} />
                 </summary>
                 <div
-                  className="dropdown_list px-6 pb-4 pt-5 min-w-full h-auto  absolute bg-white flex flex-wrap"
+                  className="dropdown_list px-4 pb-4 pt-5 min-w-full h-auto  absolute bg-white flex flex-wrap"
                   style={{ boxShadow: "0 0px 10px 0px rgba(5,59,123,0.2)" }}
                 >
                   {lstSocial &&
                     lstSocial.map((item: ISocialLinks, index: number) => (
                       <Link
                         key={item.social_id || index}
-                        className="group w-full dropdown-item flex justify-start gap-4 py-4 pl-6 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
+                        className="group w-full dropdown-item flex justify-start gap-4 py-4 xs:pl-[3.5rem] sm:pl-[2.5rem] md:px-[3rem] lg:p-4 hover:bg-homeCareTheme-primary  hover:rounded-[25px]"
                         href={`${item.link || "#"}`}
                         data-action="share/whatsapp/share"
                         target="_blank"
