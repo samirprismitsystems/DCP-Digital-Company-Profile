@@ -42,11 +42,11 @@ export default function GetInTouch() {
         const res = await ApiService.sendEmail(io);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
-          // setObjUser({
-          //   email: "",
-          //   fullName: "",
-          //   message: "",
-          // });
+          setObjUser({
+            email: "",
+            fullName: "",
+            message: "",
+          });
           return null;
         }
 
