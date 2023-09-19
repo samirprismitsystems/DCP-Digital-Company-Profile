@@ -783,7 +783,7 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
     margin-left: 0 !important;
   }
 }
-
+/* 
 @media (max-width: 400px) {
   h2,
   .h2 {
@@ -791,4 +791,4 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
     font-weight: bold;
     line-height: 1.3;
   }
-}
+} */

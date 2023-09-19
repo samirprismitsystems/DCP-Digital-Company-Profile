@@ -9,7 +9,7 @@ export const lstFeatures = [
     iconPack: "faPhoneVolume",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faPhoneVolume}
       />
     ),
@@ -20,7 +20,7 @@ export const lstFeatures = [
     iconPack: "faWhatsapp",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faWhatsapp}
       />
     ),
@@ -31,7 +31,7 @@ export const lstFeatures = [
     iconPack: "faEnvelope",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faEnvelope}
       />
     ),
@@ -42,7 +42,7 @@ export const lstFeatures = [
     iconPack: "faMapMarkedAlt",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faMapMarkedAlt}
       />
     ),
@@ -53,7 +53,7 @@ export const lstFeatures = [
     iconPack: "faAddressBook",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faAddressBook}
       />
     ),
@@ -64,7 +64,7 @@ export const lstFeatures = [
     iconPack: "faShareSquare",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faShareSquare}
       />
     ),
@@ -75,7 +75,7 @@ export const lstFeatures = [
     iconPack: "faEdit",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faEdit}
       />
     ),
@@ -86,7 +86,7 @@ export const lstFeatures = [
     iconPack: "faImages",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faImages}
       />
     ),
@@ -97,7 +97,7 @@ export const lstFeatures = [
     iconPack: "faQrcode",
     icon: (
       <FontAwesomeIcon
-        className="bg-transparent text-primary-lightDark"
+        className="bg-transparent w-[30px] h-[40px] text-primary-lightDark"
         icon={faQrcode}
       />
     ),

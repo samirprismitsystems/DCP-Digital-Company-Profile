@@ -59,7 +59,7 @@ export default function Testimonial() {
                   </p>
                 </div>
               </div>
-              
+
               {lstReview && lstReview.length > 0 && (
                 <div className="flex items-center xs:p-0 sm:p-16  justify-center w-full md:w-3/5 mb-10 md:mb-0">
                   <Swiper autoplay className="w-full">
@@ -72,7 +72,7 @@ export default function Testimonial() {
                           <div className="testimonial-slider flex flex-col item-start">
                             <p className="md:text-left text-center text-black text-[1.8rem] italic mb-6">
                               <FontAwesomeIcon
-                                className="bg-transparent text-primary-lightDark text-[6rem] mr-4"
+                                className="w-[45px] h-[45px] bg-transparent text-primary-lightDark text-[6rem] mr-4"
                                 icon={faQuoteLeft}
                               />
                               {item.user_message || "N/A"}
@@ -80,7 +80,7 @@ export default function Testimonial() {
 
                             <div className="flex items-center justify-center md:justify-start w-full space-x-4">
                               <FontAwesomeIcon
-                                className="bg-transparent text-secondary-greyDark text-[3rem]"
+                                className="w-[30px] h-[30px] bg-transparent text-secondary-greyDark text-[3rem]"
                                 icon={faUserCircle}
                               />
                               <h4 className="text-[2.2rem] text-secondary-greyDark text-left  font-bold">

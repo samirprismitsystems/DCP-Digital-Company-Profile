@@ -31,7 +31,7 @@ export default function FaqsList(props: IFaqsListProps) {
           >
             {isOpen ? (
               <FontAwesomeIcon
-                className="text-[2.5rem] p-4 bg-transparent font-semibold text-white"
+                className="w-[45px] h-[45px] text-[2.5rem] p-4 bg-transparent font-semibold text-white"
                 icon={faMinus}
                 style={{
                   transform: "rotate(180deg)",
@@ -41,7 +41,7 @@ export default function FaqsList(props: IFaqsListProps) {
               />
             ) : (
               <FontAwesomeIcon
-                className="text-[2.5rem] p-4 bg-transparent font-semibold text-white"
+                className="w-[45px] h-[45px] text-[2.5rem] p-4 bg-transparent font-semibold text-white"
                 icon={faAdd}
                 style={{
                   transform: "rotate(-180deg)",
