@@ -20,12 +20,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     isRender && (
       <Provider store={store}>
-        <div className="absolute z-[99999]">
+        <div className="absolute z-[12500]">
           <ToastContainer
             position="top-right"
             theme="light"
             autoClose={3000}
             pauseOnHover={true}
+            className="absolute z-[999999]"
           />
         </div>
         <Component {...pageProps} />

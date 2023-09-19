@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .w-custom-width {
   @apply w-[calc(100%-35rem)];
 }
@@ -515,7 +514,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
 .gadgetShop_theme .gadgetfontfamily {
   font-family: Gill Sans, sans-serif !important;
 }
@@ -619,6 +617,11 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
 }
 .owl-carousel .owl-nav button.owl-prev {
   left: -20px;
+}
+
+.Toastify {
+  position: absolute !important;
+  z-index: 999999 !important;
 }
 
 @media (min-width: 576px) {

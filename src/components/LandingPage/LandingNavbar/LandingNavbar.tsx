@@ -35,7 +35,7 @@ export default function LandingNavbar() {
       <nav
         className={`${
           scrollY >= 50 ? "shadow-md" : "shadow-none"
-        } bg-primary-main  border-gray-200 fixed w-full top-0 h-[10rem] z-[99999] p-t-[2.3rem] p-b-[1.5rem]`}
+        } bg-primary-main  border-gray-200 fixed w-full top-0 h-[10rem] z-[12000] p-t-[2.3rem] p-b-[1.5rem]`}
       >
         <MobileNavbar
           lstNavigations={landingPageNavigationMenuList}
