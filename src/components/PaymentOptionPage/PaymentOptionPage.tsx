@@ -136,7 +136,7 @@ export default function PaymentOptionPage() {
           }}
           onSubmit={objForm.handleSubmit(onSave)}
         >
-          {true ? (
+          {isLoading ? (
             <div className="py-[10rem]">
               <Loading />
             </div>
