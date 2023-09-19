@@ -20,6 +20,12 @@ export default function AdminNormalLayout({ children }: any) {
   return (
     <>
       <Head>
+        <link
+          id="favicon"
+          rel="shortcut icon"
+          href="/revenue.png"
+          sizes="any"
+        />
         <title>
           {Utils.capitalizeFirstLetter(selectedTitle) || "Admin Dashboard"}
         </title>

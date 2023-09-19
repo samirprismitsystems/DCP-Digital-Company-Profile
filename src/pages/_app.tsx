@@ -2,6 +2,7 @@ import { store } from "@/services/store/store";
 import "@/styles/globals.css";
 import "animate.css/animate.min.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useEffect, useState } from "react";

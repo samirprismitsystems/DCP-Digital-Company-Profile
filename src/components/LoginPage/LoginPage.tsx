@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import LoginFooter from "./LoginFooter/LoginFooter";
 import LoginForm from "./LoginForm/LoginForm";
 import LoginNavbar from "./LoginNavbar/LoginNavbar";
+import Head from "next/head";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,6 +17,14 @@ export default function LoginPage() {
 
   return (
     <>
+      <Head>
+        <link
+          id="favicon"
+          rel="shortcut icon"
+          href="/revenue.png"
+          sizes="any"
+        />
+      </Head>
       <LoginNavbar />
       <div
         className="container-fluid h-full"
