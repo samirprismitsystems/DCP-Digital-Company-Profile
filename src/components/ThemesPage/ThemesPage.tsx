@@ -41,10 +41,10 @@ export default function ThemesPage() {
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
-        <div className="h2 xs:text-[2.7rem] sm:text-[3rem]">
+        <div className="h2 sm:text-[3rem]">
           Themes For Company Profile Page
         </div>
-        <div className="h4 mt-1">Select Themes</div>
+        <div className="h4 mt-1">Select themes</div>
       </div>
       <div
         className="digital_profile_form  form_shadow bg-white min-h-[50%] rounded-2xl p-10 pb-0 block relative_box_for_loading"

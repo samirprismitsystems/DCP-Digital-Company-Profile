@@ -8,7 +8,7 @@ export default function TestimonialPage() {
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Testimonials</div>
-        <div className="h4 mt-1">Testimonials Data</div>
+        <div className="h4 mt-1">Testimonials data</div>
       </div>
       <div
         className="digital_profile_form form_shadow xs:w-full xl:w-4/5 m-auto mt-28 bg-white rounded-2xl p-10 pb-0 block"

@@ -12,7 +12,7 @@ export default function ServicePage() {
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
-        <div className="h2">Add company Services</div>
+        <div className="h2">Add Company Services</div>
         <div className="h4 mt-1">Upload best services</div>
       </div>
       <div

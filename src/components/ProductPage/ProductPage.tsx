@@ -12,7 +12,7 @@ export default function ProductPage() {
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
-        <div className="h2">Add company products</div>
+        <div className="h2">Add Company Products</div>
         <div className="h4 mt-1">
           Upload products which people can order online
         </div>

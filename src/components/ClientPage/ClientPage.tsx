@@ -13,7 +13,7 @@ export default function ClientPage() {
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Add Company Clients</div>
-        <div className="h4 mt-1">Add Clients</div>
+        <div className="h4 mt-1">Add clients</div>
       </div>
       <div
         className="relative_box_for_loading digital_profile_form form_shadow bg-white rounded-2xl p-10 pb-0 block"

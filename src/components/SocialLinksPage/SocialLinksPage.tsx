@@ -214,7 +214,7 @@ export default function SocialLinksPage() {
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
-        <div className="h2">Add social media links</div>
+        <div className="h2">Add Social Media Links</div>
         <div className="h4 mt-1">Please fill up your social media links</div>
       </div>
       <FormProvider {...objForm}>

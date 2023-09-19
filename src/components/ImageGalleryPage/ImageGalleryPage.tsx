@@ -12,7 +12,7 @@ export default function ImageGalleryPage() {
     <>
       <BackButton />
       <div className="tab_titles mb-8 -mt-4">
-        <div className="h2">Add company portfolios</div>
+        <div className="h2">Add Company Portfolios</div>
         <div className="h4 mt-1">Upload up to 10 Images</div>
       </div>
       <div
