@@ -19,9 +19,9 @@ export default function HomeCareHeroSection() {
             <div className="brand-img w-auto m-auto table-cell h-32 align-middle text-center justify-center items-center">
               <div className="flex items-center justify-center">
                 <img
-                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
-                    objCompany.company_logo
-                  }`}
+                  src={`${UPLOAD_IMAGE_URI}/${
+                    objCompany.company_id || Utils.getCompanyID()
+                  }/logo/${objCompany.company_logo}`}
                   alt="image.png"
                   className="max-w-[150px] h-auto w-full align-middle text-center"
                 />
@@ -29,7 +29,9 @@ export default function HomeCareHeroSection() {
             </div>
           </div>
 
-          <h5 className="head6 text-center">{objCompany.company_name || "N/A"}</h5>
+          <h5 className="head6 text-center">
+            {objCompany.company_name || "N/A"}
+          </h5>
           <h5 className="link_title font-bold homecarefont">
             {objCompany.business_segment || "N/A"}
           </h5>

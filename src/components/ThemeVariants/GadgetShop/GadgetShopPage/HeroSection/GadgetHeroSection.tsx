@@ -17,9 +17,9 @@ export default function GadgetHeroSection() {
             <div className="store-logo rounded-50  xs:w-[90px] xs:h-[90px] bg-white flex justify-center items-center mx-auto mt-0 xs:mb-6 md:mb-8 text-center text-white gadgetfontfamily ">
               {" "}
               <img
-                src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
-                  objCompany.company_logo
-                }`}
+                src={`${UPLOAD_IMAGE_URI}/${
+                  objCompany.company_id || Utils.getCompanyID()
+                }/logo/${objCompany.company_logo}`}
                 width="62"
                 height="49"
                 alt="logo"

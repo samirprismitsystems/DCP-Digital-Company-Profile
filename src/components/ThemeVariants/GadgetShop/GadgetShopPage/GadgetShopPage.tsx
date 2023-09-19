@@ -17,7 +17,7 @@ export default function GadgetShopPage(props: any) {
         <link
           id="favicon"
           rel="shortcut icon"
-          href={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
+          href={`${UPLOAD_IMAGE_URI}/${props.result.company.company_id ||Utils.getCompanyID()}/logo/${
             props.result.company.company_logo
           }`}
           sizes="any"

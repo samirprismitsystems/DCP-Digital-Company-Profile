@@ -1,9 +1,8 @@
-import PageCircularLoading from "@/common/PageCircularLoading";
-import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { IHomeCareInfo } from "@/types/themes/portfolio";
 import Head from "next/head";
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import HomeCareAboutUs from "./AboutUs/HomeCareAboutUs";
 import HomeCareContactIcons from "./ContactInformation/HomeCareContactIcons";
 import HomeCareContactInformation from "./ContactInformation/HomeCareContactInformation";
@@ -18,23 +17,21 @@ import HomeCareMadeWithLove from "./MadeWithLove/HomeCareMadeWithLove";
 import HomeCarePaymentDetails from "./Payments/HomeCarePaymentDetails";
 import HomeCareProducts from "./Products/HomeCareProducts";
 import HomeCareServices from "./Services/HomeCareServices";
-import HomeCareVideos from "./Videos/HomeCareVideos";
-import { UPLOAD_IMAGE_URI } from "@/services/config";
 
 export const HomeCareContextApi = createContext<IHomeCareInfo>(
   {} as IHomeCareInfo
 );
 
-export default function HomeCarePage(props:any) {
+export default function HomeCarePage(props: any) {
   return (
     <>
       <Head>
         <link
           id="favicon"
           rel="shortcut icon"
-          href={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
-            props.result.company.company_logo
-          }`}
+          href={`${UPLOAD_IMAGE_URI}/${
+            Utils.getCompanyID() || props.result.company.company_id
+          }/logo/${props.result.company.company_logo}`}
           sizes="any"
         />
         <title>Home Care</title>
