@@ -7,7 +7,7 @@ export default function AdminThemePage() {
       <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Add Themes For Company</div>
-        <div className="h4 mt-1">Add Themes</div>
+        <div className="h4 mt-1">Add themes</div>
       </div>
       <div
         className="digital_profile_form form_shadow bg-white  min-h-[50%] rounded-2xl p-10 pb-0 block relative_box_for_loading"

@@ -48,7 +48,7 @@ export default function AdminAddCompanyForm() {
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSave)}>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8">
           <TextField
             isRequired={true}
             name="firstName"

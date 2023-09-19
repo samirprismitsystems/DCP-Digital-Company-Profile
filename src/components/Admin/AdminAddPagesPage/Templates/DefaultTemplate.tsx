@@ -20,7 +20,7 @@ export default function DefaultTemplate() {
         title="Page Title"
       />
       <Editor savePath="pageContent" />
-      <div className="pt-32">
+      <div className="xs:pt-4  xl:pt-16">
         <h2 className="pb-8">SEO Section</h2>
         <div className="form_field xs:w-full  sm:w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 pb-3 mb-16 transition-all duration-300 ease-linear">
           <div

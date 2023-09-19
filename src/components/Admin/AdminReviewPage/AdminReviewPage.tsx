@@ -15,7 +15,7 @@ export default function AdminReviewPage() {
       <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">User Review</div>
-        <div className="h4 mt-1">Add Or Update User Review</div>
+        <div className="h4 mt-1">Add or update user review</div>
       </div>
       <button
         onClick={() => {

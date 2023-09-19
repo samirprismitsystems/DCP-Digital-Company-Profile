@@ -15,8 +15,8 @@ export default function Editor(props: { savePath: string }) {
   }, [props.savePath]);
 
   return (
-    <div className="w-full pb-14 form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black xs:mb-8 sm:mb-16 transition-all duration-300 ease-linear">
-        <CustomQuill
+    <div className="w-full xs:pb-[14rem] xsOne:pb-[11rem] sm:pb-[9rem] md:pb-[7rem] lg:pb-[8rem] xl:pb-[5rem] form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black xs:mb-8 sm:mb-16 transition-all duration-300 ease-linear">
+      <CustomQuill
         value={value || ""}
         onChange={(content: any) => {
           setValue(content);

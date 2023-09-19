@@ -9,7 +9,7 @@ export default function AdminCompanyPage() {
     <>
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Company List</div>
-        <div className="h4 mt-1">All Company List</div>
+        <div className="h4 mt-1">All company list</div>
       </div>
       <Link
         href={"/admindashboard/addcompany"}

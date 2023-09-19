@@ -14,7 +14,7 @@ export default function AdminSocialMediaPage() {
       <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Add Social Media Data</div>
-        <div className="h4 mt-1">Upload Social Media For Company</div>
+        <div className="h4 mt-1">Upload social media for company</div>
       </div>
       <button
         onClick={() => {

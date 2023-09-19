@@ -15,7 +15,7 @@ export default function AdminPagesPage() {
       <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Pages</div>
-        <div className="h4 mt-1">Add or Update pages</div>
+        <div className="h4 mt-1">Add or update pages</div>
       </div>
       <button
         onClick={() => {

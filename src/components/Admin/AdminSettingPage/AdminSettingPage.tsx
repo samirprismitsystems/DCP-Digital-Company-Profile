@@ -12,7 +12,7 @@ export default function AdminSettingPage() {
       <AdminBackButton />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Website Setting</div>
-        <div className="h4 mt-1">Change Website Settings</div>
+        <div className="h4 mt-1">Change website settings</div>
       </div>
 
       <ul className="tabs text-base pt-16 list-none  m-0 flex border-b border-solid border-secondary-main ">
