@@ -64,7 +64,7 @@ export default function GadgetGallery() {
                 >
                   {" "}
                   <img
-                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${
+                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/portfolio/${
                       item.portfolio_image
                     }`}
                     alt="gallery-img"

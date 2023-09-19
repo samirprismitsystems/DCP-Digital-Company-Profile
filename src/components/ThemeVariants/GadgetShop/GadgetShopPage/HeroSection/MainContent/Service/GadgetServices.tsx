@@ -68,7 +68,7 @@ export default function GadgetServices() {
                     alt="services-img"
                     title="services-img"
                     className="lazyload h-[25rem] img-fluid w-full max-w-full min-h-full align-middle"
-                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
+                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/service/${
                       item.service_image
                     }`}
                   />{" "}

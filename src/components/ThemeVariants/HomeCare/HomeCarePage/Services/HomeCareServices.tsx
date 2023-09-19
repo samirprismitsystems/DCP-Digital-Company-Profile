@@ -28,7 +28,7 @@ export default function HomeCareServices() {
                 <div className="image w-full h-[290px] py-6">
                   <img
                     alt="image.png"
-                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/service/${
+                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/service/${
                       item.service_image
                     }`}
                     className="max-w-[400px] block object-cover m-auto w-full h-full align-middle"

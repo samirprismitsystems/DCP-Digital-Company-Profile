@@ -103,7 +103,7 @@ export default function HomeCareGallery() {
               <div key={item.portfolio_id} className="image w-full h-auto py-6">
                 <img
                   alt="image.png"
-                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/portfolio/${
+                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/portfolio/${
                     item.portfolio_image
                   }`}
                   className="max-w-[400px] object-cover block m-auto p-4 w-full h-full align-middle"

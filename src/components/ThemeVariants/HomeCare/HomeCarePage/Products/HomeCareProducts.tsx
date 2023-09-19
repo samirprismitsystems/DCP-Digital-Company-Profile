@@ -27,7 +27,7 @@ export default function HomeCareProducts() {
               <div className="product-image w-full h-auto  mb-1 bg-homeCareTheme-primary text-center min-h-[243px]">
                 <img
                   alt="image.png"
-                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/product/${
+                  src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/product/${
                     item.product_image
                   }`}
                   className="min-h-[243px] img-fluid w-full h-full text-center align-middle "

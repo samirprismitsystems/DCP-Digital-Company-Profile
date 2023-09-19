@@ -67,7 +67,7 @@ export default function GadgetProducts() {
                     alt="product-img"
                     title="product-img"
                     className="lazyload w-auto align-middle h-[26rem]"
-                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/product/${
+                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/product/${
                       item.product_image
                     }`}
                   />{" "}
