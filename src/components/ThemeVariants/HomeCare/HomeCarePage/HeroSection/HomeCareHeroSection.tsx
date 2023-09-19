@@ -18,6 +18,7 @@ export default function HomeCareHeroSection() {
           <div className="brand-image w-72 table  ml-auto mr-auto mt-auto mb-7 text-center  justify-center items-center">
             <div className="brand-img w-auto m-auto table-cell h-32 align-middle text-center justify-center items-center">
               <div className="flex items-center justify-center">
+                
                 <img
                   src={`${UPLOAD_IMAGE_URI}/${
                     objCompany.company_id || Utils.getCompanyID()
