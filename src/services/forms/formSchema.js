@@ -203,7 +203,10 @@ export const adminAddCompanyFormSchema = yup.object({
   firstName: yup.string().optional(),
   lastName: yup.string().optional(),
   email: yup.string().optional(),
-  mobile: yup.string().optional(),
+  mobile: yup.string().matches(
+      /^[0-9]{10}$/,
+      "Phone number must be a 10-digit number (e.g., 1234567890)"
+    ),
   createPassword: yup.string().optional(),
   confirmPassword: yup
     .string()

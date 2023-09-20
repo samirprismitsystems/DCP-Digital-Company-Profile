@@ -35,6 +35,7 @@ export default function AdminAddCompanyForm() {
       const res = await ApiService.registerUserAdmin(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
+        objForm.reset();
         return null;
       }
 
@@ -45,6 +46,14 @@ export default function AdminAddCompanyForm() {
   };
 
   const passWordError = objForm.formState.errors["confirmPassword"]?.message;
+  const mobileError = objForm.formState.errors["mobile"]?.message;
+  if (mobileError) {
+    Utils.showErrorMessage(mobileError);
+  }
+
+  if (passWordError) {
+    Utils.showErrorMessage(passWordError);
+  }
   return (
     <FormProvider {...objForm}>
       <form onSubmit={objForm.handleSubmit(onSave)}>
@@ -75,6 +84,7 @@ export default function AdminAddCompanyForm() {
           title="Mobile No.*"
           placeHolder="Enter Your Mobile Number"
         />
+
         <TextField
           isRequired={true}
           name="createPassword"
@@ -89,11 +99,11 @@ export default function AdminAddCompanyForm() {
           placeHolder="Enter Your Confirm Password"
           type="password"
         />
-        {passWordError && (
+        {/* {passWordError && (
           <span className="text-red-600 text-2xl font-medium">
             {passWordError}
           </span>
-        )}
+        )} */}
         <AdminCommonButton hideNextButton={true} />
       </form>
     </FormProvider>
