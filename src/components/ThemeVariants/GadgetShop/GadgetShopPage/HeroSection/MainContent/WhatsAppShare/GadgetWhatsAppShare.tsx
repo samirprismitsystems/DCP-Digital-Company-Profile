@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
@@ -25,6 +26,9 @@ export default function GadgetWhatsAppShare() {
               );
 
               setMobile(undefined);
+            }else{
+              Utils.showErrorMessage("Mobile number must be 10 digit!")
+              return null;
             }
           }}
         >

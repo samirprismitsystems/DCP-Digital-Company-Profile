@@ -20,7 +20,7 @@ export default function PortfolioPage(props: any) {
         <link
           id="favicon"
           rel="shortcut icon"
-          href={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
+          href={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || props.result.company.company_id}/logo/${
             props.result.company.company_logo
           }`}
           sizes="any"

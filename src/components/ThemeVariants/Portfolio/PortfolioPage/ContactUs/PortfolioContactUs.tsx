@@ -5,7 +5,7 @@ import GetHeader from "../common/GetHeader";
 
 export default function PortfolioContactUs() {
   const [objData, setObjData] = useState({
-    clientName: "",
+    clientName: "samir",
     email: "",
     mobile: "",
     message: "",
@@ -13,6 +13,10 @@ export default function PortfolioContactUs() {
   const onSave = async (e: any) => {
     try {
       e.preventDefault();
+      if (objData.mobile.length !== 10){
+        Utils.showErrorMessage('Mobile number must be 10 digit!')
+        return null;
+      };
       const io: any = new FormData();
       io.append("client_name", objData.clientName);
       io.append("email_address", objData.email);
@@ -26,13 +30,13 @@ export default function PortfolioContactUs() {
 
       const res = await ApiService.createEnquiry(io);
       if (!res.error) {
+        Utils.showSuccessMessage(res.message);
         setObjData({
           clientName: "",
           email: "",
           mobile: "",
           message: "",
         });
-        Utils.showSuccessMessage(res.message);
         return null;
       }
 
@@ -66,17 +70,21 @@ export default function PortfolioContactUs() {
               clientName: e.target.value,
             });
           }}
+          value={objData.clientName || ""}
         />
         <input
           required={true}
-          type="text"
+          type="number"
           value={objData.mobile || ""}
           className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
           placeholder="Enter Your Mobile Number"
           onChange={(e: any) => {
-            handleOnChange({
-              mobile: e.target.value,
-            });
+            const userInput = e.target.value;
+            if (userInput.length <= 10) {
+              handleOnChange({
+                mobile: userInput,
+              });
+            }
           }}
         />
         <input

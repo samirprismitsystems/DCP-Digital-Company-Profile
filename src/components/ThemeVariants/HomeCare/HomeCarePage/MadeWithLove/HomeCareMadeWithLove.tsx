@@ -19,7 +19,7 @@ export default function HomeCareMadeWithLove() {
           <span className="inline-block text-[20px] text-homeCareTheme-textColor">
             Made with{" "}
             <FontAwesomeIcon
-              className="text-[#ff0000] text-[4rem] font-bold"
+              className="w-[40px] h-[40px] text-[#ff0000] text-[4rem] font-bold"
               icon={faHeart}
             />{" "}
             by{" "}
@@ -27,9 +27,9 @@ export default function HomeCareMadeWithLove() {
           <img
             alt="image.png"
             className="w-[100px] -mt-[6px] inline-block"
-            src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/logo/${
-              objCompany.company_logo
-            }`}
+            src={`${UPLOAD_IMAGE_URI}/${
+              objCompany.company_id || Utils.getCompanyID()
+            }/logo/${objCompany.company_logo}`}
           />{" "}
         </p>
       </div>

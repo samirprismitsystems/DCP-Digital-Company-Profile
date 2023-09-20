@@ -24,7 +24,10 @@ export default function HomeCareEnquiryForm() {
   const onSave = async (event: any) => {
     try {
       event.preventDefault();
-
+      if (objEnquiry.phone.length !== 10) {
+        Utils.showErrorMessage("Mobile number must be 10 digit!");
+        return null;
+      }
       const io: any = new FormData();
       io.append("client_name", objEnquiry.clientName);
       io.append("email_address", objEnquiry.email);
@@ -109,7 +112,7 @@ export default function HomeCareEnquiryForm() {
                   const userInput = e.target.value;
                   if (userInput.length <= 10) {
                     updateState({
-                      phone: e.target.value,
+                      phone: userInput,
                     });
                   }
                 }}

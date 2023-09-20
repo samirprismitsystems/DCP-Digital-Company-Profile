@@ -1,3 +1,4 @@
+import Utils from "@/services/Utils";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
@@ -12,6 +13,10 @@ export default function HomeCareShareCard() {
 
   const onSave = (e: any) => {
     e.preventDefault();
+    if(objUser.mobile.length !==10){
+      Utils.showErrorMessage('Mobile number must be 10 digit!')
+      return null;
+    }
     let redirectLink = `https://api.whatsapp.com/send?phone=+91${objUser.mobile}&text='hello I am ${objUser.name}'`;
     if (typeof window !== "undefined") {
       window.open(redirectLink);
@@ -65,7 +70,7 @@ export default function HomeCareShareCard() {
                 if (userInput.length <= 10) {
                   SetObjUser((prevState: any) => ({
                     ...prevState,
-                    mobile: e.target.value,
+                    mobile: userInput,
                   }));
                 }
               }}

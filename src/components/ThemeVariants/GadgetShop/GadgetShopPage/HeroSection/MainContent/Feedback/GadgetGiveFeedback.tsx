@@ -25,7 +25,10 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
   const onSave = async (e: any) => {
     try {
       e.preventDefault();
-
+      if (objFeedback.phoneNumber.length !== 10) {
+        Utils.showErrorMessage("Mobile number must be 10 digit!");
+        return null;
+      }
       const io: any = new FormData();
       io.append("client_name", objFeedback.clientName);
       io.append("email_address", objFeedback.email);
@@ -146,9 +149,11 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
                 className="placeholder:text-redThemeGreyTextColor focus-within:outline-none border-[1px] border-solid border-[#e5e5e5]  bg-[#f0f5f9] rounded-[10px] w-full min-h-[5rem] py-8 px-4 max-h-[375px] mb-6 text-3xl"
                 placeholder="Enter Your Mobile No"
                 onChange={(e: any) => {
-                  handleOnChange({
-                    phoneNumber: e.target.value,
-                  });
+                  const userInput = e.target.value;
+                  if (userInput.length <= 10)
+                    handleOnChange({
+                      phoneNumber: userInput,
+                    });
                 }}
               />
             </>
