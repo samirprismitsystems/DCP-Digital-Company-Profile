@@ -1,3 +1,4 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import {
   faFacebookF,
   faInstagram,
@@ -9,8 +10,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
-import { ThemeContextApi } from "@/pages/[slug]";
 import QRCode from "react-qr-code";
 
 const iconMapping: any = {

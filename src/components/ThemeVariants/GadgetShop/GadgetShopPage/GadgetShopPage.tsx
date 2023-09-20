@@ -6,10 +6,6 @@ import { createContext } from "react";
 import GadgetHeroSection from "./HeroSection/GadgetHeroSection";
 import GadgetMainContent from "./HeroSection/MainContent/GadgetMainContent";
 
-export const GadgetShopContextApi = createContext<IHomeCareInfo>(
-  {} as IHomeCareInfo
-);
-
 export default function GadgetShopPage(props: any) {
   return (
     <>

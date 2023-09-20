@@ -1,9 +1,12 @@
+import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import GetHeader from "../common/GetHeader";
 
 export default function PortfolioContactUs() {
+  const objCompany = useContext(ThemeContextApi).company;
+
   const [objData, setObjData] = useState({
     clientName: "",
     email: "",
@@ -13,19 +16,19 @@ export default function PortfolioContactUs() {
   const onSave = async (e: any) => {
     try {
       e.preventDefault();
-      if (objData.mobile.length !== 10){
-        Utils.showErrorMessage('Mobile number must be 10 digit!')
+      if (objData.mobile.length !== 10) {
+        Utils.showErrorMessage("Mobile number must be 10 digit!");
         return null;
-      };
+      }
       const io: any = new FormData();
       io.append("client_name", objData.clientName);
       io.append("email_address", objData.email);
       io.append("phone_number", objData.mobile);
       io.append("message", objData.message);
-      if (Utils.getUserID()) {
-        io.append("user_id", Utils.getUserID());
+      if (Utils.getUserID() || objCompany.user_id) {
+        io.append("user_id", Utils.getUserID() || objCompany.user_id);
       }
-      io.append("company_id", Utils.getCompanyID());
+      io.append("company_id", objCompany.company_id || Utils.getCompanyID());
       io.append("isupdate", false);
 
       const res = await ApiService.createEnquiry(io);

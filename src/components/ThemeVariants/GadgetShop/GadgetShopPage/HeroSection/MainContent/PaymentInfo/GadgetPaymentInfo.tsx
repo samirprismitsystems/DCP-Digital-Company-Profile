@@ -1,9 +1,8 @@
 import PortfolioPaymentCard from "@/components/ThemeVariants/Portfolio/PortfolioPage/PaymentInfo/PortfolioPaymentCard";
+import { ThemeContextApi } from "@/pages/[slug]";
 import { useContext } from "react";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
 import GadgetBankDetails from "./GadgetBankDetails";
-import { ThemeContextApi } from "@/pages/[slug]";
 
 export default function GadgetPaymentInfo() {
   const objPaymentInfo = useContext(ThemeContextApi).paymentinfo;

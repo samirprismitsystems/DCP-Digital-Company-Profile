@@ -1,8 +1,8 @@
 import Ratting from "@/components/ThemeVariants/Portfolio/PortfolioPage/Feedback/Ratting";
+import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { useContext, useState } from "react";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 
 interface IGadgetGiveFeedbackProps {
   title?: string;
@@ -12,7 +12,7 @@ interface IGadgetGiveFeedbackProps {
 }
 
 export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
-  const objCompany = useContext(GadgetShopContextApi).company;
+  const objCompany = useContext(ThemeContextApi).company;
 
   const [objFeedback, setObjFeedback] = useState({
     clientName: "",
@@ -36,14 +36,14 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
         io.append("ratting", rate);
         io.append("comment", objFeedback.comment);
       }
-      io.append("company_id", Utils.getCompanyID());
+      io.append("company_id", objCompany.company_id || Utils.getCompanyID());
       io.append("isupdate", false);
 
       if (props.isAnotherSubmit) {
         io.append("message", objFeedback.comment);
         io.append("phone_number", objFeedback.phoneNumber);
-        if (Utils.getUserID()) {
-          io.append("user_id", Utils.getUserID());
+        if (Utils.getUserID() || objCompany.user_id) {
+          io.append("user_id", Utils.getUserID() || objCompany.user_id);
         }
       }
 

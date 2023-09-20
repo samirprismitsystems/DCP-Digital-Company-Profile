@@ -64,9 +64,9 @@ export default function GadgetGallery() {
                 >
                   {" "}
                   <img
-                    src={`${UPLOAD_IMAGE_URI}/${Utils.getCompanyID() || item.company_id}/portfolio/${
-                      item.portfolio_image
-                    }`}
+                    src={`${UPLOAD_IMAGE_URI}/${
+                      item.company_id || Utils.getCompanyID()
+                    }/portfolio/${item.portfolio_image}`}
                     alt="gallery-img"
                     title="gallery-img"
                     className="lazyload object-cover img-fluid w-full max-w-full h-full align-middle"

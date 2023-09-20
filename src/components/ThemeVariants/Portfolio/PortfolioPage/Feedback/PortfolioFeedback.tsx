@@ -10,6 +10,8 @@ import Ratting from "./Ratting";
 
 export default function PortfolioFeedback() {
   const lstTestimonial = useContext(ThemeContextApi).testimonial;
+  const objCompany = useContext(ThemeContextApi).company;
+
   const dispatch = useDispatch();
   const [objFeedback, setObjFeedback] = useState({
     clientName: "",
@@ -26,7 +28,7 @@ export default function PortfolioFeedback() {
       io.append("email_address", objFeedback.emailAddress);
       io.append("ratting", rate);
       io.append("comment", objFeedback.comment);
-      io.append("company_id", Utils.getCompanyID());
+      io.append("company_id", objCompany.company_id || Utils.getCompanyID());
       io.append("isupdate", false);
 
       const res = await ApiService.createTestimonial(io);

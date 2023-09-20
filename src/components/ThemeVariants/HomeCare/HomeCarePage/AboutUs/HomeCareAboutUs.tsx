@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
 import { ThemeContextApi } from "@/pages/[slug]";
+import { useContext } from "react";
 
 export default function HomeCareAboutUs() {
-    const objCompany = useContext(ThemeContextApi).company;
-
+  const objCompany = useContext(ThemeContextApi).company;
 
   return (
     <div

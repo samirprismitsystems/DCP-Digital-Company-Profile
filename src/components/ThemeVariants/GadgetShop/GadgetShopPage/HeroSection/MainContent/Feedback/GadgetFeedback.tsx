@@ -1,6 +1,5 @@
 import GetPortfolioFeedBackReview from "@/components/ThemeVariants/Portfolio/PortfolioPage/Feedback/GetPortfolioFeedBackReview";
 import { useContext } from "react";
-import { GadgetShopContextApi } from "../../../GadgetShopPage";
 import GetGadgetHeader from "../AboutUs/GetGadgetHeader";
 import GadgetGiveFeedback from "./GadgetGiveFeedback";
 import { ThemeContextApi } from "@/pages/[slug]";

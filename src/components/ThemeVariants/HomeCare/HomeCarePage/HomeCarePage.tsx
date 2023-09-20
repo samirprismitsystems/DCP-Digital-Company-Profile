@@ -1,8 +1,6 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import { IHomeCareInfo } from "@/types/themes/portfolio";
 import Head from "next/head";
-import { createContext } from "react";
 import HomeCareAboutUs from "./AboutUs/HomeCareAboutUs";
 import HomeCareContactIcons from "./ContactInformation/HomeCareContactIcons";
 import HomeCareContactInformation from "./ContactInformation/HomeCareContactInformation";
@@ -18,10 +16,6 @@ import HomeCarePaymentDetails from "./Payments/HomeCarePaymentDetails";
 import HomeCareProducts from "./Products/HomeCareProducts";
 import HomeCareServices from "./Services/HomeCareServices";
 
-export const HomeCareContextApi = createContext<IHomeCareInfo>(
-  {} as IHomeCareInfo
-);
-
 export default function HomeCarePage(props: any) {
   return (
     <>
@@ -30,7 +24,7 @@ export default function HomeCarePage(props: any) {
           id="favicon"
           rel="shortcut icon"
           href={`${UPLOAD_IMAGE_URI}/${
-            Utils.getCompanyID() || props.result.company.company_id
+            props.result.company.company_id || Utils.getCompanyID()
           }/logo/${props.result.company.company_logo}`}
           sizes="any"
         />

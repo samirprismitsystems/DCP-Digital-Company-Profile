@@ -1,17 +1,13 @@
-import {
-  faFacebookMessenger,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
+import { ThemeContextApi } from "@/pages/[slug]";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
   faEnvelope,
   faMapMarkerAlt,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
-import { HomeCareContextApi } from "../HomeCarePage";
-import { ThemeContextApi } from "@/pages/[slug]";
 import Link from "next/link";
+import { useContext } from "react";
 
 export default function HomeCareContactIcons() {
   const objCompany = useContext(ThemeContextApi).company;

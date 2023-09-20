@@ -56,7 +56,7 @@ export default function HomeCareSaveContact() {
       const vCardEmail = `EMAIL;TYPE=WORK:${objCompany.company_email}`;
       const vCardAddress = `ADR;TYPE=WORK:;;${objCompany.address};;;`;
       const vCardUrl = `URL:${window.location.href}`;
-      const vCardImage = `PHOTO;VALUE=uri:${UPLOAD_IMAGE_URI}/${Utils.getCompanyID()}/${
+      const vCardImage = `PHOTO;VALUE=uri:${UPLOAD_IMAGE_URI}/${ objCompany.company_id|| Utils.getCompanyID()}/${
         objCompany.company_logo
       }`;
       const vCardTimeStamp = `REV:${new Date().toISOString()}`;
