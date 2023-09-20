@@ -5,7 +5,7 @@ import GetHeader from "../common/GetHeader";
 
 export default function PortfolioContactUs() {
   const [objData, setObjData] = useState({
-    clientName: "samir",
+    clientName: "",
     email: "",
     mobile: "",
     message: "",
