@@ -25,9 +25,11 @@ export default function GadgetGiveFeedback(props: IGadgetGiveFeedbackProps) {
   const onSave = async (e: any) => {
     try {
       e.preventDefault();
-      if (objFeedback.phoneNumber.length !== 10) {
-        Utils.showErrorMessage("Mobile number must be 10 digit!");
-        return null;
+      if (props.addEmailMobile) {
+        if (objFeedback.phoneNumber.length !== 10) {
+          Utils.showErrorMessage("Mobile number must be 10 digit!");
+          return null;
+        }
       }
       const io: any = new FormData();
       io.append("client_name", objFeedback.clientName);
