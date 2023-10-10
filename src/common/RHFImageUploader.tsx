@@ -54,6 +54,7 @@ export default function RHFImageUploader({
       >
         {imgPlaceholder && !selectedImagePath && imgPlaceholder}
         {selectedImagePath && (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             suppressHydrationWarning
             src={`${selectedImagePath}`}
