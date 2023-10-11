@@ -6,6 +6,16 @@
   @apply w-[calc(100%-35rem)];
 }
 
+.gold_card_shadow {
+  transition: all 500ms ease-in-out;
+  box-shadow: 0px 3px 0px 0px #e04343;
+}
+
+.gold_card_shadow:hover {
+  box-shadow: 0px 3px 0px 0px #fbff00;
+  transform: translate(0, -15px);
+}
+
 .custom-list-style > ol {
   list-style: revert;
 }
@@ -628,16 +638,64 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   animation: seeMoreButtonEffect 2s ease infinite;
 }
 
-.effectBox{
-  overflow: hidden;
-  transition: all 0.4s linear;
+.effect {
+  padding-left: 15px;
 }
-.effectBox:hover img{
+
+.effect::before {
+  content: "";
+  display: table;
+}
+
+.effect .img:last-child {
+  margin-right: -15px;
+}
+
+.effect .img:first-child {
   margin-left: -15px;
 }
-.effectBox:hover img{
- margin-left: 15px;
+
+.effect .img {
+  position: relative;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: red solid 2px;
 }
+
+.effect .img img {
+  display: block;
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.img:hover img {
+  transform: translate3d(0, 0, 0);
+}
+
+.img img {
+  transition: opacity 0.35s, transform 0.35s;
+  transform: translate3d(-40px, 0, 0);
+}
+
+/* 
+.effect-image:hover img {
+  transform: translate3d(40px, 0, 0);
+}
+
+.effect-image> img {
+  transform: translate3d(-40px, 0, 0);
+  width: 100%;
+  transition: opacity 0.35s, transform 0.35s;
+}
+
+.effect .effect-image{
+  border: red solid 3px;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+} */
 
 @keyframes seeMoreButtonEffect {
   0%,
