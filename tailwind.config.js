@@ -45,6 +45,9 @@ module.exports = {
           textColor: "#93959d",
           opacityBorder: "rgba(5, 59, 123,0.5)",
         },
+        gold: {
+          primary: "#E04343",
+        },
         inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",
         theme01: "#8d1c9a",

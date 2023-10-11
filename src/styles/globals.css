@@ -624,6 +624,37 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   z-index: 999999 !important;
 }
 
+.seeMoreButtonEffect {
+  animation: seeMoreButtonEffect 2s ease infinite;
+}
+
+.effectBox{
+  overflow: hidden;
+  transition: all 0.4s linear;
+}
+.effectBox:hover img{
+  margin-left: -15px;
+}
+.effectBox:hover img{
+ margin-left: 15px;
+}
+
+@keyframes seeMoreButtonEffect {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 100%;

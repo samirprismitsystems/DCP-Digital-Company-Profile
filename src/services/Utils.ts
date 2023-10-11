@@ -196,6 +196,10 @@ class Utils {
 
     return formattedWorkingHours;
   }
+
+  static getContent(data?: any) {
+    return data ? data : "N/A";
+  }
 }
 
 export default Utils;
