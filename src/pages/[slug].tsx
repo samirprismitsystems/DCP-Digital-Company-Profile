@@ -66,23 +66,28 @@ export default function UserViewSection() {
   }, []);
 
   const getTheme = () => {
-
-    if (themeID === THEME_TYPE.GADGET) {
-      return <GadgetShopPage result={result} />;
-    } else if (themeID === THEME_TYPE.HOMECARE) {
-      return <HomeCarePage result={result} />;
-    } else if (themeID === THEME_TYPE.PORTFOLIO) {
-      return <PortfolioPage result={result} />;
-    } else if (themeID === THEME_TYPE.GOLD) {
-      return <GoldTheme />
-    } else {
+    if (slug !== result.company?.company_slug) {
       return (
-        <PageNotFound
-          desc={"Please select the theme from dashboard!"}
-          title="Themes Not Available!"
-          hideButton={true}
-        />
+        <PageNotFound />
       );
+    } else {
+      if (themeID === THEME_TYPE.GADGET) {
+        return <GadgetShopPage result={result} />;
+      } else if (themeID === THEME_TYPE.HOMECARE) {
+        return <HomeCarePage result={result} />;
+      } else if (themeID === THEME_TYPE.PORTFOLIO) {
+        return <PortfolioPage result={result} />;
+      } else if (themeID === THEME_TYPE.GOLD) {
+        return <GoldTheme />
+      } else {
+        return (
+          <PageNotFound
+            desc={"Please select the theme from dashboard!"}
+            title="Themes Not Available!"
+            hideButton={true}
+          />
+        );
+      }
     }
   };
 

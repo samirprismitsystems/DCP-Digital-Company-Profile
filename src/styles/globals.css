@@ -6,16 +6,6 @@
   @apply w-[calc(100%-35rem)];
 }
 
-.gold_card_shadow {
-  transition: all 500ms ease-in-out;
-  box-shadow: 0px 3px 0px 0px #e04343;
-}
-
-.gold_card_shadow:hover {
-  box-shadow: 0px 3px 0px 0px #fbff00;
-  transform: translate(0, -15px);
-}
-
 .custom-list-style > ol {
   list-style: revert;
 }
@@ -638,64 +628,44 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   animation: seeMoreButtonEffect 2s ease infinite;
 }
 
-.effect {
-  padding-left: 15px;
+.goldTheme .owl-dots button.owl-dot.active,
+.goldTheme .owl-dots button.owl-dot:hover {
+  background: #e04343 !important;
+  transform: scale(1.2);
 }
 
-.effect::before {
-  content: "";
-  display: table;
+.goldTheme .owl-dots button.owl-dot {
+  width: 13px !important;
+  height: 13px !important;
+  display: inline-block !important;
+  background: #5c696a !important;
+  background: #fff !important;
+  cursor: pointer !important;
+  text-indent: -9999px !important;
+  border-radius: 20px !important;
+  margin: 0 0.5rem !important;
+  border: 3px solid #c9cbca !important;
 }
 
-.effect .img:last-child {
-  margin-right: -15px;
+.goldTheme .owl-dots button.owl-dot:focus {
+  outline: none !important;
 }
 
-.effect .img:first-child {
-  margin-left: -15px;
+.goldTheme .owl-theme .owl-dots .owl-dot {
+  display: inline-flex !important;
 }
 
-.effect .img {
-  position: relative;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  border: red solid 2px;
-}
+@media (min-width: 850px) {
+  .gold_card_shadow {
+    transition: all 500ms ease-in-out;
+    box-shadow: 0px 3px 0px 0px #e04343;
+  }
 
-.effect .img img {
-  display: block;
-  margin: 0;
-  padding: 0;
-  height: auto;
+  .gold_card_shadow:hover {
+    box-shadow: 0px 3px 0px 0px #fbff00;
+    transform: translate(0, -15px);
+  }
 }
-
-.img:hover img {
-  transform: translate3d(0, 0, 0);
-}
-
-.img img {
-  transition: opacity 0.35s, transform 0.35s;
-  transform: translate3d(-40px, 0, 0);
-}
-
-/* 
-.effect-image:hover img {
-  transform: translate3d(40px, 0, 0);
-}
-
-.effect-image> img {
-  transform: translate3d(-40px, 0, 0);
-  width: 100%;
-  transition: opacity 0.35s, transform 0.35s;
-}
-
-.effect .effect-image{
-  border: red solid 3px;
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-} */
 
 @keyframes seeMoreButtonEffect {
   0%,
