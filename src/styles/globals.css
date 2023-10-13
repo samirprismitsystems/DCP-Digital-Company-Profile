@@ -678,6 +678,10 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   border: solid 2px white !important;
 }
 
+.reviewImageForGold {
+  background: url("/gold_theme/clients.png");
+}
+
 @media (min-width: 850px) {
   .gold_card_shadow {
     transition: all 500ms ease-in-out;

@@ -6,6 +6,7 @@ import GoldGallery from './GoldGallery/GoldGallery';
 import GoldProduct from './GoldProduct/GoldProduct';
 import GoldShareCards from './GoldShareCards/GoldShareCards';
 import GoldHero from './HeroSection/GoldHero';
+import GoldReview from './GoldReview/GoldReview';
 
 export default function GoldTheme() {
     const objItem = useContext(ThemeContextApi);
@@ -17,6 +18,7 @@ export default function GoldTheme() {
             <GoldShareCards />
             <GoldGallery />
             <GoldProduct />
+            {/* <GoldReview/> */}
             <GoldContactUs />
         </section>
     );
