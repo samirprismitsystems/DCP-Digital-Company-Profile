@@ -15,7 +15,7 @@ export default function GoldProduct() {
             if (window.innerWidth < 620) {
                 setSlidesToShow(1);
             } else if (window.innerWidth < 950) {
-                setSlidesToShow(3);
+                setSlidesToShow(2);
             } else if (window.innerWidth < 2000) {
                 setSlidesToShow(3);
             } else {
@@ -34,7 +34,7 @@ export default function GoldProduct() {
     const options = {
         loop: true,
         items: slidesToShow,
-        autoplay: false,
+        autoplay: true,
         dots: true,
         nav: false,
         autoplayTimeout: 3000,

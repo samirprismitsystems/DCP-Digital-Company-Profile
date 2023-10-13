@@ -655,6 +655,29 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   display: inline-flex !important;
 }
 
+/* this styles for the image previewer */
+.styles-module_wrapper__1I_qj {
+  background-color: #000000c3 !important;
+  z-index: 4 !important ;
+}
+
+/* styles for the navigation button  */
+.styles-module_navigation__1pqAE {
+  color: rgb(255, 254, 254) !important;
+  opacity: 1 !important;
+}
+
+/* styles for the close button  */
+.styles-module_close__2I1sI {
+  color: rgb(255, 255, 255) !important;
+  font-size: 5rem !important;
+  opacity: 1 !important;
+}
+
+.styles-module_image__2hdkJ {
+  border: solid 2px white !important;
+}
+
 @media (min-width: 850px) {
   .gold_card_shadow {
     transition: all 500ms ease-in-out;

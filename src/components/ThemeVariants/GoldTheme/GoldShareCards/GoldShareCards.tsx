@@ -60,7 +60,7 @@ END:VCARD`;
   return (
     <section id='shareCards' className='py-24 bg-white'>
       <div className="container">
-        <div className="py-[100px] grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
           <GoldCards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
           <GoldCards iconName={faShareSquare} title="Share With Friends" clickHandler={() => {
             if (navigator.share) {

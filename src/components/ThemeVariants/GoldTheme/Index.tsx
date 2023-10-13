@@ -2,6 +2,7 @@ import { ThemeContextApi } from '@/pages/[slug]';
 import { useContext } from 'react';
 import GoldAboutUs from './GoldAboutUs/GoldAboutUs';
 import GoldContactUs from './GoldContactUs/GoldContactUs';
+import GoldGallery from './GoldGallery/GoldGallery';
 import GoldProduct from './GoldProduct/GoldProduct';
 import GoldShareCards from './GoldShareCards/GoldShareCards';
 import GoldHero from './HeroSection/GoldHero';
@@ -14,6 +15,7 @@ export default function GoldTheme() {
             <GoldHero />
             <GoldAboutUs />
             <GoldShareCards />
+            <GoldGallery />
             <GoldProduct />
             <GoldContactUs />
         </section>
