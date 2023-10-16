@@ -14,7 +14,7 @@ export default function GoldThemeMap() {
                         objCompany.address
                     )}&z=15&output=embed`}
                     width="100%"
-                    height="445"
+                    height="580"
                     frameBorder={0}
                     className="border-0"
                     allowFullScreen={true}

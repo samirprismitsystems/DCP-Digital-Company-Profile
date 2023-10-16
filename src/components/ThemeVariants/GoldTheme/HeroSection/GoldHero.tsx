@@ -1,5 +1,6 @@
 import { ThemeContextApi } from '@/pages/[slug]';
 import Utils from '@/services/Utils';
+import { UPLOAD_IMAGE_URI } from '@/services/config';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
@@ -13,18 +14,18 @@ export default function GoldHero() {
                 <div className='grid xs:grid-cols-1 md:grid-cols-2 md:gap-8 justify-between items-center'>
                     <div className='firstColumn xs:text-center md:text-left'>
                         <div className='xs:my-auto xs:block sm:mb-8'>
-                            <img className='xs:m-auto md:m-0' src={'/gold_theme/company_logo.png'} alt="company_logo.png" />
+                            <img className='xs:m-auto md:m-0' src={`${UPLOAD_IMAGE_URI}/${objItem.company_id || Utils.getCompanyID()}/logo/${objItem.company_logo}`} alt="company_logo.png" />
                         </div>
                         <h1>{Utils.getContent(objItem?.company_name)}</h1>
                         <h2 className='font-normal'>{Utils.getContent(objItem?.business_segment)}</h2>
                     </div>
                     <div className='secondColumn xs:xs:mt-20'>
                         <div className='xs:my-auto xs:block sm:mb-8'>
-                            <img className='xs:m-auto md:m-0 md:float-right' src={'/gold_theme/hero_side_image.avif'} alt="hero_side_image.avif" />
+                            <img className='xs:m-auto md:m-0 md:float-right' src={`${UPLOAD_IMAGE_URI}/${objItem.company_id || Utils.getCompanyID()}/banner/${objItem.company_banner}`} alt="hero_side_image.avif" />
                         </div>
                     </div>
                 </div>
-                <div className='xs:mt-20 md:mt-[150] lg:mt-[200px] text-center'>
+                <div className='xs:mt-20 md:mt-[150] text-center'>
                     <div className='inline-block px-4 cursor-pointer' onClick={() => {
                         Utils.scrollToView('aboutUs')
                     }}>
