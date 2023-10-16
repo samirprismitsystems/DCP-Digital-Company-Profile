@@ -48,25 +48,25 @@ export default function LandingPage() {
 
   if (metaData && Object.keys(metaData).length <= 0)
     return <PageCircularLoading />;
-
+    
   return (
     <LandingPageContextApi.Provider value={{ metaData, pageDetails }}>
       <Head>
         <meta
           name="description"
-          content={metaData.meta_description || ""}
+          content={metaData?.meta_description || ""}
           key="desc"
         />
-        <meta property="og:image" content={metaData.meta_image || ""} />
-        <meta property="og:image:width" content={metaData.page_id || ""} />
-        <title>{metaData.meta_title || "Digital Company Profile"}</title>
+        <meta property="og:image" content={metaData?.meta_image || ""} />
+        <meta property="og:image:width" content={metaData?.page_id || ""} />
+        <title>{metaData?.meta_title || "Digital Company Profile"}</title>
       </Head>
 
       <LandingNavbar />
       <HeroSection />
       <HowItsWork />
       <DigitalFeatures />
-      <WhyUseDigitalCard cardImage={pageDetails.ftimg} />
+      <WhyUseDigitalCard cardImage={pageDetails?.ftimg} />
       <FreeTrail />
       <Testimonial />
       <GetInTouch />

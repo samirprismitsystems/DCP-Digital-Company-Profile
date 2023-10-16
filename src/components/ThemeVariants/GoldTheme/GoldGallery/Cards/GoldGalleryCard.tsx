@@ -1,15 +1,26 @@
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 
-export default function GoldGalleryCard() {
+interface IGoldGalleryCardProps {
+    companyID: string;
+    srcPath: string
+    onClick?: () => void;
+}
+export default function GoldGalleryCard(props: IGoldGalleryCardProps) {
     return (
         <>
-            <div className="item group cursor-pointer xs:w-full h-[400px] xlOne:w-[400px] mr-auto mb-6">
-                <div className="effectBox xs:min-h-full h-full xlOne:min-h-[3.4rem] mb-5 p-4">
+            <div onClick={() => {
+                if (props.onClick) {
+                    props.onClick();
+                }
+            }} className="galleryCard px-8 group hover:cursor-pointer item xs:w-full h-full xlOne:w-[400px] mr-auto mb-6">
+                <div className="xs:min-h-full h-full xlOne:min-h-[3.4rem] mb-5 px-2  py-0 ">
                     <img
-                        alt="gallery-img"
+                        alt="logo.png"
                         title="gallery-img"
                         id="upload-image"
-                        className="samir  w-full max-w-full h-full block object-contain object-center align-middle group-hover:grayscale-0 grayscale"
-                        src={`/gold_theme/hero_side_image.avif`}
+                        className="w-full max-w-full h-full block object-cover object-center align-middle group-hover:grayscale-0 grayscale"
+                        src={`${props.srcPath}`}
                     />
                 </div>
             </div>

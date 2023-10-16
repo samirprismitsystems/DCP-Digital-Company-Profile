@@ -30,6 +30,7 @@
   margin-bottom: 5px;
   margin-left: 20px;
 }
+
 .relative_box_for_loading {
   position: relative;
 }
@@ -628,15 +629,108 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   animation: seeMoreButtonEffect 2s ease infinite;
 }
 
-.effectBox{
-  overflow: hidden;
-  transition: all 0.4s linear;
+.goldTheme .owl-dots button.owl-dot.active,
+.goldTheme .owl-dots button.owl-dot:hover {
+  background: #e04343 !important;
+  transform: scale(1.2);
 }
-.effectBox:hover img{
-  margin-left: -15px;
+
+.goldTheme .owl-dots button.owl-dot {
+  width: 13px !important;
+  height: 13px !important;
+  display: inline-block !important;
+  background: #5c696a !important;
+  background: #fff !important;
+  cursor: pointer !important;
+  text-indent: -9999px !important;
+  border-radius: 20px !important;
+  margin: 0 0.5rem !important;
+  border: 3px solid #c9cbca !important;
 }
-.effectBox:hover img{
- margin-left: 15px;
+
+.goldTheme .owl-dots button.owl-dot:focus {
+  outline: none !important;
+}
+
+.goldTheme .owl-theme .owl-dots .owl-dot {
+  display: inline-flex !important;
+}
+
+/* this styles for the image previewer */
+.styles-module_wrapper__1I_qj {
+  background-color: #000000c3 !important;
+  z-index: 4 !important ;
+}
+
+/* styles for the navigation button  */
+.styles-module_navigation__1pqAE {
+  color: rgb(255, 254, 254) !important;
+  opacity: 1 !important;
+}
+
+/* styles for the close button  */
+.styles-module_close__2I1sI {
+  color: rgb(255, 255, 255) !important;
+  font-size: 5rem !important;
+  opacity: 1 !important;
+}
+
+.styles-module_image__2hdkJ {
+  border: solid 2px white !important;
+}
+
+.gold_testimonial {
+  position: relative;
+  background: center / cover url("/gold_theme/clients.png") no-repeat;
+}
+
+.gold_testimonial::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:rgb(255 11 11 / 71%);
+}
+
+.gold_testimonial .owl-theme .owl-dots {
+  text-align: left !important;
+}
+
+
+.gold_testimonial .owl-dots button.owl-dot.active,
+.gold_testimonial .owl-dots button.owl-dot:hover {
+  background: #ffe800 !important;
+  transform: scale(1.2);
+}
+
+.gold_testimonial .owl-dots button.owl-dot {
+  width: 13px !important;
+  height: 13px !important;
+  display: inline-block !important;
+  background: #ffffff !important;
+  cursor: pointer !important;
+  text-indent: -9999px !important;
+  border-radius: 20px !important;
+  margin: 0 0.5rem !important;
+  border: none !important;
+}
+
+.gold_testimonial .owl-dots button.owl-dot:focus {
+  outline: none !important;
+}
+
+@media (min-width: 850px) {
+  .gold_card_shadow {
+    transition: all 500ms ease-in-out;
+    box-shadow: 0px 3px 0px 0px #e04343;
+  }
+
+  .gold_card_shadow:hover {
+    box-shadow: 0px 3px 0px 0px #fbff00;
+    transform: translate(0, -15px);
+  }
 }
 
 @keyframes seeMoreButtonEffect {
