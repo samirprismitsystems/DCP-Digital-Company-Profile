@@ -2,8 +2,22 @@ import { IUser } from "@/types/commonTypes";
 import axios from "axios";
 import AuthService from "./AuthServices";
 import { BASE_URI } from "./config";
+import Utils from "./Utils";
 
 const ApiService = {
+
+  async checkUser(userData: any){
+    const res = await axios.post(
+      `${BASE_URI}api/user/checkuser`,userData
+    );
+
+    if (res) {
+      return res.data;
+    }
+
+    return res;
+  },
+
   async getLandingPageResource() {
     const res = await axios.get(
       `${BASE_URI}api/pages/getsinglepage/landing-page`
@@ -83,7 +97,12 @@ const ApiService = {
   },
 
   async getAdminSiteSettingInfo() {
-    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`,
+    {
+      headers: {"content-type": "application/json", "Authorization": "Bearer Hello"}
+    }
+    );
     return res.data;
   },
 
