@@ -15,9 +15,9 @@ export default function Index() {
             <Hero />
             <AboutUs />
             <ShareCards />
-            <Gallery />
-            <Service />
             <Product />
+            <Service />
+            <Gallery />
             <Review />
             <ContactUs />
             <Footer />

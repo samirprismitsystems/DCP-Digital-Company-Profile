@@ -46,7 +46,7 @@ export default function Gallery() {
         <section id='shareCards' className='py-24 bg-white'>
             <div className="container">
                 <h2 className="uppercase text-center text-gold-primary my-16">Gallery</h2>
-                <div className="py-4 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-8">
+                <div className="py-4 grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center">
                     {images.map((item, index) => (
                         <GalleryCard
                             key={index}

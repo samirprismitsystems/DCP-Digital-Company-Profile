@@ -129,8 +129,8 @@ export default function ContactUs() {
                                     })
                                 }} value={objUser.message} rows={15} className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Write your message here...' />
                             </div>
-                            <div className='pt-8 md:float-right xs:block xs:m-auto'>
-                                <button type='submit' className='hover:bg-yellow-300 hover:text-gold-primary transition-all duration-300 bg-gold-primary text-white py-4 px-8 text-[1.6rem] font-medium'>Send Message</button>
+                            <div className='w-full flex xs:justify-center xs:items-center lg:items-end lg:justify-end my-4'>
+                                <button type='submit' className='hover:bg-yellow-300 hover:text-gold-primary transition-all duration-300 bg-gold-primary text-white py-4 text-[1.6rem] font-medium px-8'>Send Message</button>
                             </div>
                         </form>
                     </div>

@@ -26,7 +26,7 @@ export default function Review() {
         <section className='gold_testimonial xs:h-auto'>
             <div className="container h-full">
                 <div className="h-full py-32 text-left flex justify-center items-center flex-col">
-                    <h2 className="relative text-center uppercase text-white after:border-b-[2px] after:border-b-white after:border-solid after:block after:w-[120px] after:mt-2 after:mb-8 after:mx-auto">What Our <span className="text-gold-secondary">Clients</span> Said</h2> 
+                    <h2 className="relative text-center uppercase text-white after:border-b-[2px] after:border-b-white after:border-solid after:block after:w-[120px] after:mt-2 after:mb-8 after:mx-auto">What Our <span className="text-gold-secondary">Clients</span> Said</h2>
 
                     {lstTestimonial.length > 0 && (
                         <OwlCarousel className="owl-carousel owl-theme" {...options}>
@@ -54,7 +54,7 @@ export default function Review() {
                                             <div className="stars flex flex-wrap justify-center items-center">
                                                 <FontAwesomeIcon
                                                     icon={faStar}
-                                                        className="text-gold-secondary w-8 h-8 mt-2"
+                                                    className="text-gold-secondary w-8 h-8 mt-2"
                                                 />
                                             </div>
                                         )}
