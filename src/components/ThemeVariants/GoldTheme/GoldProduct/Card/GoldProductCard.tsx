@@ -28,7 +28,7 @@ export default function GoldProductCard(props: IGoldProductCardProps) {
                 <div className="mb-8">
                     <span className={`${props.isLeft ? "text-white" : "text-gadgetTheme-text"} font-semibold text-[1.8rem]`}>{`Rs. ${Utils.getContent(props.price)}`}</span>
                 </div>
-                <button className={`${props.isLeft ? "text-white  hover:bg-white hover:text-gold-primary border-white" : "text-gadgetTheme-text hover:text-black border-gadgetTheme-text hover:border-black"} bg-transparent  border  text-[1.8rem] font-semibold py-6 px-14 transition-all duration-700`}>
+                <button type="button" className={`${props.isLeft ? "text-white  hover:bg-white hover:text-gold-primary border-white" : "text-gadgetTheme-text hover:text-black border-gadgetTheme-text hover:border-black"} bg-transparent  border  text-[1.8rem] font-semibold py-6 px-14 transition-all duration-700`}>
                     Buy Now
                 </button>
             </div>

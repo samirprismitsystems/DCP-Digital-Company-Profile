@@ -52,7 +52,7 @@ export default function GoldContactUs() {
                     <GoldThemeMap />
                     <div className='xs:mt-16 md:mt-0'>
                         <form>
-                            <div className='grid grid-cols-2 gap-16'>
+                            <div className='grid xs:grid-cols-1 md:grid-cols-2 xs:gap-6 md:gap-16'>
                                 <input type="text" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Your Name' />
                                 <input type="text" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Email Address' />
                             </div>

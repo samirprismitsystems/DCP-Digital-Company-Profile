@@ -1,7 +1,6 @@
-import { ThemeContextApi } from '@/pages/[slug]';
-import { useContext } from 'react';
 import GoldAboutUs from './GoldAboutUs/GoldAboutUs';
 import GoldContactUs from './GoldContactUs/GoldContactUs';
+import GoldFooter from './GoldFooter/GoldFooter';
 import GoldGallery from './GoldGallery/GoldGallery';
 import GoldProduct from './GoldProduct/GoldProduct';
 import GoldReview from './GoldReview/GoldReview';
@@ -10,7 +9,6 @@ import GoldShareCards from './GoldShareCards/GoldShareCards';
 import GoldHero from './HeroSection/GoldHero';
 
 export default function GoldTheme() {
-    const objItem = useContext(ThemeContextApi);
 
     return (
         <section className='goldTheme'>
@@ -22,6 +20,7 @@ export default function GoldTheme() {
             <GoldProduct />
             <GoldReview />
             <GoldContactUs />
+            <GoldFooter />
         </section>
     );
 }
