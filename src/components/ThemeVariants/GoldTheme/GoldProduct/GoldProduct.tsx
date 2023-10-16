@@ -1,19 +1,65 @@
 import { ThemeContextApi } from "@/pages/[slug]";
-import { useContext } from "react";
+import dynamic from "next/dynamic";
+import { useContext, useEffect, useState } from "react";
 import GoldProductCard from "./Card/GoldProductCard";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+    ssr: false,
+});
 
 export default function GoldProduct() {
     const lstProduct = useContext(ThemeContextApi).product;
+    const [slidesToShow, setSlidesToShow] = useState<number>(1);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 620) {
+                setSlidesToShow(1);
+            } else if (window.innerWidth < 950) {
+                setSlidesToShow(2);
+            } else if (window.innerWidth < 2000) {
+                setSlidesToShow(3);
+            } else {
+                setSlidesToShow(3);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    const options = {
+        loop: true,
+        items: slidesToShow,
+        autoplay: false,
+        dots: true,
+        nav: false,
+        autoplayTimeout: 3000,
+        smartSpeed: 1100,
+    };
 
     if (!lstProduct) return null;
     return (
-        <section className="pb-24 bg-white">
-            <h2 className="uppercase text-center text-gold-primary py-16">Products</h2>
-            <section className="bg-gold-primary ">
-                {lstProduct.map((item, index: number) => (
-                    <GoldProductCard key={index} desc={item.product_desc} title={item.product_name} companyID={parseInt(item.company_id)} image={item.product_image} price={parseInt(item.product_price)} isLeft={(index % 2 == 0)} />
-                ))}
-            </section>
+        <section className='py-24 bg-white'>
+            <div className="container">
+                <h2 className="uppercase text-center text-gold-primary my-16">Products</h2>
+                {lstProduct.length > 0 && (
+                    <OwlCarousel className="owl-carousel owl-theme" {...options}>
+                        {lstProduct.map((item, index) => (
+                            <GoldProductCard
+                                key={index}
+                                title={item.product_name}
+                                desc={item.product_desc}
+                                price={item.product_price}
+                                srcPath={item.product_image}
+                                companyID={item.company_id} />
+                        ))}
+                    </OwlCarousel>
+                )}
+            </div>
         </section>
     )
 }

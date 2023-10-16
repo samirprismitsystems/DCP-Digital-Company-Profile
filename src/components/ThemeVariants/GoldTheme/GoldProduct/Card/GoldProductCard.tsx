@@ -2,41 +2,34 @@ import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 
 interface IGoldProductCardProps {
-    image: string;
+    companyID: string;
+    srcPath: string;
     title: string;
     desc: string;
-    isLeft: boolean;
-    companyID: number;
-    price: number;
+    price: string;
 }
 
 export default function GoldProductCard(props: IGoldProductCardProps) {
+
     return (
-        <div className="grid xs:grid-cols-1 lg:grid-cols-2">
-            {props.isLeft && (
-                <div className="h-full relative">
-                    <img className="h-full w-full object-fill object-center" src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()}/product/${props.image}`} alt="product.png" />
+        <div>
+            <div className="px-8 group hover:cursor-pointer item xs:w-full h-full xlOne:w-[400px] mr-auto mb-6">
+                <div className="xs:min-h-full h-full xlOne:min-h-[3.4rem] mb-5 px-2  py-0 ">
+                    <img
+                        alt="logo.png"
+                        title="gallery-img"
+                        id="upload-image"
+                        className="w-full max-w-full h-full block object-cover object-center align-middle group-hover:grayscale-0 grayscale"
+                        src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()
+                            }/product/${props.srcPath}`}
+                    />
                 </div>
-            )}
-            <div className={`p-8 ${props.isLeft ? "bg-gold-primary" : "bg-white"}`}>
-                <h5 className={`mb-4 relative text-left uppercase ${props.isLeft ? "text-white" : "text-gadgetTheme-text"} after:border-b-[2px] ${props.isLeft ? "after:border-b-white" : "after:border-b-black"} after:border-solid after:block after:w-[65px] after:mt-2 after:mb-8`}>{Utils.getContent(props.title)}</h5>
-                <div className="mb-8">
-                    <span className={`${props.isLeft ? "text-white" : "text-gadgetTheme-text"} text-[1.8rem]`}>
-                        {Utils.getContent(props.desc)}
-                    </span>
+                <h3 className="pt-4 text-center after:border-b-[2px] after:border-b-[#CCCCCC] after:border-solid after:block after:w-[65px] after:my-4 after:mx-auto">{Utils.getContent(props.title)}</h3>
+                <div className="py-4 text-center">
+                    <span className="text-[1.8rem]">{Utils.getContent(props.desc)}</span>
                 </div>
-                <div className="mb-8">
-                    <span className={`${props.isLeft ? "text-white" : "text-gadgetTheme-text"} font-semibold text-[1.8rem]`}>{`Rs. ${Utils.getContent(props.price)}`}</span>
-                </div>
-                <button type="button" className={`${props.isLeft ? "text-white  hover:bg-white hover:text-gold-primary border-white" : "text-gadgetTheme-text hover:text-black border-gadgetTheme-text hover:border-black"} bg-transparent  border  text-[1.8rem] font-semibold py-6 px-14 transition-all duration-700`}>
-                    Buy Now
-                </button>
+                <h2 className="px-2 py-2 font-bold text-[1.8rem] text-center">Rs.{Utils.getContent(props.price)}</h2>
             </div>
-            {!props.isLeft && (
-                <div className="h-full relative">
-                    <img className="h-full w-full object-fill object-center" src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()}/product/${props.image}`} alt="product.png" />
-                </div>
-            )}
         </div>
     )
 }
