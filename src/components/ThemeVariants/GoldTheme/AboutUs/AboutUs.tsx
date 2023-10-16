@@ -2,7 +2,7 @@ import { ThemeContextApi } from '@/pages/[slug]'
 import Utils from '@/services/Utils';
 import React, { useContext } from 'react'
 
-export default function GoldAboutUs() {
+export default function AboutUs() {
     const objItem = useContext(ThemeContextApi)?.company;
 
     return (

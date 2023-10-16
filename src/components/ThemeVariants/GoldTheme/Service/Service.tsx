@@ -1,12 +1,12 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import GoldServiceCard from "./Cards/GoldServiceCard";
+import ServiceCard from "./Cards/ServiceCard";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
 });
 
-export default function GoldService() {
+export default function Service() {
     const lstService = useContext(ThemeContextApi).service;
     const [slidesToShow, setSlidesToShow] = useState<number>(1);
 
@@ -49,7 +49,7 @@ export default function GoldService() {
                 {lstService.length > 0 && (
                     <OwlCarousel className="owl-carousel owl-theme" {...options}>
                         {lstService.map((item, index) => (
-                            <GoldServiceCard
+                            <ServiceCard
                                 key={index}
                                 title={item.service_name}
                                 desc={item.service_desc}

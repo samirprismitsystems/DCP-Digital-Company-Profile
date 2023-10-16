@@ -1,7 +1,7 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import { useContext } from "react";
 
-export default function GoldThemeMap() {
+export default function Map() {
     const objCompany = useContext(ThemeContextApi).company;
 
 

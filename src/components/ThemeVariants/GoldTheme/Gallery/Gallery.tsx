@@ -2,10 +2,10 @@ import { ThemeContextApi } from "@/pages/[slug]";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useCallback, useContext, useEffect, useState } from "react";
 import ImageViewer from "react-simple-image-viewer";
-import GoldGalleryCard from "./Cards/GoldGalleryCard";
+import GalleryCard from "./Cards/GalleryCard";
 
 
-export default function GoldGallery() {
+export default function Gallery() {
     const lstPortfolio = useContext(ThemeContextApi).portfolio;
     const objItem = useContext(ThemeContextApi).portfolio[0];
     const [currentImage, setCurrentImage] = useState(0);
@@ -48,7 +48,7 @@ export default function GoldGallery() {
                 <h2 className="uppercase text-center text-gold-primary my-16">Gallery</h2>
                 <div className="py-4 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-8">
                     {images.map((item, index) => (
-                        <GoldGalleryCard
+                        <GalleryCard
                             key={index}
                             srcPath={item}
                             onClick={() => openImageViewer(index)}

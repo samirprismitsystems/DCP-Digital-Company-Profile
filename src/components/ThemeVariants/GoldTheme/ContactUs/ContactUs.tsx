@@ -3,11 +3,11 @@ import ApiService from '@/services/ApiServices';
 import Utils from '@/services/Utils';
 import { faEnvelope, faMapMarkerAlt, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useEffect, useState } from 'react';
-import GoldThemeMap from '../GoldThemeMap/GoldThemeMap';
-import GoldContactCard from './ContactCard/GoldContactCard';
-import GoldFollowUs from './FollowUs/GoldFollowUs';
+import Map from '../Map/Map';
+import ContactCard from './ContactCard/ContactCard';
+import FollowUs from './FollowUs/FollowUs';
 
-export default function GoldContactUs() {
+export default function ContactUs() {
     const objItem = useContext(ThemeContextApi).company;
     const [objUser, setObjUser] = useState({
         name: "",
@@ -92,12 +92,12 @@ export default function GoldContactUs() {
         <section className='py-24 bg-white relative text-center block'>
             <div className="container">
                 <div className='flex xs:flex-wrap gap-y-6 lg:flex-nowrap'>
-                    <GoldContactCard isMobile={isMobile} title='Contact Number' value={`+91 ${objItem.company_contact}`} iconName={faPhone} />
-                    <GoldContactCard isMobile={isMobile} title='Email Address' value={objItem.company_email} iconName={faEnvelope} />
-                    <GoldContactCard isTablet={isTablet} isMobile={isMobile} title='Address' value={objItem.address} iconName={faMapMarkerAlt} />
+                    <ContactCard isMobile={isMobile} title='Contact Number' value={`+91 ${objItem.company_contact}`} iconName={faPhone} />
+                    <ContactCard isMobile={isMobile} title='Email Address' value={objItem.company_email} iconName={faEnvelope} />
+                    <ContactCard isTablet={isTablet} isMobile={isMobile} title='Address' value={objItem.address} iconName={faMapMarkerAlt} />
                 </div>
                 <div className="grid xs:grid-cols-1 md:grid-cols-2 gap-8 pt-24">
-                    <GoldThemeMap />
+                    <Map />
                     <div className='xs:mt-16 md:mt-0'>
                         <form onSubmit={onSave}>
                             <div className='grid xs:grid-cols-1 md:grid-cols-2 xs:gap-6 md:gap-16'>
@@ -136,7 +136,7 @@ export default function GoldContactUs() {
                     </div>
                 </div>
                 <div className="iconPacks my-8 mt-32 flex items-center justify-center">
-                    <GoldFollowUs />
+                    <FollowUs />
                 </div>
             </div>
         </section>

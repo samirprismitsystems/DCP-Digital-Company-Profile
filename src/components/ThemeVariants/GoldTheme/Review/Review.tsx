@@ -10,7 +10,7 @@ const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
 });
 
 
-export default function GoldReview() {
+export default function Review() {
     const lstTestimonial = useContext(ThemeContextApi).testimonial;
 
     const options = {

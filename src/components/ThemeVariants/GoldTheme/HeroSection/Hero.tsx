@@ -5,11 +5,11 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
 
-export default function GoldHero() {
+export default function Hero() {
     const objItem = useContext(ThemeContextApi).company;
 
     return (
-        <section className='goldHero h-auto bg-white pt-[100px] pb-[20px]'>
+        <section className='Hero h-auto bg-white pt-[100px] pb-[20px]'>
             <div className="container">
                 <div className='grid xs:grid-cols-1 md:grid-cols-2 md:gap-8 justify-between items-center'>
                     <div className='firstColumn xs:text-center md:text-left'>

@@ -1,12 +1,12 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import GoldProductCard from "./Card/GoldProductCard";
+import ProductCard from "./Card/ProductCard";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
 });
 
-export default function GoldProduct() {
+export default function Product() {
     const lstProduct = useContext(ThemeContextApi).product;
     const [slidesToShow, setSlidesToShow] = useState<number>(1);
 
@@ -49,7 +49,7 @@ export default function GoldProduct() {
                 {lstProduct.length > 0 && (
                     <OwlCarousel className="owl-carousel owl-theme" {...options}>
                         {lstProduct.map((item, index) => (
-                            <GoldProductCard
+                            <ProductCard
                                 key={index}
                                 title={item.product_name}
                                 desc={item.product_desc}

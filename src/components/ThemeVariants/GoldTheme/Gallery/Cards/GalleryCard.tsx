@@ -1,12 +1,12 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 
-interface IGoldGalleryCardProps {
+interface IGalleryCardProps {
     companyID: string;
     srcPath: string
     onClick?: () => void;
 }
-export default function GoldGalleryCard(props: IGoldGalleryCardProps) {
+export default function GalleryCard(props: IGalleryCardProps) {
     return (
         <>
             <div onClick={() => {

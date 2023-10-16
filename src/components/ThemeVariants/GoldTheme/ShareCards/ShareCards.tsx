@@ -5,9 +5,9 @@ import { faFacebookF, faInstagram, faLinkedinIn, faTelegram, faTwitter, faWhatsa
 import { faCamera, faClock, faSave, faShareSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import GoldCards from "./Cards/GoldCards";
+import Cards from "./Cards/Cards";
 
-export default function GoldShareCards() {
+export default function ShareCards() {
   const objCompany = useContext(ThemeContextApi).company;
 
   function downloadToFile(content: any, filename: string, contentType: string) {
@@ -61,8 +61,8 @@ END:VCARD`;
     <section id='shareCards' className='py-24 bg-white'>
       <div className="container">
         <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
-          <GoldCards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
-          <GoldCards iconName={faShareSquare} title="Share With Friends" clickHandler={() => {
+          <Cards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
+          <Cards iconName={faShareSquare} title="Share With Friends" clickHandler={() => {
             if (navigator.share) {
               navigator
                 .share({
@@ -113,8 +113,8 @@ END:VCARD`;
               </span>
             </div>)
           } />
-          <GoldCards iconName={faSave} clickHandler={onSaveCardClick} title="Save" value="Save VCard Contact" />
-          <GoldCards iconName={faClock} title=" Working Hours" value={`${Utils.getWorkingHours(
+          <Cards iconName={faSave} clickHandler={onSaveCardClick} title="Save" value="Save VCard Contact" />
+          <Cards iconName={faClock} title=" Working Hours" value={`${Utils.getWorkingHours(
             objCompany.working_hours_from
           )} - ${Utils.getWorkingHours(objCompany.working_hours_to)}`} />
         </div>

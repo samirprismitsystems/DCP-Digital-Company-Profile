@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { useContext } from 'react';
 
-export default function GoldFollowUs() {
+export default function FollowUs() {
     const lstSocial = useContext(ThemeContextApi).social;
 
     const iconMapping: any = {
@@ -28,7 +28,7 @@ export default function GoldFollowUs() {
                         key={item.social_id}
                         href={"#"}
                         target="_blank"
-                        className={`mx-2 my-4 w-16 h-16 text-center text-white flex justify-center items-center border-b-[2px] border-b-white border-dotted group bg-gold-primary hover:bg-[#ffe800] hover:border-b-gold-primary`}
+                        className={`mx-2 my-4 w-16 h-16 text-center text-white flex justify-center items-center border-b-[2px] border-b-white border-dotted group bg-gold-primary hover:bg-[#ffe800] hover:border-b--primary`}
                     >
                         <FontAwesomeIcon
                             className="text-3xl font-bold group-hover:text-gold-primary "
