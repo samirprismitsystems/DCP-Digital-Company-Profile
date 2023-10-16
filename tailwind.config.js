@@ -48,6 +48,7 @@ module.exports = {
         gold: {
           primary: "#E04343",
           info: "#F3F5F8",
+          secondary: "#ffe800",
         },
         inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",

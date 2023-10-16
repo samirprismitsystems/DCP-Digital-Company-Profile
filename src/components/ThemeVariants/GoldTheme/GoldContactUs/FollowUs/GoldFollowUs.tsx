@@ -25,6 +25,7 @@ export default function GoldFollowUs() {
                 const iconComponent = iconMapping[item.socialmedia_logo];
                 return (
                     <Link
+                        key={item.social_id}
                         href={"#"}
                         target="_blank"
                         className={`mx-2 my-4 w-16 h-16 text-center text-white flex justify-center items-center border-b-[2px] border-b-white border-dotted group bg-gold-primary hover:bg-[#ffe800] hover:border-b-gold-primary`}

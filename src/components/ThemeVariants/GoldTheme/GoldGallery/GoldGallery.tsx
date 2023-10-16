@@ -47,18 +47,14 @@ export default function GoldGallery() {
             <div className="container">
                 <h2 className="uppercase text-center text-gold-primary my-16">Gallery</h2>
                 <div className="py-4 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-8">
-                    {images.map((item, index) => {
-                        return (
-                            <>
-                                <GoldGalleryCard
-                                    key={item}
-                                    srcPath={item}
-                                    onClick={() => openImageViewer(index)}
-                                    companyID={objItem.company_id} />
-                            </>
-
-                        )
-                    })}
+                    {images.map((item, index) => (
+                        <GoldGalleryCard
+                            key={index}
+                            srcPath={item}
+                            onClick={() => openImageViewer(index)}
+                            companyID={objItem.company_id} />
+                    )
+                    )}
                     {isViewerOpen && (
                         <ImageViewer
                             src={images}

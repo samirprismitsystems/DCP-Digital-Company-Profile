@@ -1,7 +1,7 @@
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 
-interface IGoldProductCardProps {
+interface IGoldServiceCardProps {
     companyID: string;
     srcPath: string;
     title: string;
@@ -9,7 +9,7 @@ interface IGoldProductCardProps {
     price: string;
 }
 
-export default function GoldProductCard(props: IGoldProductCardProps) {
+export default function GoldServiceCard(props: IGoldServiceCardProps) {
 
     return (
         <div>
@@ -21,14 +21,14 @@ export default function GoldProductCard(props: IGoldProductCardProps) {
                         id="upload-image"
                         className="w-full max-w-full h-full block object-cover object-center align-middle group-hover:grayscale-0 grayscale"
                         src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()
-                            }/product/${props.srcPath}`}
+                            }/service/${props.srcPath}`}
                     />
                 </div>
                 <h3 className="pt-4 text-center after:border-b-[2px] after:border-b-[#CCCCCC] after:border-solid after:block after:w-[65px] after:my-4 after:mx-auto">{Utils.getContent(props.title)}</h3>
                 <div className="py-4 text-center">
-                    <span className="text-[1.5rem]">{Utils.getContent(props.desc)}</span>
+                    <span className="text-[1.8rem]">{Utils.getContent(props.desc)}</span>
                 </div>
-                <h2 className="px-2 py-2 font-bold text-[1.5rem] text-center">Rs.{Utils.getContent(props.price)}</h2>
+                <h2 className="px-2 py-2 font-bold text-[1.8rem] text-center">Rs.{Utils.getContent(props.price)}</h2>
             </div>
         </div>
     )
