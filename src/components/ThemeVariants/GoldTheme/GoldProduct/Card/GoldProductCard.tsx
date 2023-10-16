@@ -15,7 +15,7 @@ export default function GoldProductCard(props: IGoldProductCardProps) {
         <div className="grid xs:grid-cols-1 lg:grid-cols-2">
             {props.isLeft && (
                 <div className="h-full relative">
-                    <img className="h-[400px] w-full object-fill object-center" src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()}/product/${props.image}`} alt="product.png" />
+                    <img className="h-full w-full object-fill object-center" src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()}/product/${props.image}`} alt="product.png" />
                 </div>
             )}
             <div className={`p-8 ${props.isLeft ? "bg-gold-primary" : "bg-white"}`}>
@@ -34,7 +34,7 @@ export default function GoldProductCard(props: IGoldProductCardProps) {
             </div>
             {!props.isLeft && (
                 <div className="h-full relative">
-                    <img className="h-[400px] w-full object-fill object-center" src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()}/product/${props.image}`} alt="product.png" />
+                    <img className="h-full w-full object-fill object-center" src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()}/product/${props.image}`} alt="product.png" />
                 </div>
             )}
         </div>
