@@ -89,7 +89,7 @@ export default function ContactUs() {
 
     if (!objItem) return null;
     return (
-        <section className='py-24 bg-white relative text-center block'>
+        <section id='contact' className='py-24 bg-gold-white relative text-center block'>
             <div className="container">
                 <div className='flex xs:flex-wrap gap-y-6 lg:flex-nowrap'>
                     <ContactCard isMobile={isMobile} title='Contact Number' value={`+91 ${objItem.company_contact}`} iconName={faPhone} />

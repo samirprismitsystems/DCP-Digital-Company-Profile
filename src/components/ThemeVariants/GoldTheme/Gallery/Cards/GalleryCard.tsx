@@ -14,7 +14,7 @@ export default function GalleryCard(props: IGalleryCardProps) {
                     props.onClick();
                 }
             }} className="galleryCard group hover:cursor-pointer item xs:w-full h-full xlOne:w-[400px] mr-auto mb-6">
-                <div className="xs:min-h-full h-full xlOne:min-h-[3.4rem] mb-5 py-0 ">
+                <div className="xs:min-h-full h-full md:min-h-[250px] lg:min-h-[450px] mb-5 py-0 ">
                     <img
                         alt="logo.png"
                         title="gallery-img"

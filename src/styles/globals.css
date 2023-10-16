@@ -668,6 +668,15 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   opacity: 1 !important;
 }
 
+.menu-wrapper{
+  transform: translate3d(1.5em,1.5em,0) !important;
+  z-index: 999;
+  background-color: whitesmoke;
+  transition: width 0.4s,height 0.4s,transform 0.4s;
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  
+}
+
 /* styles for the close button  */
 .styles-module_close__2I1sI {
   color: rgb(255, 255, 255) !important;

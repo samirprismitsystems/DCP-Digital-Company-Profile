@@ -58,7 +58,7 @@ END:VCARD`;
 
   if (!objCompany) return null;
   return (
-    <section id='shareCards' className='py-24 bg-white'>
+    <section id='shareCards' className='py-24 bg-gold-white'>
       <div className="container">
         <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
           <Cards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />

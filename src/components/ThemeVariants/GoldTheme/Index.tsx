@@ -1,4 +1,5 @@
 import AboutUs from './AboutUs/AboutUs';
+import AppBar from './Appbar/AppBar';
 import ContactUs from './ContactUs/ContactUs';
 import Footer from './Footer/Footer';
 import Gallery from './Gallery/Gallery';
@@ -12,6 +13,7 @@ export default function Index() {
 
     return (
         <section className="goldTheme">
+            <AppBar/>
             <Hero />
             <AboutUs />
             <ShareCards />

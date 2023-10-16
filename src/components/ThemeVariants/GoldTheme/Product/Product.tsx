@@ -43,7 +43,7 @@ export default function Product() {
 
     if (!lstProduct) return null;
     return (
-        <section className='py-24 bg-white'>
+        <section className='py-24 bg-gold-white'>
             <div className="container">
                 <h2 className="uppercase text-center text-gold-primary my-16">Products</h2>
                 {lstProduct.length > 0 && (

@@ -43,7 +43,7 @@ export default function Service() {
 
     if (!lstService) return null;
     return (
-        <section className='py-24 bg-white'>
+        <section id="service" className='py-24 bg-gold-white'>
             <div className="container">
                 <h2 className="uppercase text-center text-gold-primary my-16">Services</h2>
                 {lstService.length > 0 && (

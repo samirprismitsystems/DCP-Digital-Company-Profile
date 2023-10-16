@@ -43,10 +43,10 @@ export default function Gallery() {
 
     if (!images) return null;
     return (
-        <section id='shareCards' className='py-24 bg-white'>
+        <section id='gallery' className='py-24  bg-gold-white'>
             <div className="container">
                 <h2 className="uppercase text-center text-gold-primary my-16">Gallery</h2>
-                <div className="py-4 grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center">
+                <div className="py-4 grid xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-center items-center">
                     {images.map((item, index) => (
                         <GalleryCard
                             key={index}
