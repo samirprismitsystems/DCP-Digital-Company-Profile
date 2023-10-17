@@ -27,7 +27,7 @@ export default function Hero() {
                 </div>
                 <div className='xs:mt-20 md:mt-[150] text-center'>
                     <div className='inline-block px-4 cursor-pointer' onClick={() => {
-                        Utils.scrollToView('aboutUs')
+                        Utils.scrollToView('about')
                     }}>
                         <h4 className='uppercase tracking-wide'>See More</h4>
                         <FontAwesomeIcon className='seeMoreButtonEffect p-4 w-14 h-14 rounded-50' icon={faChevronDown} />
