@@ -1,27 +1,28 @@
-import { ThemeContextApi } from '@/pages/[slug]';
-import { useContext } from 'react';
-import GoldAboutUs from './GoldAboutUs/GoldAboutUs';
-import GoldContactUs from './GoldContactUs/GoldContactUs';
-import GoldGallery from './GoldGallery/GoldGallery';
-import GoldProduct from './GoldProduct/GoldProduct';
-import GoldReview from './GoldReview/GoldReview';
-import GoldService from './GoldService/GoldService';
-import GoldShareCards from './GoldShareCards/GoldShareCards';
-import GoldHero from './HeroSection/GoldHero';
+import AboutUs from './AboutUs/AboutUs';
+import AppBar from './Appbar/AppBar';
+import ContactUs from './ContactUs/ContactUs';
+import Footer from './Footer/Footer';
+import Gallery from './Gallery/Gallery';
+import Hero from './HeroSection/Hero';
+import Product from './Product/Product';
+import Review from './Review/Review';
+import Service from './Service/Service';
+import ShareCards from './ShareCards/ShareCards';
 
-export default function GoldTheme() {
-    const objItem = useContext(ThemeContextApi);
+export default function Index() {
 
     return (
-        <section className='goldTheme'>
-            <GoldHero />
-            <GoldAboutUs />
-            <GoldShareCards />
-            <GoldGallery />
-            <GoldService />
-            <GoldProduct />
-            <GoldReview />
-            <GoldContactUs />
+        <section className="goldTheme">
+            <AppBar/>
+            <Hero />
+            <AboutUs />
+            <ShareCards />
+            <Product />
+            <Service />
+            <Gallery />
+            <Review />
+            <ContactUs />
+            <Footer />
         </section>
     );
 }

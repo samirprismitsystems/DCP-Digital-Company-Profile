@@ -1,14 +1,15 @@
 import { store } from "@/services/store/store";
 import "@/styles/globals.css";
 import "animate.css/animate.min.css";
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import type { AppProps } from "next/app";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 import "react-toastify/dist/ReactToastify.css";
+import "react-quill/dist/quill.snow.css";
+
 
 
 export default function App({ Component, pageProps }: AppProps) {
