@@ -769,7 +769,7 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
 .icon-list .icon-list-div {
   opacity: 0 !important;
   /* display: inline-block !important; */
-  padding: 0 0.2em !important;
+  /* padding: 0 0.2em !important; */
   margin: 0 15px !important;
   text-align: center !important;
   font-size: 1.2em !important;
@@ -904,6 +904,7 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   .container {
     max-width: 720px;
   }
+
   .gadgetShop_theme .container {
     max-width: 720px !important;
   }
@@ -1019,6 +1020,9 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
     width: calc(100% - 7rem);
     padding-top: 3.3rem;
     padding-bottom: 2rem;
+  }
+  .show-menu .menu-wrap{
+    height: 100vh !important;
   }
 }
 
