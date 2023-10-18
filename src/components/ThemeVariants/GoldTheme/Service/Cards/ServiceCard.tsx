@@ -14,7 +14,7 @@ export default function ServiceCard(props: IServiceCardProps) {
     return (
         <div>
             <div className="px-8 group hover:cursor-pointer item xs:w-full h-full xlOne:w-[400px] mr-auto mb-6">
-                <div className="xs:min-h-full h-full xlOne:min-h-[3.4rem] mb-5 px-2  py-0 ">
+                <div className="xs:min-h-full h-[300px] xlOne:min-h-[3.4rem] mb-5 px-2  py-0 ">
                     <img
                         alt="logo.png"
                         title="gallery-img"
