@@ -8,5 +8,4 @@ export enum THEME_TYPE {
   GADGET = 9,
   PORTFOLIO = 1,
   GOLD = 40,
-  PLATINUM = 41,
 }
