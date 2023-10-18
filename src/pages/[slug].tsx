@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PageNotFound from "./404";
+import Platinum from "@/components/ThemeVariants/Platinum";
 
 export const ThemeContextApi = createContext<IPortfolioInfo>(
   {} as IPortfolioInfo
@@ -79,6 +80,8 @@ export default function UserViewSection() {
         return <PortfolioPage result={result} />;
       } else if (themeID === THEME_TYPE.GOLD) {
         return <GoldTheme />
+      } else if (themeID === THEME_TYPE.PLATINUM) {
+        return <Platinum />
       } else {
         return (
           <PageNotFound
