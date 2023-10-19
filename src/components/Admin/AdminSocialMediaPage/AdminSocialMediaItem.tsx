@@ -215,7 +215,7 @@ export default function AdminSocialMediaItem() {
                   <div>
                     <input
                       type="text"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Social Name"
                       {...objForm.register(
                         `adminSocialMediaInfo.${index}.socialmedia_name`
@@ -227,7 +227,7 @@ export default function AdminSocialMediaItem() {
                   <div>
                     <input
                       type="text"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Social Logo Class"
                       {...objForm.register(
                         `adminSocialMediaInfo.${index}.socialmedia_logo`

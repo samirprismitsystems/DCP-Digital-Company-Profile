@@ -1,3 +1,4 @@
+import styles from "./styles/socialLinkPage.module.scss"
 import BackButton from "@/common/BackButton";
 import CompanyFirstPlease from "@/common/CompanyFirst/CompanyFirstPlease";
 import DashboardCommonButtons from "@/common/DashboardCommonButtons";
@@ -237,7 +238,7 @@ export default function SocialLinksPage() {
                   <div key={index}>
                     <SocialLinkTextField
                       title={
-                        <div className="flex items-center mb-1">
+                        <div className={`${styles.socialLinkIconItems} flex items-center mb-1`}>
                           <SocialLinkIcon
                             icons={item.socialmedia_logo}
                             socialID={item.social_id}

@@ -19,6 +19,7 @@ import { ISiteSettingState } from "../SwitchComponent";
 import FooterPageSelector from "./FooterPageSelector";
 import SiteSettingImageUploader from "./SiteSettingImageUploader";
 import SiteSettingTextField from "./SiteSettingTextField";
+import styles from "./styles/siteSetting.module.scss";
 
 export default function SiteSetting() {
   const router = useRouter();
@@ -149,7 +150,7 @@ export default function SiteSetting() {
               title={
                 <div className="flex items-center mb-1">
                   <FontAwesomeIcon
-                    className={`social-link-icons socialmedia_color_1`}
+                    className={`${styles.socialLinkColors} ${styles.socialmedia_color_1}`}
                     icon={faFacebookF}
                   />
                   Facebook
@@ -162,7 +163,7 @@ export default function SiteSetting() {
               title={
                 <div className="flex items-center mb-1">
                   <FontAwesomeIcon
-                    className={`social-link-icons socialmedia_color_2`}
+                    className={`${styles.socialLinkColors} ${styles.socialmedia_color_2}`}
                     icon={faInstagram}
                   />
                   Instagram
@@ -175,7 +176,7 @@ export default function SiteSetting() {
               title={
                 <div className="flex items-center mb-1">
                   <FontAwesomeIcon
-                    className={`social-link-icons socialmedia_color_3`}
+                    className={`${styles.socialLinkColors} ${styles.socialmedia_color_3}`}
                     icon={faLinkedinIn}
                   />
                   LinkedIn

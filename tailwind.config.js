@@ -39,7 +39,6 @@ module.exports = {
           secondary: "#ffe800",
           white: "#FBFBFB",
         },
-        inputPlaceHolderColor: "#78afcd",
         companyFormFieldBorderColor: "#d7d7d7",
         theme01: "#8d1c9a",
         whiteSmoke: "#f5f5f5",

@@ -231,7 +231,7 @@ export default function ServiceItem() {
                     />
                     <input
                       type="text"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Service Name"
                       {...objForm.register(
                         `service_data.${index}.service_name`
@@ -241,7 +241,7 @@ export default function ServiceItem() {
                     />
                     <input
                       type="number"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Service MRP"
                       required
                       {...objForm.register(
@@ -250,7 +250,7 @@ export default function ServiceItem() {
                       defaultValue={item.service_price}
                     />
                     <textarea
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic bg-transparent"
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic "
                       required
                       {...objForm.register(
                         `service_data.${index}.service_desc`

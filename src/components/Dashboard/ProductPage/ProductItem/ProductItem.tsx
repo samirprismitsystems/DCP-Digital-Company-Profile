@@ -232,7 +232,7 @@ export default function ProductItem() {
                     />
                     <input
                       type="text"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Product Name"
                       {...objForm.register(
                         `product_data.${index}.product_name`
@@ -242,7 +242,7 @@ export default function ProductItem() {
                     />
                     <input
                       type="number"
-                      className="py-5 px-4 border-[1px] imageUploaderInputs placeholder:text-gray-400 border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="py-5 px-4 border-[1px] bg-whiteSmoke placeholder:text-info-main border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Product MRP"
                       required
                       {...objForm.register(
@@ -251,7 +251,7 @@ export default function ProductItem() {
                       defaultValue={item.product_price}
                     />
                     <textarea
-                      className="py-5 px-4 border-[1px] imageUploaderInputs placeholder:text-gray-400 border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic bg-transparent"
+                      className="py-5 px-4 border-[1px] bg-whiteSmoke placeholder:text-info-main border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic "
                       required
                       {...objForm.register(
                         `product_data.${index}.product_desc`
