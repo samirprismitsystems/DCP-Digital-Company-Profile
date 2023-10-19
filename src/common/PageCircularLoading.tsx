@@ -1,27 +1,5 @@
-import AuthService from "@/services/AuthServices";
-import { USER_TYPE } from "@/services/Enums";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function PageCircularLoading() {
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   if (
-  //     AuthService.getUserType() == parseInt(USER_TYPE.USER) &&
-  //     router.pathname.startsWith("/admindashboard")
-  //   ) {
-  //     router.push("/dashboard");
-  //   }
-
-  //   if (
-  //     AuthService.getUserType() == USER_TYPE.ADMIN &&
-  //     router.pathname.startsWith("/dashboard")
-  //   ) {
-  //     router.push("/admindashboard");
-  //   }
-  // }, [router.pathname]);
-
   return (
     <div className="flex justify-center items-center h-screen">
       <svg

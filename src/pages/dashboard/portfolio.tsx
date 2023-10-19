@@ -1,5 +1,5 @@
 import AuthGuard from "@/AuthGuards/AuthGuards";
-import ImageGalleryPage from "@/components/ImageGalleryPage/ImageGalleryPage";
+import ImageGalleryPage from "@/components/Dashboard/ImageGalleryPage/ImageGalleryPage";
 import MainDashboardLayouts from "@/layouts/DashboardLayouts/MainDashboardLayouts";
 import React from "react";
 

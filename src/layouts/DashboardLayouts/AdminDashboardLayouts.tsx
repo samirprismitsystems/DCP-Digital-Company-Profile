@@ -13,7 +13,7 @@ import AdminReviewPage from "@/components/Admin/AdminReviewPage/AdminReviewPage"
 import AdminSettingPage from "@/components/Admin/AdminSettingPage/AdminSettingPage";
 import AdminSocialMediaPage from "@/components/Admin/AdminSocialMediaPage/AdminSocialMediaPage";
 import AdminThemePage from "@/components/Admin/AdminThemePage/AdminThemePage";
-import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
+import DashboardFooter from "@/components/Dashboard/DashboardPage/DashboardFooter/DashboardFooter";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";

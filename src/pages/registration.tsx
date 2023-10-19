@@ -1,5 +1,4 @@
-import RegistrationPage from "@/components/RegistrationPage/RegistrationPage";
-import React from "react";
+import RegistrationPage from "@/components/Common/RegistrationPage/RegistrationPage";
 
 export default function registration() {
   return (

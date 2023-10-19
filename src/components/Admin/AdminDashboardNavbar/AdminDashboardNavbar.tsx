@@ -1,4 +1,4 @@
-import ResponsiveNavbar from "@/components/DashboardPage/DashboardNavbar/ResponsiveNavbar";
+import ResponsiveNavbar from "@/components/Dashboard/DashboardPage/DashboardNavbar/ResponsiveNavbar";
 import MobileNavbar from "@/components/LandingPage/LandingNavbar/MobileNavbar";
 import { lstAdminResNavbar } from "@/data/NavigationMenu";
 import AuthService from "@/services/AuthServices";
@@ -54,7 +54,7 @@ export default function AdminDashboardNavbar() {
             }
           }}
         >
-          <span className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap txtdark font-bold">
+          <span className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
             DCP
           </span>
         </button>

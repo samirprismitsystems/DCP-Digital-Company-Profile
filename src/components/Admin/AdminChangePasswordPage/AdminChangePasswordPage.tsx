@@ -1,9 +1,9 @@
-import ChangePassword from "@/components/changePassword/ChangePassword";
+import ChangePasswordForm from "@/components/Common/changePassword/ChangePasswordForm";
 
 export default function AdminChangePasswordPage() {
   return (
     <>
-      <ChangePassword />
+      <ChangePasswordForm />
     </>
   );
 }

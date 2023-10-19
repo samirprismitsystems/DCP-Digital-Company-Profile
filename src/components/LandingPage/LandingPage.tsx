@@ -61,7 +61,6 @@ export default function LandingPage() {
         <meta property="og:image:width" content={metaData?.page_id || ""} />
         <title>{metaData?.meta_title || "Digital Company Profile"}</title>
       </Head>
-
       <LandingNavbar />
       <HeroSection />
       <HowItsWork />

@@ -1,5 +1,5 @@
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
-import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
+import DashboardFooter from "@/components/Dashboard/DashboardPage/DashboardFooter/DashboardFooter";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppSelector } from "@/services/store/hooks/hooks";
