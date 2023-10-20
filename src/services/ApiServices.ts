@@ -97,14 +97,9 @@ const ApiService = {
   },
 
   async getAdminSiteSettingInfo() {
-    let token = AuthService.getToken();
-    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`,
-    {
-      headers: {"content-type": "application/json", "Authorization": "Bearer Hello"}
-    }
-    );
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`);
     return res.data;
-  },
+},
 
   async saveAdminSiteSetting(io: any) {
     const res = await axios.post(`${BASE_URI}api/sitesetting/savesetting`, io);
@@ -141,8 +136,9 @@ const ApiService = {
   },
 
   async getDashboardCounts() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/user/getcompanydashdata/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/user/getcompanydashdata/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
@@ -186,8 +182,9 @@ const ApiService = {
   },
 
   async getCompanyDetailsPageData() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/company/getcompany/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/company/getcompany/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
