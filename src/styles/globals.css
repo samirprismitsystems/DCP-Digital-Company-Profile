@@ -8,6 +8,10 @@
   --secondaryDark: #1c424d;
 }
 
+.btnHoverEffect {
+  @apply bg-secondary-main transition-all duration-300 ease-linear hover:bg-secondary-greyDark hover:border-cyan-200 hover:border rounded-full;
+}
+
 label span[data-v-1dcf67d3] {
   display: flex;
   color: black;
@@ -92,19 +96,7 @@ h6,
   font-size: 15px;
 }
 
-.sideBarEffect {
-  transition: all !important;
-  transition-duration: 200ms !important;
-  transition-timing-function: ease-in !important;
-}
 
-.sideBarEffectNoWidth {
-  width: 0px !important;
-}
-
-.btnHoverEffect {
-  @apply bg-secondary-main transition-all duration-300 ease-linear hover:bg-secondary-greyDark hover:border-cyan-200 hover:border rounded-full;
-}
 
 .share_links {
   font-family: Gill Sans, sans-serif !important;
