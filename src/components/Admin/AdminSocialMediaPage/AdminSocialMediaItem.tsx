@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
-import AdminSocialLinkSelector from "./AdminSocialLinkSelector";
+import UpdateAndShowSocialColor from "../AdminAddSocialColorPage/UpdateAndShowSocialColor";
 
 export default function AdminSocialMediaItem() {
   const [lstSocialColor, setLstSocialColor] = useState<ISocialMediaColors[]>();
@@ -38,9 +38,9 @@ export default function AdminSocialMediaItem() {
     }
   };
 
-  useEffect(() => {
-    getColors();
-  }, []);
+  // useEffect(() => {
+  //   getColors();
+  // }, []);
 
   const loadData = async () => {
     try {
@@ -62,7 +62,7 @@ export default function AdminSocialMediaItem() {
 
   const onComplete = async () => {
     await loadData();
-    getColors();
+    // getColors();
   };
 
   const objForm = useForm({
@@ -100,7 +100,7 @@ export default function AdminSocialMediaItem() {
 
       newData?.forEach((item) => {
         if (!Boolean(item.socialmedia_color)) {
-          item.socialmedia_color = "1";
+          item.socialmedia_color = "#000000";
         }
       });
 
@@ -236,11 +236,13 @@ export default function AdminSocialMediaItem() {
                       required={true}
                     />
                   </div>
-                  <AdminSocialLinkSelector
+                  {/* adminSocialMediaInfo.${indexNumber}.socialmedia_color */}
+                  {/* <AdminSocialLinkSelector
                     selectedColorId={item.socialmedia_color}
                     lstSocialMediaColor={lstSocialColor}
                     indexNumber={index}
-                  />
+                  /> */}
+                  <UpdateAndShowSocialColor index={index} color={item.socialmedia_color}   />
                 </div>
               </div>
             );

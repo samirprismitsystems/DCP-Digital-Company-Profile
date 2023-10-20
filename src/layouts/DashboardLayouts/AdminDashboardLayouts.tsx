@@ -105,7 +105,7 @@ export default function AdminDashboardLayout({ children }: any) {
         case "changepassword":
           setDashboardContent(<AdminChangePasswordPage />);
           break;
-        case "addsocialcolors":
+        case "expired_addsocialcolors":
           setDashboardContent(<AdminAddSocialColorPage />);
           break;
         case "adduserreview":

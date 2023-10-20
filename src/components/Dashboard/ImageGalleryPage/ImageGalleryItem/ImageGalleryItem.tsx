@@ -230,7 +230,7 @@ export default function ImageGalleryItem() {
                     />
                     <input
                       type="text"
-                      className="py-5 bg-whiteSmoke px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 bg-[#f6f4f4] placeholder:text-info-main font-normal w-full  text-3xl text-secondary-main focus-within:outline-none not-italic  "
+                      className="py-5 bg-whiteSmoke px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  placeholder:text-info-main font-normal w-full  text-3xl text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Portfolio Name"
                       {...objForm.register(
                         `portfolio_data.${index}.portfolio_name`
@@ -239,7 +239,7 @@ export default function ImageGalleryItem() {
                       required
                     />
                     <textarea
-                      className="py-5 bg-whiteSmoke px-4 border-[1px] bg-[#f6f4f4] placeholder:text-info-main border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic "
+                      className="py-5 bg-whiteSmoke px-4 border-[1px]  placeholder:text-info-main border-solid border-[#ccc] rounded-lg mt-4 font-normal w-full text-3xl text-secondary-main  focus-within:outline-none not-italic "
                       required
                       {...objForm.register(
                         `portfolio_data.${index}.portfolio_desc`

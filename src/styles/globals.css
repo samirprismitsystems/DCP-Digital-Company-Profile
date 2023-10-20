@@ -96,8 +96,6 @@ h6,
   font-size: 15px;
 }
 
-
-
 .share_links {
   font-family: Gill Sans, sans-serif !important;
 }
@@ -222,7 +220,6 @@ html {
   transition: all 0.3s linear;
   scroll-behavior: smooth;
 }
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -537,7 +534,6 @@ p.product-description.text-3xl.font-medium.c-text.mt-0.mb-4 {
   .container {
     max-width: 720px;
   }
-
 }
 
 @media (min-width: 992px) {

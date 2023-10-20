@@ -251,7 +251,7 @@ export default function AdminThemeItem() {
                     />
                     <input
                       type="text"
-                      className="py-5 bg-whiteSmoke px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 bg-[#f6f4f4] placeholder:text-info-main font-normal w-full  text-3xl text-secondary-main focus-within:outline-none not-italic  "
+                      className="py-5 bg-whiteSmoke px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4 placeholder:text-info-main font-normal w-full  text-3xl text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Theme Name"
                       {...objForm.register(`theme_data.${index}.theme_name`)}
                       defaultValue={item.theme_name}
