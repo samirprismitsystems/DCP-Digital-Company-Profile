@@ -241,7 +241,7 @@ export default function SocialLinksPage() {
                         <div className={`${styles.socialLinkIconItems} flex items-center mb-1`}>
                           <SocialLinkIcon
                             icons={item.socialmedia_logo}
-                            socialID={item.social_id}
+                            color={item.socialmedia_color}
                           />
                           {Utils.capitalizeFirstLetter(item.socialmedia_name)}
                         </div>

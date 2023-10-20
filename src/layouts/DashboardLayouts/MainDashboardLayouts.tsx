@@ -158,15 +158,15 @@ export default function MainDashboardLayouts({ children }: any) {
       <section className="main mb-[2rem]">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
-            <div className="left_sidebar_nav xs:mb-[49px] text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[999] md:overflow-y-auto xs:h-[calc(100vh - 7em)]">
+            <div className="left_sidebar_nav xs:mb-[49px] text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[999] md:overflow-y-auto xl:overflow-y-visible xlOne:overflow-y-auto xs:h-[calc(100vh - 7em)]">
               <ul className="sticky mb-[20px] pb-6 md:top-40 xs:top-44 w-full list-none m-0 p-0">
                 {lstDashboardPanels &&
                   lstDashboardPanels.map((item, index: number) => (
                     <li
                       key={item.id}
                       className={`text-white ${selectedIndex !== item.id
-                          ? "bg-secondary-dark"
-                          : "bg-secondary-main"
+                        ? "bg-secondary-dark"
+                        : "bg-secondary-main"
                         } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
                         changeLayout(item);

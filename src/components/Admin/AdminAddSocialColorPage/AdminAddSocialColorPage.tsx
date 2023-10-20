@@ -204,7 +204,6 @@ export default function AdminAddSocialColorPage() {
                 {index % 2 == 0 ? (
                   <tr className="bg-white border-0">
                     <td className="flex p-4 text-2xl form_field border-b-[1px] hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-                      {/* <div className={`${item.isDelete && "hover:cursor-pointer"} inline w-8 h-8 px-4 mr-4`} style={{ backgroundColor: item.socialmedia_color_name }}></div> */}
                       <UpdateAndShowSocialColor index={index} color={item.socialmedia_color_name} isDelete={item.isDeleted} />
                     </td>
 
@@ -229,16 +228,7 @@ export default function AdminAddSocialColorPage() {
                 ) : (
                   <tr className="bg-primary-main border-red-100">
                     <td className="flex p-4 text-2xl form_field border-b-[1px] hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-                      <UpdateAndShowSocialColor index={index} color={item.socialmedia_color_name} isDelete={item.isDeleted}  />
-                      {/* <div style={{ backgroundColor: item.socialmedia_color_name }} className={`w-8 h-8 inline px-4 mr-4 ${item.isDelete && "hover:cursor-pointer"}`}></div>
-                      <input
-                        type="text"
-                        disabled
-                        className="w-full text-2xl focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
-                        {...objForm.register(
-                          `socialcolor.${index}.socialmedia_color_name`
-                        )}
-                      /> */}
+                      <UpdateAndShowSocialColor index={index} color={item.socialmedia_color_name} isDelete={item.isDeleted} />
                     </td>
 
                     <td className="p-4 text-2xl">

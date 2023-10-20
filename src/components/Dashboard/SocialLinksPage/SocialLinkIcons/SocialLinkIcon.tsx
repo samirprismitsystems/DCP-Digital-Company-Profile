@@ -1,4 +1,3 @@
-import style from "../styles/socialLinkPage.module.scss";
 import {
   faFacebookF,
   faInstagram,
@@ -10,12 +9,13 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "../styles/socialLinkPage.module.scss";
 export default function SocialLinkIcon({
-  icons,
-  socialID,
+  color,
+  icons
 }: {
-  icons: string;
-  socialID: string;
+  color: string;
+  icons: any;
 }) {
   const iconMapping: any = {
     faFacebookF: faFacebookF,
@@ -32,8 +32,11 @@ export default function SocialLinkIcon({
   return (
     <>
       <FontAwesomeIcon
-        className={`${style.socialLinkColors} ${style.socialLinkIconItems} ${style[`socialmedia_color_${socialID}`]}`}
+        className={`${style.socialLinkColors} ${style.socialLinkIconItems}`}
         icon={iconComponent}
+        style={{
+          color: color
+        }}
       />
     </>
   );
