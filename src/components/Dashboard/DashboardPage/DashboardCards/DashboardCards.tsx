@@ -23,7 +23,7 @@ export default function DashboardCards({ item }: any) {
         >
           {item.icon}
         </div>
-        <span className="dashboardCardFont font-semibold w-full text-black text-[30px] mb-1 block">
+        <span className={`${styles.dashboardCardFont} font-semibold w-full text-black text-[30px] mb-1 block`}>
           {item.digit}
         </span>
         <h3 className="text-[18px] text-center px-2 font-bold uppercase m-0">

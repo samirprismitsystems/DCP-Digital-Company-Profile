@@ -1,3 +1,4 @@
+import styles from './styles/hero.module.scss';
 import { ThemeContextApi } from '@/pages/[slug]';
 import Utils from '@/services/Utils';
 import { UPLOAD_IMAGE_URI } from '@/services/config';
@@ -30,7 +31,7 @@ export default function Hero() {
                         Utils.scrollToView('about')
                     }}>
                         <h4 className='uppercase tracking-wide'>See More</h4>
-                        <FontAwesomeIcon className='seeMoreButtonEffect p-4 w-14 h-14 rounded-50' icon={faChevronDown} />
+                        <FontAwesomeIcon className={`${styles.seeMoreButtonEffect} p-4 w-14 h-14 rounded-50`} icon={faChevronDown} />
                     </div>
                 </div>
             </div>

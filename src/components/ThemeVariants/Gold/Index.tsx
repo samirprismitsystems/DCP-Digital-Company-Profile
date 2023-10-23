@@ -12,8 +12,8 @@ import ShareCards from './ShareCards/ShareCards';
 export default function Gold() {
 
     return (
-        <section className="goldTheme">
-            <AppBar/>
+        <section className={`goldVariants`}>
+            <AppBar />
             <Hero />
             <AboutUs />
             <ShareCards />

@@ -22,8 +22,9 @@ export default function Review() {
         autoplayTimeout: 3000,
         smartSpeed: 1100,
     };
+    
     return (
-        <section className='gold_testimonial xs:h-auto'>
+        <section className={`gold_testimonial  xs:h-auto`}>
             <div className="container h-full">
                 <div className="h-full py-32 text-left flex justify-center items-center flex-col">
                     <h2 className="relative text-center uppercase text-white after:border-b-[2px] after:border-b-white after:border-solid after:block after:w-[120px] after:mt-2 after:mb-8 after:mx-auto">What Our <span className="text-gold-secondary">Clients</span> Said</h2>
