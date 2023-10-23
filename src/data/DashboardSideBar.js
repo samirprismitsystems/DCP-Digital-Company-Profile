@@ -75,7 +75,7 @@ export const lstAdminDashboardPanels = [
     id: 2,
     name: "Social Media",
     icon: "/assets/landingpage/dashboard/social_links.png",
-    link: "socialmediaadd",
+    link: "socialmedia",
   },
   {
     id: 3,

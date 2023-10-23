@@ -1,5 +1,5 @@
 import { store } from "@/services/store/store";
-import "@/styles/globals.scss";
+import "@/styles/globals.scss"
 import "animate.css/animate.min.css";
 import type { AppProps } from "next/app";
 import "owl.carousel/dist/assets/owl.carousel.css";

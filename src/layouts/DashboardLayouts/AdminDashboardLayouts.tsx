@@ -120,7 +120,7 @@ export default function AdminDashboardLayout({ children }: any) {
         case "companylist":
           setDashboardContent(<AdminCompanyPage />);
           break;
-        case "socialmediaadd":
+        case "socialmedia":
           setDashboardContent(<AdminSocialMediaPage />);
           break;
         case "pages":
@@ -190,11 +190,10 @@ export default function AdminDashboardLayout({ children }: any) {
                   lstAdminDashboardPanels.map((item, index: number) => (
                     <li
                       key={item.id}
-                      className={`text-white ${
-                        selectedIndex !== item.id
+                      className={`text-white ${selectedIndex !== item.id
                           ? "bg-secondary-dark"
                           : "bg-secondary-main"
-                      } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
+                        } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
                         changeLayout(item);
                       }}

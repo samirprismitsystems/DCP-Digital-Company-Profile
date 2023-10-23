@@ -47,7 +47,7 @@ export default function UpdateAndShowSocialColor(props: IUpdateAndShowSocialColo
             </div>
 
             {isOpen && (
-                <div ref={wrapperRef} id="dropdownNotification" className="w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow absolute z-10" aria-labelledby="dropdownNotificationButton">
+                <div ref={wrapperRef} id="dropdownNotification" className="w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow absolute z-20" aria-labelledby="dropdownNotificationButton">
                     <div className="text-[1.8rem] block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50">
                         Update Social Color
                     </div>
@@ -57,11 +57,15 @@ export default function UpdateAndShowSocialColor(props: IUpdateAndShowSocialColo
                             objForm.setValue(`adminSocialMediaInfo.${props.index}.socialmedia_color`, (value))
                         }} />
                     </div>
-                    <a href="#" className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 ">
-                        <div className="inline-flex items-center text-[1.8rem] py-4">
-                            {selectedColor}
-                        </div>
-                    </a>
+                    <div className="w-full text-[1.3rem] p-4">
+                        <input onChange={(e: any) => {
+                            const userInput: string = e.target.value;
+                            if (userInput.startsWith('#')) {
+                                setSelectedColor(userInput)
+                                objForm.setValue(`adminSocialMediaInfo.${props.index}.socialmedia_color`, (userInput))
+                            }
+                        }} type="text" value={selectedColor || ""} className='font-bold rounded-md p-2 border border-redThemeGreyTextColor w-full' />
+                    </div>
                 </div>
             )}
         </>
