@@ -1,14 +1,14 @@
 import { store } from "@/services/store/store";
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
 import "animate.css/animate.min.css";
-import { useEffect, useState } from "react";
-import { Provider } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import type { AppProps } from "next/app";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     require("react-toastify/dist/ReactToastify.css");
     setIsRender(true);
+    document.body.className = 'digimen'
   }, []);
 
   return (
