@@ -19,6 +19,7 @@ import { ISiteSettingState } from "../SwitchComponent";
 import FooterPageSelector from "./FooterPageSelector";
 import SiteSettingImageUploader from "./SiteSettingImageUploader";
 import SiteSettingTextField from "./SiteSettingTextField";
+import AuthService from "@/services/AuthServices";
 
 export default function SiteSetting() {
   const router = useRouter();
@@ -90,11 +91,13 @@ export default function SiteSetting() {
       } else {
         io.append("logo", data.siteLogo);
       }
+      let token = AuthService.getToken();
+      io.append("token", token);
 
       const res = await ApiService.saveAdminSiteSetting(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
-        router.reload();
+        // router.reload();
         return null;
       }
       throw new Error(res.message);

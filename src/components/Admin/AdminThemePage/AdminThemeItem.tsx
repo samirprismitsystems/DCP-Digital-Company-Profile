@@ -3,6 +3,7 @@ import AdminCommonButton from "@/common/AdminCommonButton";
 import Loading from "@/common/Loading";
 import RHFImageUploader from "@/common/RHFImageUploader";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { themeFormSchema } from "@/services/forms/formSchema";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
@@ -101,6 +102,8 @@ export default function AdminThemeItem() {
 
       io.append("isupdate", true);
       io.append("theme_data", JSON.stringify(oldData));
+      let token = AuthService.getToken();
+      io.append("token", token);
 
       const res = await ApiService.saveAdminThemeInfo(io);
 
@@ -126,26 +129,27 @@ export default function AdminThemeItem() {
         }
         newIO.append("isupdate", false);
         newIO.append("theme_data", JSON.stringify(newData));
+        newIO.append("token", token);
 
         const res = await ApiService.saveAdminThemeInfo(newIO);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
-          onComplete();
+          // onComplete();
           return null;
         }
       }
 
-      if (!res.error) {
-        Utils.showSuccessMessage(res.message);
-        onComplete();
-        return null;
-      }
+      // if (!res.error) {
+      //   Utils.showSuccessMessage(res.message);
+      //   onComplete();
+      //   return null;
+      // }
 
-      if (!res.error) {
-        Utils.showSuccessMessage(res.message);
-        onComplete();
-        return null;
-      }
+      // if (!res.error) {
+      //   Utils.showSuccessMessage(res.message);
+      //   onComplete();
+      //   return null;
+      // }
 
       if (res.message !== "Empty theme Data") throw new Error(res.message);
     } catch (ex: any) {

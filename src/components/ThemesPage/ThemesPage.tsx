@@ -16,14 +16,16 @@ export default function ThemesPage() {
       const io: any = new FormData();
       io.append("user_id", AuthService.getUserEmail());
       io.append("theme_id", parseInt(themeID));
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.saveThemes(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
-        const result = await ApiService.getCompanyDetailsPageData();
-        let objCompany = result?.company[0];
-        if (objCompany) {
-          Utils.setSelectedThemeID(objCompany.theme_id);
-        }
+        // const result = await ApiService.getCompanyDetailsPageData();
+        // let objCompany = result?.company[0];
+        // if (objCompany) {
+        //   Utils.setSelectedThemeID(objCompany.theme_id);
+        // }
         return null;
       }
 

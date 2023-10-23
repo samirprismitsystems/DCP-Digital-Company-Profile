@@ -53,8 +53,9 @@ class AuthService {
   }
 
   static getUserType() {
-    if (typeof window !== "undefined") {
-      return Utils.getItem("userType");
+    const data = Utils.getItem("digimen_data");
+    if (data && data.userType) {
+      return data.userType;
     }
     return null;
   }
@@ -71,8 +72,12 @@ class AuthService {
   }
 
   static getUserEmail() {
-    if (typeof window !== "undefined") {
-      return this.getLocalUserEmail() || Utils.getItem("userEmail");
+    // if (typeof window !== "undefined") {
+    //   return this.getLocalUserEmail() || Utils.getItem("userEmail");
+    // }
+    const data = Utils.getItem("digimen_data");
+    if (data && data.userEmail) {
+      return data.userEmail;
     }
     return null;
   }
