@@ -18,9 +18,9 @@ export default function Services() {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-3 gap-8">
+                <div className="grid platinumSm:grid-cols-1 platinumMd:grid-cols-2 platinumXl:grid-cols-3 gap-8">
                     {objItem && objItem.map((item) => (
-                        <div className="w-full platinumSm:w-10/12 platinumMd:w-6/12 platinumLg:w-full">
+                        <div className="w-full">
                             <div className={`${styles.single_services} text-center mt-platinum8 mx-platinum3`}>
                                 <div className={`${styles.services_icon} flex items-center justify-center`}>
                                     <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`} className={styles.services_shape} alt="" />

@@ -1,14 +1,11 @@
-import React from 'react'
-import Hero from './Hero/Hero'
 import Navbar from "./AppBar/AppBar"
-import Services from '../Services/Services'
+import Hero from './Hero/Hero'
 
 export default function AppBar() {
   return (
     <section className="header_area">
       <Navbar />
       <Hero />
-      <Services/>
     </section>
   )
 }
