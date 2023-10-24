@@ -1,0 +1,114 @@
+$color_1: rgba(249, 79, 79, var(--tw-text-opacity));
+
+.section_title {
+  .sub_title {
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: $color_1;
+  }
+  .main_title {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-top: 16px;
+  }
+  p {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 720px) {
+  .section_title {
+    .sub_title {
+      font-size: 2rem;
+      line-height: 1.75rem;
+    }
+    .main_title {
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+    }
+  }
+}
+
+.single_services {
+  --tw-border-opacity: 1;
+  border-color: rgba(232, 232, 232, var(--tw-border-opacity));
+  border-radius: 0.75rem;
+  border-style: dashed;
+  border-width: 2px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 52px;
+  padding-bottom: 52px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 300ms;
+  min-height: 550px;
+  height: 100%;
+  .services_shape {
+    fill: #fff1f1;
+    --tw-text-opacity: 1;
+    color: rgba(249, 79, 79, var(--tw-text-opacity));
+    text-align: center;
+  }
+  .services_icon {
+    img {
+      min-height: 350px;
+      object-fit: cover;
+      object-position: center;
+      transition: all 300ms ease;
+    }
+    i,
+    svg {
+      --tw-text-opacity: 1;
+      color: black;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    --tw-border-opacity: 1;
+    border-color: rgba(249, 79, 79, var(--tw-border-opacity));
+    --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    .services_icon {
+      img {
+        min-height: 350px;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.03);;
+      }
+      i,
+      svg {
+        --tw-text-opacity: 1;
+        color: white;
+      }
+    }
+    .services_shape {
+      fill: currentColor;
+      --tw-text-opacity: 1;
+      color: rgba(249, 79, 79, var(--tw-text-opacity));
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 540px) {
+  .single_services {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+@media (min-width: 720px) {
+  .single_services {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 52px;
+    padding-bottom: 52px;
+  }
+}
