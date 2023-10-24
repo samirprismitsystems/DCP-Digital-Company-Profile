@@ -9,6 +9,7 @@ import { clientFormSchema } from "@/services/forms/formSchema";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -21,6 +22,7 @@ export default function ClientItem() {
       client_logo: "",
     },
   ]);
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -34,6 +36,7 @@ export default function ClientItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }
@@ -83,6 +86,8 @@ export default function ClientItem() {
         io.append("imgcount", imgcount);
       }
       io.append("client_data", JSON.stringify(oldData));
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.saveClientPageDetails(io);
 
       const newData = data.client_data?.filter((item: any) => {
@@ -108,7 +113,7 @@ export default function ClientItem() {
         newIO.append("user_id", AuthService.getUserEmail());
         newIO.append("isupdate", false);
         newIO.append("client_data", JSON.stringify(newData));
-
+        newIO.append("token", token);
         const res = await ApiService.saveClientPageDetails(newIO);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
@@ -119,6 +124,7 @@ export default function ClientItem() {
 
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
+        router.push('/');
         onComplete();
         return null;
       }
@@ -126,6 +132,7 @@ export default function ClientItem() {
       if (res.message !== "Empty Client Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

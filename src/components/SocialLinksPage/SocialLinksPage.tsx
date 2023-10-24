@@ -12,11 +12,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import SocialLinkIcon from "./SocialLinkIcons/SocialLinkIcon";
 import SocialLinkTextField from "./SocialLinkTextField/SocialLinkTextField";
+import { useRouter } from "next/router";
 
 export default function SocialLinksPage() {
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstSocialData, setLstSocialData] = useState<any>([]);
+  const router = useRouter();
 
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
@@ -93,6 +95,8 @@ export default function SocialLinksPage() {
       io.append("socialdata", JSON.stringify(uniqueArray));
       io.append("user_id", AuthService.getUserEmail());
       io.append("isupdate", isUpdate as any);
+      const token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.saveSocialLinks(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -103,6 +107,7 @@ export default function SocialLinksPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 
@@ -197,6 +202,7 @@ export default function SocialLinksPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }

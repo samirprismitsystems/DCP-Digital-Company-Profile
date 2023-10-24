@@ -9,6 +9,7 @@ import { themeFormSchema } from "@/services/forms/formSchema";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -21,6 +22,7 @@ export default function AdminThemeItem() {
       theme_image: "",
     },
   ]);
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -34,6 +36,7 @@ export default function AdminThemeItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }

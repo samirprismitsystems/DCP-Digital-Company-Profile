@@ -13,6 +13,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 import AdminSocialLinkSelector from "./AdminSocialLinkSelector";
 import AuthService from "@/services/AuthServices";
+import { useRouter } from "next/router";
 
 export default function AdminSocialMediaItem() {
   const [lstSocialColor, setLstSocialColor] = useState<ISocialMediaColors[]>();
@@ -24,6 +25,7 @@ export default function AdminSocialMediaItem() {
     },
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const getColors = async () => {
     try {
@@ -56,6 +58,7 @@ export default function AdminSocialMediaItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }

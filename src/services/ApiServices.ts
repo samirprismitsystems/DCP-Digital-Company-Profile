@@ -305,7 +305,8 @@ const ApiService = {
   },
 
   async getAdminDashboardData() {
-    const res = await axios.get(`${BASE_URI}api/user/getadmindashdata`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/user/getadmindashdata?token=${token}`);
     return res.data;
   },
 
@@ -324,7 +325,8 @@ const ApiService = {
   },
 
   async getAdminSocialMediaInfo() {
-    const res = await axios.get(`${BASE_URI}api/company/fetchallsocial`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/company/fetchallsocial?token=${token}`);
     return res.data;
   },
 
