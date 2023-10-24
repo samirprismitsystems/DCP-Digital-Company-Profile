@@ -1,4 +1,5 @@
 .platinum {
+  font-size: 100% !important;
   font-family: "Nunito", sans-serif;
   color: #747e88;
   tab-size: 4;
@@ -7,42 +8,6 @@
     Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.5;
-  h1 {
-    font-size: 45px;
-  }
-
-  h2 {
-    font-size: 30px;
-  }
-  h3 {
-    font-size: 25px;
-  }
-  h4 {
-    font-size: 20px;
-  }
-  h5 {
-    font-size: 18px;
-  }
-  h6 {
-    font-size: 16px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  h1 a,
-  h2 a,
-  h3 a,
-  h4 a,
-  h5 a,
-  h6 a {
-    font-weight: bold;
-    margin: 0;
-    color: black;
-  }
 
   ul {
     li {
@@ -77,5 +42,41 @@
       max-width: 1320px;
     }
   }
+
+  input:focus,
+  textarea {
+    outline: none;
+  }
   font-size: 100%;
+}
+.section_title {
+  .sub_title {
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(249, 79, 79, var(--tw-text-opacity));
+  }
+  .main_title {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    margin-top: 16px;
+  }
+  p {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 720px) {
+  .section_title {
+    .sub_title {
+      font-size: 2rem;
+      line-height: 1.75rem;
+    }
+    .main_title {
+      font-size: 3rem;
+      line-height: 2.5rem;
+    }
+  }
 }

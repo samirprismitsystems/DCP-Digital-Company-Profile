@@ -3,7 +3,7 @@ import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useContext } from "react";
 import styles from "./styles/services.module.scss";
-
+import global from "../../styles/platinum.module.scss";
 
 export default function Services() {
     const lstService = useContext(ThemeContextApi).service;
@@ -12,9 +12,9 @@ export default function Services() {
             <div className="container">
                 <div className="flex items-center justify-center">
                     <div className="w-full">
-                        <div className={`${styles.section_title} text-center pb-platinum6`}>
-                            <h5 className={styles.sub_title}>What We Do</h5>
-                            <h4 className={styles.main_title}>Our Services</h4>
+                        <div className={`${global.section_title} text-center pb-platinum6`}>
+                            <h5 className={global.sub_title}>What We Do</h5>
+                            <h4 className={global.main_title}>Our Services</h4>
                         </div>
                     </div>
                 </div>

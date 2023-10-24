@@ -1,6 +1,12 @@
+import { ThemeContextApi } from "@/pages/[slug]";
+import { useContext } from "react";
 import styles from "./styles/hero.module.scss";
+import Utils from "@/services/Utils";
+import Link from "next/link";
 
 export default function Hero() {
+    const objItem = useContext(ThemeContextApi).company;
+
     return (
         <>
             <div id="home" className={`${styles.header_hero} bg-platinum-gray relative z-10 overflow-hidden platinumLg:flex items-center`}>
@@ -40,12 +46,12 @@ export default function Hero() {
 
                 <div className="container">
                     <div className="flex flex-wrap">
-                        <div className="w-full lg:w-1/2">
+                        <div className="w-full platinumLg:w-1/2">
                             <div className="header_hero_content pt-platinum150 platinumLg:pt-platinum0">
-                                <h2 className="hero_title text-2xl platinumSm:text-4xl platinumMd:text-5xl platinumLg:text-4xl platinumXl:text-5xl font-extrabold">Creative Multipurpose Tailwind CSS <span className="text-platinum-theme-color">Template</span></h2>
-                                <p className="mt-platinum8 platinumLg:mr-platinum8">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</p>
+                                <h2 className="hero_title text-2xl platinumSm:text-4xl platinumMd:text-5xl platinumLg:text-4xl platinumXl:text-[4rem] font-extrabold">{Utils.getContent(objItem.company_name)} <span className="text-platinum-theme-color">{Utils.getContent(objItem.business_segment)}</span></h2>
+                                <p className="mt-platinum8 platinumLg:mr-platinum8">{Utils.getContent(objItem.company_desc)}</p>
                                 <div className="hero_btn mt-platinum10">
-                                    <button className={styles.mainBtn} type="button">Get Started</button>
+                                    <Link href={'/login'} target="_blank" className={styles.mainBtn} type="button">Get Started</Link>
                                 </div>
                             </div>
                         </div>

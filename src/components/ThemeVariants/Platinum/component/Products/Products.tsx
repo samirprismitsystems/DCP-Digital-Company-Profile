@@ -4,9 +4,11 @@ import { UPLOAD_IMAGE_URI } from "@/services/config";
 import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
 import styles from "./styles/products.module.scss";
+import global from "../../styles/platinum.module.scss";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
+
 export default function Products() {
   const lstProduct = useContext(ThemeContextApi).product;
   const [slidesToShow, setSlidesToShow] = useState<number>(3);
@@ -48,9 +50,9 @@ export default function Products() {
         <div className="container">
           <div className="flex items-center justify-center">
             <div className="w-full">
-              <div className={`${styles.section_title} text-center pb-platinum6`}>
-                <h5 className={styles.sub_title}>Products</h5>
-                <h4 className={styles.main_title}>Our Products</h4>
+              <div className={`${global.section_title} text-center pb-platinum6`}>
+                <h5 className={global.sub_title}>Products</h5>
+                <h4 className={global.main_title}>Our Products</h4>
               </div>
             </div>
           </div>
@@ -66,7 +68,7 @@ export default function Products() {
                             <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/product/${item.product_image}`} alt="team" className="w-full" />
                           </div>
                           <div className="team_content py-platinum5 px-platinum8 relative ">
-                            <h4 className="team_name text-xl platinumMd:text-2xl"><a href="#" className="text-black group-hover:text-white">{Utils.getContent(item.product_name)}</a></h4>
+                            <h4 className="team_name"><a href="#" className="text-black group-hover:text-white">{Utils.getContent(item.product_name)}</a></h4>
                             <p className="mt-platinum2 transition-all duration-300 group-hover:text-white">{Utils.getContent(item.product_desc)}</p>
                             <p className="mt-platinum2 font-bold transition-all duration-300 group-hover:text-white">{`Rs. ${Utils.getContent(item.product_price)}`}</p>
                           </div>
