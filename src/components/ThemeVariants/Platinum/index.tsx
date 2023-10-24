@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Header from './component/Header/Header';
 import Services from './component/Services/Services';
 import styles from "./styles/platinum.module.scss";
+import Products from './component/Products/Products';
 
 export default function Platinum() {
 
@@ -20,6 +21,7 @@ export default function Platinum() {
             </Head>
             <Header />
             <Services/>
+            <Products/>
         </>
     )
 }

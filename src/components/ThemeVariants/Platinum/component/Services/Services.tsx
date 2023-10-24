@@ -6,9 +6,9 @@ import styles from "./styles/services.module.scss";
 
 
 export default function Services() {
-    const objItem = useContext(ThemeContextApi).service;
+    const lstService = useContext(ThemeContextApi).service;
     return (
-        <section id="services" className="bg-white services_area pt-platinum120 pb-platinum120">
+        <section id="services" className="bg-platinum-gray services_area pt-platinum120 pb-platinum120">
             <div className="container">
                 <div className="flex items-center justify-center">
                     <div className="w-full">
@@ -19,7 +19,7 @@ export default function Services() {
                     </div>
                 </div>
                 <div className="grid platinumSm:grid-cols-1 platinumMd:grid-cols-2 platinumXl:grid-cols-3 gap-8">
-                    {objItem && objItem.map((item) => (
+                    {lstService && lstService.map((item) => (
                         <div className="w-full">
                             <div className={`${styles.single_services} text-center mt-platinum8 mx-platinum3`}>
                                 <div className={`${styles.services_icon} flex items-center justify-center`}>
