@@ -1,4 +1,6 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
+import Gold from "@/components/ThemeVariants/Gold/Index";
+import Platinum from "@/components/ThemeVariants/Platinum";
 import ApiService from "@/services/ApiServices";
 import { THEME_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
@@ -10,7 +12,6 @@ import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PageNotFound from "./404";
-import Gold from "@/components/ThemeVariants/Gold/Index";
 
 export const ThemeContextApi = createContext<IPortfolioInfo>(
   {} as IPortfolioInfo
@@ -70,6 +71,8 @@ export default function UserViewSection() {
     } else {
       if (themeID === THEME_TYPE.GOLD) {
         return <Gold />
+      } else if (themeID === THEME_TYPE.PLATINUM) {
+        return <Platinum />
       } else {
         return (
           <PageNotFound

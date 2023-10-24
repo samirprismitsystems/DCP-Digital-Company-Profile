@@ -1,8 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap");
 @import "./owl.scss";
 @import "./variable.scss";
+@import "./platinum.scss";
 
 @font-face {
   font-family: "GothamRoundedBold";
@@ -41,6 +44,7 @@
 .btnHoverEffect {
   @apply bg-secondary-main transition-all duration-300 ease-linear hover:bg-secondary-greyDark hover:border-cyan-200 hover:border rounded-full;
 }
+
 label {
   span[data-v-1dcf67d3] {
     display: flex;
@@ -222,11 +226,13 @@ body {
     border-radius: 10px;
   }
 }
+
 html {
   font-size: 62.5%;
   transition: all 0.3s linear;
   scroll-behavior: smooth;
 }
+
 input {
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -269,6 +275,7 @@ input {
 .styles-module_image__2hdkJ {
   border: solid 2px white !important;
 }
+
 @media (min-width: 576px) {
   .container {
     max-width: 100%;
