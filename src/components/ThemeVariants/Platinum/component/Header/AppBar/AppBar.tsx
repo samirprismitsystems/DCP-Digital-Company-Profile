@@ -14,7 +14,6 @@ export default function AppBar() {
                                 <button className="text-[2rem] block platinumLg:hidden text-red-500" type="button">
                                     done
                                 </button>
-
                                 <div className="absolute left-0 z-20 hidden w-full px-platinum5 py-platinum3 duration-300 bg-white platinumLg:w-auto navbar-collapse platinumLg:block top-full mt-full platinumLg:static platinumLg:bg-transparent shadow platinumLg:shadow-none" id="navbarOne">
                                     <ul id="nav" className="items-center content-start mr-auto platinumLg:justify-end navbar-nav platinumLg:flex">
                                         <li className="nav-item py-2 ml-platinum5 platinumLg:ml-platinum12">
