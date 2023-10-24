@@ -15,6 +15,7 @@ import * as yup from "yup";
 import BankAccountDetails from "./Childs/BankAccountDetails";
 import QRCodeImageUploader from "./Childs/QRCodeImageUploader";
 import RazorpayCheckout from "./Childs/RazorpayCheckout";
+import { useRouter } from "next/router";
 
 export default function PaymentOptionPage() {
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
@@ -23,6 +24,7 @@ export default function PaymentOptionPage() {
   const objForm = useForm({
     resolver: yupResolver(paymentOptionFormSchema),
   });
+  const router = useRouter();
 
   type IFormData = yup.InferType<typeof paymentOptionFormSchema>;
   const onSave: any = async (data: IFormData) => {
@@ -47,6 +49,8 @@ export default function PaymentOptionPage() {
         io.append("logo", objPayment.logo);
       }
       io.append("isupdate", isUpdate);
+      let token = AuthService.getToken();
+      io.append("token", token);
 
       const res = await ApiService.savePaymentOptionDetails(io);
       if (!res.error) {
@@ -58,6 +62,7 @@ export default function PaymentOptionPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 
@@ -99,6 +104,7 @@ export default function PaymentOptionPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }

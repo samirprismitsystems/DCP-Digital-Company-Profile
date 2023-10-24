@@ -2,6 +2,7 @@ import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { ITestimonial } from "@/types/commonTypes";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function TestimonialTable() {
@@ -12,6 +13,7 @@ export default function TestimonialTable() {
     totalPages: 1,
     itemsPerPage: 2,
   });
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -31,6 +33,7 @@ export default function TestimonialTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }

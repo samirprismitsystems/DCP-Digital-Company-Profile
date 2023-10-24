@@ -8,6 +8,7 @@ import { ISocialLinks } from "@/types/sociallinks";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 
@@ -15,6 +16,7 @@ export default function HomeCareSaveContact() {
   const objCompany = useContext(ThemeContextApi).company;
   const [lstSocial, setLstSocial] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<any>(false);
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -28,6 +30,7 @@ export default function HomeCareSaveContact() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }

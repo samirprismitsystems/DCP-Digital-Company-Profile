@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 import AdminSocialLinkSelector from "./AdminSocialLinkSelector";
+import AuthService from "@/services/AuthServices";
+import { useRouter } from "next/router";
 
 export default function AdminSocialMediaItem() {
   const [lstSocialColor, setLstSocialColor] = useState<ISocialMediaColors[]>();
@@ -23,6 +25,7 @@ export default function AdminSocialMediaItem() {
     },
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const getColors = async () => {
     try {
@@ -38,9 +41,9 @@ export default function AdminSocialMediaItem() {
     }
   };
 
-  useEffect(() => {
-    getColors();
-  }, []);
+  // useEffect(() => {
+  //   getColors();
+  // }, []);
 
   const loadData = async () => {
     try {
@@ -55,6 +58,7 @@ export default function AdminSocialMediaItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +66,7 @@ export default function AdminSocialMediaItem() {
 
   const onComplete = async () => {
     await loadData();
-    getColors();
+    // getColors();
   };
 
   const objForm = useForm({
@@ -90,6 +94,8 @@ export default function AdminSocialMediaItem() {
       let io: any = new FormData();
       io.append("isupdate", true);
       io.append("social_data", JSON.stringify(oldData));
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.saveAdminSocialMediaInfo(io);
 
       const newData = data.adminSocialMediaInfo?.filter((item: any) => {
@@ -108,6 +114,7 @@ export default function AdminSocialMediaItem() {
         let newIO: any = new FormData();
         newIO.append("isupdate", false);
         newIO.append("social_data", JSON.stringify(newData));
+        newIO.append("token", token);
 
         const res = await ApiService.saveAdminSocialMediaInfo(newIO);
         if (!res.error) {
@@ -136,7 +143,7 @@ export default function AdminSocialMediaItem() {
         const res = await ApiService.deleteAdminSocialMediaItem(index);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
-          onComplete();
+          // onComplete();
           setLstSocialMedia([
             {
               socialmedia_logo: "",

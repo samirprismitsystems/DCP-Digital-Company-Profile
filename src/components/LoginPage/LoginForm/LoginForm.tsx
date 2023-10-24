@@ -51,7 +51,7 @@ export default function LoginForm() {
       const res = await ApiService.loginUser(userData as any);
       if (!res.error) {
         const userData = res.userdata;
-        const isValid = AuthService.setLoginUserData(userData);
+        const isValid = AuthService.setLoginUserData(userData, res.token);
         if (isValid) {
           if (userData.type === USER_TYPE.ADMIN) {
             Utils.showSuccessMessage("Admin Login Successfully");
