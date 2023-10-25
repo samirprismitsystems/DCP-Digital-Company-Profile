@@ -9,7 +9,7 @@ export default function Hero() {
 
     return (
         <>
-            <div id="home" className={`${styles.header_hero} bg-platinum-gray relative z-10 overflow-hidden platinumLg:flex items-center`}>
+            <div id="about" className={`${styles.header_hero} bg-platinum-gray relative z-10 overflow-hidden platinumLg:flex items-center`}>
                 <div className={`${styles.hero_shape} ${styles.shape_1}`}>
                     <img src="assets/themes/platinum/shape/shape-1.svg" alt="shape" />
                 </div>
