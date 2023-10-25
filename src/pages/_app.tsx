@@ -9,7 +9,7 @@ import "react-quill/dist/quill.snow.css";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Layout from "@/components/Layout/Layout";
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -33,7 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
             className="absolute z-[999999]"
           />
         </div>
-        <Component {...pageProps} />
+        <Layout>  
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     )
   );

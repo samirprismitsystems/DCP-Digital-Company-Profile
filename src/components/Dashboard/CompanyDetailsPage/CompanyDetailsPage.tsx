@@ -15,12 +15,14 @@ import CompanyStateAndCitySelector from "./FormFields/CompanyStateAndCitySelecto
 import CompanyWorkingHoursSelectorField from "./FormFields/CompanyWorkingHoursField";
 import MapInformation from "./MapInformation/MapInformation";
 import CompanyTextField from "./FormFields/CompanyTextField";
+import { useRouter } from "next/router";
 
 export default function CompanyDetailsPage() {
   const [objData, setObjData] = useState<any>();
   const [isChange, setIsChange] = useState<boolean>(false);
   const [lstStates, setState] = useState<IStates[]>();
   const [mapLocation, setMapLocation] = useState<IMap>();
+  const router = useRouter();
 
   type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
   const objForm = useForm({
@@ -82,6 +84,8 @@ export default function CompanyDetailsPage() {
       if (typeof data.company_logo === "object") {
         io.append("company_logo", data.company_logo);
       }
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.saveCompanyDetailsPageData(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -92,6 +96,7 @@ export default function CompanyDetailsPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

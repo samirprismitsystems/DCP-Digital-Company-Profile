@@ -2,6 +2,7 @@ import AdminBackButton from "@/common/AdminBackButton";
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { adminUserReviewFormSchema } from "@/services/forms/formSchema";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
@@ -58,7 +59,8 @@ export default function AdminEditUserReview(props: {
         io.append("isupdate", true);
         io.append("review_id", props.objItem.review_id);
       }
-
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.addAdminUserReview(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -69,6 +71,7 @@ export default function AdminEditUserReview(props: {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

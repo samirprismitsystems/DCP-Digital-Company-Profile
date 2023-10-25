@@ -20,6 +20,7 @@ import FooterPageSelector from "./FooterPageSelector";
 import SiteSettingImageUploader from "./SiteSettingImageUploader";
 import SiteSettingTextField from "./SiteSettingTextField";
 import styles from "./styles/siteSetting.module.scss";
+import AuthService from "@/services/AuthServices";
 
 export default function SiteSetting() {
   const router = useRouter();
@@ -91,6 +92,9 @@ export default function SiteSetting() {
       } else {
         io.append("logo", data.siteLogo);
       }
+      let token = AuthService.getToken();
+      io.append("token", token);
+
 
       const res = await ApiService.saveAdminSiteSetting(io);
       if (!res.error) {
@@ -101,6 +105,7 @@ export default function SiteSetting() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

@@ -1,4 +1,3 @@
-import AuthGuard from "@/AuthGuards/AuthGuards";
 import AdminEditUserReview from "@/components/Admin/EditUserReview/EditUserReview";
 import AdminNormalLayout from "@/layouts/AdminNormalLayout";
 import ApiService from "@/services/ApiServices";
@@ -52,10 +51,8 @@ export default function EditUserReview() {
   }, [router.query.slug]);
 
   return (
-    <AuthGuard>
-      <AdminNormalLayout>
-        <AdminEditUserReview objItem={objItem} />
-      </AdminNormalLayout>
-    </AuthGuard>
+    <AdminNormalLayout>
+      <AdminEditUserReview objItem={objItem} />
+    </AdminNormalLayout>
   );
 }

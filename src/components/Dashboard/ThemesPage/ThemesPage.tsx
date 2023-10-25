@@ -6,9 +6,11 @@ import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { useState } from "react";
 import ThemeCards from "./ThemeCards/ThemeCards";
+import { useRouter } from "next/router";
 
 export default function ThemesPage() {
   const [themeID, setThemeID] = useState<any>(Utils.getSelectedThemeID());
+  const router = useRouter();
 
   const onSave = async (e: any) => {
     try {
@@ -16,6 +18,9 @@ export default function ThemesPage() {
       const io: any = new FormData();
       io.append("user_id", AuthService.getUserEmail());
       io.append("theme_id", parseInt(themeID));
+      let token = AuthService.getToken();
+      io.append("token", token);
+
       const res = await ApiService.saveThemes(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -30,6 +35,7 @@ export default function ThemesPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

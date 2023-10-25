@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 
 interface IUser {
   firstName: string;
@@ -41,6 +42,7 @@ export default function ProfileForm() {
     },
     resolver: yupResolver(adminProfileFormSchema),
   });
+  const router = useRouter();
 
   type IFormData = yup.InferType<typeof adminProfileFormSchema>;
 
@@ -81,6 +83,8 @@ export default function ProfileForm() {
       io.append("email_id", data.email);
       io.append("contact_no", data.mobile);
       io.append("profile_photo", data.profilePhoto);
+      let token = AuthService.getToken();
+      io.append("token", token);
       io.append("isupdate", true);
 
       const res = await ApiService.saveUserProfileInfo(io);
@@ -93,6 +97,7 @@ export default function ProfileForm() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

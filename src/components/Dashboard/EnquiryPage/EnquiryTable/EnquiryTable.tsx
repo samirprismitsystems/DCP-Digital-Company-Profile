@@ -1,8 +1,10 @@
 import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { IEnquiry } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function EnquiryTable() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -12,6 +14,7 @@ export default function EnquiryTable() {
     totalPages: 1,
     itemsPerPage: 2,
   });
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -51,7 +54,9 @@ export default function EnquiryTable() {
       let io = new FormData();
       io.append("inquiry_id", EnquiryID);
       io.append("status", status);
-
+      let token = AuthService.getToken();
+      io.append("token", token);
+      
       const res = await ApiService.activeDeactiveEnquiryStatus(io);
       if (!res.error) {
         onComplete();
@@ -62,6 +67,7 @@ export default function EnquiryTable() {
       throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
+      router.push('/');
     }
   };
 
