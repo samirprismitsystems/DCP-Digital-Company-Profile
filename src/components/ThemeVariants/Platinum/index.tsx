@@ -6,6 +6,9 @@ import Products from './component/Products/Products';
 import Services from './component/Services/Services';
 import Testimonial from './component/Testimonial/Testimonial';
 import styles from "./styles/platinum.module.scss";
+import ContactInfo from './component/ContactUs/ContactInfo';
+import Footer from '../Gold/Footer/Footer';
+import Cards from './component/Cards/Cards';
 
 export default function Platinum() {
     useEffect(() => {
@@ -17,11 +20,13 @@ export default function Platinum() {
     return (
         <>
             <Header />
+            <Cards/>
             <Services />
             <Products />
             <Portfolio />
             <Testimonial />
-            <GetInTouch />
+            <ContactInfo/>
+            <Footer/>
         </>
     )
 }

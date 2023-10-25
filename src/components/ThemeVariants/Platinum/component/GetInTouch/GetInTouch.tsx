@@ -80,7 +80,7 @@ export default function GetInTouch() {
 
     return (
         <>
-            <section id="contact" className="bg-platinum-gray contact_area relative pt-platinum18 pb-platinum120">
+            <section id="contact" className="bg-platinum-gray contact_area relative pt-platinum18">
                 <div className="container">
                     <div className={`${styles.contact_image} flex items-center justify-end`}>
                         <div className={`image platinumLg:pr-platinum13`}>
@@ -90,10 +90,9 @@ export default function GetInTouch() {
                     <div className="flex justify-end">
                         <div className="w-full platinumLg:w-1/2">
                             <div className="contact_wrapper mt-platinum11">
-                                <div className={`${global.section_title} pb-platinum4`}>
+                                <div className={`${global.section_title} pb-platinum4 text-left`}>
                                     <h5 className={global.sub_title}>Contact</h5>
                                     <h4 className={global.main_title}>Get In Touch</h4>
-                                    {/* <p>Lorem ipsum dolor sitrg amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</p> */}
                                 </div>
 
                                 <div className="contact_form">
@@ -101,14 +100,14 @@ export default function GetInTouch() {
                                         <div className="">
                                             <div className="grid grid-cols-1 platinumXl:grid-cols-2 gap-4">
                                                 <div className=" w-full">
-                                                    <div className="single_form mt-platinum3 platinumMd:mt-platinum8 w-full">
+                                                    <div className="single_form mt-platinum3 platinumLg:mt-platinum5 w-full">
                                                         <input onChange={(e: any) => {
                                                             setFieldValue({ name: e.target.value })
                                                         }} value={objUserInfo.name} required name="name" id="name" type="text" placeholder="Name" className="w-full rounded-md py-platinum4 px-platinum6 border border-solid border-platinum-body-color text-[1.5rem]" />
                                                     </div>
                                                 </div>
                                                 <div className="w-full">
-                                                    <div className="single_form mt-platinum3 platinumMd:mt-platinum8">
+                                                    <div className="single_form mt-platinum3 platinumLg:mt-platinum5">
                                                         <input onChange={(e: any) => {
                                                             setFieldValue({ email: e.target.value })
                                                         }} value={objUserInfo.email} required name="email" id="email" type="email" placeholder="Email" className="text-[1.5rem] w-full rounded-md py-platinum4 px-platinum6 border border-solid border-platinum-body-color" />
@@ -134,7 +133,7 @@ export default function GetInTouch() {
                                             </div>
                                             <p className="form-message mx-platinum3"></p>
                                             <div className="w-full">
-                                                <div className="single_form mt-platinum3 platinumMd:mt-platinum8">
+                                                <div className="single_form mt-platinum3 platinumLg:mt-platinum5 float-left">
                                                     <button disabled={isLoading} type="submit" className={`text-[5.8rem] ${styles.mainBtn} ${styles.contactBtn}`}>Submit</button>
                                                 </div>
                                             </div>

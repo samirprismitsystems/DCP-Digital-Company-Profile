@@ -8,7 +8,7 @@ import styles from "./styles/services.module.scss";
 export default function Services() {
     const lstService = useContext(ThemeContextApi).service;
     return (
-        <section id="services" className="bg-platinum-gray services_area pt-platinum0 platinumMd:pt-platinum120 pb-platinum120">
+        <section id="services" className="bg-platinum-gray services_area pt-platinum120 pb-platinum120">
             <div className="container">
                 <div className="flex items-center justify-center">
                     <div className="w-full">
@@ -26,7 +26,7 @@ export default function Services() {
                                     <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`} className={styles.services_shape} alt="" />
                                 </div>
                                 <div className="services_content mt-platinum5 platinumXl:mt-platinum10">
-                                    <h3 className="services_title text-black font-semibold text-xl platinumMd:text-2xl platinumLg:text-xl platinumXl:text-3xl">{Utils.getContent(item.service_name)}</h3>
+                                    <h3 className="services_title text-black font-semibold text-3xl platinumMd:text-2xl platinumLg:text-xl platinumXl:text-3xl">{Utils.getContent(item.service_name)}</h3>
                                     <p className="mt-platinum4">{Utils.getContent(item.service_desc)}</p>
                                 </div>
                             </div>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import AboutUs from './AboutUs/AboutUs';
 import AppBar from './Appbar/AppBar';
 import ContactUs from './ContactUs/ContactUs';
@@ -11,8 +12,13 @@ import ShareCards from './ShareCards/ShareCards';
 
 export default function Gold() {
 
+    useEffect(() => {
+        const htmlTag = document.getElementsByTagName('html')[0];
+        htmlTag.className = 'goldHtml'
+    }, [])
+
     return (
-        <section className={`goldVariants`}>
+        <>
             <AppBar />
             <Hero />
             <AboutUs />
@@ -23,6 +29,6 @@ export default function Gold() {
             <Review />
             <ContactUs />
             <Footer />
-        </section>
+        </>
     );
 }
