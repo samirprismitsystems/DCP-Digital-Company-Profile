@@ -273,9 +273,7 @@ export default function MobileNavbar({
 
   return (
     <div
-      className={`h-screen w-${isOpen ? "full" : "0"} ${
-        !isOpen && "sideBarEffectNoWidth"
-      }  float-right sideBarEffect bg-black  text-white`}
+      className={`h-screen w-${isOpen ? "full" : "0"} float-right bg-black text-white transition-all duration-200 ease-in`}
     >
       {isOpen && (
         <div className={`py-16 w-${isOpen ? "full" : "0"} `}>

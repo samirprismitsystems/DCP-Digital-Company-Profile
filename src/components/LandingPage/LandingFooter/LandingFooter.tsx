@@ -32,7 +32,7 @@ export default function LandingFooter() {
             <Image
               width={57}
               height={38}
-              src="/assets/landing/company_logo.png"
+              src="/assets/landingpage/landing/company_logo.png"
               alt="Prism I. T. Systems"
               title="Prism I. T. Systems"
             />

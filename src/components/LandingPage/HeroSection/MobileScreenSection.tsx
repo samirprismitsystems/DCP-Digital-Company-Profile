@@ -25,7 +25,7 @@ export default function MobileScreenSection(props: { homeImage: string }) {
           }}
         >
           <img
-            src={`${image || "/assets/landing/digital_profile.jpg"}`}
+            src={`${image || "/assets/landingpage/landing/digital_profile.jpg"}`}
             alt="image.jpg"
             className={`transition-all duration-[12000ms] linear ${
               isHover ? "-translate-y-[77%]" : ""
@@ -36,7 +36,7 @@ export default function MobileScreenSection(props: { homeImage: string }) {
           width={800}
           height={800}
           className="block object-cover h-auto object-center xs:w-[326px] lg:m-auto md:w-full md:h-[772px] xl:h-[520px]"
-          src="/assets/landing/mobileScreen.webp"
+          src="/assets/landingpage/landing/mobileScreen.webp"
           alt="mobile-screen"
         />
       </div>

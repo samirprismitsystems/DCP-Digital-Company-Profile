@@ -11,9 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
-import AdminSocialLinkSelector from "./AdminSocialLinkSelector";
-import AuthService from "@/services/AuthServices";
-import { useRouter } from "next/router";
+import UpdateAndShowSocialColor from "../AdminAddSocialColorPage/UpdateAndShowSocialColor";
 
 export default function AdminSocialMediaItem() {
   const [lstSocialColor, setLstSocialColor] = useState<ISocialMediaColors[]>();
@@ -25,7 +23,6 @@ export default function AdminSocialMediaItem() {
     },
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const getColors = async () => {
     try {
@@ -58,7 +55,6 @@ export default function AdminSocialMediaItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
     } finally {
       setIsLoading(false);
     }
@@ -94,8 +90,6 @@ export default function AdminSocialMediaItem() {
       let io: any = new FormData();
       io.append("isupdate", true);
       io.append("social_data", JSON.stringify(oldData));
-      let token = AuthService.getToken();
-      io.append("token", token);
       const res = await ApiService.saveAdminSocialMediaInfo(io);
 
       const newData = data.adminSocialMediaInfo?.filter((item: any) => {
@@ -106,7 +100,7 @@ export default function AdminSocialMediaItem() {
 
       newData?.forEach((item) => {
         if (!Boolean(item.socialmedia_color)) {
-          item.socialmedia_color = "1";
+          item.socialmedia_color = "#000000";
         }
       });
 
@@ -114,7 +108,6 @@ export default function AdminSocialMediaItem() {
         let newIO: any = new FormData();
         newIO.append("isupdate", false);
         newIO.append("social_data", JSON.stringify(newData));
-        newIO.append("token", token);
 
         const res = await ApiService.saveAdminSocialMediaInfo(newIO);
         if (!res.error) {
@@ -143,7 +136,7 @@ export default function AdminSocialMediaItem() {
         const res = await ApiService.deleteAdminSocialMediaItem(index);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
-          // onComplete();
+          onComplete();
           setLstSocialMedia([
             {
               socialmedia_logo: "",
@@ -222,7 +215,7 @@ export default function AdminSocialMediaItem() {
                   <div>
                     <input
                       type="text"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Social Name"
                       {...objForm.register(
                         `adminSocialMediaInfo.${index}.socialmedia_name`
@@ -234,7 +227,7 @@ export default function AdminSocialMediaItem() {
                   <div>
                     <input
                       type="text"
-                      className="imageUploaderInputs placeholder:text-gray-400 py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic bg-transparent "
+                      className="bg-whiteSmoke placeholder:text-info-main py-5 px-4 border-[1px] border-solid border-[#ccc] rounded-lg mt-4  font-normal w-full text-3xl  text-secondary-main focus-within:outline-none not-italic  "
                       placeholder="Enter Social Logo Class"
                       {...objForm.register(
                         `adminSocialMediaInfo.${index}.socialmedia_logo`
@@ -243,11 +236,13 @@ export default function AdminSocialMediaItem() {
                       required={true}
                     />
                   </div>
-                  <AdminSocialLinkSelector
+                  {/* adminSocialMediaInfo.${indexNumber}.socialmedia_color */}
+                  {/* <AdminSocialLinkSelector
                     selectedColorId={item.socialmedia_color}
                     lstSocialMediaColor={lstSocialColor}
                     indexNumber={index}
-                  />
+                  /> */}
+                  <UpdateAndShowSocialColor index={index} color={item.socialmedia_color}   />
                 </div>
               </div>
             );

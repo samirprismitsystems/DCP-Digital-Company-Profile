@@ -20,20 +20,6 @@ export default function AuthGuard({ children }: { children: any }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // if (
-  //   AuthService.getUserType() == USER_TYPE.ADMIN &&
-  //   pathname.startsWith("/dashboard")
-  // ) {
-  //   return <PageCircularLoading />;
-  // }
-
-  // if (
-  //   AuthService.getUserType() == USER_TYPE.USER &&
-  //  pathname.startsWith("/admindashboard")
-  // ) {
-  //   return <PageCircularLoading />;
-  // }
-
   if (AuthService.isUserLoggedIn()) {
     return children;
   }

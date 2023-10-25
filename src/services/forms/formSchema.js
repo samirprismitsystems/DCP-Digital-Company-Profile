@@ -228,6 +228,7 @@ export const adminSocialMediaClassFormSchema = yup.object({
       socialmedia_color_id: yup.string().optional(),
       socialmedia_color_name: yup.string().optional(),
       updated_at: yup.string().optional(),
+      isDeleted: yup.boolean().optional(),
     })
   ),
   socialMediaClass: yup.string().optional(),

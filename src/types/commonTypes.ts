@@ -163,6 +163,7 @@ export interface ISocialMediaColors {
   socialmedia_color_id: string;
   socialmedia_color_name: string;
   updated_at: string;
+  isDelete?:boolean;
 }
 
 export interface IPagesPageInfo {

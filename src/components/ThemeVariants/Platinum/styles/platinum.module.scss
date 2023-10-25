@@ -1,0 +1,82 @@
+.platinum {
+  font-size: 100% !important;
+  font-family: "Nunito", sans-serif;
+  color: #747e88;
+  tab-size: 4;
+  scroll-behavior: smooth;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.5;
+
+  ul {
+    li {
+      font-size: 16px;
+    }
+  }
+
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media (min-width: 540px) {
+      max-width: 540px;
+    }
+
+    @media (min-width: 720px) {
+      max-width: 720px;
+    }
+
+    @media (min-width: 960px) {
+      max-width: 960px;
+    }
+
+    @media (min-width: 1140px) {
+      max-width: 1140px;
+    }
+
+    @media (min-width: 1320px) {
+      max-width: 1320px;
+    }
+  }
+
+  input:focus,
+  textarea {
+    outline: none;
+  }
+  font-size: 100%;
+}
+.section_title {
+  .sub_title {
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(249, 79, 79, var(--tw-text-opacity));
+  }
+  .main_title {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    margin-top: 16px;
+  }
+  p {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 720px) {
+  .section_title {
+    .sub_title {
+      font-size: 2rem;
+      line-height: 1.75rem;
+    }
+    .main_title {
+      font-size: 3rem;
+      line-height: 2.5rem;
+    }
+  }
+}

@@ -23,7 +23,7 @@ export default function NavigationMenu({
                 key={index}
                 href={`${isNavigate ? item.link : "#"}`}
                 className={`text-[2.0rem] block px-2 py-3 ${
-                  item.id === selectedIndex ? "text-secondary-main" : "txtdark"
+                  item.id === selectedIndex ? "text-secondary-main" : "text-secondary-greyDark"
                 } hover:text-primary-light font-[500]`}
                 aria-current="page"
                 onClick={(event: any) => {

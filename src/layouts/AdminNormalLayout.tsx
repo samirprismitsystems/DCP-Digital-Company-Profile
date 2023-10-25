@@ -1,5 +1,5 @@
 import AdminDashboardNavbar from "@/components/Admin/AdminDashboardNavbar/AdminDashboardNavbar";
-import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
+import DashboardFooter from "@/components/Dashboard/DashboardPage/DashboardFooter/DashboardFooter";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppSelector } from "@/services/store/hooks/hooks";
@@ -31,7 +31,7 @@ export default function AdminNormalLayout({ children }: any) {
         </title>
       </Head>
       <AdminDashboardNavbar />
-      <section className="main">
+      <section className="mainAdminLayouts">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
             <div className="left_sidebar_nav text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[9999]">

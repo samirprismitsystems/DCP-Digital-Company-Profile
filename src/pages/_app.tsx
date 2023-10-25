@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     require("react-toastify/dist/ReactToastify.css");
     setIsRender(true);
+    document.body.className = 'digimen'
   }, []);
 
   return (

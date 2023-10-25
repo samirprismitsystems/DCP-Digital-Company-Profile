@@ -1,0 +1,75 @@
+.contact_image {
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 52px;
+  padding-left: 20px;
+  padding-right: 20px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  img {
+    max-width: 100%;
+    max-width: 770px;
+  }
+}
+@media (min-width: 960px) {
+  .contact_image {
+    height: 100%;
+    margin-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    position: absolute;
+    width: 50%;
+    img {
+      max-width: 720px;
+      width: auto;
+    }
+  }
+}
+
+.mainBtn {
+  --tw-bg-opacity: 1;
+  background-color: rgba(56, 66, 77, var(--tw-bg-opacity));
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 40px;
+  padding-right: 40px;
+  position: relative;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  z-index: 10;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 300ms;
+  border-top-right-radius: 0px;
+  &:hover {
+    --tw-bg-opacity: 0.8;
+    --tw-text-opacity: 1;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+  }
+}
+
+.contactBtn {
+  --tw-bg-opacity: 1;
+  background-color: rgba(249, 79, 79, var(--tw-bg-opacity));
+  border-radius: 0.375rem;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 40px;
+  padding-right: 40px;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  &:hover {
+    --tw-bg-opacity: 0.8;
+  }
+}

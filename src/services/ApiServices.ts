@@ -51,7 +51,6 @@ const ApiService = {
 
   async loginUser(data: any) {
     const res = await axios.post(`${BASE_URI}api/user/loginuser`, data);
-
     return res.data;
   },
 

@@ -1,4 +1,4 @@
-import DashboardCards from "@/components/DashboardPage/DashboardCards/DashboardCards";
+import DashboardCards from "@/components/Dashboard/DashboardPage/DashboardCards/DashboardCards";
 import { IAdminDashboardCounts } from "@/types/commonTypes";
 import {
   faImages,
