@@ -102,25 +102,16 @@
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-
-    @media (min-width: 540px) {
-      max-width: 540px;
+    @media (max-width: 540px) {
+      max-width: 540px !important;
     }
 
-    @media (min-width: 720px) {
-      max-width: 720px;
+    @media (max-width: 720px) {
+      max-width: 720px !important;
     }
 
-    @media (min-width: 960px) {
-      max-width: 960px;
-    }
-
-    @media (min-width: 1140px) {
-      max-width: 1140px;
-    }
-
-    @media (min-width: 1320px) {
-      max-width: 1320px;
+    @media (max-width: 960px) {
+      max-width: 960px !important;
     }
   }
 
