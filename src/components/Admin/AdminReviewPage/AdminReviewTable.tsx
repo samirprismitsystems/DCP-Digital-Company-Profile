@@ -37,7 +37,6 @@ export default function AdminReviewTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
     } finally {
       setIsLoading(false);
     }

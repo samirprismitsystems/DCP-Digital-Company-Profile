@@ -1,5 +1,4 @@
-import PageCircularLoading from "@/common/PageCircularLoading";
-import LoginPage from "@/components/LoginPage/LoginPage";
+import LoginPage from "@/components/Common/LoginPage/LoginPage";
 import AuthService from "@/services/AuthServices";
 import { USER_TYPE } from "@/services/Enums";
 import { useRouter } from "next/router";

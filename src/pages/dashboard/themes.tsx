@@ -4,8 +4,10 @@ import MainDashboardLayouts from "@/layouts/DashboardLayouts/MainDashboardLayout
 
 export default function themes() {
   return (
-    <MainDashboardLayouts>
-      <ThemesPage />
-    </MainDashboardLayouts>
+    <AuthGuard>
+      <MainDashboardLayouts>
+        <ThemesPage />
+      </MainDashboardLayouts>
+    </AuthGuard>
   );
 }
