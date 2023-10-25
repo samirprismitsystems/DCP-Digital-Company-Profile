@@ -1,4 +1,86 @@
 .platinumHtml {
+  .testimonialClientText {
+    color: #f94f4f !important;
+  }
+
+  .owl-dots {
+    button.owl-dot.active {
+      background: #fe4777 !important;
+      transform: scale(1.2);
+    }
+    button.owl-dot {
+      &:hover {
+        background: #fe4777 !important;
+        transform: scale(1.2);
+      }
+      width: 13px !important;
+      height: 13px !important;
+      display: inline-block !important;
+      background: #5c696a !important;
+      background: #fff !important;
+      cursor: pointer !important;
+      text-indent: -9999px !important;
+      border-radius: 20px !important;
+      margin: 0 0.5rem !important;
+      border: 3px solid #c9cbca !important;
+      &:focus {
+        outline: none !important;
+      }
+    }
+  }
+
+  .owl-theme {
+    .owl-dots {
+      .owl-dot {
+        display: inline-flex !important;
+      }
+    }
+  }
+
+  .gold_testimonial {
+    position: relative;
+    background: center / cover url("/assets/themes/gold/clients.png") no-repeat;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgb(139 62 62 / 62%);
+    }
+
+    .owl-theme .owl-dots {
+      text-align: left !important;
+    }
+
+    .owl-theme .owl-dots .owl-dot span {
+      display: none !important;
+    }
+
+    .owl-dots button.owl-dot.active,
+    .owl-dots button.owl-dot:hover {
+      background: #f94f4f !important;
+      transform: scale(1.2);
+    }
+
+    .owl-dots button.owl-dot {
+      width: 13px !important;
+      height: 13px !important;
+      display: inline-block !important;
+      background: #ffffff !important;
+      cursor: pointer !important;
+      text-indent: -9999px !important;
+      border-radius: 20px !important;
+      margin: 0 0.5rem !important;
+      border: none !important;
+    }
+
+    .owl-dots button.owl-dot:focus {
+      outline: none; // Remove focus outline
+    }
+  }
+
   .container {
     padding-left: 16px;
     padding-right: 16px;

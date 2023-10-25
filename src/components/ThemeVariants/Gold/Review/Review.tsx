@@ -16,7 +16,7 @@ export default function Review() {
     const options = {
         loop: true,
         items: 1,
-        autoplay: true,
+        autoplay: false,
         dots: true,
         nav: false,
         autoplayTimeout: 3000,
@@ -27,7 +27,7 @@ export default function Review() {
         <section className={`gold_testimonial  xs:h-auto`}>
             <div className="container h-full">
                 <div className="h-full py-32 text-left flex justify-center items-center flex-col">
-                    <h2 className="relative text-center uppercase text-white after:border-b-[2px] after:border-b-white after:border-solid after:block after:w-[120px] after:mt-2 after:mb-8 after:mx-auto">What Our <span className="text-gold-secondary">Clients</span> Said</h2>
+                    <h2 className="relative text-center uppercase text-white after:border-b-[2px] after:border-b-white after:border-solid after:block after:w-[120px] after:mt-2 after:mb-8 after:mx-auto">What Our <span className="text-gold-secondary testimonialClientText">Clients</span> Said</h2>
 
                     {lstTestimonial.length > 0 && (
                         <OwlCarousel className="owl-carousel owl-theme" {...options}>

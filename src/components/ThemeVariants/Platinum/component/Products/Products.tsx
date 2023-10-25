@@ -3,8 +3,8 @@ import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import styles from "./styles/products.module.scss";
 import global from "../../styles/platinum.module.scss";
+import styles from "./styles/products.module.scss";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
@@ -61,7 +61,7 @@ export default function Products() {
               {lstProduct.length > 0 && (
                 <OwlCarousel className="owl-carousel owl-theme" {...options}>
                   {lstProduct.map((item, index) => (
-                    <div className="w-full">
+                    <div className="w-full" key={index}>
                       <div className={`${styles.single_team_item} mx-auto group`}>
                         <div className={`mx-platinum3 ${styles.single_team}`}>
                           <div className={`${styles.team_image} relative`}>
