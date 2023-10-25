@@ -1,8 +1,10 @@
 import Loading from "@/common/Loading";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { ITestimonial } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function TestimonialTable() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -12,6 +14,7 @@ export default function TestimonialTable() {
     totalPages: 1,
     itemsPerPage: 2,
   });
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -51,7 +54,9 @@ export default function TestimonialTable() {
       let io = new FormData();
       io.append("testimonial_id", tid);
       io.append("status", status);
-
+      let token = AuthService.getToken();
+      io.append("token", token);
+      
       const res = await ApiService.activeDeactiveTestimonialStatus(io);
       if (!res.error) {
         onComplete();
@@ -62,6 +67,7 @@ export default function TestimonialTable() {
       throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
+      router.push('/');
     }
   };
 

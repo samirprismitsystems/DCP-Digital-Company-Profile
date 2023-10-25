@@ -7,12 +7,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import SiteSettingTextField from "../SiteSetting/SiteSettingTextField";
+import AuthService from "@/services/AuthServices";
+import { useRouter } from "next/router";
 
 export default function GoogleAnalytics() {
   const [objSiteSetting, setObjSiteSetting] = useState({
     beforeTag: "",
     afterTag: "",
   });
+  const router = useRouter();
 
   const objForm = useForm({
     defaultValues: objSiteSetting,
@@ -47,7 +50,9 @@ export default function GoogleAnalytics() {
       const io: any = new FormData();
       io.append("before_body", data.beforeTag);
       io.append("after_body", data.afterTag);
-
+      let token = AuthService.getToken();
+      io.append("token", token);
+      
       const res = await ApiService.saveAdminGoogleAnalyticsInfo(io);
 
       if (!res.error) {
@@ -59,6 +64,7 @@ export default function GoogleAnalytics() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

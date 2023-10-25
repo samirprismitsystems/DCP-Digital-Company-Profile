@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 
 export default function ImageGalleryItem() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,6 +23,7 @@ export default function ImageGalleryItem() {
       portfolio_image: "",
     },
   ]);
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -84,6 +86,8 @@ export default function ImageGalleryItem() {
         io.append("imgcount", imgcount);
       }
       io.append("portfolio_data", JSON.stringify(oldData));
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.saveImageGalleryDetails(io);
 
       const newData = data.portfolio_data?.filter((item: any) => {
@@ -109,7 +113,7 @@ export default function ImageGalleryItem() {
         newIO.append("user_id", AuthService.getUserEmail());
         newIO.append("isupdate", false);
         newIO.append("portfolio_data", JSON.stringify(newData));
-
+        newIO.append("token", token);
         const res = await ApiService.saveImageGalleryDetails(newIO);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
@@ -127,6 +131,7 @@ export default function ImageGalleryItem() {
       if (res.message !== "Empty Portfolio Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

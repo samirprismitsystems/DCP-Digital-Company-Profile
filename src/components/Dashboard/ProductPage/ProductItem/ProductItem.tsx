@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 
 export default function ProductItem() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,6 +24,7 @@ export default function ProductItem() {
       product_image: "",
     },
   ]);
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -86,6 +88,8 @@ export default function ProductItem() {
         io.append("imgcount", imgcount);
       }
       io.append("product_data", JSON.stringify(oldData));
+      let token = AuthService.getToken();
+      io.append("token", token); 
       const res = await ApiService.saveProductPageDetails(io);
 
       const newData = data.product_data?.filter((item: any) => {
@@ -119,7 +123,7 @@ export default function ProductItem() {
           return null;
         }
       }
-
+      
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
         onComplete();
@@ -129,6 +133,7 @@ export default function ProductItem() {
       if (res.message !== "Empty Product Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 

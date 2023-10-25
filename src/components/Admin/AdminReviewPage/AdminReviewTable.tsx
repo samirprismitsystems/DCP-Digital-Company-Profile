@@ -1,6 +1,7 @@
 import Pagination from "@/common/Pagination";
 import TableDataNotPresent from "@/common/TableDataNotPresent";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { IAdminUserReview } from "@/types/commonTypes";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -57,6 +58,8 @@ export default function AdminReviewTable() {
       let io = new FormData();
       io.append("review_id", userReviewID);
       io.append("status", status);
+      let token = AuthService.getToken();
+      io.append("token", token);
 
       const res = await ApiService.updateUserReviewStatus(io);
       if (!res.error) {
@@ -68,6 +71,7 @@ export default function AdminReviewTable() {
       throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
+      router.push('/');
     }
   };
 

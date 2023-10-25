@@ -62,7 +62,7 @@ export default function ChangePasswordForm() {
       io.append("email_id", data.email);
       io.append("cpass", data.currentPassword);
       io.append("npass", data.confirmPassword);
-
+      
       const res = await ApiService.changeUserPassword(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
