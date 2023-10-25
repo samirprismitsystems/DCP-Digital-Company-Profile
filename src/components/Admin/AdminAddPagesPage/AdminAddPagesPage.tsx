@@ -13,6 +13,7 @@ import TemplateSelector from "./TemplateSelector";
 import DefaultTemplate from "./Templates/DefaultTemplate";
 import LandingPageTemplate from "./Templates/LandingPageTemplate";
 import TemplateTwo from "./Templates/TemplateTwo";
+import AuthService from "@/services/AuthServices";
 
 export default function AdminAddPagesPage({
   objPageInfo,
@@ -59,6 +60,7 @@ export default function AdminAddPagesPage({
       await ApiService.getAllAdminUserReview();
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/');
     }
   };
 
@@ -197,7 +199,8 @@ export default function AdminAddPagesPage({
         if (isEdit) {
           io.append("page_id", objPageInfo?.page_id);
         }
-
+        const token = AuthService.getToken();
+        io.append("token", token);
         const res = await ApiService.createCompanyPage(io);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);

@@ -1,13 +1,10 @@
-import AuthGuard from "@/AuthGuards/AuthGuards";
-import ClientPage from "@/components/Dashboard/ClientPage/ClientPage";
+import ClientPage from "@/components/ClientPage/ClientPage";
 import MainDashboardLayouts from "@/layouts/DashboardLayouts/MainDashboardLayouts";
 
 export default function client() {
   return (
-    <AuthGuard>
-      <MainDashboardLayouts>
-        <ClientPage />
-      </MainDashboardLayouts>
-    </AuthGuard>
+    <MainDashboardLayouts>
+      <ClientPage />
+    </MainDashboardLayouts>
   );
 }

@@ -1,6 +1,6 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
-import DashboardFooter from "@/components/Dashboard/DashboardPage/DashboardFooter/DashboardFooter";
-import DashboardNavbar from "@/components/Dashboard/DashboardPage/DashboardNavbar/DashboardNavbar";
+import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
+import DashboardNavbar from "@/components/DashboardPage/DashboardNavbar/DashboardNavbar";
 import { privacyPolicyNavList } from "@/data/DashboardSideBar";
 import ApiService from "@/services/ApiServices";
 import AuthService from "@/services/AuthServices";

@@ -19,11 +19,10 @@ import { ISiteSettingState } from "../SwitchComponent";
 import FooterPageSelector from "./FooterPageSelector";
 import SiteSettingImageUploader from "./SiteSettingImageUploader";
 import SiteSettingTextField from "./SiteSettingTextField";
-import styles from "./styles/siteSetting.module.scss";
+import AuthService from "@/services/AuthServices";
 
-export default function SiteSetting() {
+export default function SiteSetting({ onComplete, objSiteSetting }: any) {
   const router = useRouter();
-  const [objSiteSetting, setObjSiteSetting] = useState<ISiteSettingState>();
   const objForm = useForm({
     defaultValues: {
       facebook: "",
@@ -36,36 +35,6 @@ export default function SiteSetting() {
     },
     resolver: yupResolver(adminSiteSettingFormSchema),
   });
-
-  type IFormData = yup.InferType<typeof adminSiteSettingFormSchema>;
-  const loadData = async () => {
-    try {
-      const res = await ApiService.getAdminSiteSettingInfo();
-      if (!res.error) {
-        const result: ISiteSetting[] = res.setting;
-        const objItem = {
-          siteLogo: result[0].setting_value || "",
-          siteTitle: result[1].setting_value || "",
-          siteDescription: result[2].setting_value || "",
-          facebook: result[3].setting_value || "",
-          instagram: result[4].setting_value || "",
-          linkedIn: result[5].setting_value || "",
-          siteEmail: result[8].setting_value || "",
-          footer_pages: result[9].setting_value || "",
-        };
-        setObjSiteSetting(objItem);
-        return null;
-      }
-
-      throw new Error("Error occurred while getting social media links!");
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
-
-  const onComplete = () => {
-    loadData();
-  };
 
   const onSave: any = async (data: any) => {
     try {
@@ -91,11 +60,13 @@ export default function SiteSetting() {
       } else {
         io.append("logo", data.siteLogo);
       }
+      let token = AuthService.getToken();
+      io.append("token", token);
 
       const res = await ApiService.saveAdminSiteSetting(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
-        router.reload();
+        onComplete();
         return null;
       }
       throw new Error(res.message);
@@ -104,9 +75,9 @@ export default function SiteSetting() {
     }
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  // useEffect(() => {
+  //   loadData();
+  // }, []);
 
   useEffect(() => {
     if (objSiteSetting && Object.keys(objSiteSetting).length > 0) {
@@ -150,7 +121,7 @@ export default function SiteSetting() {
               title={
                 <div className="flex items-center mb-1">
                   <FontAwesomeIcon
-                    className={`${styles.socialLinkColors} ${styles.socialmedia_color_1}`}
+                    className={`social-link-icons socialmedia_color_1`}
                     icon={faFacebookF}
                   />
                   Facebook
@@ -163,7 +134,7 @@ export default function SiteSetting() {
               title={
                 <div className="flex items-center mb-1">
                   <FontAwesomeIcon
-                    className={`${styles.socialLinkColors} ${styles.socialmedia_color_2}`}
+                    className={`social-link-icons socialmedia_color_2`}
                     icon={faInstagram}
                   />
                   Instagram
@@ -176,7 +147,7 @@ export default function SiteSetting() {
               title={
                 <div className="flex items-center mb-1">
                   <FontAwesomeIcon
-                    className={`${styles.socialLinkColors} ${styles.socialmedia_color_3}`}
+                    className={`social-link-icons socialmedia_color_3`}
                     icon={faLinkedinIn}
                   />
                   LinkedIn

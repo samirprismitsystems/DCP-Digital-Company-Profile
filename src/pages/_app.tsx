@@ -1,16 +1,15 @@
 import { store } from "@/services/store/store";
-import "@/styles/globals.scss"
+import "@/styles/globals.css";
 import "animate.css/animate.min.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useEffect, useState } from "react";
-import "react-quill/dist/quill.snow.css";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
+import Layout from "../components/Layout/Layout";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isRender, setIsRender] = useState(false);
@@ -33,7 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
             className="absolute z-[999999]"
           />
         </div>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     )
   );
