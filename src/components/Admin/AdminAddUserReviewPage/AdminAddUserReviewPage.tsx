@@ -2,7 +2,6 @@ import AdminBackButton from "@/common/AdminBackButton";
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
-import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { adminUserReviewFormSchema } from "@/services/forms/formSchema";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
@@ -47,8 +46,7 @@ export default function AdminAddUserReviewPage() {
       io.append("user_name", data.userName);
       io.append("user_message", data.userReview);
       // io.append("isupdate", false);
-      const token = AuthService.getToken();
-      io.append("token", token);
+
       const res = await ApiService.addAdminUserReview(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);

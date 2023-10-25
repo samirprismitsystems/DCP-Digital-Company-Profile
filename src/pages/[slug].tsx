@@ -1,8 +1,6 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
-import GadgetShopPage from "@/components/ThemeVariants/GadgetShop/GadgetShopPage/GadgetShopPage";
-import GoldTheme from "@/components/ThemeVariants/GoldTheme/Index";
-import HomeCarePage from "@/components/ThemeVariants/HomeCare/HomeCarePage/HomeCarePage";
-import PortfolioPage from "@/components/ThemeVariants/Portfolio/PortfolioPage/PortfolioPage";
+import Gold from "@/components/ThemeVariants/Gold/Index";
+import Platinum from "@/components/ThemeVariants/Platinum";
 import ApiService from "@/services/ApiServices";
 import { THEME_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
@@ -66,23 +64,24 @@ export default function UserViewSection() {
   }, []);
 
   const getTheme = () => {
-
-    if (themeID === THEME_TYPE.GADGET) {
-      return <GadgetShopPage result={result} />;
-    } else if (themeID === THEME_TYPE.HOMECARE) {
-      return <HomeCarePage result={result} />;
-    } else if (themeID === THEME_TYPE.PORTFOLIO) {
-      return <PortfolioPage result={result} />;
-    } else if (themeID === THEME_TYPE.GOLD) {
-      return <GoldTheme />
-    } else {
+    if (slug !== result.company?.company_slug) {
       return (
-        <PageNotFound
-          desc={"Please select the theme from dashboard!"}
-          title="Themes Not Available!"
-          hideButton={true}
-        />
+        <PageNotFound />
       );
+    } else {
+      if (themeID === THEME_TYPE.GOLD) {
+        return <Gold />
+      } else if (themeID === THEME_TYPE.PLATINUM) {
+        return <Platinum />
+      } else {
+        return (
+          <PageNotFound
+            desc={"Please select the theme from dashboard!"}
+            title="Themes Not Available!"
+            hideButton={true}
+          />
+        );
+      }
     }
   };
 

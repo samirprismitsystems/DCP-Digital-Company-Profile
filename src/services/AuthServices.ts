@@ -7,16 +7,14 @@ const LOGIN_USER_EMAIL_KEY = "loginUserEmail";
 const LOGIN_USER_TYPE_KEY = "DIGITALCOMPANYPROFILE";
 
 class AuthService {
-  static setLoginUserData(data: ILoginUser, token: string) {
+  static setLoginUserData(data: ILoginUser) {
     if (data) {
+      Utils.setItem("userType", data.type);
+      Utils.setItem("userEmail", data.email_id);
+      Utils.setItem("userName", data.first_name);
       Utils.setItem("siteTitle", "Admin Dashboard");
-      let userData = {
-        userType: data.type,
-        userEmail: data.email_id,
-        userName: data.first_name,
-        digimenToken: token
-      }
-      Utils.setItem('digimen_data', userData);
+      Utils.setItem("isUserLoggedIn", true);
+
       return true;
     } else {
       return false;
@@ -35,9 +33,9 @@ class AuthService {
   }
 
   static getUserName() {
-    const data = Utils.getItem("digimen_data");
-    if (data && data.userName) {
-      return data.userName;
+    const userName = Utils.getItem("userName");
+    if (userName) {
+      return userName;
     }
 
     return null;
@@ -53,9 +51,8 @@ class AuthService {
   }
 
   static getUserType() {
-    const data = Utils.getItem("digimen_data");
-    if (data && data.userType) {
-      return data.userType;
+    if (typeof window !== "undefined") {
+      return Utils.getItem("userType");
     }
     return null;
   }
@@ -72,12 +69,8 @@ class AuthService {
   }
 
   static getUserEmail() {
-    // if (typeof window !== "undefined") {
-    //   return this.getLocalUserEmail() || Utils.getItem("userEmail");
-    // }
-    const data = Utils.getItem("digimen_data");
-    if (data && data.userEmail) {
-      return data.userEmail;
+    if (typeof window !== "undefined") {
+      return this.getLocalUserEmail() || Utils.getItem("userEmail");
     }
     return null;
   }
@@ -90,16 +83,6 @@ class AuthService {
       return false;
     }
   }
-
-  static getToken() {
-    const data = Utils.getItem("digimen_data");
-    if (data && data.digimenToken) {
-      return data.digimenToken;
-    } else {
-      return false;
-    }
-  }
-
 }
 
 export default AuthService;

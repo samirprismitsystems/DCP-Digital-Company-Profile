@@ -48,7 +48,7 @@ export default function Hero() {
                     <div className="flex flex-wrap">
                         <div className="w-full platinumLg:w-1/2">
                             <div className="header_hero_content pt-platinum150 platinumLg:pt-platinum0">
-                                <h2 className="hero_title text-2xl platinumSm:text-4xl platinumMd:text-5xl platinumLg:text-4xl platinumXl:text-[4rem] font-extrabold">{Utils.getContent(objItem.company_name)} <span className="text-platinum-theme-color">{Utils.getContent(objItem.business_segment)}</span></h2>
+                                <h2 className="hero_title text-[3.5rem] leading-snug platinumSm:text-5xl platinumMd:text-6xl platinumLg:text-5xl platinumXl:text-[4rem] font-extrabold">{Utils.getContent(objItem.company_name)} <span className="text-platinum-theme-color">{Utils.getContent(objItem.business_segment)}</span></h2>
                                 <p className="mt-platinum8 platinumLg:mr-platinum8">{Utils.getContent(objItem.company_desc)}</p>
                                 <div className="hero_btn mt-platinum10">
                                     <Link href={'/login'} target="_blank" className={styles.mainBtn} type="button">Get Started</Link>
@@ -56,12 +56,12 @@ export default function Hero() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className={`${styles.header_shape} hidden platinumLg:block`}></div>
+                    <div className={`${styles.header_shape} hidden platinumLg:block`}></div>
 
-                <div className={`${styles.header_image} flex items-center`}>
-                    <div className="image platinum2xl:pl-platinum25">
-                        <img src="assets/themes/platinum/header-image.svg" alt="Header Image" />
+                    <div className={`${styles.header_image} flex items-center`}>
+                        <div className="image platinum2xl:pl-platinum25">
+                            <img src="assets/themes/platinum/header-image.svg" alt="Header Image" />
+                        </div>
                     </div>
                 </div>
             </div>

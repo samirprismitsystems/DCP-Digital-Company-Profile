@@ -1,3 +1,4 @@
+import AuthGuard from "@/AuthGuards/AuthGuards";
 import PageCircularLoading from "@/common/PageCircularLoading";
 import AdminAddPagesPage from "@/components/Admin/AdminAddPagesPage/AdminAddPagesPage";
 import AdminNormalLayout from "@/layouts/AdminNormalLayout";
@@ -34,7 +35,6 @@ export default function EditAdminPages() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
     } finally {
       setIsLoading(false);
     }
@@ -50,10 +50,12 @@ export default function EditAdminPages() {
 
   if (isLoading || !objPageInfo) return <PageCircularLoading />;
   return (
-    <TemplateContextApi.Provider value={objPageInfo}>
-      <AdminNormalLayout>
-        <AdminAddPagesPage objPageInfo={objPageInfo} />
-      </AdminNormalLayout>
-    </TemplateContextApi.Provider>
+    <AuthGuard>
+      <TemplateContextApi.Provider value={objPageInfo}>
+        <AdminNormalLayout>
+          <AdminAddPagesPage objPageInfo={objPageInfo} />
+        </AdminNormalLayout>
+      </TemplateContextApi.Provider>
+    </AuthGuard>
   );
 }

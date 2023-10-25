@@ -1,3 +1,4 @@
+import AuthGuard from "@/AuthGuards/AuthGuards";
 import AdminEditUserReview from "@/components/Admin/EditUserReview/EditUserReview";
 import AdminNormalLayout from "@/layouts/AdminNormalLayout";
 import ApiService from "@/services/ApiServices";
@@ -37,7 +38,6 @@ export default function EditUserReview() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
     } finally {
       setIsLoading(false);
     }
@@ -52,8 +52,10 @@ export default function EditUserReview() {
   }, [router.query.slug]);
 
   return (
-    <AdminNormalLayout>
-      <AdminEditUserReview objItem={objItem} />
-    </AdminNormalLayout>
+    <AuthGuard>
+      <AdminNormalLayout>
+        <AdminEditUserReview objItem={objItem} />
+      </AdminNormalLayout>
+    </AuthGuard>
   );
 }

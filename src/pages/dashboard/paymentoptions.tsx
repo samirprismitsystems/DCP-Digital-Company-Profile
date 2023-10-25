@@ -1,10 +1,13 @@
-import PaymentOptionPage from "@/components/PaymentOptionPage/PaymentOptionPage";
+import AuthGuard from "@/AuthGuards/AuthGuards";
+import PaymentOptionPage from "@/components/Dashboard/PaymentOptionPage/PaymentOptionPage";
 import MainDashboardLayouts from "@/layouts/DashboardLayouts/MainDashboardLayouts";
 
 export default function paymentoptions() {
   return (
-    <MainDashboardLayouts>
-      <PaymentOptionPage />
-    </MainDashboardLayouts>
+    <AuthGuard>
+      <MainDashboardLayouts>
+        <PaymentOptionPage />
+      </MainDashboardLayouts>
+    </AuthGuard>
   );
 }
