@@ -46,7 +46,7 @@ export default function Products() {
 
   return (
     <>
-      <section id="team" className="team_area bg-[#f5f5fc] pt-platinum120 pb-platinum120">
+      <section id="team" className="team_area bg-[#f5f5fc] pb-platinum18 pt-platinum18 platinumLg:pt-platinum120 platinumLg:pb-platinum120">
         <div className="container">
           <div className="flex items-center justify-center">
             <div className="w-full">

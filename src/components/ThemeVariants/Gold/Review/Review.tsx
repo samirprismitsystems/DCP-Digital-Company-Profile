@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatDistance } from "date-fns";
 import dynamic from "next/dynamic";
 import { useContext } from "react";
+
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
 });
@@ -22,7 +23,7 @@ export default function Review() {
         autoplayTimeout: 3000,
         smartSpeed: 1100,
     };
-    
+
     return (
         <section className={`gold_testimonial  xs:h-auto`}>
             <div className="container h-full">

@@ -7,7 +7,11 @@ import Map from '../Map/Map';
 import ContactCard from './ContactCard/ContactCard';
 import FollowUs from './FollowUs/FollowUs';
 
-export default function ContactUs() {
+interface IContactUsProps {
+    child?: any
+}
+
+export default function ContactUs(props: IContactUsProps) {
     const objItem = useContext(ThemeContextApi).company;
     const [objUser, setObjUser] = useState({
         name: "",
@@ -96,45 +100,48 @@ export default function ContactUs() {
                     <ContactCard isMobile={isMobile} title='Email Address' value={objItem.company_email} iconName={faEnvelope} />
                     <ContactCard isTablet={isTablet} isMobile={isMobile} title='Address' value={objItem.address} iconName={faMapMarkerAlt} />
                 </div>
-                <div className="grid xs:grid-cols-1 md:grid-cols-2 gap-8 pt-24">
-                    <Map />
-                    <div className='xs:mt-16 md:mt-0'>
-                        <form onSubmit={onSave}>
-                            <div className='grid xs:grid-cols-1 md:grid-cols-2 xs:gap-6 md:gap-16'>
-                                <input onChange={(e: any) => {
-                                    setFieldValue({
-                                        name: e.target.value
-                                    })
-                                }} value={objUser.name} required type="text" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Your Name' />
-                                <input onChange={(e: any) => {
-                                    setFieldValue({
-                                        email: e.target.value
-                                    })
-                                }} value={objUser.email} required type="email" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Email Address' />
-                            </div>
-                            <div className='grid xs:grid-cols-1  mt-8 xs:gap-6 md:gap-16'>
-                                <input onChange={(e: any) => {
-                                    const userInput = e.target.value;
-                                    if (userInput.length <= 10) {
+                {!props.child && (
+                    <div className="grid xs:grid-cols-1 md:grid-cols-2 gap-8 pt-24">
+                        <Map />
+                        <div className='xs:mt-16 md:mt-0'>
+                            <form onSubmit={onSave}>
+                                <div className='grid xs:grid-cols-1 md:grid-cols-2 xs:gap-6 md:gap-16'>
+                                    <input onChange={(e: any) => {
                                         setFieldValue({
-                                            mobile: userInput,
-                                        });
-                                    }
-                                }} required value={objUser.mobile || ""} type="number" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Mobile Number' />
-                            </div>
-                            <div className='grid grid-cols-1 mt-8'>
-                                <textarea onChange={(e: any) => {
-                                    setFieldValue({
-                                        message: e.target.value
-                                    })
-                                }} value={objUser.message} rows={15} className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Write your message here...' />
-                            </div>
-                            <div className='w-full flex xs:justify-center xs:items-center lg:items-end lg:justify-end my-4'>
-                                <button type='submit' className='hover:bg-yellow-300 hover:text-gold-primary transition-all duration-300 bg-gold-primary text-white py-4 text-[1.6rem] font-medium px-8'>Send Message</button>
-                            </div>
-                        </form>
+                                            name: e.target.value
+                                        })
+                                    }} value={objUser.name} required type="text" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Your Name' />
+                                    <input onChange={(e: any) => {
+                                        setFieldValue({
+                                            email: e.target.value
+                                        })
+                                    }} value={objUser.email} required type="email" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Email Address' />
+                                </div>
+                                <div className='grid xs:grid-cols-1  mt-8 xs:gap-6 md:gap-16'>
+                                    <input onChange={(e: any) => {
+                                        const userInput = e.target.value;
+                                        if (userInput.length <= 10) {
+                                            setFieldValue({
+                                                mobile: userInput,
+                                            });
+                                        }
+                                    }} required value={objUser.mobile || ""} type="number" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Mobile Number' />
+                                </div>
+                                <div className='grid grid-cols-1 mt-8'>
+                                    <textarea onChange={(e: any) => {
+                                        setFieldValue({
+                                            message: e.target.value
+                                        })
+                                    }} value={objUser.message} rows={15} className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Write your message here...' />
+                                </div>
+                                <div className='w-full flex xs:justify-center xs:items-center lg:items-end lg:justify-end my-4'>
+                                    <button type='submit' className='hover:bg-yellow-300 hover:text-gold-primary transition-all duration-300 bg-gold-primary text-white py-4 text-[1.6rem] font-medium px-8'>Send Message</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                )}
+                {props.child && props.child}
                 <div className="iconPacks my-8 mt-32 flex items-center justify-center">
                     <FollowUs />
                 </div>

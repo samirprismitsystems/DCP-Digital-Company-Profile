@@ -45,7 +45,7 @@ export default function Portfolio() {
 
     return (
         <>
-            <section id="blog" className="blog_area bg-platinum-gray pt-platinum0 platinumLg:pt-platinum120">
+            <section id="portfolio" className="blog_area bg-platinum-gray pt-platinum18 platinumLg:pt-platinum120">
                 <div className="container">
                     <div className="flex items-center justify-center">
                         <div className="w-full lg:w-1/2">
