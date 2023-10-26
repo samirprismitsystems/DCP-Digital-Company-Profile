@@ -9,6 +9,7 @@ import styles from "./styles/platinum.module.scss";
 import ContactInfo from './component/ContactUs/ContactInfo';
 import Footer from '../Gold/Footer/Footer';
 import Cards from './component/Cards/Cards';
+import BottomToTop from './component/BottomToTop/BottomToTop';
 
 export default function Platinum() {
     useEffect(() => {
@@ -19,14 +20,17 @@ export default function Platinum() {
 
     return (
         <>
+            <div className="absolute z-[12000]">
+                <BottomToTop />
+            </div>
             <Header />
-            <Cards/>
+            <Cards />
             <Services />
             <Products />
             <Portfolio />
             <Testimonial />
-            <ContactInfo/>
-            <Footer/>
+            <ContactInfo />
+            <Footer />
         </>
     )
 }

@@ -5,12 +5,12 @@
 
   .owl-dots {
     button.owl-dot.active {
-      background: #fe4777 !important;
+      background: $platinumThemeColor !important;
       transform: scale(1.2);
     }
     button.owl-dot {
       &:hover {
-        background: #fe4777 !important;
+        background: $platinumThemeColor !important;
         transform: scale(1.2);
       }
       width: 13px !important;
@@ -47,7 +47,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgb(139 62 62 / 62%) !important;
+      background: $platinumThemeLightColor !important;
     }
 
     .owl-theme .owl-dots {
@@ -83,10 +83,10 @@
 
   .goldContactLinks {
     background-color: white;
-    color: #f94f4f;
+    color: $platinumThemeColor;
     padding: 4px;
     transition: all 300ms ease;
-    border: #f94f4f dotted 1px;
+    border: $platinumThemeColor dotted 1px;
     &:hover {
       svg {
         color: #fffefe;
@@ -165,5 +165,19 @@
         transform: rotate(135deg);
       }
     }
+  }
+
+  &::-webkit-scrollbar {
+    width: 11px;
+    background-color: $secondaryDark;
+    border: 2px solid $primaryMain;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $primaryMain;
+    border: 2px solid $primaryMain;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondaryDark;
+    border-radius: 10px;
   }
 }

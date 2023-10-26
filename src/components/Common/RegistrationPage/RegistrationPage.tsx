@@ -24,7 +24,7 @@ export default function RegistrationPage() {
               <Image
                 width={800}
                 height={800}
-                className="md:h-[42vh] sm:h-[29vh] h-full w-full xl:h-screen object-center object-cover"
+                className="md:h-[42vh] sm:h-[29vh] h-full w-full xl:min-h-screen xl:h-auto object-center object-cover"
                 src="/assets/loginScreen/login_img.webp"
                 alt=""
               />
@@ -40,7 +40,7 @@ export default function RegistrationPage() {
             </span>
           </div>
           <div className="relative z-0 xs:min-h-[80vh] h-screen sm:min-h-screen xl:h-screen w-2/4 xs:w-full bg-white">
-            <div className="w-full h-full p-20 xs:p-8 md:p-8 xs:h-full">
+            <div className="w-full h-auto bg-white p-20 xs:p-8 md:p-8 xs:h-auto xs:min-h-full">
               <div className="xs:pt-0 w-3/4 xs:w-full m-auto md:w-3/4 xl:pt-[33rem] xlOne:pt-[25rem] xlTwo:pt-[24rem] xlThree:pt-[10rem]">
                 <h1 className="xs:text-4xl text-black text-center xl:text-6xl font-bold">
                   Create An Account

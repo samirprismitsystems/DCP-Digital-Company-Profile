@@ -9,6 +9,7 @@ import Product from './Product/Product';
 import Review from './Review/Review';
 import Service from './Service/Service';
 import ShareCards from './ShareCards/ShareCards';
+import BottomToTop from './BottomToTop/BottomToTop';
 
 export default function Gold() {
 
@@ -19,6 +20,9 @@ export default function Gold() {
 
     return (
         <>
+            <div className="absolute z-[12000]">
+                <BottomToTop />
+            </div>
             <AppBar />
             <Hero />
             <AboutUs />

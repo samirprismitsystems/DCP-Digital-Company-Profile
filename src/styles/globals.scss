@@ -4,11 +4,23 @@
 @import "./gold.scss";
 @import "./platinum.scss";
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+*::-webkit-scrollbar {
+  width: 11px;
+  background-color: $secondaryDark;
+  border: 2px solid $primaryMain;
+}
+*::-webkit-scrollbar-track {
+  background-color: $primaryMain;
+  border: 2px solid $primaryMain;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $secondaryDark;
+  border-radius: 10px;
+}
 
 @font-face {
   font-family: "GothamRoundedBold";
@@ -159,19 +171,6 @@ h6 {
 .left_sidebar_nav {
   min-height: calc(100vh - 20rem) !important;
   height: calc(100vh - 7em);
-  &::-webkit-scrollbar {
-    width: 11px;
-    background-color: $secondaryDark;
-    border: 2px solid $primaryMain;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: $primaryMain;
-    border: 2px solid $primaryMain;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: $secondaryDark;
-    border-radius: 10px;
-  }
 }
 .mainAdminLayouts {
   min-height: calc(100vh - 20rem);

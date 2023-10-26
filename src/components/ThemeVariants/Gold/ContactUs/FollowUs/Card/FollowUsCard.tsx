@@ -30,7 +30,7 @@ export default function FollowUsCard(props: IFollowUsCardProps) {
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`mx-2 my-4 w-16 h-16 text-center text-white flex justify-center items-center border-b-[2px] border-b-white border-dotted group bg-gold-primary ho    ver:border-b-gold-primary goldContactLinks`}
+            className={`mx-2 my-4 w-16 h-16 text-center text-white flex justify-center items-center border-b-[2px] border-b-white border-dotted group bg-gold-primary hover:border-b-gold-primary goldContactLinks`}
         >
             <FontAwesomeIcon
                 className="text-3xl font-bold group-hover:text-gold-primary "

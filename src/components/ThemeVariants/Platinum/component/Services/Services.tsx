@@ -27,7 +27,7 @@ export default function Services() {
                                 </div>
                                 <div className="services_content mt-platinum5 platinumXl:mt-platinum10">
                                     <h3 className="services_title text-black font-semibold text-3xl platinumMd:text-2xl platinumLg:text-xl platinumXl:text-3xl">{Utils.getContent(item.service_name)}</h3>
-                                    <p className="mt-platinum4">{Utils.getContent(item.service_desc)}</p>
+                                    <p className="mt-platinum4 overflow-y-auto  h-[80px]">{Utils.getContent(item.service_desc)}</p>
                                 </div>
                             </div>
                         </div>
