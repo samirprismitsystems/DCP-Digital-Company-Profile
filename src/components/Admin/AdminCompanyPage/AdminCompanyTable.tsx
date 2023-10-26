@@ -39,6 +39,7 @@ export default function AdminCompanyTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +73,7 @@ export default function AdminCompanyTable() {
       throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 

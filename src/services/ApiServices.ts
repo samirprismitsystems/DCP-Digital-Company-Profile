@@ -98,10 +98,14 @@ const ApiService = {
 
   async getAdminSiteSettingInfo() {
     let token = AuthService.getToken();
-    // ?token=${token}
-    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`);
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting?token=${token}`);
     return res.data;
-},
+  },
+
+  async getPublicSiteSettingInfo() {
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getpublicsetting`);
+    return res.data;
+  },
 
   async saveAdminSiteSetting(io: any) {
     const res = await axios.post(`${BASE_URI}api/sitesetting/savesetting`, io);

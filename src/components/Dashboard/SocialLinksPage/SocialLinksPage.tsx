@@ -13,12 +13,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import SocialLinkIcon from "./SocialLinkIcons/SocialLinkIcon";
 import SocialLinkTextField from "./SocialLinkTextField/SocialLinkTextField";
+import { useRouter } from "next/router";
 
 export default function SocialLinksPage() {
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lstSocialData, setLstSocialData] = useState<any>([]);
-
+  const router = useRouter();
   const objForm = useForm({
     resolver: yupResolver(socialLinkFormSchema),
   });
@@ -198,6 +199,7 @@ export default function SocialLinksPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }

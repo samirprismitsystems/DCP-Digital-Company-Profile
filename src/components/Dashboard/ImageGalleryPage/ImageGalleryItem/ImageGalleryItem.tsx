@@ -37,6 +37,7 @@ export default function ImageGalleryItem() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }
@@ -131,7 +132,7 @@ export default function ImageGalleryItem() {
       if (res.message !== "Empty Portfolio Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 

@@ -71,7 +71,7 @@ export default function AdminReviewTable() {
       throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 

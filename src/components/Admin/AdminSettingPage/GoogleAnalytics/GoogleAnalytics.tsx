@@ -10,7 +10,7 @@ import SiteSettingTextField from "../SiteSetting/SiteSettingTextField";
 import AuthService from "@/services/AuthServices";
 import { useRouter } from "next/router";
 
-export default function GoogleAnalytics() {
+export default function GoogleAnalytics({objGoogleAnalyticsSetting, onComplete}: any) {
   const [objSiteSetting, setObjSiteSetting] = useState({
     beforeTag: "",
     afterTag: "",
@@ -21,29 +21,6 @@ export default function GoogleAnalytics() {
     defaultValues: objSiteSetting,
     resolver: yupResolver(googleAnalyticsFormSchema),
   });
-
-  const loadData = async () => {
-    try {
-      const res = await ApiService.getAdminSiteSettingInfo();
-      if (!res.error) {
-        const result: ISiteSetting[] = res.setting;
-        const objItem = {
-          beforeTag: result[6].setting_value || "",
-          afterTag: result[7].setting_value || "",
-        };
-        setObjSiteSetting(objItem);
-        return null;
-      }
-
-      throw new Error("Error occurred while getting social media links!");
-    } catch (ex: any) {
-      Utils.showErrorMessage(ex.message);
-    }
-  };
-
-  const onComplete = () => {
-    loadData();
-  };
 
   const onSave = async (data: any) => {
     try {
@@ -64,20 +41,16 @@ export default function GoogleAnalytics() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
-
-  useEffect(() => {
-    if (objSiteSetting && Object.keys(objSiteSetting).length > 0) {
-      objForm.reset(objSiteSetting);
+    if (objGoogleAnalyticsSetting && Object.keys(objGoogleAnalyticsSetting).length > 0) {
+      objForm.reset(objGoogleAnalyticsSetting);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [objSiteSetting]);
+  }, [objGoogleAnalyticsSetting]);
 
   return (
     <FormProvider {...objForm}>

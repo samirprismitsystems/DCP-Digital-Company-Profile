@@ -231,7 +231,7 @@ export default function AdminAddPagesPage({
       }
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 

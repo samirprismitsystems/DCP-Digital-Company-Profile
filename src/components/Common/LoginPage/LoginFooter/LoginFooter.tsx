@@ -24,7 +24,7 @@ export default function LoginFooter() {
     try {
       const objRes = await ApiService.getLandingPageResource();
 
-      const res = await ApiService.getAdminSiteSettingInfo();
+      const res = await ApiService.getPublicSiteSettingInfo();
       const setting = res.setting;
       objRes.page_content && objRes.page_content?.footerpages;
       const footerPages = setting[9]?.setting_value;

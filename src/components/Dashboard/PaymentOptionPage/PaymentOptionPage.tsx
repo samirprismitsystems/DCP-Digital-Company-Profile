@@ -62,7 +62,7 @@ export default function PaymentOptionPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 
@@ -104,6 +104,7 @@ export default function PaymentOptionPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }

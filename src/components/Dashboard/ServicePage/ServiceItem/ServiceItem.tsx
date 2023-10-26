@@ -35,9 +35,10 @@ export default function ServiceItem() {
         return null;
       }
 
-      if (res.message !== "Empty Product Data") throw new Error(res.error);
+      if (res.message !== "Empty Product Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }
@@ -129,7 +130,7 @@ export default function ServiceItem() {
       if (res.message !== "Empty Service Data") throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
-      router.push('/');
+      router.push('/login');
     }
   };
 

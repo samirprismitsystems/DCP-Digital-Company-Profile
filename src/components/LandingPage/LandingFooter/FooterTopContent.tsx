@@ -22,7 +22,7 @@ export default function FooterTopContent() {
 
   const loadData = async () => {
     try {
-      const res = await ApiService.getAdminSiteSettingInfo();
+      const res = await ApiService.getPublicSiteSettingInfo();
       const setting = res.setting;
       const footerPages = setting[9]?.setting_value;
       const email = setting[8]?.setting_value;
