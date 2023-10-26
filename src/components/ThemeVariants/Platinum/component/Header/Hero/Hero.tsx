@@ -51,7 +51,9 @@ export default function Hero() {
                                 <h2 className="hero_title text-[3.5rem] leading-snug platinumSm:text-5xl platinumMd:text-6xl platinumLg:text-5xl platinumXl:text-[4rem] font-extrabold">{Utils.getContent(objItem.company_name)} <span className="text-platinum-theme-color">{Utils.getContent(objItem.business_segment)}</span></h2>
                                 <p className="mt-platinum8 platinumLg:mr-platinum8">{Utils.getContent(objItem.company_desc)}</p>
                                 <div className="hero_btn mt-platinum10">
-                                    <Link href={'/login'} target="_blank" className={styles.mainBtn} type="button">Get Started</Link>
+                                    <button onClick={()=>{
+                                        Utils.scrollToView('services')
+                                    }} className={styles.mainBtn} type="button">See More</button>
                                 </div>
                             </div>
                         </div>
