@@ -1,4 +1,5 @@
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { useState } from "react";
 
@@ -14,7 +15,8 @@ export default function TestimonialToggle(props: {
       let io = new FormData();
       io.append("testimonial_id", tid);
       io.append("status", status ? "0" : "1");
-
+      let token = AuthService.getToken();
+      io.append("token", token);
       const res = await ApiService.activeDeactiveTestimonialStatus(io);
       if (!res.error) {
         props.onComplete();

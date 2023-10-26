@@ -114,6 +114,7 @@ export default function ClientItem() {
         newIO.append("user_id", AuthService.getUserEmail());
         newIO.append("isupdate", false);
         newIO.append("client_data", JSON.stringify(newData));
+        newIO.append("token", token);
 
         const res = await ApiService.saveClientPageDetails(newIO);
         if (!res.error) {

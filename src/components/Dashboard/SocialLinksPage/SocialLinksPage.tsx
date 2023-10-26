@@ -95,6 +95,9 @@ export default function SocialLinksPage() {
       io.append("socialdata", JSON.stringify(uniqueArray));
       io.append("user_id", AuthService.getUserEmail());
       io.append("isupdate", isUpdate as any);
+      let token = AuthService.getToken();
+      io.append("token", token);
+
       const res = await ApiService.saveSocialLinks(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);

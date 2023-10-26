@@ -1,9 +1,11 @@
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { adminAddCompanyFormSchema } from "@/services/forms/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -19,6 +21,7 @@ export default function AdminAddCompanyForm() {
     },
     resolver: yupResolver(adminAddCompanyFormSchema),
   });
+  const router = useRouter();
 
   type IFormData = yup.InferType<typeof adminAddCompanyFormSchema>;
   const onSave = async (data: IFormData) => {
@@ -30,12 +33,15 @@ export default function AdminAddCompanyForm() {
       io.append("email_id", data.email);
       io.append("contact_no", data.mobile);
       io.append("password", data.confirmPassword);
+      let token = AuthService.getToken();
+      io.append("token", token);
       io.append("isupdate", false);
 
       const res = await ApiService.registerUserAdmin(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
         objForm.reset();
+        router.push('/admindashboard/companylist');
         return null;
       }
 

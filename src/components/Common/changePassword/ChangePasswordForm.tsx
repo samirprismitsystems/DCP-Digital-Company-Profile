@@ -1,6 +1,7 @@
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { adminChangePasswordFormSchema } from "@/services/forms/formSchema";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
@@ -62,6 +63,8 @@ export default function ChangePasswordForm() {
       io.append("email_id", data.email);
       io.append("cpass", data.currentPassword);
       io.append("npass", data.confirmPassword);
+      let token = AuthService.getToken();
+      io.append("token", token);
       
       const res = await ApiService.changeUserPassword(io);
       if (!res.error) {
