@@ -116,6 +116,7 @@ export default function ProductItem() {
         newIO.append("user_id", AuthService.getUserEmail());
         newIO.append("isupdate", false);
         newIO.append("product_data", JSON.stringify(newData));
+        newIO.append("token", token);
 
         const res = await ApiService.saveProductPageDetails(newIO);
         if (!res.error) {

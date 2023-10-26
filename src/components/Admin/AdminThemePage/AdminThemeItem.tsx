@@ -132,7 +132,7 @@ export default function AdminThemeItem() {
         }
         newIO.append("isupdate", false);
         newIO.append("theme_data", JSON.stringify(newData));
-
+        newIO.append("token", token);
         const res = await ApiService.saveAdminThemeInfo(newIO);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);

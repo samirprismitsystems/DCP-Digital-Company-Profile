@@ -115,7 +115,8 @@ export default function AdminSocialMediaItem() {
         let newIO: any = new FormData();
         newIO.append("isupdate", false);
         newIO.append("social_data", JSON.stringify(newData));
-
+        newIO.append("token", token);
+        
         const res = await ApiService.saveAdminSocialMediaInfo(newIO);
         if (!res.error) {
           Utils.showSuccessMessage(res.message);
