@@ -1,3 +1,6 @@
+@import "/src/styles/variable.scss";
+
+
 .platinum {
   font-size: 100% !important;
   font-family: "Nunito", sans-serif;
@@ -19,6 +22,7 @@
   textarea {
     outline: none;
   }
+
   font-size: 100%;
 }
 
@@ -28,8 +32,9 @@
     font-size: 2rem;
     line-height: 1.5rem;
     --tw-text-opacity: 1;
-    color: rgba(249, 79, 79, var(--tw-text-opacity));
-  }
+    color: $platinumThemeColor;
+}
+
   .main_title {
     font-weight: 700;
     font-size: 2.5rem;

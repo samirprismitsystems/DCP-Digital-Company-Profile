@@ -1,3 +1,5 @@
+@import "/src/styles/variable.scss";
+
 .single_services {
   --tw-border-opacity: 1;
   border-color: rgba(232, 232, 232, var(--tw-border-opacity));
@@ -7,16 +9,16 @@
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 52px;
-  padding-bottom: 52px;
+  // padding-bottom: 52px;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   transition-duration: 300ms;
   height: 100%;
   .services_shape {
-    fill: #fff1f1;
+    fill: $platinumThemeColor;
     --tw-text-opacity: 1;
-    color: rgba(249, 79, 79, var(--tw-text-opacity));
+    color: $platinumThemeColor;
     text-align: center;
   }
   .services_icon {
@@ -36,7 +38,7 @@
   &:hover {
     cursor: pointer;
     --tw-border-opacity: 1;
-    border-color: rgba(249, 79, 79, var(--tw-border-opacity));
+    border-color: $platinumThemeColor;
     --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -51,9 +53,9 @@
       }
     }
     .services_shape {
-      fill: currentColor;
+      fill: $platinumThemeColor;
       --tw-text-opacity: 1;
-      color: rgba(249, 79, 79, var(--tw-text-opacity));
+      color: $platinumThemeColor;
       text-align: center;
     }
   }
@@ -63,15 +65,15 @@
   .single_services {
     padding-left: 16px;
     padding-right: 16px;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    // padding-top: 24px;
+    // padding-bottom: 24px;
   }
 }
 @media (min-width: 720px) {
   .single_services {
     padding-left: 24px;
     padding-right: 24px;
-    padding-top: 52px;
-    padding-bottom: 52px;
+    // padding-top: 52px;
+    // padding-bottom: 52px;
   }
 }

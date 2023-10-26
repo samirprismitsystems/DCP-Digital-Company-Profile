@@ -1,25 +1,30 @@
+@import "../../../../../../../../src/styles/variable.scss";
+
 .single_services {
   --tw-border-opacity: 1;
+  border-color: rgba(232, 232, 232, var(--tw-border-opacity));
   border-radius: 0.75rem;
+  border-style: dashed;
+  background-color: white;
+  border-width: 2px;
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 52px;
   padding-bottom: 52px;
-  background-color: white;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   transition-duration: 300ms;
   height: 100%;
   .services_shape {
-    fill: #fd0000;
+    fill: $platinumThemeColor;
     --tw-text-opacity: 1;
     color: rgba(249, 79, 79, var(--tw-text-opacity));
     text-align: center;
   }
   .services_icon {
     svg {
-      max-height: 100px;
+      max-height: 50px;
       height: 100%;
       object-fit: cover;
       object-position: center;
@@ -28,10 +33,11 @@
     i,
     svg {
       --tw-text-opacity: 1;
-      color: black;
+      color: $platinumThemeLightColor;
     }
   }
   &:hover {
+    border-color: $platinumThemeColor;
     cursor: pointer;
     --tw-border-opacity: 1;
     --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -44,7 +50,7 @@
       i,
       svg {
         --tw-text-opacity: 1;
-        color: #F85B5B;
+        color: $platinumThemeColor;
       }
     }
     .services_shape {

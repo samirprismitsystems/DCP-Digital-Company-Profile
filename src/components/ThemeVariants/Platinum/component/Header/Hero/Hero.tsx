@@ -57,7 +57,6 @@ export default function Hero() {
                         </div>
                     </div>
                     <div className={`${styles.header_shape} hidden platinumLg:block`}></div>
-
                     <div className={`${styles.header_image} flex items-center`}>
                         <div className="image platinum2xl:pl-platinum25">
                             <img src="assets/themes/platinum/header-image.svg" alt="Header Image" />

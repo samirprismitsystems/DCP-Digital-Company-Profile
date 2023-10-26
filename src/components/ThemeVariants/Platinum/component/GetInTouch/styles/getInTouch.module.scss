@@ -1,3 +1,5 @@
+@import "/src/styles/variable.scss";
+
 .contact_image {
   height: auto;
   margin-left: auto;
@@ -57,8 +59,8 @@
 
 .contactBtn {
   --tw-bg-opacity: 1;
-  background-color: rgba(249, 79, 79, var(--tw-bg-opacity));
   border-radius: 0.375rem;
+  background-color: $platinumThemeColor;
   padding-top: 16px;
   padding-bottom: 16px;
   padding-left: 40px;
@@ -67,5 +69,6 @@
   color: rgba(255, 255, 255, var(--tw-text-opacity));
   &:hover {
     --tw-bg-opacity: 0.8;
+    background-color: $platinumThemeLightColor;
   }
 }

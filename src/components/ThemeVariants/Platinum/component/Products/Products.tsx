@@ -46,7 +46,7 @@ export default function Products() {
 
   return (
     <>
-      <section id="team" className="team_area bg-[#f5f5fc] pb-platinum18 pt-platinum18 platinumLg:pt-platinum120 platinumLg:pb-platinum120">
+      <section id="team" className="team_area bg-white pb-platinum18 pt-platinum18 platinumLg:pt-platinum120 platinumLg:pb-platinum120">
         <div className="container">
           <div className="flex items-center justify-center">
             <div className="w-full">
@@ -63,14 +63,14 @@ export default function Products() {
                   {lstProduct.map((item, index) => (
                     <div className="w-full" key={index}>
                       <div className={`${styles.single_team_item} mx-auto group`}>
-                        <div className={`mx-platinum3 ${styles.single_team}`}>
+                        <div className={`mx-platinum3 ${styles.single_team} hover:shadow-lg`}>
                           <div className={`${styles.team_image} relative`}>
                             <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/product/${item.product_image}`} alt="team" className="w-full" />
                           </div>
                           <div className="team_content py-platinum5 px-platinum8 relative ">
-                            <h4 className="team_name"><a href="#" className="text-black group-hover:text-white">{Utils.getContent(item.product_name)}</a></h4>
-                            <p className="mt-platinum2 transition-all duration-300 group-hover:text-white">{Utils.getContent(item.product_desc)}</p>
-                            <p className="mt-platinum2 font-bold transition-all duration-300 group-hover:text-white">{`Rs. ${Utils.getContent(item.product_price)}`}</p>
+                            <h4 className="team_name"><a href="#" className="text-black group-hover:text-platinum-theme-color">{Utils.getContent(item.product_name)}</a></h4>
+                            <p className="mt-platinum2 transition-all duration-300 group-hover:text-platinum-theme-color">{Utils.getContent(item.product_desc)}</p>
+                            <p className="mt-platinum2 font-bold transition-all duration-300 group-hover:text-platinum-theme-color">{`Rs. ${Utils.getContent(item.product_price)}`}</p>
                           </div>
                         </div>
                       </div>
