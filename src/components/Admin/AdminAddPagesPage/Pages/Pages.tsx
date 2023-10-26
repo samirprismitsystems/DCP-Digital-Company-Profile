@@ -1,8 +1,10 @@
 import ApiService from "@/services/ApiServices";
+import Utils from "@/services/Utils";
 import { IPagesInfo } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Select from "react-select";
+import { useRouter } from "next/router";
 
 export default function Pages() {
   const objForm = useFormContext();
@@ -11,6 +13,7 @@ export default function Pages() {
   const [selectedOption, setSelectedOption] = useState<any>(
     objForm.getValues("footerPages") || []
   );
+  const router = useRouter();
 
   const loadAgain = (arr: any) => {
     setLstFooterPage(arr);
@@ -59,8 +62,8 @@ export default function Pages() {
 
       throw new Error(res.message);
     } catch (ex: any) {
-      // Utils.showErrorMessage(ex.message);
-      console.log(ex.message);
+      Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }

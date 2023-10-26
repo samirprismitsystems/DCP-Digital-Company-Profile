@@ -24,7 +24,7 @@ export default function DashboardFooter(props: { fullWidth?: boolean }) {
     try {
       const objRes = await ApiService.getLandingPageResource();
 
-      const res = await ApiService.getAdminSiteSettingInfo();
+      const res = await ApiService.getPublicSiteSettingInfo();
       const setting = res.setting;
       const footerPages = setting[9]?.setting_value;
       const io: any = new FormData();

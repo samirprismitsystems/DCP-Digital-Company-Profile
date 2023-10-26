@@ -6,6 +6,7 @@ import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { ITheme } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function ThemeCards({ onThemeSelect }: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -13,6 +14,7 @@ export default function ThemeCards({ onThemeSelect }: any) {
   const [selectedThemeId, setSelectedThemeId] = useState<string | null>(
     Utils.getSelectedThemeID()
   );
+  const router = useRouter();
 
   const toggle = (themeId: string) => {
     setSelectedThemeId(themeId);
@@ -32,10 +34,10 @@ export default function ThemeCards({ onThemeSelect }: any) {
         setLstThemes(res.theme);
         return null;
       }
-
-      throw new Error(res.error);
+      throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }

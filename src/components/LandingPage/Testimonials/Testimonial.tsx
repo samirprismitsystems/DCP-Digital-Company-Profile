@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { LandingPageContextApi } from "../LandingPage";
+import { useRouter } from "next/router";
 
 export default function Testimonial() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,6 +19,7 @@ export default function Testimonial() {
   const result = useContext(LandingPageContextApi);
   const data = result.pageDetails;
   SwiperCore.use([Autoplay]);
+  const router = useRouter();
 
   const loadData = async () => {
     try {
@@ -30,6 +32,7 @@ export default function Testimonial() {
       setLstReview(res.review);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }
