@@ -49,9 +49,9 @@ export default function AppBar() {
                     <div className="row items-center">
                         <div className="w-full">
                             <nav className={`flex items-center justify-between py-platinum4 navbar navbar-expand-lg`}>
-                                <Link className="navbar-brand mr-platinum5" href="/">
+                                <div className="navbar-brand mr-platinum5">
                                     <img className="h-platinum10" src={`${UPLOAD_IMAGE_URI}/${objItem.company_id || Utils.getCompanyID()}/logo/${objItem.company_logo}`} alt="Logo" />
-                                </Link>
+                            </div>
                                 <button onClick={toggle} className={`navbar-toggler focus:outline-none block platinumLg:hidden ${isActive ? 'active' : ''}`} type="button">
                                     <span className="toggler-icon"></span>
                                     <span className="toggler-icon"></span>
