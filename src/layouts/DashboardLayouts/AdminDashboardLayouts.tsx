@@ -184,8 +184,8 @@ export default function AdminDashboardLayout({ children }: any) {
       <section className="mainAdminLayouts">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
-            <div className="left_sidebar_nav text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[9999]">
-              <ul className="sticky md:top-40 xs:top-44 w-full list-none m-0 p-0">
+            <div className="left_sidebar_nav xs:overflow-y-scroll xlTwo:overflow-hidden text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[9999]">
+              <ul className="sticky md:top-0 xs:top-7 w-full list-none m-0 p-0">
                 {lstAdminDashboardPanels &&
                   lstAdminDashboardPanels.map((item, index: number) => (
                     <li
@@ -212,7 +212,7 @@ export default function AdminDashboardLayout({ children }: any) {
                   ))}
               </ul>
             </div>
-            <div className="right_sidebar_content xs:mb-[90px] sm:mb-[59px] xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] xs:min-h-[85vh] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[90vh] h-full">
+            <div className="right_sidebar_content  xs:mb-[90px] sm:mb-[59px] xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] xs:min-h-[85vh] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[90vh] h-full">
               {dashboardContent === null ? (
                 <PageCircularLoading />
               ) : dashboardContent ? (
