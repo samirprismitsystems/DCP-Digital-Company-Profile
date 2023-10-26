@@ -38,7 +38,7 @@ export default function LoginPage() {
               <Image
                 width={800}
                 height={800}
-                className="sm:h-[33vh] md:h-[42vh] h-full w-full xl:h-screen object-center object-cover"
+                className="sm:h-[33vh] md:h-[42vh] h-full w-full xl:min-h-screen xl:h-auto object-center object-cover"
                 src="/assets/landingpage/loginScreen/login_img.webp"
                 alt=""
               />
@@ -54,7 +54,7 @@ export default function LoginPage() {
             </span>
           </div>
           <div className="relative z-0 h-screen xs:h-[70vh] xl:h-screen w-2/4 xs:w-full bg-white">
-            <div className="w-full h-full p-4 sm:p-8 md:p-20">
+            <div className="w-full p-4 sm:p-8 md:p-20 bg-white h-auto">
               <div className="xl:pt-[33rem] xlOne:pt-[25rem] xlTwo:pt-[24rem] xlThree:pt-[10rem] xs:pt-0 w-3/4 xs:w-full m-auto md:w-3/4">
                 <h1 className="xs:text-5xl text-black text-center xl:text-7xl font-bold">
                   Welcome to

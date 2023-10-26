@@ -56,12 +56,12 @@ export default function ForgotPasswordPage() {
         }}
       >
         <div className="h-full  flex flex-wrap xl:flex-nowrap xs:flex-col lg:flex-row -mt-4 -mb-4">
-          <div className="relative z-0 h-screen xs:h-[25vh] sm:h-[21vh] xl:h-screen xs:w-full w-2/4">
+          <div className="relative z-0 xs:h-[25vh] min-h-full h-auto sm:h-[21vh] xl:h-auto xs:w-full w-2/4">
             <picture className="block h-full xs:h-auto">
               <Image
                 width={800}
                 height={800}
-                className="md:h-[42vh] h-full w-full xl:h-screen object-center object-cover sm:h-[40vh]"
+                className="md:h-[42vh] min-h-full h-auto w-full xl:h-auto xl:min-h-full object-center object-cover sm:h-[40vh]"
                 src="/assets/loginScreen/login_img.webp"
                 alt=""
               />
@@ -76,8 +76,8 @@ export default function ForgotPasswordPage() {
               Welcome to DCP
             </span>
           </div>
-          <div className="relative z-0 xs:h-[75vh] xl:h-screen w-2/4 xs:w-full bg-white">
-            <div className="w-full xs:h-[50vh] xl:h-screen xs:flex lg:block h-full xs:p-8 sm:p-20  md:p-20 xl:flex">
+          <div className="relative z-0 xs:h-[75vh] xl:h-auto xl:min-h-full w-2/4 xs:w-full bg-white">
+            <div className="w-full xs:h-[50vh] xl:min-h-full xl:h-auto bg-white xs:flex lg:block h-full xs:p-8 sm:p-20  md:p-20 xl:flex">
               <div className="w-full h-full xs:h-auto  md:p-20 flex justify-center items-center flex-row">
                 <div className="w-3/4 xs:w-full m-auto">
                   <h1 className="xl:text-5xl font-normal text-center text-black xs:text-[2.5rem]">
@@ -109,9 +109,8 @@ export default function ForgotPasswordPage() {
                     <div className="w-full text-center">
                       <button
                         type="submit"
-                        className={`${
-                          isLoading && "opacity-20"
-                        } border font-semibold py-4 px-14 text-3xl my-20 xs:my-14 btnHoverEffect  text-white text-center`}
+                        className={`${isLoading && "opacity-20"
+                          } border font-semibold py-4 px-14 text-3xl my-20 xs:my-14 btnHoverEffect  text-white text-center`}
                       >
                         {isLoading && <CircularLoadingEffectForButton />}
                         Send Password

@@ -1,5 +1,4 @@
-$color_1: rgba(255, 255, 255, var(--tw-text-opacity));
-$background-color_1: rgba(56, 66, 77, var(--tw-bg-opacity));
+@import "/src/styles/variable.scss";
 
 .header_hero {
   height: 900px;
@@ -76,7 +75,7 @@ $background-color_1: rgba(56, 66, 77, var(--tw-bg-opacity));
 
   .mainBtn {
     --tw-bg-opacity: 1;
-    background-color: $background-color_1;
+    background-color: $platinumThemeColor;
     border-radius: 9999px;
     cursor: pointer;
     display: inline-block;
@@ -91,7 +90,7 @@ $background-color_1: rgba(56, 66, 77, var(--tw-bg-opacity));
     position: relative;
     text-align: center;
     --tw-text-opacity: 1;
-    color: $color_1;
+    color: $white;
     z-index: 10;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -100,7 +99,8 @@ $background-color_1: rgba(56, 66, 77, var(--tw-bg-opacity));
     border-top-right-radius: 0px;
     &:hover {
       --tw-bg-opacity: 0.9;
-      color: $color_1;
+      color: $white;
+      background-color: $platinumThemeLightColor;
     }
   }
 
@@ -112,7 +112,7 @@ $background-color_1: rgba(56, 66, 77, var(--tw-bg-opacity));
     width: 50%;
     &::before {
       content: "";
-      background-color: #f5f5fc;
+      background-color: $white;
       transform: skewX(-15deg);
       width: 200%;
       height: 100%;
