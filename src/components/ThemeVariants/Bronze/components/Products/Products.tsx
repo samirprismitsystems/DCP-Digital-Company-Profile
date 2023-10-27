@@ -11,15 +11,15 @@ export default function Products() {
             <div className="bg-gray-200 " id="blog">
                 <div className="container py-[64px] px-[16px] md:py-[80px]">
                     <h2
-                        className="text-center font-header text-4xl font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
+                        className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                     >
                         Products
                     </h2>
-                    <h4
-                        className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
+                    <h3
+                        className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
                     >
                         Check out our latest products!
-                    </h4>
+                    </h3>
                     <div
                         className="mx-auto grid w-full grid-cols-1 sm:grid-cols-2 gap-6 pt-12 sm:w-3/4 lg:w-full lg:grid-cols-3 xl:gap-10"
                     >
@@ -35,9 +35,9 @@ export default function Products() {
                                     <span
                                         className="absolute inset-0 block bg-gradient-to-b from-blog-gradient-from to-blog-gradient-to bg-cover bg-center bg-no-repeat opacity-10 transition-opacity group-hover:opacity-50"
                                     ></span>
-                                    <span
-                                        className="bg-white absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-bronze-primary px-6 py-2 text-center font-body text-[1.8rem] font-bold uppercase text-black md:text-base hover:cursor-pointer hover:bg-bronze-primary hover:text-white transition-all duration-500 ease"
-                                    >Buy Now</span>
+                                    <button
+                                        className="bg-white absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-bronze-primary px-6 py-2 text-center font-body text-[1.6rem] font-bold uppercase text-black hover:cursor-pointer hover:bg-bronze-primary hover:text-white transition-all duration-500 ease"
+                                    >Buy Now</button>
                                 </div>
                                 <div className="bg-white py-6 px-5 xl:py-8">
                                     <h3

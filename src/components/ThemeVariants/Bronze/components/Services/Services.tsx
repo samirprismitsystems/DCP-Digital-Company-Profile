@@ -10,12 +10,12 @@ export default function Services() {
         <>
             <div className="container py-[64px] px-[16px] md:py-[80px]" id="services">
                 <h2
-                    className="font-header text-4xl text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
+                    className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                 >
                     Services
                 </h2>
                 <h3
-                    className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
+                    className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
                 >
                     Our services
                 </h3>

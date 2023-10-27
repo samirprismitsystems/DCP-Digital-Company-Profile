@@ -1,11 +1,12 @@
+import { ThemeContextApi } from "@/pages/[slug]";
+import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { faDribbble, faFacebookSquare, faInstagram, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import AppBar from "./AppBar/AppBar";
 import { useContext } from "react";
-import { ThemeContextApi } from "@/pages/[slug]";
-import Utils from "@/services/Utils";
+import AppBar from "./AppBar/AppBar";
 
 export default function Hero() {
     const objItem = useContext(ThemeContextApi).company;
@@ -18,10 +19,10 @@ export default function Hero() {
                     className="container relative z-30 heroContent py-[200px]"
                 >
                     <div className="flex flex-col items-center justify-center lg:flex-row">
-                        <div className="rounded-full border-8 border-bronze-primary shadow-xl mr-12">
+                        <div className="border-8 border-bronze-primary shadow-xl mr-12 relative">
                             <img
-                                src="/assets/img/blog-author.jpg"
-                                className="h-[24rem] rounded-full"
+                                src={`${UPLOAD_IMAGE_URI}/${objItem.company_id || Utils.getCompanyID()}/logo/${objItem.company_logo}`}
+                                className="p-6 h-full w-full object-cover object-center align-middle"
                                 alt="author"
                             />
                         </div>

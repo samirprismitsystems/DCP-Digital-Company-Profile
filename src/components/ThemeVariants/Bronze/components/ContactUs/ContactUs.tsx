@@ -82,15 +82,14 @@ export default function ContactUs() {
         <>
             <div className="container py-[64px] px-[16px] md:py-[80px]" id="contact">
                 <h2
-                    className="text-center font-header text-4xl uppercase text-bronze-primary font-semibold sm:text-5xl lg:text-6xl"
+                    className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                 >
                     Contact Us
                 </h2>
-                <h4
-                    className="xs:text-[2rem] pt-6 text-center font-header text-xl font-medium text-black lg:text-3xl"
-                >
-                    Have Any Questions?
-                </h4>
+                <h3
+                    className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
+                >Have Any Questions?
+                </h3>
                 <form onSubmit={onSave} className="mx-auto w-full pt-10 sm:w-3/4">
                     <div className="flex flex-col md:flex-row xs:space-y-4 md:space-y-0">
                         <input
