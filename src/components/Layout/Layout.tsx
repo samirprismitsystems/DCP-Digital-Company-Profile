@@ -14,14 +14,22 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const router = useRouter();
     const { pathname } = router;
     const token = AuthService.getToken();
-
+    
     useEffect(() => {
-        const token = AuthService.getToken();
-        if(!token){
-            router.push("/login");
+        console.log(router.asPath);
+        if (router.asPath === '/' || router.asPath === '/[slug]'){
             setIsLoading(false);
+            setIsUser(true);
         }else{
-            checkUserData();
+            console.log("else");
+            console.log(router.asPath + 'in else');
+            const token = AuthService.getToken();
+            if (!token) {
+                router.push("/login");
+                setIsLoading(false);
+            } else {
+                checkUserData();
+            }
         }
     }, [token])
 

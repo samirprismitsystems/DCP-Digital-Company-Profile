@@ -90,6 +90,12 @@ module.exports = {
           text: "#666666",
           title: "#1a1a1a",
         },
+        bronze: {
+          primary: "#5540AF",
+          secondary: "#f7fffe",
+          text: "#666666",
+          title: "#1a1a1a",
+        },
         platinum: {
           white: "#ffffff",
           black: "#38424D",

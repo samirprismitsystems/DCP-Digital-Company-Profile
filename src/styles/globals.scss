@@ -3,6 +3,7 @@
 @import "./variable.scss";
 @import "./gold.scss";
 @import "./platinum.scss";
+@import "./bronze.scss";
 
 @tailwind base;
 @tailwind components;
@@ -316,7 +317,7 @@ input {
     border-radius: 8rem !important;
   }
 }
-@media (max-width: 2000px) {
+@media (max-width: 3000px) {
   .footer_width {
     width: calc(100% - 34rem);
     padding-top: 3.3rem;
