@@ -16,13 +16,10 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const token = AuthService.getToken();
     
     useEffect(() => {
-        console.log(router.asPath);
-        if (router.asPath === '/' || router.asPath === '/[slug]'){
+        if (pathname === '/' || pathname === '/[slug]'){
             setIsLoading(false);
             setIsUser(true);
         }else{
-            console.log("else");
-            console.log(router.asPath + 'in else');
             const token = AuthService.getToken();
             if (!token) {
                 router.push("/login");
