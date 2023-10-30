@@ -5,6 +5,7 @@ import Gallery from "./components/Gallery/Gallery";
 import Hero from "./components/Hero/Hero";
 import Products from "./components/Products/Products";
 import Services from "./components/Services/Services";
+import Footer from "./components/Footer/Footer";
 
 export default function Bronze() {
     useEffect(() => {
@@ -20,6 +21,7 @@ export default function Bronze() {
             <Gallery />
             <Products />
             <ContactUs />
+            <Footer/>
         </div>
     )
 }

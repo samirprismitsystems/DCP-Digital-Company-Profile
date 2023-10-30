@@ -15,6 +15,7 @@ export default function Gallery() {
                     Check out our Portfolio
                 </h2>
                 <h3
+                    id="portfolio"
                     className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
                 >
                     Here's what We have done with the past

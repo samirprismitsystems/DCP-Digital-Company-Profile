@@ -16,6 +16,7 @@ export default function Products() {
                         Products
                     </h2>
                     <h3
+                        id="product"
                         className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
                     >
                         Check out our latest products!

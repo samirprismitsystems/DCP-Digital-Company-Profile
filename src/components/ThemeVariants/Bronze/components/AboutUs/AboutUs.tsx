@@ -58,13 +58,14 @@ END:VCARD`;
 
     return (
         <>
-            <div className="container py-[64px] px-[10px] md:py-[80px]" id="work">
+            <div className="container py-[64px] px-[10px] md:py-[80px]" >
                 <h2
                     className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                 >
                     About Us
                 </h2>
                 <h3
+                    id="about"
                     className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
                 >
                     Who Are We?
@@ -78,11 +79,11 @@ END:VCARD`;
             </div>
 
             <div
+
                 className="bg-cover bg-top bg-no-repeat py-[64px] md:py-[96px]"
                 style={{
                     backgroundImage: "url(/assets/img/experience-figure.png)"
                 }}
-                id="statistics"
             >
                 <div className="container">
                     <div

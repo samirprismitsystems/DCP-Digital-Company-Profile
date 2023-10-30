@@ -80,13 +80,14 @@ export default function ContactUs() {
     }
     return (
         <>
-            <div className="container py-[64px] px-[16px] md:py-[80px]" id="contact">
+            <div className="container py-[64px] px-[16px] md:py-[80px]">
                 <h2
                     className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                 >
                     Contact Us
                 </h2>
                 <h3
+                    id="contact"
                     className="pt-6 text-center font-header text-[1.8rem] font-medium text-black sm:text-[2rem] lg:text-[2.3rem]"
                 >Have Any Questions?
                 </h3>

@@ -1,5 +1,5 @@
 .bronze {
-  body{
+  body {
     background-color: white;
   }
 
@@ -38,6 +38,13 @@
   @media (min-width: 1536px) {
     .container {
       max-width: 1536px;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .appBar .appBarContent{
+      padding-left: 4rem;
+      padding-right: 4rem;
     }
   }
 
@@ -103,13 +110,13 @@
     }
   }
 
- @media screen and (min-width: 540px) and (max-width: 1024px) {
+  @media screen and (min-width: 540px) and (max-width: 1024px) {
     .hero {
       min-height: 100vh;
     }
   }
 
- @media screen and (min-width: 868px) and (max-width: 1024px) {
+  @media screen and (min-width: 868px) and (max-width: 1024px) {
     .heroContent {
       padding-top: 244px;
     }
