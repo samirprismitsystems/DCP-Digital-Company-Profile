@@ -87,7 +87,7 @@ END:VCARD`;
             >
                 <div className="container">
                     <div
-                        className="mx-auto w-5/6 bg-white py-[16px] shadow md:w-11/12 lg:py-[46px] xl:py-[96px] 2xl:w-full"
+                        className="mx-auto border border-gray-200  w-5/6 bg-white py-[16px] shadow md:w-11/12 2xl:w-full"
                     >
                         <div className="p-8 grid  gap-8 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
                             <ShareCards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />

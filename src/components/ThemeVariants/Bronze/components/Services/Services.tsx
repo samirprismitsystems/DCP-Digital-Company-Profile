@@ -58,7 +58,7 @@ export default function Services() {
                     Our services
                 </h3>
 
-                {lstServices && lstServices.length <= 9 && (
+                {lstServices && lstServices.length <= 6 && (
                     <div
                         className="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 xl:grid-cols-3"
                     >
@@ -88,7 +88,7 @@ export default function Services() {
                     </div>
                 )}
 
-                {lstServices && lstServices.length >= 10 && (
+                {lstServices && lstServices.length >= 7 && (
                     <OwlCarousel className="owl-carousel owl-theme" {...options}>
                         {lstServices.map((item, index) => (
                             <div key={index} className="my-[22px] h-[270px] w-full group rounded px-[32px] py-[48px] shadow hover:bg-bronze-primary hover:cursor-pointer">

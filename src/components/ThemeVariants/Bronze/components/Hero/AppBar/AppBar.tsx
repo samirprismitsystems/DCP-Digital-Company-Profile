@@ -25,7 +25,7 @@ export default function AppBar() {
                     <div className="hidden lg:block">
                         <ul className="flex items-center">
 
-                            <li className="group pl-6" onClick={() => {
+                            <li className="group pl-12" onClick={() => {
                                 Utils.scrollToView('home')
                             }}>
                                 <span
@@ -36,7 +36,7 @@ export default function AppBar() {
                                     className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
                                 ></span>
                             </li>
-                            <li className="group pl-6" onClick={() => {
+                            <li className="group pl-12" onClick={() => {
                                 Utils.scrollToView('about')
                             }}>
 
@@ -49,7 +49,7 @@ export default function AppBar() {
                                 ></span>
                             </li>
 
-                            <li className="group pl-6" onClick={() => {
+                            <li className="group pl-12" onClick={() => {
                                 Utils.scrollToView('services')
                             }}>
 
@@ -62,7 +62,7 @@ export default function AppBar() {
                                 ></span>
                             </li>
 
-                            <li className="group pl-6" onClick={() => {
+                            <li className="group pl-12" onClick={() => {
                                 Utils.scrollToView('portfolio')
                             }}>
 
@@ -75,7 +75,7 @@ export default function AppBar() {
                                 ></span>
                             </li>
 
-                            <li className="group pl-6" onClick={() => {
+                            <li className="group pl-12" onClick={() => {
                                 Utils.scrollToView('contact')
                             }}>
 
@@ -104,7 +104,7 @@ export default function AppBar() {
                     </div>
                     <div className="container">
                         <ul className="flex items-start justify-center flex-col">
-                            <li className="group pl-6 mb-8 " onClick={() => {
+                            <li className="group pl-6 mb-12 " onClick={() => {
                                 Utils.scrollToView('home')
                             }}>
                                 <span
@@ -115,7 +115,7 @@ export default function AppBar() {
                                     className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
                                 ></span>
                             </li>
-                            <li className="group pl-6 mb-8 " onClick={() => {
+                            <li className="group pl-6 mb-12 " onClick={() => {
                                 Utils.scrollToView('about')
                             }}>
 
@@ -128,7 +128,7 @@ export default function AppBar() {
                                 ></span>
                             </li>
 
-                            <li className="group pl-6 mb-8 " onClick={() => {
+                            <li className="group pl-6 mb-12 " onClick={() => {
                                 Utils.scrollToView('services')
                             }}>
 
@@ -141,7 +141,7 @@ export default function AppBar() {
                                 ></span>
                             </li>
 
-                            <li className="group pl-6 mb-8 " onClick={() => {
+                            <li className="group pl-6 mb-12 " onClick={() => {
                                 Utils.scrollToView('portfolio')
                             }}>
 
@@ -154,7 +154,7 @@ export default function AppBar() {
                                 ></span>
                             </li>
 
-                            <li className="group pl-6 mb-8 " onClick={() => {
+                            <li className="group pl-6 mb-12 " onClick={() => {
                                 Utils.scrollToView('contact')
                             }}>
 

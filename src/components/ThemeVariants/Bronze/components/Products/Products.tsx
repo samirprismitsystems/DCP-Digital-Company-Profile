@@ -59,7 +59,7 @@ export default function Products() {
                     >
                         Check out our latest products!
                     </h3>
-                    {lstProduct && lstProduct.length <= 9 && (
+                    {lstProduct && lstProduct.length <= 6 && (
                         <div
                             className="mx-auto grid w-full grid-cols-1 sm:grid-cols-2 gap-6 pt-12 sm:w-3/4 lg:w-full lg:grid-cols-3 xl:gap-10"
                         >
@@ -97,7 +97,7 @@ export default function Products() {
                         </div>
                     )}
 
-                    {lstProduct && lstProduct.length >= 10 && (
+                    {lstProduct && lstProduct.length >= 7 && (
                         <div className="py-16">
                             <OwlCarousel className="owl-carousel owl-theme" {...options}>
                                 {lstProduct.map((item, index) => (
