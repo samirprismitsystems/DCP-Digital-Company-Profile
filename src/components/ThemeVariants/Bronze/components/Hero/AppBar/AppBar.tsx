@@ -13,8 +13,6 @@ export default function AppBar() {
         setIsOpen(!isOpen)
     }
 
-    console.log(isOpen)
-
     return (
         <>
             <div id="home" className="appBar w-full py-6 sm:py-5">

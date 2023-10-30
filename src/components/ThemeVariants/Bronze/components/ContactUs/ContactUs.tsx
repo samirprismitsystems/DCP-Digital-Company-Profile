@@ -80,7 +80,7 @@ export default function ContactUs() {
     }
     return (
         <>
-            <div className="container py-[64px] px-[16px] md:py-[80px]">
+            <div className="container pt-[64px] pb-[30px] px-[16px] md:pt-[80px]">
                 <h2
                     className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                 >
@@ -194,6 +194,16 @@ export default function ContactUs() {
                         </p>
                     </div>
                 </div>
+            </div>
+            <div className="h-[400px]">
+                <iframe
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                        objCompany.address
+                    )}&z=15&output=embed`}
+                    width="100%"
+                    className="border-0 h-full"
+                    allowFullScreen={true}
+                />
             </div>
         </>
     )
