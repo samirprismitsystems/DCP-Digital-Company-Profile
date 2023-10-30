@@ -14,7 +14,7 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const router = useRouter();
     const { pathname } = router;
     const token = AuthService.getToken();
-
+    
     useEffect(() => {
         if(pathname === '/' || pathname === '/[slug]'){
             setIsLoading(false);

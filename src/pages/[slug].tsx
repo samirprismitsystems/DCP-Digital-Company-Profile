@@ -1,4 +1,5 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
+import Bronze from "@/components/ThemeVariants/Bronze";
 import Gold from "@/components/ThemeVariants/Gold/Index";
 import Platinum from "@/components/ThemeVariants/Platinum";
 import ApiService from "@/services/ApiServices";
@@ -73,6 +74,8 @@ export default function UserViewSection() {
         return <Gold />
       } else if (themeID === THEME_TYPE.PLATINUM) {
         return <Platinum />
+      } else if (themeID === THEME_TYPE.BRONZE) {
+        return <Bronze />
       } else {
         return (
           <PageNotFound

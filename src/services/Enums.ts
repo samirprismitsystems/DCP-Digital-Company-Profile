@@ -6,4 +6,5 @@ export enum USER_TYPE {
 export enum THEME_TYPE {
   GOLD = 40,
   PLATINUM = 42,
+  BRONZE = 44,
 }
