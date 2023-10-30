@@ -1,7 +1,7 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import { faDribbble, faFacebookSquare, faInstagram, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faInstagram, faLinkedinIn, faPinterestP, faTelegramPlane, faTwitter, faWhatsapp, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -10,6 +10,19 @@ import AppBar from "./AppBar/AppBar";
 
 export default function Hero() {
     const objItem = useContext(ThemeContextApi).company;
+    const lstSocial = useContext(ThemeContextApi).social;
+
+    const iconMapping: any = {
+        faFacebookF: faFacebookF,
+        faInstagram: faInstagram,
+        faLinkedinIn: faLinkedinIn,
+        faPinterestP: faPinterestP,
+        faTelegramPlane: faTelegramPlane,
+        faTwitter: faTwitter,
+        faWhatsapp: faWhatsapp,
+        faYoutube: faYoutube,
+    };
+
 
     return (
         <>
@@ -19,10 +32,10 @@ export default function Hero() {
                     className="container relative z-30 heroContent py-[200px]"
                 >
                     <div className="flex flex-col items-center justify-center lg:flex-row">
-                        <div className="border-8 border-bronze-primary shadow-xl mr-12 relative">
+                        <div className="border-8  rounded-full border-bronze-primary shadow-xl mr-12">
                             <img
-                                src={`${UPLOAD_IMAGE_URI}/${objItem.company_id || Utils.getCompanyID()}/logo/${objItem.company_logo}`}
-                                className="p-6 h-full w-full object-cover object-center align-middle"
+                                src={`${UPLOAD_IMAGE_URI}/${objItem.company_id || Utils.getCompanyID()}/banner/${objItem.company_banner}`}
+                                className="p-6 rounded-full h-[180px] w-[180px] object-cover object-center align-middle"
                                 alt="author"
                             />
                         </div>
@@ -46,21 +59,14 @@ export default function Hero() {
                                 <div
                                     className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0"
                                 >
-                                    <Link href="/">
-                                        <FontAwesomeIcon icon={faFacebookSquare} className="px-2 text-[2.4rem] text-white hover:text-yellow-200" />
-                                    </Link>
-                                    <Link href="/" className="pl-4">
-                                        <FontAwesomeIcon icon={faTwitter} className="px-2 text-[2.4rem] text-white hover:text-yellow-200" />
-                                    </Link>
-                                    <Link href="/" className="pl-4">
-                                        <FontAwesomeIcon icon={faDribbble} className="px-2 text-[2.4rem] text-white hover:text-yellow-200" />
-                                    </Link>
-                                    <Link href="/" className="pl-4">
-                                        <FontAwesomeIcon icon={faLinkedinIn} className="px-2 text-[2.4rem] text-white hover:text-yellow-200" />
-                                    </Link>
-                                    <Link href="/" className="pl-4">
-                                        <FontAwesomeIcon icon={faInstagram} className="px-2 text-[2.4rem] text-white hover:text-yellow-200" />
-                                    </Link>
+                                    {lstSocial.map((item, index: number) => {
+                                        const iconComponent = iconMapping[item.socialmedia_logo];
+                                        return (
+                                            <Link href={item.link} key={index}>
+                                                <FontAwesomeIcon icon={iconComponent} className="px-2 text-[2.4rem] text-white hover:text-yellow-200 ml-1" />
+                                            </Link>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>

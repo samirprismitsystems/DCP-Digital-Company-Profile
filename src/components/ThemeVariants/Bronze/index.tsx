@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import Hero from "./components/Hero/Hero";
-import Services from "./components/Services/Services";
-import Gallery from "./components/Gallery/Gallery";
-import Products from "./components/Products/Products";
+import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
+import Gallery from "./components/Gallery/Gallery";
+import Hero from "./components/Hero/Hero";
+import Products from "./components/Products/Products";
+import Services from "./components/Services/Services";
 
 export default function Bronze() {
     useEffect(() => {
@@ -12,12 +13,13 @@ export default function Bronze() {
     }, [])
 
     return (
-        <div id="main" className="relative">    
+        <div id="main" className="relative">
             <Hero />
-            <Services/>
-            <Gallery/>
-            <Products/>
-            <ContactUs/>
+            <AboutUs />
+            <Services />
+            <Gallery />
+            <Products />
+            <ContactUs />
         </div>
     )
 }

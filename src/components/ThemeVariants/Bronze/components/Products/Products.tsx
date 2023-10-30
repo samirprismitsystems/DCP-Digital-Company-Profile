@@ -35,9 +35,9 @@ export default function Products() {
                                     <span
                                         className="absolute inset-0 block bg-gradient-to-b from-blog-gradient-from to-blog-gradient-to bg-cover bg-center bg-no-repeat opacity-10 transition-opacity group-hover:opacity-50"
                                     ></span>
-                                    <button
+                                    {/* <button
                                         className="bg-white absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-bronze-primary px-6 py-2 text-center font-body text-[1.6rem] font-bold uppercase text-black hover:cursor-pointer hover:bg-bronze-primary hover:text-white transition-all duration-500 ease"
-                                    >Buy Now</button>
+                                    >Buy Now</button> */}
                                 </div>
                                 <div className="bg-white py-6 px-5 xl:py-8">
                                     <h3
