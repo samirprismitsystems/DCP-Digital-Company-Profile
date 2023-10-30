@@ -16,15 +16,16 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const token = AuthService.getToken();
     
     useEffect(() => {
-        if (pathname === '/' || pathname === '/[slug]'){
+        if(pathname === '/' || pathname === '/[slug]'){
             setIsLoading(false);
             setIsUser(true);
-        }else{
+        }
+        else{
             const token = AuthService.getToken();
-            if (!token) {
+            if(!token){
                 router.push("/login");
                 setIsLoading(false);
-            } else {
+            }else{
                 checkUserData();
             }
         }
