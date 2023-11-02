@@ -7,6 +7,7 @@ import {
 import { useContext } from "react";
 import { LandingPageContextApi } from "../LandingPage";
 import Steps from "./Steps";
+import styles from "./styles/howItsWork.module.scss";
 
 export default function HowItsWork() {
   const data = useContext(LandingPageContextApi);
@@ -50,7 +51,7 @@ export default function HowItsWork() {
                   {pageDetails.cardtitle1 || "N/A"}
                 </h1>
                 <div
-                  className="custom-list-style text-white xs:text-left md:text-left  text-[1.8rem] pb-4"
+                  className={`${styles.howItsWorks} text-primary-main xs:text-left md:text-left  text-[1.8rem] pb-4`}
                   dangerouslySetInnerHTML={{
                     __html: pageDetails.carddesc1 || "N/A",
                   }}
@@ -72,11 +73,11 @@ export default function HowItsWork() {
           </div>
           <div className="xs:items-start md:w-1/2 flex flex-col text-left ">
             <MainScrollAnimation>
-              <h1 className="text-white title-font text-[3.0rem] mb-4 font-semibold">
+              <h1 className="text-primary-main title-font text-[3.0rem] mb-4 font-semibold">
                 {pageDetails.cardtitle2 || "N/A"}
               </h1>
               <div
-                className="custom-list-style text-white xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4"
+                className={`${styles.howItsWorks} text-primary-main xs:text-left lg:pr-24 md:pr-16 text-[1.8rem] pb-4`}
                 dangerouslySetInnerHTML={{ __html: pageDetails.carddesc2 }}
               ></div>
             </MainScrollAnimation>

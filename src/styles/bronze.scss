@@ -1,0 +1,128 @@
+.bronze {
+  body {
+    background-color: white;
+  }
+
+  .contactCardsForBronze{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  @media (min-width: 375px) {
+    .container {
+      max-width: 375px;
+    }
+  }
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .appBar .appBarContent{
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  font-family: Open Sans, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important;
+  -webkit-font-feature-settings: normal;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  *,
+  &::after,
+  &::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: currentColor;
+  }
+
+  body {
+    position: relative;
+    margin: 0;
+    line-height: inherit;
+  }
+
+  .hero {
+    position: relative;
+    background: linear-gradient(
+      to right,
+      rgba(85, 64, 174, 0.95),
+      rgb(27 5 127 / 93%)
+    );
+    min-height: 750px;
+    height: 100%;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url("/assets/img/bg-hero.jpg") center center/cover no-repeat;
+  }
+
+  @media (max-width: 630px) {
+    .hero {
+      min-height: 588px !important;
+    }
+
+    .heroContent {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+  }
+
+  @media screen and (min-width: 540px) and (max-width: 1024px) {
+    .hero {
+      min-height: 100vh;
+    }
+  }
+
+  @media screen and (min-width: 868px) and (max-width: 1024px) {
+    .heroContent {
+      padding-top: 244px;
+    }
+  }
+}

@@ -13,7 +13,7 @@ import AdminReviewPage from "@/components/Admin/AdminReviewPage/AdminReviewPage"
 import AdminSettingPage from "@/components/Admin/AdminSettingPage/AdminSettingPage";
 import AdminSocialMediaPage from "@/components/Admin/AdminSocialMediaPage/AdminSocialMediaPage";
 import AdminThemePage from "@/components/Admin/AdminThemePage/AdminThemePage";
-import DashboardFooter from "@/components/DashboardPage/DashboardFooter/DashboardFooter";
+import DashboardFooter from "@/components/Dashboard/DashboardPage/DashboardFooter/DashboardFooter";
 import { lstAdminDashboardPanels } from "@/data/DashboardSideBar";
 import Utils from "@/services/Utils";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks/hooks";
@@ -105,7 +105,7 @@ export default function AdminDashboardLayout({ children }: any) {
         case "changepassword":
           setDashboardContent(<AdminChangePasswordPage />);
           break;
-        case "addsocialcolors":
+        case "expired_addsocialcolors":
           setDashboardContent(<AdminAddSocialColorPage />);
           break;
         case "adduserreview":
@@ -120,7 +120,7 @@ export default function AdminDashboardLayout({ children }: any) {
         case "companylist":
           setDashboardContent(<AdminCompanyPage />);
           break;
-        case "socialmediaadd":
+        case "socialmedia":
           setDashboardContent(<AdminSocialMediaPage />);
           break;
         case "pages":
@@ -181,20 +181,19 @@ export default function AdminDashboardLayout({ children }: any) {
         </title>
       </Head>
       <AdminDashboardNavbar />
-      <section className="main">
+      <section className="mainAdminLayouts">
         <div className="container-fluid">
           <div className="flex -mx-[12px] flex-nowrap">
-            <div className="left_sidebar_nav text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[9999]">
-              <ul className="sticky md:top-40 xs:top-44 w-full list-none m-0 p-0">
+            <div className="left_sidebar_nav xs:overflow-y-scroll xlTwo:overflow-hidden text-white lg:w-[35rem] xs:w-[8rem] md:w-[25rem] xs:p-4  md:p-12 bg-secondary-greyDark fixed z-[9999]">
+              <ul className="sticky md:top-0 xs:top-7 w-full list-none m-0 p-0">
                 {lstAdminDashboardPanels &&
                   lstAdminDashboardPanels.map((item, index: number) => (
                     <li
                       key={item.id}
-                      className={`text-white ${
-                        selectedIndex !== item.id
+                      className={`text-white ${selectedIndex !== item.id
                           ? "bg-secondary-dark"
                           : "bg-secondary-main"
-                      } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
+                        } rounded-xl mb-6 flex items-center md:p-10 xs:p-5 text-3xl relative z-10 hover:bg-secondary-main hover:cursor-pointer`}
                       onClick={() => {
                         changeLayout(item);
                       }}
@@ -213,7 +212,7 @@ export default function AdminDashboardLayout({ children }: any) {
                   ))}
               </ul>
             </div>
-            <div className="right_sidebar_content xs:mb-[90px] sm:mb-[59px] xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] xs:min-h-[85vh] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[90vh] h-full">
+            <div className="right_sidebar_content  xs:mb-[90px] sm:mb-[59px] xl:p-12 bg-white lg:w-[calc(100%-35rem)] md:w-[calc(100%-25rem)] xs:w-[calc(100%-8rem)] xs:p-8 xs:ml-[8rem] md:ml-[25rem] lg:ml-[35rem] xs:min-h-[85vh] lg:min-h-[83vh] xl:min-h-[86vh] xlTwo:min-h-[90vh] h-full">
               {dashboardContent === null ? (
                 <PageCircularLoading />
               ) : dashboardContent ? (

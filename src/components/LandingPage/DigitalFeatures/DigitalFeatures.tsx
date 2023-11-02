@@ -36,7 +36,7 @@ export default function DigitalFeatures() {
               {pageDetails.featuresubtitle || "N/A"}
             </h1>
             <p
-              className="xs:text-left sm:text-left md:xs:text-left text-white w-full py-8 mb-4 text-[1.8rem]"
+              className="xs:text-left sm:text-left md:xs:text-left text-primary-main w-full py-8 mb-4 text-[1.8rem]"
               style={{ lineHeight: "1.5" }}
             >
               {pageDetails.featuredesc || "N/A"}
@@ -46,7 +46,7 @@ export default function DigitalFeatures() {
               className="xs:m-0 w-60 xs:block lg:inline-block first-letter text-xl btnHoverEffect text-white  text-center px-6 py-6"
             >
               <button
-                className="text-center font-normal rounded text-white text-[2rem]"
+                className="text-center font-normal rounded text-white text-[1.8rem]"
                 style={{
                   fontFamily: "GothamRoundedBook",
                 }}

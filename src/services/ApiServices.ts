@@ -2,8 +2,22 @@ import { IUser } from "@/types/commonTypes";
 import axios from "axios";
 import AuthService from "./AuthServices";
 import { BASE_URI } from "./config";
+import Utils from "./Utils";
 
 const ApiService = {
+
+  async checkUser(userData: any){
+    const res = await axios.post(
+      `${BASE_URI}api/user/checkuser`,userData
+    );
+
+    if (res) {
+      return res.data;
+    }
+
+    return res;
+  },
+
   async getLandingPageResource() {
     const res = await axios.get(
       `${BASE_URI}api/pages/getsinglepage/landing-page`
@@ -75,14 +89,19 @@ const ApiService = {
   },
 
   async getSocialLinksData() {
-    const res = await axios.get(
-      `${BASE_URI}api/company/fetchsocial/${AuthService.getUserEmail()}`
-    );
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}/api/company/fetchsocial/${AuthService.getUserEmail()}?token=${token}`);
     return res.data;
   },
 
   async getAdminSiteSettingInfo() {
-    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getsetting?token=${token}`);
+    return res.data;
+  },
+
+  async getPublicSiteSettingInfo() {
+    const res = await axios.get(`${BASE_URI}api/sitesetting/getpublicsetting`);
     return res.data;
   },
 
@@ -92,9 +111,8 @@ const ApiService = {
   },
 
   async getProductPageDetails() {
-    const res = await axios.get(
-      `${BASE_URI}api/product/getproducts/${AuthService.getUserEmail()}`
-    );
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}/api/product/getproducts/${AuthService.getUserEmail()}?token=${token}`);
     return res.data;
   },
 
@@ -114,28 +132,30 @@ const ApiService = {
   },
 
   async getServicePageDetails() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/service/getservice/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/service/getservice/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
 
   async getDashboardCounts() {
-    const res = await axios.get(
-      `${BASE_URI}api/user/getcompanydashdata/${AuthService.getUserEmail()}`
-    );
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/user/getcompanydashdata/${AuthService.getUserEmail()}?token=${token}`);
     return res.data;
   },
 
   async getClientsPageDetails() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/client/getclients/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/client/getclients/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
 
   async getAdminThemes() {
-    const res = await axios.get(`${BASE_URI}api/theme/getthemes`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/theme/getthemes?token=${token}`);
     return res.data;
   },
 
@@ -145,36 +165,51 @@ const ApiService = {
   },
 
   async getImageGalleryDetails() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/portfolio/getportfolio/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/portfolio/getportfolio/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
 
   async getTestimonialList() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/testimonial/gettestimonial/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/testimonial/gettestimonial/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
 
   async getEnquiryPageDetails() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/inquiry/getinquiry/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/inquiry/getinquiry/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
 
   async getCompanyDetailsPageData() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/company/getcompany/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/company/getcompany/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
 
+  // async getCompanyDetailsPageData() {
+  //   let token = AuthService.getToken();
+  //   const res = await axios.get(`/api/company/getcompany?user=${AuthService.getUserEmail()}`,{
+  //     headers:{
+  //       token: token
+  //     }
+  //   });
+  //   return res.data;
+  // },
+
   async getPaymentOptionDetails() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/company/fetchpaymentoptions/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/company/fetchpaymentoptions/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },
@@ -239,8 +274,9 @@ const ApiService = {
   },
 
   async deleteClientItem(clientID: any) {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/client/deleteclient/${clientID}`
+      `${BASE_URI}api/client/deleteclient/${clientID}?token=${token}`
     );
     return res.data;
   },
@@ -258,7 +294,8 @@ const ApiService = {
   },
 
   async getThemes() {
-    const res = await axios.get(`${BASE_URI}api/theme/getthemes`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/theme/getthemes?token=${token}`);
     return res.data;
   },
 
@@ -275,12 +312,14 @@ const ApiService = {
   },
 
   async getAdminDashboardData() {
-    const res = await axios.get(`${BASE_URI}api/user/getadmindashdata`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/user/getadmindashdata?token=${token}`);
     return res.data;
   },
 
   async getAllCompanies() {
-    const res = await axios.get(`${BASE_URI}api/company/fetchallcompany`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/company/fetchallcompany?token=${token}`);
     return res.data;
   },
 
@@ -293,7 +332,8 @@ const ApiService = {
   },
 
   async getAdminSocialMediaInfo() {
-    const res = await axios.get(`${BASE_URI}api/company/fetchallsocial`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/company/fetchallsocial?token=${token}`);
     return res.data;
   },
 
@@ -310,7 +350,8 @@ const ApiService = {
   },
 
   async getAllPagesInfo() {
-    const res = await axios.get(`${BASE_URI}api/pages/getpages`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/pages/getpages?token=${token}`);
     return res.data;
   },
 
@@ -325,7 +366,8 @@ const ApiService = {
   },
 
   async getAllAdminUserReview() {
-    const res = await axios.get(`${BASE_URI}api/user/getuserreview/all`);
+    let token = AuthService.getToken();
+    const res = await axios.get(`${BASE_URI}api/user/getuserreview/all?token=${token}`);
     return res.data;
   },
 
@@ -343,8 +385,9 @@ const ApiService = {
   },
 
   async getUserProfileInfo() {
+    let token = AuthService.getToken();
     const res = await axios.get(
-      `${BASE_URI}api/user/getuser/${AuthService.getUserEmail()}`
+      `${BASE_URI}api/user/getuser/${AuthService.getUserEmail()}?token=${token}`
     );
     return res.data;
   },

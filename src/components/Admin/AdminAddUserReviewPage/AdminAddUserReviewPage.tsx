@@ -2,6 +2,7 @@ import AdminBackButton from "@/common/AdminBackButton";
 import AdminCommonButton from "@/common/AdminCommonButton";
 import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
+import AuthService from "@/services/AuthServices";
 import Utils from "@/services/Utils";
 import { adminUserReviewFormSchema } from "@/services/forms/formSchema";
 import { setRouteIsChanged } from "@/services/store/slices/commonSlice";
@@ -10,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 
 export default function AdminAddUserReviewPage() {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ export default function AdminAddUserReviewPage() {
     },
     resolver: yupResolver(adminUserReviewFormSchema),
   });
+  const router = useRouter();
 
   const onComplete = () => {
     dispatch(
@@ -46,7 +49,9 @@ export default function AdminAddUserReviewPage() {
       io.append("user_name", data.userName);
       io.append("user_message", data.userReview);
       // io.append("isupdate", false);
-
+      let token = AuthService.getToken();
+      io.append("token", token);
+      
       const res = await ApiService.addAdminUserReview(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -57,6 +62,7 @@ export default function AdminAddUserReviewPage() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     }
   };
 

@@ -3,7 +3,7 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 function SnowEffect() {
-  const [count, setCount] = useState(30);
+  const [count, setCount] = useState(120);
 
   const init = useCallback(async (engine) => {
     await loadFull(engine);
@@ -22,13 +22,13 @@ function SnowEffect() {
               value: count,
             },
             opacity: {
-              value: { min: 0.3, max: 1 },
+              value: { min: 0.3, max: 0.6 },
             },
             shape: {
               type: "circle",
             },
             size: {
-              value: { min: 1, max: 2 },
+              value: { min: 0.5, max: 3 },
             },
             move: {
               direction: "none",

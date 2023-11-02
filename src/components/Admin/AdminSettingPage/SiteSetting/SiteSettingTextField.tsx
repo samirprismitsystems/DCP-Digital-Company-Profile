@@ -16,7 +16,7 @@ export default function SiteSettingTextField(props: ITextField) {
     <>
       <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
         <label
-          className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none`}
+          className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none` }
         >
           {props.title}
         </label>

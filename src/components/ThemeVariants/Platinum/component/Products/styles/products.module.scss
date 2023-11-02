@@ -1,0 +1,88 @@
+@import "/src/styles/variable.scss";
+
+.single_team_item {
+  max-width: 405px;
+}
+
+.single_team {
+  border-radius: 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  background: $white;
+  transition: all 300ms ease;
+  &:hover {
+    cursor: pointer;
+    .social {
+      li {
+        transition: all 300ms ease;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+        &:nth-child(1) {
+          transition-delay: 100ms;
+        }
+        &:nth-child(2) {
+          transition-delay: 200ms;
+        }
+        &:nth-child(3) {
+          transition-delay: 300ms;
+        }
+        &:nth-child(4) {
+          transition-delay: 400ms;
+        }
+      }
+    }
+  }
+}
+
+.team_image {
+  height: 100%;
+  position: relative;
+  img {
+    max-height: 260px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .social {
+    li {
+      margin-top: 16px;
+      opacity: 0;
+      visibility: hidden;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-rotate: 0;
+      --tw-skew-x: 0;
+      --tw-skew-y: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      transform: translateX(var(--tw-translate-x))
+        translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+        skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+        scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+      --tw-translate-x: 100%;
+      a {
+        background-color: transparent;
+        --tw-border-opacity: 1;
+        border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+        border-radius: 9999px;
+        border-style: solid;
+        border-width: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 36px;
+        --tw-text-opacity: 1;
+        color: rgba(255, 255, 255, var(--tw-text-opacity));
+        width: 36px;
+        &:hover {
+          --tw-bg-opacity: 1;
+          background-color: rgba(249, 79, 79, var(--tw-bg-opacity));
+          --tw-border-opacity: 1;
+          border-color: rgba(249, 79, 79, var(--tw-border-opacity));
+        }
+      }
+    }
+  }
+}

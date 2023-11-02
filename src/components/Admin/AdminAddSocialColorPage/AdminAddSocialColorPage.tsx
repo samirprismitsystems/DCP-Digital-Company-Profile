@@ -1,31 +1,29 @@
 import AdminBackButton from "@/common/AdminBackButton";
 import AdminCommonButton from "@/common/AdminCommonButton";
-import TextField from "@/common/TextFields/TextField";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { adminSocialMediaClassFormSchema } from "@/services/forms/formSchema";
-import { ISocialMediaColors } from "@/types/commonTypes";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { HexColorPicker } from "react-colorful";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import UpdateAndShowSocialColor from "./UpdateAndShowSocialColor";
 export default function AdminAddSocialColorPage() {
-  const [lstSocialClasses, setLstSocialClasses] = useState<
-    ISocialMediaColors[]
-  >([
-    {
-      created_at: "",
-      socialmedia_color_id: "",
-      socialmedia_color_name: "",
-      updated_at: "",
-    },
-  ]);
-  const router = useRouter();
+  const [selectedColor, setSelectedColor] = useState<string | null>(null)
+  const [lstSocialClasses, setLstSocialClasses] = useState<any[]>([]);
+
   const objForm = useForm({
     defaultValues: {
-      socialcolor: lstSocialClasses,
+      socialcolor: lstSocialClasses || [
+        {
+          created_at: "",
+          socialmedia_color_id: "",
+          socialmedia_color_name: "",
+          updated_at: "",
+        },
+      ],
       socialMediaClass: "",
     },
     resolver: yupResolver(adminSocialMediaClassFormSchema),
@@ -35,7 +33,49 @@ export default function AdminAddSocialColorPage() {
     try {
       const res = await ApiService.getAdminSocialColors();
       if (!res.error) {
-        setLstSocialClasses(res.socialcolor);
+        if (res.socialcolor) {
+          const arr = res.socialcolor.map((item: any) => ({
+            ...item,
+            isDelete: true,
+          }));
+
+          setLstSocialClasses((prevState: any) => ([
+            {
+              socialmedia_color_name: "#3b5999",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#e4405f",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#0077b5",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#55acee",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#25d366",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#bd081c",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#0088cc",
+              isDelete: false,
+            },
+            {
+              socialmedia_color_name: "#cd201f",
+              isDelete: false,
+            },
+            ...arr,
+          ]));
+        }
+
         return null;
       }
 
@@ -44,6 +84,8 @@ export default function AdminAddSocialColorPage() {
       Utils.showErrorMessage(ex.message);
     }
   };
+
+
 
   const onComplete = () => {
     loadData();
@@ -69,8 +111,12 @@ export default function AdminAddSocialColorPage() {
 
   const newItemSave = async (data: any) => {
     try {
+      if (!selectedColor) {
+        Utils.showErrorMessage('Please select color first!')
+        return null;
+      }
       const io: any = new FormData();
-      io.append("socialmedia_color_name", data.socialMediaClass);
+      io.append("socialmedia_color_name", selectedColor);
       const res = await ApiService.saveAdminSocialMediaColorInfo(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
@@ -120,20 +166,16 @@ export default function AdminAddSocialColorPage() {
 
   return (
     <FormProvider {...objForm}>
-      <AdminBackButton backPath="socialmediaadd" index={2}/>
+      <AdminBackButton backPath="socialmediaadd" index={2} />
       <div className="tab_titles mb-8 -mt-4">
         <div className="h2">Add Social Media Color Class</div>
       </div>
       <div className="digital_profile_form form_shadow bg-white min-h-[50%] rounded-2xl pb-0 block">
         <form onSubmit={objForm.handleSubmit(newItemSave)}>
           <div className="row -mr-3 -ml-3">
-            <TextField
-              isRequired={true}
-              name="socialMediaClass"
-              title="Social Media Color Class"
-              placeHolder="Enter Social Media Class"
-              type="text"
-            />
+            <HexColorPicker color={selectedColor || ""} onChange={(value: any) => {
+              setSelectedColor(value)
+            }} />;
             <div className="xs:w-full md:w-[70%]">
               <AdminCommonButton
                 isLeft={true}
@@ -151,67 +193,60 @@ export default function AdminAddSocialColorPage() {
             <thead className="text-xs text-gray-700  bg-gray-50">
               <tr className="text-3xl text-primary-main bg-secondary-greyDark text-left p-3">
                 <th className="p-4 font-medium">Social Media Color</th>
-                <th className="p-4 font-medium">Delete</th>
+                <th className="p-4 font-medium">Action</th>
               </tr>
             </thead>
-            {fields.map((item, index: number) => (
+            {fields.map((item: any, index: number) => (
               <tbody
                 key={index}
                 className="text-2xl text-left border-0 p-[10px] align-middle text-secondary-dark"
               >
                 {index % 2 == 0 ? (
                   <tr className="bg-white border-0">
-                    <td className="p-4 text-2xl form_field border-b-[1px] hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-                      <input
-                        type="text"
-                        className="w-full text-2xl focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
-                        {...objForm.register(
-                          `socialcolor.${index}.socialmedia_color_name`
-                        )}
-                      />
+                    <td className="flex p-4 text-2xl form_field border-b-[1px] hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+                      <UpdateAndShowSocialColor index={index} color={item.socialmedia_color_name} isDelete={item.isDeleted} />
                     </td>
 
                     <td className="p-4 text-2xl">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (item.socialmedia_color_id) {
-                            onDelete(item.socialmedia_color_id);
-                          }
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          className="text-secondary-main text-3xl text-center"
-                          icon={faTrash}
-                        />
-                      </button>
+                      {item.isDelete && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (item.socialmedia_color_id) {
+                              onDelete(item.socialmedia_color_id);
+                            }
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            className="text-secondary-main text-3xl text-center"
+                            icon={faTrash}
+                          />
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ) : (
                   <tr className="bg-primary-main border-red-100">
-                    <td className="p-4 text-2xl form_field border-b-[1px] hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-                      <input
-                        type="text"
-                        className="w-full text-2xl focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
-                        {...objForm.register(
-                          `socialcolor.${index}.socialmedia_color_name`
-                        )}
-                      />
+                    <td className="flex p-4 text-2xl form_field border-b-[1px] hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+                      <UpdateAndShowSocialColor index={index} color={item.socialmedia_color_name} isDelete={item.isDeleted} />
                     </td>
+
                     <td className="p-4 text-2xl">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (item.socialmedia_color_id) {
-                            onDelete(item.socialmedia_color_id);
-                          }
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          className="text-secondary-main text-3xl text-center"
-                          icon={faTrash}
-                        />
-                      </button>
+                      {item.isDelete && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (item.socialmedia_color_id) {
+                              onDelete(item.socialmedia_color_id);
+                            }
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            className="text-secondary-main text-3xl text-center"
+                            icon={faTrash}
+                          />
+                        </button>
+                      )}
                     </td>
                   </tr>
                 )}

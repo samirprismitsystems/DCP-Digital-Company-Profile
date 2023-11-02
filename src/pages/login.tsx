@@ -1,5 +1,4 @@
-import AuthGuards from "@/AuthGuards/AuthGuards";
-import LoginPage from "@/components/LoginPage/LoginPage";
+import LoginPage from "@/components/Common/LoginPage/LoginPage";
 
 export default function login() {
   return <LoginPage />;

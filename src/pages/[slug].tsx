@@ -1,8 +1,7 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
-import GadgetShopPage from "@/components/ThemeVariants/GadgetShop/GadgetShopPage/GadgetShopPage";
-import GoldTheme from "@/components/ThemeVariants/GoldTheme/Index";
-import HomeCarePage from "@/components/ThemeVariants/HomeCare/HomeCarePage/HomeCarePage";
-import PortfolioPage from "@/components/ThemeVariants/Portfolio/PortfolioPage/PortfolioPage";
+import Bronze from "@/components/ThemeVariants/Bronze";
+import Gold from "@/components/ThemeVariants/Gold/Index";
+import Platinum from "@/components/ThemeVariants/Platinum";
 import ApiService from "@/services/ApiServices";
 import { THEME_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
@@ -14,6 +13,7 @@ import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PageNotFound from "./404";
+import Diamond from "@/components/ThemeVariants/Diamond/Diamond";
 
 export const ThemeContextApi = createContext<IPortfolioInfo>(
   {} as IPortfolioInfo
@@ -71,14 +71,14 @@ export default function UserViewSection() {
         <PageNotFound />
       );
     } else {
-      if (themeID === THEME_TYPE.GADGET) {
-        return <GadgetShopPage result={result} />;
-      } else if (themeID === THEME_TYPE.HOMECARE) {
-        return <HomeCarePage result={result} />;
-      } else if (themeID === THEME_TYPE.PORTFOLIO) {
-        return <PortfolioPage result={result} />;
-      } else if (themeID === THEME_TYPE.GOLD) {
-        return <GoldTheme />
+      if (themeID === THEME_TYPE.GOLD) {
+        return <Gold />
+      } else if (themeID === THEME_TYPE.PLATINUM) {
+        return <Platinum />
+      } else if (themeID === THEME_TYPE.BRONZE) {
+        return <Bronze />
+      } else if (themeID === THEME_TYPE.DIAMOND) {
+        return <Diamond />
       } else {
         return (
           <PageNotFound

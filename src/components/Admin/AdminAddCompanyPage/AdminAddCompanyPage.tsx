@@ -1,6 +1,7 @@
 import AdminAddCompanyForm from "./AdminAddCompanyForm";
 
 export default function AdminAddCompanyPage() {
+  
   return (
     <>
       <div className="tab_titles mb-8 -mt-4">

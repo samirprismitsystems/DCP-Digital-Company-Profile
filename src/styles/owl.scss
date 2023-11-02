@@ -1,0 +1,25 @@
+.owl-carousel {
+  .owl-nav {
+    button.owl-next {
+      position: absolute;
+      top: calc(50% - 17px);
+      transform: translateY(-50%);
+      font-size: 150px;
+      color: rgba(var(5, 59, 123), 1);
+      right: -20px;
+    }
+    button.owl-prev {
+      position: absolute;
+      top: calc(50% - 17px);
+      transform: translateY(-50%);
+      font-size: 150px;
+      color: rgba(var(5, 59, 123), 1);
+      left: -20px;
+    }
+  }
+}
+
+.owl-nav {
+  font-size: 60px;
+  color: #053b7b;
+}

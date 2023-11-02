@@ -1,0 +1,30 @@
+.diamond {
+  font-size: 100% !important;
+  line-height: 1.5 !important;
+  -webkit-text-size-adjust: 100% !important;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important;
+  font-feature-settings: normal !important;
+
+  body {
+    font-family: "Inter", sans-serif !important;
+    margin: 0 !important;
+    line-height: inherit !important;
+    background-color: white;
+  }
+
+  .owl-carousel , .owl-carousel .owl-dots.disabled{
+    display: block;
+  }
+}
+
+.dark .dark\:bg-black {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(9 14 52 / var(--tw-bg-opacity)) !important;
+}
+
+

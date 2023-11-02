@@ -39,6 +39,7 @@ export default function AdminCompanyTable() {
       throw new Error(res.message);
     } catch (ex: any) {
       Utils.showErrorMessage(ex.message);
+      router.push('/login');
     } finally {
       setIsLoading(false);
     }
@@ -59,6 +60,8 @@ export default function AdminCompanyTable() {
       let io = new FormData();
       io.append("company_id", companyID);
       io.append("status", status);
+      let token = AuthService.getToken();
+      io.append("token", token);
 
       const res = await ApiService.updateCompanyStatus(io);
       if (!res.error) {
@@ -70,6 +73,7 @@ export default function AdminCompanyTable() {
       throw new Error(res.message);
     } catch (error: any) {
       Utils.showErrorMessage(error.message);
+      router.push('/login');
     }
   };
 

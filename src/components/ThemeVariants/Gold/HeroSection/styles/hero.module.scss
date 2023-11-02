@@ -1,0 +1,19 @@
+@keyframes seeMoreButtonEffect {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.seeMoreButtonEffect {
+  animation: seeMoreButtonEffect 2s ease infinite;
+}
