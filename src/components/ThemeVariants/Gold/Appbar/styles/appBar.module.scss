@@ -38,7 +38,7 @@ $color_5: transparent;
 }
 
 .menuWrap {
-  z-index: 999;
+  z-index: 9999;
   background: rgba(255, 255, 255, 1);
   -webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s;
   transition: width 0.4s, height 0.4s, transform 0.4s;
@@ -70,25 +70,12 @@ $color_5: transparent;
 
 .menuButton {
   position: fixed;
+  z-index: 999999999 ;
   width: 2.5em;
   height: 2.25em;
   font-size: 1.5em;
   -webkit-transform: translate3d(1.5em, 1.5em, 0);
   transform: translate3d(1.5em, 1.5em, 0);
-  z-index: 1000;
-  margin: 0;
-  padding: 0;
-  border: none;
-  text-indent: 2.5em;
-  color: $color_5;
-  background: transparent;
-  position: fixed;
-  width: 2.5em;
-  height: 2.25em;
-  font-size: 1.5em;
-  -webkit-transform: translate3d(1.5em, 1.5em, 0);
-  transform: translate3d(1.5em, 1.5em, 0);
-  z-index: 1000;
   margin: 0;
   padding: 0;
   border: none;
@@ -123,7 +110,7 @@ $color_5: transparent;
 
 .iconList {
   float: right;
-  padding: 3.2em 2em 0 6em;
+  // padding: 3.2em 2em 0 6em;
   .iconListDiv {
     opacity: 0;
     margin: 0 15px;
@@ -148,5 +135,19 @@ $color_5: transparent;
     .menuWrap {
       height: 100vh !important;
     }
+  }
+}
+
+@media (max-width: 760px) {
+  .iconList {
+    padding: 3.2em 2em 0 6em;
+  }
+}
+
+@media (min-width: 760px) {
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

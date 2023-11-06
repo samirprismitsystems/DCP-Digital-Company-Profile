@@ -4,9 +4,10 @@ const ThemeToggler = () => {
     const { theme, setTheme } = useTheme();
 
     const themeToggle = () => {
-        setTheme(theme === "dark" ? "light" : "dark")
+        const newThemeValue = (theme === "system" || theme === "light") ? "dark" : "light"
+        setTheme(newThemeValue);
     }
-    
+
     return (
         <button
             onClick={themeToggle}

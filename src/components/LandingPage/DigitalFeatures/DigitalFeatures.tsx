@@ -64,14 +64,7 @@ export default function DigitalFeatures() {
                       key={index}
                       className="flex items-center text-center overflow-hidden flex-col mb-5 z-10"
                     >
-                      <div
-                        style={{
-                          backgroundColor: "rgba(80, 196, 211, 0.102)",
-                        }}
-                        className="hover:cursor-pointer hover:border hover:border-primary-lightDark border border-transparent h-full py-4 px-14  rounded-lg  text-center text-white relative text-[4rem]"
-                      >
-                        <FeatureCards logoText={item.featurelogo} />
-                      </div>
+                      <FeatureCards logoText={item.featurelogo} />
                       <h1 className="text-[1.5rem] text-white pt-4 font-normal">
                         {item.featuretext || "N/A"}
                       </h1>

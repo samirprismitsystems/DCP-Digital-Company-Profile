@@ -58,7 +58,7 @@ export default function Services() {
                     Our services
                 </h3>
 
-                {lstServices && lstServices.length <= 6 && (
+                {/* {lstServices && lstServices.length <= 6 && (
                     <div
                         className="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 xl:grid-cols-3"
                     >
@@ -86,35 +86,33 @@ export default function Services() {
                             </div>
                         ))}
                     </div>
-                )}
+                )} */}
 
-                {lstServices && lstServices.length >= 7 && (
-                    <OwlCarousel className="owl-carousel owl-theme" {...options}>
-                        {lstServices.map((item, index) => (
-                            <div key={index} className="my-[22px] h-[270px] w-full group rounded px-[32px] py-[48px] shadow hover:bg-bronze-primary hover:cursor-pointer">
-                                <div className="mx-auto h-24 w-24 relative text-center xl:h-28 xl:w-28">
-                                    <div className="transition-all duration-700 ease group-hover:transform group-hover:scale-150 h-full">
-                                        <img
-                                            src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`}
-                                            alt="development icon"
-                                            className='rounded-full object-cover object-center align-middle h-full'
-                                        />
-                                    </div>
-                                </div>
-                                <div className="text-center">
-                                    <h3
-                                        className="pt-8 text-[2.2rem] lg:text-[2rem] py-4 font-semibold uppercase text-bronze-primary group-hover:text-yellow-200"
-                                    >
-                                        {Utils.getContent(item.service_name)}
-                                    </h3>
-                                    <p className="text-grey text-[2rem] lg:text-[1.8rem] group-hover:text-white">
-                                        {Utils.getContent(item.service_desc)}
-                                    </p>
+                <OwlCarousel className="owl-carousel owl-theme" {...options}>
+                    {lstServices.map((item, index) => (
+                        <div key={index} className="my-[22px] h-[270px] w-full group rounded px-[32px] py-[48px] shadow hover:bg-bronze-primary hover:cursor-pointer">
+                            <div className="mx-auto h-24 w-24 relative text-center xl:h-28 xl:w-28">
+                                <div className="h-full">
+                                    <img
+                                        src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`}
+                                        alt="development icon"
+                                        className='rounded-full object-cover object-center align-middle h-full'
+                                    />
                                 </div>
                             </div>
-                        ))}
-                    </OwlCarousel>
-                )}
+                            <div className="text-center">
+                                <h3
+                                    className="pt-8 text-[2.2rem] lg:text-[2rem] py-4 font-semibold uppercase text-bronze-primary group-hover:text-yellow-200"
+                                >
+                                    {Utils.getContent(item.service_name)}
+                                </h3>
+                                <p className="text-grey text-[2rem] lg:text-[1.8rem] group-hover:text-white">
+                                    {Utils.getContent(item.service_desc)}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </OwlCarousel>
             </div>
         </>
     )

@@ -22,7 +22,6 @@ export default function LoginForm() {
   const loadCompanyPageDetails = async () => {
     try {
       const res = await ApiService.getCompanyDetailsPageData();
-      console.log("here0");
       if (!res.error) {
         let result = res.company[0];
         if (result) {

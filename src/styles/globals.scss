@@ -47,8 +47,33 @@
 }
 
 .landingPageActive {
-  color:#147a91;
+  color: #147a91;
 }
+
+.iconBox svg::before {
+  content: "";
+  background: -webkit-linear-gradient(#d8e3e7, #50c4d3);
+  background: -o-linear-gradient(#d8e3e7, #50c4d3);
+  background: linear-gradient(#d8e3e7, #50c4d3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.iconBox {
+  border-radius: 1rem;
+  background-color: rgba(80, 196, 211, 0.102);
+  box-shadow: 0px 0px 20px 0px rgba(19, 44, 51, 0.1);
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(80, 196, 211, 0.102);
+  transition: all 0.3s;
+}
+
 @font-face {
   font-family: "GothamRoundedBold";
   src: url("../fonts/GothamRoundedBold.woff") format("woff"),

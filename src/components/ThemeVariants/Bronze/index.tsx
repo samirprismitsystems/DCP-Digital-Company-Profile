@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Map from "../Gold/Map/Map";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Footer from "./components/Footer/Footer";
@@ -21,6 +22,9 @@ export default function Bronze() {
             <Gallery />
             <Products />
             <ContactUs />
+            <div className="min-h-[400px]">
+                <Map height={'h-[400px] mx-[0px]'}/>
+            </div>
             <Footer />
         </div>
     )

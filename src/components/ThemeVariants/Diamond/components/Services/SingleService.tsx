@@ -27,7 +27,7 @@ const SingleService = (props: ISingleServiceProps) => {
                             {Utils.getContent(props.title)}
                         </span>
                     </h3>
-                    <p className="mb-6  pb-6 text-base font-medium text-diamond-body-color">
+                    <p className="mb-6  pb-6 text-base font-medium text-diamond-body-color overflow-y-auto max-h-[170px] min-h-[170px] h-full">
                         {Utils.getContent(props.desc)}
                     </p>
                 </div>

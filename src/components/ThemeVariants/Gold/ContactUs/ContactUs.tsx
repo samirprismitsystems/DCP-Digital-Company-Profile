@@ -134,7 +134,7 @@ export default function ContactUs(props: IContactUsProps) {
                                         })
                                     }} value={objUser.message} rows={15} className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Write your message here...' />
                                 </div>
-                                <div className='w-full flex xs:justify-center xs:items-center lg:items-end lg:justify-end mt-4'>
+                                <div className='w-full flex xs:justify-center xs:items-center lg:items-end lg:justify-start mt-4'>
                                     <button type='submit' className='hover:bg-yellow-300 hover:text-gold-primary transition-all duration-300 bg-gold-primary text-white py-4 text-[1.6rem] font-medium px-8'>Send Message</button>
                                 </div>
                             </form>

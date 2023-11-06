@@ -1,6 +1,5 @@
 import Utils from "@/services/Utils";
 import Image from "next/image";
-import Link from "next/link";
 
 
 interface ISingleProductProps {
@@ -32,13 +31,12 @@ const SingleProduct = (props: ISingleProductProps) => {
                             {Utils.getContent(props.title)}
                         </span>
                     </h3>
-                    <p className="mb-6 border-b border-diamond-body-color border-opacity-10 pb-6 text-base font-medium text-diamond-body-color dark:border-white dark:border-opacity-10">
+                    <p className="mb-6 border-b border-diamond-body-color border-opacity-10 pb-6 text-base font-medium text-diamond-body-color dark:border-white dark:border-opacity-10 overflow-y-auto max-h-[170px] min-h-[170px] h-full">
                         {Utils.getContent(props.desc)}
                     </p>
                     <div className="flex items-center">
                         <div className="inline-block">
                             <p className="text-black font-bold text-[1rem] dark:text-white">Rs.{props.price}</p>
-
                         </div>
                     </div>
                 </div>

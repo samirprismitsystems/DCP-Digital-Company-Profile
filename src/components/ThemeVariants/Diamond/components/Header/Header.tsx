@@ -11,6 +11,7 @@ import { menuData } from "../../data/data";
 const Header = () => {
     const objCompany = useContext(ThemeContextApi).company;
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState<any>('home');
     const navbarToggleHandler = () => {
         setNavbarOpen(!navbarOpen);
     };
@@ -24,9 +25,36 @@ const Header = () => {
         }
     };
 
+
+    const handleScroll = () => {
+        const scrollTop = window.scrollY;
+        const sectionOffsets: any = {
+            home: 0,
+            portfolio: 800,
+            services: 1900,
+            products: 3200,
+            contact: 5000,
+        };
+
+        let active = null;
+        for (const section in sectionOffsets) {
+            if (scrollTop >= sectionOffsets[section]) {
+                active = section;
+            }
+        }
+
+        setActiveSection(active || "home");
+    };
+
     useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
         window.addEventListener("scroll", handleStickyNavbar);
-    });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", handleStickyNavbar);
+        };
+    }, []);
 
     return (
         <>
@@ -90,7 +118,7 @@ const Header = () => {
                                                         onClick={() => {
                                                             Utils.scrollToView(menuItem.path)
                                                         }}
-                                                        className={`flex py-2 text-base text-diamond-dark group-hover:opacity-70 diamondLg:dark:text-white dark:text-white diamondLg:mr-0 diamondLg:inline-flex diamondLg:py-6 diamondLg:px-0`}
+                                                        className={` ${activeSection === menuItem.path && 'activeDiamondMenu'} flex py-2 text-base text-diamond-dark group-hover:opacity-70 diamondLg:dark:text-white dark:text-white diamondLg:mr-0 diamondLg:inline-flex diamondLg:py-6 diamondLg:px-0`}
                                                     >
                                                         {menuItem.title}
                                                     </button>

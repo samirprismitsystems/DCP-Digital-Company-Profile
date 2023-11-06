@@ -5,7 +5,7 @@ import { faFacebookF, faInstagram, faLinkedinIn, faTelegram, faTwitter, faWhatsa
 import { useContext } from "react";
 import SingleFeature from "./SingleFeature";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faSave, faShareSquare } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faSave, faShareAltSquare, faShareSquare } from "@fortawesome/free-solid-svg-icons";
 import SectionTitle from "./SectionTitle";
 
 const Features = () => {
@@ -67,9 +67,9 @@ END:VCARD`;
                 className="bg-diamond-primary/[.03]  diamondMd:py-20 diamondLg:py-28"
             >
                 <div className="container">
-                    <div className="grid grid-cols-1 gap-x-8 gap-y-14 diamondSm:grid-cols-2 diamondLg:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-14 diamondSm:grid-cols-2 diamondLg:grid-cols-4 px-0 py-8 diamondMd:p-0">
                         <SingleFeature link={`https://wa.me/+91${objCompany.company_contact}`} icon={faWhatsapp} title="WhatsApp" desc={`+91 ${objCompany.company_contact}`} />
-                        <SingleFeature icon={faShareSquare} title="Share With Friends" clickHandler={() => {
+                        <SingleFeature icon={faShareAltSquare} title="Share With Friends" clickHandler={() => {
                             if (navigator.share) {
                                 navigator
                                     .share({

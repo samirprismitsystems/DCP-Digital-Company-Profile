@@ -4,99 +4,120 @@ import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function AppBar() {
     const objCompany = useContext(ThemeContextApi).company;
+    const [isActive, setIsActive] = useState(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const toggle = () => {
         setIsOpen(!isOpen)
     }
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.scrollY < 50) {
+                setIsActive(true);
+            } else {
+                setIsActive(false);
+            }
+        };
+
+        handleResize();
+
+        window.addEventListener("scroll", handleResize);
+
+        return () => {
+            window.removeEventListener("scroll", handleResize);
+        };
+    }, [])
+
     return (
         <>
-            <div id="home" className="appBar w-full py-6 sm:py-5">
-                <div className="appBarContent container flex items-center justify-between">
-                    <div>
-                        <Link href="/">
-                            <img src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id || Utils.getCompanyID()}/logo/${objCompany.company_logo}`} className="xs:h-platinum10 md:h-28" alt="logo image" />
-                        </Link>
+            <div id="home" className={`appBar ${!isActive ? "bg-bronze-primary shadow-lg": "bg-transparent shadow-none"} fixed w-full py-6 sm:py-5 z-50 shadow-none`}>
+                <div className="container">
+                    <div className="appBarContent flex items-center justify-between">
+                        <div>
+                            <Link href="/">
+                                <img src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id || Utils.getCompanyID()}/logo/${objCompany.company_logo}`} className="xs:h-platinum10 md:h-28" alt="logo image" />
+                            </Link>
+                        </div>
+                        <div className="hidden lg:block">
+                            <ul className="flex items-center">
+
+                                <li className="group pl-12" onClick={() => {
+                                    Utils.scrollToView('home')
+                                }}>
+                                    <span
+                                        className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
+                                    >Home</span>
+
+                                    <span
+                                        className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
+                                    ></span>
+                                </li>
+                                <li className="group pl-12" onClick={() => {
+                                    Utils.scrollToView('about')
+                                }}>
+
+                                    <span
+                                        className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
+                                    >About</span>
+
+                                    <span
+                                        className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
+                                    ></span>
+                                </li>
+
+                                <li className="group pl-12" onClick={() => {
+                                    Utils.scrollToView('services')
+                                }}>
+
+                                    <span
+                                        className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
+                                    >Services</span>
+
+                                    <span
+                                        className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
+                                    ></span>
+                                </li>
+
+                                <li className="group pl-12" onClick={() => {
+                                    Utils.scrollToView('portfolio')
+                                }}>
+
+                                    <span
+                                        className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
+                                    >Portfolio</span>
+
+                                    <span
+                                        className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
+                                    ></span>
+                                </li>
+
+                                <li className="group pl-12" onClick={() => {
+                                    Utils.scrollToView('contact')
+                                }}>
+
+                                    <span
+                                        className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
+                                    >Contact</span>
+
+                                    <span
+                                        className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
+                                    ></span>
+                                </li >
+
+                            </ul >
+                        </div >
+                        <div className="block lg:hidden ">
+                            <button onClick={toggle}>
+                                <FontAwesomeIcon icon={faBars} className="text-[3rem] text-white" />
+                            </button>
+                        </div >
                     </div>
-                    <div className="hidden lg:block">
-                        <ul className="flex items-center">
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('home')
-                            }}>
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Home</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('about')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >About</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('services')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Services</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('portfolio')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Portfolio</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('contact')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Contact</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li >
-
-                        </ul >
-                    </div >
-                    <div className="block lg:hidden ">
-                        <button onClick={toggle}>
-                            <FontAwesomeIcon icon={faBars} className="text-[3rem] text-white" />
-                        </button>
-                    </div >
-                </div >
+                </div>
                 <div className={`top-0 right-0 transition-all duration-500 ease-in fixed z-10 ${isOpen ? 'p-4 w-[300px]' : 'w-0'} bg-bronze-primary h-screen z-[9999]`}>
                     <div className="text-right">
                         <button onClick={toggle}>
@@ -168,7 +189,7 @@ export default function AppBar() {
                                 ></span>
                             </li >
 
-                        </ul >  
+                        </ul >
                     </div>
                 </div>
             </div >

@@ -1,3 +1,4 @@
+import Map from "@/components/ThemeVariants/Gold/Map/Map";
 import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
@@ -156,7 +157,7 @@ export default function ContactUs() {
                 <div className="container pt-[64px] pb-[64px] contactCardsForBronze">
                     <div className="mx-auto w-full pt-10 sm:w-3/4 flex flex-col lg:flex-row">
                         <div
-                            className="w-full border border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                            className="w-full border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
                                 <FontAwesomeIcon icon={faPhone} className="text-[2rem] text-gray-400" />
@@ -169,7 +170,7 @@ export default function ContactUs() {
                             </p>
                         </div>
                         <div
-                            className="w-full border  border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                            className="w-full border hover:shadow-md  border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
                                 <FontAwesomeIcon icon={faEnvelope} className="text-[2rem] text-gray-400 " />
@@ -182,7 +183,7 @@ export default function ContactUs() {
                             </p>
                         </div>
                         <div
-                            className="w-full border border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                            className="w-full border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className="text-[2rem] text-gray-400 " />
@@ -196,16 +197,6 @@ export default function ContactUs() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="h-[400px]">
-                <iframe
-                    src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                        objCompany.address
-                    )}&z=15&output=embed`}
-                    width="100%"
-                    className="border-0 h-full"
-                    allowFullScreen={true}
-                />
             </div>
         </>
     )

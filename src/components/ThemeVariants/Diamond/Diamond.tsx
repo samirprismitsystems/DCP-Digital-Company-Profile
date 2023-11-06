@@ -19,7 +19,7 @@ export default function Diamond() {
     }, [])
 
     return (
-        <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
+        <ThemeProvider attribute="class"  enableSystem={true} defaultTheme="dark">
             <Header />
             <Hero />
             <Features />
