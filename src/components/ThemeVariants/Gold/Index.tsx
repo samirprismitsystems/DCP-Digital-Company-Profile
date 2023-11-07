@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import AboutUs from './AboutUs/AboutUs';
 import AppBar from './Appbar/AppBar';
 import ContactUs from './ContactUs/ContactUs';
@@ -10,8 +10,13 @@ import Review from './Review/Review';
 import Service from './Service/Service';
 import ShareCards from './ShareCards/ShareCards';
 import BottomToTop from './BottomToTop/BottomToTop';
+import Head from 'next/head';
+import { ThemeContextApi } from '@/pages/[slug]';
+import Utils from '@/services/Utils';
+import { UPLOAD_IMAGE_URI } from '@/services/config';
 
 export default function Gold() {
+    const objCompany = useContext(ThemeContextApi).company;
 
     useEffect(() => {
         const htmlTag = document.getElementsByTagName('html')[0];
@@ -20,6 +25,10 @@ export default function Gold() {
 
     return (
         <>
+            <Head>
+                <title>{objCompany.company_slug}</title>
+                <link rel="icon" type="image/x-icon" href={`${UPLOAD_IMAGE_URI}/${objCompany?.company_id || Utils.getCompanyID()}/logo/${objCompany?.company_logo}`} />
+            </Head>
             <div className="absolute z-[12000]">
                 <BottomToTop />
             </div>

@@ -111,7 +111,7 @@ export default function Gallery() {
                                         alt="logo.png"
                                         title="gallery-img"
                                         id="upload-image"
-                                        className="w-full min-h-[280px] max-h-[280px] h-full object-cover object-center align-middle group-hover:grayscale-0 grayscale"
+                                        className="w-full min-h-[280px] max-h-[280px] h-full object-cover object-center align-middle group-hover:grayscale-0 grayscale transition-all duration-300 ease-in"
                                         src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()
                                             }/portfolio/${item.portfolio_image}`}
                                     />

@@ -14,7 +14,7 @@ export default function Hero() {
 
     return (
         <>
-            <div className="hero">
+            <div className="hero flex items-center justify-center">
                 <AppBar />
                 <div
                     className="container relative z-30 heroContent py-[200px]"

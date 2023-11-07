@@ -11,7 +11,7 @@ export default function Home() {
         <link
           id="favicon"
           rel="shortcut icon"
-          href="/revenue.png"
+          href="/logo.png"
           sizes="any"
         />
       </Head>

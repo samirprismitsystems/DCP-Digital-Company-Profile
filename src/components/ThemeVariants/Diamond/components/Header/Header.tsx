@@ -3,7 +3,6 @@ import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import Image from "next/image";
-import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import ThemeToggler from "../../common/ThemeToggler";
 import { menuData } from "../../data/data";
@@ -67,10 +66,12 @@ const Header = () => {
                 <div className="container">
                     <div className="relative -mx-4 flex items-center justify-between">
                         <div className="w-60 max-w-full px-4 diamondXl:mr-12">
-                            <Link
-                                href="/"
-                                className={`header-logo block w-full ${sticky ? "py-5 diamondLg:py-2" : "py-8"
+                            <div
+                                className={`hover:cursor-pointer header-logo block w-full ${sticky ? "py-5 diamondLg:py-2" : "py-8"
                                     } `}
+                                onClick={() => {
+                                    Utils.scrollToView('home')
+                                }}
                             >
                                 <Image
                                     src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id || Utils.getCompanyID()}/logo/${objCompany.company_logo}`}
@@ -79,7 +80,7 @@ const Header = () => {
                                     height={100}
                                     className="h-16"
                                 />
-                            </Link>
+                            </div>
                         </div>
                         <div className="flex w-full items-center justify-between px-4">
                             <div>
@@ -116,7 +117,7 @@ const Header = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => {
-                                                            Utils.scrollToView(menuItem.path)
+                                                            Utils.scrollToView(menuItem.path, 120)
                                                         }}
                                                         className={` ${activeSection === menuItem.path && 'activeDiamondMenu'} flex py-2 text-base text-diamond-dark group-hover:opacity-70 diamondLg:dark:text-white dark:text-white diamondLg:mr-0 diamondLg:inline-flex diamondLg:py-6 diamondLg:px-0`}
                                                     >

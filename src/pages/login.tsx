@@ -1,5 +1,6 @@
 import LoginPage from "@/components/Common/LoginPage/LoginPage";
 
-export default function login() {
+const login = () => {
   return <LoginPage />;
 }
+export default login;

@@ -155,9 +155,9 @@ export default function ContactUs() {
                     </button>
                 </form>
                 <div className="container pt-[64px] pb-[64px] contactCardsForBronze">
-                    <div className="mx-auto w-full pt-10 sm:w-3/4 flex flex-col lg:flex-row">
+                    <div className="mx-auto w-full pt-10 sm:w-3/4 flex flex-col lg:flex-row xs:space-y-5 lg:space-y-0 lg:space-x-5">
                         <div
-                            className="w-full border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                            className="w-full transition-all duration-300 ease-in border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
                                 <FontAwesomeIcon icon={faPhone} className="text-[2rem] text-gray-400" />
@@ -165,12 +165,12 @@ export default function ContactUs() {
                                     My Phone
                                 </p>
                             </div>
-                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[2rem]">
+                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
                                 {`+91 ${Utils.getContent(objCompany.company_contact)}`}
                             </p>
                         </div>
                         <div
-                            className="w-full border hover:shadow-md  border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                            className="w-full transition-all duration-300 ease-in border hover:shadow-md  border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
                                 <FontAwesomeIcon icon={faEnvelope} className="text-[2rem] text-gray-400 " />
@@ -178,12 +178,12 @@ export default function ContactUs() {
                                     My Email
                                 </p>
                             </div>
-                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[2rem]">
+                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
                                 {Utils.getContent(objCompany.company_email)}
                             </p>
                         </div>
                         <div
-                            className="w-full border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                            className="w-full transition-all duration-300 ease-in border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className="text-[2rem] text-gray-400 " />
@@ -191,7 +191,7 @@ export default function ContactUs() {
                                     My Address
                                 </p>
                             </div>
-                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[2rem]">
+                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
                                 {Utils.getContent(objCompany.address)}
                             </p>
                         </div>

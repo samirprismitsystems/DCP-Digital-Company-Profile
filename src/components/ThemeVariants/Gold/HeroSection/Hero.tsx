@@ -11,7 +11,7 @@ export default function Hero() {
 
     return (
         <section id='home' className='Hero h-auto bg-gold-white pt-[100px] pb-[20px]'>
-            <div className="container">
+            <div className="container  md:mt-[5rem]">
                 <div className='grid xs:grid-cols-1 md:grid-cols-2 md:gap-8 justify-between items-center'>
                     <div className='firstColumn xs:text-center md:text-left'>
                         <div className='xs:my-auto xs:block sm:mb-8'>

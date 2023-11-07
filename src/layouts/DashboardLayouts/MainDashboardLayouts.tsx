@@ -146,7 +146,7 @@ export default function MainDashboardLayouts({ children }: any) {
         <link
           id="favicon"
           rel="shortcut icon"
-          href="/revenue.png"
+          href="/logo.png"
           sizes="any"
         />
         <title>

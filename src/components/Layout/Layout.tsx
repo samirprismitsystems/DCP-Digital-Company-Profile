@@ -16,7 +16,9 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const token = AuthService.getToken();
     
     useEffect(() => {
-        if(pathname === '/' || pathname === '/[slug]'){
+        setIsLoading(false);
+            setIsUser(true);
+        if(pathname === '/' || pathname === '/[slug]' || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]'){
             setIsLoading(false);
             setIsUser(true);
         }
@@ -57,8 +59,8 @@ const  Layout = ({ children }: ILayoutProps ) => {
     if (isUser === true && !isLoading) {
         return children;
     }
-
-    if(!isLoading){
+    
+    if(!isUser && !isLoading){
         return <LoginPage />;
     }
 

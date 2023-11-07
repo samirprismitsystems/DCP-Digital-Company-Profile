@@ -51,7 +51,7 @@ const ContactUs = () => {
     }
 
     return (
-        <section className="overflow-hidden py-16 diamondMd:py-20 diamondLg:py-28">
+        <section className="overflow-hidden pt-16 diamondMd:pt-20 diamondLg:pt-28">
             <div className="container mx-auto">
                 <div className="w-full flex flex-wrap">
                     <div className="w-full mx-auto">
@@ -157,7 +157,7 @@ const ContactUs = () => {
                                         </div>
                                     </div>
                                     <div className="w-full px-4">
-                                        <button type="submit" className="rounded-md bg-diamond-primary py-4 px-9 text-base font-medium text-diamond-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                                        <button type="submit" className="rounded-md bg-diamond-primary py-4 px-9 text-base font-medium text-diamond-white transition-all duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp ">
                                             Send Enquiry
                                         </button>
                                     </div>

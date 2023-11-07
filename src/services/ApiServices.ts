@@ -402,6 +402,11 @@ const ApiService = {
     return res.data;
   },
 
+  async resetUserPassword(io: any) {
+    const res = await axios.post(`${BASE_URI}/api/user/resetpass`, io);
+    return res.data;
+  },
+
   async registerUserAdmin(io: any) {
     const res = await axios.post(`${BASE_URI}api/user/registeruseradmin`, io);
     return res.data;

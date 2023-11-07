@@ -33,7 +33,7 @@ const Hero = () => {
                                         Utils.scrollToView('features')
                                     }}
                                         type="button"
-                                        className="rounded-md bg-diamond-primary py-4 px-8 text-base font-semibold text-diamond-white duration-300 ease-in-out hover:bg-diamond-primary/80"
+                                        className="rounded-md bg-diamond-primary py-4 px-8 text-base font-semibold text-diamond-white duration-300 ease-in-out hover:bg-diamond-primary/80 transition-all"
                                     >
                                         <span className="mr-4">
                                             <FontAwesomeIcon icon={faArrowDown} />

@@ -5,7 +5,7 @@ import { landingPageNavigationMenuList } from "../../../data/NavigationMenu";
 import MobileNavbar from "./MobileNavbar";
 import MobileSideBar from "./MobileSideBar";
 
-export default function LandingNavbar() {
+export default function LandingNavbar({ activeSection }: any) {
   const [scrollY, setScrollY] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -55,7 +55,7 @@ export default function LandingNavbar() {
             <img src="/logo.png" alt="logo.png" className="h-24" />
           </div>
           <MobileSideBar toggle={toggle} />
-          <NavigationMenu lstNavigationMenu={landingPageNavigationMenuList} />
+          <NavigationMenu activeSection={activeSection} lstNavigationMenu={landingPageNavigationMenuList} />
         </div>
       </nav>
     </>

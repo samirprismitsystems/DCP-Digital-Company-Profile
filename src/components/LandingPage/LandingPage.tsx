@@ -47,6 +47,35 @@ export default function LandingPage() {
     loadData();
   }, []);
 
+
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const sectionOffsets: any = {
+      heroSection: 0,
+      digitalFeatures: 2000,
+      getInTouch: 4000,
+    };
+
+    // Find the active section based on scroll position
+    let active = null;
+    for (const section in sectionOffsets) {
+      if (scrollTop >= sectionOffsets[section]) {
+        active = section;
+      }
+    }
+
+    setActiveSection(active);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   if (metaData && Object.keys(metaData).length <= 0)
     return <PageCircularLoading />;
 
@@ -62,7 +91,7 @@ export default function LandingPage() {
         <meta property="og:image:width" content={metaData?.page_id || ""} />
         <title>{metaData?.meta_title || "Digital Company Profile"}</title>
       </Head>
-      <LandingNavbar />
+      <LandingNavbar activeSection={activeSection} />
       <HeroSection />
       <HowItsWork />
       <DigitalFeatures />

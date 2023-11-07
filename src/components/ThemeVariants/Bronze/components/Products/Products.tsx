@@ -47,7 +47,7 @@ export default function Products() {
 
     return (
         <>
-            <div className="bg-gray-200 " id="blog">
+            <div className="bg-gray-200 " id="products">
                 <div className="container py-[64px] px-[16px] md:py-[80px]">
                     <h2
                         className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"

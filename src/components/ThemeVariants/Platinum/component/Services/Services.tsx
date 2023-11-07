@@ -60,7 +60,7 @@ export default function Services() {
                         <div className="w-full" key={index}>
                             <div className={`${styles.single_services} text-center mt-platinum8 mx-platinum3`}>
                                 <div className={`${styles.services_icon} flex items-center justify-center`}>
-                                    <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`} className={styles.services_shape} alt="" />
+                                    <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`} className={`${styles.services_shape} transition-all duration-300 ease-in`} alt=""/>
                                 </div>
                                 <div className="services_content mt-platinum5 platinumXl:mt-platinum10">
                                     <h3 className="services_title text-black font-semibold text-3xl platinumMd:text-2xl platinumLg:text-xl platinumXl:text-3xl">{Utils.getContent(item.service_name)}</h3>
@@ -76,7 +76,7 @@ export default function Services() {
                             <div className="w-full" key={index}>
                                 <div className={`${styles.single_services} text-center mt-platinum8 mx-platinum3`}>
                                     <div className={`${styles.services_icon} flex items-center justify-center`}>
-                                        <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`} className={styles.services_shape} alt="" />
+                                        <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/service/${item.service_image}`} className={`${styles.services_shape} transition-all duration-300 ease-in`} alt=""/>
                                     </div>
                                     <div className="services_content mt-platinum5 platinumXl:mt-platinum10">
                                         <h3 className="services_title text-black font-semibold text-3xl platinumMd:text-2xl platinumLg:text-xl platinumXl:text-3xl">{Utils.getContent(item.service_name)}</h3>

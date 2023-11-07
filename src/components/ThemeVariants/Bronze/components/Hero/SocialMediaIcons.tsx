@@ -24,7 +24,7 @@ export default function SocialMediaIcons(props: { isFontSizeSmall?: boolean }) {
                     const iconComponent = iconMapping[item.socialmedia_logo];
                     return (
                         <Link href={item.link} target='_blank' key={index}>
-                            <FontAwesomeIcon icon={iconComponent} className={`${props.isFontSizeSmall ? "text-lg text-black dark:text-white p-2 hover:text-blue-600 dark:hover:text-yellow-200":"px-2 text-[2rem] text-white hover:text-yellow-200 ml-1"}`} />
+                            <FontAwesomeIcon icon={iconComponent} className={`${props.isFontSizeSmall ? "text-lg text-black dark:text-white p-2 hover:text-blue-600 dark:hover:text-yellow-200":"px-2 text-[2rem] text-white hover:text-yellow-200 ml-1 transition duration-300"}`} />
                         </Link>
                     );
                 })}

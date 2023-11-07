@@ -361,19 +361,19 @@ input {
     max-width: 1320px;
   }
 }
-@media (max-width: 1700px) {
-  html {
-    font-size: 45.5%;
-  }
-}
-@media (max-width: 1366px) {
-  html {
-    font-size: 38.5%;
-  }
-  .mobileImage {
-    border-radius: 8rem !important;
-  }
-}
+// @media (max-width: 1700px) {
+//   html {
+//     font-size: 45.5%;
+//   }
+// }
+// @media (max-width: 1366px) {
+//   html {
+//     font-size: 38.5%;
+//   }
+//   .mobileImage {
+//     border-radius: 8rem !important;
+//   }
+// }
 @media (max-width: 3000px) {
   .footer_width {
     width: calc(100% - 34rem);

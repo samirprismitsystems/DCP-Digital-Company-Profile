@@ -90,7 +90,7 @@ export default function Services() {
 
                 <OwlCarousel className="owl-carousel owl-theme" {...options}>
                     {lstServices.map((item, index) => (
-                        <div key={index} className="my-[22px] h-[270px] w-full group rounded px-[32px] py-[48px] shadow hover:bg-bronze-primary hover:cursor-pointer">
+                        <div key={index} className="my-[22px] h-[270px] w-full group rounded px-[32px] py-[48px] shadow hover:bg-bronze-primary hover:cursor-pointer transition-all duration-300 ease-in">
                             <div className="mx-auto h-24 w-24 relative text-center xl:h-28 xl:w-28">
                                 <div className="h-full">
                                     <img
