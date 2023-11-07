@@ -54,6 +54,7 @@ export default function UserViewSection() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.slug]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function UserViewSection() {
       loadData();
       dispatch(setRedThemeDataChanged(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRedThemeDataChanged]);
 
   useEffect(() => {

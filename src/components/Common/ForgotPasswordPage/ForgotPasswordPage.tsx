@@ -1,3 +1,5 @@
+
+
 import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForButton";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
@@ -11,6 +13,7 @@ import Head from "next/head";
 import { faFacebookF, faInstagram, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+/* eslint-disable react/no-unescaped-entities */
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSent, setIsSent] = useState(false)

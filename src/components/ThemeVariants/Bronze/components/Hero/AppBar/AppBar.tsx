@@ -100,7 +100,7 @@ export default function AppBar() {
                         <ul className="flex items-start justify-center flex-col">
 
                             {navList.map((item) => (
-                                <li className="group pl-6 mb-12 " onClick={() => {
+                                <li key={item.id} className="group pl-6 mb-12 " onClick={() => {
                                     if (item.link === 'products') {
                                         Utils.scrollToView(item.link)
                                     } else {
