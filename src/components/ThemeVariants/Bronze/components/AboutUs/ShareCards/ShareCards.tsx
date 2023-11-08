@@ -39,12 +39,12 @@ export default function ShareCards(props: IShareCardsProps) {
                     <FontAwesomeIcon className="mx-2 h-16 w-auto text-bronze-title group-hover:text-bronze-primary transition-all duration-100 ease-linear" icon={props.iconName} />
                 </div>
                 <div className="pt-5 md:pl-5 md:pt-0">
-                    <h1 className="font-body font-semibold text-[2rem] text-bronze-primary">
+                    <h1 className="font-body text-center lg:text-left font-semibold text-[2rem] text-bronze-primary">
                         {Utils.getContent(props.title)}
                     </h1>
                     {props.value && (
                         <h4
-                            className="text-grey-dark font-header text-[1.8rem] font-medium"
+                            className="text-grey-dark text-center lg:text-left font-header text-[1.8rem] font-medium"
                         >
                             {Utils.getContent(props.value)}
                         </h4>
