@@ -54,7 +54,7 @@ export default function AppBar() {
 
     return (
         <>
-            <div id="home" className={`appBar ${!isActive ? "bg-bronze-primary shadow-lg" : "bg-transparent shadow-none"} fixed w-full py-6 sm:py-5 shadow-none top-0 z-[9999]`}>
+            <div id="home" className={`appBar ${!isActive ? "bg-bronze-primary shadow-lg" : "bg-transparent shadow-none"} fixed w-full py-6 sm:py-5 z-50 shadow-none top-0`}>
                 <div className="container">
                     <div className="appBarContent flex items-center justify-between">
                         <div className="hover:cursor-pointer" onClick={() => {

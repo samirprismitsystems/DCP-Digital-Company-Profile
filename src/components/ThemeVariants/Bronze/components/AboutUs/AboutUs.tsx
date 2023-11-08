@@ -1,8 +1,8 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import { faFacebookF, faInstagram, faLinkedinIn, faSquareWhatsapp, faTelegram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faClock, faSave, faShareSquare, faSquareShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF, faInstagram, faLinkedinIn, faTelegram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faClock, faSave, faShareSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import ShareCards from "./ShareCards/ShareCards";
@@ -90,8 +90,8 @@ END:VCARD`;
                         className="mx-auto border border-gray-200  w-5/6 bg-white py-[16px] shadow md:w-11/12 2xl:w-full"
                     >
                         <div className="p-8 grid  gap-8 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
-                            <ShareCards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faSquareWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
-                            <ShareCards iconName={faSquareShareNodes} title="Share With Friends" clickHandler={() => {
+                            <ShareCards link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
+                            <ShareCards iconName={faShareSquare} title="Share With Friends" clickHandler={() => {
                                 if (navigator.share) {
                                     navigator
                                         .share({
@@ -109,7 +109,7 @@ END:VCARD`;
                                     );
                                 }
                             }} content={
-                                (<div className="social-icons flex justify-center lg:justify-start items-center flex-cols space-x-4">
+                                (<div className="social-icons flex justify-start items-center flex-cols space-x-4">
                                     <span className="fb-icon">
                                         <FontAwesomeIcon
                                             className="text-[2rem] font-bold text-[#b2b2b2]"
