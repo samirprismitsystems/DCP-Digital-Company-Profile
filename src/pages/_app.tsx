@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/Layout/Layout";
+import Head from "next/head";
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -22,7 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    isRender && (
+    <>
+    <Head>
+      <title>Digimen</title>
+    </Head>
+    {isRender && (
       <Provider store={store}>
         <div className="absolute z-[12500]">
           <ToastContainer
@@ -37,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Layout>
       </Provider>
-    )
+      )}
+    </>
   );
 }

@@ -1,20 +1,20 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
-import { faFacebookF, faInstagram, faLinkedinIn, faPinterestP, faTelegramPlane, faTwitter, faWhatsapp, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { useContext } from "react";
 import AppBar from "./AppBar/AppBar";
 import SocialMediaIcons from "./SocialMediaIcons";
+
+/* eslint-disable react/no-unescaped-entities */
 
 export default function Hero() {
     const objItem = useContext(ThemeContextApi).company;
 
     return (
         <>
-            <div className="hero">
+            <div className="hero flex items-center justify-center">
                 <AppBar />
                 <div
                     className="container relative z-30 heroContent py-[200px]"
@@ -31,7 +31,7 @@ export default function Hero() {
                             <h1
                                 className="text-center font-header text-[4.25rem] text-white sm:text-center sm:text-[6rem] md:text-[5.75rem] lg:text-left leading-normal"
                             >
-                                {Utils.getContent(objItem.company_name)}
+                                {Utils.getContent(objItem.company_name?.toString())}
                             </h1>
                             <div
                                 className="flex flex-col justify-center xs:pt-4 md:pt-3 sm:flex-row sm:pt-5 lg:justify-start"
@@ -44,7 +44,7 @@ export default function Hero() {
                                         <FontAwesomeIcon icon={faChevronRight} className="text-3xl text-yellow-200 px-4" />
                                     </div>
                                 </div>
-                                <SocialMediaIcons/>
+                                <SocialMediaIcons />
                             </div>
                         </div>
                     </div>

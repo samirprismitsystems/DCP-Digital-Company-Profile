@@ -16,6 +16,8 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const token = AuthService.getToken();
     
     useEffect(() => {
+        setIsLoading(false);
+            setIsUser(true);
         if(pathname === '/' || pathname === '/[slug]'){
             setIsLoading(false);
             setIsUser(true);
@@ -23,9 +25,15 @@ const  Layout = ({ children }: ILayoutProps ) => {
         else{
             const token = AuthService.getToken();
             if(!token){
-                router.push("/login");
+                if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
+                    router.push(pathname);
+                }else{
+                    router.push('/login');
+                }
                 setIsLoading(false);
+                setIsUser(false);
             }else{
+                console.log("check in progress");
                 checkUserData();
             }
         }
@@ -37,29 +45,35 @@ const  Layout = ({ children }: ILayoutProps ) => {
         userData.append("token",token ? token : '');
 
         const res = await ApiService.checkUser(userData);
-        
-        if(res.error === false){
-            setIsUser(true);
-            setIsLoading(false);
-            if (pathname === "/login") {
+        if(!res.error){
+            if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
                 if (AuthService.getUserType() === USER_TYPE.ADMIN) {
                     router.push("/admindashboard");
                 } else {
                     router.push("/dashboard");
                 }
             }
+            setTimeout(() => {
+                setIsUser(true);
+                setIsLoading(false);
+            }, 600);
         }else{
             setIsLoading(false);
-            router.push('/login');
+            router.push(pathname);
         }
     }
 
     if (isUser === true && !isLoading) {
         return children;
     }
-
-    if(!isLoading){
-        return <LoginPage />;
+    
+    if(!isUser && !isLoading){
+        if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
+            return children;
+        }
+        else{
+            return <LoginPage />;
+        }
     }
 
 }

@@ -38,7 +38,7 @@ const BottomToTop = () => {
         <>
             {showButton && (
                 <button
-                    className="w-[44px] h-[44px] fixed right-platinum8 bottom-platinum8 text-[3rem] bg-gold-primary p-platinum4 rounded-md flex items-center justify-center text-white"
+                    className="w-[44px] h-[44px] fixed right-platinum8 bottom-[125px] text-[3rem] bg-gold-primary p-platinum4 rounded-md flex items-center justify-center text-white"
                     onClick={handleScrollToTop}
                 >
                     <FontAwesomeIcon className="text-white" icon={faChevronUp} />

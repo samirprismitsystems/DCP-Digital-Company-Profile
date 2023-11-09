@@ -143,15 +143,9 @@ export default function MainDashboardLayouts({ children }: any) {
   return (
     <>
       <Head>
-        <link
-          id="favicon"
-          rel="shortcut icon"
-          href="/revenue.png"
-          sizes="any"
-        />
         <title>
           {Utils.capitalizeFirstLetter(selectedTitle) ||
-            "Digital Company Profile"}
+            "Dashboard"}
         </title>
       </Head>
       <DashboardNavbar />

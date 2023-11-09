@@ -20,7 +20,7 @@ export default function FreeTrail() {
         <h1 className="text-white title-font xs:mb-3 text-[3.0rem] font-semibold xs:text-left xs:w-full">
           {data.fttitle || "N/A"}
         </h1>
-        <p className="text-white md:pr-16 text-[1.8rem] sm:mb-4 xs:mb-5">
+        <p className="text-primary-main md:pr-16 text-[1.8rem] sm:mb-4 xs:mb-5">
           {data.ftdesc || "N/A"}
         </p>
         <Link

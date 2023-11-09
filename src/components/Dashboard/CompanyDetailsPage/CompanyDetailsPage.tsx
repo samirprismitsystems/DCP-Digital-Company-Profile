@@ -16,12 +16,14 @@ import CompanyWorkingHoursSelectorField from "./FormFields/CompanyWorkingHoursFi
 import MapInformation from "./MapInformation/MapInformation";
 import CompanyTextField from "./FormFields/CompanyTextField";
 import { useRouter } from "next/router";
+import Loading from "@/common/Loading";
 
 export default function CompanyDetailsPage() {
   const [objData, setObjData] = useState<any>();
   const [isChange, setIsChange] = useState<boolean>(false);
   const [lstStates, setState] = useState<IStates[]>();
   const [mapLocation, setMapLocation] = useState<IMap>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   type IFormData = yup.InferType<typeof companyDetailsFormSchema>;
@@ -208,14 +210,18 @@ export default function CompanyDetailsPage() {
 
       throw new Error(res.message);
     } catch (ex: any) {
+      router.push('/login');
       Utils.showErrorMessage(ex.message);
+    }finally{
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
+    setIsLoading(true);
     loadStates();
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   useEffect(() => {
@@ -266,6 +272,7 @@ export default function CompanyDetailsPage() {
       objForm.formState.errors.alternatePhoneNumber?.message || ""
     );
   }
+
   return (
     <>
       <div className="tab_titles mb-8 -mt-4">
@@ -281,170 +288,181 @@ export default function CompanyDetailsPage() {
             boxShadow: "0rem 0rem 1rem 0px rgb(28 66 77 / 15%)",
           }}
           onSubmit={objForm.handleSubmit(onSave)}
-        >
-          <div className="row lg:grid lg:grid-cols-1 xl:grid-cols-2 xl:gap-8 lg:gap-8 xs:flex-wrap lg:flex-nowrap -mr-3 -ml-3 xs:flex justify-center mb-14">
-            <div className="leftSide px-3">
-              <CompanyTextField
-                name="fullName"
-                title="Full Name / Business Name / Company Name *"
-                placeHolder="Enter Your Full Name / Business Name / Company Name"
-                type="text"
-                isRequired={true}
-              />
-              <CompanyTextField
-                name="businessType"
-                title="Business Type / Description *"
-                placeHolder="Business Type / Description"
-                type="text"
-                isRequired={true}
-              />
-              <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8">
-                <CompanyTextField
-                  name="phoneNumber"
-                  title="Phone No. (WhatsApp No) *"
-                  placeHolder="Enter Your WhatsApp No"
-                  type="number"
-                  isRequired={true}
-                />
-                <CompanyTextField
-                  name="alternatePhoneNumber"
-                  title="Alternet Phone No. (Optional)"
-                  placeHolder="Enter Your Alternet Phone No"
-                  type="number"
-                />
+        > 
+          {isLoading && (
+              <div className="py-[10rem]">
+                  <Loading />
               </div>
-              <CompanyTextField
-                name="emailID"
-                title="Email Id *"
-                placeHolder="Enter Your Email"
-                type="email"
-                isRequired={true}
-              />
-            </div>
-            {objData &&
-              Object.keys(objData).length > 0 &&
-              Utils.getCompanyID() && (
-                <CompanyImageUploader
-                  logoPath={(objData && objData.company_logo) || ""}
-                  bannerPath={(objData && objData.company_banner) || ""}
-                />
-              )}
-            {!Utils.getCompanyID() && (
-              <CompanyImageUploader
-                logoPath={(objData && objData.company_logo) || ""}
-                bannerPath={(objData && objData.company_banner) || ""}
-              />
-            )}
-            <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
-          </div>
-          <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">
-            <div className="leftSide px-3 grid xs:grid-cols-1  sm:grid-cols-2 gap-8">
-              <div className="xs:block sm:hidden lg:mt-8 xs:pt-4"></div>
-              <CompanyTextField
-                name="houseNumber"
-                title="House No, Street, Area *"
-                placeHolder="Enter House No, Street (Area)"
-                type="text"
-                isRequired={true}
-              />
-              <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  mb-16 transition-all duration-300 ease-linear">
-                <label
-                  className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none`}
-                >
-                  Country *
-                </label>
-                <select
-                  disabled
-                  className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
-                  placeholder="Select City"
-                  defaultValue={"India"}
-                >
-                  <option value={"India"}>India</option>
-                </select>
-              </div>
-            </div>
-            <div className="rightSide grid sm:grid-cols-3 md:grid-cols-3 xs:grid-cols-1 gap-8">
-              {lstStates && (
-                <CompanyStateAndCitySelector lstStates={lstStates} />
-              )}
-              <CompanyTextField
-                name="postalCode"
-                title="Postal Code *"
-                placeHolder="Enter Postcode"
-                type="number"
-                isRequired={true}
-              />
-            </div>
-          </div>
-          <CompanyTextField
-            name="companyEstDate"
-            title="Company Est Date"
-            type="date"
-          />
-          <CompanyWorkingHoursSelectorField />
-          <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-            <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
-              About Company
-            </label>
-            <textarea
-              className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
-              placeholder="Add Company Business / Description"
-              rows={8}
-              {...objForm.register("aboutCompany")}
-            />
-          </div>
-          <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-            <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
-              Map Address
-            </label>
-            <div className="flex items-center justify-center">
-              <input
-                className="w-full xs:mb-6 text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
-                placeholder="Enter Map Address  Eg. Area, City"
-                type={"text"}
-                {...objForm.register("mapAddress")}
-              />
-              <button
-                style={{
-                  transition: "all 0.3s linear",
-                }}
-                type="button"
-                className="xs:hidden sm:block py-4 font-medium text-center text-3xl xs:w-1/2 md:w-96 text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
-                onClick={getMapLocation}
-              >
-                Get Location
-              </button>
-            </div>
-            <button
-              style={{
-                transition: "all 0.3s linear",
-              }}
-              type="button"
-              className="xs:visible py-4 sm:hidden font-medium text-center text-3xl xs:w-full text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
-              onClick={getMapLocation}
-            >
-              Get Location
-            </button>
-          </div>
-          {mapLocation && (
-            <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
-              <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
-                Map
-              </label>
-              <div className="w-full h-[400px] relative z-0">
-                <MapInformation
-                  isChange={isChange}
-                  setIsChange={setIsChange}
-                  mapLocation={mapLocation}
-                />
-              </div>
-            </div>
           )}
-          <div className="w-full flex justify-end">
-            <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
-              <DashboardCommonButtons />
-            </div>
-          </div>
+          {
+            objData && Object.entries(objData).length !== 0 && (
+              <>
+              <div className="row lg:grid lg:grid-cols-1 xl:grid-cols-2 xl:gap-8 lg:gap-8 xs:flex-wrap lg:flex-nowrap -mr-3 -ml-3 xs:flex justify-center mb-14">
+                <div className="leftSide px-3">
+                  <CompanyTextField
+                    name="fullName"
+                    title="Full Name / Business Name / Company Name *"
+                    placeHolder="Enter Your Full Name / Business Name / Company Name"
+                    type="text"
+                    isRequired={true}
+                  />
+                  <CompanyTextField
+                    name="businessType"
+                    title="Business Type / Description *"
+                    placeHolder="Business Type / Description"
+                    type="text"
+                    isRequired={true}
+                  />
+                  <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8">
+                    <CompanyTextField
+                      name="phoneNumber"
+                      title="Phone No. (WhatsApp No) *"
+                      placeHolder="Enter Your WhatsApp No"
+                      type="number"
+                      isRequired={true}
+                    />
+                    <CompanyTextField
+                      name="alternatePhoneNumber"
+                      title="Alternet Phone No. (Optional)"
+                      placeHolder="Enter Your Alternet Phone No"
+                      type="number"
+                    />
+                  </div>
+                  <CompanyTextField
+                    name="emailID"
+                    title="Email Id *"
+                    placeHolder="Enter Your Email"
+                    type="email"
+                    isRequired={true}
+                  />
+                </div>
+                {objData &&
+                  Object.keys(objData).length > 0 &&
+                  Utils.getCompanyID() && (
+                    <CompanyImageUploader
+                      logoPath={(objData && objData.company_logo) || ""}
+                      bannerPath={(objData && objData.company_banner) || ""}
+                    />
+                  )}
+                {!Utils.getCompanyID() && (
+                  <CompanyImageUploader
+                    logoPath={(objData && objData.company_logo) || ""}
+                    bannerPath={(objData && objData.company_banner) || ""}
+                  />
+                )}
+                <div className="xs:hidden sm:block sm:mb-8 md:mb-8 lg:hidden"></div>
+              </div>
+              <div className="row grid md:grid-cols-1  xs:grid-cols-1 lg:grid-cols-2  flex-wrap -mr-3 -ml-3 gap-8">
+                <div className="leftSide px-3 grid xs:grid-cols-1  sm:grid-cols-2 gap-8">
+                  <div className="xs:block sm:hidden lg:mt-8 xs:pt-4"></div>
+                  <CompanyTextField
+                    name="houseNumber"
+                    title="House No, Street, Area *"
+                    placeHolder="Enter House No, Street (Area)"
+                    type="text"
+                    isRequired={true}
+                  />
+                  <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  mb-16 transition-all duration-300 ease-linear">
+                    <label
+                      className={`font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none`}
+                    >
+                      Country *
+                    </label>
+                    <select
+                      disabled
+                      className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
+                      placeholder="Select City"
+                      defaultValue={"India"}
+                    >
+                      <option value={"India"}>India</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="rightSide grid sm:grid-cols-3 md:grid-cols-3 xs:grid-cols-1 gap-8">
+                  {lstStates && (
+                    <CompanyStateAndCitySelector lstStates={lstStates} />
+                  )}
+                  <CompanyTextField
+                    name="postalCode"
+                    title="Postal Code *"
+                    placeHolder="Enter Postcode"
+                    type="number"
+                    isRequired={true}
+                  />
+                </div>
+              </div>
+              <CompanyTextField
+                name="companyEstDate"
+                title="Company Est Date"
+                type="date"
+              />
+              <CompanyWorkingHoursSelectorField />
+              <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+                <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
+                  About Company
+                </label>
+                <textarea
+                  className="w-full text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight'] "
+                  placeholder="Add Company Business / Description"
+                  rows={8}
+                  {...objForm.register("aboutCompany")}
+                />
+              </div>
+              <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+                <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
+                  Map Address
+                </label>
+                <div className="flex items-center justify-center">
+                  <input
+                    className="w-full xs:mb-6 text-3xl mt-1 focus:outline-none font-light text-primary-light placeholder:text-info-main bg-transparent border-0 font-['GothamRoundedLight']"
+                    placeholder="Enter Map Address  Eg. Area, City"
+                    type={"text"}
+                    {...objForm.register("mapAddress")}
+                  />
+                  <button
+                    style={{
+                      transition: "all 0.3s linear",
+                    }}
+                    type="button"
+                    className="xs:hidden sm:block py-4 font-medium text-center text-3xl xs:w-1/2 md:w-96 text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
+                    onClick={getMapLocation}
+                  >
+                    Get Location
+                  </button>
+                </div>
+                <button
+                  style={{
+                    transition: "all 0.3s linear",
+                  }}
+                  type="button"
+                  className="xs:visible py-4 sm:hidden font-medium text-center text-3xl xs:w-full text-black bg-primary-main hover:bg-secondary-main border-[1px] border-secondary-main rounded-[5rem]"
+                  onClick={getMapLocation}
+                >
+                  Get Location
+                </button>
+              </div>
+              {mapLocation && (
+                <div className="form_field border-b-[1px] border-b-companyFormFieldBorderColor hover:border-b-black focus-within:border-b-black  pb-3 mb-16 transition-all duration-300 ease-linear">
+                  <label className="font-['GothamRoundedLight'] font-light text-3xl text-black w-full mb-4 inline-block select-none">
+                    Map
+                  </label>
+                  <div className="w-full h-[400px] relative z-0">
+                    <MapInformation
+                      isChange={isChange}
+                      setIsChange={setIsChange}
+                      mapLocation={mapLocation}
+                    />
+                  </div>
+                </div>
+              )}
+              <div className="w-full flex justify-end">
+                <div className="xs:w-full sm:w-[60%] lg:w-[100%] xl:w-[80%]">
+                  <DashboardCommonButtons />
+                </div>
+              </div>
+            </>
+            )
+          }
         </form>
       </FormProvider>
     </>

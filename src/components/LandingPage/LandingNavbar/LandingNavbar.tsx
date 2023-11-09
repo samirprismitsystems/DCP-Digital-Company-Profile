@@ -5,9 +5,10 @@ import { landingPageNavigationMenuList } from "../../../data/NavigationMenu";
 import MobileNavbar from "./MobileNavbar";
 import MobileSideBar from "./MobileSideBar";
 
-export default function LandingNavbar() {
+export default function LandingNavbar({ activeSection }: any) {
   const [scrollY, setScrollY] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -41,19 +42,20 @@ export default function LandingNavbar() {
           toggle={toggle}
           isOpen={isOpen}
         />
-        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
+        <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex-wrap justify-between pb-6 pt-6 mx-0 flex items-center h-full">
           <div
             onClick={() => {
               Utils.scrollToView('heroSection')
             }}
             className="hover:cursor-pointer flex items-center p-t-[.3125rem] text-[1.25rem]"
           >
-            <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
+            {/* <h1 className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
               DCP
-            </h1>
+            </h1> */}
+            <img src="/logo.png" alt="logo.png" className="h-24" />
           </div>
           <MobileSideBar toggle={toggle} />
-          <NavigationMenu lstNavigationMenu={landingPageNavigationMenuList} />
+          <NavigationMenu activeSection={activeSection} lstNavigationMenu={landingPageNavigationMenuList} />
         </div>
       </nav>
     </>

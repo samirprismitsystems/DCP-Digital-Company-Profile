@@ -3,6 +3,10 @@
     background-color: white;
   }
 
+  .contactCardsForBronze {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
   .container {
     width: 100%;
     margin-right: auto;
@@ -42,7 +46,7 @@
   }
 
   @media (max-width: 780px) {
-    .appBar .appBarContent{
+    .appBar .appBarContent {
       padding-left: 4rem;
       padding-right: 4rem;
     }
@@ -97,6 +101,20 @@
     height: 100%;
     z-index: -1;
     background: url("/assets/img/bg-hero.jpg") center center/cover no-repeat;
+  }
+
+  *::-webkit-scrollbar {
+    width: 11px;
+    background-color: #c0bebe;
+    border: 2px solid #e4e6ef;
+  }
+  *::-webkit-scrollbar-track {
+    background-color: #e4e6ef;
+    border: 2px solid #e4e6ef;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #c0bebe;
+    border-radius: 10px;
   }
 
   @media (max-width: 630px) {

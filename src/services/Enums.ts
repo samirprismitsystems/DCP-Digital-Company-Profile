@@ -7,4 +7,5 @@ export enum THEME_TYPE {
   GOLD = 40,
   PLATINUM = 42,
   BRONZE = 44,
+  DIAMOND = 45,
 }

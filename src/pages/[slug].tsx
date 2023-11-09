@@ -1,14 +1,17 @@
 import PageCircularLoading from "@/common/PageCircularLoading";
 import Bronze from "@/components/ThemeVariants/Bronze";
+import Diamond from "@/components/ThemeVariants/Diamond/Diamond";
 import Gold from "@/components/ThemeVariants/Gold/Index";
 import Platinum from "@/components/ThemeVariants/Platinum";
 import ApiService from "@/services/ApiServices";
 import { THEME_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
+import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { useAppSelector } from "@/services/store/hooks/hooks";
 import { setRedThemeDataChanged } from "@/services/store/slices/commonSlice";
 import { RootState } from "@/services/store/store";
 import { IPortfolioInfo } from "@/types/themes/portfolio";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -76,6 +79,8 @@ export default function UserViewSection() {
         return <Platinum />
       } else if (themeID === THEME_TYPE.BRONZE) {
         return <Bronze />
+      } else if (themeID === THEME_TYPE.DIAMOND) {
+        return <Diamond />
       } else {
         return (
           <PageNotFound
@@ -90,8 +95,10 @@ export default function UserViewSection() {
 
   if (isLoading) return <PageCircularLoading />;
   return (
-    <ThemeContextApi.Provider value={result}>
-      {getTheme()}
-    </ThemeContextApi.Provider>
+    <>
+      <ThemeContextApi.Provider value={result}>
+        {getTheme()}
+      </ThemeContextApi.Provider>
+    </>
   );
 }

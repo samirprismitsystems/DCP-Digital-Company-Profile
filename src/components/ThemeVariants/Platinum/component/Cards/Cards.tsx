@@ -1,11 +1,11 @@
 import { ThemeContextApi } from '@/pages/[slug]';
 import Utils from '@/services/Utils';
-import { faFacebookF, faInstagram, faLinkedinIn, faTelegram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { UPLOAD_IMAGE_URI } from '@/services/config';
+import { faFacebookF, faInstagram, faLinkedinIn, faSquareWhatsapp, faTelegram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faClock, faSave, faShareSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
 import ShareCard from './ShareCard/ShareCard';
-import { UPLOAD_IMAGE_URI } from '@/services/config';
 
 
 
@@ -59,9 +59,9 @@ END:VCARD`;
     };
 
     return (
-        <section className="bg-[#f5f5fc] services_area pt-platinum0 platinumMd:pt-platinum120 pb-platinum120">
+        <section id='feature' className="bg-[#f5f5fc] services_area pt-platinum0 platinumMd:pt-platinum120 pb-platinum120">
             <div className="container grid grid-cols-1 platinumSm:grid-cols-2 gap-6  platinumMd:grid-cols-3 platinumXl:grid-cols-4">
-                <ShareCard link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
+                <ShareCard link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faSquareWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
                 <ShareCard iconName={faShareSquare} title="Share With Friends" clickHandler={() => {
                     if (navigator.share) {
                         navigator
