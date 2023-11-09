@@ -16,22 +16,24 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const token = AuthService.getToken();
     
     useEffect(() => {
-<<<<<<< HEAD
         setIsLoading(false);
             setIsUser(true);
-        if(pathname === '/' || pathname === '/[slug]' || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]'){
-=======
         if(pathname === '/' || pathname === '/[slug]'){
->>>>>>> parent of a29d01f (add update new code 09/11/2023)
             setIsLoading(false);
             setIsUser(true);
         }
         else{
             const token = AuthService.getToken();
             if(!token){
-                router.push("/login");
+                if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
+                    router.push(pathname);
+                }else{
+                    router.push('/login');
+                }
                 setIsLoading(false);
+                setIsUser(false);
             }else{
+                console.log("check in progress");
                 checkUserData();
             }
         }
@@ -43,34 +45,35 @@ const  Layout = ({ children }: ILayoutProps ) => {
         userData.append("token",token ? token : '');
 
         const res = await ApiService.checkUser(userData);
-        
-        if(res.error === false){
-            setIsUser(true);
-            setIsLoading(false);
-            if (pathname === "/login") {
+        if(!res.error){
+            if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
                 if (AuthService.getUserType() === USER_TYPE.ADMIN) {
                     router.push("/admindashboard");
                 } else {
                     router.push("/dashboard");
                 }
             }
+            setTimeout(() => {
+                setIsUser(true);
+                setIsLoading(false);
+            }, 600);
         }else{
             setIsLoading(false);
-            router.push('/login');
+            router.push(pathname);
         }
     }
 
     if (isUser === true && !isLoading) {
         return children;
     }
-<<<<<<< HEAD
     
     if(!isUser && !isLoading){
-=======
-
-    if(!isLoading){
->>>>>>> parent of a29d01f (add update new code 09/11/2023)
-        return <LoginPage />;
+        if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
+            return children;
+        }
+        else{
+            return <LoginPage />;
+        }
     }
 
 }

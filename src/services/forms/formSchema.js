@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 export const loginSchema = yup.object({
   userID: yup.string().required(),
-  password: yup.string(),
+  password: yup.string().required(),
 });
 
 export const forgotPasswordSchema = yup.object({
@@ -185,6 +185,22 @@ export const adminProfileFormSchema = yup.object({
 export const adminChangePasswordFormSchema = yup.object({
   email: yup.string().optional(),
   currentPassword: yup.string().optional(),
+  newPassword: yup.string().optional(),
+  confirmPassword: yup
+    .string()
+    .optional()
+    .test(
+      "passwords-match",
+      "New Password and Confirm Password not match!",
+      function (value) {
+        const { newPassword } = this.parent;
+        return newPassword === value;
+      }
+    ),
+});
+
+export const adminResetPasswordFormSchema = yup.object({
+  email: yup.string().optional(),
   newPassword: yup.string().optional(),
   confirmPassword: yup
     .string()

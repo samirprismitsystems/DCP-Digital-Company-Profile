@@ -28,10 +28,7 @@ export default function Document() {
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossOrigin=""
         />
-<<<<<<< HEAD
-=======
-        <link href="path/to/lightbox.css" rel="stylesheet" />
->>>>>>> parent of a29d01f (add update new code 09/11/2023)
+        <link id="favicon" rel="shortcut icon" href="/icon.png" />
       </Head>
       <body>
         <Main />

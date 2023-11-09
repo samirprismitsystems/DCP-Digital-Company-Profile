@@ -33,7 +33,7 @@ export default function ShareCards(props: IShareCardsProps) {
                         }
                     }
                 }}
-                className="group hover:cursor-pointer hover:shadow-md xs:p-4 xs:h-[100px] xl:h-[200px] lg:p-8 flex flex-col items-center justify-center text-left xl:flex-row"
+                className="group hover:cursor-pointer hover:border-b hover:border-b-gray-200 xs:p-4 xs:h-[100px] xl:h-[200px] lg:p-8 flex flex-col items-center justify-center text-left xl:flex-row"
             >
                 <div>
                     <FontAwesomeIcon className="mx-2 h-16 w-auto text-bronze-title group-hover:text-bronze-primary transition-all duration-100 ease-linear" icon={props.iconName} />

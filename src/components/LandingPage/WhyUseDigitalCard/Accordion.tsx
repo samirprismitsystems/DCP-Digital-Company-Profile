@@ -23,7 +23,7 @@ const Accordion = () => {
           {data.pageDetails.faqtitle || "Why Use Digital Business Card?"}
         </h3>
       </div>
-      <p className="xs:mb-10 mb-5 scroll-element js-scroll fade-in-bottom xs:text-left sm:text-left text-white ">
+      <p className="xs:mb-10 mb-5 scroll-element js-scroll fade-in-bottom xs:text-left sm:text-left text-primary-main font-normal ">
         {description || "N/A"}
       </p>
       {lstAccordion &&

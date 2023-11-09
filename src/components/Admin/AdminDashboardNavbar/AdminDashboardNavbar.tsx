@@ -27,7 +27,7 @@ export default function AdminDashboardNavbar() {
 
   return (
     <nav
-      className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] xs:h-[8.5rem] z-[999] p-t-[2.3rem] p-b-[1.5rem]`}
+      className={`shadow-md bg-white sticky w-full top-0 xl:h-[10rem] z-[999] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
         isAdmin={true}
@@ -37,7 +37,7 @@ export default function AdminDashboardNavbar() {
         redirectPath="admindashboard"
       />
 
-      <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
+      <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0 h-full">
         <button
           type="button"
           className="flex items-center p-t-[.3125rem] text-[1.25rem]"
@@ -54,9 +54,10 @@ export default function AdminDashboardNavbar() {
             }
           }}
         >
-          <span className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
+          {/* <span className=" self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
             DCP
-          </span>
+          </span> */}
+          <img src="/logo.png" alt="logo.png" className="h-24" />
         </button>
 
         <div className="xs:block md:hidden">

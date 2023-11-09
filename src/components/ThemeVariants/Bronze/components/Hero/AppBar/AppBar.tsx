@@ -3,47 +3,47 @@ import Utils from "@/services/Utils";
 import { UPLOAD_IMAGE_URI } from "@/services/config";
 import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { navList } from "./data/data";
 
 export default function AppBar() {
     const objCompany = useContext(ThemeContextApi).company;
+    const [isActive, setIsActive] = useState(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-<<<<<<< HEAD
+    const [Md, setMd] = useState<boolean>(false);
+    const [Sm, setSm] = useState<boolean>(false);
     const [activeSection, setActiveSection] = useState<string>('home');
-=======
->>>>>>> parent of a29d01f (add update new code 09/11/2023)
 
     const toggle = () => {
         setIsOpen(!isOpen)
     }
 
-<<<<<<< HEAD
+    const handleResize = () => {
+        const scrollTop = window.scrollY;
+
+        if (scrollTop < 50) {
+            setIsActive(true);
+        } else {
+            setIsActive(false);
+        }
+
+        const options: any = {
+            home: 0,
+            about: Md ? 732 : Sm ? 500 : 655,
+            products: Md ? 1435 : 1420,
+            services: Md ? 2252 : Sm ? 2252 : 2344,
+            contact: Md ? 3387 : Sm ? 3300 : 3460,
+        }
+
+        for (let item in options) {
+            const currentItem = options[item]
+            if (scrollTop > currentItem) {
+                setActiveSection(item)
+            }
+        }
+    };
+
     useEffect(() => {
-        const handleResize = () => {
-            const scrollTop = window.scrollY;
-
-            if (scrollTop < 50) {
-                setIsActive(true);
-            } else {
-                setIsActive(false);
-            }
-
-            console.log(scrollTop)
-            const options: any = {
-                home: 0,
-                about: 655,
-                products: 1420,
-                services: 2344,
-                contact: 3460,
-            }
-
-            for (let item in options) {
-                const currentItem = options[item]
-                if (scrollTop > currentItem) {
-                    setActiveSection(item)
-                }
-            }
-        };
 
         handleResize();
 
@@ -54,91 +54,72 @@ export default function AppBar() {
         };
     }, [])
 
-=======
->>>>>>> parent of a29d01f (add update new code 09/11/2023)
+    const handleWidth = () => {
+        const innerWidth = window.innerWidth;
+        if (innerWidth > 820) {
+            setIsOpen(false)
+        }
+
+        if (innerWidth >= 550 && innerWidth <= 786) {
+            setMd(true);
+        } else {
+            setMd(false);
+            if (innerWidth <= 430) {
+                setSm(true);
+            } else {
+                setSm(false);
+            }
+        }
+    };
+    useEffect(() => {
+
+        handleWidth();
+        window.addEventListener("resize", handleWidth);
+
+        return () => {
+            window.removeEventListener("resize", handleWidth);
+        };
+    }, [])
+
+
     return (
         <>
-            <div id="home" className="appBar w-full py-6 sm:py-5">
-                <div className="appBarContent container flex items-center justify-between">
-                    <div>
-                        <a href="/">
+            <div id="home" className={`appBar ${!isActive ? "bg-bronze-primary shadow-lg" : "bg-transparent shadow-none"} fixed w-full py-6 sm:py-5 z-50 shadow-none top-0`}>
+                <div className="container">
+                    <div className="appBarContent flex items-center justify-between">
+                        <div className="hover:cursor-pointer" onClick={() => {
+                            Utils.scrollToView('home')
+                        }}>
                             <img src={`${UPLOAD_IMAGE_URI}/${objCompany.company_id || Utils.getCompanyID()}/logo/${objCompany.company_logo}`} className="xs:h-platinum10 md:h-28" alt="logo image" />
-                        </a>
+                        </div>
+                        <div className="hidden lg:block">
+                            <ul className="flex items-center">
+                                {navList.map((item) => (
+                                    <li key={item.id} className="group pl-12" onClick={() => {
+                                        if (item.link === 'products') {
+                                            Utils.scrollToView(item.link, 50)
+                                        } else {
+                                            Utils.scrollToView(item.link, 150)
+                                        }
+                                    }}>
+                                        <span
+                                            className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
+                                        >{item.name}</span>
+
+                                        <span
+                                            className={`block h-0.5 w-full bg-transparent group-hover:bg-yellow-200 ${activeSection === item.link ? "bg-yellow-200" : ""}`}
+                                        ></span>
+                                    </li>
+                                ))}
+                            </ul >
+                        </div >
+                        <div className="block lg:hidden ">
+                            <button onClick={toggle}>
+                                <FontAwesomeIcon icon={faBars} className="text-[3rem] text-white" />
+                            </button>
+                        </div >
                     </div>
-                    <div className="hidden lg:block">
-                        <ul className="flex items-center">
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('home')
-                            }}>
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Home</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('about')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >About</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('services')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Services</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('portfolio')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Portfolio</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-12" onClick={() => {
-                                Utils.scrollToView('contact')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-                                >Contact</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li >
-
-                        </ul >
-                    </div >
-                    <div className="block lg:hidden ">
-                        <button onClick={toggle}>
-                            <FontAwesomeIcon icon={faBars} className="text-[3rem] text-white" />
-                        </button>
-                    </div >
-                </div >
+                </div>
                 <div className={`top-0 right-0 transition-all duration-500 ease-in fixed z-10 ${isOpen ? 'p-4 w-[300px]' : 'w-0'} bg-bronze-primary h-screen z-[9999]`}>
                     <div className="text-right">
                         <button onClick={toggle}>
@@ -147,18 +128,11 @@ export default function AppBar() {
                     </div>
                     <div className="container">
                         <ul className="flex items-start justify-center flex-col">
-                            <li className="group pl-6 mb-12 " onClick={() => {
-                                Utils.scrollToView('home')
-                            }}>
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header text-[2rem] font-semibold uppercase text-white"
-                                >Home</span>
 
-<<<<<<< HEAD
-                            {navList.map((item) => (
-                                <li key={item.id} className="group pl-6 mb-12 " onClick={() => {
+                            {navList.map((item, index: number) => (
+                                <li key={index} className="group pl-6 mb-12" onClick={() => {
                                     if (item.link === 'products') {
-                                        Utils.scrollToView(item.link)
+                                        Utils.scrollToView(item.link, Md ? 40 : Sm ? 60 : 100)
                                     } else {
                                         Utils.scrollToView(item.link, 150)
                                     }
@@ -166,65 +140,13 @@ export default function AppBar() {
                                     <span
                                         className="cursor-pointer pt-0.5 font-header text-[2rem] font-semibold uppercase text-white"
                                     >{item.name}</span>
-=======
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-                            <li className="group pl-6 mb-12 " onClick={() => {
-                                Utils.scrollToView('about')
-                            }}>
->>>>>>> parent of a29d01f (add update new code 09/11/2023)
 
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header text-[2rem] font-semibold uppercase text-white"
-                                >About</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-6 mb-12 " onClick={() => {
-                                Utils.scrollToView('services')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header text-[2rem] font-semibold uppercase text-white"
-                                >Services</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-6 mb-12 " onClick={() => {
-                                Utils.scrollToView('portfolio')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header text-[2rem] font-semibold uppercase text-white"
-                                >Portfolio</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li>
-
-                            <li className="group pl-6 mb-12 " onClick={() => {
-                                Utils.scrollToView('contact')
-                            }}>
-
-                                <span
-                                    className="cursor-pointer pt-0.5 font-header text-[2rem] font-semibold uppercase text-white"
-                                >Contact</span>
-
-                                <span
-                                    className="block h-0.5 w-full bg-transparent group-hover:bg-yellow-200"
-                                ></span>
-                            </li >
-
-                        </ul >  
+                                    <span
+                                        className={`block h-0.5 w-full bg-transparent ${activeSection === item.link ? "bg-yellow-200" : ""}`}
+                                    ></span>
+                                </li>
+                            ))}
+                        </ul >
                     </div>
                 </div>
             </div >
