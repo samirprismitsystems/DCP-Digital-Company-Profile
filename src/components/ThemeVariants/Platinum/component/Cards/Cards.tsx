@@ -59,7 +59,7 @@ END:VCARD`;
     };
 
     return (
-        <section id='feature' className="bg-[#f5f5fc] services_area pt-platinum0 platinumMd:pt-platinum120 pb-platinum120">
+        <section className="bg-[#f5f5fc] services_area pt-platinum0 platinumMd:pt-platinum120 pb-platinum120">
             <div className="container grid grid-cols-1 platinumSm:grid-cols-2 gap-6  platinumMd:grid-cols-3 platinumXl:grid-cols-4">
                 <ShareCard link={`https://wa.me/+91${objCompany.company_contact}`} iconName={faWhatsapp} title="WhatsApp" value={`+91 ${objCompany.company_contact}`} />
                 <ShareCard iconName={faShareSquare} title="Share With Friends" clickHandler={() => {

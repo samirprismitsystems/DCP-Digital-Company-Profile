@@ -19,7 +19,7 @@ export default function ServiceCard(props: IServiceCardProps) {
                         alt="logo.png"
                         title="gallery-img"
                         id="upload-image"
-                        className="w-full max-w-full h-full block object-cover object-center align-middle group-hover:grayscale-0 grayscale transition-all duration-300 ease"
+                        className="w-full max-w-full h-full block object-cover object-center align-middle group-hover:grayscale-0 grayscale"
                         src={`${UPLOAD_IMAGE_URI}/${props.companyID || Utils.getCompanyID()
                             }/service/${props.srcPath}`}
                     />

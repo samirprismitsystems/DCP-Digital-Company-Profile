@@ -4,11 +4,34 @@ import AuthService from "@/services/AuthServices";
 import { USER_TYPE } from "@/services/Enums";
 import Utils from "@/services/Utils";
 import { loginSchema } from "@/services/forms/formSchema";
+import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+export const loadCompanyPageDetails = async () => {
+  try {
+    const res = await ApiService.getCompanyDetailsPageData();
+    if (!res.error) {
+      let result = res.company[0];
+      if (result) {
+        let websiteSlug = result.company_slug;
+        Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
+        Utils.setItem("slug", websiteSlug);
+        Utils.setItem("userID", result.user_id);
+        Utils.setItem("themeID", result.theme_id);
+      }
+      return null;
+    }
+
+    throw new Error(res.message);
+  } catch (ex: any) {
+    Utils.showErrorMessage(ex.message);
+  }
+};
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,28 +39,6 @@ export default function LoginForm() {
   const objForm = useForm({
     resolver: yupResolver(loginSchema),
   });
-  
-  const loadCompanyPageDetails = async () => {
-    try {
-      const res = await ApiService.getCompanyDetailsPageData();
-      if (!res.error) {
-        let result = res.company[0];
-        if (result) {
-          let websiteSlug = result.company_slug;
-          Utils.setItem("IMAGE_UPLOAD_ID", parseInt(result.company_id));
-          Utils.setItem("slug", websiteSlug);
-          Utils.setItem("userID", result.user_id);
-          Utils.setItem("themeID", result.theme_id);
-        }
-        return null;
-      }
-  
-      throw new Error(res.message);
-    } catch (ex: any) {
-      router.push('/login');
-      Utils.showErrorMessage(ex.message);
-    }
-  };
 
   const onLogin: any = async (data: { userID: string; password: string }) => {
     try {
@@ -78,38 +79,63 @@ export default function LoginForm() {
   };
 
   return (
-    <>
-      <form onSubmit={objForm.handleSubmit(onLogin)}>
-        <div>
-            <label htmlFor="email" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">Your email</label>
-            <input 
-              type="email"
-              id="email" 
-              className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              placeholder="name@company.com" 
-              required 
-              {...objForm.register("userID")}
-            />
-        </div>
-        <div>
-            <label className="block mb-3 text-2xl md:text-3xl  font-medium text-secondary-main dark:text-white">Password</label>
-            <input 
-              type="password"
-              {...objForm.register("password")}
-              id="password" 
-              placeholder="••••••••" 
-              className="bg-gray-50 mb-5 border border-cyan-700 text-cyan-700 focus-visible:outline-none text-2xl md:text-3xl rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              required 
-            />
-        </div>
-        <button 
-          type="submit"
-          className="w-full text-white bg-secondary-main sm:text-2xl text-3xl mb-5 hover:bg-secondary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+    <div className="xs:w-full w-4/5 m-auto px-16 xs:px-0">
+      <form
+        className="sm:px-16 md:w-3/4 xl:w-4/5 md:m-auto"
+        onSubmit={objForm.handleSubmit(onLogin)}
+      >
+        <div className="py-4">
+          <label
+            className="block mb-4 font-normal px-2 text-black text-3xl"
+            htmlFor="username"
           >
-            {isLoading && <CircularLoadingEffectForButton />}
-            Sign in
-        </button>
+            User ID
+          </label>
+          <input
+            className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
+            type="email"
+            required
+            placeholder="Enter Email Id or Mobile Number"
+            {...objForm.register("userID")}
+          />
+        </div>
+        <div className="py-8">
+          <label
+            className="block mb-4 font-normal px-2 text-black text-3xl"
+            htmlFor="username"
+          >
+            Password
+          </label>
+          <input
+            required
+            className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
+            type="password"
+            placeholder="Enter 6 Digit Password"
+            {...objForm.register("password")}
+          />
+        </div>
+        <div className="xs:py-6 py-10">
+          <h1 className="text-primary-lightDark font-bold text-center text-3xl">
+            <Link href={"/forgetpassword"}>Forgot Password?</Link>
+          </h1>
+          <div className="w-full text-center pb-8">
+            <button
+              type="submit"
+              className={`${isLoading && "opacity-20"
+                } border py-4 px-14 text-3xl xs:mt-4 md:my-16 btnHoverEffect  text-white text-center`}
+            >
+              {isLoading && <CircularLoadingEffectForButton />}
+              Login
+            </button>
+          </div>
+          <div className="text-black text-3xl text-center font-semibold">
+            <Link href={"/registration"} className="hover:text-secondary-main">
+              New User? Create An Account
+              <FontAwesomeIcon size="sm" icon={faAngleDoubleRight} />
+            </Link>
+          </div>
+        </div>
       </form>
-    </>
+    </div>
   );
 }

@@ -46,7 +46,7 @@ export default function Products() {
 
   return (
     <>
-      <section id="products" className="team_area bg-white pb-platinum18 pt-platinum18 platinumLg:pt-platinum120 platinumLg:pb-platinum120">
+      <section id="team" className="team_area bg-white pb-platinum18 pt-platinum18 platinumLg:pt-platinum120 platinumLg:pb-platinum120">
         <div className="container">
           <div className="flex items-center justify-center">
             <div className="w-full">
@@ -63,13 +63,13 @@ export default function Products() {
                   {lstProduct.map((item, index) => (
                     <div className="w-full" key={index}>
                       <div className={`${styles.single_team_item} mx-auto group`}>
-                        <div className={`mx-platinum3 ${styles.single_team} hover:shadow-lg transition-all duration-300 ease-in`}>
-                          <div className={`${styles.team_image} w-full h-full min-h-[300px] max-h-[300px] relative`}>
-                            <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/product/${item.product_image}`} alt="team" className="w-full max-h-[300px] min-h-[300px] h-full object-cover object-center align-middle" />
+                        <div className={`mx-platinum3 ${styles.single_team} hover:shadow-lg`}>
+                          <div className={`${styles.team_image} relative`}>
+                            <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/product/${item.product_image}`} alt="team" className="w-full" />
                           </div>
                           <div className="team_content py-platinum5 px-platinum8 relative ">
                             <h4 className="team_name"><a href="#" className="text-black group-hover:text-platinum-theme-color">{Utils.getContent(item.product_name)}</a></h4>
-                            <p className="mt-platinum2 transition-all duration-300 group-hover:text-platinum-theme-color overflow-y-auto max-h-[170px] min-h-[170px] h-full">{Utils.getContent(item.product_desc)}</p>
+                            <p className="mt-platinum2 transition-all duration-300 group-hover:text-platinum-theme-color">{Utils.getContent(item.product_desc)}</p>
                             <p className="mt-platinum2 font-bold transition-all duration-300 group-hover:text-platinum-theme-color">{`Rs. ${Utils.getContent(item.product_price)}`}</p>
                           </div>
                         </div>

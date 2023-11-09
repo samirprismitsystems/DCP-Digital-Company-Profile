@@ -1,7 +1,8 @@
+import Utils from "@/services/Utils";
 import { INavigationMenu } from "@/types/commonTypes";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function NavigationMenu({
   lstNavigationMenu,
@@ -9,38 +10,9 @@ export default function NavigationMenu({
 }: {
   lstNavigationMenu: INavigationMenu[];
   isNavigate?: boolean;
-  activeSection?: string;
 }) {
-  const [activeSection, setActiveSection] = useState<any>('home');
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
-
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const sectionOffsets: any = {
-      heroSection: 0,
-      digitalFeatures: 1500,
-      getInTouch: 4000,
-    };
-
-    let active = null;
-    for (const section in sectionOffsets) {
-      if (scrollTop >= sectionOffsets[section]) {
-        active = section;
-      }
-    }
-
-    setActiveSection(active);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-
   return (
     <>
       <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -50,7 +22,9 @@ export default function NavigationMenu({
               <a
                 key={index}
                 href={`${isNavigate ? item.link : "#"}`}
-                className={`${activeSection === item.link ? 'landingPageActive' : ''} text-[2.0rem] block px-2 py-3 hover:text-primary-light font-[500]`}
+                className={`text-[2.0rem] block px-2 py-3 ${
+                  item.id === selectedIndex ? "text-secondary-main" : "text-secondary-greyDark"
+                } hover:text-primary-light font-[500]`}
                 aria-current="page"
                 onClick={(event: any) => {
                   if (isNavigate) {
@@ -58,13 +32,8 @@ export default function NavigationMenu({
                     return null;
                   }
                   event.preventDefault();
-                  const element: any = document.getElementById(item.link);
-                  if (element) {
-                    window.scrollTo({
-                      top: element.offsetTop ? element.offsetTop - 80 : 0,
-                      behavior: "smooth",
-                    });
-                  }
+                  setSelectedIndex(item.id);
+                  Utils.scrollToView(item.link);
                 }}
               >
                 {item.name}
@@ -74,7 +43,7 @@ export default function NavigationMenu({
             <Link
               href="/login"
               target="_blank"
-              className="border py-[1rem] px-[2.4rem] btnHoverEffect  text-white block  text-center"
+              className="border py-2 px-9 btnHoverEffect  text-white block  text-center"
             >
               Login
             </Link>

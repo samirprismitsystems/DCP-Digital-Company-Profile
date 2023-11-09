@@ -54,16 +54,25 @@ export default function FooterTopContent() {
     <section className="container xs:pt-24 pt-16 pb-16">
       <div className="row ">
         <MainScrollAnimation>
-          <img src="/footerLogo.png" alt="footerLogo.png" className="mx-auto" />
+          <div className="text-center  font-bold font-600">
+            <div className="text-[4.6rem]">
+              <Link href="/" className="text-white">
+                {objSetting.siteTitle || "N/A"}
+              </Link>
+            </div>
+            <h4 className="text-[2.2rem] font-600   text-white">
+              {objSetting.siteDesc || "N/A"}
+            </h4>
+          </div>
           <div className="xs:w-[65%] sm:w-2/5 md:w-1/4 m-auto xs:pt-12 pt-16">
-            <ul className="flex lg:justify-center sm:justify-evenly xs:justify-evenly items-center md:space-x-8">
+            <ul className="flex lg:justify-center sm:justify-evenly xs:justify-between items-center md:space-x-8">
               <Link
                 href={`${objSetting.facebook || "#"}`}
                 target="_blank"
-                className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark  h-20 w-20 "
+                className="group border hover:border-primary-lightDark hover:cursor-pointer group  justify-center items-center flex align-middle rounded-[50%] bg-white hover:bg-secondary-dark h-20 w-20 "
               >
                 <FontAwesomeIcon
-                  className="xs:w-[20px] xs:h-[20px] lg:w-[26px] md:h-[26px] group-hover:text-white text-center text-secondary-main text-[3rem]"
+                  className="w-[30px] h-[30px] group-hover:text-white text-center text-secondary-main text-[3rem]"
                   icon={faFacebookF}
                 />
               </Link>
@@ -73,7 +82,7 @@ export default function FooterTopContent() {
                 className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 "
               >
                 <FontAwesomeIcon
-                  className="hover:text-white xs:w-[20px] xs:h-[20px] lg:w-[26px] md:h-[26px] group-hover:text-white text-center bg-transparent text-secondary-main text-[3rem]"
+                  className="hover:text-white w-[30px] h-[30px] group-hover:text-white text-center bg-transparent text-secondary-main text-[3rem]"
                   icon={faInstagram}
                 />
               </Link>
@@ -83,7 +92,7 @@ export default function FooterTopContent() {
                 className="hover:cursor-pointer hover:bg-secondary-dark group border hover:border-primary-lightDark justify-center items-center flex align-middle rounded-[50%] bg-white h-20 w-20 "
               >
                 <FontAwesomeIcon
-                  className="hover:text-white xs:w-[20px] xs:h-[20px] lg:w-[26px] md:h-[26px] group-hover:text-white text-center text-secondary-main text-[3rem]"
+                  className="hover:text-white w-[30px] h-[30px] group-hover:text-white text-center text-secondary-main text-[3rem]"
                   icon={faLinkedinIn}
                 />
               </Link>

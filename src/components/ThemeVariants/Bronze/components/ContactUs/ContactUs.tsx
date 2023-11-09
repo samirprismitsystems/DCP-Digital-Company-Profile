@@ -1,4 +1,3 @@
-import Map from "@/components/ThemeVariants/Gold/Map/Map";
 import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
@@ -154,49 +153,57 @@ export default function ContactUs() {
                         <FontAwesomeIcon icon={faChevronRight} className="relative ml-4 text-3xl text-[2rem] text-white" />
                     </button>
                 </form>
-                <div className="container pt-[64px] pb-[64px] contactCardsForBronze">
-                    <div className="mx-auto w-full pt-10 sm:w-3/4 flex flex-col lg:flex-row xs:space-y-5 lg:space-y-0 lg:space-x-5">
-                        <div
-                            className="w-full transition-all duration-300 ease-in border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
-                        >
-                            <div className="flex items-center">
-                                <FontAwesomeIcon icon={faPhone} className="text-[2rem] text-gray-400" />
-                                <p className="pl-4 font-body font-semibold uppercase text-gray-400 text-[1.8rem] tracking-wide">
-                                    My Phone
-                                </p>
-                            </div>
-                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
-                                {`+91 ${Utils.getContent(objCompany.company_contact)}`}
+                <div className="flex flex-col pt-16 lg:flex-row">
+                    <div
+                        className="w-full border-l-2 border-t-2 border-r-2 border-b-2 border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
+                    >
+                        <div className="flex items-center">
+                            <FontAwesomeIcon icon={faPhone} className="text-[2rem] text-gray-400" />
+                            <p className="pl-4 font-body font-semibold uppercase text-gray-400 text-[1.8rem] tracking-wide">
+                                My Phone
                             </p>
                         </div>
-                        <div
-                            className="w-full transition-all duration-300 ease-in border hover:shadow-md  border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
-                        >
-                            <div className="flex items-center">
-                                <FontAwesomeIcon icon={faEnvelope} className="text-[2rem] text-gray-400 " />
-                                <p className="pl-4 font-body font-semibold uppercase text-gray-400 text-[1.8rem] tracking-wide">
-                                    My Email
-                                </p>
-                            </div>
-                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
-                                {Utils.getContent(objCompany.company_email)}
+                        <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[2rem]">
+                            {`+91 ${Utils.getContent(objCompany.company_contact)}`}
+                        </p>
+                    </div>
+                    <div
+                        className="w-full border-l-2 border-t-0 border-r-2 border-b-2 border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3 lg:border-l-0 lg:border-t-2"
+                    >
+                        <div className="flex items-center">
+                            <FontAwesomeIcon icon={faEnvelope} className="text-[2rem] text-gray-400 " />
+                            <p className="pl-4 font-body font-semibold uppercase text-gray-400 text-[1.8rem] tracking-wide">
+                                My Email
                             </p>
                         </div>
-                        <div
-                            className="w-full transition-all duration-300 ease-in border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
-                        >
-                            <div className="flex items-center">
-                                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-[2rem] text-gray-400 " />
-                                <p className="pl-4 font-body font-semibold uppercase text-gray-400 text-[1.8rem] tracking-wide">
-                                    My Address
-                                </p>
-                            </div>
-                            <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
-                                {Utils.getContent(objCompany.address)}
+                        <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[2rem]">
+                            {Utils.getContent(objCompany.company_email)}
+                        </p>
+                    </div>
+                    <div
+                        className="w-full border-l-2 border-t-0 border-r-2 border-b-2 border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3 lg:border-l-0 lg:border-t-2"
+                    >
+                        <div className="flex items-center">
+                            <FontAwesomeIcon icon={faMapMarkerAlt} className="text-[2rem] text-gray-400 " />
+                            <p className="pl-4 font-body font-semibold uppercase text-gray-400 text-[1.8rem] tracking-wide">
+                                My Address
                             </p>
                         </div>
+                        <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[2rem]">
+                            {Utils.getContent(objCompany.address)}
+                        </p>
                     </div>
                 </div>
+            </div>
+            <div className="h-[400px]">
+                <iframe
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                        objCompany.address
+                    )}&z=15&output=embed`}
+                    width="100%"
+                    className="border-0 h-full"
+                    allowFullScreen={true}
+                />
             </div>
         </>
     )

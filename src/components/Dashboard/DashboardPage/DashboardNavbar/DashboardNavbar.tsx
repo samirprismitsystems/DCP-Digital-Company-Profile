@@ -69,7 +69,7 @@ export default function DashboardNavbar(props: {
 
   return (
     <nav
-      className={`shadow-md bg-white sticky z-[999] w-full top-0 h-[10rem] p-t-[2.3rem] p-b-[1.5rem]`}
+      className={`shadow-md bg-white sticky z-[999] w-full top-0 xl:h-[10rem] xs:h-[8.5rem] p-t-[2.3rem] p-b-[1.5rem]`}
     >
       <MobileNavbar
         isDashboard={props.lstNav ? false : true}
@@ -83,7 +83,7 @@ export default function DashboardNavbar(props: {
         isLogin={props.isLogin}
         isAdmin={AuthService.isUserAdmin()}
       />
-      <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0 h-full">
+      <div className="container-navbar custom-container xl:max-w-[1140px] xlOne:max-w-[1320px] xlTwo:max-w-[1800px] md:max-w-[720px] lg:max-w-[960px] w-full flex flex-wrap items-center justify-between pb-6 pt-6 mx-0">
         <button
           type="button"
           className="flex items-center p-t-[.3125rem] text-[1.25rem]"
@@ -104,10 +104,9 @@ export default function DashboardNavbar(props: {
             }
           }}
         >
-          {/* <span className="self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
+          <span className="self-center xs:text-[3.6rem] md:text-[4.6rem] whitespace-nowrap text-secondary-greyDark font-bold">
             DCP
-          </span> */}
-          <img src="/logo.png" alt="logo.png" className="h-24" />
+          </span>
         </button>
         {!(props.isLogin && props.lstNav) && (
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">

@@ -3,15 +3,12 @@ import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { createNewAccountSchema } from "@/services/forms/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useRouter } from "next/router";
 
 export default function RegistrationForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
   const objForm = useForm({
     resolver: yupResolver(createNewAccountSchema),
   });
@@ -31,16 +28,6 @@ export default function RegistrationForm() {
       io.append("contact_no", data.mobile);
 
       const res = await ApiService.userRegistration(io);
-      if (!res.error) {
-        objForm.reset({
-          firstName: '',
-          lastName: '',
-          email: '',
-          confirmPassword: '',
-          mobile: 0
-        })
-        router.push('/login');
-      }
       if (res.error) {
         throw new Error(res.message);
       }
@@ -55,92 +42,120 @@ export default function RegistrationForm() {
   return (
     <>
       <form
+        className="sm:px-16 md:w-3/4 xl:w-4/5 md:m-auto"
         onSubmit={objForm.handleSubmit(onRegister)}
       >
-        <div className="flex flex-start items-center justify-center gap-x-2">
-          <div className="flex-1">
-              <label htmlFor="first name" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">First Name</label>
-              <input 
+        <div className="py-4 grid grid-cols-2 xs:grid-cols-1 gap-4 items-center">
+          <div className="grid  xs:grid-cols-1 xl:grid-cols-2">
+            <div className="py-1">
+              <label
+                className="block mb-4 font-normal px-2 text-black text-3xl"
+                htmlFor="username"
+              >
+                First Name
+              </label>
+              <input
+                required
+                className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
                 type="text"
-                id="first name" 
-                className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="first name" 
-                required 
+                placeholder="Enter Your First Name"
                 {...objForm.register("firstName")}
               />
-          </div>
-          <div className="flex-1">
-              <label htmlFor="last name" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">Last Name</label>
-              <input 
+            </div>
+            <div className="py-1">
+              <label
+                className="block mb-4 font-normal px-2 text-black text-3xl"
+                htmlFor="username"
+              >
+                Last Name
+              </label>
+              <input
+                required
+                className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
                 type="text"
-                id="last name" 
-                className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="last name" 
-                required 
+                placeholder="Enter Your Last Name"
                 {...objForm.register("lastName")}
               />
+            </div>
           </div>
-        </div>
-        <div>
-            <label htmlFor="email" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">Your email</label>
-            <input 
+          <div className="py-1">
+            <label
+              className="block mb-4 font-normal px-2 text-black text-3xl"
+              htmlFor="username"
+            >
+              Email
+            </label>
+            <input
+              required
+              className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
               type="email"
-              id="email" 
-              className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              placeholder="name@company.com" 
-              required 
+              placeholder="Enter Your Email"
               {...objForm.register("email")}
             />
-        </div>
-        <div>
-            <label htmlFor="mobile" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">Mobile No.</label>
-            <input 
-              type="tel"
-              pattern="[0-9]{10}"
-              id="mobile" 
-              className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              placeholder="123456789" 
-              required 
+          </div>
+          <div className="py-1">
+            <label
+              className="block mb-4 font-normal px-2 text-black text-3xl"
+              htmlFor="username"
+            >
+              Mobile No <span className="text-red-600 text-4xl">*</span>
+            </label>
+            <input
+              required
+              className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
+              type="number"
+              placeholder="Enter Your Mobile Number"
               {...objForm.register("mobile")}
             />
-        </div>
-        <div>
-            <label className="block mb-3 text-2xl md:text-3xl  font-medium text-secondary-main dark:text-white">Password</label>
-            <input 
+          </div>
+          <div className="py-1">
+            <label
+              className="block mb-4 font-normal px-2 text-black text-3xl"
+              htmlFor="username"
+            >
+              Create Your Password{" "}
+              <span className="text-red-600 text-4xl">*</span>
+            </label>
+            <input
+              required
+              className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
               type="password"
+              placeholder="Enter 6 Digit Password"
               {...objForm.register("createPassword")}
-              id="password" 
-              placeholder="••••••••" 
-              className="bg-gray-50 mb-5 border border-cyan-700 text-cyan-700 focus-visible:outline-none text-2xl md:text-3xl rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              required 
             />
-        </div>
-        <div>
-            <label className="block mb-3 text-2xl md:text-3xl  font-medium text-secondary-main dark:text-white">Confirm Password</label>
-            <input 
+          </div>
+          <div className="py-1">
+            <label
+              className="block mb-4 font-normal px-2 text-black text-3xl"
+              htmlFor="username"
+            >
+              Confirm Password <span className="text-red-600 text-4xl">*</span>
+            </label>
+            <input
+              required
+              className="bg-transparent border-b hover:border-b-black w-full text-primary-light placeholder:text-info-main mr-3 py-1 px-2 leading-tight focus:outline-none text-3xl"
               type="password"
+              placeholder="Enter 6 Digit Password"
               {...objForm.register("confirmPassword")}
-              id="confirm password" 
-              placeholder="••••••••" 
-              className="bg-gray-50 mb-5 border border-cyan-700 text-cyan-700 focus-visible:outline-none text-2xl md:text-3xl rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              required 
             />
+          </div>
+          {objForm.formState.errors.confirmPassword && (
+            <span className="text-red-600 text-2xl font-normal">
+              {objForm.formState.errors.confirmPassword.message}
+            </span>
+          )}
         </div>
-        {objForm.formState.errors.confirmPassword && (
-          <span className="text-red-600 text-2xl font-normal">
-            {objForm.formState.errors.confirmPassword.message}
-          </span>
-        )}
-        <button 
-          type="submit"
-          className="w-full text-white bg-secondary-main mt-3 sm:text-2xl text-3xl mb-5 hover:bg-secondary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+        <div className="w-full text-center">
+          <button
+            type="submit"
+            className={` ${
+              isLoading && "opacity-20"
+            } border py-4 px-14 text-3xl my-8 btnHoverEffect  text-white text-center`}
           >
             {isLoading && <CircularLoadingEffectForButton />}
             Sign Up
-        </button>
-        <p className="font-light text-2xl md:text-3xl mt-5">
-          Go Back To Login? <Link href="/login" className="font-medium text-secondary-main hover:underline text-2xl md:text-3xl ">Login</Link>
-        </p>
+          </button>
+        </div>
       </form>
     </>
   );

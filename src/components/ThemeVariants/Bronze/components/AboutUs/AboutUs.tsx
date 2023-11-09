@@ -58,7 +58,7 @@ END:VCARD`;
 
     return (
         <>
-            <div className="container pt-[64px] px-[10px] md:pt-[80px]" >
+            <div className="container py-[64px] px-[10px] md:py-[80px]" >
                 <h2
                     className="font-header text-[2.5rem] text-center font-header font-semibold uppercase text-bronze-primary sm:text-5xl lg:text-6xl"
                 >

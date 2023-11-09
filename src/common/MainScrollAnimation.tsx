@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimationOnScroll } from "react-animation-on-scroll";
+import ScrollAnimation from "react-animate-on-scroll";
 
 export default function MainScrollAnimation(props: any) {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -25,10 +25,10 @@ export default function MainScrollAnimation(props: any) {
   }, [scrollPosition]);
 
   return (
-    <AnimationOnScroll
+    <ScrollAnimation
       animateIn={scrollDirection === "down" ? "animate__fadeInUp" : "none"}
     >
       {props.children}
-    </AnimationOnScroll>
+    </ScrollAnimation>
   );
 }

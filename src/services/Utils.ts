@@ -32,12 +32,12 @@ class Utils {
     });
   }
 
-  static scrollToView(id: string, offsetValue?: number) {
+  static scrollToView(id: string) {
     if (typeof window !== "undefined") {
       const element: any = document.getElementById(id);
       if (element) {
         window.scrollTo({
-          top: element.offsetTop ? element.offsetTop - (offsetValue || 204) : 0,
+          top: element.offsetTop ? element.offsetTop - 204 : 0,
           behavior: "smooth",
         });
       }

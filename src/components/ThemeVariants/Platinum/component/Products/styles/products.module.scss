@@ -38,6 +38,13 @@
 
 .team_image {
   height: 100%;
+  position: relative;
+  img {
+    max-height: 260px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
   .social {
     li {
       margin-top: 16px;

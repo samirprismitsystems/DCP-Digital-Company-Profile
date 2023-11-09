@@ -1,49 +1,10 @@
 import { ThemeContextApi } from '@/pages/[slug]';
 import Utils from '@/services/Utils';
 import { UPLOAD_IMAGE_URI } from '@/services/config';
-import dynamic from 'next/dynamic';
-import { useContext, useEffect, useState } from 'react';
-const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
-    ssr: false,
-});
+import { useContext } from 'react';
 
-/* eslint-disable react/no-unescaped-entities */
 export default function Gallery() {
     const lstGallery = useContext(ThemeContextApi).portfolio;
-
-    const [slidesToShow, setSlidesToShow] = useState<number>(1);
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 620) {
-                setSlidesToShow(1);
-            } else if (window.innerWidth < 950) {
-                setSlidesToShow(2);
-            } else if (window.innerWidth < 2000) {
-                setSlidesToShow(3);
-            } else {
-                setSlidesToShow(3);
-            }
-        };
-
-        handleResize();
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
-    const options = {
-        loop: true,
-        items: slidesToShow,
-        autoplay: false,
-        dots: true,
-        margin: 15,
-        nav: false,
-        autoplayTimeout: 3000,
-        smartSpeed: 1100,
-    };
 
     return (
         <>
@@ -60,8 +21,10 @@ export default function Gallery() {
                     Here's what We have done with the past
                 </h3>
 
-                <OwlCarousel className="owl-carousel owl-theme" {...options}>
-                    {lstGallery && lstGallery.map((item: any, index: number) => (
+                <div
+                    className="mx-auto grid w-full grid-cols-1 gap-8 pt-12 sm:w-3/4 md:gap-10 lg:w-full lg:grid-cols-2"
+                >
+                    {lstGallery && lstGallery.map((item, index: number) => (
                         <div
                             key={index}
                             className="mx-auto w-full relative h-[300px] transform transition-all hover:scale-105 md:mx-0"
@@ -73,7 +36,7 @@ export default function Gallery() {
                             />
                         </div>
                     ))}
-                </OwlCarousel>
+                </div>
             </div>
         </>
     )

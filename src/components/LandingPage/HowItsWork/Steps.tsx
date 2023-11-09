@@ -33,7 +33,7 @@ export default function Steps(props: IStepsProps) {
                 {props.title}
               </h1>
             </div>
-            <p className="text-left pt-6 text-primary-main text-[1.8rem]">
+            <p className="text-left pt-6 text-white text-[1.8rem]">
               {props.desc}
             </p>
           </div>

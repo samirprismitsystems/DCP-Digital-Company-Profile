@@ -18,8 +18,8 @@ export default function Review() {
         loop: true,
         items: 1,
         autoplay: false,
-        dots: false,
-        nav: true,
+        dots: true,
+        nav: false,
         autoplayTimeout: 3000,
         smartSpeed: 1100,
     };
@@ -33,7 +33,7 @@ export default function Review() {
                     {lstTestimonial.length > 0 && (
                         <OwlCarousel className="owl-carousel owl-theme" {...options}>
                             {lstTestimonial.map((item: ITestimonial, index: number) => (
-                                <div className="py-4 px-[5rem] w-full flex flex-col items-start" key={index}>
+                                <div className="py-4 px-4 w-full flex flex-col items-start" key={index}>
                                     <h5 className="text-white font-semibold text-[1.8rem]">
                                         {item.client_name || "N/A"}
                                     </h5>

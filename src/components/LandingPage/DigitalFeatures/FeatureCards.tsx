@@ -10,13 +10,7 @@ export default function FeatureCards(props: IFeatureCardsProps) {
       {lstFeatures.map((item, index) => {
         if (item.iconPack === props.logoText) {
           return (
-            
-            <div
-              style={{
-                backgroundColor: "rgba(80, 196, 211, 0.102)",
-              }}
-              className="iconBox hover:cursor-pointer hover:border hover:border-primary-lightDark border border-transparent h-full py-4 rounded-lg  text-center relative"
-              key={index}>
+            <div key={index} className="font-normal">
               {item.icon}
             </div>
           );

@@ -16,9 +16,13 @@ const  Layout = ({ children }: ILayoutProps ) => {
     const token = AuthService.getToken();
     
     useEffect(() => {
+<<<<<<< HEAD
         setIsLoading(false);
             setIsUser(true);
         if(pathname === '/' || pathname === '/[slug]' || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]'){
+=======
+        if(pathname === '/' || pathname === '/[slug]'){
+>>>>>>> parent of a29d01f (add update new code 09/11/2023)
             setIsLoading(false);
             setIsUser(true);
         }
@@ -59,8 +63,13 @@ const  Layout = ({ children }: ILayoutProps ) => {
     if (isUser === true && !isLoading) {
         return children;
     }
+<<<<<<< HEAD
     
     if(!isUser && !isLoading){
+=======
+
+    if(!isLoading){
+>>>>>>> parent of a29d01f (add update new code 09/11/2023)
         return <LoginPage />;
     }
 

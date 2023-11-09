@@ -173,7 +173,11 @@ export default function AdminDashboardLayout({ children }: any) {
         <link
           id="favicon"
           rel="shortcut icon"
+<<<<<<< HEAD
           href="/logo.png"
+=======
+          href="/revenue.png"
+>>>>>>> parent of a29d01f (add update new code 09/11/2023)
           sizes="any"
         />
         <title>

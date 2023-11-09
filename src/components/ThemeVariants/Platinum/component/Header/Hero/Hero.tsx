@@ -52,7 +52,7 @@ export default function Hero() {
                                 <p className="mt-platinum8 platinumLg:mr-platinum8">{Utils.getContent(objItem.company_desc)}</p>
                                 <div className="hero_btn mt-platinum10">
                                     <button onClick={()=>{
-                                        Utils.scrollToView('feature')
+                                        Utils.scrollToView('services')
                                     }} className={styles.mainBtn} type="button">See More</button>
                                 </div>
                             </div>

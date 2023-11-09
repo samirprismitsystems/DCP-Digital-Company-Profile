@@ -6,13 +6,13 @@ export const lstNavigation = [
   },
   {
     index: 1,
-    name: "Services",
-    link: "services",
+    name: "About",
+    link: "about",
   },
   {
     index: 2,
-    name: "Products",
-    link: "products",
+    name: "Service",
+    link: "services",
   },
   {
     index: 3,

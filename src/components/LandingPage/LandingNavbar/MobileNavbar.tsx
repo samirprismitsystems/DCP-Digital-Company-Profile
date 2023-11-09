@@ -75,24 +75,7 @@ export default function MobileNavbar({
     }
 
     setSelectedIndex(item.id);
-    // Utils.scrollToView(item.link);
-    if (item.link == 'getInTouch'){
-      const element: any = document.getElementById(item.link);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop ? element.offsetTop - 120 : 0,
-          behavior: "smooth",
-        });
-      }
-    }else{
-      const element: any = document.getElementById(item.link);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop ? element.offsetTop - 80 : 0,
-          behavior: "smooth",
-        });
-      }
-    }
+    Utils.scrollToView(item.link);
     toggle();
   };
 
@@ -129,8 +112,9 @@ export default function MobileNavbar({
                     toggle();
                   }
                 }}
-                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${0 === selectedIndex ? "text-primary-lightDark" : "text-white"
-                  }`}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  0 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
                 aria-current="page"
               >
                 {`Hi, ${AuthService.getUserName()}`}
@@ -142,8 +126,9 @@ export default function MobileNavbar({
                   router.push("/login");
                   return null;
                 }}
-                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${1 === selectedIndex ? "text-primary-lightDark" : "text-white"
-                  }`}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  1 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
                 aria-current="page"
               >
                 Logout
@@ -167,8 +152,9 @@ export default function MobileNavbar({
                   }
                   toggle();
                 }}
-                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${1 === selectedIndex ? "text-primary-lightDark" : "text-white"
-                  }`}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  1 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
                 aria-current="page"
               >
                 {`Visit Site`}
@@ -200,8 +186,9 @@ export default function MobileNavbar({
                     toggle();
                   }
                 }}
-                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${2 === selectedIndex ? "text-primary-lightDark" : "text-white"
-                  }`}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  2 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
                 aria-current="page"
               >
                 {`Hi, ${AuthService.getUserName()}`}
@@ -213,8 +200,9 @@ export default function MobileNavbar({
                   router.push("/login");
                   return null;
                 }}
-                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${3 === selectedIndex ? "text-primary-lightDark" : "text-white"
-                  }`}
+                className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                  3 === selectedIndex ? "text-primary-lightDark" : "text-white"
+                }`}
                 aria-current="page"
               >
                 Logout
@@ -239,10 +227,11 @@ export default function MobileNavbar({
                         handleNavigationOperation(event, item);
                       }}
                       href="#"
-                      className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${item.id === selectedIndex
+                      className={`py-16 text-[2.5rem] block hover:text-primary-lightDark ${
+                        item.id === selectedIndex
                           ? "text-primary-lightDark"
                           : "text-white"
-                        }`}
+                      }`}
                       aria-current="page"
                     >
                       {item.name}

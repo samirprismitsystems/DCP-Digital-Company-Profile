@@ -60,7 +60,7 @@ export default function Portfolio() {
                             {lstPortfolio.map((item, index: number) => (
                                 <div key={index} className="w-full hover:cursor-pointer">
                                     <div className="single_blog mt-platinum8 rounded-xl bg-white transition-all duration-300 overflow-hidden ">
-                                        <div className="m-platinum4 blog_image relative w-full h-full hover:shadow-xl transition-all duration-700 overflow-hidden">
+                                        <div className="m-platinum4 blog_image relative w-full h-full hover:shadow-xl">
                                             <img src={`${UPLOAD_IMAGE_URI}/${item.company_id || Utils.getCompanyID()}/portfolio/${item.portfolio_image}`} alt="blog" className="w-full rounded-xl h-full object-cover object-center max-h-[300px] min-h-[300px]" />
                                         </div>
                                     </div>
