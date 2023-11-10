@@ -11,15 +11,15 @@ export default function NavigationMenu({
   isNavigate?: boolean;
   activeSection?: string;
 }) {
-  const [activeSection, setActiveSection] = useState<any>('home');
+  const [activeSection, setActiveSection] = useState<any>('heroSection');
   const router = useRouter();
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     const sectionOffsets: any = {
       heroSection: 0,
-      digitalFeatures: 1500,
-      getInTouch: 4000,
+      digitalFeatures: 2265,
+      getInTouch: 4930,
     };
 
     let active = null;

@@ -16,8 +16,8 @@ export default function AppBar() {
             home: 0,
             product: isMobileView ? 2200 : 1080,
             service: isMobileView ? 3000 : 1880,
-            gallery: isMobileView ? 3611 : 2460,
-            contact: isMobileView ? 4520 : 3450,
+            gallery: isMobileView ? 3611 : 2768,
+            contact: isMobileView ? 4520 : 3883,
         }
 
         for (let item in sectionList) {
@@ -31,12 +31,14 @@ export default function AppBar() {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 530) {
-                setIsMobileView(true)
+
+
+            if (window.innerWidth >= 425 && window.innerWidth <= 750) {
+                setIsMobileView(false)
             }
 
-            if (window.innerWidth > 530) {
-                setIsMobileView(false)
+            if (window.innerWidth <= 425) {
+                setIsMobileView(true)
             }
 
             if (window.innerWidth < 760) {
@@ -75,7 +77,7 @@ export default function AppBar() {
                     <div className={`${styles.iconList} xs:w-full xsOne:w-2/3 md:w-full px-[2rem] flex items-center justify-end xs:flex-col md:flex-row`}>
                         {navbarList.map((item, index: number) => (
                             <div key={index} onClick={() => {
-                                Utils.scrollToView(item.link, isMobileView ? -40 : 80)
+                                Utils.scrollToView(item.link, isMobileScreen ? -40 : 80)
                                 if (isMobileScreen)
                                     toggle();
                             }} className={`group hover:cursor-pointer md:px-[0.2em] md:py-0 xs:py-8 md:py-auto xs:w-full md:w-auto ${styles.iconListDiv} flex items-center justify-center flex-col px-8 border-b border-dashed hover:border-b-gold-primary  ${activeSection === item.link ? 'border-b-gold-primary' : "border-b-black"}`}>
