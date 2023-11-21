@@ -5,10 +5,11 @@ import { faEnvelope, faMapMarkerAlt, faPhone } from '@fortawesome/free-solid-svg
 import { useContext, useEffect, useState } from 'react';
 import Map from '../Map/Map';
 import ContactCard from './ContactCard/ContactCard';
-import FollowUs from './FollowUs/FollowUs';
 
 interface IContactUsProps {
     child?: any
+    placeHolderColor?: string
+    submitButtonStyle?: string
 }
 
 export default function ContactUs(props: IContactUsProps) {
@@ -110,12 +111,12 @@ export default function ContactUs(props: IContactUsProps) {
                                         setFieldValue({
                                             name: e.target.value
                                         })
-                                    }} value={objUser.name} required type="text" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Your Name' />
+                                    }} value={objUser.name} required type="text" className={` border border-black border-solid p-6 text-[1.5rem] font-medium ${props.placeHolderColor && props.placeHolderColor}`} placeholder='Your Name' />
                                     <input onChange={(e: any) => {
                                         setFieldValue({
                                             email: e.target.value
                                         })
-                                    }} value={objUser.email} required type="email" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Email Address' />
+                                    }} value={objUser.email} required type="email" className={`border border-black border-solid p-6 text-[1.5rem] font-medium ${props.placeHolderColor && props.placeHolderColor}`} placeholder='Email Address' />
                                 </div>
                                 <div className='grid xs:grid-cols-1  mt-8 xs:gap-6 md:gap-16'>
                                     <input onChange={(e: any) => {
@@ -125,17 +126,17 @@ export default function ContactUs(props: IContactUsProps) {
                                                 mobile: userInput,
                                             });
                                         }
-                                    }} required value={objUser.mobile || ""} type="number" className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Mobile Number' />
+                                    }} required value={objUser.mobile || ""} type="number" className={`border border-black border-solid p-6 text-[1.5rem] font-medium ${props.placeHolderColor && props.placeHolderColor} border border-black border-solid p-6 text-[1.5rem] font-medium`} placeholder='Mobile Number' />
                                 </div>
                                 <div className='grid grid-cols-1 mt-8'>
                                     <textarea onChange={(e: any) => {
                                         setFieldValue({
                                             message: e.target.value
                                         })
-                                    }} value={objUser.message} rows={15} className='border border-black border-solid p-6 text-[1.5rem] font-medium' placeholder='Write your message here...' />
+                                    }} value={objUser.message} rows={15} className={`border border-black border-solid p-6 text-[1.5rem] font-medium ${props.placeHolderColor && props.placeHolderColor} border border-black border-solid p-6 text-[1.5rem] font-medium`} placeholder='Write your message here...' />
                                 </div>
                                 <div className='w-full flex xs:justify-center xs:items-center lg:items-end lg:justify-start mt-4'>
-                                    <button type='submit' className='hover:bg-yellow-300 hover:text-gold-primary transition-all duration-300 bg-gold-primary text-white py-4 text-[1.6rem] font-medium px-8'>Send Message</button>
+                                    <button type='submit' className={`${props.submitButtonStyle ? props.submitButtonStyle : "bg-gold-primary text-white hover:bg-yellow-300 hover:text-gold-primary"} transition-all duration-300  py-4 text-[1.6rem] font-medium px-8`}>Send Message</button>
                                 </div>
                             </form>
                         </div>

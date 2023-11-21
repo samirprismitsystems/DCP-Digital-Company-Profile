@@ -200,6 +200,15 @@ class Utils {
   static getContent(data?: any) {
     return data ? data : "N/A";
   }
+
+  static getCompressContent(data: string) {
+    const result = data;
+    if (result && result.length >= 95) {
+      return `${result.slice(0, 95)}...`;
+    } else {
+      return result;
+    }
+  }
 }
 
 export default Utils;

@@ -1,6 +1,11 @@
+import { ThemeContextApi } from '@/pages/[slug]';
+import Utils from '@/services/Utils';
+import { UPLOAD_IMAGE_URI } from '@/services/config';
+import Head from 'next/head';
 import { useContext, useEffect } from 'react';
 import AboutUs from './AboutUs/AboutUs';
 import AppBar from './Appbar/AppBar';
+import BottomToTop from './BottomToTop/BottomToTop';
 import ContactUs from './ContactUs/ContactUs';
 import Footer from './Footer/Footer';
 import Gallery from './Gallery/Gallery';
@@ -9,11 +14,6 @@ import Product from './Product/Product';
 import Review from './Review/Review';
 import Service from './Service/Service';
 import ShareCards from './ShareCards/ShareCards';
-import BottomToTop from './BottomToTop/BottomToTop';
-import Head from 'next/head';
-import { ThemeContextApi } from '@/pages/[slug]';
-import Utils from '@/services/Utils';
-import { UPLOAD_IMAGE_URI } from '@/services/config';
 
 export default function Gold() {
     const objCompany = useContext(ThemeContextApi).company;
