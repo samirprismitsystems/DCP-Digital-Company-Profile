@@ -1,5 +1,6 @@
 import { ThemeContextApi } from "@/pages/[slug]";
 import { useContext, useEffect } from "react";
+import Footer from "../../Bronze/components/Footer/Footer";
 import ContactUs from "../../Gold/ContactUs/ContactUs";
 import GetFeedBack from "../../Gold/GetFeedBack/GetFeedBack";
 import Header from "./Header/Header";
@@ -8,7 +9,6 @@ import Portfolio from "./Portfolio/Portfolio";
 import Products from "./Products/Product";
 import Services from "./Services/Services";
 import Testimonial from "./Testimonial/Testimonial";
-import Footer from "../../Bronze/components/Footer/Footer";
 
 const Silver = () => {
     const objCompany = useContext(ThemeContextApi).company;
@@ -28,7 +28,7 @@ const Silver = () => {
             <Testimonial />
             <GetFeedBack />
             <ContactUs submitButtonStyle={'bg-silver-Blueviolet text-white'} placeHolderColor={'placeholder:text-black focus-within:outline-none'} />
-            <Footer bgColor={'bg-silver-Blueviolet'}/>
+            <Footer bgColor={'bg-silver-Blueviolet'} />
         </>
     )
 }

@@ -197,6 +197,20 @@
       width: 15px;
     }
   }
+
+  *::-webkit-scrollbar {
+    width: 11px;
+    background-color: #c0bebe;
+    border: 2px solid #e4e6ef;
+  }
+  *::-webkit-scrollbar-track {
+    background-color: #e4e6ef;
+    border: 2px solid #e4e6ef;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #c0bebe;
+    border-radius: 10px;
+  }
 }
 
 .silver:not([data-scroll="0"]) .navbar {
@@ -208,5 +222,5 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
   transition: 0.4s linear;
   padding: 0px !important;
-  z-index: 3;
+  z-index: 444444;
 }

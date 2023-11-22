@@ -131,7 +131,7 @@ export default function AppBar() {
 
                             {navList.map((item, index: number) => (
                                 <li key={index} className="group pl-6 mb-12" onClick={() => {
-                                    if (item.link === 'products') {
+                                    if(item.link === 'products') {
                                         Utils.scrollToView(item.link, Md ? 40 : Sm ? 60 : 100)
                                     } else {
                                         Utils.scrollToView(item.link, 150)

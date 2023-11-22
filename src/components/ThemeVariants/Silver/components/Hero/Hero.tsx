@@ -14,7 +14,7 @@ export default function Hero() {
                         <div className='flex flex-col justify-evenly'>
                             <h1 className='text-silver-midnightblue  font-semibold text-center lg:text-start lh-120 pt-5 lg:pt-0'>{Utils.getContent(objCompany.company_name)}</h1>
                             <h3 className='text-silver-charcoal text-3xl font-normal text-center lg:text-start opacity-75 pt-5 lg:pt-0 leading-normal'>{Utils.getContent(objCompany.company_desc)}</h3>
-                            <div className='flex mt-8 items-center justify-between pt-10 lg:pt-4'>
+                            <div className='flex mt-8 items-center justify-center pt-10 lg:pt-4'>
                                 <button className="bg-silver-Blueviolet text-white text-2xl rounded-md px-12 py-6" onClick={() => {
                                     Utils.scrollToView('products', -30)
                                 }}>Learn more</button>
