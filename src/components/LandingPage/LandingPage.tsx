@@ -47,8 +47,6 @@ export default function LandingPage() {
     loadData();
   }, []);
 
-
-
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     const sectionOffsets: any = {

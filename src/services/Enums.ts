@@ -4,9 +4,9 @@ export enum USER_TYPE {
 }
 
 export enum THEME_TYPE {
-  GOLD = 40,
-  PLATINUM = 42,
-  BRONZE = 44,
-  DIAMOND = 45,
-  SILVER = 47,
+  GOLD = 'GOLD',
+  PLATINUM = 'PLATINUM',
+  BRONZE = 'BRONZE',
+  DIAMOND = 'DIAMOND',
+  SILVER = 'SILVER',
 }

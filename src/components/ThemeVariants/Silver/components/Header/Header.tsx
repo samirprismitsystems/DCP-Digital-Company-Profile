@@ -34,7 +34,7 @@ const Header = () => {
 
     return (
         <>
-            <div id='home' className="navbar">
+            <div  className="navbar">
                 <div className='container'>
                     <div className="mx-auto min-w-7xl w-full px-6 py-8 lg:px-8">
                         <div className="relative flex h-12 md:h-20 items-center justify-between">
@@ -65,7 +65,7 @@ const Header = () => {
                                                         setCurrentLink(item.href)
                                                     }}
                                                     className={classNames(
-                                                        item.href === currentLink ? 'underline-links' : 'text-slategray',
+                                                        item.href === currentLink ? 'underline-links' : 'text-silver-common',
                                                         'px-3 py-4 text-2xl md:text-3xl opacity-75 hover:opacity-100 hover:cursor-pointer'
                                                     )}
                                                 >

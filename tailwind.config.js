@@ -133,6 +133,7 @@ module.exports = {
           slategray: "#57595F",
           lightkblue: "#F6FAFF",
           grey500: "#ECECEC",
+          common:"#501b1d",
           red: "#B40000",
           gold: "#FFB900",
           darkgray: "rgba(54, 54, 54, 0.75)",

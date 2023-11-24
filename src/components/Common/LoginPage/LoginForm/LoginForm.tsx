@@ -106,8 +106,8 @@ export default function LoginForm() {
           type="submit"
           className="w-full text-white bg-secondary-main sm:text-2xl text-3xl mb-5 hover:bg-secondary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           >
-            {isLoading && <CircularLoadingEffectForButton />}
             Sign in
+            {isLoading && <CircularLoadingEffectForButton />}
         </button>
       </form>
     </>

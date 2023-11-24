@@ -2,8 +2,9 @@ import CircularLoadingEffectForButton from "@/common/CircularLoadingEffectForBut
 import MainScrollAnimation from "@/common/MainScrollAnimation";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LandingPageContextApi } from "../LandingPage";
+import { useRouter } from "next/router";
 
 interface IFormUser {
   fullName: string;
@@ -20,6 +21,18 @@ export default function GetInTouch() {
     fullName: "",
     message: "",
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    // Get the target div from the URL hash
+    const targetDivId = router.asPath.split('#')[1];
+
+    // Scroll to the target div
+    const targetDiv = document.getElementById(targetDivId);
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [router.asPath]);
 
   const handleChange = (data: any) => {
     setObjUser({

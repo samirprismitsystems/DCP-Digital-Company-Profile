@@ -170,7 +170,7 @@ export default function GetFeedBack(props: IGetFeedBackProps) {
                                 });
                             }}
                         />
-                        <button type='submit' className={`bg-silver-Blueviolet text-center transition-all duration-300  py-4 text-[1.6rem] block mx-auto font-medium px-8 c-text text-white`}>{props.buttonTitle || "Submit"}</button>
+                        <button type='submit' className={`bg-silver-common text-center transition-all duration-300  py-4 text-[1.6rem] block mx-auto font-medium px-8 c-text text-white`}>{props.buttonTitle || "Submit"}</button>
                     </form>
                 </div>
             </div>

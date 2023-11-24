@@ -23,8 +23,9 @@ export const ThemeContextApi = createContext<IPortfolioInfo>(
 export default function UserViewSection() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [result, setResult] = useState<IPortfolioInfo>({} as IPortfolioInfo);
-  const [themeID, setThemeID] = useState<number | undefined>(undefined);
+  const [themeName, setThemeName] = useState<string | undefined>(undefined);
   const isRedThemeDataChanged = useAppSelector(
     (store: RootState) => store.common.isRedThemeDataChanged
   );
@@ -38,7 +39,8 @@ export default function UserViewSection() {
         const res: IPortfolioInfo = await ApiService.getWebsiteDetails(slug);
         if (!res.error) {
           setResult(res);
-          setThemeID(parseInt(res.company.theme_id));
+          setThemeName(res.theme?.theme_name);
+          setIsLoaded(true);
           return null;
         }
 
@@ -66,35 +68,40 @@ export default function UserViewSection() {
     loadData();
   }, []);
 
+  console.log(themeName)
   const getTheme = () => {
-    if (slug !== result.company?.company_slug) {
-      return (
-        <PageNotFound />
-      );
-    } else {
-      if (themeID === THEME_TYPE.GOLD) {
-        return <Gold />
-      } else if (themeID === THEME_TYPE.PLATINUM) {
-        return <Platinum />
-      } else if (themeID === THEME_TYPE.BRONZE) {
-        return <Bronze />
-      } else if (themeID === THEME_TYPE.DIAMOND) {
-        return <Diamond />
-      } else if (themeID === THEME_TYPE.SILVER) {
-        return <Silver />
-      } else {
+    if(isLoaded){
+      if (slug !== result.company?.company_slug) {
         return (
-          <PageNotFound
-            desc={"Please select the theme from dashboard!"}
-            title="Themes Not Available!"
-            hideButton={true}
-          />
+          <PageNotFound />
         );
+      } else {
+        switch(themeName?.toUpperCase()){
+          case THEME_TYPE.GOLD:
+            return <Gold />
+          case THEME_TYPE.PLATINUM:
+            return <Platinum />
+          case THEME_TYPE.BRONZE:
+            return <Bronze />
+          case THEME_TYPE.DIAMOND:
+            return <Diamond />
+          case THEME_TYPE.SILVER:
+            return <Silver />
+          default:
+            return (
+              <PageNotFound
+                title="Theme Not Available!"
+                desc={"Please select the theme from dashboard!"}
+                hideButton={true}
+              />
+            ); 
+        }
       }
     }
   };
 
   if (isLoading) return <PageCircularLoading />;
+
   return (
     <>
       <ThemeContextApi.Provider value={result}>

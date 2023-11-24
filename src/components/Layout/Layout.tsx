@@ -10,30 +10,33 @@ interface ILayoutProps extends PropsWithChildren<any> {}
 const  Layout = ({ children }: ILayoutProps ) => {
 
     const [isUser, setIsUser] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const router = useRouter();
     const { pathname } = router;
     const token = AuthService.getToken();
     
     useEffect(() => {
-        setIsLoading(false);
-            setIsUser(true);
+        setIsLoading(true);
+        setIsUser(true);
         if(pathname === '/' || pathname === '/[slug]'){
             setIsLoading(false);
             setIsUser(true);
+            setIsLoaded(true);
         }
         else{
             const token = AuthService.getToken();
             if(!token){
                 if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
-                    router.push(pathname);
                 }else{
-                    router.push('/login');
+                    if(pathname !== "/login"){
+                        router.push('/login');
+                    }
                 }
                 setIsLoading(false);
                 setIsUser(false);
+                setIsLoaded(true);
             }else{
-                console.log("check in progress");
                 checkUserData();
             }
         }
@@ -56,18 +59,23 @@ const  Layout = ({ children }: ILayoutProps ) => {
             setTimeout(() => {
                 setIsUser(true);
                 setIsLoading(false);
+                setIsLoaded(true);
             }, 600);
-        }else{
+        }
+        else{
             setIsLoading(false);
-            router.push(pathname);
+            setIsLoaded(true);
+            if(pathname !== "/login"){
+                router.push('/login');
+            }
         }
     }
 
-    if (isUser === true && !isLoading) {
+    if (isUser === true && !isLoading && isLoaded) {
         return children;
     }
     
-    if(!isUser && !isLoading){
+    if(!isUser && !isLoading && isLoaded){
         if (pathname === "/login" || pathname === '/forgetpassword' || pathname === '/registration' || pathname === '/resetpassword/[resetpassword]') {
             return children;
         }

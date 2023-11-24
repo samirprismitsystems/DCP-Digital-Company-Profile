@@ -10,6 +10,26 @@
     "Segoe UI Symbol", "Noto Color Emoji" !important;
   font-feature-settings: normal !important;
 
+  .diamondLoading {
+    body {
+      background: #17212b;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg.loading {
+      overflow: visible;
+      width: 8rem;
+      height: 8rem;
+    }
+
+    .loading__stroke {
+      stroke-width: 0.125rem;
+    }
+  }
+
   body {
     font-family: "Inter", sans-serif !important;
     margin: 0 !important;
@@ -30,16 +50,16 @@
 
   *::-webkit-scrollbar {
     width: 11px;
-    background-color: #c0bebe ;
-    border: 2px solid #e4e6ef ;
+    background-color: #c0bebe;
+    border: 2px solid #e4e6ef;
   }
   *::-webkit-scrollbar-track {
-    background-color: #e4e6ef ;
-    border: 2px solid #e4e6ef ;
+    background-color: #e4e6ef;
+    border: 2px solid #e4e6ef;
   }
   *::-webkit-scrollbar-thumb {
-    background-color: #c0bebe ;
-    border-radius: 10px ;
+    background-color: #c0bebe;
+    border-radius: 10px;
   }
 }
 

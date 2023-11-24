@@ -34,6 +34,9 @@ export default function Bronze() {
                 <Services />
                 <Gallery />
                 <ContactUs />
+                <div className="min-h-[400px] relative">
+                    <Map height={'h-[400px] mx-[0px]'} />
+                </div>
                 <Footer />
             </div>
         </>

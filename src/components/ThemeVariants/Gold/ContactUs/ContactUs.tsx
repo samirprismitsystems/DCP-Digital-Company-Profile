@@ -10,6 +10,7 @@ interface IContactUsProps {
     child?: any
     placeHolderColor?: string
     submitButtonStyle?: string
+    removeCardsBorder?: boolean
 }
 
 export default function ContactUs(props: IContactUsProps) {
@@ -97,9 +98,9 @@ export default function ContactUs(props: IContactUsProps) {
         <section id='contact' className='py-24 bg-gold-white relative text-center block'>
             <div className="container">
                 <div className='flex xs:flex-wrap gap-y-6 lg:flex-nowrap'>
-                    <ContactCard isMobile={isMobile} title='Contact Number' value={`+91 ${objItem.company_contact}`} iconName={faPhone} />
-                    <ContactCard isMobile={isMobile} title='Email Address' value={objItem.company_email} iconName={faEnvelope} />
-                    <ContactCard isTablet={isTablet} isMobile={isMobile} title='Address' value={objItem.address} iconName={faMapMarkerAlt} />
+                    <ContactCard isRemoveBorder={props.removeCardsBorder} isMobile={isMobile} title='Contact Number' value={`+91 ${objItem.company_contact}`} iconName={faPhone} />
+                    <ContactCard href={`mailto:${objItem.company_email}`} isRemoveBorder={props.removeCardsBorder} isMobile={isMobile} title='Email Address' value={objItem.company_email} iconName={faEnvelope} />
+                    <ContactCard href={`http://maps.google.com/maps/search/?api=1&query=${objItem.address}`} isRemoveBorder={props.removeCardsBorder} isTablet={isTablet} isMobile={isMobile} title='Address' value={objItem.address} iconName={faMapMarkerAlt} />
                 </div>
                 {!props.child && (
                     <div className="grid xs:grid-cols-1 md:grid-cols-2 gap-8 pt-24">

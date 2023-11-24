@@ -27,8 +27,8 @@ const Silver = () => {
             <Portfolio />
             <Testimonial />
             <GetFeedBack />
-            <ContactUs submitButtonStyle={'bg-silver-Blueviolet text-white'} placeHolderColor={'placeholder:text-black focus-within:outline-none'} />
-            <Footer bgColor={'bg-silver-Blueviolet'} />
+            <ContactUs removeCardsBorder={true} submitButtonStyle={'bg-silver-common text-white'} placeHolderColor={'placeholder:text-black focus-within:outline-none'} />
+            <Footer bgColor={'bg-silver-common'} />
         </>
     )
 }

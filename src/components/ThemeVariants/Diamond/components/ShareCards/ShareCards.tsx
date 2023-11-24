@@ -2,6 +2,7 @@ import { ThemeContextApi } from "@/pages/[slug]";
 import Utils from "@/services/Utils";
 import { faEnvelope, faMapMarkerAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useContext } from "react";
 
 const ShareCards = () => {
@@ -19,8 +20,8 @@ const ShareCards = () => {
                         >
                             <div className="grid grid-cols-1 diamondLg:grid-cols-3 gap-4">
                                 <SingleBrand iconName={faPhone} title="Contact" value={`+91 ${Utils.getContent(objCompany.company_contact)}`} />
-                                <SingleBrand iconName={faEnvelope} title="Email" value={`${Utils.getContent(objCompany.company_email)}`} />
-                                <SingleBrand iconName={faMapMarkerAlt} title="Address" value={`${Utils.getContent(objCompany.address)}`} />
+                                <SingleBrand href={`mailto:${objCompany.company_email}`} iconName={faEnvelope} title="Email" value={`${Utils.getContent(objCompany.company_email)}`} />
+                                <SingleBrand href={`http://maps.google.com/maps/search/?api=1&query=${objCompany.address}`} iconName={faMapMarkerAlt} title="Address" value={`${Utils.getContent(objCompany.address)}`} />
                             </div>
                         </div>
                     </div>
@@ -36,20 +37,35 @@ const SingleBrand = (props: {
     value: string;
     title: string;
     iconName: any;
+    href?: string;
 }) => {
     const { value, title, iconName } = props;
 
     return (
-        <div className="mx-3 py-4 px-0 flex w-full items-center justify-center bg-[#F9FAFB] shadow-md h-full min-h-[200px] relative hover:shadow-lg dark:bg-diamond-black transition-all duration-300 ease-in">
-            <div className="h-full text-center dark:text-white px-4 flex items-center justify-center flex-col">
-                <FontAwesomeIcon icon={iconName} className="text-diamond-primary dark:text-diamond-body-color h-8 w-8 mb-4" />
-                <h3>
-                    <span className="mb-4 block text-xl font-bold text-black hover:text-diamond-primary dark:text-diamond-white dark:hover:text-diamond-primary diamondSm:text-2xl">{title}</span>
-                </h3>
-                <p className="text-base font-medium text-diamond-body-color">
-                    {value}
-                </p>
+        props.href ? (
+            <Link target="_blank" href={props.href} className="mx-3 py-4 px-0 flex w-full items-center justify-center bg-[#F9FAFB] shadow-md h-full min-h-[200px] relative hover:shadow-lg dark:bg-diamond-black transition-all duration-300 ease-in">
+                <div className="h-full text-center dark:text-white px-4 flex items-center justify-center flex-col">
+                    <FontAwesomeIcon icon={iconName} className="text-diamond-primary dark:text-diamond-body-color h-8 w-8 mb-4" />
+                    <h3>
+                        <span className="mb-4 block text-xl font-bold text-black hover:text-diamond-primary dark:text-diamond-white dark:hover:text-diamond-primary diamondSm:text-2xl">{title}</span>
+                    </h3>
+                    <p className="text-base font-medium text-diamond-body-color">
+                        {value}
+                    </p>
+                </div>
+            </Link>
+        ) : (
+            <div className="mx-3 py-4 px-0 flex w-full items-center justify-center bg-[#F9FAFB] shadow-md h-full min-h-[200px] relative hover:shadow-lg dark:bg-diamond-black transition-all duration-300 ease-in">
+                <div className="h-full text-center dark:text-white px-4 flex items-center justify-center flex-col">
+                    <FontAwesomeIcon icon={iconName} className="text-diamond-primary dark:text-diamond-body-color h-8 w-8 mb-4" />
+                    <h3>
+                        <span className="mb-4 block text-xl font-bold text-black hover:text-diamond-primary dark:text-diamond-white dark:hover:text-diamond-primary diamondSm:text-2xl">{title}</span>
+                    </h3>
+                    <p className="text-base font-medium text-diamond-body-color">
+                        {value}
+                    </p>
+                </div>
             </div>
-        </div>
+        )
     );
 };

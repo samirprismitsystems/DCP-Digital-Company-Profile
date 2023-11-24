@@ -1,9 +1,9 @@
-import Map from "@/components/ThemeVariants/Gold/Map/Map";
 import { ThemeContextApi } from "@/pages/[slug]";
 import ApiService from "@/services/ApiServices";
 import Utils from "@/services/Utils";
 import { faChevronRight, faEnvelope, faMapMarkerAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useContext, useState } from "react";
 
 export default function ContactUs() {
@@ -169,7 +169,9 @@ export default function ContactUs() {
                                 {`+91 ${Utils.getContent(objCompany.company_contact)}`}
                             </p>
                         </div>
-                        <div
+                        <Link
+                            href={`mailto:${objItem.company_email}`}
+                            target="_blank"
                             className="w-full transition-all duration-300 ease-in border hover:shadow-md  border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
@@ -181,8 +183,10 @@ export default function ContactUs() {
                             <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
                                 {Utils.getContent(objCompany.company_email)}
                             </p>
-                        </div>
-                        <div
+                        </Link>
+                        <Link
+                            href={`http://maps.google.com/maps/search/?api=1&query=${objItem.address}`}
+                            target="_blank"
                             className="w-full transition-all duration-300 ease-in border hover:shadow-md border-gray-400 px-[24px] py-[32px] sm:py-[32px] lg:w-1/3"
                         >
                             <div className="flex items-center">
@@ -194,7 +198,7 @@ export default function ContactUs() {
                             <p className="pt-4 text-left font-body text-bronze-primary font-semibold text-[1.8rem]">
                                 {Utils.getContent(objCompany.address)}
                             </p>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

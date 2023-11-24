@@ -1,7 +1,8 @@
 import ResetPasswordForm from "./ResetPasswordForm";
 import Link from "next/link";
 
-export default function ResetPassword({token }: any) {
+export default function ResetPassword() {
+
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900 h-full w-full">
@@ -14,7 +15,7 @@ export default function ResetPassword({token }: any) {
                 <h1 className="font-bold leading-tight tracking-tight text-gray-900 text-5xl mb-4 dark:text-white">
                   Reset Password
                 </h1>
-                <ResetPasswordForm token={token} />
+                <ResetPasswordForm />
               </div>
           </div>
 

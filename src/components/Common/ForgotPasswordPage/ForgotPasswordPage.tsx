@@ -94,45 +94,47 @@ export default function ForgotPasswordPage() {
             <img className="w-auto h-22" src="/logo.png" alt="logo" />
           </Link>
           <div className="w-[460px] max-w-[90%] h-auto mb-5  bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-12">
-              <h1 className="font-bold leading-tight tracking-tight text-gray-900 text-5xl mb-4 dark:text-white">
-                Forgot Password?
-              </h1>
-              <h5 className="tracking-tight text-gray-900 mb-6 mt-4">
-                Mention registered Email id
-              </h5>
-              {
-                !isSent ?
-                  <form onSubmit={objForm.handleSubmit(onSubmit)}>
+              <div className="p-6 p-12">
+                  <h1 className="font-bold leading-tight tracking-tight text-gray-900 text-5xl mb-4 dark:text-white">
+                    Forgot Password?
+                  </h1>
+                  {
+                    !isSent ?
+                    <>
+                      <h5 className="tracking-tight text-gray-900 mb-6 mt-4">
+                        Mention registered Email id
+                      </h5>
+                      <form onSubmit={objForm.handleSubmit(onSubmit)}>
+                          <div>
+                            <label htmlFor="email" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">User ID</label>
+                            <input 
+                              type="email"
+                              id="email"
+                              className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                              placeholder="Enter Email Id or Mobile Number"
+                              required 
+                              {...objForm.register("userID")}
+                            />
+                          </div>
+                          <button 
+                            type="submit"
+                            className="w-full text-white bg-secondary-main mt-3 h-[40px] sm:text-2xl text-3xl mb-3 hover:bg-secondary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            >
+                              Reset Password
+                              {isLoading && <CircularLoadingEffectForButton />}
+                          </button>
+                          <p className="font-light text-2xl md:text-3xl mt-5">
+                            Go Back To Login? <Link href="/login" className="font-medium text-secondary-main hover:underline text-2xl md:text-3xl ">Login</Link>
+                          </p>
+                        </form>
+                    </>
+                    : 
                     <div>
-                      <label htmlFor="email" className="block mb-3 text-2xl md:text-3xl font-medium text-secondary-main dark:text-white">User ID</label>
-                      <input
-                        type="email"
-                        id="email"
-                        className="bg-gray-50 border border-cyan-700 ring-black text-cyan-700	text-2xl md:text-3xl mb-5 focus-visible:outline-none rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Enter Email Id or Mobile Number"
-                        required
-                        {...objForm.register("userID")}
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full text-white bg-secondary-main mt-3 sm:text-2xl text-3xl mb-5 hover:bg-secondary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    >
-                      {isLoading && <CircularLoadingEffectForButton />}
-                      Reset Password
-                    </button>
-                    <p className="font-light text-2xl md:text-3xl mt-5">
-                      Go Back To Login? <Link href="/login" className="font-medium text-secondary-main hover:underline text-2xl md:text-3xl ">Login</Link>
-                    </p>
-                  </form>
-                  :
-                  <div>
-                    <p>If we found an eligible account associated with that username, we've sent password reset instructions to the primary email address on the account.</p>
-                    <p>Still having trouble logging in? <Link href='/'> Contact Support.</Link></p>
-                  </div>
-              }
-            </div>
+                      <p>If we found an eligible account associated with that username, we've sent password reset instructions to the primary email address on the account.</p>
+                      <p>Still having trouble logging in? <Link href='/#getInTouch' className="text-cyan-700 flex underline hover:text-secondary-dark"> Contact Support.</Link></p>
+                    </div> 
+                  }
+              </div>
           </div>
 
           <div className="flex flex-wrap space-x-10 ml-auto mr-auto justify-center mt-10">

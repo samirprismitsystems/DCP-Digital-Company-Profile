@@ -25,6 +25,7 @@
     "date-fns": "^2.30.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
+    "gsap": "^3.12.2",
     "http-proxy-middleware": "^2.0.6",
     "leaflet": "1.9.4",
     "leaflet-defaulticon-compatibility": "0.1.1",

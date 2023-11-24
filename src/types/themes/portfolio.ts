@@ -5,6 +5,7 @@ import {
   IPaymentOptions,
   IServicePageData,
   ITestimonial,
+  ITheme
 } from "../commonTypes";
 import { ICompanyCityList, ICompanyDetails } from "../companyTypes";
 import { IProduct } from "../products";
@@ -23,6 +24,7 @@ export interface IPortfolioInfo {
   service: IServicePageData[];
   social: ISocialLinks[];
   testimonial: ITestimonial[];
+  theme: ITheme;
 }
 
 export interface IHomeCareInfo {

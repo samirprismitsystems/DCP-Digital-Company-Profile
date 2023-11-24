@@ -62,7 +62,7 @@ export default function DigitalFeatures() {
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-center overflow-hidden flex-col mb-5 z-10"
+                      className="flex items-center text-center  overflow-hidden flex-col mb-5 z-10"
                     >
                       <FeatureCards logoText={item.featurelogo} />
                       <h1 className="text-[1.5rem] text-white pt-4 font-normal">

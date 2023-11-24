@@ -16,7 +16,7 @@ interface IUserReset {
   confirmPassword: string;
 }
 
-export default function ChangePasswordForm({token}: any) {
+export default function ChangePasswordForm() {
   const [objUser, setObjUser] = useState<IUserReset>();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false)
@@ -39,15 +39,20 @@ export default function ChangePasswordForm({token}: any) {
       io.append("email_id", data.email);
       io.append("cpass", data.confirmPassword);
       io.append("npass", data.confirmPassword);
-      io.append("reset_token", token);
+      io.append("reset_token", router.query.resetpassword);
 
       const res = await ApiService.resetUserPassword(io);
       if (!res.error) {
         Utils.showSuccessMessage(res.message);
         router.push('/login');
       }
-      throw new Error(res.message);
+
+      if(res.error){
+        console.log(res);
+      }
+      // throw new Error(res.message);
     } catch (ex: any) {
+      console.log(ex);
       Utils.showErrorMessage(ex.message);
     }
   };
@@ -98,10 +103,10 @@ export default function ChangePasswordForm({token}: any) {
           type="submit"
           className="w-full text-white bg-secondary-main mt-3 sm:text-2xl text-3xl mb-5 hover:bg-secondary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           >
-            {isLoading && <CircularLoadingEffectForButton />}
             Reset Password
+            {isLoading && <CircularLoadingEffectForButton />}
         </button>
-        <p className="font-light text-2xl md:text-3xl mt-5">
+        <p className="font-light text-2xl md:text-3xl mt-5 h-[40px]">
           Go Back To Login? <Link href="/login" className="font-medium text-secondary-main hover:underline text-2xl md:text-3xl ">Login</Link>
         </p>
       </form>

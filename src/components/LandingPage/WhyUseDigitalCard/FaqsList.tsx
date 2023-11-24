@@ -22,7 +22,7 @@ export default function FaqsList(props: IFaqsListProps) {
           }}
         >
           <button
-            className="flex items-center justify-start hover:cursor-pointer text-[2rem] bg-transparent text-white font-Montserrat relative w-full text-left font-medium p-4"
+            className="flex items-center justify-start hover:cursor-pointer text-[2rem] digiFeature bg-transparent text-white font-Montserrat relative w-full text-left font-medium p-4"
             onClick={() => {
               if (props.onToggle) {
                 props.onToggle(props.title);
@@ -31,7 +31,7 @@ export default function FaqsList(props: IFaqsListProps) {
           >
             {isOpen ? (
               <FontAwesomeIcon
-                className="w-[45px] h-[45px] text-[2.5rem] p-4 bg-transparent font-semibold text-white"
+                className="w-[25px] h-[25px] text-[2.5rem] p-4 bg-transparent font-semibold text-white"
                 icon={faMinus}
                 style={{
                   transform: "rotate(180deg)",
@@ -41,7 +41,7 @@ export default function FaqsList(props: IFaqsListProps) {
               />
             ) : (
               <FontAwesomeIcon
-                className="w-[45px] h-[45px] text-[2.5rem] p-4 bg-transparent font-semibold text-white"
+                className="w-[25px] h-[25px] text-[2.5rem] p-4 bg-transparent font-semibold text-white"
                 icon={faAdd}
                 style={{
                   transform: "rotate(-180deg)",
@@ -52,9 +52,8 @@ export default function FaqsList(props: IFaqsListProps) {
             {props.title || "N/A"}
           </button>
           <div
-            className={`${
-              isOpen ? "max-h-[250px]" : "max-h-0"
-            } overflow-hidden`}
+            className={`${isOpen ? "max-h-[250px]" : "max-h-0"
+              } overflow-hidden`}
             style={{
               transition: "max-height 0.5s ease-out",
             }}

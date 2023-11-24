@@ -40,7 +40,7 @@ export default function Platinum() {
             <Portfolio />
             <Testimonial />
             <ContactInfo />
-            <div className="min-h-[400px] relative -z-[1]">
+            <div className="min-h-[400px] relative">
                 <Map height={'h-[400px] mx-[0px]'} />
             </div>
             <Footer />
